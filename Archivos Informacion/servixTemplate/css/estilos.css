@@ -1,0 +1,131 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+body {
+
+	font-family:'Trebuchet MS', Arial, Helvetica, sans-serif;
+
+}
+
+
+* {margin:0px; }
+a{ outline:none; border:0px;}
+
+
+
+
+#todo{
+	
+height:100%;
+margin:0 auto; width:980px;
+overflow:hidden;
+
+}
+
+
+#encabezado{ overflow:hidden;padding-bottom:20px; }
+
+#logo{text-align:left; width:250px; float:left; padding-left:5px; }
+
+#menu{text-align:right; width:720px; float:left; padding-top:6em; font-size:0.8em; color:#666666; padding-right:5px; }
+ 
+
+
+#buscador {
+	
+height:326px;
+overflow:hidden;
+background:url(../img/fondo_buscador.jpg) no-repeat;
+}
+
+
+#buscador_arriba{ float:left; width:980px;}
+#buscador_abajo{ float:left; width:980px;}
+
+
+#input_buscar{ float:left; width:308px; padding-top:57px; padding-left:27px;}
+#input_donde{ float:left; width:308px;  padding-top:57px; padding-left:15px;}
+#bot_buscar{ float:left; width:163px;  padding-top:57px; padding-left:10px;}
+
+.input1{
+background-position: left center;
+font-size:0.9em; line-height:50px;
+padding-left:15px;
+width:308px;
+height:52px;
+background:url(../img/input.jpg) no-repeat;
+border:0px;
+outline:none;
+}
+
+.input2{
+ 
+background-position: left center;
+font-size:0.9em; line-height:50px;
+padding-left:15px;
+width:308px;
+height:52px;
+background:url(../img/input.jpg) no-repeat;
+border:0px;
+outline:none;
+}
+
+.boton_buscar{
+ 
+background-position: left center;
+width:163px;
+height:52px;
+background:url(../img/boton_buscar.jpg) no-repeat;
+border:0px;
+outline:none;
+}
+
+
+.titulo{ font-size:29px; font-weight:200; letter-spacing:0.05em; color:#fff; padding-bottom:6px;}
+.sub_titulo{ font-size:18px; color:#6a6a6a; line-height:23px; padding-bottom:10px;}
+
+#sol_serv{ float:left; padding-left:45px; padding-top:20px;}
+#pub_serv{ float:left; padding-left:55px; padding-top:20px;}
+
+
+#contenido{
+padding:15px;
+height:100%;
+width:965px;
+margin:0 auto;
+overflow:hidden;
+}
+
+a{text-decoration:none;}
+a:link{color:#666;}
+a:hover{color:#d31c1c;}
+a:active{color:#666;}
+a:visited{color:#666;}
+
+#pie_contenido a:link, a:active, a:visited{color:#FFF; text-decoration:underline;}
+#pie_contenido a:hover{color:#d31c1c; text-decoration:underline;}
+
+
+#pie{height:187px; background:url(../img/fondo_pie.jpg) repeat-x; overflow:hidden;}
+
+#pie_contenido{
+	
+	margin:0 auto;
+	width:980px;
+	text-align:center;
+	font-size:12px;
+	height:187px;
+	line-height:2em;
+	color:#FFF;
+	padding-top:3%;
+	}
+	
+#lista li{display:inline; margin:5px;}
+
+#lista ul { list-style:none; 
+    margin:0px; 
+    padding:0px;}
+	
+	
+value{color:#CCCCCC;}
