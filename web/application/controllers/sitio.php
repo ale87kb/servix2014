@@ -18,10 +18,17 @@ class sitio extends CI_Controller {
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
 
-	
+
 	public function index()
 	{
-		$this->load->view('index');
+		$this->load->model('servix_model');
+		
+		$datosDB = $this->servix_model->get_datos();
+
+
+		$data['vista'] = 'index';
+		$data['datos'] = $datosDB;
+		$this->load->view('home_view',$data);
 	}
 }
 

@@ -40,7 +40,10 @@
 
 $route['default_controller'] = "sitio";
 //url                        // Controlador/metodo 
+
 $route['login'] 			 = "login/index";
+$route['home2'] 			 = "sitio/index";
+
 $route['404_override'] = '';
 
 
