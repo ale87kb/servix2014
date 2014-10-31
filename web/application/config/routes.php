@@ -41,8 +41,27 @@
 $route['default_controller'] = "sitio";
 //url                        // Controlador/metodo 
 
-$route['login'] 			 = "login/index";
-$route['home2'] 			 = "sitio/index";
+$route['condiciones-de-uso']   = "sitio/condiciones_de_uso";
+$route['preguntas_frecuentes'] = "sitio/preguntas_frecuentes";
+$route['solicitud-de-sercio']  = "sitio/solicitar_servicio";
+$route['consultar-servicio']   = "sitio/consultar_servicio";
+$route['ofrecer-servicio']     = "sitio/ofrecer_servicio";
+$route['categorias']           = "sitio/categorias";
+$route['login']     	       = "login/index";
+$route['recuperar-clave']      = "login/recuperar_clave";
+$route['registrarse']          = "login/registrar_usuario";
+$route['resultado-busqueda']   = "sitio/buscar_servicio";
+$route['ficha-del-servicio']   = "sitio/ficha_servicio";
+
+
+$route['mi-perfil']   		   				= "usuario/index";
+$route['mi-perfil/editar-datos']   			= "usuario/editar_datos";
+$route['mi-perfil/editar-servicios']  		= "usuario/editar_servicios";
+$route['mi-perfil/favoritos']  				= "usuario/favoritos";
+$route['mi-perfil/servicios-solicitados']  	= "usuario/servicios_solicitados";
+$route['mis-comentarios']           		= "usuario/mis_comentarios";
+
+
 
 $route['404_override'] = '';
 
