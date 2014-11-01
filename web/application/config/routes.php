@@ -38,20 +38,22 @@
 |
 */
 
-$route['default_controller'] = "sitio";
+$route['default_controller'] 				= "sitio";
 //url                        // Controlador/metodo 
 
-$route['condiciones-de-uso']   = "sitio/condiciones_de_uso";
-$route['preguntas_frecuentes'] = "sitio/preguntas_frecuentes";
-$route['solicitud-de-sercio']  = "sitio/solicitar_servicio";
-$route['consultar-servicio']   = "sitio/consultar_servicio";
-$route['ofrecer-servicio']     = "sitio/ofrecer_servicio";
-$route['categorias']           = "sitio/categorias";
-$route['login']     	       = "login/index";
-$route['recuperar-clave']      = "login/recuperar_clave";
-$route['registrarse']          = "login/registrar_usuario";
-$route['resultado-busqueda']   = "sitio/buscar_servicio";
-$route['ficha-del-servicio']   = "sitio/ficha_servicio";
+$route['condiciones-de-uso']   				= "sitio/condiciones_de_uso";
+$route['preguntas_frecuentes'] 				= "sitio/preguntas_frecuentes";
+$route['solicitud-de-servicio']				= "sitio/solicitar_servicio";
+$route['consultar-servicio']   				= "sitio/consultar_servicio";
+$route['ofrecer-servicio']     				= "sitio/ofrecer_servicio";
+$route['categorias']           				= "sitio/categorias";
+$route['resultado-busqueda']   				= "sitio/buscar_servicio";
+$route['ficha-del-servicio']   				= "sitio/ficha_servicio";
+
+$route['login']     	       				= "login/index";
+$route['recuperar-clave']      				= "login/recuperar_clave";
+$route['validar-login']        				= "login/validacion_login";
+$route['registrarse']          				= "login/registrar_usuario";
 
 
 $route['mi-perfil']   		   				= "usuario/index";
