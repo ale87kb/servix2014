@@ -38,34 +38,38 @@
 |
 */
 
-$route['default_controller'] 				= "sitio";
+$route['default_controller'] 					= "sitio";
 //url                        // Controlador/metodo 
 
-$route['condiciones-de-uso']   				= "sitio/condiciones_de_uso";
-$route['preguntas_frecuentes'] 				= "sitio/preguntas_frecuentes";
-$route['solicitud-de-servicio']				= "sitio/solicitar_servicio";
-$route['consultar-servicio']   				= "sitio/consultar_servicio";
-$route['ofrecer-servicio']     				= "sitio/ofrecer_servicio";
-$route['categorias']           				= "sitio/categorias";
-$route['resultado-busqueda']   				= "sitio/buscar_servicio";
-$route['ficha-del-servicio']   				= "sitio/ficha_servicio";
+$route['condiciones-de-uso']   					= "sitio/condiciones_de_uso";
+$route['preguntas_frecuentes'] 					= "sitio/preguntas_frecuentes";
+$route['solicitud-de-servicio']					= "sitio/solicitar_servicio";
+$route['consultar-servicio']   					= "sitio/consultar_servicio";
+$route['ofrecer-servicio']     					= "sitio/ofrecer_servicio";
+$route['categorias']           					= "sitio/categorias";
+$route['busqueda_servicio']						= "sitio/busqueda_servicio";
 
-$route['login']     	       				= "login/index";
-$route['recuperar-clave']      				= "login/recuperar_clave";
-$route['validar-login']        				= "login/validacion_login";
-$route['registrarse']          				= "login/registrar_usuario";
+$route['busqueda_localidades']   				= "sitio/busqueda_localidades";
+$route['busqueda'] 								= "sitio/busqueda";
+$route['resultado-de-busqueda/(:any)/(:any)'] 	= "sitio/resultado_busqueda/$1/$2";
+$route['ficha-del-servicio']   					= "sitio/ficha_servicio";
 
-
-$route['mi-perfil']   		   				= "usuario/index";
-$route['mi-perfil/editar-datos']   			= "usuario/editar_datos";
-$route['mi-perfil/editar-servicios']  		= "usuario/editar_servicios";
-$route['mi-perfil/favoritos']  				= "usuario/favoritos";
-$route['mi-perfil/servicios-solicitados']  	= "usuario/servicios_solicitados";
-$route['mis-comentarios']           		= "usuario/mis_comentarios";
+$route['login']     	       					= "login/index";
+$route['recuperar-clave']      					= "login/recuperar_clave";
+$route['validar-login']        					= "login/validacion_login";
+$route['registrarse']          					= "login/registrar_usuario";
 
 
+$route['mi-perfil']   		   					= "usuario/index";
+$route['mi-perfil/editar-datos']   				= "usuario/editar_datos";
+$route['mi-perfil/editar-servicios']  			= "usuario/editar_servicios";
+$route['mi-perfil/favoritos']  					= "usuario/favoritos";
+$route['mi-perfil/servicios-solicitados']  		= "usuario/servicios_solicitados";
+$route['mis-comentarios']           			= "usuario/mis_comentarios";
 
-$route['404_override'] = '';
+
+
+$route['404_override'] 	= '';
 
 
 /* End of file routes.php */

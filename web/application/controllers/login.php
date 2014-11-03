@@ -9,12 +9,15 @@ class Login extends CI_Controller {
 	public function index(){
 		echo "index";
 	}
+
 	public function recuperar_clave(){
 		echo "recuperar_clave";
 	}
+
 	public function validacion_login(){
 		echo "validacion_login";
 	}
+	
 	public function registrar_usuario(){
 		echo "registrar_usuario";
 	}

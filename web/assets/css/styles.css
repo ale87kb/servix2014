@@ -6,3 +6,7 @@
  	display: inline-block;
  	margin: 25px auto 0px;
  }
+
+ul.typeahead.dropdown-menu{
+	width: 93%;
+}

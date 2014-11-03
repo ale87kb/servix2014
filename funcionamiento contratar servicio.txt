@@ -1,0 +1,37 @@
+Persona que busca servicio = P.A
+
+Contacta a persona que ofrece servicio = P.B
+
+
+cuando  P.A contacta a P.B se le envia un email a ambos 
+------------------------
+Email 
+P.A  
+
+has contactado a P.B por el servicio de bla bla
+
+Sus datos son : bla bla
+
+Pd: En el caso que en lleguen a un acuerdo para concretar el servicio,
+no te olvides de calificar a este usuario. A su vez, él también te calificará como cliente.
+Recuerda que tienes un plazo de 10 días para calificar a tu contraparte.
+
+------------------------
+Email 
+P.B
+
+P.A te contactado por el servicio de bla bla
+
+comentarios:
+
+lorem lorem
+
+sus datos :
+
+Pd: En el caso que en lleguen a un acuerdo para concretar el servicio,
+no te olvides de calificar a este usuario. A su vez, él también calificará tu servicio.
+Recuerda que tienes un plazo de 10 días para calificar a tu contraparte.
+
+*--------------------------------*
+
+

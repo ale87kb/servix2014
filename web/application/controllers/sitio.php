@@ -5,20 +5,41 @@ class sitio extends CI_Controller {
 	function __construct(){
 
 		parent::__construct();
+		
 	}
 
 
 	public function index()
 	{
-		$this->load->model('servix_model');
 		
-		$datosDB = $this->servix_model->get_datos();
 
-
-		$data['vista'] = 'template';
-		$data['datos'] = $datosDB;
+		$data['vista'] = 'index_view';
 		$this->load->view('home_view',$data);
 	}
+
+
+	public function busqueda_servicio(){
+		 $data = $this->servix_model->getBusquedaServicio();
+		 $arrayDatos = array();
+		 foreach ($data as $d) {
+		 	$arrayDatos[] = ucfirst($d['titulo']);
+		 }
+		 echo  json_encode($arrayDatos);
+	}
+	public function busqueda_localidades(){
+		$data = $this->servix_model->geBusquedaLocalProv();
+		 $arrayDatos = array();
+		 foreach ($data as $d) {
+		 	if($d['localidad']==$d['provincia']){
+		 		$d['provincia'] = '';
+		 	}
+		 	$loc = $d['localidad'].", ".$d['provincia'];
+		 	$arrayDatos[] = trim($loc,", ") ;
+		 }
+		 echo  json_encode($arrayDatos);
+	}
+
+
 
 	public function condiciones_de_uso(){
 		echo "condiciones_de_uso";  		
@@ -38,8 +59,28 @@ class sitio extends CI_Controller {
 	public function categorias(){
 		echo "categorias";	 
 	}
-	public function buscar_servicio(){
-		echo "buscar_servicio";	 
+
+	public function busqueda(){
+		 $post = $this->input->post();
+		 $busqueda = array();
+		 foreach ($post as $k => $v) {
+			$busqueda['post'][$k] = ($v);
+			$busqueda['url'][$k]  = normaliza($v);
+		 }
+		 $this->session->set_userdata("busqueda",$busqueda);
+		 return redirect("resultado-de-busqueda/".$busqueda['url']['servicio']."/".$busqueda['url']['localidad']);
+
+	}
+
+	public function resultado_busqueda($servicio,$localidad){
+		$busca = $this->session->userdata("busqueda");
+
+		$data['servicio']  = $busca['post']['servicio'];
+		$data['localidad'] = $busca['post']['localidad'];
+		$data['result']	   = $this->servix_model->getResultadoBusqueda($data['servicio'],$data['localidad']);
+		$data['vista'] = 'resultado_busqueda_view';
+		$this->load->view('home_view',$data);
+
 	}
 	public function ficha_servicio(){
 		echo "ficha_servicio";	 
