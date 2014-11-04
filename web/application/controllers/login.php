@@ -8,6 +8,8 @@ class Login extends CI_Controller {
 
 	public function index(){
 		echo "index";
+
+		/**cargar la vista del login*/
 	}
 
 	public function recuperar_clave(){
@@ -16,6 +18,13 @@ class Login extends CI_Controller {
 
 	public function validacion_login(){
 		echo "validacion_login";
+		// valida form  como en el ejemplo
+
+	}
+
+	private function _check_database($password){
+		//consulta datos en base de datos
+		//llama al modelo del usuario a la funcion _getUsuario
 	}
 	
 	public function registrar_usuario(){

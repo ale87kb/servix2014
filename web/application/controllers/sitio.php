@@ -5,7 +5,7 @@ class sitio extends CI_Controller {
 	function __construct(){
 
 		parent::__construct();
-		
+	
 	}
 
 
@@ -62,21 +62,32 @@ class sitio extends CI_Controller {
 
 	public function busqueda(){
 		 $post = $this->input->post();
+		 //$post tiene el input value de servicio, localidad 
+		 //los tiene tal como te lo envia el usuario con tildes y acentos y ñ
+
 		 $busqueda = array();
 		 foreach ($post as $k => $v) {
 			$busqueda['post'][$k] = ($v);
-			$busqueda['url'][$k]  = normaliza($v);
+			//la funcion normaliza sale del helper
+			// todas las funciones que no tengan $this->algo->funcion() 
+			//provienen de un helper
+
+			$busqueda['url'][$k]  = normaliza(trim($v));
 		 }
+		 //seteo una nueva variable de session que me guarde los datos de las busqueda con su post y url a mostrar
+
 		 $this->session->set_userdata("busqueda",$busqueda);
-		 return redirect("resultado-de-busqueda/".$busqueda['url']['servicio']."/".$busqueda['url']['localidad']);
+		 //esto es lo que te envio el usuario por post parseado para la url para tener una url friendly
+		 return redirect("resultado-de-busqueda/".$busqueda['url']['servicio']."-en-".$busqueda['url']['localidad']);
 
 	}
 
-	public function resultado_busqueda($servicio,$localidad){
+	public function resultado_busqueda(){
 		$busca = $this->session->userdata("busqueda");
 
 		$data['servicio']  = $busca['post']['servicio'];
 		$data['localidad'] = $busca['post']['localidad'];
+		//aca llamo al model de servix y le paso como parametro el post sin parsear para que busque en la db
 		$data['result']	   = $this->servix_model->getResultadoBusqueda($data['servicio'],$data['localidad']);
 		$data['vista'] = 'resultado_busqueda_view';
 		$this->load->view('home_view',$data);

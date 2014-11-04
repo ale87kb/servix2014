@@ -51,7 +51,7 @@ $route['busqueda_servicio']						= "sitio/busqueda_servicio";
 
 $route['busqueda_localidades']   				= "sitio/busqueda_localidades";
 $route['busqueda'] 								= "sitio/busqueda";
-$route['resultado-de-busqueda/(:any)/(:any)'] 	= "sitio/resultado_busqueda/$1/$2";
+$route['resultado-de-busqueda/(:any)']			= "sitio/resultado_busqueda";
 $route['ficha-del-servicio']   					= "sitio/ficha_servicio";
 
 $route['login']     	       					= "login/index";
