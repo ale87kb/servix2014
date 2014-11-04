@@ -83,15 +83,47 @@ class sitio extends CI_Controller {
 	}
 
 	public function resultado_busqueda(){
+			
 		$busca = $this->session->userdata("busqueda");
-
 		$data['servicio']  = $busca['post']['servicio'];
 		$data['localidad'] = $busca['post']['localidad'];
 		//aca llamo al model de servix y le paso como parametro el post sin parsear para que busque en la db
 		$data['result']	   = $this->servix_model->getResultadoBusqueda($data['servicio'],$data['localidad']);
+		print_d($this->db->last_query());
+		if(!empty($data['result'])){
+		 $data['map'] =	$this->_gmap($data['result']);
+		}
 		$data['vista'] = 'resultado_busqueda_view';
 		$this->load->view('home_view',$data);
 
+	}
+
+
+
+	private function _gmap($rs){
+		$this->load->library('googlemaps');	
+
+		$config['center'] = '37.4419, -122.1419';
+		$config['zoom'] = 'auto';
+		$config['cluster'] = TRUE;
+		$this->googlemaps->initialize($config);
+
+
+		foreach ($rs as $v) {
+
+		$marker = array();
+		$marker['position'] = ''.$v['latitud'].' '.$v['longitud'].'';
+		$marker['infowindow_content'] = ('<div style="width: 250px;color: #000;font-size:14px;font-family:Arial, Helvetica, sans-serif;">'.ucwords($v['titulo']).'			</div>');
+		$marker['infowindowMaxWidth'] = "500";
+
+		$this->googlemaps->add_marker($marker);
+	
+
+		}
+
+		$data['map'] = $this->googlemaps->create_map();
+		return $data['map'];
+	
 	}
 	public function ficha_servicio(){
 		echo "ficha_servicio";	 

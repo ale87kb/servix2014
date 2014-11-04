@@ -34,8 +34,12 @@
 
         </div><!--/center-->
         <div class="col-md-4">
-        <img src="http://placehold.it/400x800&text=GOOGLE MAP MARKERS" alt="mapa" class="img-responsive">
-      </div>
+         <?php 
+         if(isset($map)){
+          echo $map['html'];
+        }
+        ?>
+        </div>
         <?php
       }else{
         ?>

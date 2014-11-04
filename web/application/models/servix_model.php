@@ -31,9 +31,29 @@ Class Servix_model extends CI_Model{
 
 	}
 
+	private function _parsearLocalidad($localidad){
+
+		$loc = explode(',', $localidad );
+
+		if(!empty($loc[1])){
+
+			$loc['localidad'] = trim($loc[0]);
+			$loc['provincia'] = trim($loc[1]);
+
+		}else{
+			$loc['localidad'] = trim($loc[0]);
+			$loc['provincia'] = trim($loc[0]);
+		}
+		return $loc;
+	}
+
 	public function getResultadoBusqueda($servicio,$localidad){
+
+		$loc = $this->_parsearLocalidad($localidad);
+
 		$query = "SELECT
-				*
+				servicios.*
+				
 				FROM
 				servicios
 				INNER JOIN categorias ON servicios.id_categorias = categorias.id
@@ -42,7 +62,7 @@ Class Servix_model extends CI_Model{
 				WHERE
 				(servicios.titulo LIKE '%$servicio%' OR categorias.categoria LIKE '%$servicio%')
 				AND
-				(localidades.localidad LIKE '%$localidad%' OR provincias.provincia LIKE '%$localidad%')";
+				(localidades.localidad LIKE '%".$loc['localidad']."%' OR provincias.provincia LIKE '%".$loc['provincia']."%')";
 				
 		$rs    = $this->db->query($query);
 		return $rs->result_array();
