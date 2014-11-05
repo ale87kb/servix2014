@@ -101,12 +101,13 @@ class sitio extends CI_Controller {
 
 	private function _setPaginacion($servicio,$localidad,$urlServ,$urlLoc){
 		$pages = 4; //Número de registros mostrados por páginas
+		$paginas_segmento = $this->uri->segment(4);
         $this->load->library('pagination'); //Cargamos la librería de paginación
         $config['base_url'] 	= site_url('resultado-de-busqueda/'.$urlServ.'/'.$urlLoc);
         $config['total_rows'] 	= $this->servix_model->getTotalFilasResultBusqueda($servicio,$localidad);//calcula el número de filas  
         $config['per_page'] 	= $pages; //Número de registros mostrados por páginas
         $config['num_links'] 	= 2; //Número de links mostrados en la paginación
-        $config["uri_segment"] 	= (empty($this->uri->segment(4))) ? 0 : $this->uri->segment(4);//el segmento de la paginación
+        $config["uri_segment"] 	= (empty($paginas_segmento)) ? 0 : $paginas_segmento;//el segmento de la paginación
 
         $this->pagination->initialize($config); //inicializamos la paginación  
         $data["result"] 	= $this->servix_model->getResultadoBusqueda($servicio,$localidad,$config["uri_segment"],$config['per_page']);
