@@ -7,27 +7,28 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      
     </div>
+    
     <div id="navbar" class="navbar-collapse collapse">     
       <ul class="nav navbar-nav navbar-right">
         <?php 
         if(isset($usuario)){
           ?>
-          <li><?php echo $usuario; ?> </li>
+          <li><a href="#" rel="nofollow"><?php echo $usuario;?></a></li>
           <?php
         }else{
           ?>
-           <li><a data-toggle="modal" href="#myModal" rel="nofollow" >Login</a></li>
-        <li><a href="#">Registrarse</a></li>
+          <li><a data-toggle="modal" href="#myModal" rel="nofollow">Login</a></li>
+          <li><a href="#">Registrarse</a></li>
           <?php
         }
          ?>
-       
       </ul>
     </div><!--/.nav-collapse -->
 
-
+    <?php
+    if(empty($usuario)){
+      ?>
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -49,7 +50,9 @@
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-
+    <?php
+      } 
+    ?>
 
 
   </div>

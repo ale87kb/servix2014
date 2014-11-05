@@ -2,13 +2,12 @@
 
 class Login extends CI_Controller {
 
-	function __construct(){
+	public function __construct(){
 		parent::__construct();
 	}
 
 
 	public function index(){
-
 		/*cargar la vista del login*/
    		$this->load->helper(array('form'));
    		$this->load->view('login/login_view');
@@ -27,9 +26,8 @@ class Login extends CI_Controller {
 
 	public function validacion_login(){
 
-		// valida form  como en el ejemplo
+		//valida form como en el ejemplo
 
-		//This method will have the credentials validation
 		$this->load->library('form_validation');
 
 		$this->form_validation->set_rules('usuario', 'usuario', 'trim|required|xss_clean');
@@ -38,12 +36,12 @@ class Login extends CI_Controller {
 
 		if($this->form_validation->run() == FALSE)
 		{
-		 //Field validation failed.  User redirected to login page
+		 //Si falla la validacion se redirije a home nuevamente
 		 $this->load->view('login/login_view');
 		}
 		else
 		{
-		 //Go to private area
+		 //usuario logueado
 		 redirect('homelogueado', 'refresh');
 		}
 	}
@@ -79,9 +77,6 @@ class Login extends CI_Controller {
 		}
 	}
 	
-
-	
-
 
 	public function logout(){
 

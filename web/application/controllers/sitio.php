@@ -2,16 +2,16 @@
 
 class sitio extends CI_Controller {
 
-	function __construct(){
+	public function __construct(){
 
 		parent::__construct();
+		
+		//inicio sesion de usuario preguntandole al modelo
 		$this->usuario = null;
-
-		$user = $this->usuarios_model->isLogin();	
+		$user = $this->usuarios_model->isLogin();
 		if($user){
 			$this->usuario = $user['usuario'];
 		}
-	
 	}
 
 

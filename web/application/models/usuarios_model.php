@@ -37,7 +37,7 @@ Class Usuarios_model extends CI_Model{
 	   }
 	   else
 	   {
-	     //If no session, redirect to login page
+	     //Si no hay sesion
 	    return false;
 	   }
 	}
