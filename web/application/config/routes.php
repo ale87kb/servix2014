@@ -52,7 +52,7 @@ $route['busqueda_servicio']						= "sitio/busqueda_servicio";
 $route['busqueda_localidades']   				= "sitio/busqueda_localidades";
 $route['busqueda'] 								= "sitio/busqueda";
 $route['resultado-de-busqueda/(:any)']			= "sitio/resultado_busqueda";
-$route['ficha-del-servicio']   					= "sitio/ficha_servicio";
+$route['ficha/(:any)']		    				= "sitio/ficha_servicio/$1";
 
 $route['login']     	       					= "login/index";
 $route['recuperar-clave']      					= "login/recuperar_clave";

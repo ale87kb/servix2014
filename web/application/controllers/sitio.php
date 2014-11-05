@@ -87,25 +87,47 @@ class sitio extends CI_Controller {
 		$busca = $this->session->userdata("busqueda");
 		$data['servicio']  = $busca['post']['servicio'];
 		$data['localidad'] = $busca['post']['localidad'];
+		$urlLoc 		   = $busca['url']['localidad'];
+		$urlServ 		   = $busca['url']['servicio'];
 		//aca llamo al model de servix y le paso como parametro el post sin parsear para que busque en la db
-		$data['result']	   = $this->servix_model->getResultadoBusqueda($data['servicio'],$data['localidad']);
-		print_d($this->db->last_query());
+		$result	   = $this->_setPaginacion($data['servicio'],$data['localidad'],$urlServ,$urlLoc);
+		$data['result'] = $result['result'];
 		if(!empty($data['result'])){
-		 $data['map'] =	$this->_gmap($data['result']);
+		 $data['map'] =	$this->_gmap($data['result'],$busca['post']['localidad']);
 		}
+		
 		$data['vista'] = 'resultado_busqueda_view';
 		$this->load->view('home_view',$data);
 
 	}
 
+	private function _setPaginacion($servicio,$localidad,$urlServ,$urlLoc){
+		$pages = 4; //Número de registros mostrados por páginas
+        $this->load->library('pagination'); //Cargamos la librería de paginación
+        $config['base_url'] 	= site_url('resultado-de-busqueda/'.$urlServ.'/'.$urlLoc);
+        $config['total_rows'] 	= $this->servix_model->getTotalFilasResultBusqueda($servicio,$localidad);//calcula el número de filas  
+        $config['per_page'] 	= $pages; //Número de registros mostrados por páginas
+        $config['num_links'] 	= 2; //Número de links mostrados en la paginación
+        $config["uri_segment"] 	= (empty($this->uri->segment(4))) ? 0 : $this->uri->segment(4);//el segmento de la paginación
+
+        $this->pagination->initialize($config); //inicializamos la paginación  
+        $data["result"] 	= $this->servix_model->getResultadoBusqueda($servicio,$localidad,$config["uri_segment"],$config['per_page']);
+        return $data;        
+	}
 
 
-	private function _gmap($rs){
+	private function _gmap($rs,$loc){
 		$this->load->library('googlemaps');	
+	
+		$config = array();
+		$config['center']	= $loc.',argentina';
+   		$config['zoom']		= 'auto';
+		$config['cluster'] 	= TRUE;
+		$config['places'] 	= TRUE; 
+		$config['minifyJS'] = TRUE;
+		$marker['animation']= 'DROP';
 
-		$config['center'] = '37.4419, -122.1419';
-		$config['zoom'] = 'auto';
-		$config['cluster'] = TRUE;
+
 		$this->googlemaps->initialize($config);
 
 
@@ -113,7 +135,7 @@ class sitio extends CI_Controller {
 
 		$marker = array();
 		$marker['position'] = ''.$v['latitud'].' '.$v['longitud'].'';
-		$marker['infowindow_content'] = ('<div style="width: 250px;color: #000;font-size:14px;font-family:Arial, Helvetica, sans-serif;">'.ucwords($v['titulo']).'			</div>');
+		$marker['infowindow_content'] = ('<div style="width: 250px;color: #000;font-size:14px;font-family:Arial, Helvetica, sans-serif;">'.ucwords($v['titulo']).'<br>'.ucfirst($v['direccion']).'			</div>');
 		$marker['infowindowMaxWidth'] = "500";
 
 		$this->googlemaps->add_marker($marker);
@@ -125,8 +147,17 @@ class sitio extends CI_Controller {
 		return $data['map'];
 	
 	}
-	public function ficha_servicio(){
-		echo "ficha_servicio";	 
+
+
+
+	public function ficha_servicio($servicio){
+		$id = $this->_parsearIdServicio($servicio);
+		echo $id;
+	}
+
+	private function _parsearIdServicio($servicio){
+		$serv = explode('-', $servicio);
+		return $serv[0];
 	}
 
 

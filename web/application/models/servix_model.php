@@ -34,26 +34,25 @@ Class Servix_model extends CI_Model{
 	private function _parsearLocalidad($localidad){
 
 		$loc = explode(',', $localidad );
-
+		$data = array();
 		if(!empty($loc[1])){
 
-			$loc['localidad'] = trim($loc[0]);
-			$loc['provincia'] = trim($loc[1]);
+			$data['localidad'] = trim($loc[0]);
+			$data['provincia'] = trim($loc[1]);
+			$data['cond']	   = 'AND';
 
 		}else{
-			$loc['localidad'] = trim($loc[0]);
-			$loc['provincia'] = trim($loc[0]);
+			$data['localidad'] = trim($loc[0]);
+			$data['provincia'] = trim($loc[0]);
+			$data['cond']	   = 'OR';
 		}
-		return $loc;
+		return $data;
 	}
 
-	public function getResultadoBusqueda($servicio,$localidad){
-
+	public function getTotalFilasResultBusqueda($servicio,$localidad){
 		$loc = $this->_parsearLocalidad($localidad);
-
 		$query = "SELECT
-				servicios.*
-				
+				servicios.id		
 				FROM
 				servicios
 				INNER JOIN categorias ON servicios.id_categorias = categorias.id
@@ -62,7 +61,36 @@ Class Servix_model extends CI_Model{
 				WHERE
 				(servicios.titulo LIKE '%$servicio%' OR categorias.categoria LIKE '%$servicio%')
 				AND
-				(localidades.localidad LIKE '%".$loc['localidad']."%' OR provincias.provincia LIKE '%".$loc['provincia']."%')";
+				(localidades.localidad LIKE '%".$loc['localidad']."%' ".$loc['cond']." provincias.provincia LIKE '%".$loc['provincia']."%')";
+				
+		$rs    = $this->db->query($query);
+		return $rs->num_rows();
+	}
+	public function getResultadoBusqueda($servicio,$localidad,$ini=0,$fin=10){
+
+		$loc = $this->_parsearLocalidad($localidad);
+
+		$query = "SELECT
+				servicios.id,
+				servicios.titulo,
+				servicios.descripcion,
+				servicios.latitud,
+				servicios.longitud,
+				servicios.direccion,
+				localidades.localidad,
+				provincias.provincia,
+				categorias.categoria				
+				FROM
+				servicios
+				INNER JOIN categorias ON servicios.id_categorias = categorias.id
+				INNER JOIN localidades ON servicios.id_localidades = localidades.id
+				INNER JOIN provincias ON localidades.id_provincia = provincias.id
+				WHERE
+				(servicios.titulo LIKE '%$servicio%' OR categorias.categoria LIKE '%$servicio%')
+				AND
+				(localidades.localidad LIKE '%".$loc['localidad']."%' ".$loc['cond']." provincias.provincia LIKE '%".$loc['provincia']."%')
+				LIMIT $ini,$fin
+				";
 				
 		$rs    = $this->db->query($query);
 		return $rs->result_array();
