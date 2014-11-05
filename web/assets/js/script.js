@@ -25,6 +25,9 @@ $('document').ready(function(){
 
 	$servix = new app();
 	$servix.init();
+
+});
+
 	
 /* $("#formulario").on("submit", function(e)
         {
@@ -60,11 +63,3 @@ $('document').ready(function(){
             });
             e.preventDefault();
         })*/
-	
-});
-
-
-
-
-       
-

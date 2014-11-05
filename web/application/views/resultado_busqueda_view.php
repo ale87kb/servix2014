@@ -24,6 +24,10 @@
           </div>
         </div>
         <hr>
+
+
+
+
       <?php
         }
           echo $this->pagination->create_links();  
@@ -63,5 +67,6 @@
       }
      ?>
    
-  
+
   </div><!--/container-fluid-->
+

@@ -103,6 +103,7 @@ class sitio extends CI_Controller {
 		if(!empty($data['result'])){
 		 $data['map'] =	$this->_gmap($data['result'],$busca['post']['localidad']);
 		}
+		// print_d($this->db->last_query());
 		
 		$data['vista'] = 'resultado_busqueda_view';
 		$this->load->view('home_view',$data);
@@ -160,9 +161,13 @@ class sitio extends CI_Controller {
 
 
 	public function ficha_servicio($servicio){
-		$id = $this->_parsearIdServicio($servicio);
-		echo $id;
+		// $id = $this->_parsearIdServicio($servicio);
+		// echo $id;
+
+		$data['vista'] = 'ficha_servicio_view';
+		$this->load->view('home_view',$data);
 	}
+
 
 	private function _parsearIdServicio($servicio){
 		$serv = explode('-', $servicio);

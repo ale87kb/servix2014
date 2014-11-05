@@ -10,3 +10,37 @@
 ul.typeahead.dropdown-menu{
 	width: 93%;
 }
+
+a.list-group-item {
+    height:auto;
+    min-height:220px;
+}
+a.list-group-item.active small {
+    color:#fff;
+}
+.stars {
+    margin:20px auto 1px;    
+}
+
+.footer-servix{
+	margin-top: 20px;
+}
+
+.ficha h1{
+	margin-bottom: 40px;
+}
+.ficha h2{
+	margin-top:0px;
+	margin-bottom: 20px;
+}
+.votacion h3{
+	margin-bottom: 30px;
+}
+ .starrr,.startt{
+ 	color:gold;
+ }
+.votacion .starrr{
+	font-size: 28px;
+	color: gold;
+	margin-top: 0px;
+}
