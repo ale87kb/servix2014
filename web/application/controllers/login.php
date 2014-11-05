@@ -34,8 +34,6 @@ class Login extends CI_Controller {
 
 		$this->form_validation->set_rules('usuario', 'usuario', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('clave', 'clave', 'trim|required|xss_clean|callback_check_database');
-
-		$this->form_validation->set_message('required', 'El  %s es requerido');
            
 
 		if($this->form_validation->run() == FALSE)
@@ -82,19 +80,7 @@ class Login extends CI_Controller {
 	}
 	
 
-	public function sesion_iniciada(){
-		if($this->session->userdata('logged_in'))
-	   {
-	     $session_data = $this->session->userdata('logged_in');
-	     $data['usuario'] = $session_data['usuario'];
-	     $this->load->view('login/homelogueado_view', $data);
-	   }
-	   else
-	   {
-	     //If no session, redirect to login page
-	     redirect('login', 'refresh');
-	   }
-	}
+	
 
 
 	public function logout(){

@@ -5,12 +5,20 @@ class sitio extends CI_Controller {
 	function __construct(){
 
 		parent::__construct();
+		$this->usuario = null;
+
+		$user = $this->usuarios_model->isLogin();	
+		if($user){
+			$this->usuario = $user['usuario'];
+		}
 	
 	}
 
 
 	public function index(){
 		
+		// print_d($data['usuario']);
+		$data['usuario'] = $this->usuario;
 		$data['vista'] = 'index_view';
 		$this->load->view('home_view',$data);
 	}
@@ -37,6 +45,7 @@ class sitio extends CI_Controller {
 		 echo  json_encode($arrayDatos);
 	}
 
+	
 
 
 	public function condiciones_de_uso(){
@@ -83,6 +92,7 @@ class sitio extends CI_Controller {
 	public function resultado_busqueda(){
 			
 		$busca = $this->session->userdata("busqueda");
+		$data['usuario']   = $this->usuario;
 		$data['servicio']  = $busca['post']['servicio'];
 		$data['localidad'] = $busca['post']['localidad'];
 		$urlLoc 		   = $busca['url']['localidad'];

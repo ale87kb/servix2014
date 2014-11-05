@@ -11,8 +11,19 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">     
       <ul class="nav navbar-nav navbar-right">
-        <li><a data-toggle="modal" href="#myModal" rel="nofollow" >Login</a></li>
+        <?php 
+        if(isset($usuario)){
+          ?>
+          <li><?php echo $usuario; ?> </li>
+          <?php
+        }else{
+          ?>
+           <li><a data-toggle="modal" href="#myModal" rel="nofollow" >Login</a></li>
         <li><a href="#">Registrarse</a></li>
+          <?php
+        }
+         ?>
+       
       </ul>
     </div><!--/.nav-collapse -->
 

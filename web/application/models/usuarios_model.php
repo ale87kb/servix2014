@@ -28,6 +28,20 @@ Class Usuarios_model extends CI_Model{
 	   	}
 	}
 
+	public function isLogin(){
+		if($this->session->userdata('logged_in'))
+	   {
+	     $session_data = $this->session->userdata('logged_in');
+	     $data['usuario'] = $session_data['usuario'];
+	    return $data;
+	   }
+	   else
+	   {
+	     //If no session, redirect to login page
+	    return false;
+	   }
+	}
+
 
 	public function get_datos(){
 		$query = "SELECT * FROM servicios";
