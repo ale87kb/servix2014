@@ -9,10 +9,8 @@ class sitio extends CI_Controller {
 	}
 
 
-	public function index()
-	{
+	public function index(){
 		
-
 		$data['vista'] = 'index_view';
 		$this->load->view('home_view',$data);
 	}

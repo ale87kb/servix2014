@@ -8,6 +8,11 @@ Class Servicios_model extends CI_Model{
 
 	}
 
-	
+	public function get_datos(){
+		$query = "SELECT * FROM servicios";
+		$rs    = $this->db->query($query);
+		return $rs->result_array();
+
+	}
 
 }

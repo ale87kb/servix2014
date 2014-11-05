@@ -54,6 +54,9 @@ $route['busqueda'] 								= "sitio/busqueda";
 $route['resultado-de-busqueda/(:any)']			= "sitio/resultado_busqueda";
 $route['ficha/(:any)']		    				= "sitio/ficha_servicio/$1";
 
+$route['homelogueado']		   					= "login/sesion_iniciada";
+$route['logout']		   						= "login/logout";
+
 $route['login']     	       					= "login/index";
 $route['recuperar-clave']      					= "login/recuperar_clave";
 $route['validar-login']        					= "login/validacion_login";
