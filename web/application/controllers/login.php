@@ -10,7 +10,7 @@ class Login extends CI_Controller {
 	public function index(){
 		/*cargar la vista del login*/
    		$this->load->helper(array('form'));
-   		$this->load->view('login/login_view');
+   		$this->load->view('login_view');
 	}
 
 
@@ -24,7 +24,29 @@ class Login extends CI_Controller {
 	}
 
 
+
 	public function validacion_login(){
+
+		//valida form
+		$this->load->library('form_validation');
+
+		$this->form_validation->set_rules('usuario', 'usuario', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('clave', 'clave', 'trim|required|xss_clean|callback_check_database');
+           
+		if($this->form_validation->run() == FALSE)
+		{
+		 //Si falla la validacion se redirige a home nuevamente
+		 $this->load->view('login_view');
+		}
+		else
+		{
+		 //usuario logueado - redirige a Home
+		 redirect('', 'refresh');
+		}
+	}
+
+
+	public function validacion_login_ajax(){
 
 		//valida form como en el ejemplo
 
@@ -32,30 +54,75 @@ class Login extends CI_Controller {
 
 		$this->form_validation->set_rules('usuario', 'usuario', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('clave', 'clave', 'trim|required|xss_clean|callback_check_database');
-           
+
+		
+		/* CON BOOSTRAPVALIDATOR */
+		if($this->form_validation->run() == FALSE)
+        {
+            $data = array(
+                'username' => form_error('usuario'),
+                'password' => form_error('clave'),
+                'res'      => "error"
+            );
+
+            echo json_encode($data);
+        }
+        else
+        {
+            $data = array(
+				'message' => "CONECTADO",
+            /*sprintf('Welcome %s', $userName),*/
+                'res'      => "success"
+            );
+            echo json_encode($data);
+            
+            //aquí ya puedes procesar los datos de tu formulario
+        }
+	}
+
+	public function validacion_login_ajax(){
+
+		//valida form como en el ejemplo
+
+		$this->load->library('form_validation');
+
+		$this->form_validation->set_rules('usuario', 'usuario', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('clave', 'clave', 'trim|required|xss_clean|callback_check_database');
+
+		
+		// SIN BOOSTRAPVALIDATOR 
 
 		if($this->form_validation->run() == FALSE)
-		{
-		 //Si falla la validacion se redirije a home nuevamente
-		 $this->load->view('login/login_view');
-		}
-		else
-		{
-		 //usuario logueado
-		 redirect('homelogueado', 'refresh');
-		}
+        {
+            $data = array(
+                'username' => form_error('usuario'),
+                'password' => form_error('clave'),
+                'res'      => "error"
+            );
+            echo json_encode($data);
+        }
+        else
+        {
+            $data = array(
+                'res'      => "success"
+            );
+            echo json_encode($data);
+            //aquí ya puedes procesar los datos de tu formulario
+        }
+
+
 	}
 
 
 	public function check_database($clave){
 		//consulta datos en base de datos
-		//llama al modelo del usuario a la funcion login
+		//llama al modelo del usuario a la funcion login verifica usuario con contraseña
 
 		//Field validation succeeded.  Validate against database
-		$usuario = $this->input->post('usuario');
+		$user = $this->input->post('usuario');
 
 		//query the database
-		$result = $this->usuarios_model->login($usuario, $clave);
+		$result = $this->usuarios_model->login($user, $clave);
 
 		if($result)
 		{
@@ -83,7 +150,7 @@ class Login extends CI_Controller {
 		//Destruye la sesion del usuario y vuelve a login.
 	   $this->session->unset_userdata('logged_in');
 	   $this->session->sess_destroy();
-	   redirect('login', 'refresh');
+	   redirect('', 'refresh');
 	}
 
 }

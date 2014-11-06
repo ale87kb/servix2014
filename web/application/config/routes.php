@@ -47,19 +47,18 @@ $route['solicitud-de-servicio']					= "sitio/solicitar_servicio";
 $route['consultar-servicio']   					= "sitio/consultar_servicio";
 $route['ofrecer-servicio']     					= "sitio/ofrecer_servicio";
 $route['categorias']           					= "sitio/categorias";
-$route['busqueda_servicio']						= "sitio/busqueda_servicio";
 
+$route['busqueda_servicio']						= "sitio/busqueda_servicio";
 $route['busqueda_localidades']   				= "sitio/busqueda_localidades";
 $route['busqueda'] 								= "sitio/busqueda";
 $route['resultado-de-busqueda/(:any)']			= "sitio/resultado_busqueda";
 $route['ficha/(:any)']		    				= "sitio/ficha_servicio/$1";
 
-$route['homelogueado']		   					= "login/sesion_iniciada";
 $route['logout']		   						= "login/logout";
-
 $route['login']     	       					= "login/index";
 $route['recuperar-clave']      					= "login/recuperar_clave";
-$route['validar-login']        					= "login/validacion_login";
+$route['validar_login']        					= "login/validacion_login";
+$route['validar_login_ajax']        			= "login/validacion_login_ajax";
 $route['registrarse']          					= "login/registrar_usuario";
 
 

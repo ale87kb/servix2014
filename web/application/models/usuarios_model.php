@@ -10,8 +10,7 @@ Class Usuarios_model extends CI_Model{
 
 
 	public function login($usuario, $clave){
-	   $query = "SELECT *
-	   			FROM usuarios
+	   $query 	= "SELECT * FROM usuarios
 	   			WHERE usuarios.email = '$usuario'
 	   			AND usuarios.clave = MD5('$clave')
 	   			LIMIT 1";

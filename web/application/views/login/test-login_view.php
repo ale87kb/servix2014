@@ -22,7 +22,7 @@
 
   <body>
 <nav class="navbar navbar-default navbar-static-top navbar-servix" role="navigation">
-  <div class="container">
+  <!--<div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -31,7 +31,7 @@
         <span class="icon-bar"></span>
       </button>
       
-    </div>
+    </div>-->
   </div>
 </nav>
 
@@ -54,7 +54,7 @@
    </form>--> 
 
 
-    <form class="form-horizontal" role="form" id="formulario-login" action="<?php echo site_url('validar-login');?>" method="POST">
+    <form class="form-horizontal" role="form" id="formulario-login" action="<?php echo site_url('validar_login');?>" method="POST">
     <div class="form-group">
       <label for="usuario" class="col-sm-2 control-label">Usuario</label>
       <div class="col-sm-7">

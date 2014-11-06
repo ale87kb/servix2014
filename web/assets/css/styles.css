@@ -44,3 +44,15 @@ a.list-group-item.active small {
 	color: gold;
 	margin-top: 0px;
 }
+
+
+/***********LOGIN MODALBOX ******************/
+.login_modal{
+	width: 420px;
+}
+.login_modal_body{
+	padding: 15px 30px;
+}
+
+/***********FIN LOGIN MODALBOX ******************/
+
