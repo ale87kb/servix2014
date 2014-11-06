@@ -1,5 +1,5 @@
 <div class="jumbotron col-md-12">
-  <h1>SERVIX</h1>
+  <!-- <h1>SERVIX</h1> -->
   <div class="search-box col-md-12"  >
     <form class="form" role="form" id="formulario-busqueda" action="<?php echo site_url('busqueda');?>" method="POST">
        <div class="row">

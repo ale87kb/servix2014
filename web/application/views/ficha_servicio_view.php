@@ -12,43 +12,65 @@
 					<p>
 						<img src="http://placehold.it/200x200" class="img-rounded" alt="">
 					</p>
-					<p class="startt">
-						<span class="glyphicon .glyphicon-star-empty glyphicon-star"></span>
-						<span class="glyphicon .glyphicon-star-empty glyphicon-star"></span>
-						<span class="glyphicon .glyphicon-star-empty glyphicon-star"></span>
-						<span class="glyphicon .glyphicon-star-empty glyphicon-star"></span>
-						<span class="glyphicon .glyphicon-star-empty glyphicon-star-empty"></span>
-					</p>
-			       <p class="">Promedio de votos 4 Estrellas</p>
-			       <a href="#modalOpinion" class="btn btn-primary"  data-toggle="modal" data-target="#modalOpinion">Quiero opinar</a>
+					<p><a href="#" class="btn btn-link">Recomendar a un amigo</a></p>
+			      
 				</div>
 			</div>
 			<div class="col-md-6">
 				<h2>
-					Text text text
+					<?php echo $titulo; ?>
 				</h2>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos magni officia accusamus! Quod laudantium magni temporibus fugiat, blanditiis unde, delectus minima perspiciatis iste iusto doloremque aliquid earum voluptatem, neque et.</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos magni officia accusamus! Quod laudantium magni temporibus fugiat, blanditiis unde, delectus minima perspiciatis iste iusto doloremque aliquid earum voluptatem, neque et.</p>
+				<p>
+					<?php echo  $descripcion; ?>
+				</p>
 				<br>
 				<h4>Datos de contacto</h4>
 				<p>
-					<strong>Tel:</strong>:4444-4444<br>
-					<strong>Email:</strong>:<a href="mailto:joe@example.com?subject=feedback" "email me">pepe@hotmail.com</a><br>
-					<strong>Sitio web:</strong>:<a href="#" title="">www.pepeherria.com.ar</a><br>
+					<?php if(isset($usuario)){
+						?>
+							<strong>Tel:</strong>:<?php echo $telefono; ?><br>
+						
+							<strong>Sitio web:</strong>:<a href="#" title=""><?php echo $url_web; ?></a><br>
+						<?php
+					}else{
+						?>
+						<strong>Tel:</strong>:<?php echo $telefono; ?><br>
+						
+						<?php
+					} ?>
+					
 					
 				</p>
-				<form action="#" method="post">
+				<div class="clearfix"><br></div>
+				<form action="<?php echo site_url('enviar/comentario-servicio'); ?>" method="post" id="formCServ">
 					<div class="form-group">
-						<label for="exampleInputEmail1">Consultar sobre este servicio</label>
-						<textarea class="form-control" rows="3"></textarea>
+						<label for="comentario">Consultar sobre este servicio</label>
+						<textarea class="form-control" name="comentario" id="comentario" rows="3" requerid="" placeholder="Mensaje"></textarea>
 					</div>
-					 <button type="submit" class="btn btn-default pull-right">Contactar</button>
+					
+					
+					 <?php if(isset($usuario)){
+						?>
+						 <button type="submit" class="btn btn-info pull-right">Contactar</button>
+						<?php
+					}else{
+						?>
+						<a data-toggle="modal" href="#loginModal" data-target="#loginModal" rel=""  class="btn btn-info pull-right">Contactar
+						</a>
+
+						
+						<?php
+					} ?>
 				</form>
 			</div>
 			<div class="col-md-3">
 				<p>
 					
-				<img src="http://placehold.it/400x800" class="img-responsive pull-left" alt=""  >
+				 <?php 
+			         if(isset($map)){
+			          echo $map['html'];
+			        }
+			        ?>
 				</p>
 			</div>
 
@@ -96,13 +118,28 @@
 		    </div>
 		  </div>
 		</div>
-	
+		<div class="clearfix"></div>
 		<div class="col-md-12">
-				<div class="lead text-right">
+			<h3>Opiniones:</h3>
+			<hr>
+		</div>
+		<div class="col-md-2">
+			<div class=" text-right">
 					<h2> 240 <small> Votos </small></h2>
+					<p class="startt">
+						<span class="glyphicon .glyphicon-star-empty glyphicon-star"></span>
+						<span class="glyphicon .glyphicon-star-empty glyphicon-star"></span>
+						<span class="glyphicon .glyphicon-star-empty glyphicon-star"></span>
+						<span class="glyphicon .glyphicon-star-empty glyphicon-star"></span>
+						<span class="glyphicon .glyphicon-star-empty glyphicon-star-empty"></span>
+					</p>
+					 <p class="">Promedio de<br> votos 4 Estrellas</p>
+			       <a href="#modalOpinion" class="btn btn-primary"  data-toggle="modal" data-target="#modalOpinion">Quiero opinar</a>
 				</div>
-				<h3>Comentarios:</h3>
-				<br>
+		</div>
+		<div class="col-md-10">
+
+	
 				
                 <div class="col-md-12">
                     <h4 class=""> Mira la del barrio</h4>

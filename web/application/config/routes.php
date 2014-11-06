@@ -47,8 +47,10 @@ $route['solicitud-de-servicio']					= "sitio/solicitar_servicio";
 $route['consultar-servicio']   					= "sitio/consultar_servicio";
 $route['ofrecer-servicio']     					= "sitio/ofrecer_servicio";
 $route['categorias']           					= "sitio/categorias";
+$route['checkLogin']           					= "sitio/check_login";
 
 $route['busqueda_servicio']						= "sitio/busqueda_servicio";
+$route['enviar/comentario-servicio']			= "sitio/comentar_servicio";
 $route['busqueda_localidades']   				= "sitio/busqueda_localidades";
 $route['busqueda'] 								= "sitio/busqueda";
 $route['resultado-de-busqueda/(:any)']			= "sitio/resultado_busqueda";

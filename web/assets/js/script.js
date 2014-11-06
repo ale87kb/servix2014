@@ -30,45 +30,42 @@ $('document').ready(function(){
             );
         },
 
-        this.modal_login = function(){
-
-
-    $('#form_login_ajax').bootstrapValidator({
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        },
-        fields: {
-            usuario: {
-                validators: {
-                    notEmpty: {
-                        message: 'The username is required'
+      
+        this.validar_comentario_servicio = function(){
+            $("#formCServ").bootstrapValidator({
+                container: 'tooltip',
+                    feedbackIcons: {
+                        valid: 'glyphicon glyphicon-ok',
+                        invalid: 'glyphicon glyphicon-remove',
+                        validating: 'glyphicon glyphicon-refresh'
+                    },
+                    fields: {
+                        comentario: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Por favor, ingrese un mensaje'
+                                },
+                                stringLength: {
+                                    max: 300,
+                                    message: 'Por favor, ingrese un mensaje con menos de 300 caracteres'
+                                }
+                               
+                            }
+                        }
                     }
-                }
-            },
-            clave: {
-                validators: {
-                    notEmpty: {
-                        message: 'The password is required'
-                    }
-                }
-            }
-        }
-    });
-
-    $('#loginModal').on('shown.bs.modal', function() {
-        $('#form_login_ajax').bootstrapValidator('resetForm', true);
-    });
-
-
+            }).on('success.form.bv', function(e) {
+                e.preventDefault();
+                console.log($(this))
+               // $('#myForm').ajaxForm(function() { 
+               //  alert("Thank you for your comment!"); 
+               //  }); 
+            });
         },
-
         this.validar_login_ajax = function(){
             urlweb = this.url;
 
 
-
+           
             $('#loginModal').on('shown.bs.modal', function() {
                 $('#form_login_ajax').bootstrapValidator('resetForm', true);
             });
@@ -85,20 +82,8 @@ $('document').ready(function(){
                             validators: {
                                 notEmpty: {
                                     message: 'Se requiere un email de usuario'
-                                },
-                               /* stringLength: {
-                                    min: 6,
-                                    max: 30,
-                                    message: 'The username must be more than 6 and less than 30 characters long'
-                                },
-                                /*remote: {
-                                    url: 'remote.php',
-                                    message: 'The username is not available'
-                                },*/
-                                /*regexp: {
-                                    regexp: /^[a-zA-Z0-9_\.]+$/,
-                                    message: 'The username can only consist of alphabetical, number, dot and underscore'
-                                }*/
+                                }
+                           
                             }
                         },
                         clave: {
@@ -148,70 +133,16 @@ $('document').ready(function(){
                     })
 
 
-                    /*var json = JSON.parse(data);
-                        $(".errorusername, .errorpassword").html("");
-                        if(json.res == "error")
-                        {
-                            if(json.username)
-                            {
-                                $(".errorusername").append( json.username );
-                            }
-                            if(json.password)
-                            {
-                                $(".errorpassword").append( json.password );
-                            }
-                        }
-                        else
-                        {
-                            $('#loginModal').modal('hide');//cerramos la modal de bootstrap
-                            window.location.reload(); //recargamos la pagina
-                        }
-                    }).error(function(jqXHR, exception){
-                        console.log("Error: " + jqXHR.responseText)
-                    })*/
+                    
             },
 
-
-
-            /* FUNCIONA
-            $("#form_login_ajax").submit( function(e)
-            {
-                e.preventDefault();
-
-                $.post(urlweb+"validar_login_ajax", 
-                    $(this).serialize(),
-                    function(data){
-                        var json = JSON.parse(data);
-                        $(".errorusername, .errorpassword").html("");
-                        if(json.res == "error")
-                        {
-                            if(json.username)
-                            {
-                                $(".errorusername").append( json.username );
-                            }
-                            if(json.password)
-                            {
-                                $(".errorpassword").append( json.password );
-                            }
-                        }
-                        else
-                        {
-                            $('#loginModal').modal('hide');//cerramos la modal de bootstrap
-                            window.location.reload(); //recargamos la pagina
-                        }
-                    }).error(function(jqXHR, exception){
-                        console.log("Error: " + jqXHR.responseText)
-                    })
-            })
-        },
-        */
 		
 
 		this.init = function(){
             this.busqueda();
-            //this.modal_login();
             this.validar_login_ajax();
-            this.dropdownMenu();			
+            this.dropdownMenu();            
+            this.validar_comentario_servicio();			
 		}
 	}
 	

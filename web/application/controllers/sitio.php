@@ -7,13 +7,17 @@ class sitio extends CI_Controller {
 		parent::__construct();
 		
 		//inicio sesion de usuario preguntandole al modelo
+		$this->usuario = $this->check_login();
+	}
+
+	public function check_login(){
 		$this->usuario = null;
 		$user = $this->usuarios_model->isLogin();
 		if($user){
 			$this->usuario = $user['usuario'];
 		}
+		return $this->usuario;
 	}
-
 
 	public function index(){
 		
@@ -23,6 +27,18 @@ class sitio extends CI_Controller {
 		$this->load->view('home_view',$data);
 	}
 
+	public function comentar_servicio(){
+		echo "asdasd";
+		$usuario = $this->check_login();
+			// print_d($this->check_login());
+		if(!empty($usuario)){
+			$comentario_result = array('error' => false,'LoadVista'=>'','mensaje'=>'Su contacto ha sido enviado exitosamente.' );
+		}else{
+			$comentario_result = array('error' => true,'LoadVista'=>'login/login_form.php', 'mensaje'=> 'Por favor ingrese al sitio o registrese' );
+		}
+
+		json_encode($comentario_result);
+	}
 
 	public function busqueda_servicio(){
 		 $data = $this->servix_model->getBusquedaServicio();
@@ -126,16 +142,15 @@ class sitio extends CI_Controller {
 	}
 
 
-	private function _gmap($rs,$loc){
+	private function _gmap($rs,$loc=null,$zoom='auto'){
 		$this->load->library('googlemaps');	
-	
-		$config = array();
-		$config['center']	= $loc.',argentina';
-   		$config['zoom']		= 'auto';
+		$config 			= array();
+	    $config['region']   = 'Argentina';
+		$config['center']	= "$loc";
+   		$config['zoom']		= "$zoom";
 		$config['cluster'] 	= TRUE;
 		$config['places'] 	= TRUE; 
 		$config['minifyJS'] = TRUE;
-		$marker['animation']= 'DROP';
 
 
 		$this->googlemaps->initialize($config);
@@ -144,13 +159,11 @@ class sitio extends CI_Controller {
 		foreach ($rs as $v) {
 
 		$marker = array();
-		$marker['position'] = ''.$v['latitud'].' '.$v['longitud'].'';
+		$marker['position']			  = ''.$v['latitud'].' '.$v['longitud'].'';
 		$marker['infowindow_content'] = ('<div style="width: 250px;color: #000;font-size:14px;font-family:Arial, Helvetica, sans-serif;">'.ucwords($v['titulo']).'<br>'.ucfirst($v['direccion']).'			</div>');
 		$marker['infowindowMaxWidth'] = "500";
-
+		$marker['animation']		  = 'DROP';
 		$this->googlemaps->add_marker($marker);
-	
-
 		}
 
 		$data['map'] = $this->googlemaps->create_map();
@@ -161,10 +174,18 @@ class sitio extends CI_Controller {
 
 
 	public function ficha_servicio($servicio){
-		// $id = $this->_parsearIdServicio($servicio);
-		// echo $id;
-
-		$data['vista'] = 'ficha_servicio_view';
+		$id 			 = $this->_parsearIdServicio($servicio);
+		$servicio 		 = $this->servicios_model->getServicioFicha($id);
+		$c = 0;
+		foreach ($servicio[0] as $key => $value) {
+			$data[$key] = $value;
+		}
+		$lat 			 = $servicio[0]['latitud'];
+		$long 			 = $servicio[0]['longitud'];
+		$position	     = "$lat,$long";
+		$data['map'] 	 = $this->_gmap($servicio,$position,14);
+		$data['usuario'] = $this->usuario;
+		$data['vista']   = 'ficha_servicio_view';
 		$this->load->view('home_view',$data);
 	}
 
