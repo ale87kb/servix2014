@@ -121,6 +121,7 @@ $('document').ready(function(){
 
                 // Use Ajax to submit form data
                 $.post(urlweb+"validar_login_ajax", $form.serialize(), function(data) { 
+                        console.log(data);
                        var json = JSON.parse(data);
                         $(".errorusername, .errorpassword").html("");
                         if(json.res == "error")

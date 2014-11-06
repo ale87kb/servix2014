@@ -14,8 +14,8 @@
 	<script src="<?php  echo site_url('assets/js/bootstrap.min.js');?>"></script>
 	<script src="<?php  echo site_url('assets/js/bootstrap-typeahead.js');?>"></script>
 	<!-- BootstrapValidator -->
-	<script src="<?php  echo site_url('assets/bootstrapvalidator-dist-0.5.3/dist/js/bootstrapValidator.min.js');?>" type="text/javascript"></script>
-	<script src="<?php  echo site_url('assets/bootstrapvalidator-dist-0.5.3/src/js/language/es_ES.js');?>" type="text/javascript"></script>
+	<script src="<?php  echo site_url('assets/js/bootstrapValidator.min.js');?>" type="text/javascript"></script>
+	<script src="<?php  echo site_url('assets/js/lang/es_ES.js');?>" type="text/javascript"></script>
 	
 	<script>
 		$site_url = "<?php echo site_url();?>";
