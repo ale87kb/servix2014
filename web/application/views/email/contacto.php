@@ -44,13 +44,15 @@
 			<table>
 				<tr>
 					<td>
-						<h3>Hola, Juan</h3>
-						<p class="lead">Te contactaron por el servicio de <strong>Herreria de caballos 2</strong></p>
+						<h3>Hola, <?php echo $nombre ?></h3>
+						<p class="lead">Te contactaron por el servicio de <strong><?php echo $nombre_servicio; ?></strong></p>
 						
 						<!-- Callout Panel -->
 						<p class="callout">
 							<strong>Mensaje</strong>:<br>
-							Phasellus dictum sapien a neque luctus cursus. Pellentesque sem dolor, fringilla et pharetra vitae. consequat vel lacus. Sed iaculis pulvinar ligula, ornare fringilla ante viverra et. In hac habitasse platea dictumst. Donec vel orci mi, eu congue justo. Integer eget odio est, eget malesuada lorem. Aenean sed tellus dui, vitae viverra risus. Nullam massa sapien, pulvinar eleifend fringilla id, convallis eget nisi. Mauris a sagittis dui. Pellentesque non lacinia mi. Fusce sit amet libero sit amet erat venenatis sollicitudin vitae vel eros. Cras nunc sapien, interdum sit amet porttitor ut, congue quis urna.
+							<?php 
+							echo htmlentities($comentario);
+							 ?>
 						</p><!-- /Callout Panel -->					
 												
 						<!-- social & contact -->
@@ -69,9 +71,9 @@
 												<h5 class="">Contact Info:</h5>												
 											
 												<p>
-													Nombre: <strong>Maria Ines</strong></br>
-													Teléfono: <strong>408.341.0600</strong><br/>
-                Email: <strong><a href="emailto:hseldon@trantor.com">hseldon@trantor.com</a></strong></p>
+													Nombre: <strong><?php echo $nombreUsuario; ?></strong></br>
+													Teléfono: <strong><?php echo $telUsuario; ?></strong><br/>
+            										Email: <strong><a href="emailto:hseldon@trantor.com"><?php echo $emailUsuario; ?></a></strong></p>
                 
 											</td>
 										</tr>
