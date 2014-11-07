@@ -33,35 +33,40 @@ class sitio extends CI_Controller {
 
 	public function comentar_servicio(){
 	
-		$usuario = $this->usuarios_model->isLogin();
-		$post = $this->input->post();
-		if(!empty($usuario)){
+		$usuario 		= $this->usuarios_model->isLogin();
+		$post 			= $this->input->post();
+		$id_servicio 	=  $this->input->post('id_servicio');
+		$id_usuario  	= $usuario['id'];
+		$comentario 	= $this->input->post('comentario');
+		$validacion 	= $this->_validar_consulta($usuario);
 
+		if($validacion['error'] == false){
+			$this->servicios_model->setConsultaServicio($id_servicio,$id_usuario ,$comentario );
+			$this->servicios_model->sendContacto($post);
+		}
+
+		echo json_encode($validacion);
+
+	}
+
+	private function _validar_consulta($usuario){
+		if(!empty($usuario)){
 				$this->form_validation->set_rules('comentario', 'comentario', 'trim|required|xss_clean');
-			
-		           
 				if($this->form_validation->run() == FALSE){
 					$comentario_result = array(
 					'error' => true,
 					'mensaje'=>'Por favor ingrese un comentario.',
 					 );		
 				}else{
-					$this->servicios_model->setConsultaServicio( $this->input->post('id_servicio'), $usuario['id'], $this->input->post('comentario'));
-					$this->servicios_model->sendContacto($post);
 					$comentario_result = array(
 					'error' => false,
 					'mensaje'=>'Su consulta ha sido enviado exitosamente.',
 					 );
 				}
-			
 		}else{
-
-			
-
 			$comentario_result = array('error' => true, 'mensaje'=> 'Por favor ingrese al sitio o registrese');
 		}
-		
-		echo json_encode($comentario_result);
+		return $comentario_result;
 	}
 
 	public function busqueda_servicio(){
@@ -200,6 +205,8 @@ class sitio extends CI_Controller {
 	public function ficha_servicio($servicio=null){
 
 		$id 			 = $this->_parsearIdServicio($servicio);
+
+		if(is_numeric($id)){
 		$servicio 		 = $this->servicios_model->getServicioFicha($id);
 		$opiniones 		 = $this->servicios_model->getOpinionServicio($id);
 
@@ -222,6 +229,9 @@ class sitio extends CI_Controller {
 		$data['vista']   = 'ficha_servicio_view';
 
 		$this->load->view('home_view',$data);
+		}else{
+			redirect('');
+		}
 	}
 
 
