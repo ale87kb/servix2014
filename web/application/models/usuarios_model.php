@@ -31,6 +31,7 @@ Class Usuarios_model extends CI_Model{
 		if($this->session->userdata('logged_in'))
 	   {
 	     $session_data = $this->session->userdata('logged_in');
+	     $data['id']	  = $session_data['id'];
 	     $data['usuario'] = $session_data['usuario'];
 	    return $data;
 	   }

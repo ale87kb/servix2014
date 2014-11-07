@@ -48,6 +48,7 @@ $route['consultar-servicio']   					= "sitio/consultar_servicio";
 $route['ofrecer-servicio']     					= "sitio/ofrecer_servicio";
 $route['categorias']           					= "sitio/categorias";
 $route['checkLogin']           					= "sitio/check_login";
+$route['mail']           						= "sitio/mail";
 
 $route['busqueda_servicio']						= "sitio/busqueda_servicio";
 $route['enviar/comentario-servicio']			= "sitio/comentar_servicio";

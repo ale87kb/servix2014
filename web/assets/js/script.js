@@ -32,6 +32,7 @@ $('document').ready(function(){
 
       
         this.validar_comentario_servicio = function(){
+
             $("#formCServ").bootstrapValidator({
                 container: 'tooltip',
                     feedbackIcons: {
@@ -54,11 +55,31 @@ $('document').ready(function(){
                         }
                     }
             }).on('success.form.bv', function(e) {
-                e.preventDefault();
-                console.log($(this))
-               // $('#myForm').ajaxForm(function() { 
-               //  alert("Thank you for your comment!"); 
-               //  }); 
+                  
+              // $(this).data('bootstrapValidator').resetForm();
+            
+                var options = { 
+
+                    success:function(data){
+                         var json = JSON.parse(data);
+                         if(json.error == false){
+                            $("#mensaje").append(json.mensaje);
+                            $("#mensaje").addClass("alert-success");
+                            $("#mensaje").removeClass("hidden");
+                            // console.log(json);
+                         }else{
+                            $("#mensaje").append(json.mensaje);
+                            $("#mensaje").addClass("alert-danger");
+                            $("#mensaje").removeClass("hidden");
+                         }
+                        
+                    },
+                    resetForm: true,
+                }
+
+
+                 $(this).ajaxForm(options); 
+                setTimeout(function() {window.location.reload(); }, 2000);
             });
         },
         this.validar_login_ajax = function(){

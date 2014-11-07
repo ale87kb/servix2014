@@ -13,7 +13,27 @@
 						<img src="http://placehold.it/200x200" class="img-rounded" alt="">
 					</p>
 					<p><a href="#" class="btn btn-link">Recomendar a un amigo</a></p>
-			      
+			      <?php
+				 if(empty($comentario) and empty($puntos)){
+				 		
+				?>
+
+						<?php if(isset($usuario)){
+						?>
+						 <a href="#modalOpinion" class="btn btn-primary"  data-toggle="modal" data-target="#modalOpinion">Quiero opinar</a>
+						<?php
+						}else{
+							?>
+						<a data-toggle="modal" href="#loginModal" data-target="#loginModal" rel=""  class="btn btn-primary ">Quiero opinar
+						</a>
+
+						
+						<?php
+						} ?>
+					
+				<?php 
+				}
+				?>
 				</div>
 			</div>
 			<div class="col-md-6">
@@ -34,6 +54,7 @@
 						<?php
 					}else{
 						?>
+						<strong>Nombre:</strong>:<?php echo $nombre; ?><br>
 						<strong>Tel:</strong>:<?php echo $telefono; ?><br>
 						
 						<?php
@@ -42,15 +63,20 @@
 					
 				</p>
 				<div class="clearfix"><br></div>
+				<div class="alert hidden alert-dismissible" id="mensaje" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button></div>
 				<form action="<?php echo site_url('enviar/comentario-servicio'); ?>" method="post" id="formCServ">
 					<div class="form-group">
 						<label for="comentario">Consultar sobre este servicio</label>
 						<textarea class="form-control" name="comentario" id="comentario" rows="3" requerid="" placeholder="Mensaje"></textarea>
+
 					</div>
 					
 					
 					 <?php if(isset($usuario)){
 						?>
+						 <input type="hidden" value="<?php echo $id; ?>" name="id_servicio" />
+						 <input type="hidden" value="<?php echo $titulo; ?>" name="nombre_servicio" />
+						 <input type="hidden" value="<?php echo $nombre; ?>" name="nombre" />
 						 <button type="submit" class="btn btn-info pull-right">Contactar</button>
 						<?php
 					}else{
@@ -77,6 +103,7 @@
 		</div>
 		<div class="col-md-12">
 			<hr>
+			<p class="text-center"><small>Servix no vende este servicio y no participa en ninguna negociación. Sólo se limita a la publicación de anuncios de sus usuarios.</small></p>
 		</div>
 		<!-- Modal -->
 		<div class="modal fade" id="modalOpinion" tabindex="-1" role="dialog" aria-labelledby="modalOpinion-1" aria-hidden="true">
@@ -119,7 +146,14 @@
 		  </div>
 		</div>
 		<div class="clearfix"></div>
+		<?php
+		 if(!empty($comentario) and !empty($puntos)){
+
+		?>
+
 		<div class="col-md-12">
+
+
 			<h3>Opiniones:</h3>
 			<hr>
 		</div>
@@ -160,6 +194,8 @@
                     </p>
                 </div>
 		</div>
+			<?php
+		} ?>
 	</div>
 
 </section>

@@ -27,17 +27,41 @@ class sitio extends CI_Controller {
 		$this->load->view('home_view',$data);
 	}
 
-	public function comentar_servicio(){
-		echo "asdasd";
-		$usuario = $this->check_login();
-			// print_d($this->check_login());
-		if(!empty($usuario)){
-			$comentario_result = array('error' => false,'LoadVista'=>'','mensaje'=>'Su contacto ha sido enviado exitosamente.' );
-		}else{
-			$comentario_result = array('error' => true,'LoadVista'=>'login/login_form.php', 'mensaje'=> 'Por favor ingrese al sitio o registrese' );
-		}
+	public function mail(){
+		$this->load->view('email/contacto');
+	}
 
-		json_encode($comentario_result);
+	public function comentar_servicio(){
+	
+		$usuario = $this->usuarios_model->isLogin();
+		$post = $this->input->post();
+		if(!empty($usuario)){
+
+				$this->form_validation->set_rules('comentario', 'comentario', 'trim|required|xss_clean');
+			
+		           
+				if($this->form_validation->run() == FALSE){
+					$comentario_result = array(
+					'error' => true,
+					'mensaje'=>'Por favor ingrese un comentario.',
+					 );		
+				}else{
+					$this->servicios_model->setConsultaServicio( $this->input->post('id_servicio'), $usuario['id'], $this->input->post('comentario'));
+					$this->servicios_model->sendContacto($post);
+					$comentario_result = array(
+					'error' => false,
+					'mensaje'=>'Su consulta ha sido enviado exitosamente.',
+					 );
+				}
+			
+		}else{
+
+			
+
+			$comentario_result = array('error' => true, 'mensaje'=> 'Por favor ingrese al sitio o registrese');
+		}
+		
+		echo json_encode($comentario_result);
 	}
 
 	public function busqueda_servicio(){
@@ -173,19 +197,30 @@ class sitio extends CI_Controller {
 
 
 
-	public function ficha_servicio($servicio){
+	public function ficha_servicio($servicio=null){
+
 		$id 			 = $this->_parsearIdServicio($servicio);
 		$servicio 		 = $this->servicios_model->getServicioFicha($id);
-		$c = 0;
+		$opiniones 		 = $this->servicios_model->getOpinionServicio($id);
+
+		
+
+		if(!empty($opiniones)){
+			foreach ($opiniones[0] as $key => $value) {
+				$data[$key] = $value;
+			}
+		}
 		foreach ($servicio[0] as $key => $value) {
 			$data[$key] = $value;
 		}
+		$data['servicio']= $data['titulo'];
 		$lat 			 = $servicio[0]['latitud'];
 		$long 			 = $servicio[0]['longitud'];
 		$position	     = "$lat,$long";
 		$data['map'] 	 = $this->_gmap($servicio,$position,14);
 		$data['usuario'] = $this->usuario;
 		$data['vista']   = 'ficha_servicio_view';
+
 		$this->load->view('home_view',$data);
 	}
 
