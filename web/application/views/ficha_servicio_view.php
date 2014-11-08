@@ -77,7 +77,6 @@
 						 <input type="hidden" value="<?php echo $id; ?>" name="id_servicio" />
 						 <input type="hidden" value="<?php echo $titulo; ?>" name="nombre_servicio" />
 						 <input type="hidden" value="<?php echo $nombre; ?>" name="nombre" />
-						 <input type="hidden" value="<?php echo $email; ?>" name="email" />
 						 <button type="submit" class="btn btn-info pull-right">Contactar</button>
 						<?php
 					}else{
@@ -124,7 +123,6 @@
 					    <label for="inputEmail3" class="col-sm-5 control-label">¿Como Calificarias este servicio?</label>
 					    <div class="col-sm-7">
 					    		  <div id="stars" class="starrr " ></div>
-					    		  <input type="hidden" value="0" id="puntos" name="puntos">
 					    </div>
 					  </div>
 					  <div class="form-group">

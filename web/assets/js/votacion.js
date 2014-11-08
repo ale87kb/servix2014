@@ -7,13 +7,7 @@ var __slice = [].slice;
     Starrr.prototype.defaults = {
       rating: void 0,
       numStars: 5,
-      change: function(e, value) {
-        if(value == undefined){
-          value = 0;
-        }
-        $("#puntos").val(value);
-        // if(value == undefi)
-      }
+      change: function(e, value) {}
     };
 
     function Starrr($el, options) {

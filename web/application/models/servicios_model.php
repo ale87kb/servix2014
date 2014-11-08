@@ -15,30 +15,7 @@ Class Servicios_model extends CI_Model{
 		return $rs;
 	}
 	public function sendContacto($post){
-		 if(isset($post)){
-
-		 	// print_d($post);
-		 	$this->load->library('email');
-		 	$config['charset'] = 'utf-8';
-	        $config['wordwrap'] = TRUE;
-	        $config['mailtype'] = 'html';
-	        $fromemail          = 'no-responder@servix.com'; // desde
-	        $toemail            = $post['email']; //para 
-	        $mail               = null;
-	        $subject            = "Servix datos de contacto";
-
-	        
-	        $this->email->initialize($config);
-        	$this->email->to($toemail);
-	        $this->email->from($fromemail, $post['nombre']);
-	        
-	        $this->email->subject($subject);
-	        $mesg  = $this->load->view('email/contacto',$post,true);
-	        $this->email->message($mesg);
-	        $mail = $this->email->send();
-	      
-	      	return $mail;
-		 }
+		 return true;
 	}
 
 	public function getOpinionServicio($id){
@@ -70,14 +47,13 @@ Class Servicios_model extends CI_Model{
 					servicios.longitud,
 					localidades.localidad,
 					categorias.categoria,
-					usuarios.nombre,
-					usuarios.email
+					usuarios.nombre
 					FROM
 					servicios
 					LEFT OUTER JOIN localidades ON servicios.id_localidades = localidades.id
 					LEFT OUTER JOIN categorias ON servicios.id_categorias = categorias.id
 					LEFT OUTER JOIN relacion_u_s ON relacion_u_s.id_servicios = servicios.id
-					LEFT OUTER JOIN usuarios ON relacion_u_s.id_usurios = usuarios.id
+					INNER JOIN usuarios ON relacion_u_s.id_usurios = usuarios.id
 					WHERE
 					servicios.id = $id LIMIT 1";
 		$rs    = $this->db->query($query);

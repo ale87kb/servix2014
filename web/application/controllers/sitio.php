@@ -22,22 +22,14 @@ class sitio extends CI_Controller {
 	public function index(){
 		
 		// print_d($data['usuario']);
-
 		$data['usuario'] = $this->usuario;
 		$data['vista'] = 'index_view';
 		$this->load->view('home_view',$data);
 	}
 
-
-	// public function mail(){  // test email
-	// 	$post    = $this->input->post();
-	// 	$usuario = $this->usuarios_model->isLogin();
-	// 	$post['nombreUsuario'] = $usuario['usuario'];
-	// 	$post['telUsuario']    = $usuario['telefono'];
-	// 	$post['emailUsuario']  = $usuario['email'];
-		
-	// 	$this->servicios_model->sendContacto($post);
-	// }
+	public function mail(){
+		$this->load->view('email/contacto');
+	}
 
 	public function comentar_servicio(){
 	
@@ -48,16 +40,9 @@ class sitio extends CI_Controller {
 		$comentario 	= $this->input->post('comentario');
 		$validacion 	= $this->_validar_consulta($usuario);
 
-
 		if($validacion['error'] == false){
 			$this->servicios_model->setConsultaServicio($id_servicio,$id_usuario ,$comentario );
-			$post['nombreUsuario'] = $usuario['usuario'];
-			$post['telUsuario']    = $usuario['telefono'];
-			$post['emailUsuario']  = $usuario['email'];
-
 			$this->servicios_model->sendContacto($post);
-
-			
 		}
 
 		echo json_encode($validacion);
@@ -220,8 +205,8 @@ class sitio extends CI_Controller {
 	public function ficha_servicio($servicio=null){
 
 		$id 			 = $this->_parsearIdServicio($servicio);
-		if(is_numeric($id)){
 
+		if(is_numeric($id)){
 		$servicio 		 = $this->servicios_model->getServicioFicha($id);
 		$opiniones 		 = $this->servicios_model->getOpinionServicio($id);
 

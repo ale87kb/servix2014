@@ -30,11 +30,9 @@ Class Usuarios_model extends CI_Model{
 	public function isLogin(){
 		if($this->session->userdata('logged_in'))
 	   {
-	     $session_data 	   = $this->session->userdata('logged_in');
-	     $data['id']	   = $session_data['id'];
-	     $data['usuario']  = $session_data['usuario'];
-	     $data['telefono'] = $session_data['telefono'];
-	     $data['email']    = $session_data['email'];
+	     $session_data = $this->session->userdata('logged_in');
+	     $data['id']	  = $session_data['id'];
+	     $data['usuario'] = $session_data['usuario'];
 	    return $data;
 	   }
 	   else

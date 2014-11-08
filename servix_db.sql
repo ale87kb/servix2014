@@ -1,18 +1,25 @@
--- --------------------------------------------------------
--- Host:                         127.0.0.1
--- Server version:               5.6.20 - MySQL Community Server (GPL)
--- Server OS:                    Win32
--- HeidiSQL version:             7.0.0.4053
--- Date/time:                    2014-11-07 15:22:36
--- --------------------------------------------------------
+/*
+Navicat MySQL Data Transfer
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES utf8 */;
-/*!40014 SET FOREIGN_KEY_CHECKS=0 */;
+Source Server         : localhost
+Source Server Version : 50520
+Source Host           : localhost:3306
+Source Database       : servix_db
 
--- Dumping structure for table servix_db.busquedas_temp
+Target Server Type    : MYSQL
+Target Server Version : 50520
+File Encoding         : 65001
+
+Date: 2014-11-04 22:33:52
+*/
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `busquedas_temp`
+-- ----------------------------
 DROP TABLE IF EXISTS `busquedas_temp`;
-CREATE TABLE IF NOT EXISTS `busquedas_temp` (
+CREATE TABLE `busquedas_temp` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_categorias` int(11) unsigned NOT NULL,
   `id_usuario` int(11) unsigned NOT NULL,
@@ -29,68 +36,67 @@ CREATE TABLE IF NOT EXISTS `busquedas_temp` (
   CONSTRAINT `busquedas_temp_ibfk_4` FOREIGN KEY (`id_categorias`) REFERENCES `categorias` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table servix_db.busquedas_temp: ~0 rows (approximately)
-DELETE FROM `busquedas_temp`;
-/*!40000 ALTER TABLE `busquedas_temp` DISABLE KEYS */;
-/*!40000 ALTER TABLE `busquedas_temp` ENABLE KEYS */;
+-- ----------------------------
+-- Records of busquedas_temp
+-- ----------------------------
 
-
--- Dumping structure for table servix_db.categorias
+-- ----------------------------
+-- Table structure for `categorias`
+-- ----------------------------
 DROP TABLE IF EXISTS `categorias`;
-CREATE TABLE IF NOT EXISTS `categorias` (
+CREATE TABLE `categorias` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `categoria` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
 
--- Dumping data for table servix_db.categorias: ~38 rows (approximately)
-DELETE FROM `categorias`;
-/*!40000 ALTER TABLE `categorias` DISABLE KEYS */;
-INSERT INTO `categorias` (`id`, `categoria`) VALUES
-	(1, 'mecánico'),
-	(2, 'taquillero'),
-	(3, 'imprentero'),
-	(4, 'basurero'),
-	(5, 'cocinero'),
-	(6, 'techista'),
-	(7, 'encuadernador'),
-	(8, 'portero'),
-	(9, 'cortinero'),
-	(10, 'panadero'),
-	(11, 'vendedor'),
-	(12, 'modista'),
-	(13, 'peluquero'),
-	(14, 'colectivero'),
-	(15, 'confitero'),
-	(16, 'encargado'),
-	(17, 'frutero'),
-	(18, 'diseñador'),
-	(19, 'mucama'),
-	(20, 'apuntador'),
-	(21, 'bicicletero'),
-	(22, 'herrero'),
-	(23, 'kiosquero'),
-	(24, 'jalatero'),
-	(25, 'carpintero'),
-	(26, 'costurera'),
-	(27, 'mesero'),
-	(28, 'jardinero'),
-	(29, 'heladero'),
-	(30, 'lavaplatos'),
-	(31, 'pescador'),
-	(32, 'guardavidas'),
-	(33, 'gasista'),
-	(34, 'niñera'),
-	(35, 'verdulero'),
-	(36, 'electricista'),
-	(37, 'estampadora '),
-	(38, 'costurero');
-/*!40000 ALTER TABLE `categorias` ENABLE KEYS */;
+-- ----------------------------
+-- Records of categorias
+-- ----------------------------
+INSERT INTO `categorias` VALUES ('1', 'mecánico');
+INSERT INTO `categorias` VALUES ('2', 'taquillero');
+INSERT INTO `categorias` VALUES ('3', 'imprentero');
+INSERT INTO `categorias` VALUES ('4', 'basurero');
+INSERT INTO `categorias` VALUES ('5', 'cocinero');
+INSERT INTO `categorias` VALUES ('6', 'techista');
+INSERT INTO `categorias` VALUES ('7', 'encuadernador');
+INSERT INTO `categorias` VALUES ('8', 'portero');
+INSERT INTO `categorias` VALUES ('9', 'cortinero');
+INSERT INTO `categorias` VALUES ('10', 'panadero');
+INSERT INTO `categorias` VALUES ('11', 'vendedor');
+INSERT INTO `categorias` VALUES ('12', 'modista');
+INSERT INTO `categorias` VALUES ('13', 'peluquero');
+INSERT INTO `categorias` VALUES ('14', 'colectivero');
+INSERT INTO `categorias` VALUES ('15', 'confitero');
+INSERT INTO `categorias` VALUES ('16', 'encargado');
+INSERT INTO `categorias` VALUES ('17', 'frutero');
+INSERT INTO `categorias` VALUES ('18', 'diseñador');
+INSERT INTO `categorias` VALUES ('19', 'mucama');
+INSERT INTO `categorias` VALUES ('20', 'apuntador');
+INSERT INTO `categorias` VALUES ('21', 'bicicletero');
+INSERT INTO `categorias` VALUES ('22', 'herrero');
+INSERT INTO `categorias` VALUES ('23', 'kiosquero');
+INSERT INTO `categorias` VALUES ('24', 'jalatero');
+INSERT INTO `categorias` VALUES ('25', 'carpintero');
+INSERT INTO `categorias` VALUES ('26', 'costurera');
+INSERT INTO `categorias` VALUES ('27', 'mesero');
+INSERT INTO `categorias` VALUES ('28', 'jardinero');
+INSERT INTO `categorias` VALUES ('29', 'heladero');
+INSERT INTO `categorias` VALUES ('30', 'lavaplatos');
+INSERT INTO `categorias` VALUES ('31', 'pescador');
+INSERT INTO `categorias` VALUES ('32', 'guardavidas');
+INSERT INTO `categorias` VALUES ('33', 'gasista');
+INSERT INTO `categorias` VALUES ('34', 'niñera');
+INSERT INTO `categorias` VALUES ('35', 'verdulero');
+INSERT INTO `categorias` VALUES ('36', 'electricista');
+INSERT INTO `categorias` VALUES ('37', 'estampadora ');
+INSERT INTO `categorias` VALUES ('38', 'costurero');
 
-
--- Dumping structure for table servix_db.ci_sessions
+-- ----------------------------
+-- Table structure for `ci_sessions`
+-- ----------------------------
 DROP TABLE IF EXISTS `ci_sessions`;
-CREATE TABLE IF NOT EXISTS `ci_sessions` (
+CREATE TABLE `ci_sessions` (
   `session_id` varchar(40) NOT NULL DEFAULT '0',
   `ip_address` varchar(45) NOT NULL DEFAULT '0',
   `user_agent` varchar(120) NOT NULL,
@@ -100,17 +106,16 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
   KEY `last_activity_idx` (`last_activity`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table servix_db.ci_sessions: ~1 rows (approximately)
-DELETE FROM `ci_sessions`;
-/*!40000 ALTER TABLE `ci_sessions` DISABLE KEYS */;
-INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-	('8da3a90e3d2f1a2105cb6233c9a68c3f', '::1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36', 1415382892, 'a:3:{s:9:"user_data";s:0:"";s:9:"logged_in";a:4:{s:2:"id";s:1:"8";s:7:"usuario";s:5:"Pedro";s:5:"email";s:14:"pepe@gmail.com";s:8:"telefono";s:9:"4444-5587";}s:8:"busqueda";a:2:{s:4:"post";a:2:{s:8:"servicio";s:21:"Herreria los hermanos";s:9:"localidad";s:12:"buenos aires";}s:3:"url";a:2:{s:8:"servicio";s:21:"herreria-los-hermanos";s:9:"localidad";s:12:"buenos-aires";}}}');
-/*!40000 ALTER TABLE `ci_sessions` ENABLE KEYS */;
+-- ----------------------------
+-- Records of ci_sessions
+-- ----------------------------
+INSERT INTO `ci_sessions` VALUES ('e1eb367c86f8f29eb155637a4a3ecb2e', '::1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:33.0) Gecko/20100101 Firefox/33.0', '1415150993', 'a:3:{s:9:\"user_data\";s:0:\"\";s:9:\"logged_in\";a:2:{s:2:\"id\";s:1:\"8\";s:7:\"usuario\";s:4:\"pepe\";}s:8:\"busqueda\";a:2:{s:4:\"post\";a:2:{s:8:\"servicio\";s:13:\"Aceros Gongal\";s:9:\"localidad\";s:23:\"A. Alsina, Buenos Aires\";}s:3:\"url\";a:2:{s:8:\"servicio\";s:13:\"aceros-gongal\";s:9:\"localidad\";s:21:\"a-alsina-buenos-aires\";}}}');
 
-
--- Dumping structure for table servix_db.comentarios
+-- ----------------------------
+-- Table structure for `comentarios`
+-- ----------------------------
 DROP TABLE IF EXISTS `comentarios`;
-CREATE TABLE IF NOT EXISTS `comentarios` (
+CREATE TABLE `comentarios` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_usuarios` int(11) unsigned NOT NULL,
   `id_servicios` int(11) unsigned NOT NULL,
@@ -123,38 +128,15 @@ CREATE TABLE IF NOT EXISTS `comentarios` (
   CONSTRAINT `comentarios_ibfk_2` FOREIGN KEY (`id_servicios`) REFERENCES `servicios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table servix_db.comentarios: ~0 rows (approximately)
-DELETE FROM `comentarios`;
-/*!40000 ALTER TABLE `comentarios` DISABLE KEYS */;
-/*!40000 ALTER TABLE `comentarios` ENABLE KEYS */;
+-- ----------------------------
+-- Records of comentarios
+-- ----------------------------
 
-
--- Dumping structure for table servix_db.consultas_servicios
-DROP TABLE IF EXISTS `consultas_servicios`;
-CREATE TABLE IF NOT EXISTS `consultas_servicios` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `id_servicio` int(10) DEFAULT '0',
-  `id_usuario` int(10) DEFAULT '0',
-  `fecha` datetime DEFAULT NULL,
-  `consulta` text,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
-
--- Dumping data for table servix_db.consultas_servicios: ~5 rows (approximately)
-DELETE FROM `consultas_servicios`;
-/*!40000 ALTER TABLE `consultas_servicios` DISABLE KEYS */;
-INSERT INTO `consultas_servicios` (`id`, `id_servicio`, `id_usuario`, `fecha`, `consulta`) VALUES
-	(1, 208, 8, '2014-11-07 14:11:36', 'hola como estas mi nombre es horacio y necesitaria hacer un porton de hierron de 2000 x 2000 cm, estoy en ruta 4 y la 5 por favor enviame un presupuesto de tallado con todos los datos de donde estas y como trabajas gracias espero tu breve comentario '),
-	(2, 208, 8, '2014-11-07 14:11:37', 'asdasdasasdasdasd'),
-	(3, 208, 8, '2014-11-07 14:11:37', 'asdasddsadasdsad'),
-	(4, 208, 8, '2014-11-07 14:11:38', 'asdasddfgfdgdfgdfg'),
-	(5, 208, 8, '2014-11-07 14:11:50', ' es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la i');
-/*!40000 ALTER TABLE `consultas_servicios` ENABLE KEYS */;
-
-
--- Dumping structure for table servix_db.favoritos
+-- ----------------------------
+-- Table structure for `favoritos`
+-- ----------------------------
 DROP TABLE IF EXISTS `favoritos`;
-CREATE TABLE IF NOT EXISTS `favoritos` (
+CREATE TABLE `favoritos` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_usuarios` int(11) unsigned NOT NULL,
   `id_servicios` int(11) unsigned NOT NULL,
@@ -165,15 +147,15 @@ CREATE TABLE IF NOT EXISTS `favoritos` (
   CONSTRAINT `favoritos_ibfk_2` FOREIGN KEY (`id_servicios`) REFERENCES `servicios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table servix_db.favoritos: ~0 rows (approximately)
-DELETE FROM `favoritos`;
-/*!40000 ALTER TABLE `favoritos` DISABLE KEYS */;
-/*!40000 ALTER TABLE `favoritos` ENABLE KEYS */;
+-- ----------------------------
+-- Records of favoritos
+-- ----------------------------
 
-
--- Dumping structure for table servix_db.localidades
+-- ----------------------------
+-- Table structure for `localidades`
+-- ----------------------------
 DROP TABLE IF EXISTS `localidades`;
-CREATE TABLE IF NOT EXISTS `localidades` (
+CREATE TABLE `localidades` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_provincia` int(11) unsigned NOT NULL,
   `localidad` varchar(45) NOT NULL,
@@ -182,2398 +164,2397 @@ CREATE TABLE IF NOT EXISTS `localidades` (
   CONSTRAINT `localidades_ibfk_1` FOREIGN KEY (`id_provincia`) REFERENCES `provincias` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2383 DEFAULT CHARSET=latin1;
 
--- Dumping data for table servix_db.localidades: ~2.382 rows (approximately)
-DELETE FROM `localidades`;
-/*!40000 ALTER TABLE `localidades` DISABLE KEYS */;
-INSERT INTO `localidades` (`id`, `id_provincia`, `localidad`) VALUES
-	(1, 1, '25 de Mayo'),
-	(2, 1, '3 de febrero'),
-	(3, 1, 'A. Alsina'),
-	(4, 1, 'A. Gonzáles Cháves'),
-	(5, 1, 'Aguas Verdes'),
-	(6, 1, 'Alberti'),
-	(7, 1, 'Arrecifes'),
-	(8, 1, 'Ayacucho'),
-	(9, 1, 'Azul'),
-	(10, 1, 'Bahía Blanca'),
-	(11, 1, 'Balcarce'),
-	(12, 1, 'Baradero'),
-	(13, 1, 'Benito Juárez'),
-	(14, 1, 'Berisso'),
-	(15, 1, 'Bolívar'),
-	(16, 1, 'Bragado'),
-	(17, 1, 'Brandsen'),
-	(18, 1, 'Campana'),
-	(19, 1, 'Cañuelas'),
-	(20, 1, 'Capilla del Señor'),
-	(21, 1, 'Capitán Sarmiento'),
-	(22, 1, 'Carapachay'),
-	(23, 1, 'Carhue'),
-	(24, 1, 'Cariló'),
-	(25, 1, 'Carlos Casares'),
-	(26, 1, 'Carlos Tejedor'),
-	(27, 1, 'Carmen de Areco'),
-	(28, 1, 'Carmen de Patagones'),
-	(29, 1, 'Castelli'),
-	(30, 1, 'Chacabuco'),
-	(31, 1, 'Chascomús'),
-	(32, 1, 'Chivilcoy'),
-	(33, 1, 'Colón'),
-	(34, 1, 'Coronel Dorrego'),
-	(35, 1, 'Coronel Pringles'),
-	(36, 1, 'Coronel Rosales'),
-	(37, 1, 'Coronel Suarez'),
-	(38, 1, 'Costa Azul'),
-	(39, 1, 'Costa Chica'),
-	(40, 1, 'Costa del Este'),
-	(41, 1, 'Costa Esmeralda'),
-	(42, 1, 'Daireaux'),
-	(43, 1, 'Darregueira'),
-	(44, 1, 'Del Viso'),
-	(45, 1, 'Dolores'),
-	(46, 1, 'Don Torcuato'),
-	(47, 1, 'Ensenada'),
-	(48, 1, 'Escobar'),
-	(49, 1, 'Exaltación de la Cruz'),
-	(50, 1, 'Florentino Ameghino'),
-	(51, 1, 'Garín'),
-	(52, 1, 'Gral. Alvarado'),
-	(53, 1, 'Gral. Alvear'),
-	(54, 1, 'Gral. Arenales'),
-	(55, 1, 'Gral. Belgrano'),
-	(56, 1, 'Gral. Guido'),
-	(57, 1, 'Gral. Lamadrid'),
-	(58, 1, 'Gral. Las Heras'),
-	(59, 1, 'Gral. Lavalle'),
-	(60, 1, 'Gral. Madariaga'),
-	(61, 1, 'Gral. Pacheco'),
-	(62, 1, 'Gral. Paz'),
-	(63, 1, 'Gral. Pinto'),
-	(64, 1, 'Gral. Pueyrredón'),
-	(65, 1, 'Gral. Rodríguez'),
-	(66, 1, 'Gral. Viamonte'),
-	(67, 1, 'Gral. Villegas'),
-	(68, 1, 'Guaminí'),
-	(69, 1, 'Guernica'),
-	(70, 1, 'Hipólito Yrigoyen'),
-	(71, 1, 'Ing. Maschwitz'),
-	(72, 1, 'Junín'),
-	(73, 1, 'La Plata'),
-	(74, 1, 'Laprida'),
-	(75, 1, 'Las Flores'),
-	(76, 1, 'Las Toninas'),
-	(77, 1, 'Leandro N. Alem'),
-	(78, 1, 'Lincoln'),
-	(79, 1, 'Loberia'),
-	(80, 1, 'Lobos'),
-	(81, 1, 'Los Cardales'),
-	(82, 1, 'Los Toldos'),
-	(83, 1, 'Lucila del Mar'),
-	(84, 1, 'Luján'),
-	(85, 1, 'Magdalena'),
-	(86, 1, 'Maipú'),
-	(87, 1, 'Mar Chiquita'),
-	(88, 1, 'Mar de Ajó'),
-	(89, 1, 'Mar de las Pampas'),
-	(90, 1, 'Mar del Plata'),
-	(91, 1, 'Mar del Tuyú'),
-	(92, 1, 'Marcos Paz'),
-	(93, 1, 'Mercedes'),
-	(94, 1, 'Miramar'),
-	(95, 1, 'Monte'),
-	(96, 1, 'Monte Hermoso'),
-	(97, 1, 'Munro'),
-	(98, 1, 'Navarro'),
-	(99, 1, 'Necochea'),
-	(100, 1, 'Olavarría'),
-	(101, 1, 'Partido de la Costa'),
-	(102, 1, 'Pehuajó'),
-	(103, 1, 'Pellegrini'),
-	(104, 1, 'Pergamino'),
-	(105, 1, 'Pigüé'),
-	(106, 1, 'Pila'),
-	(107, 1, 'Pilar'),
-	(108, 1, 'Pinamar'),
-	(109, 1, 'Pinar del Sol'),
-	(110, 1, 'Polvorines'),
-	(111, 1, 'Pte. Perón'),
-	(112, 1, 'Puán'),
-	(113, 1, 'Punta Indio'),
-	(114, 1, 'Ramallo'),
-	(115, 1, 'Rauch'),
-	(116, 1, 'Rivadavia'),
-	(117, 1, 'Rojas'),
-	(118, 1, 'Roque Pérez'),
-	(119, 1, 'Saavedra'),
-	(120, 1, 'Saladillo'),
-	(121, 1, 'Salliqueló'),
-	(122, 1, 'Salto'),
-	(123, 1, 'San Andrés de Giles'),
-	(124, 1, 'San Antonio de Areco'),
-	(125, 1, 'San Antonio de Padua'),
-	(126, 1, 'San Bernardo'),
-	(127, 1, 'San Cayetano'),
-	(128, 1, 'San Clemente del Tuyú'),
-	(129, 1, 'San Nicolás'),
-	(130, 1, 'San Pedro'),
-	(131, 1, 'San Vicente'),
-	(132, 1, 'Santa Teresita'),
-	(133, 1, 'Suipacha'),
-	(134, 1, 'Tandil'),
-	(135, 1, 'Tapalqué'),
-	(136, 1, 'Tordillo'),
-	(137, 1, 'Tornquist'),
-	(138, 1, 'Trenque Lauquen'),
-	(139, 1, 'Tres Lomas'),
-	(140, 1, 'Villa Gesell'),
-	(141, 1, 'Villarino'),
-	(142, 1, 'Zárate'),
-	(143, 2, '11 de Septiembre'),
-	(144, 2, '20 de Junio'),
-	(145, 2, '25 de Mayo'),
-	(146, 2, 'Acassuso'),
-	(147, 2, 'Adrogué'),
-	(148, 2, 'Aldo Bonzi'),
-	(149, 2, 'Área Reserva Cinturón Ecológico'),
-	(150, 2, 'Avellaneda'),
-	(151, 2, 'Banfield'),
-	(152, 2, 'Barrio Parque'),
-	(153, 2, 'Barrio Santa Teresita'),
-	(154, 2, 'Beccar'),
-	(155, 2, 'Bella Vista'),
-	(156, 2, 'Berazategui'),
-	(157, 2, 'Bernal Este'),
-	(158, 2, 'Bernal Oeste'),
-	(159, 2, 'Billinghurst'),
-	(160, 2, 'Boulogne'),
-	(161, 2, 'Burzaco'),
-	(162, 2, 'Carapachay'),
-	(163, 2, 'Caseros'),
-	(164, 2, 'Castelar'),
-	(165, 2, 'Churruca'),
-	(166, 2, 'Ciudad Evita'),
-	(167, 2, 'Ciudad Madero'),
-	(168, 2, 'Ciudadela'),
-	(169, 2, 'Claypole'),
-	(170, 2, 'Crucecita'),
-	(171, 2, 'Dock Sud'),
-	(172, 2, 'Don Bosco'),
-	(173, 2, 'Don Orione'),
-	(174, 2, 'El Jagüel'),
-	(175, 2, 'El Libertador'),
-	(176, 2, 'El Palomar'),
-	(177, 2, 'El Tala'),
-	(178, 2, 'El Trébol'),
-	(179, 2, 'Ezeiza'),
-	(180, 2, 'Ezpeleta'),
-	(181, 2, 'Florencio Varela'),
-	(182, 2, 'Florida'),
-	(183, 2, 'Francisco Álvarez'),
-	(184, 2, 'Gerli'),
-	(185, 2, 'Glew'),
-	(186, 2, 'González Catán'),
-	(187, 2, 'Gral. Lamadrid'),
-	(188, 2, 'Grand Bourg'),
-	(189, 2, 'Gregorio de Laferrere'),
-	(190, 2, 'Guillermo Enrique Hudson'),
-	(191, 2, 'Haedo'),
-	(192, 2, 'Hurlingham'),
-	(193, 2, 'Ing. Sourdeaux'),
-	(194, 2, 'Isidro Casanova'),
-	(195, 2, 'Ituzaingó'),
-	(196, 2, 'José C. Paz'),
-	(197, 2, 'José Ingenieros'),
-	(198, 2, 'José Marmol'),
-	(199, 2, 'La Lucila'),
-	(200, 2, 'La Reja'),
-	(201, 2, 'La Tablada'),
-	(202, 2, 'Lanús'),
-	(203, 2, 'Llavallol'),
-	(204, 2, 'Loma Hermosa'),
-	(205, 2, 'Lomas de Zamora'),
-	(206, 2, 'Lomas del Millón'),
-	(207, 2, 'Lomas del Mirador'),
-	(208, 2, 'Longchamps'),
-	(209, 2, 'Los Polvorines'),
-	(210, 2, 'Luis Guillón'),
-	(211, 2, 'Malvinas Argentinas'),
-	(212, 2, 'Martín Coronado'),
-	(213, 2, 'Martínez'),
-	(214, 2, 'Merlo'),
-	(215, 2, 'Ministro Rivadavia'),
-	(216, 2, 'Monte Chingolo'),
-	(217, 2, 'Monte Grande'),
-	(218, 2, 'Moreno'),
-	(219, 2, 'Morón'),
-	(220, 2, 'Muñiz'),
-	(221, 2, 'Olivos'),
-	(222, 2, 'Pablo Nogués'),
-	(223, 2, 'Pablo Podestá'),
-	(224, 2, 'Paso del Rey'),
-	(225, 2, 'Pereyra'),
-	(226, 2, 'Piñeiro'),
-	(227, 2, 'Plátanos'),
-	(228, 2, 'Pontevedra'),
-	(229, 2, 'Quilmes'),
-	(230, 2, 'Rafael Calzada'),
-	(231, 2, 'Rafael Castillo'),
-	(232, 2, 'Ramos Mejía'),
-	(233, 2, 'Ranelagh'),
-	(234, 2, 'Remedios de Escalada'),
-	(235, 2, 'Sáenz Peña'),
-	(236, 2, 'San Antonio de Padua'),
-	(237, 2, 'San Fernando'),
-	(238, 2, 'San Francisco Solano'),
-	(239, 2, 'San Isidro'),
-	(240, 2, 'San José'),
-	(241, 2, 'San Justo'),
-	(242, 2, 'San Martín'),
-	(243, 2, 'San Miguel'),
-	(244, 2, 'Santos Lugares'),
-	(245, 2, 'Sarandí'),
-	(246, 2, 'Sourigues'),
-	(247, 2, 'Tapiales'),
-	(248, 2, 'Temperley'),
-	(249, 2, 'Tigre'),
-	(250, 2, 'Tortuguitas'),
-	(251, 2, 'Tristán Suárez'),
-	(252, 2, 'Trujui'),
-	(253, 2, 'Turdera'),
-	(254, 2, 'Valentín Alsina'),
-	(255, 2, 'Vicente López'),
-	(256, 2, 'Villa Adelina'),
-	(257, 2, 'Villa Ballester'),
-	(258, 2, 'Villa Bosch'),
-	(259, 2, 'Villa Caraza'),
-	(260, 2, 'Villa Celina'),
-	(261, 2, 'Villa Centenario'),
-	(262, 2, 'Villa de Mayo'),
-	(263, 2, 'Villa Diamante'),
-	(264, 2, 'Villa Domínico'),
-	(265, 2, 'Villa España'),
-	(266, 2, 'Villa Fiorito'),
-	(267, 2, 'Villa Guillermina'),
-	(268, 2, 'Villa Insuperable'),
-	(269, 2, 'Villa José León Suárez'),
-	(270, 2, 'Villa La Florida'),
-	(271, 2, 'Villa Luzuriaga'),
-	(272, 2, 'Villa Martelli'),
-	(273, 2, 'Villa Obrera'),
-	(274, 2, 'Villa Progreso'),
-	(275, 2, 'Villa Raffo'),
-	(276, 2, 'Villa Sarmiento'),
-	(277, 2, 'Villa Tesei'),
-	(278, 2, 'Villa Udaondo'),
-	(279, 2, 'Virrey del Pino'),
-	(280, 2, 'Wilde'),
-	(281, 2, 'William Morris'),
-	(282, 3, 'Agronomía'),
-	(283, 3, 'Almagro'),
-	(284, 3, 'Balvanera'),
-	(285, 3, 'Barracas'),
-	(286, 3, 'Belgrano'),
-	(287, 3, 'Boca'),
-	(288, 3, 'Boedo'),
-	(289, 3, 'Caballito'),
-	(290, 3, 'Chacarita'),
-	(291, 3, 'Coghlan'),
-	(292, 3, 'Colegiales'),
-	(293, 3, 'Constitución'),
-	(294, 3, 'Flores'),
-	(295, 3, 'Floresta'),
-	(296, 3, 'La Paternal'),
-	(297, 3, 'Liniers'),
-	(298, 3, 'Mataderos'),
-	(299, 3, 'Monserrat'),
-	(300, 3, 'Monte Castro'),
-	(301, 3, 'Nueva Pompeya'),
-	(302, 3, 'Núñez'),
-	(303, 3, 'Palermo'),
-	(304, 3, 'Parque Avellaneda'),
-	(305, 3, 'Parque Chacabuco'),
-	(306, 3, 'Parque Chas'),
-	(307, 3, 'Parque Patricios'),
-	(308, 3, 'Puerto Madero'),
-	(309, 3, 'Recoleta'),
-	(310, 3, 'Retiro'),
-	(311, 3, 'Saavedra'),
-	(312, 3, 'San Cristóbal'),
-	(313, 3, 'San Nicolás'),
-	(314, 3, 'San Telmo'),
-	(315, 3, 'Vélez Sársfield'),
-	(316, 3, 'Versalles'),
-	(317, 3, 'Villa Crespo'),
-	(318, 3, 'Villa del Parque'),
-	(319, 3, 'Villa Devoto'),
-	(320, 3, 'Villa Gral. Mitre'),
-	(321, 3, 'Villa Lugano'),
-	(322, 3, 'Villa Luro'),
-	(323, 3, 'Villa Ortúzar'),
-	(324, 3, 'Villa Pueyrredón'),
-	(325, 3, 'Villa Real'),
-	(326, 3, 'Villa Riachuelo'),
-	(327, 3, 'Villa Santa Rita'),
-	(328, 3, 'Villa Soldati'),
-	(329, 3, 'Villa Urquiza'),
-	(330, 4, 'Aconquija'),
-	(331, 4, 'Ancasti'),
-	(332, 4, 'Andalgalá'),
-	(333, 4, 'Antofagasta'),
-	(334, 4, 'Belén'),
-	(335, 4, 'Capayán'),
-	(336, 4, 'Capital'),
-	(337, 4, '4'),
-	(338, 4, 'Corral Quemado'),
-	(339, 4, 'El Alto'),
-	(340, 4, 'El Rodeo'),
-	(341, 4, 'F.Mamerto Esquiú'),
-	(342, 4, 'Fiambalá'),
-	(343, 4, 'Hualfín'),
-	(344, 4, 'Huillapima'),
-	(345, 4, 'Icaño'),
-	(346, 4, 'La Puerta'),
-	(347, 4, 'Las Juntas'),
-	(348, 4, 'Londres'),
-	(349, 4, 'Los Altos'),
-	(350, 4, 'Los Varela'),
-	(351, 4, 'Mutquín'),
-	(352, 4, 'Paclín'),
-	(353, 4, 'Poman'),
-	(354, 4, 'Pozo de La Piedra'),
-	(355, 4, 'Puerta de Corral'),
-	(356, 4, 'Puerta San José'),
-	(357, 4, 'Recreo'),
-	(358, 4, 'S.F.V de 4'),
-	(359, 4, 'San Fernando'),
-	(360, 4, 'San Fernando del Valle'),
-	(361, 4, 'San José'),
-	(362, 4, 'Santa María'),
-	(363, 4, 'Santa Rosa'),
-	(364, 4, 'Saujil'),
-	(365, 4, 'Tapso'),
-	(366, 4, 'Tinogasta'),
-	(367, 4, 'Valle Viejo'),
-	(368, 4, 'Villa Vil'),
-	(369, 5, 'Aviá Teraí'),
-	(370, 5, 'Barranqueras'),
-	(371, 5, 'Basail'),
-	(372, 5, 'Campo Largo'),
-	(373, 5, 'Capital'),
-	(374, 5, 'Capitán Solari'),
-	(375, 5, 'Charadai'),
-	(376, 5, 'Charata'),
-	(377, 5, 'Chorotis'),
-	(378, 5, 'Ciervo Petiso'),
-	(379, 5, 'Cnel. Du Graty'),
-	(380, 5, 'Col. Benítez'),
-	(381, 5, 'Col. Elisa'),
-	(382, 5, 'Col. Popular'),
-	(383, 5, 'Colonias Unidas'),
-	(384, 5, 'Concepción'),
-	(385, 5, 'Corzuela'),
-	(386, 5, 'Cote Lai'),
-	(387, 5, 'El Sauzalito'),
-	(388, 5, 'Enrique Urien'),
-	(389, 5, 'Fontana'),
-	(390, 5, 'Fte. Esperanza'),
-	(391, 5, 'Gancedo'),
-	(392, 5, 'Gral. Capdevila'),
-	(393, 5, 'Gral. Pinero'),
-	(394, 5, 'Gral. San Martín'),
-	(395, 5, 'Gral. Vedia'),
-	(396, 5, 'Hermoso Campo'),
-	(397, 5, 'I. del Cerrito'),
-	(398, 5, 'J.J. Castelli'),
-	(399, 5, 'La Clotilde'),
-	(400, 5, 'La Eduvigis'),
-	(401, 5, 'La Escondida'),
-	(402, 5, 'La Leonesa'),
-	(403, 5, 'La Tigra'),
-	(404, 5, 'La Verde'),
-	(405, 5, 'Laguna Blanca'),
-	(406, 5, 'Laguna Limpia'),
-	(407, 5, 'Lapachito'),
-	(408, 5, 'Las Breñas'),
-	(409, 5, 'Las Garcitas'),
-	(410, 5, 'Las Palmas'),
-	(411, 5, 'Los Frentones'),
-	(412, 5, 'Machagai'),
-	(413, 5, 'Makallé'),
-	(414, 5, 'Margarita Belén'),
-	(415, 5, 'Miraflores'),
-	(416, 5, 'Misión N. Pompeya'),
-	(417, 5, 'Napenay'),
-	(418, 5, 'Pampa Almirón'),
-	(419, 5, 'Pampa del Indio'),
-	(420, 5, 'Pampa del Infierno'),
-	(421, 5, 'Pdcia. de La Plaza'),
-	(422, 5, 'Pdcia. Roca'),
-	(423, 5, 'Pdcia. Roque Sáenz Peña'),
-	(424, 5, 'Pto. Bermejo'),
-	(425, 5, 'Pto. Eva Perón'),
-	(426, 5, 'Puero Tirol'),
-	(427, 5, 'Puerto Vilelas'),
-	(428, 5, 'Quitilipi'),
-	(429, 5, 'Resistencia'),
-	(430, 5, 'Sáenz Peña'),
-	(431, 5, 'Samuhú'),
-	(432, 5, 'San Bernardo'),
-	(433, 5, 'Santa Sylvina'),
-	(434, 5, 'Taco Pozo'),
-	(435, 5, 'Tres Isletas'),
-	(436, 5, 'Villa Ángela'),
-	(437, 5, 'Villa Berthet'),
-	(438, 5, 'Villa R. Bermejito'),
-	(439, 6, 'Aldea Apeleg'),
-	(440, 6, 'Aldea Beleiro'),
-	(441, 6, 'Aldea Epulef'),
-	(442, 6, 'Alto Río Sengerr'),
-	(443, 6, 'Buen Pasto'),
-	(444, 6, 'Camarones'),
-	(445, 6, 'Carrenleufú'),
-	(446, 6, 'Cholila'),
-	(447, 6, 'Co. Centinela'),
-	(448, 6, 'Colan Conhué'),
-	(449, 6, 'Comodoro Rivadavia'),
-	(450, 6, 'Corcovado'),
-	(451, 6, 'Cushamen'),
-	(452, 6, 'Dique F. Ameghino'),
-	(453, 6, 'Dolavón'),
-	(454, 6, 'Dr. R. Rojas'),
-	(455, 6, 'El Hoyo'),
-	(456, 6, 'El Maitén'),
-	(457, 6, 'Epuyén'),
-	(458, 6, 'Esquel'),
-	(459, 6, 'Facundo'),
-	(460, 6, 'Gaimán'),
-	(461, 6, 'Gan Gan'),
-	(462, 6, 'Gastre'),
-	(463, 6, 'Gdor. Costa'),
-	(464, 6, 'Gualjaina'),
-	(465, 6, 'J. de San Martín'),
-	(466, 6, 'Lago Blanco'),
-	(467, 6, 'Lago Puelo'),
-	(468, 6, 'Lagunita Salada'),
-	(469, 6, 'Las Plumas'),
-	(470, 6, 'Los Altares'),
-	(471, 6, 'Paso de los Indios'),
-	(472, 6, 'Paso del Sapo'),
-	(473, 6, 'Pto. Madryn'),
-	(474, 6, 'Pto. Pirámides'),
-	(475, 6, 'Rada Tilly'),
-	(476, 6, 'Rawson'),
-	(477, 6, 'Río Mayo'),
-	(478, 6, 'Río Pico'),
-	(479, 6, 'Sarmiento'),
-	(480, 6, 'Tecka'),
-	(481, 6, 'Telsen'),
-	(482, 6, 'Trelew'),
-	(483, 6, 'Trevelin'),
-	(484, 6, 'Veintiocho de Julio'),
-	(485, 7, 'Achiras'),
-	(486, 7, 'Adelia Maria'),
-	(487, 7, 'Agua de Oro'),
-	(488, 7, 'Alcira Gigena'),
-	(489, 7, 'Aldea Santa Maria'),
-	(490, 7, 'Alejandro Roca'),
-	(491, 7, 'Alejo Ledesma'),
-	(492, 7, 'Alicia'),
-	(493, 7, 'Almafuerte'),
-	(494, 7, 'Alpa Corral'),
-	(495, 7, 'Alta Gracia'),
-	(496, 7, 'Alto Alegre'),
-	(497, 7, 'Alto de Los Quebrachos'),
-	(498, 7, 'Altos de Chipion'),
-	(499, 7, 'Amboy'),
-	(500, 7, 'Ambul'),
-	(501, 7, 'Ana Zumaran'),
-	(502, 7, 'Anisacate'),
-	(503, 7, 'Arguello'),
-	(504, 7, 'Arias'),
-	(505, 7, 'Arroyito'),
-	(506, 7, 'Arroyo Algodon'),
-	(507, 7, 'Arroyo Cabral'),
-	(508, 7, 'Arroyo Los Patos'),
-	(509, 7, 'Assunta'),
-	(510, 7, 'Atahona'),
-	(511, 7, 'Ausonia'),
-	(512, 7, 'Avellaneda'),
-	(513, 7, 'Ballesteros'),
-	(514, 7, 'Ballesteros Sud'),
-	(515, 7, 'Balnearia'),
-	(516, 7, 'Bañado de Soto'),
-	(517, 7, 'Bell Ville'),
-	(518, 7, 'Bengolea'),
-	(519, 7, 'Benjamin Gould'),
-	(520, 7, 'Berrotaran'),
-	(521, 7, 'Bialet Masse'),
-	(522, 7, 'Bouwer'),
-	(523, 7, 'Brinkmann'),
-	(524, 7, 'Buchardo'),
-	(525, 7, 'Bulnes'),
-	(526, 7, 'Cabalango'),
-	(527, 7, 'Calamuchita'),
-	(528, 7, 'Calchin'),
-	(529, 7, 'Calchin Oeste'),
-	(530, 7, 'Calmayo'),
-	(531, 7, 'Camilo Aldao'),
-	(532, 7, 'Caminiaga'),
-	(533, 7, 'Cañada de Luque'),
-	(534, 7, 'Cañada de Machado'),
-	(535, 7, 'Cañada de Rio Pinto'),
-	(536, 7, 'Cañada del Sauce'),
-	(537, 7, 'Canals'),
-	(538, 7, 'Candelaria Sud'),
-	(539, 7, 'Capilla de Remedios'),
-	(540, 7, 'Capilla de Siton'),
-	(541, 7, 'Capilla del Carmen'),
-	(542, 7, 'Capilla del Monte'),
-	(543, 7, 'Capital'),
-	(544, 7, 'Capitan Gral B. O´Higgins'),
-	(545, 7, 'Carnerillo'),
-	(546, 7, 'Carrilobo'),
-	(547, 7, 'Casa Grande'),
-	(548, 7, 'Cavanagh'),
-	(549, 7, 'Cerro Colorado'),
-	(550, 7, 'Chaján'),
-	(551, 7, 'Chalacea'),
-	(552, 7, 'Chañar Viejo'),
-	(553, 7, 'Chancaní'),
-	(554, 7, 'Charbonier'),
-	(555, 7, 'Charras'),
-	(556, 7, 'Chazón'),
-	(557, 7, 'Chilibroste'),
-	(558, 7, 'Chucul'),
-	(559, 7, 'Chuña'),
-	(560, 7, 'Chuña Huasi'),
-	(561, 7, 'Churqui Cañada'),
-	(562, 7, 'Cienaga Del Coro'),
-	(563, 7, 'Cintra'),
-	(564, 7, 'Col. Almada'),
-	(565, 7, 'Col. Anita'),
-	(566, 7, 'Col. Barge'),
-	(567, 7, 'Col. Bismark'),
-	(568, 7, 'Col. Bremen'),
-	(569, 7, 'Col. Caroya'),
-	(570, 7, 'Col. Italiana'),
-	(571, 7, 'Col. Iturraspe'),
-	(572, 7, 'Col. Las Cuatro Esquinas'),
-	(573, 7, 'Col. Las Pichanas'),
-	(574, 7, 'Col. Marina'),
-	(575, 7, 'Col. Prosperidad'),
-	(576, 7, 'Col. San Bartolome'),
-	(577, 7, 'Col. San Pedro'),
-	(578, 7, 'Col. Tirolesa'),
-	(579, 7, 'Col. Vicente Aguero'),
-	(580, 7, 'Col. Videla'),
-	(581, 7, 'Col. Vignaud'),
-	(582, 7, 'Col. Waltelina'),
-	(583, 7, 'Colazo'),
-	(584, 7, 'Comechingones'),
-	(585, 7, 'Conlara'),
-	(586, 7, 'Copacabana'),
-	(587, 7, '7'),
-	(588, 7, 'Coronel Baigorria'),
-	(589, 7, 'Coronel Moldes'),
-	(590, 7, 'Corral de Bustos'),
-	(591, 7, 'Corralito'),
-	(592, 7, 'Cosquín'),
-	(593, 7, 'Costa Sacate'),
-	(594, 7, 'Cruz Alta'),
-	(595, 7, 'Cruz de Caña'),
-	(596, 7, 'Cruz del Eje'),
-	(597, 7, 'Cuesta Blanca'),
-	(598, 7, 'Dean Funes'),
-	(599, 7, 'Del Campillo'),
-	(600, 7, 'Despeñaderos'),
-	(601, 7, 'Devoto'),
-	(602, 7, 'Diego de Rojas'),
-	(603, 7, 'Dique Chico'),
-	(604, 7, 'El Arañado'),
-	(605, 7, 'El Brete'),
-	(606, 7, 'El Chacho'),
-	(607, 7, 'El Crispín'),
-	(608, 7, 'El Fortín'),
-	(609, 7, 'El Manzano'),
-	(610, 7, 'El Rastreador'),
-	(611, 7, 'El Rodeo'),
-	(612, 7, 'El Tío'),
-	(613, 7, 'Elena'),
-	(614, 7, 'Embalse'),
-	(615, 7, 'Esquina'),
-	(616, 7, 'Estación Gral. Paz'),
-	(617, 7, 'Estación Juárez Celman'),
-	(618, 7, 'Estancia de Guadalupe'),
-	(619, 7, 'Estancia Vieja'),
-	(620, 7, 'Etruria'),
-	(621, 7, 'Eufrasio Loza'),
-	(622, 7, 'Falda del Carmen'),
-	(623, 7, 'Freyre'),
-	(624, 7, 'Gral. Baldissera'),
-	(625, 7, 'Gral. Cabrera'),
-	(626, 7, 'Gral. Deheza'),
-	(627, 7, 'Gral. Fotheringham'),
-	(628, 7, 'Gral. Levalle'),
-	(629, 7, 'Gral. Roca'),
-	(630, 7, 'Guanaco Muerto'),
-	(631, 7, 'Guasapampa'),
-	(632, 7, 'Guatimozin'),
-	(633, 7, 'Gutenberg'),
-	(634, 7, 'Hernando'),
-	(635, 7, 'Huanchillas'),
-	(636, 7, 'Huerta Grande'),
-	(637, 7, 'Huinca Renanco'),
-	(638, 7, 'Idiazabal'),
-	(639, 7, 'Impira'),
-	(640, 7, 'Inriville'),
-	(641, 7, 'Isla Verde'),
-	(642, 7, 'Italó'),
-	(643, 7, 'James Craik'),
-	(644, 7, 'Jesús María'),
-	(645, 7, 'Jovita'),
-	(646, 7, 'Justiniano Posse'),
-	(647, 7, 'Km 658'),
-	(648, 7, 'L. V. Mansilla'),
-	(649, 7, 'La Batea'),
-	(650, 7, 'La Calera'),
-	(651, 7, 'La Carlota'),
-	(652, 7, 'La Carolina'),
-	(653, 7, 'La Cautiva'),
-	(654, 7, 'La Cesira'),
-	(655, 7, 'La Cruz'),
-	(656, 7, 'La Cumbre'),
-	(657, 7, 'La Cumbrecita'),
-	(658, 7, 'La Falda'),
-	(659, 7, 'La Francia'),
-	(660, 7, 'La Granja'),
-	(661, 7, 'La Higuera'),
-	(662, 7, 'La Laguna'),
-	(663, 7, 'La Paisanita'),
-	(664, 7, 'La Palestina'),
-	(665, 7, '12'),
-	(666, 7, 'La Paquita'),
-	(667, 7, 'La Para'),
-	(668, 7, 'La Paz'),
-	(669, 7, 'La Playa'),
-	(670, 7, 'La Playosa'),
-	(671, 7, 'La Población'),
-	(672, 7, 'La Posta'),
-	(673, 7, 'La Puerta'),
-	(674, 7, 'La Quinta'),
-	(675, 7, 'La Rancherita'),
-	(676, 7, 'La Rinconada'),
-	(677, 7, 'La Serranita'),
-	(678, 7, 'La Tordilla'),
-	(679, 7, 'Laborde'),
-	(680, 7, 'Laboulaye'),
-	(681, 7, 'Laguna Larga'),
-	(682, 7, 'Las Acequias'),
-	(683, 7, 'Las Albahacas'),
-	(684, 7, 'Las Arrias'),
-	(685, 7, 'Las Bajadas'),
-	(686, 7, 'Las Caleras'),
-	(687, 7, 'Las Calles'),
-	(688, 7, 'Las Cañadas'),
-	(689, 7, 'Las Gramillas'),
-	(690, 7, 'Las Higueras'),
-	(691, 7, 'Las Isletillas'),
-	(692, 7, 'Las Junturas'),
-	(693, 7, 'Las Palmas'),
-	(694, 7, 'Las Peñas'),
-	(695, 7, 'Las Peñas Sud'),
-	(696, 7, 'Las Perdices'),
-	(697, 7, 'Las Playas'),
-	(698, 7, 'Las Rabonas'),
-	(699, 7, 'Las Saladas'),
-	(700, 7, 'Las Tapias'),
-	(701, 7, 'Las Varas'),
-	(702, 7, 'Las Varillas'),
-	(703, 7, 'Las Vertientes'),
-	(704, 7, 'Leguizamón'),
-	(705, 7, 'Leones'),
-	(706, 7, 'Los Cedros'),
-	(707, 7, 'Los Cerrillos'),
-	(708, 7, 'Los Chañaritos (C.E)'),
-	(709, 7, 'Los Chanaritos (R.S)'),
-	(710, 7, 'Los Cisnes'),
-	(711, 7, 'Los Cocos'),
-	(712, 7, 'Los Cóndores'),
-	(713, 7, 'Los Hornillos'),
-	(714, 7, 'Los Hoyos'),
-	(715, 7, 'Los Mistoles'),
-	(716, 7, 'Los Molinos'),
-	(717, 7, 'Los Pozos'),
-	(718, 7, 'Los Reartes'),
-	(719, 7, 'Los Surgentes'),
-	(720, 7, 'Los Talares'),
-	(721, 7, 'Los Zorros'),
-	(722, 7, 'Lozada'),
-	(723, 7, 'Luca'),
-	(724, 7, 'Luque'),
-	(725, 7, 'Luyaba'),
-	(726, 7, 'Malagueño'),
-	(727, 7, 'Malena'),
-	(728, 7, 'Malvinas Argentinas'),
-	(729, 7, 'Manfredi'),
-	(730, 7, 'Maquinista Gallini'),
-	(731, 7, 'Marcos Juárez'),
-	(732, 7, 'Marull'),
-	(733, 7, 'Matorrales'),
-	(734, 7, 'Mattaldi'),
-	(735, 7, 'Mayu Sumaj'),
-	(736, 7, 'Media Naranja'),
-	(737, 7, 'Melo'),
-	(738, 7, 'Mendiolaza'),
-	(739, 7, 'Mi Granja'),
-	(740, 7, 'Mina Clavero'),
-	(741, 7, 'Miramar'),
-	(742, 7, 'Morrison'),
-	(743, 7, 'Morteros'),
-	(744, 7, 'Mte. Buey'),
-	(745, 7, 'Mte. Cristo'),
-	(746, 7, 'Mte. De Los Gauchos'),
-	(747, 7, 'Mte. Leña'),
-	(748, 7, 'Mte. Maíz'),
-	(749, 7, 'Mte. Ralo'),
-	(750, 7, 'Nicolás Bruzone'),
-	(751, 7, 'Noetinger'),
-	(752, 7, 'Nono'),
-	(753, 7, 'Nueva 7'),
-	(754, 7, 'Obispo Trejo'),
-	(755, 7, 'Olaeta'),
-	(756, 7, 'Oliva'),
-	(757, 7, 'Olivares San Nicolás'),
-	(758, 7, 'Onagolty'),
-	(759, 7, 'Oncativo'),
-	(760, 7, 'Ordoñez'),
-	(761, 7, 'Pacheco De Melo'),
-	(762, 7, 'Pampayasta N.'),
-	(763, 7, 'Pampayasta S.'),
-	(764, 7, 'Panaholma'),
-	(765, 7, 'Pascanas'),
-	(766, 7, 'Pasco'),
-	(767, 7, 'Paso del Durazno'),
-	(768, 7, 'Paso Viejo'),
-	(769, 7, 'Pilar'),
-	(770, 7, 'Pincén'),
-	(771, 7, 'Piquillín'),
-	(772, 7, 'Plaza de Mercedes'),
-	(773, 7, 'Plaza Luxardo'),
-	(774, 7, 'Porteña'),
-	(775, 7, 'Potrero de Garay'),
-	(776, 7, 'Pozo del Molle'),
-	(777, 7, 'Pozo Nuevo'),
-	(778, 7, 'Pueblo Italiano'),
-	(779, 7, 'Puesto de Castro'),
-	(780, 7, 'Punta del Agua'),
-	(781, 7, 'Quebracho Herrado'),
-	(782, 7, 'Quilino'),
-	(783, 7, 'Rafael García'),
-	(784, 7, 'Ranqueles'),
-	(785, 7, 'Rayo Cortado'),
-	(786, 7, 'Reducción'),
-	(787, 7, 'Rincón'),
-	(788, 7, 'Río Bamba'),
-	(789, 7, 'Río Ceballos'),
-	(790, 7, 'Río Cuarto'),
-	(791, 7, 'Río de Los Sauces'),
-	(792, 7, 'Río Primero'),
-	(793, 7, 'Río Segundo'),
-	(794, 7, 'Río Tercero'),
-	(795, 7, 'Rosales'),
-	(796, 7, 'Rosario del Saladillo'),
-	(797, 7, 'Sacanta'),
-	(798, 7, 'Sagrada Familia'),
-	(799, 7, 'Saira'),
-	(800, 7, 'Saladillo'),
-	(801, 7, 'Saldán'),
-	(802, 7, 'Salsacate'),
-	(803, 7, 'Salsipuedes'),
-	(804, 7, 'Sampacho'),
-	(805, 7, 'San Agustín'),
-	(806, 7, 'San Antonio de Arredondo'),
-	(807, 7, 'San Antonio de Litín'),
-	(808, 7, 'San Basilio'),
-	(809, 7, 'San Carlos Minas'),
-	(810, 7, 'San Clemente'),
-	(811, 7, 'San Esteban'),
-	(812, 7, 'San Francisco'),
-	(813, 7, 'San Ignacio'),
-	(814, 7, 'San Javier'),
-	(815, 7, 'San Jerónimo'),
-	(816, 7, 'San Joaquín'),
-	(817, 7, 'San José de La Dormida'),
-	(818, 7, 'San José de Las Salinas'),
-	(819, 7, 'San Lorenzo'),
-	(820, 7, 'San Marcos Sierras'),
-	(821, 7, 'San Marcos Sud'),
-	(822, 7, 'San Pedro'),
-	(823, 7, 'San Pedro N.'),
-	(824, 7, 'San Roque'),
-	(825, 7, 'San Vicente'),
-	(826, 7, 'Santa Catalina'),
-	(827, 7, 'Santa Elena'),
-	(828, 7, 'Santa Eufemia'),
-	(829, 7, 'Santa Maria'),
-	(830, 7, 'Sarmiento'),
-	(831, 7, 'Saturnino M.Laspiur'),
-	(832, 7, 'Sauce Arriba'),
-	(833, 7, 'Sebastián Elcano'),
-	(834, 7, 'Seeber'),
-	(835, 7, 'Segunda Usina'),
-	(836, 7, 'Serrano'),
-	(837, 7, 'Serrezuela'),
-	(838, 7, 'Sgo. Temple'),
-	(839, 7, 'Silvio Pellico'),
-	(840, 7, 'Simbolar'),
-	(841, 7, 'Sinsacate'),
-	(842, 7, 'Sta. Rosa de Calamuchita'),
-	(843, 7, 'Sta. Rosa de Río Primero'),
-	(844, 7, 'Suco'),
-	(845, 7, 'Tala Cañada'),
-	(846, 7, 'Tala Huasi'),
-	(847, 7, 'Talaini'),
-	(848, 7, 'Tancacha'),
-	(849, 7, 'Tanti'),
-	(850, 7, 'Ticino'),
-	(851, 7, 'Tinoco'),
-	(852, 7, 'Tío Pujio'),
-	(853, 7, 'Toledo'),
-	(854, 7, 'Toro Pujio'),
-	(855, 7, 'Tosno'),
-	(856, 7, 'Tosquita'),
-	(857, 7, 'Tránsito'),
-	(858, 7, 'Tuclame'),
-	(859, 7, 'Tutti'),
-	(860, 7, 'Ucacha'),
-	(861, 7, 'Unquillo'),
-	(862, 7, 'Valle de Anisacate'),
-	(863, 7, 'Valle Hermoso'),
-	(864, 7, 'Vélez Sarfield'),
-	(865, 7, 'Viamonte'),
-	(866, 7, 'Vicuña Mackenna'),
-	(867, 7, 'Villa Allende'),
-	(868, 7, 'Villa Amancay'),
-	(869, 7, 'Villa Ascasubi'),
-	(870, 7, 'Villa Candelaria N.'),
-	(871, 7, 'Villa Carlos Paz'),
-	(872, 7, 'Villa Cerro Azul'),
-	(873, 7, 'Villa Ciudad de América'),
-	(874, 7, 'Villa Ciudad Pque Los Reartes'),
-	(875, 7, 'Villa Concepción del Tío'),
-	(876, 7, 'Villa Cura Brochero'),
-	(877, 7, 'Villa de Las Rosas'),
-	(878, 7, 'Villa de María'),
-	(879, 7, 'Villa de Pocho'),
-	(880, 7, 'Villa de Soto'),
-	(881, 7, 'Villa del Dique'),
-	(882, 7, 'Villa del Prado'),
-	(883, 7, 'Villa del Rosario'),
-	(884, 7, 'Villa del Totoral'),
-	(885, 7, 'Villa Dolores'),
-	(886, 7, 'Villa El Chancay'),
-	(887, 7, 'Villa Elisa'),
-	(888, 7, 'Villa Flor Serrana'),
-	(889, 7, 'Villa Fontana'),
-	(890, 7, 'Villa Giardino'),
-	(891, 7, 'Villa Gral. Belgrano'),
-	(892, 7, 'Villa Gutierrez'),
-	(893, 7, 'Villa Huidobro'),
-	(894, 7, 'Villa La Bolsa'),
-	(895, 7, 'Villa Los Aromos'),
-	(896, 7, 'Villa Los Patos'),
-	(897, 7, 'Villa María'),
-	(898, 7, 'Villa Nueva'),
-	(899, 7, 'Villa Pque. Santa Ana'),
-	(900, 7, 'Villa Pque. Siquiman'),
-	(901, 7, 'Villa Quillinzo'),
-	(902, 7, 'Villa Rossi'),
-	(903, 7, 'Villa Rumipal'),
-	(904, 7, 'Villa San Esteban'),
-	(905, 7, 'Villa San Isidro'),
-	(906, 7, 'Villa 21'),
-	(907, 7, 'Villa Sarmiento (G.R)'),
-	(908, 7, 'Villa Sarmiento (S.A)'),
-	(909, 7, 'Villa Tulumba'),
-	(910, 7, 'Villa Valeria'),
-	(911, 7, 'Villa Yacanto'),
-	(912, 7, 'Washington'),
-	(913, 7, 'Wenceslao Escalante'),
-	(914, 7, 'Ycho Cruz Sierras'),
-	(915, 8, 'Alvear'),
-	(916, 8, 'Bella Vista'),
-	(917, 8, 'Berón de Astrada'),
-	(918, 8, 'Bonpland'),
-	(919, 8, 'Caá Cati'),
-	(920, 8, 'Capital'),
-	(921, 8, 'Chavarría'),
-	(922, 8, 'Col. C. Pellegrini'),
-	(923, 8, 'Col. Libertad'),
-	(924, 8, 'Col. Liebig'),
-	(925, 8, 'Col. Sta Rosa'),
-	(926, 8, 'Concepción'),
-	(927, 8, 'Cruz de Los Milagros'),
-	(928, 8, 'Curuzú-Cuatiá'),
-	(929, 8, 'Empedrado'),
-	(930, 8, 'Esquina'),
-	(931, 8, 'Estación Torrent'),
-	(932, 8, 'Felipe Yofré'),
-	(933, 8, 'Garruchos'),
-	(934, 8, 'Gdor. Agrónomo'),
-	(935, 8, 'Gdor. Martínez'),
-	(936, 8, 'Goya'),
-	(937, 8, 'Guaviravi'),
-	(938, 8, 'Herlitzka'),
-	(939, 8, 'Ita-Ibate'),
-	(940, 8, 'Itatí'),
-	(941, 8, 'Ituzaingó'),
-	(942, 8, 'José Rafael Gómez'),
-	(943, 8, 'Juan Pujol'),
-	(944, 8, 'La Cruz'),
-	(945, 8, 'Lavalle'),
-	(946, 8, 'Lomas de Vallejos'),
-	(947, 8, 'Loreto'),
-	(948, 8, 'Mariano I. Loza'),
-	(949, 8, 'Mburucuyá'),
-	(950, 8, 'Mercedes'),
-	(951, 8, 'Mocoretá'),
-	(952, 8, 'Mte. Caseros'),
-	(953, 8, 'Nueve de Julio'),
-	(954, 8, 'Palmar Grande'),
-	(955, 8, 'Parada Pucheta'),
-	(956, 8, 'Paso de La Patria'),
-	(957, 8, 'Paso de Los Libres'),
-	(958, 8, 'Pedro R. Fernandez'),
-	(959, 8, 'Perugorría'),
-	(960, 8, 'Pueblo Libertador'),
-	(961, 8, 'Ramada Paso'),
-	(962, 8, 'Riachuelo'),
-	(963, 8, 'Saladas'),
-	(964, 8, 'San Antonio'),
-	(965, 8, 'San Carlos'),
-	(966, 8, 'San Cosme'),
-	(967, 8, 'San Lorenzo'),
-	(968, 8, '20 del Palmar'),
-	(969, 8, 'San Miguel'),
-	(970, 8, 'San Roque'),
-	(971, 8, 'Santa Ana'),
-	(972, 8, 'Santa Lucía'),
-	(973, 8, 'Santo Tomé'),
-	(974, 8, 'Sauce'),
-	(975, 8, 'Tabay'),
-	(976, 8, 'Tapebicuá'),
-	(977, 8, 'Tatacua'),
-	(978, 8, 'Virasoro'),
-	(979, 8, 'Yapeyú'),
-	(980, 8, 'Yataití Calle'),
-	(981, 9, 'Alarcón'),
-	(982, 9, 'Alcaraz'),
-	(983, 9, 'Alcaraz N.'),
-	(984, 9, 'Alcaraz S.'),
-	(985, 9, 'Aldea Asunción'),
-	(986, 9, 'Aldea Brasilera'),
-	(987, 9, 'Aldea Elgenfeld'),
-	(988, 9, 'Aldea Grapschental'),
-	(989, 9, 'Aldea Ma. Luisa'),
-	(990, 9, 'Aldea Protestante'),
-	(991, 9, 'Aldea Salto'),
-	(992, 9, 'Aldea San Antonio (G)'),
-	(993, 9, 'Aldea San Antonio (P)'),
-	(994, 9, 'Aldea 19'),
-	(995, 9, 'Aldea San Miguel'),
-	(996, 9, 'Aldea San Rafael'),
-	(997, 9, 'Aldea Spatzenkutter'),
-	(998, 9, 'Aldea Sta. María'),
-	(999, 9, 'Aldea Sta. Rosa'),
-	(1000, 9, 'Aldea Valle María'),
-	(1001, 9, 'Altamirano Sur'),
-	(1002, 9, 'Antelo'),
-	(1003, 9, 'Antonio Tomás'),
-	(1004, 9, 'Aranguren'),
-	(1005, 9, 'Arroyo Barú'),
-	(1006, 9, 'Arroyo Burgos'),
-	(1007, 9, 'Arroyo Clé'),
-	(1008, 9, 'Arroyo Corralito'),
-	(1009, 9, 'Arroyo del Medio'),
-	(1010, 9, 'Arroyo Maturrango'),
-	(1011, 9, 'Arroyo Palo Seco'),
-	(1012, 9, 'Banderas'),
-	(1013, 9, 'Basavilbaso'),
-	(1014, 9, 'Betbeder'),
-	(1015, 9, 'Bovril'),
-	(1016, 9, 'Caseros'),
-	(1017, 9, 'Ceibas'),
-	(1018, 9, 'Cerrito'),
-	(1019, 9, 'Chajarí'),
-	(1020, 9, 'Chilcas'),
-	(1021, 9, 'Clodomiro Ledesma'),
-	(1022, 9, 'Col. Alemana'),
-	(1023, 9, 'Col. Avellaneda'),
-	(1024, 9, 'Col. Avigdor'),
-	(1025, 9, 'Col. Ayuí'),
-	(1026, 9, 'Col. Baylina'),
-	(1027, 9, 'Col. Carrasco'),
-	(1028, 9, 'Col. Celina'),
-	(1029, 9, 'Col. Cerrito'),
-	(1030, 9, 'Col. Crespo'),
-	(1031, 9, 'Col. Elia'),
-	(1032, 9, 'Col. Ensayo'),
-	(1033, 9, 'Col. Gral. Roca'),
-	(1034, 9, 'Col. La Argentina'),
-	(1035, 9, 'Col. Merou'),
-	(1036, 9, 'Col. Oficial Nª3'),
-	(1037, 9, 'Col. Oficial Nº13'),
-	(1038, 9, 'Col. Oficial Nº14'),
-	(1039, 9, 'Col. Oficial Nº5'),
-	(1040, 9, 'Col. Reffino'),
-	(1041, 9, 'Col. Tunas'),
-	(1042, 9, 'Col. Viraró'),
-	(1043, 9, 'Colón'),
-	(1044, 9, 'Concepción del Uruguay'),
-	(1045, 9, 'Concordia'),
-	(1046, 9, 'Conscripto Bernardi'),
-	(1047, 9, 'Costa Grande'),
-	(1048, 9, 'Costa San Antonio'),
-	(1049, 9, 'Costa Uruguay N.'),
-	(1050, 9, 'Costa Uruguay S.'),
-	(1051, 9, 'Crespo'),
-	(1052, 9, 'Crucecitas 3ª'),
-	(1053, 9, 'Crucecitas 7ª'),
-	(1054, 9, 'Crucecitas 8ª'),
-	(1055, 9, 'Cuchilla Redonda'),
-	(1056, 9, 'Curtiembre'),
-	(1057, 9, 'Diamante'),
-	(1058, 9, 'Distrito 6º'),
-	(1059, 9, 'Distrito Chañar'),
-	(1060, 9, 'Distrito Chiqueros'),
-	(1061, 9, 'Distrito Cuarto'),
-	(1062, 9, 'Distrito Diego López'),
-	(1063, 9, 'Distrito Pajonal'),
-	(1064, 9, 'Distrito Sauce'),
-	(1065, 9, 'Distrito Tala'),
-	(1066, 9, 'Distrito Talitas'),
-	(1067, 9, 'Don Cristóbal 1ª Sección'),
-	(1068, 9, 'Don Cristóbal 2ª Sección'),
-	(1069, 9, 'Durazno'),
-	(1070, 9, 'El Cimarrón'),
-	(1071, 9, 'El Gramillal'),
-	(1072, 9, 'El Palenque'),
-	(1073, 9, 'El Pingo'),
-	(1074, 9, 'El Quebracho'),
-	(1075, 9, 'El Redomón'),
-	(1076, 9, 'El Solar'),
-	(1077, 9, 'Enrique Carbo'),
-	(1078, 9, '9'),
-	(1079, 9, 'Espinillo N.'),
-	(1080, 9, 'Estación Campos'),
-	(1081, 9, 'Estación Escriña'),
-	(1082, 9, 'Estación Lazo'),
-	(1083, 9, 'Estación Raíces'),
-	(1084, 9, 'Estación Yerúa'),
-	(1085, 9, 'Estancia Grande'),
-	(1086, 9, 'Estancia Líbaros'),
-	(1087, 9, 'Estancia Racedo'),
-	(1088, 9, 'Estancia Solá'),
-	(1089, 9, 'Estancia Yuquerí'),
-	(1090, 9, 'Estaquitas'),
-	(1091, 9, 'Faustino M. Parera'),
-	(1092, 9, 'Febre'),
-	(1093, 9, 'Federación'),
-	(1094, 9, 'Federal'),
-	(1095, 9, 'Gdor. Echagüe'),
-	(1096, 9, 'Gdor. Mansilla'),
-	(1097, 9, 'Gilbert'),
-	(1098, 9, 'González Calderón'),
-	(1099, 9, 'Gral. Almada'),
-	(1100, 9, 'Gral. Alvear'),
-	(1101, 9, 'Gral. Campos'),
-	(1102, 9, 'Gral. Galarza'),
-	(1103, 9, 'Gral. Ramírez'),
-	(1104, 9, 'Gualeguay'),
-	(1105, 9, 'Gualeguaychú'),
-	(1106, 9, 'Gualeguaycito'),
-	(1107, 9, 'Guardamonte'),
-	(1108, 9, 'Hambis'),
-	(1109, 9, 'Hasenkamp'),
-	(1110, 9, 'Hernandarias'),
-	(1111, 9, 'Hernández'),
-	(1112, 9, 'Herrera'),
-	(1113, 9, 'Hinojal'),
-	(1114, 9, 'Hocker'),
-	(1115, 9, 'Ing. Sajaroff'),
-	(1116, 9, 'Irazusta'),
-	(1117, 9, 'Isletas'),
-	(1118, 9, 'J.J De Urquiza'),
-	(1119, 9, 'Jubileo'),
-	(1120, 9, 'La Clarita'),
-	(1121, 9, 'La Criolla'),
-	(1122, 9, 'La Esmeralda'),
-	(1123, 9, 'La Florida'),
-	(1124, 9, 'La Fraternidad'),
-	(1125, 9, 'La Hierra'),
-	(1126, 9, 'La Ollita'),
-	(1127, 9, 'La Paz'),
-	(1128, 9, 'La Picada'),
-	(1129, 9, 'La Providencia'),
-	(1130, 9, 'La Verbena'),
-	(1131, 9, 'Laguna Benítez'),
-	(1132, 9, 'Larroque'),
-	(1133, 9, 'Las Cuevas'),
-	(1134, 9, 'Las Garzas'),
-	(1135, 9, 'Las Guachas'),
-	(1136, 9, 'Las Mercedes'),
-	(1137, 9, 'Las Moscas'),
-	(1138, 9, 'Las Mulitas'),
-	(1139, 9, 'Las Toscas'),
-	(1140, 9, 'Laurencena'),
-	(1141, 9, 'Libertador San Martín'),
-	(1142, 9, 'Loma Limpia'),
-	(1143, 9, 'Los Ceibos'),
-	(1144, 9, 'Los Charruas'),
-	(1145, 9, 'Los Conquistadores'),
-	(1146, 9, 'Lucas González'),
-	(1147, 9, 'Lucas N.'),
-	(1148, 9, 'Lucas S. 1ª'),
-	(1149, 9, 'Lucas S. 2ª'),
-	(1150, 9, 'Maciá'),
-	(1151, 9, 'María Grande'),
-	(1152, 9, 'María Grande 2ª'),
-	(1153, 9, 'Médanos'),
-	(1154, 9, 'Mojones N.'),
-	(1155, 9, 'Mojones S.'),
-	(1156, 9, 'Molino Doll'),
-	(1157, 9, 'Monte Redondo'),
-	(1158, 9, 'Montoya'),
-	(1159, 9, 'Mulas Grandes'),
-	(1160, 9, 'Ñancay'),
-	(1161, 9, 'Nogoyá'),
-	(1162, 9, 'Nueva Escocia'),
-	(1163, 9, 'Nueva Vizcaya'),
-	(1164, 9, 'Ombú'),
-	(1165, 9, 'Oro Verde'),
-	(1166, 9, 'Paraná'),
-	(1167, 9, 'Pasaje Guayaquil'),
-	(1168, 9, 'Pasaje Las Tunas'),
-	(1169, 9, 'Paso de La Arena'),
-	(1170, 9, 'Paso de La Laguna'),
-	(1171, 9, 'Paso de Las Piedras'),
-	(1172, 9, 'Paso Duarte'),
-	(1173, 9, 'Pastor Britos'),
-	(1174, 9, 'Pedernal'),
-	(1175, 9, 'Perdices'),
-	(1176, 9, 'Picada Berón'),
-	(1177, 9, 'Piedras Blancas'),
-	(1178, 9, 'Primer Distrito Cuchilla'),
-	(1179, 9, 'Primero de Mayo'),
-	(1180, 9, 'Pronunciamiento'),
-	(1181, 9, 'Pto. Algarrobo'),
-	(1182, 9, 'Pto. Ibicuy'),
-	(1183, 9, 'Pueblo Brugo'),
-	(1184, 9, 'Pueblo Cazes'),
-	(1185, 9, 'Pueblo Gral. Belgrano'),
-	(1186, 9, 'Pueblo Liebig'),
-	(1187, 9, 'Puerto Yeruá'),
-	(1188, 9, 'Punta del Monte'),
-	(1189, 9, 'Quebracho'),
-	(1190, 9, 'Quinto Distrito'),
-	(1191, 9, 'Raices Oeste'),
-	(1192, 9, 'Rincón de Nogoyá'),
-	(1193, 9, 'Rincón del Cinto'),
-	(1194, 9, 'Rincón del Doll'),
-	(1195, 9, 'Rincón del Gato'),
-	(1196, 9, 'Rocamora'),
-	(1197, 9, 'Rosario del Tala'),
-	(1198, 9, 'San Benito'),
-	(1199, 9, 'San Cipriano'),
-	(1200, 9, 'San Ernesto'),
-	(1201, 9, 'San Gustavo'),
-	(1202, 9, 'San Jaime'),
-	(1203, 9, 'San José'),
-	(1204, 9, 'San José de Feliciano'),
-	(1205, 9, 'San Justo'),
-	(1206, 9, 'San Marcial'),
-	(1207, 9, 'San Pedro'),
-	(1208, 9, 'San Ramírez'),
-	(1209, 9, 'San Ramón'),
-	(1210, 9, 'San Roque'),
-	(1211, 9, 'San Salvador'),
-	(1212, 9, 'San Víctor'),
-	(1213, 9, 'Santa Ana'),
-	(1214, 9, 'Santa Anita'),
-	(1215, 9, 'Santa Elena'),
-	(1216, 9, 'Santa Lucía'),
-	(1217, 9, 'Santa Luisa'),
-	(1218, 9, 'Sauce de Luna'),
-	(1219, 9, 'Sauce Montrull'),
-	(1220, 9, 'Sauce Pinto'),
-	(1221, 9, 'Sauce Sur'),
-	(1222, 9, 'Seguí'),
-	(1223, 9, 'Sir Leonard'),
-	(1224, 9, 'Sosa'),
-	(1225, 9, 'Tabossi'),
-	(1226, 9, 'Tezanos Pinto'),
-	(1227, 9, 'Ubajay'),
-	(1228, 9, 'Urdinarrain'),
-	(1229, 9, 'Veinte de Septiembre'),
-	(1230, 9, 'Viale'),
-	(1231, 9, 'Victoria'),
-	(1232, 9, 'Villa Clara'),
-	(1233, 9, 'Villa del Rosario'),
-	(1234, 9, 'Villa Domínguez'),
-	(1235, 9, 'Villa Elisa'),
-	(1236, 9, 'Villa Fontana'),
-	(1237, 9, 'Villa Gdor. Etchevehere'),
-	(1238, 9, 'Villa Mantero'),
-	(1239, 9, 'Villa Paranacito'),
-	(1240, 9, 'Villa Urquiza'),
-	(1241, 9, 'Villaguay'),
-	(1242, 9, 'Walter Moss'),
-	(1243, 9, 'Yacaré'),
-	(1244, 9, 'Yeso Oeste'),
-	(1245, 10, 'Buena Vista'),
-	(1246, 10, 'Clorinda'),
-	(1247, 10, 'Col. Pastoril'),
-	(1248, 10, 'Cte. Fontana'),
-	(1249, 10, 'El Colorado'),
-	(1250, 10, 'El Espinillo'),
-	(1251, 10, 'Estanislao Del Campo'),
-	(1252, 10, '10'),
-	(1253, 10, 'Fortín Lugones'),
-	(1254, 10, 'Gral. Lucio V. Mansilla'),
-	(1255, 10, 'Gral. Manuel Belgrano'),
-	(1256, 10, 'Gral. Mosconi'),
-	(1257, 10, 'Gran Guardia'),
-	(1258, 10, 'Herradura'),
-	(1259, 10, 'Ibarreta'),
-	(1260, 10, 'Ing. Juárez'),
-	(1261, 10, 'Laguna Blanca'),
-	(1262, 10, 'Laguna Naick Neck'),
-	(1263, 10, 'Laguna Yema'),
-	(1264, 10, 'Las Lomitas'),
-	(1265, 10, 'Los Chiriguanos'),
-	(1266, 10, 'Mayor V. Villafañe'),
-	(1267, 10, 'Misión San Fco.'),
-	(1268, 10, 'Palo Santo'),
-	(1269, 10, 'Pirané'),
-	(1270, 10, 'Pozo del Maza'),
-	(1271, 10, 'Riacho He-He'),
-	(1272, 10, 'San Hilario'),
-	(1273, 10, 'San Martín II'),
-	(1274, 10, 'Siete Palmas'),
-	(1275, 10, 'Subteniente Perín'),
-	(1276, 10, 'Tres Lagunas'),
-	(1277, 10, 'Villa Dos Trece'),
-	(1278, 10, 'Villa Escolar'),
-	(1279, 10, 'Villa Gral. Güemes'),
-	(1280, 11, 'Abdon Castro Tolay'),
-	(1281, 11, 'Abra Pampa'),
-	(1282, 11, 'Abralaite'),
-	(1283, 11, 'Aguas Calientes'),
-	(1284, 11, 'Arrayanal'),
-	(1285, 11, 'Barrios'),
-	(1286, 11, 'Caimancito'),
-	(1287, 11, 'Calilegua'),
-	(1288, 11, 'Cangrejillos'),
-	(1289, 11, 'Caspala'),
-	(1290, 11, 'Catuá'),
-	(1291, 11, 'Cieneguillas'),
-	(1292, 11, 'Coranzulli'),
-	(1293, 11, 'Cusi-Cusi'),
-	(1294, 11, 'El Aguilar'),
-	(1295, 11, 'El Carmen'),
-	(1296, 11, 'El Cóndor'),
-	(1297, 11, 'El Fuerte'),
-	(1298, 11, 'El Piquete'),
-	(1299, 11, 'El Talar'),
-	(1300, 11, 'Fraile Pintado'),
-	(1301, 11, 'Hipólito Yrigoyen'),
-	(1302, 11, 'Huacalera'),
-	(1303, 11, 'Humahuaca'),
-	(1304, 11, 'La Esperanza'),
-	(1305, 11, 'La Mendieta'),
-	(1306, 11, 'La Quiaca'),
-	(1307, 11, 'Ledesma'),
-	(1308, 11, 'Libertador Gral. San Martin'),
-	(1309, 11, 'Maimara'),
-	(1310, 11, 'Mina Pirquitas'),
-	(1311, 11, 'Monterrico'),
-	(1312, 11, 'Palma Sola'),
-	(1313, 11, 'Palpalá'),
-	(1314, 11, 'Pampa Blanca'),
-	(1315, 11, 'Pampichuela'),
-	(1316, 11, 'Perico'),
-	(1317, 11, 'Puesto del Marqués'),
-	(1318, 11, 'Puesto Viejo'),
-	(1319, 11, 'Pumahuasi'),
-	(1320, 11, 'Purmamarca'),
-	(1321, 11, 'Rinconada'),
-	(1322, 11, 'Rodeitos'),
-	(1323, 11, 'Rosario de Río Grande'),
-	(1324, 11, 'San Antonio'),
-	(1325, 11, 'San Francisco'),
-	(1326, 11, 'San Pedro'),
-	(1327, 11, 'San Rafael'),
-	(1328, 11, 'San Salvador'),
-	(1329, 11, 'Santa Ana'),
-	(1330, 11, 'Santa Catalina'),
-	(1331, 11, 'Santa Clara'),
-	(1332, 11, 'Susques'),
-	(1333, 11, 'Tilcara'),
-	(1334, 11, 'Tres Cruces'),
-	(1335, 11, 'Tumbaya'),
-	(1336, 11, 'Valle Grande'),
-	(1337, 11, 'Vinalito'),
-	(1338, 11, 'Volcán'),
-	(1339, 11, 'Yala'),
-	(1340, 11, 'Yaví'),
-	(1341, 11, 'Yuto'),
-	(1342, 12, 'Abramo'),
-	(1343, 12, 'Adolfo Van Praet'),
-	(1344, 12, 'Agustoni'),
-	(1345, 12, 'Algarrobo del Aguila'),
-	(1346, 12, 'Alpachiri'),
-	(1347, 12, 'Alta Italia'),
-	(1348, 12, 'Anguil'),
-	(1349, 12, 'Arata'),
-	(1350, 12, 'Ataliva Roca'),
-	(1351, 12, 'Bernardo Larroude'),
-	(1352, 12, 'Bernasconi'),
-	(1353, 12, 'Caleufú'),
-	(1354, 12, 'Carro Quemado'),
-	(1355, 12, 'Catriló'),
-	(1356, 12, 'Ceballos'),
-	(1357, 12, 'Chacharramendi'),
-	(1358, 12, 'Col. Barón'),
-	(1359, 12, 'Col. Santa María'),
-	(1360, 12, 'Conhelo'),
-	(1361, 12, 'Coronel Hilario Lagos'),
-	(1362, 12, 'Cuchillo-Có'),
-	(1363, 12, 'Doblas'),
-	(1364, 12, 'Dorila'),
-	(1365, 12, 'Eduardo Castex'),
-	(1366, 12, 'Embajador Martini'),
-	(1367, 12, 'Falucho'),
-	(1368, 12, 'Gral. Acha'),
-	(1369, 12, 'Gral. Manuel Campos'),
-	(1370, 12, 'Gral. Pico'),
-	(1371, 12, 'Guatraché'),
-	(1372, 12, 'Ing. Luiggi'),
-	(1373, 12, 'Intendente Alvear'),
-	(1374, 12, 'Jacinto Arauz'),
-	(1375, 12, 'La Adela'),
-	(1376, 12, 'La Humada'),
-	(1377, 12, 'La Maruja'),
-	(1378, 12, '12'),
-	(1379, 12, 'La Reforma'),
-	(1380, 12, 'Limay Mahuida'),
-	(1381, 12, 'Lonquimay'),
-	(1382, 12, 'Loventuel'),
-	(1383, 12, 'Luan Toro'),
-	(1384, 12, 'Macachín'),
-	(1385, 12, 'Maisonnave'),
-	(1386, 12, 'Mauricio Mayer'),
-	(1387, 12, 'Metileo'),
-	(1388, 12, 'Miguel Cané'),
-	(1389, 12, 'Miguel Riglos'),
-	(1390, 12, 'Monte Nievas'),
-	(1391, 12, 'Parera'),
-	(1392, 12, 'Perú'),
-	(1393, 12, 'Pichi-Huinca'),
-	(1394, 12, 'Puelches'),
-	(1395, 12, 'Puelén'),
-	(1396, 12, 'Quehue'),
-	(1397, 12, 'Quemú Quemú'),
-	(1398, 12, 'Quetrequén'),
-	(1399, 12, 'Rancul'),
-	(1400, 12, 'Realicó'),
-	(1401, 12, 'Relmo'),
-	(1402, 12, 'Rolón'),
-	(1403, 12, 'Rucanelo'),
-	(1404, 12, 'Sarah'),
-	(1405, 12, 'Speluzzi'),
-	(1406, 12, 'Sta. Isabel'),
-	(1407, 12, 'Sta. Rosa'),
-	(1408, 12, 'Sta. Teresa'),
-	(1409, 12, 'Telén'),
-	(1410, 12, 'Toay'),
-	(1411, 12, 'Tomas M. de Anchorena'),
-	(1412, 12, 'Trenel'),
-	(1413, 12, 'Unanue'),
-	(1414, 12, 'Uriburu'),
-	(1415, 12, 'Veinticinco de Mayo'),
-	(1416, 12, 'Vertiz'),
-	(1417, 12, 'Victorica'),
-	(1418, 12, 'Villa Mirasol'),
-	(1419, 12, 'Winifreda'),
-	(1420, 13, 'Arauco'),
-	(1421, 13, 'Capital'),
-	(1422, 13, 'Castro Barros'),
-	(1423, 13, 'Chamical'),
-	(1424, 13, 'Chilecito'),
-	(1425, 13, 'Coronel F. Varela'),
-	(1426, 13, 'Famatina'),
-	(1427, 13, 'Gral. A.V.Peñaloza'),
-	(1428, 13, 'Gral. Belgrano'),
-	(1429, 13, 'Gral. J.F. Quiroga'),
-	(1430, 13, 'Gral. Lamadrid'),
-	(1431, 13, 'Gral. Ocampo'),
-	(1432, 13, 'Gral. San Martín'),
-	(1433, 13, 'Independencia'),
-	(1434, 13, 'Rosario Penaloza'),
-	(1435, 13, 'San Blas de Los Sauces'),
-	(1436, 13, 'Sanagasta'),
-	(1437, 13, 'Vinchina'),
-	(1438, 14, 'Capital'),
-	(1439, 14, 'Chacras de Coria'),
-	(1440, 14, 'Dorrego'),
-	(1441, 14, 'Gllen'),
-	(1442, 14, 'Godoy Cruz'),
-	(1443, 14, 'Gral. Alvear'),
-	(1444, 14, 'Guaymallén'),
-	(1445, 14, 'Junín'),
-	(1446, 14, 'La Paz'),
-	(1447, 14, 'Las Heras'),
-	(1448, 14, 'Lavalle'),
-	(1449, 14, 'Luján'),
-	(1450, 14, 'Luján De Cuyo'),
-	(1451, 14, 'Maipú'),
-	(1452, 14, 'Malargüe'),
-	(1453, 14, 'Rivadavia'),
-	(1454, 14, 'San Carlos'),
-	(1455, 14, 'San Martín'),
-	(1456, 14, 'San Rafael'),
-	(1457, 14, 'Sta. Rosa'),
-	(1458, 14, 'Tunuyán'),
-	(1459, 14, 'Tupungato'),
-	(1460, 14, 'Villa Nueva'),
-	(1461, 15, 'Alba Posse'),
-	(1462, 15, 'Almafuerte'),
-	(1463, 15, 'Apóstoles'),
-	(1464, 15, 'Aristóbulo Del Valle'),
-	(1465, 15, 'Arroyo Del Medio'),
-	(1466, 15, 'Azara'),
-	(1467, 15, 'Bdo. De Irigoyen'),
-	(1468, 15, 'Bonpland'),
-	(1469, 15, 'Caá Yari'),
-	(1470, 15, 'Campo Grande'),
-	(1471, 15, 'Campo Ramón'),
-	(1472, 15, 'Campo Viera'),
-	(1473, 15, 'Candelaria'),
-	(1474, 15, 'Capioví'),
-	(1475, 15, 'Caraguatay'),
-	(1476, 15, 'Cdte. Guacurarí'),
-	(1477, 15, 'Cerro Azul'),
-	(1478, 15, 'Cerro Corá'),
-	(1479, 15, 'Col. Alberdi'),
-	(1480, 15, 'Col. Aurora'),
-	(1481, 15, 'Col. Delicia'),
-	(1482, 15, 'Col. Polana'),
-	(1483, 15, 'Col. Victoria'),
-	(1484, 15, 'Col. Wanda'),
-	(1485, 15, 'Concepción De La Sierra'),
-	(1486, 15, 'Corpus'),
-	(1487, 15, 'Dos Arroyos'),
-	(1488, 15, 'Dos de Mayo'),
-	(1489, 15, 'El Alcázar'),
-	(1490, 15, 'El Dorado'),
-	(1491, 15, 'El Soberbio'),
-	(1492, 15, 'Esperanza'),
-	(1493, 15, 'F. Ameghino'),
-	(1494, 15, 'Fachinal'),
-	(1495, 15, 'Garuhapé'),
-	(1496, 15, 'Garupá'),
-	(1497, 15, 'Gdor. López'),
-	(1498, 15, 'Gdor. Roca'),
-	(1499, 15, 'Gral. Alvear'),
-	(1500, 15, 'Gral. Urquiza'),
-	(1501, 15, 'Guaraní'),
-	(1502, 15, 'H. Yrigoyen'),
-	(1503, 15, 'Iguazú'),
-	(1504, 15, 'Itacaruaré'),
-	(1505, 15, 'Jardín América'),
-	(1506, 15, 'Leandro N. Alem'),
-	(1507, 15, 'Libertad'),
-	(1508, 15, 'Loreto'),
-	(1509, 15, 'Los Helechos'),
-	(1510, 15, 'Mártires'),
-	(1511, 15, '15'),
-	(1512, 15, 'Mojón Grande'),
-	(1513, 15, 'Montecarlo'),
-	(1514, 15, 'Nueve de Julio'),
-	(1515, 15, 'Oberá'),
-	(1516, 15, 'Olegario V. Andrade'),
-	(1517, 15, 'Panambí'),
-	(1518, 15, 'Posadas'),
-	(1519, 15, 'Profundidad'),
-	(1520, 15, 'Pto. Iguazú'),
-	(1521, 15, 'Pto. Leoni'),
-	(1522, 15, 'Pto. Piray'),
-	(1523, 15, 'Pto. Rico'),
-	(1524, 15, 'Ruiz de Montoya'),
-	(1525, 15, 'San Antonio'),
-	(1526, 15, 'San Ignacio'),
-	(1527, 15, 'San Javier'),
-	(1528, 15, 'San José'),
-	(1529, 15, 'San Martín'),
-	(1530, 15, 'San Pedro'),
-	(1531, 15, 'San Vicente'),
-	(1532, 15, 'Santiago De Liniers'),
-	(1533, 15, 'Santo Pipo'),
-	(1534, 15, 'Sta. Ana'),
-	(1535, 15, 'Sta. María'),
-	(1536, 15, 'Tres Capones'),
-	(1537, 15, 'Veinticinco de Mayo'),
-	(1538, 15, 'Wanda'),
-	(1539, 16, 'Aguada San Roque'),
-	(1540, 16, 'Aluminé'),
-	(1541, 16, 'Andacollo'),
-	(1542, 16, 'Añelo'),
-	(1543, 16, 'Bajada del Agrio'),
-	(1544, 16, 'Barrancas'),
-	(1545, 16, 'Buta Ranquil'),
-	(1546, 16, 'Capital'),
-	(1547, 16, 'Caviahué'),
-	(1548, 16, 'Centenario'),
-	(1549, 16, 'Chorriaca'),
-	(1550, 16, 'Chos Malal'),
-	(1551, 16, 'Cipolletti'),
-	(1552, 16, 'Covunco Abajo'),
-	(1553, 16, 'Coyuco Cochico'),
-	(1554, 16, 'Cutral Có'),
-	(1555, 16, 'El Cholar'),
-	(1556, 16, 'El Huecú'),
-	(1557, 16, 'El Sauce'),
-	(1558, 16, 'Guañacos'),
-	(1559, 16, 'Huinganco'),
-	(1560, 16, 'Las Coloradas'),
-	(1561, 16, 'Las Lajas'),
-	(1562, 16, 'Las Ovejas'),
-	(1563, 16, 'Loncopué'),
-	(1564, 16, 'Los Catutos'),
-	(1565, 16, 'Los Chihuidos'),
-	(1566, 16, 'Los Miches'),
-	(1567, 16, 'Manzano Amargo'),
-	(1568, 16, '16'),
-	(1569, 16, 'Octavio Pico'),
-	(1570, 16, 'Paso Aguerre'),
-	(1571, 16, 'Picún Leufú'),
-	(1572, 16, 'Piedra del Aguila'),
-	(1573, 16, 'Pilo Lil'),
-	(1574, 16, 'Plaza Huincul'),
-	(1575, 16, 'Plottier'),
-	(1576, 16, 'Quili Malal'),
-	(1577, 16, 'Ramón Castro'),
-	(1578, 16, 'Rincón de Los Sauces'),
-	(1579, 16, 'San Martín de Los Andes'),
-	(1580, 16, 'San Patricio del Chañar'),
-	(1581, 16, 'Santo Tomás'),
-	(1582, 16, 'Sauzal Bonito'),
-	(1583, 16, 'Senillosa'),
-	(1584, 16, 'Taquimilán'),
-	(1585, 16, 'Tricao Malal'),
-	(1586, 16, 'Varvarco'),
-	(1587, 16, 'Villa Curí Leuvu'),
-	(1588, 16, 'Villa del Nahueve'),
-	(1589, 16, 'Villa del Puente Picún Leuvú'),
-	(1590, 16, 'Villa El Chocón'),
-	(1591, 16, 'Villa La Angostura'),
-	(1592, 16, 'Villa Pehuenia'),
-	(1593, 16, 'Villa Traful'),
-	(1594, 16, 'Vista Alegre'),
-	(1595, 16, 'Zapala'),
-	(1596, 17, 'Aguada Cecilio'),
-	(1597, 17, 'Aguada de Guerra'),
-	(1598, 17, 'Allén'),
-	(1599, 17, 'Arroyo de La Ventana'),
-	(1600, 17, 'Arroyo Los Berros'),
-	(1601, 17, 'Bariloche'),
-	(1602, 17, 'Calte. Cordero'),
-	(1603, 17, 'Campo Grande'),
-	(1604, 17, 'Catriel'),
-	(1605, 17, 'Cerro Policía'),
-	(1606, 17, 'Cervantes'),
-	(1607, 17, 'Chelforo'),
-	(1608, 17, 'Chimpay'),
-	(1609, 17, 'Chinchinales'),
-	(1610, 17, 'Chipauquil'),
-	(1611, 17, 'Choele Choel'),
-	(1612, 17, 'Cinco Saltos'),
-	(1613, 17, 'Cipolletti'),
-	(1614, 17, 'Clemente Onelli'),
-	(1615, 17, 'Colán Conhue'),
-	(1616, 17, 'Comallo'),
-	(1617, 17, 'Comicó'),
-	(1618, 17, 'Cona Niyeu'),
-	(1619, 17, 'Coronel Belisle'),
-	(1620, 17, 'Cubanea'),
-	(1621, 17, 'Darwin'),
-	(1622, 17, 'Dina Huapi'),
-	(1623, 17, 'El Bolsón'),
-	(1624, 17, 'El Caín'),
-	(1625, 17, 'El Manso'),
-	(1626, 17, 'Gral. Conesa'),
-	(1627, 17, 'Gral. Enrique Godoy'),
-	(1628, 17, 'Gral. Fernandez Oro'),
-	(1629, 17, 'Gral. Roca'),
-	(1630, 17, 'Guardia Mitre'),
-	(1631, 17, 'Ing. Huergo'),
-	(1632, 17, 'Ing. Jacobacci'),
-	(1633, 17, 'Laguna Blanca'),
-	(1634, 17, 'Lamarque'),
-	(1635, 17, 'Las Grutas'),
-	(1636, 17, 'Los Menucos'),
-	(1637, 17, 'Luis Beltrán'),
-	(1638, 17, 'Mainqué'),
-	(1639, 17, 'Mamuel Choique'),
-	(1640, 17, 'Maquinchao'),
-	(1641, 17, 'Mencué'),
-	(1642, 17, 'Mtro. Ramos Mexia'),
-	(1643, 17, 'Nahuel Niyeu'),
-	(1644, 17, 'Naupa Huen'),
-	(1645, 17, 'Ñorquinco'),
-	(1646, 17, 'Ojos de Agua'),
-	(1647, 17, 'Paso de Agua'),
-	(1648, 17, 'Paso Flores'),
-	(1649, 17, 'Peñas Blancas'),
-	(1650, 17, 'Pichi Mahuida'),
-	(1651, 17, 'Pilcaniyeu'),
-	(1652, 17, 'Pomona'),
-	(1653, 17, 'Prahuaniyeu'),
-	(1654, 17, 'Rincón Treneta'),
-	(1655, 17, 'Río Chico'),
-	(1656, 17, 'Río Colorado'),
-	(1657, 17, 'Roca'),
-	(1658, 17, 'San Antonio Oeste'),
-	(1659, 17, 'San Javier'),
-	(1660, 17, 'Sierra Colorada'),
-	(1661, 17, 'Sierra Grande'),
-	(1662, 17, 'Sierra Pailemán'),
-	(1663, 17, 'Valcheta'),
-	(1664, 17, 'Valle Azul'),
-	(1665, 17, 'Viedma'),
-	(1666, 17, 'Villa Llanquín'),
-	(1667, 17, 'Villa Mascardi'),
-	(1668, 17, 'Villa Regina'),
-	(1669, 17, 'Yaminué'),
-	(1670, 18, 'A. Saravia'),
-	(1671, 18, 'Aguaray'),
-	(1672, 18, 'Angastaco'),
-	(1673, 18, 'Animaná'),
-	(1674, 18, 'Cachi'),
-	(1675, 18, 'Cafayate'),
-	(1676, 18, 'Campo Quijano'),
-	(1677, 18, 'Campo Santo'),
-	(1678, 18, 'Capital'),
-	(1679, 18, 'Cerrillos'),
-	(1680, 18, 'Chicoana'),
-	(1681, 18, 'Col. Sta. Rosa'),
-	(1682, 18, 'Coronel Moldes'),
-	(1683, 18, 'El Bordo'),
-	(1684, 18, 'El Carril'),
-	(1685, 18, 'El Galpón'),
-	(1686, 18, 'El Jardín'),
-	(1687, 18, 'El Potrero'),
-	(1688, 18, 'El Quebrachal'),
-	(1689, 18, 'El Tala'),
-	(1690, 18, 'Embarcación'),
-	(1691, 18, 'Gral. Ballivian'),
-	(1692, 18, 'Gral. Güemes'),
-	(1693, 18, 'Gral. Mosconi'),
-	(1694, 18, 'Gral. Pizarro'),
-	(1695, 18, 'Guachipas'),
-	(1696, 18, 'Hipólito Yrigoyen'),
-	(1697, 18, 'Iruyá'),
-	(1698, 18, 'Isla De Cañas'),
-	(1699, 18, 'J. V. Gonzalez'),
-	(1700, 18, 'La Caldera'),
-	(1701, 18, 'La Candelaria'),
-	(1702, 18, 'La Merced'),
-	(1703, 18, 'La Poma'),
-	(1704, 18, 'La Viña'),
-	(1705, 18, 'Las Lajitas'),
-	(1706, 18, 'Los Toldos'),
-	(1707, 18, 'Metán'),
-	(1708, 18, 'Molinos'),
-	(1709, 18, 'Nazareno'),
-	(1710, 18, 'Orán'),
-	(1711, 18, 'Payogasta'),
-	(1712, 18, 'Pichanal'),
-	(1713, 18, 'Prof. S. Mazza'),
-	(1714, 18, 'Río Piedras'),
-	(1715, 18, 'Rivadavia Banda Norte'),
-	(1716, 18, 'Rivadavia Banda Sur'),
-	(1717, 18, 'Rosario de La Frontera'),
-	(1718, 18, 'Rosario de Lerma'),
-	(1719, 18, 'Saclantás'),
-	(1720, 18, '18'),
-	(1721, 18, 'San Antonio'),
-	(1722, 18, 'San Carlos'),
-	(1723, 18, 'San José De Metán'),
-	(1724, 18, 'San Ramón'),
-	(1725, 18, 'Santa Victoria E.'),
-	(1726, 18, 'Santa Victoria O.'),
-	(1727, 18, 'Tartagal'),
-	(1728, 18, 'Tolar Grande'),
-	(1729, 18, 'Urundel'),
-	(1730, 18, 'Vaqueros'),
-	(1731, 18, 'Villa San Lorenzo'),
-	(1732, 19, 'Albardón'),
-	(1733, 19, 'Angaco'),
-	(1734, 19, 'Calingasta'),
-	(1735, 19, 'Capital'),
-	(1736, 19, 'Caucete'),
-	(1737, 19, 'Chimbas'),
-	(1738, 19, 'Iglesia'),
-	(1739, 19, 'Jachal'),
-	(1740, 19, 'Nueve de Julio'),
-	(1741, 19, 'Pocito'),
-	(1742, 19, 'Rawson'),
-	(1743, 19, 'Rivadavia'),
-	(1744, 19, '19'),
-	(1745, 19, 'San Martín'),
-	(1746, 19, 'Santa Lucía'),
-	(1747, 19, 'Sarmiento'),
-	(1748, 19, 'Ullum'),
-	(1749, 19, 'Valle Fértil'),
-	(1750, 19, 'Veinticinco de Mayo'),
-	(1751, 19, 'Zonda'),
-	(1752, 20, 'Alto Pelado'),
-	(1753, 20, 'Alto Pencoso'),
-	(1754, 20, 'Anchorena'),
-	(1755, 20, 'Arizona'),
-	(1756, 20, 'Bagual'),
-	(1757, 20, 'Balde'),
-	(1758, 20, 'Batavia'),
-	(1759, 20, 'Beazley'),
-	(1760, 20, 'Buena Esperanza'),
-	(1761, 20, 'Candelaria'),
-	(1762, 20, 'Capital'),
-	(1763, 20, 'Carolina'),
-	(1764, 20, 'Carpintería'),
-	(1765, 20, 'Concarán'),
-	(1766, 20, 'Cortaderas'),
-	(1767, 20, 'El Morro'),
-	(1768, 20, 'El Trapiche'),
-	(1769, 20, 'El Volcán'),
-	(1770, 20, 'Fortín El Patria'),
-	(1771, 20, 'Fortuna'),
-	(1772, 20, 'Fraga'),
-	(1773, 20, 'Juan Jorba'),
-	(1774, 20, 'Juan Llerena'),
-	(1775, 20, 'Juana Koslay'),
-	(1776, 20, 'Justo Daract'),
-	(1777, 20, 'La Calera'),
-	(1778, 20, 'La Florida'),
-	(1779, 20, 'La Punilla'),
-	(1780, 20, 'La Toma'),
-	(1781, 20, 'Lafinur'),
-	(1782, 20, 'Las Aguadas'),
-	(1783, 20, 'Las Chacras'),
-	(1784, 20, 'Las Lagunas'),
-	(1785, 20, 'Las Vertientes'),
-	(1786, 20, 'Lavaisse'),
-	(1787, 20, 'Leandro N. Alem'),
-	(1788, 20, 'Los Molles'),
-	(1789, 20, 'Luján'),
-	(1790, 20, 'Mercedes'),
-	(1791, 20, 'Merlo'),
-	(1792, 20, 'Naschel'),
-	(1793, 20, 'Navia'),
-	(1794, 20, 'Nogolí'),
-	(1795, 20, 'Nueva Galia'),
-	(1796, 20, 'Papagayos'),
-	(1797, 20, 'Paso Grande'),
-	(1798, 20, 'Potrero de Los Funes'),
-	(1799, 20, 'Quines'),
-	(1800, 20, 'Renca'),
-	(1801, 20, 'Saladillo'),
-	(1802, 20, 'San Francisco'),
-	(1803, 20, 'San Gerónimo'),
-	(1804, 20, 'San Martín'),
-	(1805, 20, 'San Pablo'),
-	(1806, 20, 'Santa Rosa de Conlara'),
-	(1807, 20, 'Talita'),
-	(1808, 20, 'Tilisarao'),
-	(1809, 20, 'Unión'),
-	(1810, 20, 'Villa de La Quebrada'),
-	(1811, 20, 'Villa de Praga'),
-	(1812, 20, 'Villa del Carmen'),
-	(1813, 20, 'Villa Gral. Roca'),
-	(1814, 20, 'Villa Larca'),
-	(1815, 20, 'Villa Mercedes'),
-	(1816, 20, 'Zanjitas'),
-	(1817, 21, 'Calafate'),
-	(1818, 21, 'Caleta Olivia'),
-	(1819, 21, 'Cañadón Seco'),
-	(1820, 21, 'Comandante Piedrabuena'),
-	(1821, 21, 'El Calafate'),
-	(1822, 21, 'El Chaltén'),
-	(1823, 21, 'Gdor. Gregores'),
-	(1824, 21, 'Hipólito Yrigoyen'),
-	(1825, 21, 'Jaramillo'),
-	(1826, 21, 'Koluel Kaike'),
-	(1827, 21, 'Las Heras'),
-	(1828, 21, 'Los Antiguos'),
-	(1829, 21, 'Perito Moreno'),
-	(1830, 21, 'Pico Truncado'),
-	(1831, 21, 'Pto. Deseado'),
-	(1832, 21, 'Pto. San Julián'),
-	(1833, 21, 'Pto. 21'),
-	(1834, 21, 'Río Cuarto'),
-	(1835, 21, 'Río Gallegos'),
-	(1836, 21, 'Río Turbio'),
-	(1837, 21, 'Tres Lagos'),
-	(1838, 21, 'Veintiocho De Noviembre'),
-	(1839, 22, 'Aarón Castellanos'),
-	(1840, 22, 'Acebal'),
-	(1841, 22, 'Aguará Grande'),
-	(1842, 22, 'Albarellos'),
-	(1843, 22, 'Alcorta'),
-	(1844, 22, 'Aldao'),
-	(1845, 22, 'Alejandra'),
-	(1846, 22, 'Álvarez'),
-	(1847, 22, 'Ambrosetti'),
-	(1848, 22, 'Amenábar'),
-	(1849, 22, 'Angélica'),
-	(1850, 22, 'Angeloni'),
-	(1851, 22, 'Arequito'),
-	(1852, 22, 'Arminda'),
-	(1853, 22, 'Armstrong'),
-	(1854, 22, 'Arocena'),
-	(1855, 22, 'Arroyo Aguiar'),
-	(1856, 22, 'Arroyo Ceibal'),
-	(1857, 22, 'Arroyo Leyes'),
-	(1858, 22, 'Arroyo Seco'),
-	(1859, 22, 'Arrufó'),
-	(1860, 22, 'Arteaga'),
-	(1861, 22, 'Ataliva'),
-	(1862, 22, 'Aurelia'),
-	(1863, 22, 'Avellaneda'),
-	(1864, 22, 'Barrancas'),
-	(1865, 22, 'Bauer Y Sigel'),
-	(1866, 22, 'Bella Italia'),
-	(1867, 22, 'Berabevú'),
-	(1868, 22, 'Berna'),
-	(1869, 22, 'Bernardo de Irigoyen'),
-	(1870, 22, 'Bigand'),
-	(1871, 22, 'Bombal'),
-	(1872, 22, 'Bouquet'),
-	(1873, 22, 'Bustinza'),
-	(1874, 22, 'Cabal'),
-	(1875, 22, 'Cacique Ariacaiquin'),
-	(1876, 22, 'Cafferata'),
-	(1877, 22, 'Calchaquí'),
-	(1878, 22, 'Campo Andino'),
-	(1879, 22, 'Campo Piaggio'),
-	(1880, 22, 'Cañada de Gómez'),
-	(1881, 22, 'Cañada del Ucle'),
-	(1882, 22, 'Cañada Rica'),
-	(1883, 22, 'Cañada Rosquín'),
-	(1884, 22, 'Candioti'),
-	(1885, 22, 'Capital'),
-	(1886, 22, 'Capitán Bermúdez'),
-	(1887, 22, 'Capivara'),
-	(1888, 22, 'Carcarañá'),
-	(1889, 22, 'Carlos Pellegrini'),
-	(1890, 22, 'Carmen'),
-	(1891, 22, 'Carmen Del Sauce'),
-	(1892, 22, 'Carreras'),
-	(1893, 22, 'Carrizales'),
-	(1894, 22, 'Casalegno'),
-	(1895, 22, 'Casas'),
-	(1896, 22, 'Casilda'),
-	(1897, 22, 'Castelar'),
-	(1898, 22, 'Castellanos'),
-	(1899, 22, 'Cayastá'),
-	(1900, 22, 'Cayastacito'),
-	(1901, 22, 'Centeno'),
-	(1902, 22, 'Cepeda'),
-	(1903, 22, 'Ceres'),
-	(1904, 22, 'Chabás'),
-	(1905, 22, 'Chañar Ladeado'),
-	(1906, 22, 'Chapuy'),
-	(1907, 22, 'Chovet'),
-	(1908, 22, 'Christophersen'),
-	(1909, 22, 'Classon'),
-	(1910, 22, 'Cnel. Arnold'),
-	(1911, 22, 'Cnel. Bogado'),
-	(1912, 22, 'Cnel. Dominguez'),
-	(1913, 22, 'Cnel. Fraga'),
-	(1914, 22, 'Col. Aldao'),
-	(1915, 22, 'Col. Ana'),
-	(1916, 22, 'Col. Belgrano'),
-	(1917, 22, 'Col. Bicha'),
-	(1918, 22, 'Col. Bigand'),
-	(1919, 22, 'Col. Bossi'),
-	(1920, 22, 'Col. Cavour'),
-	(1921, 22, 'Col. Cello'),
-	(1922, 22, 'Col. Dolores'),
-	(1923, 22, 'Col. Dos Rosas'),
-	(1924, 22, 'Col. Durán'),
-	(1925, 22, 'Col. Iturraspe'),
-	(1926, 22, 'Col. Margarita'),
-	(1927, 22, 'Col. Mascias'),
-	(1928, 22, 'Col. Raquel'),
-	(1929, 22, 'Col. Rosa'),
-	(1930, 22, 'Col. San José'),
-	(1931, 22, 'Constanza'),
-	(1932, 22, 'Coronda'),
-	(1933, 22, 'Correa'),
-	(1934, 22, 'Crispi'),
-	(1935, 22, 'Cululú'),
-	(1936, 22, 'Curupayti'),
-	(1937, 22, 'Desvio Arijón'),
-	(1938, 22, 'Diaz'),
-	(1939, 22, 'Diego de Alvear'),
-	(1940, 22, 'Egusquiza'),
-	(1941, 22, 'El Arazá'),
-	(1942, 22, 'El Rabón'),
-	(1943, 22, 'El Sombrerito'),
-	(1944, 22, 'El Trébol'),
-	(1945, 22, 'Elisa'),
-	(1946, 22, 'Elortondo'),
-	(1947, 22, 'Emilia'),
-	(1948, 22, 'Empalme San Carlos'),
-	(1949, 22, 'Empalme Villa Constitucion'),
-	(1950, 22, 'Esmeralda'),
-	(1951, 22, 'Esperanza'),
-	(1952, 22, 'Estación Alvear'),
-	(1953, 22, 'Estacion Clucellas'),
-	(1954, 22, 'Esteban Rams'),
-	(1955, 22, 'Esther'),
-	(1956, 22, 'Esustolia'),
-	(1957, 22, 'Eusebia'),
-	(1958, 22, 'Felicia'),
-	(1959, 22, 'Fidela'),
-	(1960, 22, 'Fighiera'),
-	(1961, 22, 'Firmat'),
-	(1962, 22, 'Florencia'),
-	(1963, 22, 'Fortín Olmos'),
-	(1964, 22, 'Franck'),
-	(1965, 22, 'Fray Luis Beltrán'),
-	(1966, 22, 'Frontera'),
-	(1967, 22, 'Fuentes'),
-	(1968, 22, 'Funes'),
-	(1969, 22, 'Gaboto'),
-	(1970, 22, 'Galisteo'),
-	(1971, 22, 'Gálvez'),
-	(1972, 22, 'Garabalto'),
-	(1973, 22, 'Garibaldi'),
-	(1974, 22, 'Gato Colorado'),
-	(1975, 22, 'Gdor. Crespo'),
-	(1976, 22, 'Gessler'),
-	(1977, 22, 'Godoy'),
-	(1978, 22, 'Golondrina'),
-	(1979, 22, 'Gral. Gelly'),
-	(1980, 22, 'Gral. Lagos'),
-	(1981, 22, 'Granadero Baigorria'),
-	(1982, 22, 'Gregoria Perez De Denis'),
-	(1983, 22, 'Grutly'),
-	(1984, 22, 'Guadalupe N.'),
-	(1985, 22, 'Gödeken'),
-	(1986, 22, 'Helvecia'),
-	(1987, 22, 'Hersilia'),
-	(1988, 22, 'Hipatía'),
-	(1989, 22, 'Huanqueros'),
-	(1990, 22, 'Hugentobler'),
-	(1991, 22, 'Hughes'),
-	(1992, 22, 'Humberto 1º'),
-	(1993, 22, 'Humboldt'),
-	(1994, 22, 'Ibarlucea'),
-	(1995, 22, 'Ing. Chanourdie'),
-	(1996, 22, 'Intiyaco'),
-	(1997, 22, 'Ituzaingó'),
-	(1998, 22, 'Jacinto L. Aráuz'),
-	(1999, 22, 'Josefina'),
-	(2000, 22, 'Juan B. Molina'),
-	(2001, 22, 'Juan de Garay'),
-	(2002, 22, 'Juncal'),
-	(2003, 22, 'La Brava'),
-	(2004, 22, 'La Cabral'),
-	(2005, 22, 'La Camila'),
-	(2006, 22, 'La Chispa'),
-	(2007, 22, 'La Clara'),
-	(2008, 22, 'La Criolla'),
-	(2009, 22, 'La Gallareta'),
-	(2010, 22, 'La Lucila'),
-	(2011, 22, 'La Pelada'),
-	(2012, 22, 'La Penca'),
-	(2013, 22, 'La Rubia'),
-	(2014, 22, 'La Sarita'),
-	(2015, 22, 'La Vanguardia'),
-	(2016, 22, 'Labordeboy'),
-	(2017, 22, 'Laguna Paiva'),
-	(2018, 22, 'Landeta'),
-	(2019, 22, 'Lanteri'),
-	(2020, 22, 'Larrechea'),
-	(2021, 22, 'Las Avispas'),
-	(2022, 22, 'Las Bandurrias'),
-	(2023, 22, 'Las Garzas'),
-	(2024, 22, 'Las Palmeras'),
-	(2025, 22, 'Las Parejas'),
-	(2026, 22, 'Las Petacas'),
-	(2027, 22, 'Las Rosas'),
-	(2028, 22, 'Las Toscas'),
-	(2029, 22, 'Las Tunas'),
-	(2030, 22, 'Lazzarino'),
-	(2031, 22, 'Lehmann'),
-	(2032, 22, 'Llambi Campbell'),
-	(2033, 22, 'Logroño'),
-	(2034, 22, 'Loma Alta'),
-	(2035, 22, 'López'),
-	(2036, 22, 'Los Amores'),
-	(2037, 22, 'Los Cardos'),
-	(2038, 22, 'Los Laureles'),
-	(2039, 22, 'Los Molinos'),
-	(2040, 22, 'Los Quirquinchos'),
-	(2041, 22, 'Lucio V. Lopez'),
-	(2042, 22, 'Luis Palacios'),
-	(2043, 22, 'Ma. Juana'),
-	(2044, 22, 'Ma. Luisa'),
-	(2045, 22, 'Ma. Susana'),
-	(2046, 22, 'Ma. Teresa'),
-	(2047, 22, 'Maciel'),
-	(2048, 22, 'Maggiolo'),
-	(2049, 22, 'Malabrigo'),
-	(2050, 22, 'Marcelino Escalada'),
-	(2051, 22, 'Margarita'),
-	(2052, 22, 'Matilde'),
-	(2053, 22, 'Mauá'),
-	(2054, 22, 'Máximo Paz'),
-	(2055, 22, 'Melincué'),
-	(2056, 22, 'Miguel Torres'),
-	(2057, 22, 'Moisés Ville'),
-	(2058, 22, 'Monigotes'),
-	(2059, 22, 'Monje'),
-	(2060, 22, 'Monte Obscuridad'),
-	(2061, 22, 'Monte Vera'),
-	(2062, 22, 'Montefiore'),
-	(2063, 22, 'Montes de Oca'),
-	(2064, 22, 'Murphy'),
-	(2065, 22, 'Ñanducita'),
-	(2066, 22, 'Naré'),
-	(2067, 22, 'Nelson'),
-	(2068, 22, 'Nicanor E. Molinas'),
-	(2069, 22, 'Nuevo Torino'),
-	(2070, 22, 'Oliveros'),
-	(2071, 22, 'Palacios'),
-	(2072, 22, 'Pavón'),
-	(2073, 22, 'Pavón Arriba'),
-	(2074, 22, 'Pedro Gómez Cello'),
-	(2075, 22, 'Pérez'),
-	(2076, 22, 'Peyrano'),
-	(2077, 22, 'Piamonte'),
-	(2078, 22, 'Pilar'),
-	(2079, 22, 'Piñero'),
-	(2080, 22, 'Plaza Clucellas'),
-	(2081, 22, 'Portugalete'),
-	(2082, 22, 'Pozo Borrado'),
-	(2083, 22, 'Progreso'),
-	(2084, 22, 'Providencia'),
-	(2085, 22, 'Pte. Roca'),
-	(2086, 22, 'Pueblo Andino'),
-	(2087, 22, 'Pueblo Esther'),
-	(2088, 22, 'Pueblo Gral. San Martín'),
-	(2089, 22, 'Pueblo Irigoyen'),
-	(2090, 22, 'Pueblo Marini'),
-	(2091, 22, 'Pueblo Muñoz'),
-	(2092, 22, 'Pueblo Uranga'),
-	(2093, 22, 'Pujato'),
-	(2094, 22, 'Pujato N.'),
-	(2095, 22, 'Rafaela'),
-	(2096, 22, 'Ramayón'),
-	(2097, 22, 'Ramona'),
-	(2098, 22, 'Reconquista'),
-	(2099, 22, 'Recreo'),
-	(2100, 22, 'Ricardone'),
-	(2101, 22, 'Rivadavia'),
-	(2102, 22, 'Roldán'),
-	(2103, 22, 'Romang'),
-	(2104, 22, 'Rosario'),
-	(2105, 22, 'Rueda'),
-	(2106, 22, 'Rufino'),
-	(2107, 22, 'Sa Pereira'),
-	(2108, 22, 'Saguier'),
-	(2109, 22, 'Saladero M. Cabal'),
-	(2110, 22, 'Salto Grande'),
-	(2111, 22, 'San Agustín'),
-	(2112, 22, 'San Antonio de Obligado'),
-	(2113, 22, 'San Bernardo (N.J.)'),
-	(2114, 22, 'San Bernardo (S.J.)'),
-	(2115, 22, 'San Carlos Centro'),
-	(2116, 22, 'San Carlos N.'),
-	(2117, 22, 'San Carlos S.'),
-	(2118, 22, 'San Cristóbal'),
-	(2119, 22, 'San Eduardo'),
-	(2120, 22, 'San Eugenio'),
-	(2121, 22, 'San Fabián'),
-	(2122, 22, 'San Fco. de Santa Fé'),
-	(2123, 22, 'San Genaro'),
-	(2124, 22, 'San Genaro N.'),
-	(2125, 22, 'San Gregorio'),
-	(2126, 22, 'San Guillermo'),
-	(2127, 22, 'San Javier'),
-	(2128, 22, 'San Jerónimo del Sauce'),
-	(2129, 22, 'San Jerónimo N.'),
-	(2130, 22, 'San Jerónimo S.'),
-	(2131, 22, 'San Jorge'),
-	(2132, 22, 'San José de La Esquina'),
-	(2133, 22, 'San José del Rincón'),
-	(2134, 22, 'San Justo'),
-	(2135, 22, 'San Lorenzo'),
-	(2136, 22, 'San Mariano'),
-	(2137, 22, 'San Martín de Las Escobas'),
-	(2138, 22, 'San Martín N.'),
-	(2139, 22, 'San Vicente'),
-	(2140, 22, 'Sancti Spititu'),
-	(2141, 22, 'Sanford'),
-	(2142, 22, 'Santo Domingo'),
-	(2143, 22, 'Santo Tomé'),
-	(2144, 22, 'Santurce'),
-	(2145, 22, 'Sargento Cabral'),
-	(2146, 22, 'Sarmiento'),
-	(2147, 22, 'Sastre'),
-	(2148, 22, 'Sauce Viejo'),
-	(2149, 22, 'Serodino'),
-	(2150, 22, 'Silva'),
-	(2151, 22, 'Soldini'),
-	(2152, 22, 'Soledad'),
-	(2153, 22, 'Soutomayor'),
-	(2154, 22, 'Sta. Clara de Buena Vista'),
-	(2155, 22, 'Sta. Clara de Saguier'),
-	(2156, 22, 'Sta. Isabel'),
-	(2157, 22, 'Sta. Margarita'),
-	(2158, 22, 'Sta. Maria Centro'),
-	(2159, 22, 'Sta. María N.'),
-	(2160, 22, 'Sta. Rosa'),
-	(2161, 22, 'Sta. Teresa'),
-	(2162, 22, 'Suardi'),
-	(2163, 22, 'Sunchales'),
-	(2164, 22, 'Susana'),
-	(2165, 22, 'Tacuarendí'),
-	(2166, 22, 'Tacural'),
-	(2167, 22, 'Tartagal'),
-	(2168, 22, 'Teodelina'),
-	(2169, 22, 'Theobald'),
-	(2170, 22, 'Timbúes'),
-	(2171, 22, 'Toba'),
-	(2172, 22, 'Tortugas'),
-	(2173, 22, 'Tostado'),
-	(2174, 22, 'Totoras'),
-	(2175, 22, 'Traill'),
-	(2176, 22, 'Venado Tuerto'),
-	(2177, 22, 'Vera'),
-	(2178, 22, 'Vera y Pintado'),
-	(2179, 22, 'Videla'),
-	(2180, 22, 'Vila'),
-	(2181, 22, 'Villa Amelia'),
-	(2182, 22, 'Villa Ana'),
-	(2183, 22, 'Villa Cañas'),
-	(2184, 22, 'Villa Constitución'),
-	(2185, 22, 'Villa Eloísa'),
-	(2186, 22, 'Villa Gdor. Gálvez'),
-	(2187, 22, 'Villa Guillermina'),
-	(2188, 22, 'Villa Minetti'),
-	(2189, 22, 'Villa Mugueta'),
-	(2190, 22, 'Villa Ocampo'),
-	(2191, 22, 'Villa San José'),
-	(2192, 22, 'Villa Saralegui'),
-	(2193, 22, 'Villa Trinidad'),
-	(2194, 22, 'Villada'),
-	(2195, 22, 'Virginia'),
-	(2196, 22, 'Wheelwright'),
-	(2197, 22, 'Zavalla'),
-	(2198, 22, 'Zenón Pereira'),
-	(2199, 23, 'Añatuya'),
-	(2200, 23, 'Árraga'),
-	(2201, 23, 'Bandera'),
-	(2202, 23, 'Bandera Bajada'),
-	(2203, 23, 'Beltrán'),
-	(2204, 23, 'Brea Pozo'),
-	(2205, 23, 'Campo Gallo'),
-	(2206, 23, 'Capital'),
-	(2207, 23, 'Chilca Juliana'),
-	(2208, 23, 'Choya'),
-	(2209, 23, 'Clodomira'),
-	(2210, 23, 'Col. Alpina'),
-	(2211, 23, 'Col. Dora'),
-	(2212, 23, 'Col. El Simbolar Robles'),
-	(2213, 23, 'El Bobadal'),
-	(2214, 23, 'El Charco'),
-	(2215, 23, 'El Mojón'),
-	(2216, 23, 'Estación Atamisqui'),
-	(2217, 23, 'Estación Simbolar'),
-	(2218, 23, 'Fernández'),
-	(2219, 23, 'Fortín Inca'),
-	(2220, 23, 'Frías'),
-	(2221, 23, 'Garza'),
-	(2222, 23, 'Gramilla'),
-	(2223, 23, 'Guardia Escolta'),
-	(2224, 23, 'Herrera'),
-	(2225, 23, 'Icaño'),
-	(2226, 23, 'Ing. Forres'),
-	(2227, 23, 'La Banda'),
-	(2228, 23, 'La Cañada'),
-	(2229, 23, 'Laprida'),
-	(2230, 23, 'Lavalle'),
-	(2231, 23, 'Loreto'),
-	(2232, 23, 'Los Juríes'),
-	(2233, 23, 'Los Núñez'),
-	(2234, 23, 'Los Pirpintos'),
-	(2235, 23, 'Los Quiroga'),
-	(2236, 23, 'Los Telares'),
-	(2237, 23, 'Lugones'),
-	(2238, 23, 'Malbrán'),
-	(2239, 23, 'Matara'),
-	(2240, 23, 'Medellín'),
-	(2241, 23, 'Monte Quemado'),
-	(2242, 23, 'Nueva Esperanza'),
-	(2243, 23, 'Nueva Francia'),
-	(2244, 23, 'Palo Negro'),
-	(2245, 23, 'Pampa de Los Guanacos'),
-	(2246, 23, 'Pinto'),
-	(2247, 23, 'Pozo Hondo'),
-	(2248, 23, 'Quimilí'),
-	(2249, 23, 'Real Sayana'),
-	(2250, 23, 'Sachayoj'),
-	(2251, 23, 'San Pedro de Guasayán'),
-	(2252, 23, 'Selva'),
-	(2253, 23, 'Sol de Julio'),
-	(2254, 23, 'Sumampa'),
-	(2255, 23, 'Suncho Corral'),
-	(2256, 23, 'Taboada'),
-	(2257, 23, 'Tapso'),
-	(2258, 23, 'Termas de Rio Hondo'),
-	(2259, 23, 'Tintina'),
-	(2260, 23, 'Tomas Young'),
-	(2261, 23, 'Vilelas'),
-	(2262, 23, 'Villa Atamisqui'),
-	(2263, 23, 'Villa La Punta'),
-	(2264, 23, 'Villa Ojo de Agua'),
-	(2265, 23, 'Villa Río Hondo'),
-	(2266, 23, 'Villa Salavina'),
-	(2267, 23, 'Villa Unión'),
-	(2268, 23, 'Vilmer'),
-	(2269, 23, 'Weisburd'),
-	(2270, 24, 'Río Grande'),
-	(2271, 24, 'Tolhuin'),
-	(2272, 24, 'Ushuaia'),
-	(2273, 25, 'Acheral'),
-	(2274, 25, 'Agua Dulce'),
-	(2275, 25, 'Aguilares'),
-	(2276, 25, 'Alderetes'),
-	(2277, 25, 'Alpachiri'),
-	(2278, 25, 'Alto Verde'),
-	(2279, 25, 'Amaicha del Valle'),
-	(2280, 25, 'Amberes'),
-	(2281, 25, 'Ancajuli'),
-	(2282, 25, 'Arcadia'),
-	(2283, 25, 'Atahona'),
-	(2284, 25, 'Banda del Río Sali'),
-	(2285, 25, 'Bella Vista'),
-	(2286, 25, 'Buena Vista'),
-	(2287, 25, 'Burruyacú'),
-	(2288, 25, 'Capitán Cáceres'),
-	(2289, 25, 'Cevil Redondo'),
-	(2290, 25, 'Choromoro'),
-	(2291, 25, 'Ciudacita'),
-	(2292, 25, 'Colalao del Valle'),
-	(2293, 25, 'Colombres'),
-	(2294, 25, 'Concepción'),
-	(2295, 25, 'Delfín Gallo'),
-	(2296, 25, 'El Bracho'),
-	(2297, 25, 'El Cadillal'),
-	(2298, 25, 'El Cercado'),
-	(2299, 25, 'El Chañar'),
-	(2300, 25, 'El Manantial'),
-	(2301, 25, 'El Mojón'),
-	(2302, 25, 'El Mollar'),
-	(2303, 25, 'El Naranjito'),
-	(2304, 25, 'El Naranjo'),
-	(2305, 25, 'El Polear'),
-	(2306, 25, 'El Puestito'),
-	(2307, 25, 'El Sacrificio'),
-	(2308, 25, 'El Timbó'),
-	(2309, 25, 'Escaba'),
-	(2310, 25, 'Esquina'),
-	(2311, 25, 'Estación Aráoz'),
-	(2312, 25, 'Famaillá'),
-	(2313, 25, 'Gastone'),
-	(2314, 25, 'Gdor. Garmendia'),
-	(2315, 25, 'Gdor. Piedrabuena'),
-	(2316, 25, 'Graneros'),
-	(2317, 25, 'Huasa Pampa'),
-	(2318, 25, 'J. B. Alberdi'),
-	(2319, 25, 'La Cocha'),
-	(2320, 25, 'La Esperanza'),
-	(2321, 25, 'La Florida'),
-	(2322, 25, 'La Ramada'),
-	(2323, 25, 'La Trinidad'),
-	(2324, 25, 'Lamadrid'),
-	(2325, 25, 'Las Cejas'),
-	(2326, 25, 'Las Talas'),
-	(2327, 25, 'Las Talitas'),
-	(2328, 25, 'Los Bulacio'),
-	(2329, 25, 'Los Gómez'),
-	(2330, 25, 'Los Nogales'),
-	(2331, 25, 'Los Pereyra'),
-	(2332, 25, 'Los Pérez'),
-	(2333, 25, 'Los Puestos'),
-	(2334, 25, 'Los Ralos'),
-	(2335, 25, 'Los Sarmientos'),
-	(2336, 25, 'Los Sosa'),
-	(2337, 25, 'Lules'),
-	(2338, 25, 'M. García Fernández'),
-	(2339, 25, 'Manuela Pedraza'),
-	(2340, 25, 'Medinas'),
-	(2341, 25, 'Monte Bello'),
-	(2342, 25, 'Monteagudo'),
-	(2343, 25, 'Monteros'),
-	(2344, 25, 'Padre Monti'),
-	(2345, 25, 'Pampa Mayo'),
-	(2346, 25, 'Quilmes'),
-	(2347, 25, 'Raco'),
-	(2348, 25, 'Ranchillos'),
-	(2349, 25, 'Río Chico'),
-	(2350, 25, 'Río Colorado'),
-	(2351, 25, 'Río Seco'),
-	(2352, 25, 'Rumi Punco'),
-	(2353, 25, 'San Andrés'),
-	(2354, 25, 'San Felipe'),
-	(2355, 25, 'San Ignacio'),
-	(2356, 25, 'San Javier'),
-	(2357, 25, 'San José'),
-	(2358, 25, 'San Miguel de 25'),
-	(2359, 25, 'San Pedro'),
-	(2360, 25, 'San Pedro de Colalao'),
-	(2361, 25, 'Santa Rosa de Leales'),
-	(2362, 25, 'Sgto. Moya'),
-	(2363, 25, 'Siete de Abril'),
-	(2364, 25, 'Simoca'),
-	(2365, 25, 'Soldado Maldonado'),
-	(2366, 25, 'Sta. Ana'),
-	(2367, 25, 'Sta. Cruz'),
-	(2368, 25, 'Sta. Lucía'),
-	(2369, 25, 'Taco Ralo'),
-	(2370, 25, 'Tafí del Valle'),
-	(2371, 25, 'Tafí Viejo'),
-	(2372, 25, 'Tapia'),
-	(2373, 25, 'Teniente Berdina'),
-	(2374, 25, 'Trancas'),
-	(2375, 25, 'Villa Belgrano'),
-	(2376, 25, 'Villa Benjamín Araoz'),
-	(2377, 25, 'Villa Chiligasta'),
-	(2378, 25, 'Villa de Leales'),
-	(2379, 25, 'Villa Quinteros'),
-	(2380, 25, 'Yánima'),
-	(2381, 25, 'Yerba Buena'),
-	(2382, 25, 'Yerba Buena (S)');
-/*!40000 ALTER TABLE `localidades` ENABLE KEYS */;
+-- ----------------------------
+-- Records of localidades
+-- ----------------------------
+INSERT INTO `localidades` VALUES ('1', '1', '25 de Mayo');
+INSERT INTO `localidades` VALUES ('2', '1', '3 de febrero');
+INSERT INTO `localidades` VALUES ('3', '1', 'A. Alsina');
+INSERT INTO `localidades` VALUES ('4', '1', 'A. Gonzáles Cháves');
+INSERT INTO `localidades` VALUES ('5', '1', 'Aguas Verdes');
+INSERT INTO `localidades` VALUES ('6', '1', 'Alberti');
+INSERT INTO `localidades` VALUES ('7', '1', 'Arrecifes');
+INSERT INTO `localidades` VALUES ('8', '1', 'Ayacucho');
+INSERT INTO `localidades` VALUES ('9', '1', 'Azul');
+INSERT INTO `localidades` VALUES ('10', '1', 'Bahía Blanca');
+INSERT INTO `localidades` VALUES ('11', '1', 'Balcarce');
+INSERT INTO `localidades` VALUES ('12', '1', 'Baradero');
+INSERT INTO `localidades` VALUES ('13', '1', 'Benito Juárez');
+INSERT INTO `localidades` VALUES ('14', '1', 'Berisso');
+INSERT INTO `localidades` VALUES ('15', '1', 'Bolívar');
+INSERT INTO `localidades` VALUES ('16', '1', 'Bragado');
+INSERT INTO `localidades` VALUES ('17', '1', 'Brandsen');
+INSERT INTO `localidades` VALUES ('18', '1', 'Campana');
+INSERT INTO `localidades` VALUES ('19', '1', 'Cañuelas');
+INSERT INTO `localidades` VALUES ('20', '1', 'Capilla del Señor');
+INSERT INTO `localidades` VALUES ('21', '1', 'Capitán Sarmiento');
+INSERT INTO `localidades` VALUES ('22', '1', 'Carapachay');
+INSERT INTO `localidades` VALUES ('23', '1', 'Carhue');
+INSERT INTO `localidades` VALUES ('24', '1', 'Cariló');
+INSERT INTO `localidades` VALUES ('25', '1', 'Carlos Casares');
+INSERT INTO `localidades` VALUES ('26', '1', 'Carlos Tejedor');
+INSERT INTO `localidades` VALUES ('27', '1', 'Carmen de Areco');
+INSERT INTO `localidades` VALUES ('28', '1', 'Carmen de Patagones');
+INSERT INTO `localidades` VALUES ('29', '1', 'Castelli');
+INSERT INTO `localidades` VALUES ('30', '1', 'Chacabuco');
+INSERT INTO `localidades` VALUES ('31', '1', 'Chascomús');
+INSERT INTO `localidades` VALUES ('32', '1', 'Chivilcoy');
+INSERT INTO `localidades` VALUES ('33', '1', 'Colón');
+INSERT INTO `localidades` VALUES ('34', '1', 'Coronel Dorrego');
+INSERT INTO `localidades` VALUES ('35', '1', 'Coronel Pringles');
+INSERT INTO `localidades` VALUES ('36', '1', 'Coronel Rosales');
+INSERT INTO `localidades` VALUES ('37', '1', 'Coronel Suarez');
+INSERT INTO `localidades` VALUES ('38', '1', 'Costa Azul');
+INSERT INTO `localidades` VALUES ('39', '1', 'Costa Chica');
+INSERT INTO `localidades` VALUES ('40', '1', 'Costa del Este');
+INSERT INTO `localidades` VALUES ('41', '1', 'Costa Esmeralda');
+INSERT INTO `localidades` VALUES ('42', '1', 'Daireaux');
+INSERT INTO `localidades` VALUES ('43', '1', 'Darregueira');
+INSERT INTO `localidades` VALUES ('44', '1', 'Del Viso');
+INSERT INTO `localidades` VALUES ('45', '1', 'Dolores');
+INSERT INTO `localidades` VALUES ('46', '1', 'Don Torcuato');
+INSERT INTO `localidades` VALUES ('47', '1', 'Ensenada');
+INSERT INTO `localidades` VALUES ('48', '1', 'Escobar');
+INSERT INTO `localidades` VALUES ('49', '1', 'Exaltación de la Cruz');
+INSERT INTO `localidades` VALUES ('50', '1', 'Florentino Ameghino');
+INSERT INTO `localidades` VALUES ('51', '1', 'Garín');
+INSERT INTO `localidades` VALUES ('52', '1', 'Gral. Alvarado');
+INSERT INTO `localidades` VALUES ('53', '1', 'Gral. Alvear');
+INSERT INTO `localidades` VALUES ('54', '1', 'Gral. Arenales');
+INSERT INTO `localidades` VALUES ('55', '1', 'Gral. Belgrano');
+INSERT INTO `localidades` VALUES ('56', '1', 'Gral. Guido');
+INSERT INTO `localidades` VALUES ('57', '1', 'Gral. Lamadrid');
+INSERT INTO `localidades` VALUES ('58', '1', 'Gral. Las Heras');
+INSERT INTO `localidades` VALUES ('59', '1', 'Gral. Lavalle');
+INSERT INTO `localidades` VALUES ('60', '1', 'Gral. Madariaga');
+INSERT INTO `localidades` VALUES ('61', '1', 'Gral. Pacheco');
+INSERT INTO `localidades` VALUES ('62', '1', 'Gral. Paz');
+INSERT INTO `localidades` VALUES ('63', '1', 'Gral. Pinto');
+INSERT INTO `localidades` VALUES ('64', '1', 'Gral. Pueyrredón');
+INSERT INTO `localidades` VALUES ('65', '1', 'Gral. Rodríguez');
+INSERT INTO `localidades` VALUES ('66', '1', 'Gral. Viamonte');
+INSERT INTO `localidades` VALUES ('67', '1', 'Gral. Villegas');
+INSERT INTO `localidades` VALUES ('68', '1', 'Guaminí');
+INSERT INTO `localidades` VALUES ('69', '1', 'Guernica');
+INSERT INTO `localidades` VALUES ('70', '1', 'Hipólito Yrigoyen');
+INSERT INTO `localidades` VALUES ('71', '1', 'Ing. Maschwitz');
+INSERT INTO `localidades` VALUES ('72', '1', 'Junín');
+INSERT INTO `localidades` VALUES ('73', '1', 'La Plata');
+INSERT INTO `localidades` VALUES ('74', '1', 'Laprida');
+INSERT INTO `localidades` VALUES ('75', '1', 'Las Flores');
+INSERT INTO `localidades` VALUES ('76', '1', 'Las Toninas');
+INSERT INTO `localidades` VALUES ('77', '1', 'Leandro N. Alem');
+INSERT INTO `localidades` VALUES ('78', '1', 'Lincoln');
+INSERT INTO `localidades` VALUES ('79', '1', 'Loberia');
+INSERT INTO `localidades` VALUES ('80', '1', 'Lobos');
+INSERT INTO `localidades` VALUES ('81', '1', 'Los Cardales');
+INSERT INTO `localidades` VALUES ('82', '1', 'Los Toldos');
+INSERT INTO `localidades` VALUES ('83', '1', 'Lucila del Mar');
+INSERT INTO `localidades` VALUES ('84', '1', 'Luján');
+INSERT INTO `localidades` VALUES ('85', '1', 'Magdalena');
+INSERT INTO `localidades` VALUES ('86', '1', 'Maipú');
+INSERT INTO `localidades` VALUES ('87', '1', 'Mar Chiquita');
+INSERT INTO `localidades` VALUES ('88', '1', 'Mar de Ajó');
+INSERT INTO `localidades` VALUES ('89', '1', 'Mar de las Pampas');
+INSERT INTO `localidades` VALUES ('90', '1', 'Mar del Plata');
+INSERT INTO `localidades` VALUES ('91', '1', 'Mar del Tuyú');
+INSERT INTO `localidades` VALUES ('92', '1', 'Marcos Paz');
+INSERT INTO `localidades` VALUES ('93', '1', 'Mercedes');
+INSERT INTO `localidades` VALUES ('94', '1', 'Miramar');
+INSERT INTO `localidades` VALUES ('95', '1', 'Monte');
+INSERT INTO `localidades` VALUES ('96', '1', 'Monte Hermoso');
+INSERT INTO `localidades` VALUES ('97', '1', 'Munro');
+INSERT INTO `localidades` VALUES ('98', '1', 'Navarro');
+INSERT INTO `localidades` VALUES ('99', '1', 'Necochea');
+INSERT INTO `localidades` VALUES ('100', '1', 'Olavarría');
+INSERT INTO `localidades` VALUES ('101', '1', 'Partido de la Costa');
+INSERT INTO `localidades` VALUES ('102', '1', 'Pehuajó');
+INSERT INTO `localidades` VALUES ('103', '1', 'Pellegrini');
+INSERT INTO `localidades` VALUES ('104', '1', 'Pergamino');
+INSERT INTO `localidades` VALUES ('105', '1', 'Pigüé');
+INSERT INTO `localidades` VALUES ('106', '1', 'Pila');
+INSERT INTO `localidades` VALUES ('107', '1', 'Pilar');
+INSERT INTO `localidades` VALUES ('108', '1', 'Pinamar');
+INSERT INTO `localidades` VALUES ('109', '1', 'Pinar del Sol');
+INSERT INTO `localidades` VALUES ('110', '1', 'Polvorines');
+INSERT INTO `localidades` VALUES ('111', '1', 'Pte. Perón');
+INSERT INTO `localidades` VALUES ('112', '1', 'Puán');
+INSERT INTO `localidades` VALUES ('113', '1', 'Punta Indio');
+INSERT INTO `localidades` VALUES ('114', '1', 'Ramallo');
+INSERT INTO `localidades` VALUES ('115', '1', 'Rauch');
+INSERT INTO `localidades` VALUES ('116', '1', 'Rivadavia');
+INSERT INTO `localidades` VALUES ('117', '1', 'Rojas');
+INSERT INTO `localidades` VALUES ('118', '1', 'Roque Pérez');
+INSERT INTO `localidades` VALUES ('119', '1', 'Saavedra');
+INSERT INTO `localidades` VALUES ('120', '1', 'Saladillo');
+INSERT INTO `localidades` VALUES ('121', '1', 'Salliqueló');
+INSERT INTO `localidades` VALUES ('122', '1', 'Salto');
+INSERT INTO `localidades` VALUES ('123', '1', 'San Andrés de Giles');
+INSERT INTO `localidades` VALUES ('124', '1', 'San Antonio de Areco');
+INSERT INTO `localidades` VALUES ('125', '1', 'San Antonio de Padua');
+INSERT INTO `localidades` VALUES ('126', '1', 'San Bernardo');
+INSERT INTO `localidades` VALUES ('127', '1', 'San Cayetano');
+INSERT INTO `localidades` VALUES ('128', '1', 'San Clemente del Tuyú');
+INSERT INTO `localidades` VALUES ('129', '1', 'San Nicolás');
+INSERT INTO `localidades` VALUES ('130', '1', 'San Pedro');
+INSERT INTO `localidades` VALUES ('131', '1', 'San Vicente');
+INSERT INTO `localidades` VALUES ('132', '1', 'Santa Teresita');
+INSERT INTO `localidades` VALUES ('133', '1', 'Suipacha');
+INSERT INTO `localidades` VALUES ('134', '1', 'Tandil');
+INSERT INTO `localidades` VALUES ('135', '1', 'Tapalqué');
+INSERT INTO `localidades` VALUES ('136', '1', 'Tordillo');
+INSERT INTO `localidades` VALUES ('137', '1', 'Tornquist');
+INSERT INTO `localidades` VALUES ('138', '1', 'Trenque Lauquen');
+INSERT INTO `localidades` VALUES ('139', '1', 'Tres Lomas');
+INSERT INTO `localidades` VALUES ('140', '1', 'Villa Gesell');
+INSERT INTO `localidades` VALUES ('141', '1', 'Villarino');
+INSERT INTO `localidades` VALUES ('142', '1', 'Zárate');
+INSERT INTO `localidades` VALUES ('143', '2', '11 de Septiembre');
+INSERT INTO `localidades` VALUES ('144', '2', '20 de Junio');
+INSERT INTO `localidades` VALUES ('145', '2', '25 de Mayo');
+INSERT INTO `localidades` VALUES ('146', '2', 'Acassuso');
+INSERT INTO `localidades` VALUES ('147', '2', 'Adrogué');
+INSERT INTO `localidades` VALUES ('148', '2', 'Aldo Bonzi');
+INSERT INTO `localidades` VALUES ('149', '2', 'Área Reserva Cinturón Ecológico');
+INSERT INTO `localidades` VALUES ('150', '2', 'Avellaneda');
+INSERT INTO `localidades` VALUES ('151', '2', 'Banfield');
+INSERT INTO `localidades` VALUES ('152', '2', 'Barrio Parque');
+INSERT INTO `localidades` VALUES ('153', '2', 'Barrio Santa Teresita');
+INSERT INTO `localidades` VALUES ('154', '2', 'Beccar');
+INSERT INTO `localidades` VALUES ('155', '2', 'Bella Vista');
+INSERT INTO `localidades` VALUES ('156', '2', 'Berazategui');
+INSERT INTO `localidades` VALUES ('157', '2', 'Bernal Este');
+INSERT INTO `localidades` VALUES ('158', '2', 'Bernal Oeste');
+INSERT INTO `localidades` VALUES ('159', '2', 'Billinghurst');
+INSERT INTO `localidades` VALUES ('160', '2', 'Boulogne');
+INSERT INTO `localidades` VALUES ('161', '2', 'Burzaco');
+INSERT INTO `localidades` VALUES ('162', '2', 'Carapachay');
+INSERT INTO `localidades` VALUES ('163', '2', 'Caseros');
+INSERT INTO `localidades` VALUES ('164', '2', 'Castelar');
+INSERT INTO `localidades` VALUES ('165', '2', 'Churruca');
+INSERT INTO `localidades` VALUES ('166', '2', 'Ciudad Evita');
+INSERT INTO `localidades` VALUES ('167', '2', 'Ciudad Madero');
+INSERT INTO `localidades` VALUES ('168', '2', 'Ciudadela');
+INSERT INTO `localidades` VALUES ('169', '2', 'Claypole');
+INSERT INTO `localidades` VALUES ('170', '2', 'Crucecita');
+INSERT INTO `localidades` VALUES ('171', '2', 'Dock Sud');
+INSERT INTO `localidades` VALUES ('172', '2', 'Don Bosco');
+INSERT INTO `localidades` VALUES ('173', '2', 'Don Orione');
+INSERT INTO `localidades` VALUES ('174', '2', 'El Jagüel');
+INSERT INTO `localidades` VALUES ('175', '2', 'El Libertador');
+INSERT INTO `localidades` VALUES ('176', '2', 'El Palomar');
+INSERT INTO `localidades` VALUES ('177', '2', 'El Tala');
+INSERT INTO `localidades` VALUES ('178', '2', 'El Trébol');
+INSERT INTO `localidades` VALUES ('179', '2', 'Ezeiza');
+INSERT INTO `localidades` VALUES ('180', '2', 'Ezpeleta');
+INSERT INTO `localidades` VALUES ('181', '2', 'Florencio Varela');
+INSERT INTO `localidades` VALUES ('182', '2', 'Florida');
+INSERT INTO `localidades` VALUES ('183', '2', 'Francisco Álvarez');
+INSERT INTO `localidades` VALUES ('184', '2', 'Gerli');
+INSERT INTO `localidades` VALUES ('185', '2', 'Glew');
+INSERT INTO `localidades` VALUES ('186', '2', 'González Catán');
+INSERT INTO `localidades` VALUES ('187', '2', 'Gral. Lamadrid');
+INSERT INTO `localidades` VALUES ('188', '2', 'Grand Bourg');
+INSERT INTO `localidades` VALUES ('189', '2', 'Gregorio de Laferrere');
+INSERT INTO `localidades` VALUES ('190', '2', 'Guillermo Enrique Hudson');
+INSERT INTO `localidades` VALUES ('191', '2', 'Haedo');
+INSERT INTO `localidades` VALUES ('192', '2', 'Hurlingham');
+INSERT INTO `localidades` VALUES ('193', '2', 'Ing. Sourdeaux');
+INSERT INTO `localidades` VALUES ('194', '2', 'Isidro Casanova');
+INSERT INTO `localidades` VALUES ('195', '2', 'Ituzaingó');
+INSERT INTO `localidades` VALUES ('196', '2', 'José C. Paz');
+INSERT INTO `localidades` VALUES ('197', '2', 'José Ingenieros');
+INSERT INTO `localidades` VALUES ('198', '2', 'José Marmol');
+INSERT INTO `localidades` VALUES ('199', '2', 'La Lucila');
+INSERT INTO `localidades` VALUES ('200', '2', 'La Reja');
+INSERT INTO `localidades` VALUES ('201', '2', 'La Tablada');
+INSERT INTO `localidades` VALUES ('202', '2', 'Lanús');
+INSERT INTO `localidades` VALUES ('203', '2', 'Llavallol');
+INSERT INTO `localidades` VALUES ('204', '2', 'Loma Hermosa');
+INSERT INTO `localidades` VALUES ('205', '2', 'Lomas de Zamora');
+INSERT INTO `localidades` VALUES ('206', '2', 'Lomas del Millón');
+INSERT INTO `localidades` VALUES ('207', '2', 'Lomas del Mirador');
+INSERT INTO `localidades` VALUES ('208', '2', 'Longchamps');
+INSERT INTO `localidades` VALUES ('209', '2', 'Los Polvorines');
+INSERT INTO `localidades` VALUES ('210', '2', 'Luis Guillón');
+INSERT INTO `localidades` VALUES ('211', '2', 'Malvinas Argentinas');
+INSERT INTO `localidades` VALUES ('212', '2', 'Martín Coronado');
+INSERT INTO `localidades` VALUES ('213', '2', 'Martínez');
+INSERT INTO `localidades` VALUES ('214', '2', 'Merlo');
+INSERT INTO `localidades` VALUES ('215', '2', 'Ministro Rivadavia');
+INSERT INTO `localidades` VALUES ('216', '2', 'Monte Chingolo');
+INSERT INTO `localidades` VALUES ('217', '2', 'Monte Grande');
+INSERT INTO `localidades` VALUES ('218', '2', 'Moreno');
+INSERT INTO `localidades` VALUES ('219', '2', 'Morón');
+INSERT INTO `localidades` VALUES ('220', '2', 'Muñiz');
+INSERT INTO `localidades` VALUES ('221', '2', 'Olivos');
+INSERT INTO `localidades` VALUES ('222', '2', 'Pablo Nogués');
+INSERT INTO `localidades` VALUES ('223', '2', 'Pablo Podestá');
+INSERT INTO `localidades` VALUES ('224', '2', 'Paso del Rey');
+INSERT INTO `localidades` VALUES ('225', '2', 'Pereyra');
+INSERT INTO `localidades` VALUES ('226', '2', 'Piñeiro');
+INSERT INTO `localidades` VALUES ('227', '2', 'Plátanos');
+INSERT INTO `localidades` VALUES ('228', '2', 'Pontevedra');
+INSERT INTO `localidades` VALUES ('229', '2', 'Quilmes');
+INSERT INTO `localidades` VALUES ('230', '2', 'Rafael Calzada');
+INSERT INTO `localidades` VALUES ('231', '2', 'Rafael Castillo');
+INSERT INTO `localidades` VALUES ('232', '2', 'Ramos Mejía');
+INSERT INTO `localidades` VALUES ('233', '2', 'Ranelagh');
+INSERT INTO `localidades` VALUES ('234', '2', 'Remedios de Escalada');
+INSERT INTO `localidades` VALUES ('235', '2', 'Sáenz Peña');
+INSERT INTO `localidades` VALUES ('236', '2', 'San Antonio de Padua');
+INSERT INTO `localidades` VALUES ('237', '2', 'San Fernando');
+INSERT INTO `localidades` VALUES ('238', '2', 'San Francisco Solano');
+INSERT INTO `localidades` VALUES ('239', '2', 'San Isidro');
+INSERT INTO `localidades` VALUES ('240', '2', 'San José');
+INSERT INTO `localidades` VALUES ('241', '2', 'San Justo');
+INSERT INTO `localidades` VALUES ('242', '2', 'San Martín');
+INSERT INTO `localidades` VALUES ('243', '2', 'San Miguel');
+INSERT INTO `localidades` VALUES ('244', '2', 'Santos Lugares');
+INSERT INTO `localidades` VALUES ('245', '2', 'Sarandí');
+INSERT INTO `localidades` VALUES ('246', '2', 'Sourigues');
+INSERT INTO `localidades` VALUES ('247', '2', 'Tapiales');
+INSERT INTO `localidades` VALUES ('248', '2', 'Temperley');
+INSERT INTO `localidades` VALUES ('249', '2', 'Tigre');
+INSERT INTO `localidades` VALUES ('250', '2', 'Tortuguitas');
+INSERT INTO `localidades` VALUES ('251', '2', 'Tristán Suárez');
+INSERT INTO `localidades` VALUES ('252', '2', 'Trujui');
+INSERT INTO `localidades` VALUES ('253', '2', 'Turdera');
+INSERT INTO `localidades` VALUES ('254', '2', 'Valentín Alsina');
+INSERT INTO `localidades` VALUES ('255', '2', 'Vicente López');
+INSERT INTO `localidades` VALUES ('256', '2', 'Villa Adelina');
+INSERT INTO `localidades` VALUES ('257', '2', 'Villa Ballester');
+INSERT INTO `localidades` VALUES ('258', '2', 'Villa Bosch');
+INSERT INTO `localidades` VALUES ('259', '2', 'Villa Caraza');
+INSERT INTO `localidades` VALUES ('260', '2', 'Villa Celina');
+INSERT INTO `localidades` VALUES ('261', '2', 'Villa Centenario');
+INSERT INTO `localidades` VALUES ('262', '2', 'Villa de Mayo');
+INSERT INTO `localidades` VALUES ('263', '2', 'Villa Diamante');
+INSERT INTO `localidades` VALUES ('264', '2', 'Villa Domínico');
+INSERT INTO `localidades` VALUES ('265', '2', 'Villa España');
+INSERT INTO `localidades` VALUES ('266', '2', 'Villa Fiorito');
+INSERT INTO `localidades` VALUES ('267', '2', 'Villa Guillermina');
+INSERT INTO `localidades` VALUES ('268', '2', 'Villa Insuperable');
+INSERT INTO `localidades` VALUES ('269', '2', 'Villa José León Suárez');
+INSERT INTO `localidades` VALUES ('270', '2', 'Villa La Florida');
+INSERT INTO `localidades` VALUES ('271', '2', 'Villa Luzuriaga');
+INSERT INTO `localidades` VALUES ('272', '2', 'Villa Martelli');
+INSERT INTO `localidades` VALUES ('273', '2', 'Villa Obrera');
+INSERT INTO `localidades` VALUES ('274', '2', 'Villa Progreso');
+INSERT INTO `localidades` VALUES ('275', '2', 'Villa Raffo');
+INSERT INTO `localidades` VALUES ('276', '2', 'Villa Sarmiento');
+INSERT INTO `localidades` VALUES ('277', '2', 'Villa Tesei');
+INSERT INTO `localidades` VALUES ('278', '2', 'Villa Udaondo');
+INSERT INTO `localidades` VALUES ('279', '2', 'Virrey del Pino');
+INSERT INTO `localidades` VALUES ('280', '2', 'Wilde');
+INSERT INTO `localidades` VALUES ('281', '2', 'William Morris');
+INSERT INTO `localidades` VALUES ('282', '3', 'Agronomía');
+INSERT INTO `localidades` VALUES ('283', '3', 'Almagro');
+INSERT INTO `localidades` VALUES ('284', '3', 'Balvanera');
+INSERT INTO `localidades` VALUES ('285', '3', 'Barracas');
+INSERT INTO `localidades` VALUES ('286', '3', 'Belgrano');
+INSERT INTO `localidades` VALUES ('287', '3', 'Boca');
+INSERT INTO `localidades` VALUES ('288', '3', 'Boedo');
+INSERT INTO `localidades` VALUES ('289', '3', 'Caballito');
+INSERT INTO `localidades` VALUES ('290', '3', 'Chacarita');
+INSERT INTO `localidades` VALUES ('291', '3', 'Coghlan');
+INSERT INTO `localidades` VALUES ('292', '3', 'Colegiales');
+INSERT INTO `localidades` VALUES ('293', '3', 'Constitución');
+INSERT INTO `localidades` VALUES ('294', '3', 'Flores');
+INSERT INTO `localidades` VALUES ('295', '3', 'Floresta');
+INSERT INTO `localidades` VALUES ('296', '3', 'La Paternal');
+INSERT INTO `localidades` VALUES ('297', '3', 'Liniers');
+INSERT INTO `localidades` VALUES ('298', '3', 'Mataderos');
+INSERT INTO `localidades` VALUES ('299', '3', 'Monserrat');
+INSERT INTO `localidades` VALUES ('300', '3', 'Monte Castro');
+INSERT INTO `localidades` VALUES ('301', '3', 'Nueva Pompeya');
+INSERT INTO `localidades` VALUES ('302', '3', 'Núñez');
+INSERT INTO `localidades` VALUES ('303', '3', 'Palermo');
+INSERT INTO `localidades` VALUES ('304', '3', 'Parque Avellaneda');
+INSERT INTO `localidades` VALUES ('305', '3', 'Parque Chacabuco');
+INSERT INTO `localidades` VALUES ('306', '3', 'Parque Chas');
+INSERT INTO `localidades` VALUES ('307', '3', 'Parque Patricios');
+INSERT INTO `localidades` VALUES ('308', '3', 'Puerto Madero');
+INSERT INTO `localidades` VALUES ('309', '3', 'Recoleta');
+INSERT INTO `localidades` VALUES ('310', '3', 'Retiro');
+INSERT INTO `localidades` VALUES ('311', '3', 'Saavedra');
+INSERT INTO `localidades` VALUES ('312', '3', 'San Cristóbal');
+INSERT INTO `localidades` VALUES ('313', '3', 'San Nicolás');
+INSERT INTO `localidades` VALUES ('314', '3', 'San Telmo');
+INSERT INTO `localidades` VALUES ('315', '3', 'Vélez Sársfield');
+INSERT INTO `localidades` VALUES ('316', '3', 'Versalles');
+INSERT INTO `localidades` VALUES ('317', '3', 'Villa Crespo');
+INSERT INTO `localidades` VALUES ('318', '3', 'Villa del Parque');
+INSERT INTO `localidades` VALUES ('319', '3', 'Villa Devoto');
+INSERT INTO `localidades` VALUES ('320', '3', 'Villa Gral. Mitre');
+INSERT INTO `localidades` VALUES ('321', '3', 'Villa Lugano');
+INSERT INTO `localidades` VALUES ('322', '3', 'Villa Luro');
+INSERT INTO `localidades` VALUES ('323', '3', 'Villa Ortúzar');
+INSERT INTO `localidades` VALUES ('324', '3', 'Villa Pueyrredón');
+INSERT INTO `localidades` VALUES ('325', '3', 'Villa Real');
+INSERT INTO `localidades` VALUES ('326', '3', 'Villa Riachuelo');
+INSERT INTO `localidades` VALUES ('327', '3', 'Villa Santa Rita');
+INSERT INTO `localidades` VALUES ('328', '3', 'Villa Soldati');
+INSERT INTO `localidades` VALUES ('329', '3', 'Villa Urquiza');
+INSERT INTO `localidades` VALUES ('330', '4', 'Aconquija');
+INSERT INTO `localidades` VALUES ('331', '4', 'Ancasti');
+INSERT INTO `localidades` VALUES ('332', '4', 'Andalgalá');
+INSERT INTO `localidades` VALUES ('333', '4', 'Antofagasta');
+INSERT INTO `localidades` VALUES ('334', '4', 'Belén');
+INSERT INTO `localidades` VALUES ('335', '4', 'Capayán');
+INSERT INTO `localidades` VALUES ('336', '4', 'Capital');
+INSERT INTO `localidades` VALUES ('337', '4', '4');
+INSERT INTO `localidades` VALUES ('338', '4', 'Corral Quemado');
+INSERT INTO `localidades` VALUES ('339', '4', 'El Alto');
+INSERT INTO `localidades` VALUES ('340', '4', 'El Rodeo');
+INSERT INTO `localidades` VALUES ('341', '4', 'F.Mamerto Esquiú');
+INSERT INTO `localidades` VALUES ('342', '4', 'Fiambalá');
+INSERT INTO `localidades` VALUES ('343', '4', 'Hualfín');
+INSERT INTO `localidades` VALUES ('344', '4', 'Huillapima');
+INSERT INTO `localidades` VALUES ('345', '4', 'Icaño');
+INSERT INTO `localidades` VALUES ('346', '4', 'La Puerta');
+INSERT INTO `localidades` VALUES ('347', '4', 'Las Juntas');
+INSERT INTO `localidades` VALUES ('348', '4', 'Londres');
+INSERT INTO `localidades` VALUES ('349', '4', 'Los Altos');
+INSERT INTO `localidades` VALUES ('350', '4', 'Los Varela');
+INSERT INTO `localidades` VALUES ('351', '4', 'Mutquín');
+INSERT INTO `localidades` VALUES ('352', '4', 'Paclín');
+INSERT INTO `localidades` VALUES ('353', '4', 'Poman');
+INSERT INTO `localidades` VALUES ('354', '4', 'Pozo de La Piedra');
+INSERT INTO `localidades` VALUES ('355', '4', 'Puerta de Corral');
+INSERT INTO `localidades` VALUES ('356', '4', 'Puerta San José');
+INSERT INTO `localidades` VALUES ('357', '4', 'Recreo');
+INSERT INTO `localidades` VALUES ('358', '4', 'S.F.V de 4');
+INSERT INTO `localidades` VALUES ('359', '4', 'San Fernando');
+INSERT INTO `localidades` VALUES ('360', '4', 'San Fernando del Valle');
+INSERT INTO `localidades` VALUES ('361', '4', 'San José');
+INSERT INTO `localidades` VALUES ('362', '4', 'Santa María');
+INSERT INTO `localidades` VALUES ('363', '4', 'Santa Rosa');
+INSERT INTO `localidades` VALUES ('364', '4', 'Saujil');
+INSERT INTO `localidades` VALUES ('365', '4', 'Tapso');
+INSERT INTO `localidades` VALUES ('366', '4', 'Tinogasta');
+INSERT INTO `localidades` VALUES ('367', '4', 'Valle Viejo');
+INSERT INTO `localidades` VALUES ('368', '4', 'Villa Vil');
+INSERT INTO `localidades` VALUES ('369', '5', 'Aviá Teraí');
+INSERT INTO `localidades` VALUES ('370', '5', 'Barranqueras');
+INSERT INTO `localidades` VALUES ('371', '5', 'Basail');
+INSERT INTO `localidades` VALUES ('372', '5', 'Campo Largo');
+INSERT INTO `localidades` VALUES ('373', '5', 'Capital');
+INSERT INTO `localidades` VALUES ('374', '5', 'Capitán Solari');
+INSERT INTO `localidades` VALUES ('375', '5', 'Charadai');
+INSERT INTO `localidades` VALUES ('376', '5', 'Charata');
+INSERT INTO `localidades` VALUES ('377', '5', 'Chorotis');
+INSERT INTO `localidades` VALUES ('378', '5', 'Ciervo Petiso');
+INSERT INTO `localidades` VALUES ('379', '5', 'Cnel. Du Graty');
+INSERT INTO `localidades` VALUES ('380', '5', 'Col. Benítez');
+INSERT INTO `localidades` VALUES ('381', '5', 'Col. Elisa');
+INSERT INTO `localidades` VALUES ('382', '5', 'Col. Popular');
+INSERT INTO `localidades` VALUES ('383', '5', 'Colonias Unidas');
+INSERT INTO `localidades` VALUES ('384', '5', 'Concepción');
+INSERT INTO `localidades` VALUES ('385', '5', 'Corzuela');
+INSERT INTO `localidades` VALUES ('386', '5', 'Cote Lai');
+INSERT INTO `localidades` VALUES ('387', '5', 'El Sauzalito');
+INSERT INTO `localidades` VALUES ('388', '5', 'Enrique Urien');
+INSERT INTO `localidades` VALUES ('389', '5', 'Fontana');
+INSERT INTO `localidades` VALUES ('390', '5', 'Fte. Esperanza');
+INSERT INTO `localidades` VALUES ('391', '5', 'Gancedo');
+INSERT INTO `localidades` VALUES ('392', '5', 'Gral. Capdevila');
+INSERT INTO `localidades` VALUES ('393', '5', 'Gral. Pinero');
+INSERT INTO `localidades` VALUES ('394', '5', 'Gral. San Martín');
+INSERT INTO `localidades` VALUES ('395', '5', 'Gral. Vedia');
+INSERT INTO `localidades` VALUES ('396', '5', 'Hermoso Campo');
+INSERT INTO `localidades` VALUES ('397', '5', 'I. del Cerrito');
+INSERT INTO `localidades` VALUES ('398', '5', 'J.J. Castelli');
+INSERT INTO `localidades` VALUES ('399', '5', 'La Clotilde');
+INSERT INTO `localidades` VALUES ('400', '5', 'La Eduvigis');
+INSERT INTO `localidades` VALUES ('401', '5', 'La Escondida');
+INSERT INTO `localidades` VALUES ('402', '5', 'La Leonesa');
+INSERT INTO `localidades` VALUES ('403', '5', 'La Tigra');
+INSERT INTO `localidades` VALUES ('404', '5', 'La Verde');
+INSERT INTO `localidades` VALUES ('405', '5', 'Laguna Blanca');
+INSERT INTO `localidades` VALUES ('406', '5', 'Laguna Limpia');
+INSERT INTO `localidades` VALUES ('407', '5', 'Lapachito');
+INSERT INTO `localidades` VALUES ('408', '5', 'Las Breñas');
+INSERT INTO `localidades` VALUES ('409', '5', 'Las Garcitas');
+INSERT INTO `localidades` VALUES ('410', '5', 'Las Palmas');
+INSERT INTO `localidades` VALUES ('411', '5', 'Los Frentones');
+INSERT INTO `localidades` VALUES ('412', '5', 'Machagai');
+INSERT INTO `localidades` VALUES ('413', '5', 'Makallé');
+INSERT INTO `localidades` VALUES ('414', '5', 'Margarita Belén');
+INSERT INTO `localidades` VALUES ('415', '5', 'Miraflores');
+INSERT INTO `localidades` VALUES ('416', '5', 'Misión N. Pompeya');
+INSERT INTO `localidades` VALUES ('417', '5', 'Napenay');
+INSERT INTO `localidades` VALUES ('418', '5', 'Pampa Almirón');
+INSERT INTO `localidades` VALUES ('419', '5', 'Pampa del Indio');
+INSERT INTO `localidades` VALUES ('420', '5', 'Pampa del Infierno');
+INSERT INTO `localidades` VALUES ('421', '5', 'Pdcia. de La Plaza');
+INSERT INTO `localidades` VALUES ('422', '5', 'Pdcia. Roca');
+INSERT INTO `localidades` VALUES ('423', '5', 'Pdcia. Roque Sáenz Peña');
+INSERT INTO `localidades` VALUES ('424', '5', 'Pto. Bermejo');
+INSERT INTO `localidades` VALUES ('425', '5', 'Pto. Eva Perón');
+INSERT INTO `localidades` VALUES ('426', '5', 'Puero Tirol');
+INSERT INTO `localidades` VALUES ('427', '5', 'Puerto Vilelas');
+INSERT INTO `localidades` VALUES ('428', '5', 'Quitilipi');
+INSERT INTO `localidades` VALUES ('429', '5', 'Resistencia');
+INSERT INTO `localidades` VALUES ('430', '5', 'Sáenz Peña');
+INSERT INTO `localidades` VALUES ('431', '5', 'Samuhú');
+INSERT INTO `localidades` VALUES ('432', '5', 'San Bernardo');
+INSERT INTO `localidades` VALUES ('433', '5', 'Santa Sylvina');
+INSERT INTO `localidades` VALUES ('434', '5', 'Taco Pozo');
+INSERT INTO `localidades` VALUES ('435', '5', 'Tres Isletas');
+INSERT INTO `localidades` VALUES ('436', '5', 'Villa Ángela');
+INSERT INTO `localidades` VALUES ('437', '5', 'Villa Berthet');
+INSERT INTO `localidades` VALUES ('438', '5', 'Villa R. Bermejito');
+INSERT INTO `localidades` VALUES ('439', '6', 'Aldea Apeleg');
+INSERT INTO `localidades` VALUES ('440', '6', 'Aldea Beleiro');
+INSERT INTO `localidades` VALUES ('441', '6', 'Aldea Epulef');
+INSERT INTO `localidades` VALUES ('442', '6', 'Alto Río Sengerr');
+INSERT INTO `localidades` VALUES ('443', '6', 'Buen Pasto');
+INSERT INTO `localidades` VALUES ('444', '6', 'Camarones');
+INSERT INTO `localidades` VALUES ('445', '6', 'Carrenleufú');
+INSERT INTO `localidades` VALUES ('446', '6', 'Cholila');
+INSERT INTO `localidades` VALUES ('447', '6', 'Co. Centinela');
+INSERT INTO `localidades` VALUES ('448', '6', 'Colan Conhué');
+INSERT INTO `localidades` VALUES ('449', '6', 'Comodoro Rivadavia');
+INSERT INTO `localidades` VALUES ('450', '6', 'Corcovado');
+INSERT INTO `localidades` VALUES ('451', '6', 'Cushamen');
+INSERT INTO `localidades` VALUES ('452', '6', 'Dique F. Ameghino');
+INSERT INTO `localidades` VALUES ('453', '6', 'Dolavón');
+INSERT INTO `localidades` VALUES ('454', '6', 'Dr. R. Rojas');
+INSERT INTO `localidades` VALUES ('455', '6', 'El Hoyo');
+INSERT INTO `localidades` VALUES ('456', '6', 'El Maitén');
+INSERT INTO `localidades` VALUES ('457', '6', 'Epuyén');
+INSERT INTO `localidades` VALUES ('458', '6', 'Esquel');
+INSERT INTO `localidades` VALUES ('459', '6', 'Facundo');
+INSERT INTO `localidades` VALUES ('460', '6', 'Gaimán');
+INSERT INTO `localidades` VALUES ('461', '6', 'Gan Gan');
+INSERT INTO `localidades` VALUES ('462', '6', 'Gastre');
+INSERT INTO `localidades` VALUES ('463', '6', 'Gdor. Costa');
+INSERT INTO `localidades` VALUES ('464', '6', 'Gualjaina');
+INSERT INTO `localidades` VALUES ('465', '6', 'J. de San Martín');
+INSERT INTO `localidades` VALUES ('466', '6', 'Lago Blanco');
+INSERT INTO `localidades` VALUES ('467', '6', 'Lago Puelo');
+INSERT INTO `localidades` VALUES ('468', '6', 'Lagunita Salada');
+INSERT INTO `localidades` VALUES ('469', '6', 'Las Plumas');
+INSERT INTO `localidades` VALUES ('470', '6', 'Los Altares');
+INSERT INTO `localidades` VALUES ('471', '6', 'Paso de los Indios');
+INSERT INTO `localidades` VALUES ('472', '6', 'Paso del Sapo');
+INSERT INTO `localidades` VALUES ('473', '6', 'Pto. Madryn');
+INSERT INTO `localidades` VALUES ('474', '6', 'Pto. Pirámides');
+INSERT INTO `localidades` VALUES ('475', '6', 'Rada Tilly');
+INSERT INTO `localidades` VALUES ('476', '6', 'Rawson');
+INSERT INTO `localidades` VALUES ('477', '6', 'Río Mayo');
+INSERT INTO `localidades` VALUES ('478', '6', 'Río Pico');
+INSERT INTO `localidades` VALUES ('479', '6', 'Sarmiento');
+INSERT INTO `localidades` VALUES ('480', '6', 'Tecka');
+INSERT INTO `localidades` VALUES ('481', '6', 'Telsen');
+INSERT INTO `localidades` VALUES ('482', '6', 'Trelew');
+INSERT INTO `localidades` VALUES ('483', '6', 'Trevelin');
+INSERT INTO `localidades` VALUES ('484', '6', 'Veintiocho de Julio');
+INSERT INTO `localidades` VALUES ('485', '7', 'Achiras');
+INSERT INTO `localidades` VALUES ('486', '7', 'Adelia Maria');
+INSERT INTO `localidades` VALUES ('487', '7', 'Agua de Oro');
+INSERT INTO `localidades` VALUES ('488', '7', 'Alcira Gigena');
+INSERT INTO `localidades` VALUES ('489', '7', 'Aldea Santa Maria');
+INSERT INTO `localidades` VALUES ('490', '7', 'Alejandro Roca');
+INSERT INTO `localidades` VALUES ('491', '7', 'Alejo Ledesma');
+INSERT INTO `localidades` VALUES ('492', '7', 'Alicia');
+INSERT INTO `localidades` VALUES ('493', '7', 'Almafuerte');
+INSERT INTO `localidades` VALUES ('494', '7', 'Alpa Corral');
+INSERT INTO `localidades` VALUES ('495', '7', 'Alta Gracia');
+INSERT INTO `localidades` VALUES ('496', '7', 'Alto Alegre');
+INSERT INTO `localidades` VALUES ('497', '7', 'Alto de Los Quebrachos');
+INSERT INTO `localidades` VALUES ('498', '7', 'Altos de Chipion');
+INSERT INTO `localidades` VALUES ('499', '7', 'Amboy');
+INSERT INTO `localidades` VALUES ('500', '7', 'Ambul');
+INSERT INTO `localidades` VALUES ('501', '7', 'Ana Zumaran');
+INSERT INTO `localidades` VALUES ('502', '7', 'Anisacate');
+INSERT INTO `localidades` VALUES ('503', '7', 'Arguello');
+INSERT INTO `localidades` VALUES ('504', '7', 'Arias');
+INSERT INTO `localidades` VALUES ('505', '7', 'Arroyito');
+INSERT INTO `localidades` VALUES ('506', '7', 'Arroyo Algodon');
+INSERT INTO `localidades` VALUES ('507', '7', 'Arroyo Cabral');
+INSERT INTO `localidades` VALUES ('508', '7', 'Arroyo Los Patos');
+INSERT INTO `localidades` VALUES ('509', '7', 'Assunta');
+INSERT INTO `localidades` VALUES ('510', '7', 'Atahona');
+INSERT INTO `localidades` VALUES ('511', '7', 'Ausonia');
+INSERT INTO `localidades` VALUES ('512', '7', 'Avellaneda');
+INSERT INTO `localidades` VALUES ('513', '7', 'Ballesteros');
+INSERT INTO `localidades` VALUES ('514', '7', 'Ballesteros Sud');
+INSERT INTO `localidades` VALUES ('515', '7', 'Balnearia');
+INSERT INTO `localidades` VALUES ('516', '7', 'Bañado de Soto');
+INSERT INTO `localidades` VALUES ('517', '7', 'Bell Ville');
+INSERT INTO `localidades` VALUES ('518', '7', 'Bengolea');
+INSERT INTO `localidades` VALUES ('519', '7', 'Benjamin Gould');
+INSERT INTO `localidades` VALUES ('520', '7', 'Berrotaran');
+INSERT INTO `localidades` VALUES ('521', '7', 'Bialet Masse');
+INSERT INTO `localidades` VALUES ('522', '7', 'Bouwer');
+INSERT INTO `localidades` VALUES ('523', '7', 'Brinkmann');
+INSERT INTO `localidades` VALUES ('524', '7', 'Buchardo');
+INSERT INTO `localidades` VALUES ('525', '7', 'Bulnes');
+INSERT INTO `localidades` VALUES ('526', '7', 'Cabalango');
+INSERT INTO `localidades` VALUES ('527', '7', 'Calamuchita');
+INSERT INTO `localidades` VALUES ('528', '7', 'Calchin');
+INSERT INTO `localidades` VALUES ('529', '7', 'Calchin Oeste');
+INSERT INTO `localidades` VALUES ('530', '7', 'Calmayo');
+INSERT INTO `localidades` VALUES ('531', '7', 'Camilo Aldao');
+INSERT INTO `localidades` VALUES ('532', '7', 'Caminiaga');
+INSERT INTO `localidades` VALUES ('533', '7', 'Cañada de Luque');
+INSERT INTO `localidades` VALUES ('534', '7', 'Cañada de Machado');
+INSERT INTO `localidades` VALUES ('535', '7', 'Cañada de Rio Pinto');
+INSERT INTO `localidades` VALUES ('536', '7', 'Cañada del Sauce');
+INSERT INTO `localidades` VALUES ('537', '7', 'Canals');
+INSERT INTO `localidades` VALUES ('538', '7', 'Candelaria Sud');
+INSERT INTO `localidades` VALUES ('539', '7', 'Capilla de Remedios');
+INSERT INTO `localidades` VALUES ('540', '7', 'Capilla de Siton');
+INSERT INTO `localidades` VALUES ('541', '7', 'Capilla del Carmen');
+INSERT INTO `localidades` VALUES ('542', '7', 'Capilla del Monte');
+INSERT INTO `localidades` VALUES ('543', '7', 'Capital');
+INSERT INTO `localidades` VALUES ('544', '7', 'Capitan Gral B. O´Higgins');
+INSERT INTO `localidades` VALUES ('545', '7', 'Carnerillo');
+INSERT INTO `localidades` VALUES ('546', '7', 'Carrilobo');
+INSERT INTO `localidades` VALUES ('547', '7', 'Casa Grande');
+INSERT INTO `localidades` VALUES ('548', '7', 'Cavanagh');
+INSERT INTO `localidades` VALUES ('549', '7', 'Cerro Colorado');
+INSERT INTO `localidades` VALUES ('550', '7', 'Chaján');
+INSERT INTO `localidades` VALUES ('551', '7', 'Chalacea');
+INSERT INTO `localidades` VALUES ('552', '7', 'Chañar Viejo');
+INSERT INTO `localidades` VALUES ('553', '7', 'Chancaní');
+INSERT INTO `localidades` VALUES ('554', '7', 'Charbonier');
+INSERT INTO `localidades` VALUES ('555', '7', 'Charras');
+INSERT INTO `localidades` VALUES ('556', '7', 'Chazón');
+INSERT INTO `localidades` VALUES ('557', '7', 'Chilibroste');
+INSERT INTO `localidades` VALUES ('558', '7', 'Chucul');
+INSERT INTO `localidades` VALUES ('559', '7', 'Chuña');
+INSERT INTO `localidades` VALUES ('560', '7', 'Chuña Huasi');
+INSERT INTO `localidades` VALUES ('561', '7', 'Churqui Cañada');
+INSERT INTO `localidades` VALUES ('562', '7', 'Cienaga Del Coro');
+INSERT INTO `localidades` VALUES ('563', '7', 'Cintra');
+INSERT INTO `localidades` VALUES ('564', '7', 'Col. Almada');
+INSERT INTO `localidades` VALUES ('565', '7', 'Col. Anita');
+INSERT INTO `localidades` VALUES ('566', '7', 'Col. Barge');
+INSERT INTO `localidades` VALUES ('567', '7', 'Col. Bismark');
+INSERT INTO `localidades` VALUES ('568', '7', 'Col. Bremen');
+INSERT INTO `localidades` VALUES ('569', '7', 'Col. Caroya');
+INSERT INTO `localidades` VALUES ('570', '7', 'Col. Italiana');
+INSERT INTO `localidades` VALUES ('571', '7', 'Col. Iturraspe');
+INSERT INTO `localidades` VALUES ('572', '7', 'Col. Las Cuatro Esquinas');
+INSERT INTO `localidades` VALUES ('573', '7', 'Col. Las Pichanas');
+INSERT INTO `localidades` VALUES ('574', '7', 'Col. Marina');
+INSERT INTO `localidades` VALUES ('575', '7', 'Col. Prosperidad');
+INSERT INTO `localidades` VALUES ('576', '7', 'Col. San Bartolome');
+INSERT INTO `localidades` VALUES ('577', '7', 'Col. San Pedro');
+INSERT INTO `localidades` VALUES ('578', '7', 'Col. Tirolesa');
+INSERT INTO `localidades` VALUES ('579', '7', 'Col. Vicente Aguero');
+INSERT INTO `localidades` VALUES ('580', '7', 'Col. Videla');
+INSERT INTO `localidades` VALUES ('581', '7', 'Col. Vignaud');
+INSERT INTO `localidades` VALUES ('582', '7', 'Col. Waltelina');
+INSERT INTO `localidades` VALUES ('583', '7', 'Colazo');
+INSERT INTO `localidades` VALUES ('584', '7', 'Comechingones');
+INSERT INTO `localidades` VALUES ('585', '7', 'Conlara');
+INSERT INTO `localidades` VALUES ('586', '7', 'Copacabana');
+INSERT INTO `localidades` VALUES ('587', '7', '7');
+INSERT INTO `localidades` VALUES ('588', '7', 'Coronel Baigorria');
+INSERT INTO `localidades` VALUES ('589', '7', 'Coronel Moldes');
+INSERT INTO `localidades` VALUES ('590', '7', 'Corral de Bustos');
+INSERT INTO `localidades` VALUES ('591', '7', 'Corralito');
+INSERT INTO `localidades` VALUES ('592', '7', 'Cosquín');
+INSERT INTO `localidades` VALUES ('593', '7', 'Costa Sacate');
+INSERT INTO `localidades` VALUES ('594', '7', 'Cruz Alta');
+INSERT INTO `localidades` VALUES ('595', '7', 'Cruz de Caña');
+INSERT INTO `localidades` VALUES ('596', '7', 'Cruz del Eje');
+INSERT INTO `localidades` VALUES ('597', '7', 'Cuesta Blanca');
+INSERT INTO `localidades` VALUES ('598', '7', 'Dean Funes');
+INSERT INTO `localidades` VALUES ('599', '7', 'Del Campillo');
+INSERT INTO `localidades` VALUES ('600', '7', 'Despeñaderos');
+INSERT INTO `localidades` VALUES ('601', '7', 'Devoto');
+INSERT INTO `localidades` VALUES ('602', '7', 'Diego de Rojas');
+INSERT INTO `localidades` VALUES ('603', '7', 'Dique Chico');
+INSERT INTO `localidades` VALUES ('604', '7', 'El Arañado');
+INSERT INTO `localidades` VALUES ('605', '7', 'El Brete');
+INSERT INTO `localidades` VALUES ('606', '7', 'El Chacho');
+INSERT INTO `localidades` VALUES ('607', '7', 'El Crispín');
+INSERT INTO `localidades` VALUES ('608', '7', 'El Fortín');
+INSERT INTO `localidades` VALUES ('609', '7', 'El Manzano');
+INSERT INTO `localidades` VALUES ('610', '7', 'El Rastreador');
+INSERT INTO `localidades` VALUES ('611', '7', 'El Rodeo');
+INSERT INTO `localidades` VALUES ('612', '7', 'El Tío');
+INSERT INTO `localidades` VALUES ('613', '7', 'Elena');
+INSERT INTO `localidades` VALUES ('614', '7', 'Embalse');
+INSERT INTO `localidades` VALUES ('615', '7', 'Esquina');
+INSERT INTO `localidades` VALUES ('616', '7', 'Estación Gral. Paz');
+INSERT INTO `localidades` VALUES ('617', '7', 'Estación Juárez Celman');
+INSERT INTO `localidades` VALUES ('618', '7', 'Estancia de Guadalupe');
+INSERT INTO `localidades` VALUES ('619', '7', 'Estancia Vieja');
+INSERT INTO `localidades` VALUES ('620', '7', 'Etruria');
+INSERT INTO `localidades` VALUES ('621', '7', 'Eufrasio Loza');
+INSERT INTO `localidades` VALUES ('622', '7', 'Falda del Carmen');
+INSERT INTO `localidades` VALUES ('623', '7', 'Freyre');
+INSERT INTO `localidades` VALUES ('624', '7', 'Gral. Baldissera');
+INSERT INTO `localidades` VALUES ('625', '7', 'Gral. Cabrera');
+INSERT INTO `localidades` VALUES ('626', '7', 'Gral. Deheza');
+INSERT INTO `localidades` VALUES ('627', '7', 'Gral. Fotheringham');
+INSERT INTO `localidades` VALUES ('628', '7', 'Gral. Levalle');
+INSERT INTO `localidades` VALUES ('629', '7', 'Gral. Roca');
+INSERT INTO `localidades` VALUES ('630', '7', 'Guanaco Muerto');
+INSERT INTO `localidades` VALUES ('631', '7', 'Guasapampa');
+INSERT INTO `localidades` VALUES ('632', '7', 'Guatimozin');
+INSERT INTO `localidades` VALUES ('633', '7', 'Gutenberg');
+INSERT INTO `localidades` VALUES ('634', '7', 'Hernando');
+INSERT INTO `localidades` VALUES ('635', '7', 'Huanchillas');
+INSERT INTO `localidades` VALUES ('636', '7', 'Huerta Grande');
+INSERT INTO `localidades` VALUES ('637', '7', 'Huinca Renanco');
+INSERT INTO `localidades` VALUES ('638', '7', 'Idiazabal');
+INSERT INTO `localidades` VALUES ('639', '7', 'Impira');
+INSERT INTO `localidades` VALUES ('640', '7', 'Inriville');
+INSERT INTO `localidades` VALUES ('641', '7', 'Isla Verde');
+INSERT INTO `localidades` VALUES ('642', '7', 'Italó');
+INSERT INTO `localidades` VALUES ('643', '7', 'James Craik');
+INSERT INTO `localidades` VALUES ('644', '7', 'Jesús María');
+INSERT INTO `localidades` VALUES ('645', '7', 'Jovita');
+INSERT INTO `localidades` VALUES ('646', '7', 'Justiniano Posse');
+INSERT INTO `localidades` VALUES ('647', '7', 'Km 658');
+INSERT INTO `localidades` VALUES ('648', '7', 'L. V. Mansilla');
+INSERT INTO `localidades` VALUES ('649', '7', 'La Batea');
+INSERT INTO `localidades` VALUES ('650', '7', 'La Calera');
+INSERT INTO `localidades` VALUES ('651', '7', 'La Carlota');
+INSERT INTO `localidades` VALUES ('652', '7', 'La Carolina');
+INSERT INTO `localidades` VALUES ('653', '7', 'La Cautiva');
+INSERT INTO `localidades` VALUES ('654', '7', 'La Cesira');
+INSERT INTO `localidades` VALUES ('655', '7', 'La Cruz');
+INSERT INTO `localidades` VALUES ('656', '7', 'La Cumbre');
+INSERT INTO `localidades` VALUES ('657', '7', 'La Cumbrecita');
+INSERT INTO `localidades` VALUES ('658', '7', 'La Falda');
+INSERT INTO `localidades` VALUES ('659', '7', 'La Francia');
+INSERT INTO `localidades` VALUES ('660', '7', 'La Granja');
+INSERT INTO `localidades` VALUES ('661', '7', 'La Higuera');
+INSERT INTO `localidades` VALUES ('662', '7', 'La Laguna');
+INSERT INTO `localidades` VALUES ('663', '7', 'La Paisanita');
+INSERT INTO `localidades` VALUES ('664', '7', 'La Palestina');
+INSERT INTO `localidades` VALUES ('665', '7', '12');
+INSERT INTO `localidades` VALUES ('666', '7', 'La Paquita');
+INSERT INTO `localidades` VALUES ('667', '7', 'La Para');
+INSERT INTO `localidades` VALUES ('668', '7', 'La Paz');
+INSERT INTO `localidades` VALUES ('669', '7', 'La Playa');
+INSERT INTO `localidades` VALUES ('670', '7', 'La Playosa');
+INSERT INTO `localidades` VALUES ('671', '7', 'La Población');
+INSERT INTO `localidades` VALUES ('672', '7', 'La Posta');
+INSERT INTO `localidades` VALUES ('673', '7', 'La Puerta');
+INSERT INTO `localidades` VALUES ('674', '7', 'La Quinta');
+INSERT INTO `localidades` VALUES ('675', '7', 'La Rancherita');
+INSERT INTO `localidades` VALUES ('676', '7', 'La Rinconada');
+INSERT INTO `localidades` VALUES ('677', '7', 'La Serranita');
+INSERT INTO `localidades` VALUES ('678', '7', 'La Tordilla');
+INSERT INTO `localidades` VALUES ('679', '7', 'Laborde');
+INSERT INTO `localidades` VALUES ('680', '7', 'Laboulaye');
+INSERT INTO `localidades` VALUES ('681', '7', 'Laguna Larga');
+INSERT INTO `localidades` VALUES ('682', '7', 'Las Acequias');
+INSERT INTO `localidades` VALUES ('683', '7', 'Las Albahacas');
+INSERT INTO `localidades` VALUES ('684', '7', 'Las Arrias');
+INSERT INTO `localidades` VALUES ('685', '7', 'Las Bajadas');
+INSERT INTO `localidades` VALUES ('686', '7', 'Las Caleras');
+INSERT INTO `localidades` VALUES ('687', '7', 'Las Calles');
+INSERT INTO `localidades` VALUES ('688', '7', 'Las Cañadas');
+INSERT INTO `localidades` VALUES ('689', '7', 'Las Gramillas');
+INSERT INTO `localidades` VALUES ('690', '7', 'Las Higueras');
+INSERT INTO `localidades` VALUES ('691', '7', 'Las Isletillas');
+INSERT INTO `localidades` VALUES ('692', '7', 'Las Junturas');
+INSERT INTO `localidades` VALUES ('693', '7', 'Las Palmas');
+INSERT INTO `localidades` VALUES ('694', '7', 'Las Peñas');
+INSERT INTO `localidades` VALUES ('695', '7', 'Las Peñas Sud');
+INSERT INTO `localidades` VALUES ('696', '7', 'Las Perdices');
+INSERT INTO `localidades` VALUES ('697', '7', 'Las Playas');
+INSERT INTO `localidades` VALUES ('698', '7', 'Las Rabonas');
+INSERT INTO `localidades` VALUES ('699', '7', 'Las Saladas');
+INSERT INTO `localidades` VALUES ('700', '7', 'Las Tapias');
+INSERT INTO `localidades` VALUES ('701', '7', 'Las Varas');
+INSERT INTO `localidades` VALUES ('702', '7', 'Las Varillas');
+INSERT INTO `localidades` VALUES ('703', '7', 'Las Vertientes');
+INSERT INTO `localidades` VALUES ('704', '7', 'Leguizamón');
+INSERT INTO `localidades` VALUES ('705', '7', 'Leones');
+INSERT INTO `localidades` VALUES ('706', '7', 'Los Cedros');
+INSERT INTO `localidades` VALUES ('707', '7', 'Los Cerrillos');
+INSERT INTO `localidades` VALUES ('708', '7', 'Los Chañaritos (C.E)');
+INSERT INTO `localidades` VALUES ('709', '7', 'Los Chanaritos (R.S)');
+INSERT INTO `localidades` VALUES ('710', '7', 'Los Cisnes');
+INSERT INTO `localidades` VALUES ('711', '7', 'Los Cocos');
+INSERT INTO `localidades` VALUES ('712', '7', 'Los Cóndores');
+INSERT INTO `localidades` VALUES ('713', '7', 'Los Hornillos');
+INSERT INTO `localidades` VALUES ('714', '7', 'Los Hoyos');
+INSERT INTO `localidades` VALUES ('715', '7', 'Los Mistoles');
+INSERT INTO `localidades` VALUES ('716', '7', 'Los Molinos');
+INSERT INTO `localidades` VALUES ('717', '7', 'Los Pozos');
+INSERT INTO `localidades` VALUES ('718', '7', 'Los Reartes');
+INSERT INTO `localidades` VALUES ('719', '7', 'Los Surgentes');
+INSERT INTO `localidades` VALUES ('720', '7', 'Los Talares');
+INSERT INTO `localidades` VALUES ('721', '7', 'Los Zorros');
+INSERT INTO `localidades` VALUES ('722', '7', 'Lozada');
+INSERT INTO `localidades` VALUES ('723', '7', 'Luca');
+INSERT INTO `localidades` VALUES ('724', '7', 'Luque');
+INSERT INTO `localidades` VALUES ('725', '7', 'Luyaba');
+INSERT INTO `localidades` VALUES ('726', '7', 'Malagueño');
+INSERT INTO `localidades` VALUES ('727', '7', 'Malena');
+INSERT INTO `localidades` VALUES ('728', '7', 'Malvinas Argentinas');
+INSERT INTO `localidades` VALUES ('729', '7', 'Manfredi');
+INSERT INTO `localidades` VALUES ('730', '7', 'Maquinista Gallini');
+INSERT INTO `localidades` VALUES ('731', '7', 'Marcos Juárez');
+INSERT INTO `localidades` VALUES ('732', '7', 'Marull');
+INSERT INTO `localidades` VALUES ('733', '7', 'Matorrales');
+INSERT INTO `localidades` VALUES ('734', '7', 'Mattaldi');
+INSERT INTO `localidades` VALUES ('735', '7', 'Mayu Sumaj');
+INSERT INTO `localidades` VALUES ('736', '7', 'Media Naranja');
+INSERT INTO `localidades` VALUES ('737', '7', 'Melo');
+INSERT INTO `localidades` VALUES ('738', '7', 'Mendiolaza');
+INSERT INTO `localidades` VALUES ('739', '7', 'Mi Granja');
+INSERT INTO `localidades` VALUES ('740', '7', 'Mina Clavero');
+INSERT INTO `localidades` VALUES ('741', '7', 'Miramar');
+INSERT INTO `localidades` VALUES ('742', '7', 'Morrison');
+INSERT INTO `localidades` VALUES ('743', '7', 'Morteros');
+INSERT INTO `localidades` VALUES ('744', '7', 'Mte. Buey');
+INSERT INTO `localidades` VALUES ('745', '7', 'Mte. Cristo');
+INSERT INTO `localidades` VALUES ('746', '7', 'Mte. De Los Gauchos');
+INSERT INTO `localidades` VALUES ('747', '7', 'Mte. Leña');
+INSERT INTO `localidades` VALUES ('748', '7', 'Mte. Maíz');
+INSERT INTO `localidades` VALUES ('749', '7', 'Mte. Ralo');
+INSERT INTO `localidades` VALUES ('750', '7', 'Nicolás Bruzone');
+INSERT INTO `localidades` VALUES ('751', '7', 'Noetinger');
+INSERT INTO `localidades` VALUES ('752', '7', 'Nono');
+INSERT INTO `localidades` VALUES ('753', '7', 'Nueva 7');
+INSERT INTO `localidades` VALUES ('754', '7', 'Obispo Trejo');
+INSERT INTO `localidades` VALUES ('755', '7', 'Olaeta');
+INSERT INTO `localidades` VALUES ('756', '7', 'Oliva');
+INSERT INTO `localidades` VALUES ('757', '7', 'Olivares San Nicolás');
+INSERT INTO `localidades` VALUES ('758', '7', 'Onagolty');
+INSERT INTO `localidades` VALUES ('759', '7', 'Oncativo');
+INSERT INTO `localidades` VALUES ('760', '7', 'Ordoñez');
+INSERT INTO `localidades` VALUES ('761', '7', 'Pacheco De Melo');
+INSERT INTO `localidades` VALUES ('762', '7', 'Pampayasta N.');
+INSERT INTO `localidades` VALUES ('763', '7', 'Pampayasta S.');
+INSERT INTO `localidades` VALUES ('764', '7', 'Panaholma');
+INSERT INTO `localidades` VALUES ('765', '7', 'Pascanas');
+INSERT INTO `localidades` VALUES ('766', '7', 'Pasco');
+INSERT INTO `localidades` VALUES ('767', '7', 'Paso del Durazno');
+INSERT INTO `localidades` VALUES ('768', '7', 'Paso Viejo');
+INSERT INTO `localidades` VALUES ('769', '7', 'Pilar');
+INSERT INTO `localidades` VALUES ('770', '7', 'Pincén');
+INSERT INTO `localidades` VALUES ('771', '7', 'Piquillín');
+INSERT INTO `localidades` VALUES ('772', '7', 'Plaza de Mercedes');
+INSERT INTO `localidades` VALUES ('773', '7', 'Plaza Luxardo');
+INSERT INTO `localidades` VALUES ('774', '7', 'Porteña');
+INSERT INTO `localidades` VALUES ('775', '7', 'Potrero de Garay');
+INSERT INTO `localidades` VALUES ('776', '7', 'Pozo del Molle');
+INSERT INTO `localidades` VALUES ('777', '7', 'Pozo Nuevo');
+INSERT INTO `localidades` VALUES ('778', '7', 'Pueblo Italiano');
+INSERT INTO `localidades` VALUES ('779', '7', 'Puesto de Castro');
+INSERT INTO `localidades` VALUES ('780', '7', 'Punta del Agua');
+INSERT INTO `localidades` VALUES ('781', '7', 'Quebracho Herrado');
+INSERT INTO `localidades` VALUES ('782', '7', 'Quilino');
+INSERT INTO `localidades` VALUES ('783', '7', 'Rafael García');
+INSERT INTO `localidades` VALUES ('784', '7', 'Ranqueles');
+INSERT INTO `localidades` VALUES ('785', '7', 'Rayo Cortado');
+INSERT INTO `localidades` VALUES ('786', '7', 'Reducción');
+INSERT INTO `localidades` VALUES ('787', '7', 'Rincón');
+INSERT INTO `localidades` VALUES ('788', '7', 'Río Bamba');
+INSERT INTO `localidades` VALUES ('789', '7', 'Río Ceballos');
+INSERT INTO `localidades` VALUES ('790', '7', 'Río Cuarto');
+INSERT INTO `localidades` VALUES ('791', '7', 'Río de Los Sauces');
+INSERT INTO `localidades` VALUES ('792', '7', 'Río Primero');
+INSERT INTO `localidades` VALUES ('793', '7', 'Río Segundo');
+INSERT INTO `localidades` VALUES ('794', '7', 'Río Tercero');
+INSERT INTO `localidades` VALUES ('795', '7', 'Rosales');
+INSERT INTO `localidades` VALUES ('796', '7', 'Rosario del Saladillo');
+INSERT INTO `localidades` VALUES ('797', '7', 'Sacanta');
+INSERT INTO `localidades` VALUES ('798', '7', 'Sagrada Familia');
+INSERT INTO `localidades` VALUES ('799', '7', 'Saira');
+INSERT INTO `localidades` VALUES ('800', '7', 'Saladillo');
+INSERT INTO `localidades` VALUES ('801', '7', 'Saldán');
+INSERT INTO `localidades` VALUES ('802', '7', 'Salsacate');
+INSERT INTO `localidades` VALUES ('803', '7', 'Salsipuedes');
+INSERT INTO `localidades` VALUES ('804', '7', 'Sampacho');
+INSERT INTO `localidades` VALUES ('805', '7', 'San Agustín');
+INSERT INTO `localidades` VALUES ('806', '7', 'San Antonio de Arredondo');
+INSERT INTO `localidades` VALUES ('807', '7', 'San Antonio de Litín');
+INSERT INTO `localidades` VALUES ('808', '7', 'San Basilio');
+INSERT INTO `localidades` VALUES ('809', '7', 'San Carlos Minas');
+INSERT INTO `localidades` VALUES ('810', '7', 'San Clemente');
+INSERT INTO `localidades` VALUES ('811', '7', 'San Esteban');
+INSERT INTO `localidades` VALUES ('812', '7', 'San Francisco');
+INSERT INTO `localidades` VALUES ('813', '7', 'San Ignacio');
+INSERT INTO `localidades` VALUES ('814', '7', 'San Javier');
+INSERT INTO `localidades` VALUES ('815', '7', 'San Jerónimo');
+INSERT INTO `localidades` VALUES ('816', '7', 'San Joaquín');
+INSERT INTO `localidades` VALUES ('817', '7', 'San José de La Dormida');
+INSERT INTO `localidades` VALUES ('818', '7', 'San José de Las Salinas');
+INSERT INTO `localidades` VALUES ('819', '7', 'San Lorenzo');
+INSERT INTO `localidades` VALUES ('820', '7', 'San Marcos Sierras');
+INSERT INTO `localidades` VALUES ('821', '7', 'San Marcos Sud');
+INSERT INTO `localidades` VALUES ('822', '7', 'San Pedro');
+INSERT INTO `localidades` VALUES ('823', '7', 'San Pedro N.');
+INSERT INTO `localidades` VALUES ('824', '7', 'San Roque');
+INSERT INTO `localidades` VALUES ('825', '7', 'San Vicente');
+INSERT INTO `localidades` VALUES ('826', '7', 'Santa Catalina');
+INSERT INTO `localidades` VALUES ('827', '7', 'Santa Elena');
+INSERT INTO `localidades` VALUES ('828', '7', 'Santa Eufemia');
+INSERT INTO `localidades` VALUES ('829', '7', 'Santa Maria');
+INSERT INTO `localidades` VALUES ('830', '7', 'Sarmiento');
+INSERT INTO `localidades` VALUES ('831', '7', 'Saturnino M.Laspiur');
+INSERT INTO `localidades` VALUES ('832', '7', 'Sauce Arriba');
+INSERT INTO `localidades` VALUES ('833', '7', 'Sebastián Elcano');
+INSERT INTO `localidades` VALUES ('834', '7', 'Seeber');
+INSERT INTO `localidades` VALUES ('835', '7', 'Segunda Usina');
+INSERT INTO `localidades` VALUES ('836', '7', 'Serrano');
+INSERT INTO `localidades` VALUES ('837', '7', 'Serrezuela');
+INSERT INTO `localidades` VALUES ('838', '7', 'Sgo. Temple');
+INSERT INTO `localidades` VALUES ('839', '7', 'Silvio Pellico');
+INSERT INTO `localidades` VALUES ('840', '7', 'Simbolar');
+INSERT INTO `localidades` VALUES ('841', '7', 'Sinsacate');
+INSERT INTO `localidades` VALUES ('842', '7', 'Sta. Rosa de Calamuchita');
+INSERT INTO `localidades` VALUES ('843', '7', 'Sta. Rosa de Río Primero');
+INSERT INTO `localidades` VALUES ('844', '7', 'Suco');
+INSERT INTO `localidades` VALUES ('845', '7', 'Tala Cañada');
+INSERT INTO `localidades` VALUES ('846', '7', 'Tala Huasi');
+INSERT INTO `localidades` VALUES ('847', '7', 'Talaini');
+INSERT INTO `localidades` VALUES ('848', '7', 'Tancacha');
+INSERT INTO `localidades` VALUES ('849', '7', 'Tanti');
+INSERT INTO `localidades` VALUES ('850', '7', 'Ticino');
+INSERT INTO `localidades` VALUES ('851', '7', 'Tinoco');
+INSERT INTO `localidades` VALUES ('852', '7', 'Tío Pujio');
+INSERT INTO `localidades` VALUES ('853', '7', 'Toledo');
+INSERT INTO `localidades` VALUES ('854', '7', 'Toro Pujio');
+INSERT INTO `localidades` VALUES ('855', '7', 'Tosno');
+INSERT INTO `localidades` VALUES ('856', '7', 'Tosquita');
+INSERT INTO `localidades` VALUES ('857', '7', 'Tránsito');
+INSERT INTO `localidades` VALUES ('858', '7', 'Tuclame');
+INSERT INTO `localidades` VALUES ('859', '7', 'Tutti');
+INSERT INTO `localidades` VALUES ('860', '7', 'Ucacha');
+INSERT INTO `localidades` VALUES ('861', '7', 'Unquillo');
+INSERT INTO `localidades` VALUES ('862', '7', 'Valle de Anisacate');
+INSERT INTO `localidades` VALUES ('863', '7', 'Valle Hermoso');
+INSERT INTO `localidades` VALUES ('864', '7', 'Vélez Sarfield');
+INSERT INTO `localidades` VALUES ('865', '7', 'Viamonte');
+INSERT INTO `localidades` VALUES ('866', '7', 'Vicuña Mackenna');
+INSERT INTO `localidades` VALUES ('867', '7', 'Villa Allende');
+INSERT INTO `localidades` VALUES ('868', '7', 'Villa Amancay');
+INSERT INTO `localidades` VALUES ('869', '7', 'Villa Ascasubi');
+INSERT INTO `localidades` VALUES ('870', '7', 'Villa Candelaria N.');
+INSERT INTO `localidades` VALUES ('871', '7', 'Villa Carlos Paz');
+INSERT INTO `localidades` VALUES ('872', '7', 'Villa Cerro Azul');
+INSERT INTO `localidades` VALUES ('873', '7', 'Villa Ciudad de América');
+INSERT INTO `localidades` VALUES ('874', '7', 'Villa Ciudad Pque Los Reartes');
+INSERT INTO `localidades` VALUES ('875', '7', 'Villa Concepción del Tío');
+INSERT INTO `localidades` VALUES ('876', '7', 'Villa Cura Brochero');
+INSERT INTO `localidades` VALUES ('877', '7', 'Villa de Las Rosas');
+INSERT INTO `localidades` VALUES ('878', '7', 'Villa de María');
+INSERT INTO `localidades` VALUES ('879', '7', 'Villa de Pocho');
+INSERT INTO `localidades` VALUES ('880', '7', 'Villa de Soto');
+INSERT INTO `localidades` VALUES ('881', '7', 'Villa del Dique');
+INSERT INTO `localidades` VALUES ('882', '7', 'Villa del Prado');
+INSERT INTO `localidades` VALUES ('883', '7', 'Villa del Rosario');
+INSERT INTO `localidades` VALUES ('884', '7', 'Villa del Totoral');
+INSERT INTO `localidades` VALUES ('885', '7', 'Villa Dolores');
+INSERT INTO `localidades` VALUES ('886', '7', 'Villa El Chancay');
+INSERT INTO `localidades` VALUES ('887', '7', 'Villa Elisa');
+INSERT INTO `localidades` VALUES ('888', '7', 'Villa Flor Serrana');
+INSERT INTO `localidades` VALUES ('889', '7', 'Villa Fontana');
+INSERT INTO `localidades` VALUES ('890', '7', 'Villa Giardino');
+INSERT INTO `localidades` VALUES ('891', '7', 'Villa Gral. Belgrano');
+INSERT INTO `localidades` VALUES ('892', '7', 'Villa Gutierrez');
+INSERT INTO `localidades` VALUES ('893', '7', 'Villa Huidobro');
+INSERT INTO `localidades` VALUES ('894', '7', 'Villa La Bolsa');
+INSERT INTO `localidades` VALUES ('895', '7', 'Villa Los Aromos');
+INSERT INTO `localidades` VALUES ('896', '7', 'Villa Los Patos');
+INSERT INTO `localidades` VALUES ('897', '7', 'Villa María');
+INSERT INTO `localidades` VALUES ('898', '7', 'Villa Nueva');
+INSERT INTO `localidades` VALUES ('899', '7', 'Villa Pque. Santa Ana');
+INSERT INTO `localidades` VALUES ('900', '7', 'Villa Pque. Siquiman');
+INSERT INTO `localidades` VALUES ('901', '7', 'Villa Quillinzo');
+INSERT INTO `localidades` VALUES ('902', '7', 'Villa Rossi');
+INSERT INTO `localidades` VALUES ('903', '7', 'Villa Rumipal');
+INSERT INTO `localidades` VALUES ('904', '7', 'Villa San Esteban');
+INSERT INTO `localidades` VALUES ('905', '7', 'Villa San Isidro');
+INSERT INTO `localidades` VALUES ('906', '7', 'Villa 21');
+INSERT INTO `localidades` VALUES ('907', '7', 'Villa Sarmiento (G.R)');
+INSERT INTO `localidades` VALUES ('908', '7', 'Villa Sarmiento (S.A)');
+INSERT INTO `localidades` VALUES ('909', '7', 'Villa Tulumba');
+INSERT INTO `localidades` VALUES ('910', '7', 'Villa Valeria');
+INSERT INTO `localidades` VALUES ('911', '7', 'Villa Yacanto');
+INSERT INTO `localidades` VALUES ('912', '7', 'Washington');
+INSERT INTO `localidades` VALUES ('913', '7', 'Wenceslao Escalante');
+INSERT INTO `localidades` VALUES ('914', '7', 'Ycho Cruz Sierras');
+INSERT INTO `localidades` VALUES ('915', '8', 'Alvear');
+INSERT INTO `localidades` VALUES ('916', '8', 'Bella Vista');
+INSERT INTO `localidades` VALUES ('917', '8', 'Berón de Astrada');
+INSERT INTO `localidades` VALUES ('918', '8', 'Bonpland');
+INSERT INTO `localidades` VALUES ('919', '8', 'Caá Cati');
+INSERT INTO `localidades` VALUES ('920', '8', 'Capital');
+INSERT INTO `localidades` VALUES ('921', '8', 'Chavarría');
+INSERT INTO `localidades` VALUES ('922', '8', 'Col. C. Pellegrini');
+INSERT INTO `localidades` VALUES ('923', '8', 'Col. Libertad');
+INSERT INTO `localidades` VALUES ('924', '8', 'Col. Liebig');
+INSERT INTO `localidades` VALUES ('925', '8', 'Col. Sta Rosa');
+INSERT INTO `localidades` VALUES ('926', '8', 'Concepción');
+INSERT INTO `localidades` VALUES ('927', '8', 'Cruz de Los Milagros');
+INSERT INTO `localidades` VALUES ('928', '8', 'Curuzú-Cuatiá');
+INSERT INTO `localidades` VALUES ('929', '8', 'Empedrado');
+INSERT INTO `localidades` VALUES ('930', '8', 'Esquina');
+INSERT INTO `localidades` VALUES ('931', '8', 'Estación Torrent');
+INSERT INTO `localidades` VALUES ('932', '8', 'Felipe Yofré');
+INSERT INTO `localidades` VALUES ('933', '8', 'Garruchos');
+INSERT INTO `localidades` VALUES ('934', '8', 'Gdor. Agrónomo');
+INSERT INTO `localidades` VALUES ('935', '8', 'Gdor. Martínez');
+INSERT INTO `localidades` VALUES ('936', '8', 'Goya');
+INSERT INTO `localidades` VALUES ('937', '8', 'Guaviravi');
+INSERT INTO `localidades` VALUES ('938', '8', 'Herlitzka');
+INSERT INTO `localidades` VALUES ('939', '8', 'Ita-Ibate');
+INSERT INTO `localidades` VALUES ('940', '8', 'Itatí');
+INSERT INTO `localidades` VALUES ('941', '8', 'Ituzaingó');
+INSERT INTO `localidades` VALUES ('942', '8', 'José Rafael Gómez');
+INSERT INTO `localidades` VALUES ('943', '8', 'Juan Pujol');
+INSERT INTO `localidades` VALUES ('944', '8', 'La Cruz');
+INSERT INTO `localidades` VALUES ('945', '8', 'Lavalle');
+INSERT INTO `localidades` VALUES ('946', '8', 'Lomas de Vallejos');
+INSERT INTO `localidades` VALUES ('947', '8', 'Loreto');
+INSERT INTO `localidades` VALUES ('948', '8', 'Mariano I. Loza');
+INSERT INTO `localidades` VALUES ('949', '8', 'Mburucuyá');
+INSERT INTO `localidades` VALUES ('950', '8', 'Mercedes');
+INSERT INTO `localidades` VALUES ('951', '8', 'Mocoretá');
+INSERT INTO `localidades` VALUES ('952', '8', 'Mte. Caseros');
+INSERT INTO `localidades` VALUES ('953', '8', 'Nueve de Julio');
+INSERT INTO `localidades` VALUES ('954', '8', 'Palmar Grande');
+INSERT INTO `localidades` VALUES ('955', '8', 'Parada Pucheta');
+INSERT INTO `localidades` VALUES ('956', '8', 'Paso de La Patria');
+INSERT INTO `localidades` VALUES ('957', '8', 'Paso de Los Libres');
+INSERT INTO `localidades` VALUES ('958', '8', 'Pedro R. Fernandez');
+INSERT INTO `localidades` VALUES ('959', '8', 'Perugorría');
+INSERT INTO `localidades` VALUES ('960', '8', 'Pueblo Libertador');
+INSERT INTO `localidades` VALUES ('961', '8', 'Ramada Paso');
+INSERT INTO `localidades` VALUES ('962', '8', 'Riachuelo');
+INSERT INTO `localidades` VALUES ('963', '8', 'Saladas');
+INSERT INTO `localidades` VALUES ('964', '8', 'San Antonio');
+INSERT INTO `localidades` VALUES ('965', '8', 'San Carlos');
+INSERT INTO `localidades` VALUES ('966', '8', 'San Cosme');
+INSERT INTO `localidades` VALUES ('967', '8', 'San Lorenzo');
+INSERT INTO `localidades` VALUES ('968', '8', '20 del Palmar');
+INSERT INTO `localidades` VALUES ('969', '8', 'San Miguel');
+INSERT INTO `localidades` VALUES ('970', '8', 'San Roque');
+INSERT INTO `localidades` VALUES ('971', '8', 'Santa Ana');
+INSERT INTO `localidades` VALUES ('972', '8', 'Santa Lucía');
+INSERT INTO `localidades` VALUES ('973', '8', 'Santo Tomé');
+INSERT INTO `localidades` VALUES ('974', '8', 'Sauce');
+INSERT INTO `localidades` VALUES ('975', '8', 'Tabay');
+INSERT INTO `localidades` VALUES ('976', '8', 'Tapebicuá');
+INSERT INTO `localidades` VALUES ('977', '8', 'Tatacua');
+INSERT INTO `localidades` VALUES ('978', '8', 'Virasoro');
+INSERT INTO `localidades` VALUES ('979', '8', 'Yapeyú');
+INSERT INTO `localidades` VALUES ('980', '8', 'Yataití Calle');
+INSERT INTO `localidades` VALUES ('981', '9', 'Alarcón');
+INSERT INTO `localidades` VALUES ('982', '9', 'Alcaraz');
+INSERT INTO `localidades` VALUES ('983', '9', 'Alcaraz N.');
+INSERT INTO `localidades` VALUES ('984', '9', 'Alcaraz S.');
+INSERT INTO `localidades` VALUES ('985', '9', 'Aldea Asunción');
+INSERT INTO `localidades` VALUES ('986', '9', 'Aldea Brasilera');
+INSERT INTO `localidades` VALUES ('987', '9', 'Aldea Elgenfeld');
+INSERT INTO `localidades` VALUES ('988', '9', 'Aldea Grapschental');
+INSERT INTO `localidades` VALUES ('989', '9', 'Aldea Ma. Luisa');
+INSERT INTO `localidades` VALUES ('990', '9', 'Aldea Protestante');
+INSERT INTO `localidades` VALUES ('991', '9', 'Aldea Salto');
+INSERT INTO `localidades` VALUES ('992', '9', 'Aldea San Antonio (G)');
+INSERT INTO `localidades` VALUES ('993', '9', 'Aldea San Antonio (P)');
+INSERT INTO `localidades` VALUES ('994', '9', 'Aldea 19');
+INSERT INTO `localidades` VALUES ('995', '9', 'Aldea San Miguel');
+INSERT INTO `localidades` VALUES ('996', '9', 'Aldea San Rafael');
+INSERT INTO `localidades` VALUES ('997', '9', 'Aldea Spatzenkutter');
+INSERT INTO `localidades` VALUES ('998', '9', 'Aldea Sta. María');
+INSERT INTO `localidades` VALUES ('999', '9', 'Aldea Sta. Rosa');
+INSERT INTO `localidades` VALUES ('1000', '9', 'Aldea Valle María');
+INSERT INTO `localidades` VALUES ('1001', '9', 'Altamirano Sur');
+INSERT INTO `localidades` VALUES ('1002', '9', 'Antelo');
+INSERT INTO `localidades` VALUES ('1003', '9', 'Antonio Tomás');
+INSERT INTO `localidades` VALUES ('1004', '9', 'Aranguren');
+INSERT INTO `localidades` VALUES ('1005', '9', 'Arroyo Barú');
+INSERT INTO `localidades` VALUES ('1006', '9', 'Arroyo Burgos');
+INSERT INTO `localidades` VALUES ('1007', '9', 'Arroyo Clé');
+INSERT INTO `localidades` VALUES ('1008', '9', 'Arroyo Corralito');
+INSERT INTO `localidades` VALUES ('1009', '9', 'Arroyo del Medio');
+INSERT INTO `localidades` VALUES ('1010', '9', 'Arroyo Maturrango');
+INSERT INTO `localidades` VALUES ('1011', '9', 'Arroyo Palo Seco');
+INSERT INTO `localidades` VALUES ('1012', '9', 'Banderas');
+INSERT INTO `localidades` VALUES ('1013', '9', 'Basavilbaso');
+INSERT INTO `localidades` VALUES ('1014', '9', 'Betbeder');
+INSERT INTO `localidades` VALUES ('1015', '9', 'Bovril');
+INSERT INTO `localidades` VALUES ('1016', '9', 'Caseros');
+INSERT INTO `localidades` VALUES ('1017', '9', 'Ceibas');
+INSERT INTO `localidades` VALUES ('1018', '9', 'Cerrito');
+INSERT INTO `localidades` VALUES ('1019', '9', 'Chajarí');
+INSERT INTO `localidades` VALUES ('1020', '9', 'Chilcas');
+INSERT INTO `localidades` VALUES ('1021', '9', 'Clodomiro Ledesma');
+INSERT INTO `localidades` VALUES ('1022', '9', 'Col. Alemana');
+INSERT INTO `localidades` VALUES ('1023', '9', 'Col. Avellaneda');
+INSERT INTO `localidades` VALUES ('1024', '9', 'Col. Avigdor');
+INSERT INTO `localidades` VALUES ('1025', '9', 'Col. Ayuí');
+INSERT INTO `localidades` VALUES ('1026', '9', 'Col. Baylina');
+INSERT INTO `localidades` VALUES ('1027', '9', 'Col. Carrasco');
+INSERT INTO `localidades` VALUES ('1028', '9', 'Col. Celina');
+INSERT INTO `localidades` VALUES ('1029', '9', 'Col. Cerrito');
+INSERT INTO `localidades` VALUES ('1030', '9', 'Col. Crespo');
+INSERT INTO `localidades` VALUES ('1031', '9', 'Col. Elia');
+INSERT INTO `localidades` VALUES ('1032', '9', 'Col. Ensayo');
+INSERT INTO `localidades` VALUES ('1033', '9', 'Col. Gral. Roca');
+INSERT INTO `localidades` VALUES ('1034', '9', 'Col. La Argentina');
+INSERT INTO `localidades` VALUES ('1035', '9', 'Col. Merou');
+INSERT INTO `localidades` VALUES ('1036', '9', 'Col. Oficial Nª3');
+INSERT INTO `localidades` VALUES ('1037', '9', 'Col. Oficial Nº13');
+INSERT INTO `localidades` VALUES ('1038', '9', 'Col. Oficial Nº14');
+INSERT INTO `localidades` VALUES ('1039', '9', 'Col. Oficial Nº5');
+INSERT INTO `localidades` VALUES ('1040', '9', 'Col. Reffino');
+INSERT INTO `localidades` VALUES ('1041', '9', 'Col. Tunas');
+INSERT INTO `localidades` VALUES ('1042', '9', 'Col. Viraró');
+INSERT INTO `localidades` VALUES ('1043', '9', 'Colón');
+INSERT INTO `localidades` VALUES ('1044', '9', 'Concepción del Uruguay');
+INSERT INTO `localidades` VALUES ('1045', '9', 'Concordia');
+INSERT INTO `localidades` VALUES ('1046', '9', 'Conscripto Bernardi');
+INSERT INTO `localidades` VALUES ('1047', '9', 'Costa Grande');
+INSERT INTO `localidades` VALUES ('1048', '9', 'Costa San Antonio');
+INSERT INTO `localidades` VALUES ('1049', '9', 'Costa Uruguay N.');
+INSERT INTO `localidades` VALUES ('1050', '9', 'Costa Uruguay S.');
+INSERT INTO `localidades` VALUES ('1051', '9', 'Crespo');
+INSERT INTO `localidades` VALUES ('1052', '9', 'Crucecitas 3ª');
+INSERT INTO `localidades` VALUES ('1053', '9', 'Crucecitas 7ª');
+INSERT INTO `localidades` VALUES ('1054', '9', 'Crucecitas 8ª');
+INSERT INTO `localidades` VALUES ('1055', '9', 'Cuchilla Redonda');
+INSERT INTO `localidades` VALUES ('1056', '9', 'Curtiembre');
+INSERT INTO `localidades` VALUES ('1057', '9', 'Diamante');
+INSERT INTO `localidades` VALUES ('1058', '9', 'Distrito 6º');
+INSERT INTO `localidades` VALUES ('1059', '9', 'Distrito Chañar');
+INSERT INTO `localidades` VALUES ('1060', '9', 'Distrito Chiqueros');
+INSERT INTO `localidades` VALUES ('1061', '9', 'Distrito Cuarto');
+INSERT INTO `localidades` VALUES ('1062', '9', 'Distrito Diego López');
+INSERT INTO `localidades` VALUES ('1063', '9', 'Distrito Pajonal');
+INSERT INTO `localidades` VALUES ('1064', '9', 'Distrito Sauce');
+INSERT INTO `localidades` VALUES ('1065', '9', 'Distrito Tala');
+INSERT INTO `localidades` VALUES ('1066', '9', 'Distrito Talitas');
+INSERT INTO `localidades` VALUES ('1067', '9', 'Don Cristóbal 1ª Sección');
+INSERT INTO `localidades` VALUES ('1068', '9', 'Don Cristóbal 2ª Sección');
+INSERT INTO `localidades` VALUES ('1069', '9', 'Durazno');
+INSERT INTO `localidades` VALUES ('1070', '9', 'El Cimarrón');
+INSERT INTO `localidades` VALUES ('1071', '9', 'El Gramillal');
+INSERT INTO `localidades` VALUES ('1072', '9', 'El Palenque');
+INSERT INTO `localidades` VALUES ('1073', '9', 'El Pingo');
+INSERT INTO `localidades` VALUES ('1074', '9', 'El Quebracho');
+INSERT INTO `localidades` VALUES ('1075', '9', 'El Redomón');
+INSERT INTO `localidades` VALUES ('1076', '9', 'El Solar');
+INSERT INTO `localidades` VALUES ('1077', '9', 'Enrique Carbo');
+INSERT INTO `localidades` VALUES ('1078', '9', '9');
+INSERT INTO `localidades` VALUES ('1079', '9', 'Espinillo N.');
+INSERT INTO `localidades` VALUES ('1080', '9', 'Estación Campos');
+INSERT INTO `localidades` VALUES ('1081', '9', 'Estación Escriña');
+INSERT INTO `localidades` VALUES ('1082', '9', 'Estación Lazo');
+INSERT INTO `localidades` VALUES ('1083', '9', 'Estación Raíces');
+INSERT INTO `localidades` VALUES ('1084', '9', 'Estación Yerúa');
+INSERT INTO `localidades` VALUES ('1085', '9', 'Estancia Grande');
+INSERT INTO `localidades` VALUES ('1086', '9', 'Estancia Líbaros');
+INSERT INTO `localidades` VALUES ('1087', '9', 'Estancia Racedo');
+INSERT INTO `localidades` VALUES ('1088', '9', 'Estancia Solá');
+INSERT INTO `localidades` VALUES ('1089', '9', 'Estancia Yuquerí');
+INSERT INTO `localidades` VALUES ('1090', '9', 'Estaquitas');
+INSERT INTO `localidades` VALUES ('1091', '9', 'Faustino M. Parera');
+INSERT INTO `localidades` VALUES ('1092', '9', 'Febre');
+INSERT INTO `localidades` VALUES ('1093', '9', 'Federación');
+INSERT INTO `localidades` VALUES ('1094', '9', 'Federal');
+INSERT INTO `localidades` VALUES ('1095', '9', 'Gdor. Echagüe');
+INSERT INTO `localidades` VALUES ('1096', '9', 'Gdor. Mansilla');
+INSERT INTO `localidades` VALUES ('1097', '9', 'Gilbert');
+INSERT INTO `localidades` VALUES ('1098', '9', 'González Calderón');
+INSERT INTO `localidades` VALUES ('1099', '9', 'Gral. Almada');
+INSERT INTO `localidades` VALUES ('1100', '9', 'Gral. Alvear');
+INSERT INTO `localidades` VALUES ('1101', '9', 'Gral. Campos');
+INSERT INTO `localidades` VALUES ('1102', '9', 'Gral. Galarza');
+INSERT INTO `localidades` VALUES ('1103', '9', 'Gral. Ramírez');
+INSERT INTO `localidades` VALUES ('1104', '9', 'Gualeguay');
+INSERT INTO `localidades` VALUES ('1105', '9', 'Gualeguaychú');
+INSERT INTO `localidades` VALUES ('1106', '9', 'Gualeguaycito');
+INSERT INTO `localidades` VALUES ('1107', '9', 'Guardamonte');
+INSERT INTO `localidades` VALUES ('1108', '9', 'Hambis');
+INSERT INTO `localidades` VALUES ('1109', '9', 'Hasenkamp');
+INSERT INTO `localidades` VALUES ('1110', '9', 'Hernandarias');
+INSERT INTO `localidades` VALUES ('1111', '9', 'Hernández');
+INSERT INTO `localidades` VALUES ('1112', '9', 'Herrera');
+INSERT INTO `localidades` VALUES ('1113', '9', 'Hinojal');
+INSERT INTO `localidades` VALUES ('1114', '9', 'Hocker');
+INSERT INTO `localidades` VALUES ('1115', '9', 'Ing. Sajaroff');
+INSERT INTO `localidades` VALUES ('1116', '9', 'Irazusta');
+INSERT INTO `localidades` VALUES ('1117', '9', 'Isletas');
+INSERT INTO `localidades` VALUES ('1118', '9', 'J.J De Urquiza');
+INSERT INTO `localidades` VALUES ('1119', '9', 'Jubileo');
+INSERT INTO `localidades` VALUES ('1120', '9', 'La Clarita');
+INSERT INTO `localidades` VALUES ('1121', '9', 'La Criolla');
+INSERT INTO `localidades` VALUES ('1122', '9', 'La Esmeralda');
+INSERT INTO `localidades` VALUES ('1123', '9', 'La Florida');
+INSERT INTO `localidades` VALUES ('1124', '9', 'La Fraternidad');
+INSERT INTO `localidades` VALUES ('1125', '9', 'La Hierra');
+INSERT INTO `localidades` VALUES ('1126', '9', 'La Ollita');
+INSERT INTO `localidades` VALUES ('1127', '9', 'La Paz');
+INSERT INTO `localidades` VALUES ('1128', '9', 'La Picada');
+INSERT INTO `localidades` VALUES ('1129', '9', 'La Providencia');
+INSERT INTO `localidades` VALUES ('1130', '9', 'La Verbena');
+INSERT INTO `localidades` VALUES ('1131', '9', 'Laguna Benítez');
+INSERT INTO `localidades` VALUES ('1132', '9', 'Larroque');
+INSERT INTO `localidades` VALUES ('1133', '9', 'Las Cuevas');
+INSERT INTO `localidades` VALUES ('1134', '9', 'Las Garzas');
+INSERT INTO `localidades` VALUES ('1135', '9', 'Las Guachas');
+INSERT INTO `localidades` VALUES ('1136', '9', 'Las Mercedes');
+INSERT INTO `localidades` VALUES ('1137', '9', 'Las Moscas');
+INSERT INTO `localidades` VALUES ('1138', '9', 'Las Mulitas');
+INSERT INTO `localidades` VALUES ('1139', '9', 'Las Toscas');
+INSERT INTO `localidades` VALUES ('1140', '9', 'Laurencena');
+INSERT INTO `localidades` VALUES ('1141', '9', 'Libertador San Martín');
+INSERT INTO `localidades` VALUES ('1142', '9', 'Loma Limpia');
+INSERT INTO `localidades` VALUES ('1143', '9', 'Los Ceibos');
+INSERT INTO `localidades` VALUES ('1144', '9', 'Los Charruas');
+INSERT INTO `localidades` VALUES ('1145', '9', 'Los Conquistadores');
+INSERT INTO `localidades` VALUES ('1146', '9', 'Lucas González');
+INSERT INTO `localidades` VALUES ('1147', '9', 'Lucas N.');
+INSERT INTO `localidades` VALUES ('1148', '9', 'Lucas S. 1ª');
+INSERT INTO `localidades` VALUES ('1149', '9', 'Lucas S. 2ª');
+INSERT INTO `localidades` VALUES ('1150', '9', 'Maciá');
+INSERT INTO `localidades` VALUES ('1151', '9', 'María Grande');
+INSERT INTO `localidades` VALUES ('1152', '9', 'María Grande 2ª');
+INSERT INTO `localidades` VALUES ('1153', '9', 'Médanos');
+INSERT INTO `localidades` VALUES ('1154', '9', 'Mojones N.');
+INSERT INTO `localidades` VALUES ('1155', '9', 'Mojones S.');
+INSERT INTO `localidades` VALUES ('1156', '9', 'Molino Doll');
+INSERT INTO `localidades` VALUES ('1157', '9', 'Monte Redondo');
+INSERT INTO `localidades` VALUES ('1158', '9', 'Montoya');
+INSERT INTO `localidades` VALUES ('1159', '9', 'Mulas Grandes');
+INSERT INTO `localidades` VALUES ('1160', '9', 'Ñancay');
+INSERT INTO `localidades` VALUES ('1161', '9', 'Nogoyá');
+INSERT INTO `localidades` VALUES ('1162', '9', 'Nueva Escocia');
+INSERT INTO `localidades` VALUES ('1163', '9', 'Nueva Vizcaya');
+INSERT INTO `localidades` VALUES ('1164', '9', 'Ombú');
+INSERT INTO `localidades` VALUES ('1165', '9', 'Oro Verde');
+INSERT INTO `localidades` VALUES ('1166', '9', 'Paraná');
+INSERT INTO `localidades` VALUES ('1167', '9', 'Pasaje Guayaquil');
+INSERT INTO `localidades` VALUES ('1168', '9', 'Pasaje Las Tunas');
+INSERT INTO `localidades` VALUES ('1169', '9', 'Paso de La Arena');
+INSERT INTO `localidades` VALUES ('1170', '9', 'Paso de La Laguna');
+INSERT INTO `localidades` VALUES ('1171', '9', 'Paso de Las Piedras');
+INSERT INTO `localidades` VALUES ('1172', '9', 'Paso Duarte');
+INSERT INTO `localidades` VALUES ('1173', '9', 'Pastor Britos');
+INSERT INTO `localidades` VALUES ('1174', '9', 'Pedernal');
+INSERT INTO `localidades` VALUES ('1175', '9', 'Perdices');
+INSERT INTO `localidades` VALUES ('1176', '9', 'Picada Berón');
+INSERT INTO `localidades` VALUES ('1177', '9', 'Piedras Blancas');
+INSERT INTO `localidades` VALUES ('1178', '9', 'Primer Distrito Cuchilla');
+INSERT INTO `localidades` VALUES ('1179', '9', 'Primero de Mayo');
+INSERT INTO `localidades` VALUES ('1180', '9', 'Pronunciamiento');
+INSERT INTO `localidades` VALUES ('1181', '9', 'Pto. Algarrobo');
+INSERT INTO `localidades` VALUES ('1182', '9', 'Pto. Ibicuy');
+INSERT INTO `localidades` VALUES ('1183', '9', 'Pueblo Brugo');
+INSERT INTO `localidades` VALUES ('1184', '9', 'Pueblo Cazes');
+INSERT INTO `localidades` VALUES ('1185', '9', 'Pueblo Gral. Belgrano');
+INSERT INTO `localidades` VALUES ('1186', '9', 'Pueblo Liebig');
+INSERT INTO `localidades` VALUES ('1187', '9', 'Puerto Yeruá');
+INSERT INTO `localidades` VALUES ('1188', '9', 'Punta del Monte');
+INSERT INTO `localidades` VALUES ('1189', '9', 'Quebracho');
+INSERT INTO `localidades` VALUES ('1190', '9', 'Quinto Distrito');
+INSERT INTO `localidades` VALUES ('1191', '9', 'Raices Oeste');
+INSERT INTO `localidades` VALUES ('1192', '9', 'Rincón de Nogoyá');
+INSERT INTO `localidades` VALUES ('1193', '9', 'Rincón del Cinto');
+INSERT INTO `localidades` VALUES ('1194', '9', 'Rincón del Doll');
+INSERT INTO `localidades` VALUES ('1195', '9', 'Rincón del Gato');
+INSERT INTO `localidades` VALUES ('1196', '9', 'Rocamora');
+INSERT INTO `localidades` VALUES ('1197', '9', 'Rosario del Tala');
+INSERT INTO `localidades` VALUES ('1198', '9', 'San Benito');
+INSERT INTO `localidades` VALUES ('1199', '9', 'San Cipriano');
+INSERT INTO `localidades` VALUES ('1200', '9', 'San Ernesto');
+INSERT INTO `localidades` VALUES ('1201', '9', 'San Gustavo');
+INSERT INTO `localidades` VALUES ('1202', '9', 'San Jaime');
+INSERT INTO `localidades` VALUES ('1203', '9', 'San José');
+INSERT INTO `localidades` VALUES ('1204', '9', 'San José de Feliciano');
+INSERT INTO `localidades` VALUES ('1205', '9', 'San Justo');
+INSERT INTO `localidades` VALUES ('1206', '9', 'San Marcial');
+INSERT INTO `localidades` VALUES ('1207', '9', 'San Pedro');
+INSERT INTO `localidades` VALUES ('1208', '9', 'San Ramírez');
+INSERT INTO `localidades` VALUES ('1209', '9', 'San Ramón');
+INSERT INTO `localidades` VALUES ('1210', '9', 'San Roque');
+INSERT INTO `localidades` VALUES ('1211', '9', 'San Salvador');
+INSERT INTO `localidades` VALUES ('1212', '9', 'San Víctor');
+INSERT INTO `localidades` VALUES ('1213', '9', 'Santa Ana');
+INSERT INTO `localidades` VALUES ('1214', '9', 'Santa Anita');
+INSERT INTO `localidades` VALUES ('1215', '9', 'Santa Elena');
+INSERT INTO `localidades` VALUES ('1216', '9', 'Santa Lucía');
+INSERT INTO `localidades` VALUES ('1217', '9', 'Santa Luisa');
+INSERT INTO `localidades` VALUES ('1218', '9', 'Sauce de Luna');
+INSERT INTO `localidades` VALUES ('1219', '9', 'Sauce Montrull');
+INSERT INTO `localidades` VALUES ('1220', '9', 'Sauce Pinto');
+INSERT INTO `localidades` VALUES ('1221', '9', 'Sauce Sur');
+INSERT INTO `localidades` VALUES ('1222', '9', 'Seguí');
+INSERT INTO `localidades` VALUES ('1223', '9', 'Sir Leonard');
+INSERT INTO `localidades` VALUES ('1224', '9', 'Sosa');
+INSERT INTO `localidades` VALUES ('1225', '9', 'Tabossi');
+INSERT INTO `localidades` VALUES ('1226', '9', 'Tezanos Pinto');
+INSERT INTO `localidades` VALUES ('1227', '9', 'Ubajay');
+INSERT INTO `localidades` VALUES ('1228', '9', 'Urdinarrain');
+INSERT INTO `localidades` VALUES ('1229', '9', 'Veinte de Septiembre');
+INSERT INTO `localidades` VALUES ('1230', '9', 'Viale');
+INSERT INTO `localidades` VALUES ('1231', '9', 'Victoria');
+INSERT INTO `localidades` VALUES ('1232', '9', 'Villa Clara');
+INSERT INTO `localidades` VALUES ('1233', '9', 'Villa del Rosario');
+INSERT INTO `localidades` VALUES ('1234', '9', 'Villa Domínguez');
+INSERT INTO `localidades` VALUES ('1235', '9', 'Villa Elisa');
+INSERT INTO `localidades` VALUES ('1236', '9', 'Villa Fontana');
+INSERT INTO `localidades` VALUES ('1237', '9', 'Villa Gdor. Etchevehere');
+INSERT INTO `localidades` VALUES ('1238', '9', 'Villa Mantero');
+INSERT INTO `localidades` VALUES ('1239', '9', 'Villa Paranacito');
+INSERT INTO `localidades` VALUES ('1240', '9', 'Villa Urquiza');
+INSERT INTO `localidades` VALUES ('1241', '9', 'Villaguay');
+INSERT INTO `localidades` VALUES ('1242', '9', 'Walter Moss');
+INSERT INTO `localidades` VALUES ('1243', '9', 'Yacaré');
+INSERT INTO `localidades` VALUES ('1244', '9', 'Yeso Oeste');
+INSERT INTO `localidades` VALUES ('1245', '10', 'Buena Vista');
+INSERT INTO `localidades` VALUES ('1246', '10', 'Clorinda');
+INSERT INTO `localidades` VALUES ('1247', '10', 'Col. Pastoril');
+INSERT INTO `localidades` VALUES ('1248', '10', 'Cte. Fontana');
+INSERT INTO `localidades` VALUES ('1249', '10', 'El Colorado');
+INSERT INTO `localidades` VALUES ('1250', '10', 'El Espinillo');
+INSERT INTO `localidades` VALUES ('1251', '10', 'Estanislao Del Campo');
+INSERT INTO `localidades` VALUES ('1252', '10', '10');
+INSERT INTO `localidades` VALUES ('1253', '10', 'Fortín Lugones');
+INSERT INTO `localidades` VALUES ('1254', '10', 'Gral. Lucio V. Mansilla');
+INSERT INTO `localidades` VALUES ('1255', '10', 'Gral. Manuel Belgrano');
+INSERT INTO `localidades` VALUES ('1256', '10', 'Gral. Mosconi');
+INSERT INTO `localidades` VALUES ('1257', '10', 'Gran Guardia');
+INSERT INTO `localidades` VALUES ('1258', '10', 'Herradura');
+INSERT INTO `localidades` VALUES ('1259', '10', 'Ibarreta');
+INSERT INTO `localidades` VALUES ('1260', '10', 'Ing. Juárez');
+INSERT INTO `localidades` VALUES ('1261', '10', 'Laguna Blanca');
+INSERT INTO `localidades` VALUES ('1262', '10', 'Laguna Naick Neck');
+INSERT INTO `localidades` VALUES ('1263', '10', 'Laguna Yema');
+INSERT INTO `localidades` VALUES ('1264', '10', 'Las Lomitas');
+INSERT INTO `localidades` VALUES ('1265', '10', 'Los Chiriguanos');
+INSERT INTO `localidades` VALUES ('1266', '10', 'Mayor V. Villafañe');
+INSERT INTO `localidades` VALUES ('1267', '10', 'Misión San Fco.');
+INSERT INTO `localidades` VALUES ('1268', '10', 'Palo Santo');
+INSERT INTO `localidades` VALUES ('1269', '10', 'Pirané');
+INSERT INTO `localidades` VALUES ('1270', '10', 'Pozo del Maza');
+INSERT INTO `localidades` VALUES ('1271', '10', 'Riacho He-He');
+INSERT INTO `localidades` VALUES ('1272', '10', 'San Hilario');
+INSERT INTO `localidades` VALUES ('1273', '10', 'San Martín II');
+INSERT INTO `localidades` VALUES ('1274', '10', 'Siete Palmas');
+INSERT INTO `localidades` VALUES ('1275', '10', 'Subteniente Perín');
+INSERT INTO `localidades` VALUES ('1276', '10', 'Tres Lagunas');
+INSERT INTO `localidades` VALUES ('1277', '10', 'Villa Dos Trece');
+INSERT INTO `localidades` VALUES ('1278', '10', 'Villa Escolar');
+INSERT INTO `localidades` VALUES ('1279', '10', 'Villa Gral. Güemes');
+INSERT INTO `localidades` VALUES ('1280', '11', 'Abdon Castro Tolay');
+INSERT INTO `localidades` VALUES ('1281', '11', 'Abra Pampa');
+INSERT INTO `localidades` VALUES ('1282', '11', 'Abralaite');
+INSERT INTO `localidades` VALUES ('1283', '11', 'Aguas Calientes');
+INSERT INTO `localidades` VALUES ('1284', '11', 'Arrayanal');
+INSERT INTO `localidades` VALUES ('1285', '11', 'Barrios');
+INSERT INTO `localidades` VALUES ('1286', '11', 'Caimancito');
+INSERT INTO `localidades` VALUES ('1287', '11', 'Calilegua');
+INSERT INTO `localidades` VALUES ('1288', '11', 'Cangrejillos');
+INSERT INTO `localidades` VALUES ('1289', '11', 'Caspala');
+INSERT INTO `localidades` VALUES ('1290', '11', 'Catuá');
+INSERT INTO `localidades` VALUES ('1291', '11', 'Cieneguillas');
+INSERT INTO `localidades` VALUES ('1292', '11', 'Coranzulli');
+INSERT INTO `localidades` VALUES ('1293', '11', 'Cusi-Cusi');
+INSERT INTO `localidades` VALUES ('1294', '11', 'El Aguilar');
+INSERT INTO `localidades` VALUES ('1295', '11', 'El Carmen');
+INSERT INTO `localidades` VALUES ('1296', '11', 'El Cóndor');
+INSERT INTO `localidades` VALUES ('1297', '11', 'El Fuerte');
+INSERT INTO `localidades` VALUES ('1298', '11', 'El Piquete');
+INSERT INTO `localidades` VALUES ('1299', '11', 'El Talar');
+INSERT INTO `localidades` VALUES ('1300', '11', 'Fraile Pintado');
+INSERT INTO `localidades` VALUES ('1301', '11', 'Hipólito Yrigoyen');
+INSERT INTO `localidades` VALUES ('1302', '11', 'Huacalera');
+INSERT INTO `localidades` VALUES ('1303', '11', 'Humahuaca');
+INSERT INTO `localidades` VALUES ('1304', '11', 'La Esperanza');
+INSERT INTO `localidades` VALUES ('1305', '11', 'La Mendieta');
+INSERT INTO `localidades` VALUES ('1306', '11', 'La Quiaca');
+INSERT INTO `localidades` VALUES ('1307', '11', 'Ledesma');
+INSERT INTO `localidades` VALUES ('1308', '11', 'Libertador Gral. San Martin');
+INSERT INTO `localidades` VALUES ('1309', '11', 'Maimara');
+INSERT INTO `localidades` VALUES ('1310', '11', 'Mina Pirquitas');
+INSERT INTO `localidades` VALUES ('1311', '11', 'Monterrico');
+INSERT INTO `localidades` VALUES ('1312', '11', 'Palma Sola');
+INSERT INTO `localidades` VALUES ('1313', '11', 'Palpalá');
+INSERT INTO `localidades` VALUES ('1314', '11', 'Pampa Blanca');
+INSERT INTO `localidades` VALUES ('1315', '11', 'Pampichuela');
+INSERT INTO `localidades` VALUES ('1316', '11', 'Perico');
+INSERT INTO `localidades` VALUES ('1317', '11', 'Puesto del Marqués');
+INSERT INTO `localidades` VALUES ('1318', '11', 'Puesto Viejo');
+INSERT INTO `localidades` VALUES ('1319', '11', 'Pumahuasi');
+INSERT INTO `localidades` VALUES ('1320', '11', 'Purmamarca');
+INSERT INTO `localidades` VALUES ('1321', '11', 'Rinconada');
+INSERT INTO `localidades` VALUES ('1322', '11', 'Rodeitos');
+INSERT INTO `localidades` VALUES ('1323', '11', 'Rosario de Río Grande');
+INSERT INTO `localidades` VALUES ('1324', '11', 'San Antonio');
+INSERT INTO `localidades` VALUES ('1325', '11', 'San Francisco');
+INSERT INTO `localidades` VALUES ('1326', '11', 'San Pedro');
+INSERT INTO `localidades` VALUES ('1327', '11', 'San Rafael');
+INSERT INTO `localidades` VALUES ('1328', '11', 'San Salvador');
+INSERT INTO `localidades` VALUES ('1329', '11', 'Santa Ana');
+INSERT INTO `localidades` VALUES ('1330', '11', 'Santa Catalina');
+INSERT INTO `localidades` VALUES ('1331', '11', 'Santa Clara');
+INSERT INTO `localidades` VALUES ('1332', '11', 'Susques');
+INSERT INTO `localidades` VALUES ('1333', '11', 'Tilcara');
+INSERT INTO `localidades` VALUES ('1334', '11', 'Tres Cruces');
+INSERT INTO `localidades` VALUES ('1335', '11', 'Tumbaya');
+INSERT INTO `localidades` VALUES ('1336', '11', 'Valle Grande');
+INSERT INTO `localidades` VALUES ('1337', '11', 'Vinalito');
+INSERT INTO `localidades` VALUES ('1338', '11', 'Volcán');
+INSERT INTO `localidades` VALUES ('1339', '11', 'Yala');
+INSERT INTO `localidades` VALUES ('1340', '11', 'Yaví');
+INSERT INTO `localidades` VALUES ('1341', '11', 'Yuto');
+INSERT INTO `localidades` VALUES ('1342', '12', 'Abramo');
+INSERT INTO `localidades` VALUES ('1343', '12', 'Adolfo Van Praet');
+INSERT INTO `localidades` VALUES ('1344', '12', 'Agustoni');
+INSERT INTO `localidades` VALUES ('1345', '12', 'Algarrobo del Aguila');
+INSERT INTO `localidades` VALUES ('1346', '12', 'Alpachiri');
+INSERT INTO `localidades` VALUES ('1347', '12', 'Alta Italia');
+INSERT INTO `localidades` VALUES ('1348', '12', 'Anguil');
+INSERT INTO `localidades` VALUES ('1349', '12', 'Arata');
+INSERT INTO `localidades` VALUES ('1350', '12', 'Ataliva Roca');
+INSERT INTO `localidades` VALUES ('1351', '12', 'Bernardo Larroude');
+INSERT INTO `localidades` VALUES ('1352', '12', 'Bernasconi');
+INSERT INTO `localidades` VALUES ('1353', '12', 'Caleufú');
+INSERT INTO `localidades` VALUES ('1354', '12', 'Carro Quemado');
+INSERT INTO `localidades` VALUES ('1355', '12', 'Catriló');
+INSERT INTO `localidades` VALUES ('1356', '12', 'Ceballos');
+INSERT INTO `localidades` VALUES ('1357', '12', 'Chacharramendi');
+INSERT INTO `localidades` VALUES ('1358', '12', 'Col. Barón');
+INSERT INTO `localidades` VALUES ('1359', '12', 'Col. Santa María');
+INSERT INTO `localidades` VALUES ('1360', '12', 'Conhelo');
+INSERT INTO `localidades` VALUES ('1361', '12', 'Coronel Hilario Lagos');
+INSERT INTO `localidades` VALUES ('1362', '12', 'Cuchillo-Có');
+INSERT INTO `localidades` VALUES ('1363', '12', 'Doblas');
+INSERT INTO `localidades` VALUES ('1364', '12', 'Dorila');
+INSERT INTO `localidades` VALUES ('1365', '12', 'Eduardo Castex');
+INSERT INTO `localidades` VALUES ('1366', '12', 'Embajador Martini');
+INSERT INTO `localidades` VALUES ('1367', '12', 'Falucho');
+INSERT INTO `localidades` VALUES ('1368', '12', 'Gral. Acha');
+INSERT INTO `localidades` VALUES ('1369', '12', 'Gral. Manuel Campos');
+INSERT INTO `localidades` VALUES ('1370', '12', 'Gral. Pico');
+INSERT INTO `localidades` VALUES ('1371', '12', 'Guatraché');
+INSERT INTO `localidades` VALUES ('1372', '12', 'Ing. Luiggi');
+INSERT INTO `localidades` VALUES ('1373', '12', 'Intendente Alvear');
+INSERT INTO `localidades` VALUES ('1374', '12', 'Jacinto Arauz');
+INSERT INTO `localidades` VALUES ('1375', '12', 'La Adela');
+INSERT INTO `localidades` VALUES ('1376', '12', 'La Humada');
+INSERT INTO `localidades` VALUES ('1377', '12', 'La Maruja');
+INSERT INTO `localidades` VALUES ('1378', '12', '12');
+INSERT INTO `localidades` VALUES ('1379', '12', 'La Reforma');
+INSERT INTO `localidades` VALUES ('1380', '12', 'Limay Mahuida');
+INSERT INTO `localidades` VALUES ('1381', '12', 'Lonquimay');
+INSERT INTO `localidades` VALUES ('1382', '12', 'Loventuel');
+INSERT INTO `localidades` VALUES ('1383', '12', 'Luan Toro');
+INSERT INTO `localidades` VALUES ('1384', '12', 'Macachín');
+INSERT INTO `localidades` VALUES ('1385', '12', 'Maisonnave');
+INSERT INTO `localidades` VALUES ('1386', '12', 'Mauricio Mayer');
+INSERT INTO `localidades` VALUES ('1387', '12', 'Metileo');
+INSERT INTO `localidades` VALUES ('1388', '12', 'Miguel Cané');
+INSERT INTO `localidades` VALUES ('1389', '12', 'Miguel Riglos');
+INSERT INTO `localidades` VALUES ('1390', '12', 'Monte Nievas');
+INSERT INTO `localidades` VALUES ('1391', '12', 'Parera');
+INSERT INTO `localidades` VALUES ('1392', '12', 'Perú');
+INSERT INTO `localidades` VALUES ('1393', '12', 'Pichi-Huinca');
+INSERT INTO `localidades` VALUES ('1394', '12', 'Puelches');
+INSERT INTO `localidades` VALUES ('1395', '12', 'Puelén');
+INSERT INTO `localidades` VALUES ('1396', '12', 'Quehue');
+INSERT INTO `localidades` VALUES ('1397', '12', 'Quemú Quemú');
+INSERT INTO `localidades` VALUES ('1398', '12', 'Quetrequén');
+INSERT INTO `localidades` VALUES ('1399', '12', 'Rancul');
+INSERT INTO `localidades` VALUES ('1400', '12', 'Realicó');
+INSERT INTO `localidades` VALUES ('1401', '12', 'Relmo');
+INSERT INTO `localidades` VALUES ('1402', '12', 'Rolón');
+INSERT INTO `localidades` VALUES ('1403', '12', 'Rucanelo');
+INSERT INTO `localidades` VALUES ('1404', '12', 'Sarah');
+INSERT INTO `localidades` VALUES ('1405', '12', 'Speluzzi');
+INSERT INTO `localidades` VALUES ('1406', '12', 'Sta. Isabel');
+INSERT INTO `localidades` VALUES ('1407', '12', 'Sta. Rosa');
+INSERT INTO `localidades` VALUES ('1408', '12', 'Sta. Teresa');
+INSERT INTO `localidades` VALUES ('1409', '12', 'Telén');
+INSERT INTO `localidades` VALUES ('1410', '12', 'Toay');
+INSERT INTO `localidades` VALUES ('1411', '12', 'Tomas M. de Anchorena');
+INSERT INTO `localidades` VALUES ('1412', '12', 'Trenel');
+INSERT INTO `localidades` VALUES ('1413', '12', 'Unanue');
+INSERT INTO `localidades` VALUES ('1414', '12', 'Uriburu');
+INSERT INTO `localidades` VALUES ('1415', '12', 'Veinticinco de Mayo');
+INSERT INTO `localidades` VALUES ('1416', '12', 'Vertiz');
+INSERT INTO `localidades` VALUES ('1417', '12', 'Victorica');
+INSERT INTO `localidades` VALUES ('1418', '12', 'Villa Mirasol');
+INSERT INTO `localidades` VALUES ('1419', '12', 'Winifreda');
+INSERT INTO `localidades` VALUES ('1420', '13', 'Arauco');
+INSERT INTO `localidades` VALUES ('1421', '13', 'Capital');
+INSERT INTO `localidades` VALUES ('1422', '13', 'Castro Barros');
+INSERT INTO `localidades` VALUES ('1423', '13', 'Chamical');
+INSERT INTO `localidades` VALUES ('1424', '13', 'Chilecito');
+INSERT INTO `localidades` VALUES ('1425', '13', 'Coronel F. Varela');
+INSERT INTO `localidades` VALUES ('1426', '13', 'Famatina');
+INSERT INTO `localidades` VALUES ('1427', '13', 'Gral. A.V.Peñaloza');
+INSERT INTO `localidades` VALUES ('1428', '13', 'Gral. Belgrano');
+INSERT INTO `localidades` VALUES ('1429', '13', 'Gral. J.F. Quiroga');
+INSERT INTO `localidades` VALUES ('1430', '13', 'Gral. Lamadrid');
+INSERT INTO `localidades` VALUES ('1431', '13', 'Gral. Ocampo');
+INSERT INTO `localidades` VALUES ('1432', '13', 'Gral. San Martín');
+INSERT INTO `localidades` VALUES ('1433', '13', 'Independencia');
+INSERT INTO `localidades` VALUES ('1434', '13', 'Rosario Penaloza');
+INSERT INTO `localidades` VALUES ('1435', '13', 'San Blas de Los Sauces');
+INSERT INTO `localidades` VALUES ('1436', '13', 'Sanagasta');
+INSERT INTO `localidades` VALUES ('1437', '13', 'Vinchina');
+INSERT INTO `localidades` VALUES ('1438', '14', 'Capital');
+INSERT INTO `localidades` VALUES ('1439', '14', 'Chacras de Coria');
+INSERT INTO `localidades` VALUES ('1440', '14', 'Dorrego');
+INSERT INTO `localidades` VALUES ('1441', '14', 'Gllen');
+INSERT INTO `localidades` VALUES ('1442', '14', 'Godoy Cruz');
+INSERT INTO `localidades` VALUES ('1443', '14', 'Gral. Alvear');
+INSERT INTO `localidades` VALUES ('1444', '14', 'Guaymallén');
+INSERT INTO `localidades` VALUES ('1445', '14', 'Junín');
+INSERT INTO `localidades` VALUES ('1446', '14', 'La Paz');
+INSERT INTO `localidades` VALUES ('1447', '14', 'Las Heras');
+INSERT INTO `localidades` VALUES ('1448', '14', 'Lavalle');
+INSERT INTO `localidades` VALUES ('1449', '14', 'Luján');
+INSERT INTO `localidades` VALUES ('1450', '14', 'Luján De Cuyo');
+INSERT INTO `localidades` VALUES ('1451', '14', 'Maipú');
+INSERT INTO `localidades` VALUES ('1452', '14', 'Malargüe');
+INSERT INTO `localidades` VALUES ('1453', '14', 'Rivadavia');
+INSERT INTO `localidades` VALUES ('1454', '14', 'San Carlos');
+INSERT INTO `localidades` VALUES ('1455', '14', 'San Martín');
+INSERT INTO `localidades` VALUES ('1456', '14', 'San Rafael');
+INSERT INTO `localidades` VALUES ('1457', '14', 'Sta. Rosa');
+INSERT INTO `localidades` VALUES ('1458', '14', 'Tunuyán');
+INSERT INTO `localidades` VALUES ('1459', '14', 'Tupungato');
+INSERT INTO `localidades` VALUES ('1460', '14', 'Villa Nueva');
+INSERT INTO `localidades` VALUES ('1461', '15', 'Alba Posse');
+INSERT INTO `localidades` VALUES ('1462', '15', 'Almafuerte');
+INSERT INTO `localidades` VALUES ('1463', '15', 'Apóstoles');
+INSERT INTO `localidades` VALUES ('1464', '15', 'Aristóbulo Del Valle');
+INSERT INTO `localidades` VALUES ('1465', '15', 'Arroyo Del Medio');
+INSERT INTO `localidades` VALUES ('1466', '15', 'Azara');
+INSERT INTO `localidades` VALUES ('1467', '15', 'Bdo. De Irigoyen');
+INSERT INTO `localidades` VALUES ('1468', '15', 'Bonpland');
+INSERT INTO `localidades` VALUES ('1469', '15', 'Caá Yari');
+INSERT INTO `localidades` VALUES ('1470', '15', 'Campo Grande');
+INSERT INTO `localidades` VALUES ('1471', '15', 'Campo Ramón');
+INSERT INTO `localidades` VALUES ('1472', '15', 'Campo Viera');
+INSERT INTO `localidades` VALUES ('1473', '15', 'Candelaria');
+INSERT INTO `localidades` VALUES ('1474', '15', 'Capioví');
+INSERT INTO `localidades` VALUES ('1475', '15', 'Caraguatay');
+INSERT INTO `localidades` VALUES ('1476', '15', 'Cdte. Guacurarí');
+INSERT INTO `localidades` VALUES ('1477', '15', 'Cerro Azul');
+INSERT INTO `localidades` VALUES ('1478', '15', 'Cerro Corá');
+INSERT INTO `localidades` VALUES ('1479', '15', 'Col. Alberdi');
+INSERT INTO `localidades` VALUES ('1480', '15', 'Col. Aurora');
+INSERT INTO `localidades` VALUES ('1481', '15', 'Col. Delicia');
+INSERT INTO `localidades` VALUES ('1482', '15', 'Col. Polana');
+INSERT INTO `localidades` VALUES ('1483', '15', 'Col. Victoria');
+INSERT INTO `localidades` VALUES ('1484', '15', 'Col. Wanda');
+INSERT INTO `localidades` VALUES ('1485', '15', 'Concepción De La Sierra');
+INSERT INTO `localidades` VALUES ('1486', '15', 'Corpus');
+INSERT INTO `localidades` VALUES ('1487', '15', 'Dos Arroyos');
+INSERT INTO `localidades` VALUES ('1488', '15', 'Dos de Mayo');
+INSERT INTO `localidades` VALUES ('1489', '15', 'El Alcázar');
+INSERT INTO `localidades` VALUES ('1490', '15', 'El Dorado');
+INSERT INTO `localidades` VALUES ('1491', '15', 'El Soberbio');
+INSERT INTO `localidades` VALUES ('1492', '15', 'Esperanza');
+INSERT INTO `localidades` VALUES ('1493', '15', 'F. Ameghino');
+INSERT INTO `localidades` VALUES ('1494', '15', 'Fachinal');
+INSERT INTO `localidades` VALUES ('1495', '15', 'Garuhapé');
+INSERT INTO `localidades` VALUES ('1496', '15', 'Garupá');
+INSERT INTO `localidades` VALUES ('1497', '15', 'Gdor. López');
+INSERT INTO `localidades` VALUES ('1498', '15', 'Gdor. Roca');
+INSERT INTO `localidades` VALUES ('1499', '15', 'Gral. Alvear');
+INSERT INTO `localidades` VALUES ('1500', '15', 'Gral. Urquiza');
+INSERT INTO `localidades` VALUES ('1501', '15', 'Guaraní');
+INSERT INTO `localidades` VALUES ('1502', '15', 'H. Yrigoyen');
+INSERT INTO `localidades` VALUES ('1503', '15', 'Iguazú');
+INSERT INTO `localidades` VALUES ('1504', '15', 'Itacaruaré');
+INSERT INTO `localidades` VALUES ('1505', '15', 'Jardín América');
+INSERT INTO `localidades` VALUES ('1506', '15', 'Leandro N. Alem');
+INSERT INTO `localidades` VALUES ('1507', '15', 'Libertad');
+INSERT INTO `localidades` VALUES ('1508', '15', 'Loreto');
+INSERT INTO `localidades` VALUES ('1509', '15', 'Los Helechos');
+INSERT INTO `localidades` VALUES ('1510', '15', 'Mártires');
+INSERT INTO `localidades` VALUES ('1511', '15', '15');
+INSERT INTO `localidades` VALUES ('1512', '15', 'Mojón Grande');
+INSERT INTO `localidades` VALUES ('1513', '15', 'Montecarlo');
+INSERT INTO `localidades` VALUES ('1514', '15', 'Nueve de Julio');
+INSERT INTO `localidades` VALUES ('1515', '15', 'Oberá');
+INSERT INTO `localidades` VALUES ('1516', '15', 'Olegario V. Andrade');
+INSERT INTO `localidades` VALUES ('1517', '15', 'Panambí');
+INSERT INTO `localidades` VALUES ('1518', '15', 'Posadas');
+INSERT INTO `localidades` VALUES ('1519', '15', 'Profundidad');
+INSERT INTO `localidades` VALUES ('1520', '15', 'Pto. Iguazú');
+INSERT INTO `localidades` VALUES ('1521', '15', 'Pto. Leoni');
+INSERT INTO `localidades` VALUES ('1522', '15', 'Pto. Piray');
+INSERT INTO `localidades` VALUES ('1523', '15', 'Pto. Rico');
+INSERT INTO `localidades` VALUES ('1524', '15', 'Ruiz de Montoya');
+INSERT INTO `localidades` VALUES ('1525', '15', 'San Antonio');
+INSERT INTO `localidades` VALUES ('1526', '15', 'San Ignacio');
+INSERT INTO `localidades` VALUES ('1527', '15', 'San Javier');
+INSERT INTO `localidades` VALUES ('1528', '15', 'San José');
+INSERT INTO `localidades` VALUES ('1529', '15', 'San Martín');
+INSERT INTO `localidades` VALUES ('1530', '15', 'San Pedro');
+INSERT INTO `localidades` VALUES ('1531', '15', 'San Vicente');
+INSERT INTO `localidades` VALUES ('1532', '15', 'Santiago De Liniers');
+INSERT INTO `localidades` VALUES ('1533', '15', 'Santo Pipo');
+INSERT INTO `localidades` VALUES ('1534', '15', 'Sta. Ana');
+INSERT INTO `localidades` VALUES ('1535', '15', 'Sta. María');
+INSERT INTO `localidades` VALUES ('1536', '15', 'Tres Capones');
+INSERT INTO `localidades` VALUES ('1537', '15', 'Veinticinco de Mayo');
+INSERT INTO `localidades` VALUES ('1538', '15', 'Wanda');
+INSERT INTO `localidades` VALUES ('1539', '16', 'Aguada San Roque');
+INSERT INTO `localidades` VALUES ('1540', '16', 'Aluminé');
+INSERT INTO `localidades` VALUES ('1541', '16', 'Andacollo');
+INSERT INTO `localidades` VALUES ('1542', '16', 'Añelo');
+INSERT INTO `localidades` VALUES ('1543', '16', 'Bajada del Agrio');
+INSERT INTO `localidades` VALUES ('1544', '16', 'Barrancas');
+INSERT INTO `localidades` VALUES ('1545', '16', 'Buta Ranquil');
+INSERT INTO `localidades` VALUES ('1546', '16', 'Capital');
+INSERT INTO `localidades` VALUES ('1547', '16', 'Caviahué');
+INSERT INTO `localidades` VALUES ('1548', '16', 'Centenario');
+INSERT INTO `localidades` VALUES ('1549', '16', 'Chorriaca');
+INSERT INTO `localidades` VALUES ('1550', '16', 'Chos Malal');
+INSERT INTO `localidades` VALUES ('1551', '16', 'Cipolletti');
+INSERT INTO `localidades` VALUES ('1552', '16', 'Covunco Abajo');
+INSERT INTO `localidades` VALUES ('1553', '16', 'Coyuco Cochico');
+INSERT INTO `localidades` VALUES ('1554', '16', 'Cutral Có');
+INSERT INTO `localidades` VALUES ('1555', '16', 'El Cholar');
+INSERT INTO `localidades` VALUES ('1556', '16', 'El Huecú');
+INSERT INTO `localidades` VALUES ('1557', '16', 'El Sauce');
+INSERT INTO `localidades` VALUES ('1558', '16', 'Guañacos');
+INSERT INTO `localidades` VALUES ('1559', '16', 'Huinganco');
+INSERT INTO `localidades` VALUES ('1560', '16', 'Las Coloradas');
+INSERT INTO `localidades` VALUES ('1561', '16', 'Las Lajas');
+INSERT INTO `localidades` VALUES ('1562', '16', 'Las Ovejas');
+INSERT INTO `localidades` VALUES ('1563', '16', 'Loncopué');
+INSERT INTO `localidades` VALUES ('1564', '16', 'Los Catutos');
+INSERT INTO `localidades` VALUES ('1565', '16', 'Los Chihuidos');
+INSERT INTO `localidades` VALUES ('1566', '16', 'Los Miches');
+INSERT INTO `localidades` VALUES ('1567', '16', 'Manzano Amargo');
+INSERT INTO `localidades` VALUES ('1568', '16', '16');
+INSERT INTO `localidades` VALUES ('1569', '16', 'Octavio Pico');
+INSERT INTO `localidades` VALUES ('1570', '16', 'Paso Aguerre');
+INSERT INTO `localidades` VALUES ('1571', '16', 'Picún Leufú');
+INSERT INTO `localidades` VALUES ('1572', '16', 'Piedra del Aguila');
+INSERT INTO `localidades` VALUES ('1573', '16', 'Pilo Lil');
+INSERT INTO `localidades` VALUES ('1574', '16', 'Plaza Huincul');
+INSERT INTO `localidades` VALUES ('1575', '16', 'Plottier');
+INSERT INTO `localidades` VALUES ('1576', '16', 'Quili Malal');
+INSERT INTO `localidades` VALUES ('1577', '16', 'Ramón Castro');
+INSERT INTO `localidades` VALUES ('1578', '16', 'Rincón de Los Sauces');
+INSERT INTO `localidades` VALUES ('1579', '16', 'San Martín de Los Andes');
+INSERT INTO `localidades` VALUES ('1580', '16', 'San Patricio del Chañar');
+INSERT INTO `localidades` VALUES ('1581', '16', 'Santo Tomás');
+INSERT INTO `localidades` VALUES ('1582', '16', 'Sauzal Bonito');
+INSERT INTO `localidades` VALUES ('1583', '16', 'Senillosa');
+INSERT INTO `localidades` VALUES ('1584', '16', 'Taquimilán');
+INSERT INTO `localidades` VALUES ('1585', '16', 'Tricao Malal');
+INSERT INTO `localidades` VALUES ('1586', '16', 'Varvarco');
+INSERT INTO `localidades` VALUES ('1587', '16', 'Villa Curí Leuvu');
+INSERT INTO `localidades` VALUES ('1588', '16', 'Villa del Nahueve');
+INSERT INTO `localidades` VALUES ('1589', '16', 'Villa del Puente Picún Leuvú');
+INSERT INTO `localidades` VALUES ('1590', '16', 'Villa El Chocón');
+INSERT INTO `localidades` VALUES ('1591', '16', 'Villa La Angostura');
+INSERT INTO `localidades` VALUES ('1592', '16', 'Villa Pehuenia');
+INSERT INTO `localidades` VALUES ('1593', '16', 'Villa Traful');
+INSERT INTO `localidades` VALUES ('1594', '16', 'Vista Alegre');
+INSERT INTO `localidades` VALUES ('1595', '16', 'Zapala');
+INSERT INTO `localidades` VALUES ('1596', '17', 'Aguada Cecilio');
+INSERT INTO `localidades` VALUES ('1597', '17', 'Aguada de Guerra');
+INSERT INTO `localidades` VALUES ('1598', '17', 'Allén');
+INSERT INTO `localidades` VALUES ('1599', '17', 'Arroyo de La Ventana');
+INSERT INTO `localidades` VALUES ('1600', '17', 'Arroyo Los Berros');
+INSERT INTO `localidades` VALUES ('1601', '17', 'Bariloche');
+INSERT INTO `localidades` VALUES ('1602', '17', 'Calte. Cordero');
+INSERT INTO `localidades` VALUES ('1603', '17', 'Campo Grande');
+INSERT INTO `localidades` VALUES ('1604', '17', 'Catriel');
+INSERT INTO `localidades` VALUES ('1605', '17', 'Cerro Policía');
+INSERT INTO `localidades` VALUES ('1606', '17', 'Cervantes');
+INSERT INTO `localidades` VALUES ('1607', '17', 'Chelforo');
+INSERT INTO `localidades` VALUES ('1608', '17', 'Chimpay');
+INSERT INTO `localidades` VALUES ('1609', '17', 'Chinchinales');
+INSERT INTO `localidades` VALUES ('1610', '17', 'Chipauquil');
+INSERT INTO `localidades` VALUES ('1611', '17', 'Choele Choel');
+INSERT INTO `localidades` VALUES ('1612', '17', 'Cinco Saltos');
+INSERT INTO `localidades` VALUES ('1613', '17', 'Cipolletti');
+INSERT INTO `localidades` VALUES ('1614', '17', 'Clemente Onelli');
+INSERT INTO `localidades` VALUES ('1615', '17', 'Colán Conhue');
+INSERT INTO `localidades` VALUES ('1616', '17', 'Comallo');
+INSERT INTO `localidades` VALUES ('1617', '17', 'Comicó');
+INSERT INTO `localidades` VALUES ('1618', '17', 'Cona Niyeu');
+INSERT INTO `localidades` VALUES ('1619', '17', 'Coronel Belisle');
+INSERT INTO `localidades` VALUES ('1620', '17', 'Cubanea');
+INSERT INTO `localidades` VALUES ('1621', '17', 'Darwin');
+INSERT INTO `localidades` VALUES ('1622', '17', 'Dina Huapi');
+INSERT INTO `localidades` VALUES ('1623', '17', 'El Bolsón');
+INSERT INTO `localidades` VALUES ('1624', '17', 'El Caín');
+INSERT INTO `localidades` VALUES ('1625', '17', 'El Manso');
+INSERT INTO `localidades` VALUES ('1626', '17', 'Gral. Conesa');
+INSERT INTO `localidades` VALUES ('1627', '17', 'Gral. Enrique Godoy');
+INSERT INTO `localidades` VALUES ('1628', '17', 'Gral. Fernandez Oro');
+INSERT INTO `localidades` VALUES ('1629', '17', 'Gral. Roca');
+INSERT INTO `localidades` VALUES ('1630', '17', 'Guardia Mitre');
+INSERT INTO `localidades` VALUES ('1631', '17', 'Ing. Huergo');
+INSERT INTO `localidades` VALUES ('1632', '17', 'Ing. Jacobacci');
+INSERT INTO `localidades` VALUES ('1633', '17', 'Laguna Blanca');
+INSERT INTO `localidades` VALUES ('1634', '17', 'Lamarque');
+INSERT INTO `localidades` VALUES ('1635', '17', 'Las Grutas');
+INSERT INTO `localidades` VALUES ('1636', '17', 'Los Menucos');
+INSERT INTO `localidades` VALUES ('1637', '17', 'Luis Beltrán');
+INSERT INTO `localidades` VALUES ('1638', '17', 'Mainqué');
+INSERT INTO `localidades` VALUES ('1639', '17', 'Mamuel Choique');
+INSERT INTO `localidades` VALUES ('1640', '17', 'Maquinchao');
+INSERT INTO `localidades` VALUES ('1641', '17', 'Mencué');
+INSERT INTO `localidades` VALUES ('1642', '17', 'Mtro. Ramos Mexia');
+INSERT INTO `localidades` VALUES ('1643', '17', 'Nahuel Niyeu');
+INSERT INTO `localidades` VALUES ('1644', '17', 'Naupa Huen');
+INSERT INTO `localidades` VALUES ('1645', '17', 'Ñorquinco');
+INSERT INTO `localidades` VALUES ('1646', '17', 'Ojos de Agua');
+INSERT INTO `localidades` VALUES ('1647', '17', 'Paso de Agua');
+INSERT INTO `localidades` VALUES ('1648', '17', 'Paso Flores');
+INSERT INTO `localidades` VALUES ('1649', '17', 'Peñas Blancas');
+INSERT INTO `localidades` VALUES ('1650', '17', 'Pichi Mahuida');
+INSERT INTO `localidades` VALUES ('1651', '17', 'Pilcaniyeu');
+INSERT INTO `localidades` VALUES ('1652', '17', 'Pomona');
+INSERT INTO `localidades` VALUES ('1653', '17', 'Prahuaniyeu');
+INSERT INTO `localidades` VALUES ('1654', '17', 'Rincón Treneta');
+INSERT INTO `localidades` VALUES ('1655', '17', 'Río Chico');
+INSERT INTO `localidades` VALUES ('1656', '17', 'Río Colorado');
+INSERT INTO `localidades` VALUES ('1657', '17', 'Roca');
+INSERT INTO `localidades` VALUES ('1658', '17', 'San Antonio Oeste');
+INSERT INTO `localidades` VALUES ('1659', '17', 'San Javier');
+INSERT INTO `localidades` VALUES ('1660', '17', 'Sierra Colorada');
+INSERT INTO `localidades` VALUES ('1661', '17', 'Sierra Grande');
+INSERT INTO `localidades` VALUES ('1662', '17', 'Sierra Pailemán');
+INSERT INTO `localidades` VALUES ('1663', '17', 'Valcheta');
+INSERT INTO `localidades` VALUES ('1664', '17', 'Valle Azul');
+INSERT INTO `localidades` VALUES ('1665', '17', 'Viedma');
+INSERT INTO `localidades` VALUES ('1666', '17', 'Villa Llanquín');
+INSERT INTO `localidades` VALUES ('1667', '17', 'Villa Mascardi');
+INSERT INTO `localidades` VALUES ('1668', '17', 'Villa Regina');
+INSERT INTO `localidades` VALUES ('1669', '17', 'Yaminué');
+INSERT INTO `localidades` VALUES ('1670', '18', 'A. Saravia');
+INSERT INTO `localidades` VALUES ('1671', '18', 'Aguaray');
+INSERT INTO `localidades` VALUES ('1672', '18', 'Angastaco');
+INSERT INTO `localidades` VALUES ('1673', '18', 'Animaná');
+INSERT INTO `localidades` VALUES ('1674', '18', 'Cachi');
+INSERT INTO `localidades` VALUES ('1675', '18', 'Cafayate');
+INSERT INTO `localidades` VALUES ('1676', '18', 'Campo Quijano');
+INSERT INTO `localidades` VALUES ('1677', '18', 'Campo Santo');
+INSERT INTO `localidades` VALUES ('1678', '18', 'Capital');
+INSERT INTO `localidades` VALUES ('1679', '18', 'Cerrillos');
+INSERT INTO `localidades` VALUES ('1680', '18', 'Chicoana');
+INSERT INTO `localidades` VALUES ('1681', '18', 'Col. Sta. Rosa');
+INSERT INTO `localidades` VALUES ('1682', '18', 'Coronel Moldes');
+INSERT INTO `localidades` VALUES ('1683', '18', 'El Bordo');
+INSERT INTO `localidades` VALUES ('1684', '18', 'El Carril');
+INSERT INTO `localidades` VALUES ('1685', '18', 'El Galpón');
+INSERT INTO `localidades` VALUES ('1686', '18', 'El Jardín');
+INSERT INTO `localidades` VALUES ('1687', '18', 'El Potrero');
+INSERT INTO `localidades` VALUES ('1688', '18', 'El Quebrachal');
+INSERT INTO `localidades` VALUES ('1689', '18', 'El Tala');
+INSERT INTO `localidades` VALUES ('1690', '18', 'Embarcación');
+INSERT INTO `localidades` VALUES ('1691', '18', 'Gral. Ballivian');
+INSERT INTO `localidades` VALUES ('1692', '18', 'Gral. Güemes');
+INSERT INTO `localidades` VALUES ('1693', '18', 'Gral. Mosconi');
+INSERT INTO `localidades` VALUES ('1694', '18', 'Gral. Pizarro');
+INSERT INTO `localidades` VALUES ('1695', '18', 'Guachipas');
+INSERT INTO `localidades` VALUES ('1696', '18', 'Hipólito Yrigoyen');
+INSERT INTO `localidades` VALUES ('1697', '18', 'Iruyá');
+INSERT INTO `localidades` VALUES ('1698', '18', 'Isla De Cañas');
+INSERT INTO `localidades` VALUES ('1699', '18', 'J. V. Gonzalez');
+INSERT INTO `localidades` VALUES ('1700', '18', 'La Caldera');
+INSERT INTO `localidades` VALUES ('1701', '18', 'La Candelaria');
+INSERT INTO `localidades` VALUES ('1702', '18', 'La Merced');
+INSERT INTO `localidades` VALUES ('1703', '18', 'La Poma');
+INSERT INTO `localidades` VALUES ('1704', '18', 'La Viña');
+INSERT INTO `localidades` VALUES ('1705', '18', 'Las Lajitas');
+INSERT INTO `localidades` VALUES ('1706', '18', 'Los Toldos');
+INSERT INTO `localidades` VALUES ('1707', '18', 'Metán');
+INSERT INTO `localidades` VALUES ('1708', '18', 'Molinos');
+INSERT INTO `localidades` VALUES ('1709', '18', 'Nazareno');
+INSERT INTO `localidades` VALUES ('1710', '18', 'Orán');
+INSERT INTO `localidades` VALUES ('1711', '18', 'Payogasta');
+INSERT INTO `localidades` VALUES ('1712', '18', 'Pichanal');
+INSERT INTO `localidades` VALUES ('1713', '18', 'Prof. S. Mazza');
+INSERT INTO `localidades` VALUES ('1714', '18', 'Río Piedras');
+INSERT INTO `localidades` VALUES ('1715', '18', 'Rivadavia Banda Norte');
+INSERT INTO `localidades` VALUES ('1716', '18', 'Rivadavia Banda Sur');
+INSERT INTO `localidades` VALUES ('1717', '18', 'Rosario de La Frontera');
+INSERT INTO `localidades` VALUES ('1718', '18', 'Rosario de Lerma');
+INSERT INTO `localidades` VALUES ('1719', '18', 'Saclantás');
+INSERT INTO `localidades` VALUES ('1720', '18', '18');
+INSERT INTO `localidades` VALUES ('1721', '18', 'San Antonio');
+INSERT INTO `localidades` VALUES ('1722', '18', 'San Carlos');
+INSERT INTO `localidades` VALUES ('1723', '18', 'San José De Metán');
+INSERT INTO `localidades` VALUES ('1724', '18', 'San Ramón');
+INSERT INTO `localidades` VALUES ('1725', '18', 'Santa Victoria E.');
+INSERT INTO `localidades` VALUES ('1726', '18', 'Santa Victoria O.');
+INSERT INTO `localidades` VALUES ('1727', '18', 'Tartagal');
+INSERT INTO `localidades` VALUES ('1728', '18', 'Tolar Grande');
+INSERT INTO `localidades` VALUES ('1729', '18', 'Urundel');
+INSERT INTO `localidades` VALUES ('1730', '18', 'Vaqueros');
+INSERT INTO `localidades` VALUES ('1731', '18', 'Villa San Lorenzo');
+INSERT INTO `localidades` VALUES ('1732', '19', 'Albardón');
+INSERT INTO `localidades` VALUES ('1733', '19', 'Angaco');
+INSERT INTO `localidades` VALUES ('1734', '19', 'Calingasta');
+INSERT INTO `localidades` VALUES ('1735', '19', 'Capital');
+INSERT INTO `localidades` VALUES ('1736', '19', 'Caucete');
+INSERT INTO `localidades` VALUES ('1737', '19', 'Chimbas');
+INSERT INTO `localidades` VALUES ('1738', '19', 'Iglesia');
+INSERT INTO `localidades` VALUES ('1739', '19', 'Jachal');
+INSERT INTO `localidades` VALUES ('1740', '19', 'Nueve de Julio');
+INSERT INTO `localidades` VALUES ('1741', '19', 'Pocito');
+INSERT INTO `localidades` VALUES ('1742', '19', 'Rawson');
+INSERT INTO `localidades` VALUES ('1743', '19', 'Rivadavia');
+INSERT INTO `localidades` VALUES ('1744', '19', '19');
+INSERT INTO `localidades` VALUES ('1745', '19', 'San Martín');
+INSERT INTO `localidades` VALUES ('1746', '19', 'Santa Lucía');
+INSERT INTO `localidades` VALUES ('1747', '19', 'Sarmiento');
+INSERT INTO `localidades` VALUES ('1748', '19', 'Ullum');
+INSERT INTO `localidades` VALUES ('1749', '19', 'Valle Fértil');
+INSERT INTO `localidades` VALUES ('1750', '19', 'Veinticinco de Mayo');
+INSERT INTO `localidades` VALUES ('1751', '19', 'Zonda');
+INSERT INTO `localidades` VALUES ('1752', '20', 'Alto Pelado');
+INSERT INTO `localidades` VALUES ('1753', '20', 'Alto Pencoso');
+INSERT INTO `localidades` VALUES ('1754', '20', 'Anchorena');
+INSERT INTO `localidades` VALUES ('1755', '20', 'Arizona');
+INSERT INTO `localidades` VALUES ('1756', '20', 'Bagual');
+INSERT INTO `localidades` VALUES ('1757', '20', 'Balde');
+INSERT INTO `localidades` VALUES ('1758', '20', 'Batavia');
+INSERT INTO `localidades` VALUES ('1759', '20', 'Beazley');
+INSERT INTO `localidades` VALUES ('1760', '20', 'Buena Esperanza');
+INSERT INTO `localidades` VALUES ('1761', '20', 'Candelaria');
+INSERT INTO `localidades` VALUES ('1762', '20', 'Capital');
+INSERT INTO `localidades` VALUES ('1763', '20', 'Carolina');
+INSERT INTO `localidades` VALUES ('1764', '20', 'Carpintería');
+INSERT INTO `localidades` VALUES ('1765', '20', 'Concarán');
+INSERT INTO `localidades` VALUES ('1766', '20', 'Cortaderas');
+INSERT INTO `localidades` VALUES ('1767', '20', 'El Morro');
+INSERT INTO `localidades` VALUES ('1768', '20', 'El Trapiche');
+INSERT INTO `localidades` VALUES ('1769', '20', 'El Volcán');
+INSERT INTO `localidades` VALUES ('1770', '20', 'Fortín El Patria');
+INSERT INTO `localidades` VALUES ('1771', '20', 'Fortuna');
+INSERT INTO `localidades` VALUES ('1772', '20', 'Fraga');
+INSERT INTO `localidades` VALUES ('1773', '20', 'Juan Jorba');
+INSERT INTO `localidades` VALUES ('1774', '20', 'Juan Llerena');
+INSERT INTO `localidades` VALUES ('1775', '20', 'Juana Koslay');
+INSERT INTO `localidades` VALUES ('1776', '20', 'Justo Daract');
+INSERT INTO `localidades` VALUES ('1777', '20', 'La Calera');
+INSERT INTO `localidades` VALUES ('1778', '20', 'La Florida');
+INSERT INTO `localidades` VALUES ('1779', '20', 'La Punilla');
+INSERT INTO `localidades` VALUES ('1780', '20', 'La Toma');
+INSERT INTO `localidades` VALUES ('1781', '20', 'Lafinur');
+INSERT INTO `localidades` VALUES ('1782', '20', 'Las Aguadas');
+INSERT INTO `localidades` VALUES ('1783', '20', 'Las Chacras');
+INSERT INTO `localidades` VALUES ('1784', '20', 'Las Lagunas');
+INSERT INTO `localidades` VALUES ('1785', '20', 'Las Vertientes');
+INSERT INTO `localidades` VALUES ('1786', '20', 'Lavaisse');
+INSERT INTO `localidades` VALUES ('1787', '20', 'Leandro N. Alem');
+INSERT INTO `localidades` VALUES ('1788', '20', 'Los Molles');
+INSERT INTO `localidades` VALUES ('1789', '20', 'Luján');
+INSERT INTO `localidades` VALUES ('1790', '20', 'Mercedes');
+INSERT INTO `localidades` VALUES ('1791', '20', 'Merlo');
+INSERT INTO `localidades` VALUES ('1792', '20', 'Naschel');
+INSERT INTO `localidades` VALUES ('1793', '20', 'Navia');
+INSERT INTO `localidades` VALUES ('1794', '20', 'Nogolí');
+INSERT INTO `localidades` VALUES ('1795', '20', 'Nueva Galia');
+INSERT INTO `localidades` VALUES ('1796', '20', 'Papagayos');
+INSERT INTO `localidades` VALUES ('1797', '20', 'Paso Grande');
+INSERT INTO `localidades` VALUES ('1798', '20', 'Potrero de Los Funes');
+INSERT INTO `localidades` VALUES ('1799', '20', 'Quines');
+INSERT INTO `localidades` VALUES ('1800', '20', 'Renca');
+INSERT INTO `localidades` VALUES ('1801', '20', 'Saladillo');
+INSERT INTO `localidades` VALUES ('1802', '20', 'San Francisco');
+INSERT INTO `localidades` VALUES ('1803', '20', 'San Gerónimo');
+INSERT INTO `localidades` VALUES ('1804', '20', 'San Martín');
+INSERT INTO `localidades` VALUES ('1805', '20', 'San Pablo');
+INSERT INTO `localidades` VALUES ('1806', '20', 'Santa Rosa de Conlara');
+INSERT INTO `localidades` VALUES ('1807', '20', 'Talita');
+INSERT INTO `localidades` VALUES ('1808', '20', 'Tilisarao');
+INSERT INTO `localidades` VALUES ('1809', '20', 'Unión');
+INSERT INTO `localidades` VALUES ('1810', '20', 'Villa de La Quebrada');
+INSERT INTO `localidades` VALUES ('1811', '20', 'Villa de Praga');
+INSERT INTO `localidades` VALUES ('1812', '20', 'Villa del Carmen');
+INSERT INTO `localidades` VALUES ('1813', '20', 'Villa Gral. Roca');
+INSERT INTO `localidades` VALUES ('1814', '20', 'Villa Larca');
+INSERT INTO `localidades` VALUES ('1815', '20', 'Villa Mercedes');
+INSERT INTO `localidades` VALUES ('1816', '20', 'Zanjitas');
+INSERT INTO `localidades` VALUES ('1817', '21', 'Calafate');
+INSERT INTO `localidades` VALUES ('1818', '21', 'Caleta Olivia');
+INSERT INTO `localidades` VALUES ('1819', '21', 'Cañadón Seco');
+INSERT INTO `localidades` VALUES ('1820', '21', 'Comandante Piedrabuena');
+INSERT INTO `localidades` VALUES ('1821', '21', 'El Calafate');
+INSERT INTO `localidades` VALUES ('1822', '21', 'El Chaltén');
+INSERT INTO `localidades` VALUES ('1823', '21', 'Gdor. Gregores');
+INSERT INTO `localidades` VALUES ('1824', '21', 'Hipólito Yrigoyen');
+INSERT INTO `localidades` VALUES ('1825', '21', 'Jaramillo');
+INSERT INTO `localidades` VALUES ('1826', '21', 'Koluel Kaike');
+INSERT INTO `localidades` VALUES ('1827', '21', 'Las Heras');
+INSERT INTO `localidades` VALUES ('1828', '21', 'Los Antiguos');
+INSERT INTO `localidades` VALUES ('1829', '21', 'Perito Moreno');
+INSERT INTO `localidades` VALUES ('1830', '21', 'Pico Truncado');
+INSERT INTO `localidades` VALUES ('1831', '21', 'Pto. Deseado');
+INSERT INTO `localidades` VALUES ('1832', '21', 'Pto. San Julián');
+INSERT INTO `localidades` VALUES ('1833', '21', 'Pto. 21');
+INSERT INTO `localidades` VALUES ('1834', '21', 'Río Cuarto');
+INSERT INTO `localidades` VALUES ('1835', '21', 'Río Gallegos');
+INSERT INTO `localidades` VALUES ('1836', '21', 'Río Turbio');
+INSERT INTO `localidades` VALUES ('1837', '21', 'Tres Lagos');
+INSERT INTO `localidades` VALUES ('1838', '21', 'Veintiocho De Noviembre');
+INSERT INTO `localidades` VALUES ('1839', '22', 'Aarón Castellanos');
+INSERT INTO `localidades` VALUES ('1840', '22', 'Acebal');
+INSERT INTO `localidades` VALUES ('1841', '22', 'Aguará Grande');
+INSERT INTO `localidades` VALUES ('1842', '22', 'Albarellos');
+INSERT INTO `localidades` VALUES ('1843', '22', 'Alcorta');
+INSERT INTO `localidades` VALUES ('1844', '22', 'Aldao');
+INSERT INTO `localidades` VALUES ('1845', '22', 'Alejandra');
+INSERT INTO `localidades` VALUES ('1846', '22', 'Álvarez');
+INSERT INTO `localidades` VALUES ('1847', '22', 'Ambrosetti');
+INSERT INTO `localidades` VALUES ('1848', '22', 'Amenábar');
+INSERT INTO `localidades` VALUES ('1849', '22', 'Angélica');
+INSERT INTO `localidades` VALUES ('1850', '22', 'Angeloni');
+INSERT INTO `localidades` VALUES ('1851', '22', 'Arequito');
+INSERT INTO `localidades` VALUES ('1852', '22', 'Arminda');
+INSERT INTO `localidades` VALUES ('1853', '22', 'Armstrong');
+INSERT INTO `localidades` VALUES ('1854', '22', 'Arocena');
+INSERT INTO `localidades` VALUES ('1855', '22', 'Arroyo Aguiar');
+INSERT INTO `localidades` VALUES ('1856', '22', 'Arroyo Ceibal');
+INSERT INTO `localidades` VALUES ('1857', '22', 'Arroyo Leyes');
+INSERT INTO `localidades` VALUES ('1858', '22', 'Arroyo Seco');
+INSERT INTO `localidades` VALUES ('1859', '22', 'Arrufó');
+INSERT INTO `localidades` VALUES ('1860', '22', 'Arteaga');
+INSERT INTO `localidades` VALUES ('1861', '22', 'Ataliva');
+INSERT INTO `localidades` VALUES ('1862', '22', 'Aurelia');
+INSERT INTO `localidades` VALUES ('1863', '22', 'Avellaneda');
+INSERT INTO `localidades` VALUES ('1864', '22', 'Barrancas');
+INSERT INTO `localidades` VALUES ('1865', '22', 'Bauer Y Sigel');
+INSERT INTO `localidades` VALUES ('1866', '22', 'Bella Italia');
+INSERT INTO `localidades` VALUES ('1867', '22', 'Berabevú');
+INSERT INTO `localidades` VALUES ('1868', '22', 'Berna');
+INSERT INTO `localidades` VALUES ('1869', '22', 'Bernardo de Irigoyen');
+INSERT INTO `localidades` VALUES ('1870', '22', 'Bigand');
+INSERT INTO `localidades` VALUES ('1871', '22', 'Bombal');
+INSERT INTO `localidades` VALUES ('1872', '22', 'Bouquet');
+INSERT INTO `localidades` VALUES ('1873', '22', 'Bustinza');
+INSERT INTO `localidades` VALUES ('1874', '22', 'Cabal');
+INSERT INTO `localidades` VALUES ('1875', '22', 'Cacique Ariacaiquin');
+INSERT INTO `localidades` VALUES ('1876', '22', 'Cafferata');
+INSERT INTO `localidades` VALUES ('1877', '22', 'Calchaquí');
+INSERT INTO `localidades` VALUES ('1878', '22', 'Campo Andino');
+INSERT INTO `localidades` VALUES ('1879', '22', 'Campo Piaggio');
+INSERT INTO `localidades` VALUES ('1880', '22', 'Cañada de Gómez');
+INSERT INTO `localidades` VALUES ('1881', '22', 'Cañada del Ucle');
+INSERT INTO `localidades` VALUES ('1882', '22', 'Cañada Rica');
+INSERT INTO `localidades` VALUES ('1883', '22', 'Cañada Rosquín');
+INSERT INTO `localidades` VALUES ('1884', '22', 'Candioti');
+INSERT INTO `localidades` VALUES ('1885', '22', 'Capital');
+INSERT INTO `localidades` VALUES ('1886', '22', 'Capitán Bermúdez');
+INSERT INTO `localidades` VALUES ('1887', '22', 'Capivara');
+INSERT INTO `localidades` VALUES ('1888', '22', 'Carcarañá');
+INSERT INTO `localidades` VALUES ('1889', '22', 'Carlos Pellegrini');
+INSERT INTO `localidades` VALUES ('1890', '22', 'Carmen');
+INSERT INTO `localidades` VALUES ('1891', '22', 'Carmen Del Sauce');
+INSERT INTO `localidades` VALUES ('1892', '22', 'Carreras');
+INSERT INTO `localidades` VALUES ('1893', '22', 'Carrizales');
+INSERT INTO `localidades` VALUES ('1894', '22', 'Casalegno');
+INSERT INTO `localidades` VALUES ('1895', '22', 'Casas');
+INSERT INTO `localidades` VALUES ('1896', '22', 'Casilda');
+INSERT INTO `localidades` VALUES ('1897', '22', 'Castelar');
+INSERT INTO `localidades` VALUES ('1898', '22', 'Castellanos');
+INSERT INTO `localidades` VALUES ('1899', '22', 'Cayastá');
+INSERT INTO `localidades` VALUES ('1900', '22', 'Cayastacito');
+INSERT INTO `localidades` VALUES ('1901', '22', 'Centeno');
+INSERT INTO `localidades` VALUES ('1902', '22', 'Cepeda');
+INSERT INTO `localidades` VALUES ('1903', '22', 'Ceres');
+INSERT INTO `localidades` VALUES ('1904', '22', 'Chabás');
+INSERT INTO `localidades` VALUES ('1905', '22', 'Chañar Ladeado');
+INSERT INTO `localidades` VALUES ('1906', '22', 'Chapuy');
+INSERT INTO `localidades` VALUES ('1907', '22', 'Chovet');
+INSERT INTO `localidades` VALUES ('1908', '22', 'Christophersen');
+INSERT INTO `localidades` VALUES ('1909', '22', 'Classon');
+INSERT INTO `localidades` VALUES ('1910', '22', 'Cnel. Arnold');
+INSERT INTO `localidades` VALUES ('1911', '22', 'Cnel. Bogado');
+INSERT INTO `localidades` VALUES ('1912', '22', 'Cnel. Dominguez');
+INSERT INTO `localidades` VALUES ('1913', '22', 'Cnel. Fraga');
+INSERT INTO `localidades` VALUES ('1914', '22', 'Col. Aldao');
+INSERT INTO `localidades` VALUES ('1915', '22', 'Col. Ana');
+INSERT INTO `localidades` VALUES ('1916', '22', 'Col. Belgrano');
+INSERT INTO `localidades` VALUES ('1917', '22', 'Col. Bicha');
+INSERT INTO `localidades` VALUES ('1918', '22', 'Col. Bigand');
+INSERT INTO `localidades` VALUES ('1919', '22', 'Col. Bossi');
+INSERT INTO `localidades` VALUES ('1920', '22', 'Col. Cavour');
+INSERT INTO `localidades` VALUES ('1921', '22', 'Col. Cello');
+INSERT INTO `localidades` VALUES ('1922', '22', 'Col. Dolores');
+INSERT INTO `localidades` VALUES ('1923', '22', 'Col. Dos Rosas');
+INSERT INTO `localidades` VALUES ('1924', '22', 'Col. Durán');
+INSERT INTO `localidades` VALUES ('1925', '22', 'Col. Iturraspe');
+INSERT INTO `localidades` VALUES ('1926', '22', 'Col. Margarita');
+INSERT INTO `localidades` VALUES ('1927', '22', 'Col. Mascias');
+INSERT INTO `localidades` VALUES ('1928', '22', 'Col. Raquel');
+INSERT INTO `localidades` VALUES ('1929', '22', 'Col. Rosa');
+INSERT INTO `localidades` VALUES ('1930', '22', 'Col. San José');
+INSERT INTO `localidades` VALUES ('1931', '22', 'Constanza');
+INSERT INTO `localidades` VALUES ('1932', '22', 'Coronda');
+INSERT INTO `localidades` VALUES ('1933', '22', 'Correa');
+INSERT INTO `localidades` VALUES ('1934', '22', 'Crispi');
+INSERT INTO `localidades` VALUES ('1935', '22', 'Cululú');
+INSERT INTO `localidades` VALUES ('1936', '22', 'Curupayti');
+INSERT INTO `localidades` VALUES ('1937', '22', 'Desvio Arijón');
+INSERT INTO `localidades` VALUES ('1938', '22', 'Diaz');
+INSERT INTO `localidades` VALUES ('1939', '22', 'Diego de Alvear');
+INSERT INTO `localidades` VALUES ('1940', '22', 'Egusquiza');
+INSERT INTO `localidades` VALUES ('1941', '22', 'El Arazá');
+INSERT INTO `localidades` VALUES ('1942', '22', 'El Rabón');
+INSERT INTO `localidades` VALUES ('1943', '22', 'El Sombrerito');
+INSERT INTO `localidades` VALUES ('1944', '22', 'El Trébol');
+INSERT INTO `localidades` VALUES ('1945', '22', 'Elisa');
+INSERT INTO `localidades` VALUES ('1946', '22', 'Elortondo');
+INSERT INTO `localidades` VALUES ('1947', '22', 'Emilia');
+INSERT INTO `localidades` VALUES ('1948', '22', 'Empalme San Carlos');
+INSERT INTO `localidades` VALUES ('1949', '22', 'Empalme Villa Constitucion');
+INSERT INTO `localidades` VALUES ('1950', '22', 'Esmeralda');
+INSERT INTO `localidades` VALUES ('1951', '22', 'Esperanza');
+INSERT INTO `localidades` VALUES ('1952', '22', 'Estación Alvear');
+INSERT INTO `localidades` VALUES ('1953', '22', 'Estacion Clucellas');
+INSERT INTO `localidades` VALUES ('1954', '22', 'Esteban Rams');
+INSERT INTO `localidades` VALUES ('1955', '22', 'Esther');
+INSERT INTO `localidades` VALUES ('1956', '22', 'Esustolia');
+INSERT INTO `localidades` VALUES ('1957', '22', 'Eusebia');
+INSERT INTO `localidades` VALUES ('1958', '22', 'Felicia');
+INSERT INTO `localidades` VALUES ('1959', '22', 'Fidela');
+INSERT INTO `localidades` VALUES ('1960', '22', 'Fighiera');
+INSERT INTO `localidades` VALUES ('1961', '22', 'Firmat');
+INSERT INTO `localidades` VALUES ('1962', '22', 'Florencia');
+INSERT INTO `localidades` VALUES ('1963', '22', 'Fortín Olmos');
+INSERT INTO `localidades` VALUES ('1964', '22', 'Franck');
+INSERT INTO `localidades` VALUES ('1965', '22', 'Fray Luis Beltrán');
+INSERT INTO `localidades` VALUES ('1966', '22', 'Frontera');
+INSERT INTO `localidades` VALUES ('1967', '22', 'Fuentes');
+INSERT INTO `localidades` VALUES ('1968', '22', 'Funes');
+INSERT INTO `localidades` VALUES ('1969', '22', 'Gaboto');
+INSERT INTO `localidades` VALUES ('1970', '22', 'Galisteo');
+INSERT INTO `localidades` VALUES ('1971', '22', 'Gálvez');
+INSERT INTO `localidades` VALUES ('1972', '22', 'Garabalto');
+INSERT INTO `localidades` VALUES ('1973', '22', 'Garibaldi');
+INSERT INTO `localidades` VALUES ('1974', '22', 'Gato Colorado');
+INSERT INTO `localidades` VALUES ('1975', '22', 'Gdor. Crespo');
+INSERT INTO `localidades` VALUES ('1976', '22', 'Gessler');
+INSERT INTO `localidades` VALUES ('1977', '22', 'Godoy');
+INSERT INTO `localidades` VALUES ('1978', '22', 'Golondrina');
+INSERT INTO `localidades` VALUES ('1979', '22', 'Gral. Gelly');
+INSERT INTO `localidades` VALUES ('1980', '22', 'Gral. Lagos');
+INSERT INTO `localidades` VALUES ('1981', '22', 'Granadero Baigorria');
+INSERT INTO `localidades` VALUES ('1982', '22', 'Gregoria Perez De Denis');
+INSERT INTO `localidades` VALUES ('1983', '22', 'Grutly');
+INSERT INTO `localidades` VALUES ('1984', '22', 'Guadalupe N.');
+INSERT INTO `localidades` VALUES ('1985', '22', 'Gödeken');
+INSERT INTO `localidades` VALUES ('1986', '22', 'Helvecia');
+INSERT INTO `localidades` VALUES ('1987', '22', 'Hersilia');
+INSERT INTO `localidades` VALUES ('1988', '22', 'Hipatía');
+INSERT INTO `localidades` VALUES ('1989', '22', 'Huanqueros');
+INSERT INTO `localidades` VALUES ('1990', '22', 'Hugentobler');
+INSERT INTO `localidades` VALUES ('1991', '22', 'Hughes');
+INSERT INTO `localidades` VALUES ('1992', '22', 'Humberto 1º');
+INSERT INTO `localidades` VALUES ('1993', '22', 'Humboldt');
+INSERT INTO `localidades` VALUES ('1994', '22', 'Ibarlucea');
+INSERT INTO `localidades` VALUES ('1995', '22', 'Ing. Chanourdie');
+INSERT INTO `localidades` VALUES ('1996', '22', 'Intiyaco');
+INSERT INTO `localidades` VALUES ('1997', '22', 'Ituzaingó');
+INSERT INTO `localidades` VALUES ('1998', '22', 'Jacinto L. Aráuz');
+INSERT INTO `localidades` VALUES ('1999', '22', 'Josefina');
+INSERT INTO `localidades` VALUES ('2000', '22', 'Juan B. Molina');
+INSERT INTO `localidades` VALUES ('2001', '22', 'Juan de Garay');
+INSERT INTO `localidades` VALUES ('2002', '22', 'Juncal');
+INSERT INTO `localidades` VALUES ('2003', '22', 'La Brava');
+INSERT INTO `localidades` VALUES ('2004', '22', 'La Cabral');
+INSERT INTO `localidades` VALUES ('2005', '22', 'La Camila');
+INSERT INTO `localidades` VALUES ('2006', '22', 'La Chispa');
+INSERT INTO `localidades` VALUES ('2007', '22', 'La Clara');
+INSERT INTO `localidades` VALUES ('2008', '22', 'La Criolla');
+INSERT INTO `localidades` VALUES ('2009', '22', 'La Gallareta');
+INSERT INTO `localidades` VALUES ('2010', '22', 'La Lucila');
+INSERT INTO `localidades` VALUES ('2011', '22', 'La Pelada');
+INSERT INTO `localidades` VALUES ('2012', '22', 'La Penca');
+INSERT INTO `localidades` VALUES ('2013', '22', 'La Rubia');
+INSERT INTO `localidades` VALUES ('2014', '22', 'La Sarita');
+INSERT INTO `localidades` VALUES ('2015', '22', 'La Vanguardia');
+INSERT INTO `localidades` VALUES ('2016', '22', 'Labordeboy');
+INSERT INTO `localidades` VALUES ('2017', '22', 'Laguna Paiva');
+INSERT INTO `localidades` VALUES ('2018', '22', 'Landeta');
+INSERT INTO `localidades` VALUES ('2019', '22', 'Lanteri');
+INSERT INTO `localidades` VALUES ('2020', '22', 'Larrechea');
+INSERT INTO `localidades` VALUES ('2021', '22', 'Las Avispas');
+INSERT INTO `localidades` VALUES ('2022', '22', 'Las Bandurrias');
+INSERT INTO `localidades` VALUES ('2023', '22', 'Las Garzas');
+INSERT INTO `localidades` VALUES ('2024', '22', 'Las Palmeras');
+INSERT INTO `localidades` VALUES ('2025', '22', 'Las Parejas');
+INSERT INTO `localidades` VALUES ('2026', '22', 'Las Petacas');
+INSERT INTO `localidades` VALUES ('2027', '22', 'Las Rosas');
+INSERT INTO `localidades` VALUES ('2028', '22', 'Las Toscas');
+INSERT INTO `localidades` VALUES ('2029', '22', 'Las Tunas');
+INSERT INTO `localidades` VALUES ('2030', '22', 'Lazzarino');
+INSERT INTO `localidades` VALUES ('2031', '22', 'Lehmann');
+INSERT INTO `localidades` VALUES ('2032', '22', 'Llambi Campbell');
+INSERT INTO `localidades` VALUES ('2033', '22', 'Logroño');
+INSERT INTO `localidades` VALUES ('2034', '22', 'Loma Alta');
+INSERT INTO `localidades` VALUES ('2035', '22', 'López');
+INSERT INTO `localidades` VALUES ('2036', '22', 'Los Amores');
+INSERT INTO `localidades` VALUES ('2037', '22', 'Los Cardos');
+INSERT INTO `localidades` VALUES ('2038', '22', 'Los Laureles');
+INSERT INTO `localidades` VALUES ('2039', '22', 'Los Molinos');
+INSERT INTO `localidades` VALUES ('2040', '22', 'Los Quirquinchos');
+INSERT INTO `localidades` VALUES ('2041', '22', 'Lucio V. Lopez');
+INSERT INTO `localidades` VALUES ('2042', '22', 'Luis Palacios');
+INSERT INTO `localidades` VALUES ('2043', '22', 'Ma. Juana');
+INSERT INTO `localidades` VALUES ('2044', '22', 'Ma. Luisa');
+INSERT INTO `localidades` VALUES ('2045', '22', 'Ma. Susana');
+INSERT INTO `localidades` VALUES ('2046', '22', 'Ma. Teresa');
+INSERT INTO `localidades` VALUES ('2047', '22', 'Maciel');
+INSERT INTO `localidades` VALUES ('2048', '22', 'Maggiolo');
+INSERT INTO `localidades` VALUES ('2049', '22', 'Malabrigo');
+INSERT INTO `localidades` VALUES ('2050', '22', 'Marcelino Escalada');
+INSERT INTO `localidades` VALUES ('2051', '22', 'Margarita');
+INSERT INTO `localidades` VALUES ('2052', '22', 'Matilde');
+INSERT INTO `localidades` VALUES ('2053', '22', 'Mauá');
+INSERT INTO `localidades` VALUES ('2054', '22', 'Máximo Paz');
+INSERT INTO `localidades` VALUES ('2055', '22', 'Melincué');
+INSERT INTO `localidades` VALUES ('2056', '22', 'Miguel Torres');
+INSERT INTO `localidades` VALUES ('2057', '22', 'Moisés Ville');
+INSERT INTO `localidades` VALUES ('2058', '22', 'Monigotes');
+INSERT INTO `localidades` VALUES ('2059', '22', 'Monje');
+INSERT INTO `localidades` VALUES ('2060', '22', 'Monte Obscuridad');
+INSERT INTO `localidades` VALUES ('2061', '22', 'Monte Vera');
+INSERT INTO `localidades` VALUES ('2062', '22', 'Montefiore');
+INSERT INTO `localidades` VALUES ('2063', '22', 'Montes de Oca');
+INSERT INTO `localidades` VALUES ('2064', '22', 'Murphy');
+INSERT INTO `localidades` VALUES ('2065', '22', 'Ñanducita');
+INSERT INTO `localidades` VALUES ('2066', '22', 'Naré');
+INSERT INTO `localidades` VALUES ('2067', '22', 'Nelson');
+INSERT INTO `localidades` VALUES ('2068', '22', 'Nicanor E. Molinas');
+INSERT INTO `localidades` VALUES ('2069', '22', 'Nuevo Torino');
+INSERT INTO `localidades` VALUES ('2070', '22', 'Oliveros');
+INSERT INTO `localidades` VALUES ('2071', '22', 'Palacios');
+INSERT INTO `localidades` VALUES ('2072', '22', 'Pavón');
+INSERT INTO `localidades` VALUES ('2073', '22', 'Pavón Arriba');
+INSERT INTO `localidades` VALUES ('2074', '22', 'Pedro Gómez Cello');
+INSERT INTO `localidades` VALUES ('2075', '22', 'Pérez');
+INSERT INTO `localidades` VALUES ('2076', '22', 'Peyrano');
+INSERT INTO `localidades` VALUES ('2077', '22', 'Piamonte');
+INSERT INTO `localidades` VALUES ('2078', '22', 'Pilar');
+INSERT INTO `localidades` VALUES ('2079', '22', 'Piñero');
+INSERT INTO `localidades` VALUES ('2080', '22', 'Plaza Clucellas');
+INSERT INTO `localidades` VALUES ('2081', '22', 'Portugalete');
+INSERT INTO `localidades` VALUES ('2082', '22', 'Pozo Borrado');
+INSERT INTO `localidades` VALUES ('2083', '22', 'Progreso');
+INSERT INTO `localidades` VALUES ('2084', '22', 'Providencia');
+INSERT INTO `localidades` VALUES ('2085', '22', 'Pte. Roca');
+INSERT INTO `localidades` VALUES ('2086', '22', 'Pueblo Andino');
+INSERT INTO `localidades` VALUES ('2087', '22', 'Pueblo Esther');
+INSERT INTO `localidades` VALUES ('2088', '22', 'Pueblo Gral. San Martín');
+INSERT INTO `localidades` VALUES ('2089', '22', 'Pueblo Irigoyen');
+INSERT INTO `localidades` VALUES ('2090', '22', 'Pueblo Marini');
+INSERT INTO `localidades` VALUES ('2091', '22', 'Pueblo Muñoz');
+INSERT INTO `localidades` VALUES ('2092', '22', 'Pueblo Uranga');
+INSERT INTO `localidades` VALUES ('2093', '22', 'Pujato');
+INSERT INTO `localidades` VALUES ('2094', '22', 'Pujato N.');
+INSERT INTO `localidades` VALUES ('2095', '22', 'Rafaela');
+INSERT INTO `localidades` VALUES ('2096', '22', 'Ramayón');
+INSERT INTO `localidades` VALUES ('2097', '22', 'Ramona');
+INSERT INTO `localidades` VALUES ('2098', '22', 'Reconquista');
+INSERT INTO `localidades` VALUES ('2099', '22', 'Recreo');
+INSERT INTO `localidades` VALUES ('2100', '22', 'Ricardone');
+INSERT INTO `localidades` VALUES ('2101', '22', 'Rivadavia');
+INSERT INTO `localidades` VALUES ('2102', '22', 'Roldán');
+INSERT INTO `localidades` VALUES ('2103', '22', 'Romang');
+INSERT INTO `localidades` VALUES ('2104', '22', 'Rosario');
+INSERT INTO `localidades` VALUES ('2105', '22', 'Rueda');
+INSERT INTO `localidades` VALUES ('2106', '22', 'Rufino');
+INSERT INTO `localidades` VALUES ('2107', '22', 'Sa Pereira');
+INSERT INTO `localidades` VALUES ('2108', '22', 'Saguier');
+INSERT INTO `localidades` VALUES ('2109', '22', 'Saladero M. Cabal');
+INSERT INTO `localidades` VALUES ('2110', '22', 'Salto Grande');
+INSERT INTO `localidades` VALUES ('2111', '22', 'San Agustín');
+INSERT INTO `localidades` VALUES ('2112', '22', 'San Antonio de Obligado');
+INSERT INTO `localidades` VALUES ('2113', '22', 'San Bernardo (N.J.)');
+INSERT INTO `localidades` VALUES ('2114', '22', 'San Bernardo (S.J.)');
+INSERT INTO `localidades` VALUES ('2115', '22', 'San Carlos Centro');
+INSERT INTO `localidades` VALUES ('2116', '22', 'San Carlos N.');
+INSERT INTO `localidades` VALUES ('2117', '22', 'San Carlos S.');
+INSERT INTO `localidades` VALUES ('2118', '22', 'San Cristóbal');
+INSERT INTO `localidades` VALUES ('2119', '22', 'San Eduardo');
+INSERT INTO `localidades` VALUES ('2120', '22', 'San Eugenio');
+INSERT INTO `localidades` VALUES ('2121', '22', 'San Fabián');
+INSERT INTO `localidades` VALUES ('2122', '22', 'San Fco. de Santa Fé');
+INSERT INTO `localidades` VALUES ('2123', '22', 'San Genaro');
+INSERT INTO `localidades` VALUES ('2124', '22', 'San Genaro N.');
+INSERT INTO `localidades` VALUES ('2125', '22', 'San Gregorio');
+INSERT INTO `localidades` VALUES ('2126', '22', 'San Guillermo');
+INSERT INTO `localidades` VALUES ('2127', '22', 'San Javier');
+INSERT INTO `localidades` VALUES ('2128', '22', 'San Jerónimo del Sauce');
+INSERT INTO `localidades` VALUES ('2129', '22', 'San Jerónimo N.');
+INSERT INTO `localidades` VALUES ('2130', '22', 'San Jerónimo S.');
+INSERT INTO `localidades` VALUES ('2131', '22', 'San Jorge');
+INSERT INTO `localidades` VALUES ('2132', '22', 'San José de La Esquina');
+INSERT INTO `localidades` VALUES ('2133', '22', 'San José del Rincón');
+INSERT INTO `localidades` VALUES ('2134', '22', 'San Justo');
+INSERT INTO `localidades` VALUES ('2135', '22', 'San Lorenzo');
+INSERT INTO `localidades` VALUES ('2136', '22', 'San Mariano');
+INSERT INTO `localidades` VALUES ('2137', '22', 'San Martín de Las Escobas');
+INSERT INTO `localidades` VALUES ('2138', '22', 'San Martín N.');
+INSERT INTO `localidades` VALUES ('2139', '22', 'San Vicente');
+INSERT INTO `localidades` VALUES ('2140', '22', 'Sancti Spititu');
+INSERT INTO `localidades` VALUES ('2141', '22', 'Sanford');
+INSERT INTO `localidades` VALUES ('2142', '22', 'Santo Domingo');
+INSERT INTO `localidades` VALUES ('2143', '22', 'Santo Tomé');
+INSERT INTO `localidades` VALUES ('2144', '22', 'Santurce');
+INSERT INTO `localidades` VALUES ('2145', '22', 'Sargento Cabral');
+INSERT INTO `localidades` VALUES ('2146', '22', 'Sarmiento');
+INSERT INTO `localidades` VALUES ('2147', '22', 'Sastre');
+INSERT INTO `localidades` VALUES ('2148', '22', 'Sauce Viejo');
+INSERT INTO `localidades` VALUES ('2149', '22', 'Serodino');
+INSERT INTO `localidades` VALUES ('2150', '22', 'Silva');
+INSERT INTO `localidades` VALUES ('2151', '22', 'Soldini');
+INSERT INTO `localidades` VALUES ('2152', '22', 'Soledad');
+INSERT INTO `localidades` VALUES ('2153', '22', 'Soutomayor');
+INSERT INTO `localidades` VALUES ('2154', '22', 'Sta. Clara de Buena Vista');
+INSERT INTO `localidades` VALUES ('2155', '22', 'Sta. Clara de Saguier');
+INSERT INTO `localidades` VALUES ('2156', '22', 'Sta. Isabel');
+INSERT INTO `localidades` VALUES ('2157', '22', 'Sta. Margarita');
+INSERT INTO `localidades` VALUES ('2158', '22', 'Sta. Maria Centro');
+INSERT INTO `localidades` VALUES ('2159', '22', 'Sta. María N.');
+INSERT INTO `localidades` VALUES ('2160', '22', 'Sta. Rosa');
+INSERT INTO `localidades` VALUES ('2161', '22', 'Sta. Teresa');
+INSERT INTO `localidades` VALUES ('2162', '22', 'Suardi');
+INSERT INTO `localidades` VALUES ('2163', '22', 'Sunchales');
+INSERT INTO `localidades` VALUES ('2164', '22', 'Susana');
+INSERT INTO `localidades` VALUES ('2165', '22', 'Tacuarendí');
+INSERT INTO `localidades` VALUES ('2166', '22', 'Tacural');
+INSERT INTO `localidades` VALUES ('2167', '22', 'Tartagal');
+INSERT INTO `localidades` VALUES ('2168', '22', 'Teodelina');
+INSERT INTO `localidades` VALUES ('2169', '22', 'Theobald');
+INSERT INTO `localidades` VALUES ('2170', '22', 'Timbúes');
+INSERT INTO `localidades` VALUES ('2171', '22', 'Toba');
+INSERT INTO `localidades` VALUES ('2172', '22', 'Tortugas');
+INSERT INTO `localidades` VALUES ('2173', '22', 'Tostado');
+INSERT INTO `localidades` VALUES ('2174', '22', 'Totoras');
+INSERT INTO `localidades` VALUES ('2175', '22', 'Traill');
+INSERT INTO `localidades` VALUES ('2176', '22', 'Venado Tuerto');
+INSERT INTO `localidades` VALUES ('2177', '22', 'Vera');
+INSERT INTO `localidades` VALUES ('2178', '22', 'Vera y Pintado');
+INSERT INTO `localidades` VALUES ('2179', '22', 'Videla');
+INSERT INTO `localidades` VALUES ('2180', '22', 'Vila');
+INSERT INTO `localidades` VALUES ('2181', '22', 'Villa Amelia');
+INSERT INTO `localidades` VALUES ('2182', '22', 'Villa Ana');
+INSERT INTO `localidades` VALUES ('2183', '22', 'Villa Cañas');
+INSERT INTO `localidades` VALUES ('2184', '22', 'Villa Constitución');
+INSERT INTO `localidades` VALUES ('2185', '22', 'Villa Eloísa');
+INSERT INTO `localidades` VALUES ('2186', '22', 'Villa Gdor. Gálvez');
+INSERT INTO `localidades` VALUES ('2187', '22', 'Villa Guillermina');
+INSERT INTO `localidades` VALUES ('2188', '22', 'Villa Minetti');
+INSERT INTO `localidades` VALUES ('2189', '22', 'Villa Mugueta');
+INSERT INTO `localidades` VALUES ('2190', '22', 'Villa Ocampo');
+INSERT INTO `localidades` VALUES ('2191', '22', 'Villa San José');
+INSERT INTO `localidades` VALUES ('2192', '22', 'Villa Saralegui');
+INSERT INTO `localidades` VALUES ('2193', '22', 'Villa Trinidad');
+INSERT INTO `localidades` VALUES ('2194', '22', 'Villada');
+INSERT INTO `localidades` VALUES ('2195', '22', 'Virginia');
+INSERT INTO `localidades` VALUES ('2196', '22', 'Wheelwright');
+INSERT INTO `localidades` VALUES ('2197', '22', 'Zavalla');
+INSERT INTO `localidades` VALUES ('2198', '22', 'Zenón Pereira');
+INSERT INTO `localidades` VALUES ('2199', '23', 'Añatuya');
+INSERT INTO `localidades` VALUES ('2200', '23', 'Árraga');
+INSERT INTO `localidades` VALUES ('2201', '23', 'Bandera');
+INSERT INTO `localidades` VALUES ('2202', '23', 'Bandera Bajada');
+INSERT INTO `localidades` VALUES ('2203', '23', 'Beltrán');
+INSERT INTO `localidades` VALUES ('2204', '23', 'Brea Pozo');
+INSERT INTO `localidades` VALUES ('2205', '23', 'Campo Gallo');
+INSERT INTO `localidades` VALUES ('2206', '23', 'Capital');
+INSERT INTO `localidades` VALUES ('2207', '23', 'Chilca Juliana');
+INSERT INTO `localidades` VALUES ('2208', '23', 'Choya');
+INSERT INTO `localidades` VALUES ('2209', '23', 'Clodomira');
+INSERT INTO `localidades` VALUES ('2210', '23', 'Col. Alpina');
+INSERT INTO `localidades` VALUES ('2211', '23', 'Col. Dora');
+INSERT INTO `localidades` VALUES ('2212', '23', 'Col. El Simbolar Robles');
+INSERT INTO `localidades` VALUES ('2213', '23', 'El Bobadal');
+INSERT INTO `localidades` VALUES ('2214', '23', 'El Charco');
+INSERT INTO `localidades` VALUES ('2215', '23', 'El Mojón');
+INSERT INTO `localidades` VALUES ('2216', '23', 'Estación Atamisqui');
+INSERT INTO `localidades` VALUES ('2217', '23', 'Estación Simbolar');
+INSERT INTO `localidades` VALUES ('2218', '23', 'Fernández');
+INSERT INTO `localidades` VALUES ('2219', '23', 'Fortín Inca');
+INSERT INTO `localidades` VALUES ('2220', '23', 'Frías');
+INSERT INTO `localidades` VALUES ('2221', '23', 'Garza');
+INSERT INTO `localidades` VALUES ('2222', '23', 'Gramilla');
+INSERT INTO `localidades` VALUES ('2223', '23', 'Guardia Escolta');
+INSERT INTO `localidades` VALUES ('2224', '23', 'Herrera');
+INSERT INTO `localidades` VALUES ('2225', '23', 'Icaño');
+INSERT INTO `localidades` VALUES ('2226', '23', 'Ing. Forres');
+INSERT INTO `localidades` VALUES ('2227', '23', 'La Banda');
+INSERT INTO `localidades` VALUES ('2228', '23', 'La Cañada');
+INSERT INTO `localidades` VALUES ('2229', '23', 'Laprida');
+INSERT INTO `localidades` VALUES ('2230', '23', 'Lavalle');
+INSERT INTO `localidades` VALUES ('2231', '23', 'Loreto');
+INSERT INTO `localidades` VALUES ('2232', '23', 'Los Juríes');
+INSERT INTO `localidades` VALUES ('2233', '23', 'Los Núñez');
+INSERT INTO `localidades` VALUES ('2234', '23', 'Los Pirpintos');
+INSERT INTO `localidades` VALUES ('2235', '23', 'Los Quiroga');
+INSERT INTO `localidades` VALUES ('2236', '23', 'Los Telares');
+INSERT INTO `localidades` VALUES ('2237', '23', 'Lugones');
+INSERT INTO `localidades` VALUES ('2238', '23', 'Malbrán');
+INSERT INTO `localidades` VALUES ('2239', '23', 'Matara');
+INSERT INTO `localidades` VALUES ('2240', '23', 'Medellín');
+INSERT INTO `localidades` VALUES ('2241', '23', 'Monte Quemado');
+INSERT INTO `localidades` VALUES ('2242', '23', 'Nueva Esperanza');
+INSERT INTO `localidades` VALUES ('2243', '23', 'Nueva Francia');
+INSERT INTO `localidades` VALUES ('2244', '23', 'Palo Negro');
+INSERT INTO `localidades` VALUES ('2245', '23', 'Pampa de Los Guanacos');
+INSERT INTO `localidades` VALUES ('2246', '23', 'Pinto');
+INSERT INTO `localidades` VALUES ('2247', '23', 'Pozo Hondo');
+INSERT INTO `localidades` VALUES ('2248', '23', 'Quimilí');
+INSERT INTO `localidades` VALUES ('2249', '23', 'Real Sayana');
+INSERT INTO `localidades` VALUES ('2250', '23', 'Sachayoj');
+INSERT INTO `localidades` VALUES ('2251', '23', 'San Pedro de Guasayán');
+INSERT INTO `localidades` VALUES ('2252', '23', 'Selva');
+INSERT INTO `localidades` VALUES ('2253', '23', 'Sol de Julio');
+INSERT INTO `localidades` VALUES ('2254', '23', 'Sumampa');
+INSERT INTO `localidades` VALUES ('2255', '23', 'Suncho Corral');
+INSERT INTO `localidades` VALUES ('2256', '23', 'Taboada');
+INSERT INTO `localidades` VALUES ('2257', '23', 'Tapso');
+INSERT INTO `localidades` VALUES ('2258', '23', 'Termas de Rio Hondo');
+INSERT INTO `localidades` VALUES ('2259', '23', 'Tintina');
+INSERT INTO `localidades` VALUES ('2260', '23', 'Tomas Young');
+INSERT INTO `localidades` VALUES ('2261', '23', 'Vilelas');
+INSERT INTO `localidades` VALUES ('2262', '23', 'Villa Atamisqui');
+INSERT INTO `localidades` VALUES ('2263', '23', 'Villa La Punta');
+INSERT INTO `localidades` VALUES ('2264', '23', 'Villa Ojo de Agua');
+INSERT INTO `localidades` VALUES ('2265', '23', 'Villa Río Hondo');
+INSERT INTO `localidades` VALUES ('2266', '23', 'Villa Salavina');
+INSERT INTO `localidades` VALUES ('2267', '23', 'Villa Unión');
+INSERT INTO `localidades` VALUES ('2268', '23', 'Vilmer');
+INSERT INTO `localidades` VALUES ('2269', '23', 'Weisburd');
+INSERT INTO `localidades` VALUES ('2270', '24', 'Río Grande');
+INSERT INTO `localidades` VALUES ('2271', '24', 'Tolhuin');
+INSERT INTO `localidades` VALUES ('2272', '24', 'Ushuaia');
+INSERT INTO `localidades` VALUES ('2273', '25', 'Acheral');
+INSERT INTO `localidades` VALUES ('2274', '25', 'Agua Dulce');
+INSERT INTO `localidades` VALUES ('2275', '25', 'Aguilares');
+INSERT INTO `localidades` VALUES ('2276', '25', 'Alderetes');
+INSERT INTO `localidades` VALUES ('2277', '25', 'Alpachiri');
+INSERT INTO `localidades` VALUES ('2278', '25', 'Alto Verde');
+INSERT INTO `localidades` VALUES ('2279', '25', 'Amaicha del Valle');
+INSERT INTO `localidades` VALUES ('2280', '25', 'Amberes');
+INSERT INTO `localidades` VALUES ('2281', '25', 'Ancajuli');
+INSERT INTO `localidades` VALUES ('2282', '25', 'Arcadia');
+INSERT INTO `localidades` VALUES ('2283', '25', 'Atahona');
+INSERT INTO `localidades` VALUES ('2284', '25', 'Banda del Río Sali');
+INSERT INTO `localidades` VALUES ('2285', '25', 'Bella Vista');
+INSERT INTO `localidades` VALUES ('2286', '25', 'Buena Vista');
+INSERT INTO `localidades` VALUES ('2287', '25', 'Burruyacú');
+INSERT INTO `localidades` VALUES ('2288', '25', 'Capitán Cáceres');
+INSERT INTO `localidades` VALUES ('2289', '25', 'Cevil Redondo');
+INSERT INTO `localidades` VALUES ('2290', '25', 'Choromoro');
+INSERT INTO `localidades` VALUES ('2291', '25', 'Ciudacita');
+INSERT INTO `localidades` VALUES ('2292', '25', 'Colalao del Valle');
+INSERT INTO `localidades` VALUES ('2293', '25', 'Colombres');
+INSERT INTO `localidades` VALUES ('2294', '25', 'Concepción');
+INSERT INTO `localidades` VALUES ('2295', '25', 'Delfín Gallo');
+INSERT INTO `localidades` VALUES ('2296', '25', 'El Bracho');
+INSERT INTO `localidades` VALUES ('2297', '25', 'El Cadillal');
+INSERT INTO `localidades` VALUES ('2298', '25', 'El Cercado');
+INSERT INTO `localidades` VALUES ('2299', '25', 'El Chañar');
+INSERT INTO `localidades` VALUES ('2300', '25', 'El Manantial');
+INSERT INTO `localidades` VALUES ('2301', '25', 'El Mojón');
+INSERT INTO `localidades` VALUES ('2302', '25', 'El Mollar');
+INSERT INTO `localidades` VALUES ('2303', '25', 'El Naranjito');
+INSERT INTO `localidades` VALUES ('2304', '25', 'El Naranjo');
+INSERT INTO `localidades` VALUES ('2305', '25', 'El Polear');
+INSERT INTO `localidades` VALUES ('2306', '25', 'El Puestito');
+INSERT INTO `localidades` VALUES ('2307', '25', 'El Sacrificio');
+INSERT INTO `localidades` VALUES ('2308', '25', 'El Timbó');
+INSERT INTO `localidades` VALUES ('2309', '25', 'Escaba');
+INSERT INTO `localidades` VALUES ('2310', '25', 'Esquina');
+INSERT INTO `localidades` VALUES ('2311', '25', 'Estación Aráoz');
+INSERT INTO `localidades` VALUES ('2312', '25', 'Famaillá');
+INSERT INTO `localidades` VALUES ('2313', '25', 'Gastone');
+INSERT INTO `localidades` VALUES ('2314', '25', 'Gdor. Garmendia');
+INSERT INTO `localidades` VALUES ('2315', '25', 'Gdor. Piedrabuena');
+INSERT INTO `localidades` VALUES ('2316', '25', 'Graneros');
+INSERT INTO `localidades` VALUES ('2317', '25', 'Huasa Pampa');
+INSERT INTO `localidades` VALUES ('2318', '25', 'J. B. Alberdi');
+INSERT INTO `localidades` VALUES ('2319', '25', 'La Cocha');
+INSERT INTO `localidades` VALUES ('2320', '25', 'La Esperanza');
+INSERT INTO `localidades` VALUES ('2321', '25', 'La Florida');
+INSERT INTO `localidades` VALUES ('2322', '25', 'La Ramada');
+INSERT INTO `localidades` VALUES ('2323', '25', 'La Trinidad');
+INSERT INTO `localidades` VALUES ('2324', '25', 'Lamadrid');
+INSERT INTO `localidades` VALUES ('2325', '25', 'Las Cejas');
+INSERT INTO `localidades` VALUES ('2326', '25', 'Las Talas');
+INSERT INTO `localidades` VALUES ('2327', '25', 'Las Talitas');
+INSERT INTO `localidades` VALUES ('2328', '25', 'Los Bulacio');
+INSERT INTO `localidades` VALUES ('2329', '25', 'Los Gómez');
+INSERT INTO `localidades` VALUES ('2330', '25', 'Los Nogales');
+INSERT INTO `localidades` VALUES ('2331', '25', 'Los Pereyra');
+INSERT INTO `localidades` VALUES ('2332', '25', 'Los Pérez');
+INSERT INTO `localidades` VALUES ('2333', '25', 'Los Puestos');
+INSERT INTO `localidades` VALUES ('2334', '25', 'Los Ralos');
+INSERT INTO `localidades` VALUES ('2335', '25', 'Los Sarmientos');
+INSERT INTO `localidades` VALUES ('2336', '25', 'Los Sosa');
+INSERT INTO `localidades` VALUES ('2337', '25', 'Lules');
+INSERT INTO `localidades` VALUES ('2338', '25', 'M. García Fernández');
+INSERT INTO `localidades` VALUES ('2339', '25', 'Manuela Pedraza');
+INSERT INTO `localidades` VALUES ('2340', '25', 'Medinas');
+INSERT INTO `localidades` VALUES ('2341', '25', 'Monte Bello');
+INSERT INTO `localidades` VALUES ('2342', '25', 'Monteagudo');
+INSERT INTO `localidades` VALUES ('2343', '25', 'Monteros');
+INSERT INTO `localidades` VALUES ('2344', '25', 'Padre Monti');
+INSERT INTO `localidades` VALUES ('2345', '25', 'Pampa Mayo');
+INSERT INTO `localidades` VALUES ('2346', '25', 'Quilmes');
+INSERT INTO `localidades` VALUES ('2347', '25', 'Raco');
+INSERT INTO `localidades` VALUES ('2348', '25', 'Ranchillos');
+INSERT INTO `localidades` VALUES ('2349', '25', 'Río Chico');
+INSERT INTO `localidades` VALUES ('2350', '25', 'Río Colorado');
+INSERT INTO `localidades` VALUES ('2351', '25', 'Río Seco');
+INSERT INTO `localidades` VALUES ('2352', '25', 'Rumi Punco');
+INSERT INTO `localidades` VALUES ('2353', '25', 'San Andrés');
+INSERT INTO `localidades` VALUES ('2354', '25', 'San Felipe');
+INSERT INTO `localidades` VALUES ('2355', '25', 'San Ignacio');
+INSERT INTO `localidades` VALUES ('2356', '25', 'San Javier');
+INSERT INTO `localidades` VALUES ('2357', '25', 'San José');
+INSERT INTO `localidades` VALUES ('2358', '25', 'San Miguel de 25');
+INSERT INTO `localidades` VALUES ('2359', '25', 'San Pedro');
+INSERT INTO `localidades` VALUES ('2360', '25', 'San Pedro de Colalao');
+INSERT INTO `localidades` VALUES ('2361', '25', 'Santa Rosa de Leales');
+INSERT INTO `localidades` VALUES ('2362', '25', 'Sgto. Moya');
+INSERT INTO `localidades` VALUES ('2363', '25', 'Siete de Abril');
+INSERT INTO `localidades` VALUES ('2364', '25', 'Simoca');
+INSERT INTO `localidades` VALUES ('2365', '25', 'Soldado Maldonado');
+INSERT INTO `localidades` VALUES ('2366', '25', 'Sta. Ana');
+INSERT INTO `localidades` VALUES ('2367', '25', 'Sta. Cruz');
+INSERT INTO `localidades` VALUES ('2368', '25', 'Sta. Lucía');
+INSERT INTO `localidades` VALUES ('2369', '25', 'Taco Ralo');
+INSERT INTO `localidades` VALUES ('2370', '25', 'Tafí del Valle');
+INSERT INTO `localidades` VALUES ('2371', '25', 'Tafí Viejo');
+INSERT INTO `localidades` VALUES ('2372', '25', 'Tapia');
+INSERT INTO `localidades` VALUES ('2373', '25', 'Teniente Berdina');
+INSERT INTO `localidades` VALUES ('2374', '25', 'Trancas');
+INSERT INTO `localidades` VALUES ('2375', '25', 'Villa Belgrano');
+INSERT INTO `localidades` VALUES ('2376', '25', 'Villa Benjamín Araoz');
+INSERT INTO `localidades` VALUES ('2377', '25', 'Villa Chiligasta');
+INSERT INTO `localidades` VALUES ('2378', '25', 'Villa de Leales');
+INSERT INTO `localidades` VALUES ('2379', '25', 'Villa Quinteros');
+INSERT INTO `localidades` VALUES ('2380', '25', 'Yánima');
+INSERT INTO `localidades` VALUES ('2381', '25', 'Yerba Buena');
+INSERT INTO `localidades` VALUES ('2382', '25', 'Yerba Buena (S)');
 
-
--- Dumping structure for table servix_db.postulaciones_temp
+-- ----------------------------
+-- Table structure for `postulaciones_temp`
+-- ----------------------------
 DROP TABLE IF EXISTS `postulaciones_temp`;
-CREATE TABLE IF NOT EXISTS `postulaciones_temp` (
+CREATE TABLE `postulaciones_temp` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_busquedas_temp` int(11) unsigned NOT NULL,
   `id_usuarios` int(11) unsigned NOT NULL,
@@ -2584,55 +2565,54 @@ CREATE TABLE IF NOT EXISTS `postulaciones_temp` (
   CONSTRAINT `postulaciones_temp_ibfk_2` FOREIGN KEY (`id_usuarios`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table servix_db.postulaciones_temp: ~0 rows (approximately)
-DELETE FROM `postulaciones_temp`;
-/*!40000 ALTER TABLE `postulaciones_temp` DISABLE KEYS */;
-/*!40000 ALTER TABLE `postulaciones_temp` ENABLE KEYS */;
+-- ----------------------------
+-- Records of postulaciones_temp
+-- ----------------------------
 
-
--- Dumping structure for table servix_db.provincias
+-- ----------------------------
+-- Table structure for `provincias`
+-- ----------------------------
 DROP TABLE IF EXISTS `provincias`;
-CREATE TABLE IF NOT EXISTS `provincias` (
+CREATE TABLE `provincias` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `provincia` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
--- Dumping data for table servix_db.provincias: ~25 rows (approximately)
-DELETE FROM `provincias`;
-/*!40000 ALTER TABLE `provincias` DISABLE KEYS */;
-INSERT INTO `provincias` (`id`, `provincia`) VALUES
-	(1, 'Buenos Aires'),
-	(2, 'Buenos Aires-GBA'),
-	(3, 'Capital Federal'),
-	(4, 'Catamarca'),
-	(5, 'Chaco'),
-	(6, 'Chubut'),
-	(7, 'Córdoba'),
-	(8, 'Corrientes'),
-	(9, 'Entre Ríos'),
-	(10, 'Formosa'),
-	(11, 'Jujuy'),
-	(12, 'La Pampa'),
-	(13, 'La Rioja'),
-	(14, 'Mendoza'),
-	(15, 'Misiones'),
-	(16, 'Neuquén'),
-	(17, 'Río Negro'),
-	(18, 'Salta'),
-	(19, 'San Juan'),
-	(20, 'San Luis'),
-	(21, 'Santa Cruz'),
-	(22, 'Santa Fe'),
-	(23, 'Santiago del Estero'),
-	(24, 'Tierra del Fuego'),
-	(25, 'Tucumán');
-/*!40000 ALTER TABLE `provincias` ENABLE KEYS */;
+-- ----------------------------
+-- Records of provincias
+-- ----------------------------
+INSERT INTO `provincias` VALUES ('1', 'Buenos Aires');
+INSERT INTO `provincias` VALUES ('2', 'Buenos Aires-GBA');
+INSERT INTO `provincias` VALUES ('3', 'Capital Federal');
+INSERT INTO `provincias` VALUES ('4', 'Catamarca');
+INSERT INTO `provincias` VALUES ('5', 'Chaco');
+INSERT INTO `provincias` VALUES ('6', 'Chubut');
+INSERT INTO `provincias` VALUES ('7', 'Córdoba');
+INSERT INTO `provincias` VALUES ('8', 'Corrientes');
+INSERT INTO `provincias` VALUES ('9', 'Entre Ríos');
+INSERT INTO `provincias` VALUES ('10', 'Formosa');
+INSERT INTO `provincias` VALUES ('11', 'Jujuy');
+INSERT INTO `provincias` VALUES ('12', 'La Pampa');
+INSERT INTO `provincias` VALUES ('13', 'La Rioja');
+INSERT INTO `provincias` VALUES ('14', 'Mendoza');
+INSERT INTO `provincias` VALUES ('15', 'Misiones');
+INSERT INTO `provincias` VALUES ('16', 'Neuquén');
+INSERT INTO `provincias` VALUES ('17', 'Río Negro');
+INSERT INTO `provincias` VALUES ('18', 'Salta');
+INSERT INTO `provincias` VALUES ('19', 'San Juan');
+INSERT INTO `provincias` VALUES ('20', 'San Luis');
+INSERT INTO `provincias` VALUES ('21', 'Santa Cruz');
+INSERT INTO `provincias` VALUES ('22', 'Santa Fe');
+INSERT INTO `provincias` VALUES ('23', 'Santiago del Estero');
+INSERT INTO `provincias` VALUES ('24', 'Tierra del Fuego');
+INSERT INTO `provincias` VALUES ('25', 'Tucumán');
 
-
--- Dumping structure for table servix_db.puntuacion
+-- ----------------------------
+-- Table structure for `puntuacion`
+-- ----------------------------
 DROP TABLE IF EXISTS `puntuacion`;
-CREATE TABLE IF NOT EXISTS `puntuacion` (
+CREATE TABLE `puntuacion` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_usuarios` int(11) unsigned NOT NULL,
   `id_servicios` int(11) unsigned NOT NULL,
@@ -2645,15 +2625,15 @@ CREATE TABLE IF NOT EXISTS `puntuacion` (
   CONSTRAINT `puntuacion_ibfk_2` FOREIGN KEY (`id_servicios`) REFERENCES `servicios` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table servix_db.puntuacion: ~0 rows (approximately)
-DELETE FROM `puntuacion`;
-/*!40000 ALTER TABLE `puntuacion` DISABLE KEYS */;
-/*!40000 ALTER TABLE `puntuacion` ENABLE KEYS */;
+-- ----------------------------
+-- Records of puntuacion
+-- ----------------------------
 
-
--- Dumping structure for table servix_db.relacion_u_s
+-- ----------------------------
+-- Table structure for `relacion_u_s`
+-- ----------------------------
 DROP TABLE IF EXISTS `relacion_u_s`;
-CREATE TABLE IF NOT EXISTS `relacion_u_s` (
+CREATE TABLE `relacion_u_s` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `id_usurios` int(11) unsigned NOT NULL,
   `id_servicios` int(11) unsigned NOT NULL,
@@ -2662,24 +2642,17 @@ CREATE TABLE IF NOT EXISTS `relacion_u_s` (
   KEY `id_servicios` (`id_servicios`),
   CONSTRAINT `relacion_u_s_ibfk_1` FOREIGN KEY (`id_usurios`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `relacion_u_s_ibfk_2` FOREIGN KEY (`id_servicios`) REFERENCES `servicios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table servix_db.relacion_u_s: ~6 rows (approximately)
-DELETE FROM `relacion_u_s`;
-/*!40000 ALTER TABLE `relacion_u_s` DISABLE KEYS */;
-INSERT INTO `relacion_u_s` (`id`, `id_usurios`, `id_servicios`) VALUES
-	(1, 9, 208),
-	(2, 10, 521),
-	(3, 11, 522),
-	(4, 12, 523),
-	(5, 13, 524),
-	(6, 14, 511);
-/*!40000 ALTER TABLE `relacion_u_s` ENABLE KEYS */;
+-- ----------------------------
+-- Records of relacion_u_s
+-- ----------------------------
 
-
--- Dumping structure for table servix_db.servicios
+-- ----------------------------
+-- Table structure for `servicios`
+-- ----------------------------
 DROP TABLE IF EXISTS `servicios`;
-CREATE TABLE IF NOT EXISTS `servicios` (
+CREATE TABLE `servicios` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `id_categorias` int(11) unsigned NOT NULL,
   `id_localidades` int(11) unsigned NOT NULL,
@@ -2698,68 +2671,67 @@ CREATE TABLE IF NOT EXISTS `servicios` (
   CONSTRAINT `servicios_ibfk_2` FOREIGN KEY (`id_categorias`) REFERENCES `categorias` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=525 DEFAULT CHARSET=latin1;
 
--- Dumping data for table servix_db.servicios: ~52 rows (approximately)
-DELETE FROM `servicios`;
-/*!40000 ALTER TABLE `servicios` DISABLE KEYS */;
-INSERT INTO `servicios` (`id`, `id_categorias`, `id_localidades`, `titulo`, `descripcion`, `foto`, `url_web`, `direccion`, `telefono`, `latitud`, `longitud`) VALUES
-	(3, 1, 54, 'trousers public wide stick keep', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', '100/100', 'http://google.com/', '{alguna calle 2145}', '637-888-9670', '10', '260'),
-	(30, 2, 16, 'degree', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'side present side west root common stocking h', 'kick moon good property road sound short poli', '3609 State Loop 1', '355-908-8964', '124930292', '792375873'),
-	(47, 24, 19, 'cotton nail river', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'some effect stitch rhythm broken song kind do', 'sand blow with high division fat together min', '3753 State Hwy 70G Bus', '267-582-4736', '630076610', '182578414'),
-	(57, 12, 48, 'porter come side', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'as hat heart long clock crime apple then enou', 'harbour lip all drop than rain news cork song', '796 State Loop 458', '554-859-2069', '411472431', '55321903'),
-	(64, 36, 82, 'sock stiff fight', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'lip train son with because harmony dirty mass', 'bottle brick present belief seat week country', '34305 E Hurst', '848-067-5338', '770665544', '733742221'),
-	(67, 10, 67, 'love through', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'print detail thing change whistle harbour at ', 'now shelf balance example apparatus move whil', '735 2nd St', '710-204-3126', '471541499', '618210106'),
-	(74, 12, 87, 'knee take death loose', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'wash motion spade hook metal religion summer ', 'operation food answer burn angry pencil card ', '162 Eldorado Pkwy', '678-162-9399', '415391085', '771374111'),
-	(105, 6, 33, 'public', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'tray mountain cook complex open verse drawer ', 'attack cause house left silver look dependent', '2594 Beltway 8', '210-542-3199', '191605195', '528202241'),
-	(126, 31, 3, 'waiting', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'tomorrow breath bridge open match bad balance', 'join blood print frame any boy little blood s', '7830 FM 1191', '613-335-7907', '446014627', '18062313'),
-	(137, 18, 17, 'married till conscious', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'cheap physical coat lead cry hat rail stateme', 'sort sock silk broken brass any destruction l', '81 S State Hwy 18', '847-678-2514', '335334585', '177533826'),
-	(138, 3, 76, 'silk not I', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'crack see verse tooth meat cart value complet', 'muscle floor woman red table waste country po', '93689 N State Hwy 79', '844-775-5793', '496311929', '228784283'),
-	(147, 28, 28, 'pleasure music table act', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'tired steel comfort chin back simple stone ta', 'stocking plate summer destruction twist fowl ', '45767 US Hwy 90U Bus', '606-845-1455', '371332870', '191471041'),
-	(193, 21, 12, 'now angle', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'ticket very fixed watch grip mother necessary', 'sort fear poor committee level probable ficti', '27697 US Hwy 81D Bus', '145-690-6530', '326322070', '216826337'),
-	(204, 12, 74, 'tray line', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'society wide second test clean cruel very orn', 'jump condition powder tree up regular thumb b', '49777 Doak St', '362-147-9691', '379852742', '11069465'),
-	(208, 22, 36, 'Herreria los hermanos', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'statement writing space form will complete na', 'http://www.misitioweb.com.ar', '68 E San Antonio St', '103-513-0952', '-38.7751423', '-62.1179636'),
-	(226, 8, 54, 'over thin root learning', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'fire such news decision near account line pro', 'arch coal twist pin milk till brain kind blue', '5068 FM 852', '186-704-1261', '698183890', '671562056'),
-	(244, 37, 64, 'basin', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'credit canvas hospital cold whistle rest moon', 'low order room apparatus complete crack level', '628 US Hwy 259', '581-510-7535', '340245738', '217866679'),
-	(262, 3, 58, 'night', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'station kiss through yellow brush language ha', 'increase east bridge development grass drawer', '630 Byrd Ave', '650-850-9951', '119930610', '183885541'),
-	(329, 31, 95, 'different', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'hard regular near name south left put time ab', 'metal coat flame organizatio where self sad s', '30038 N Upshaw Blvd', '818-437-4339', '725429730', '633284882'),
-	(334, 18, 3, 'impulse potato slow', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'clear bit request bell healthy he balance sou', 'summer reward discovery fruit cushion fact ey', '96 Carolina St', '280-254-8069', '636235724', '730619451'),
-	(349, 15, 29, 'doubt bag', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'current breath drawer hollow dust circle comb', 'balance monkey low line cup news cover wool i', '62 FM 1244 E', '902-629-0288', '766668750', '686953936'),
-	(384, 10, 35, 'smell', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'mind kick hand whistle thought plant rain spe', 'certain prison slope finger toe leg plant cup', '33 W Dale St', '331-075-2690', '472525998', '506984472'),
-	(495, 35, 86, 'give', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'dress give shut baby full year ring expert wa', 'linen memory school operation ever as brush a', '63982 Western Ave', '709-851-2282', '779646299', '254414507'),
-	(496, 17, 24, 'name observation', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'punishment material level beautiful table cha', 'bed seem slip history dear smooth support wav', '45 Uvalde Rd', '616-867-3710', '218239622', '191952107'),
-	(497, 25, 61, 'fertile', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'thought experience before memory wave train m', 'farm grass button eye paste feather company f', '65698 S Getty St', '433-501-2199', '294032683', '129149595'),
-	(498, 26, 33, 'military leather oven list', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'among middle then loose watch wise purpose di', 'married division slope book stitch roll mount', '863 S US Hwy 287 Nb', '633-371-2190', '778628275', '101464927'),
-	(499, 15, 83, 'serious direction', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'competition kick vessel foolish art colour ta', 'opinion cheese cork seem hole week snow curta', '862 W Center Ave', '570-182-5396', '178322163', '440931198'),
-	(500, 28, 15, 'military needle', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'degree grain lock bread map floor join idea r', 'take observation pot summer face manager not ', '93442 Salinas Ave', '664-971-4876', '307077067', '629452623'),
-	(501, 13, 24, 'brain', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'before across condition bird nation wax baske', 'bright leaf leg loud opposite pin expert wine', '4937 Commerce St', '974-691-6149', '700771044', '198657393'),
-	(502, 22, 76, 'Aceros Gongal', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'room secretary plant false help writing accou', 'town dark pipe polish brother way false shelf', 'Calle 27 al 1359', '619-493-3068', '-36.4827107', '-56.7078295'),
-	(503, 35, 6, 'lock that ink', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'money small reason hat rain hat other door il', 'unit relation print bed pump business fat thu', '7863 State Hwy 289 Bus', '247-145-0960', '346658131', '517105212'),
-	(504, 13, 4, 'death', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'harbour door house even body shake ornament w', 'up feeling who library hour able feeble offer', '902 Spr 231', '968-141-8449', '642806783', '479970430'),
-	(505, 38, 1, 'paint', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'unit smash take cheese good reward key flat t', 'chemical damage quick than expansion green hi', '159 State Hwy 65', '183-342-1237', '157405003', '480807690'),
-	(506, 10, 91, 'reason', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'leaf seem desire smoke competition cook milk ', 'again wax yesterday past kiss voice approval ', '4281 State Hwy 37 Alt', '732-782-3997', '298413536', '353937012'),
-	(507, 19, 52, 'system hand sound', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'purpose cat house edge doubt than enough ever', 'very air bed wine nerve public swim material ', '56 Sr348', '672-183-8977', '76627760', '201219738'),
-	(508, 10, 87, 'curtain false parcel late', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'danger representat as dust for company silver', 'experience come oven attempt attraction feath', '4664 Amber', '761-350-5185', '89855551', '239518099'),
-	(509, 15, 78, 'cheese then addition', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'unit stocking month bitter some stitch hope p', 'shut by money comb store fire voice request m', '9478 State Loop 564', '299-167-4105', '58303606', '771837626'),
-	(510, 1, 29, 'round bath chance necessary', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'dependent love sense old crack protest father', 'stage box hanging smoke and growth taste writ', '5792 Roland Ave', '486-137-6548', '416539072', '665122970'),
-	(511, 22, 9, 'Rejas y portones Juan Carlos', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'crush true off cruel error liquid tooth late ', 'throat value current number daughter adjustme', '21 FM 487', '382-727-1001', '-36.7749285', '-59.8526113'),
-	(512, 17, 56, 'wet horn attraction', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'porter expansion pain same digestion second e', 'branch ice wire exchange linen tired school w', '51 Cbd-Fair Park Link', '355-216-7347', '633422434', '353872004'),
-	(513, 26, 56, 'oven smooth', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'equal monkey against coat or go bright appara', 'quiet competition run existence arm mind wood', '7550 S US Hwy 287', '786-536-4431', '268897645', '612829510'),
-	(514, 37, 11, 'form square', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'talk card effect money yellow boy limit all a', 'do protest cotton mist please increase almost', '293 SE Loop 281', '194-084-5288', '595874535', '153275065'),
-	(515, 19, 87, 'blade smash sound certain', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'expansion match trouble burst wound old grain', 'have solid cup harmony food wing down young l', '515 S Smith Ave', '690-469-6550', '657972316', '761113410'),
-	(516, 30, 3, 'yellow butter fertile society', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'linen writing very stretch conscious strange ', 'with flight love basket send middle low bed n', '232 E Leona St', '748-931-5897', '379126042', '321301679'),
-	(517, 4, 50, 'net middle comfort', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'serious bell fixed narrow steam substance use', 'bag effect digestion store month with coat co', '18 Hwy 67 E', '603-620-3353', '505777127', '116113709'),
-	(518, 36, 41, 'thumb drink brass', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'fold north feeble expert scale stomach use or', 'let theory cook discussion dress impulse west', '90 W 6th St', '522-558-8679', '267337458', '652185998'),
-	(519, 34, 56, 'horn discovery pain', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'bridge road after loud false have burn pull a', 'love theory wave fight bridge bell do unit fe', '20010 Morelos Ave', '193-003-6582', '217007333', '522109329'),
-	(520, 24, 58, 'polish free', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'edge wound record knot humour drop drain shor', 'place wind go insurance cause cart operation ', '2695 NW Loop 564', '275-423-7021', '736060986', '123638337'),
-	(521, 22, 76, 'Aceros de importación', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'room secretary plant false help writing accou', 'town dark pipe polish brother way false shelf', 'Calle 27 al 1359', '619-493-3068', '-36.4826107', '-56.7076295'),
-	(522, 22, 36, 'Herreria los primos', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'statement writing space form will complete na', 'price field ball foolish expert poison comb s', '68 E San Antonio St', '103-513-0952', '-38.7651423', '-62.1279636'),
-	(523, 22, 9, 'Herreria de caballos', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'crush true off cruel error liquid tooth late ', 'throat value current number daughter adjustme', '21 FM 487', '382-727-1001', '-36.7769285', '-59.8586113'),
-	(524, 22, 9, 'Herreria de caballos 2', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'crush true off cruel error liquid tooth late ', 'throat value current number daughter adjustme', '21 FM 487', '382-727-1001', '-36.7765285', '-59.8546113');
-/*!40000 ALTER TABLE `servicios` ENABLE KEYS */;
+-- ----------------------------
+-- Records of servicios
+-- ----------------------------
+INSERT INTO `servicios` VALUES ('3', '1', '54', 'trousers public wide stick keep', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', '100/100', 'http://google.com/', '{alguna calle 2145}', '637-888-9670', '10', '260');
+INSERT INTO `servicios` VALUES ('30', '2', '16', 'degree', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'side present side west root common stocking h', 'kick moon good property road sound short poli', '3609 State Loop 1', '355-908-8964', '124930292', '792375873');
+INSERT INTO `servicios` VALUES ('47', '24', '19', 'cotton nail river', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'some effect stitch rhythm broken song kind do', 'sand blow with high division fat together min', '3753 State Hwy 70G Bus', '267-582-4736', '630076610', '182578414');
+INSERT INTO `servicios` VALUES ('57', '12', '48', 'porter come side', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'as hat heart long clock crime apple then enou', 'harbour lip all drop than rain news cork song', '796 State Loop 458', '554-859-2069', '411472431', '55321903');
+INSERT INTO `servicios` VALUES ('64', '36', '82', 'sock stiff fight', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'lip train son with because harmony dirty mass', 'bottle brick present belief seat week country', '34305 E Hurst', '848-067-5338', '770665544', '733742221');
+INSERT INTO `servicios` VALUES ('67', '10', '67', 'love through', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'print detail thing change whistle harbour at ', 'now shelf balance example apparatus move whil', '735 2nd St', '710-204-3126', '471541499', '618210106');
+INSERT INTO `servicios` VALUES ('74', '12', '87', 'knee take death loose', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'wash motion spade hook metal religion summer ', 'operation food answer burn angry pencil card ', '162 Eldorado Pkwy', '678-162-9399', '415391085', '771374111');
+INSERT INTO `servicios` VALUES ('105', '6', '33', 'public', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'tray mountain cook complex open verse drawer ', 'attack cause house left silver look dependent', '2594 Beltway 8', '210-542-3199', '191605195', '528202241');
+INSERT INTO `servicios` VALUES ('126', '31', '3', 'waiting', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'tomorrow breath bridge open match bad balance', 'join blood print frame any boy little blood s', '7830 FM 1191', '613-335-7907', '446014627', '18062313');
+INSERT INTO `servicios` VALUES ('137', '18', '17', 'married till conscious', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'cheap physical coat lead cry hat rail stateme', 'sort sock silk broken brass any destruction l', '81 S State Hwy 18', '847-678-2514', '335334585', '177533826');
+INSERT INTO `servicios` VALUES ('138', '3', '76', 'silk not I', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'crack see verse tooth meat cart value complet', 'muscle floor woman red table waste country po', '93689 N State Hwy 79', '844-775-5793', '496311929', '228784283');
+INSERT INTO `servicios` VALUES ('147', '28', '28', 'pleasure music table act', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'tired steel comfort chin back simple stone ta', 'stocking plate summer destruction twist fowl ', '45767 US Hwy 90U Bus', '606-845-1455', '371332870', '191471041');
+INSERT INTO `servicios` VALUES ('193', '21', '12', 'now angle', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'ticket very fixed watch grip mother necessary', 'sort fear poor committee level probable ficti', '27697 US Hwy 81D Bus', '145-690-6530', '326322070', '216826337');
+INSERT INTO `servicios` VALUES ('204', '12', '74', 'tray line', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'society wide second test clean cruel very orn', 'jump condition powder tree up regular thumb b', '49777 Doak St', '362-147-9691', '379852742', '11069465');
+INSERT INTO `servicios` VALUES ('208', '22', '36', 'Herreria los hermanos', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'statement writing space form will complete na', 'price field ball foolish expert poison comb s', '68 E San Antonio St', '103-513-0952', '-38.7751423', '-62.1179636');
+INSERT INTO `servicios` VALUES ('226', '8', '54', 'over thin root learning', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'fire such news decision near account line pro', 'arch coal twist pin milk till brain kind blue', '5068 FM 852', '186-704-1261', '698183890', '671562056');
+INSERT INTO `servicios` VALUES ('244', '37', '64', 'basin', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'credit canvas hospital cold whistle rest moon', 'low order room apparatus complete crack level', '628 US Hwy 259', '581-510-7535', '340245738', '217866679');
+INSERT INTO `servicios` VALUES ('262', '3', '58', 'night', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'station kiss through yellow brush language ha', 'increase east bridge development grass drawer', '630 Byrd Ave', '650-850-9951', '119930610', '183885541');
+INSERT INTO `servicios` VALUES ('329', '31', '95', 'different', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'hard regular near name south left put time ab', 'metal coat flame organizatio where self sad s', '30038 N Upshaw Blvd', '818-437-4339', '725429730', '633284882');
+INSERT INTO `servicios` VALUES ('334', '18', '3', 'impulse potato slow', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'clear bit request bell healthy he balance sou', 'summer reward discovery fruit cushion fact ey', '96 Carolina St', '280-254-8069', '636235724', '730619451');
+INSERT INTO `servicios` VALUES ('349', '15', '29', 'doubt bag', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'current breath drawer hollow dust circle comb', 'balance monkey low line cup news cover wool i', '62 FM 1244 E', '902-629-0288', '766668750', '686953936');
+INSERT INTO `servicios` VALUES ('384', '10', '35', 'smell', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'mind kick hand whistle thought plant rain spe', 'certain prison slope finger toe leg plant cup', '33 W Dale St', '331-075-2690', '472525998', '506984472');
+INSERT INTO `servicios` VALUES ('495', '35', '86', 'give', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'dress give shut baby full year ring expert wa', 'linen memory school operation ever as brush a', '63982 Western Ave', '709-851-2282', '779646299', '254414507');
+INSERT INTO `servicios` VALUES ('496', '17', '24', 'name observation', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'punishment material level beautiful table cha', 'bed seem slip history dear smooth support wav', '45 Uvalde Rd', '616-867-3710', '218239622', '191952107');
+INSERT INTO `servicios` VALUES ('497', '25', '61', 'fertile', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'thought experience before memory wave train m', 'farm grass button eye paste feather company f', '65698 S Getty St', '433-501-2199', '294032683', '129149595');
+INSERT INTO `servicios` VALUES ('498', '26', '33', 'military leather oven list', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'among middle then loose watch wise purpose di', 'married division slope book stitch roll mount', '863 S US Hwy 287 Nb', '633-371-2190', '778628275', '101464927');
+INSERT INTO `servicios` VALUES ('499', '15', '83', 'serious direction', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'competition kick vessel foolish art colour ta', 'opinion cheese cork seem hole week snow curta', '862 W Center Ave', '570-182-5396', '178322163', '440931198');
+INSERT INTO `servicios` VALUES ('500', '28', '15', 'military needle', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'degree grain lock bread map floor join idea r', 'take observation pot summer face manager not ', '93442 Salinas Ave', '664-971-4876', '307077067', '629452623');
+INSERT INTO `servicios` VALUES ('501', '13', '24', 'brain', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'before across condition bird nation wax baske', 'bright leaf leg loud opposite pin expert wine', '4937 Commerce St', '974-691-6149', '700771044', '198657393');
+INSERT INTO `servicios` VALUES ('502', '22', '76', 'Aceros Gongal', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'room secretary plant false help writing accou', 'town dark pipe polish brother way false shelf', 'Calle 27 al 1359', '619-493-3068', '-36.4827107', '-56.7078295');
+INSERT INTO `servicios` VALUES ('503', '35', '6', 'lock that ink', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'money small reason hat rain hat other door il', 'unit relation print bed pump business fat thu', '7863 State Hwy 289 Bus', '247-145-0960', '346658131', '517105212');
+INSERT INTO `servicios` VALUES ('504', '13', '4', 'death', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'harbour door house even body shake ornament w', 'up feeling who library hour able feeble offer', '902 Spr 231', '968-141-8449', '642806783', '479970430');
+INSERT INTO `servicios` VALUES ('505', '38', '1', 'paint', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'unit smash take cheese good reward key flat t', 'chemical damage quick than expansion green hi', '159 State Hwy 65', '183-342-1237', '157405003', '480807690');
+INSERT INTO `servicios` VALUES ('506', '10', '91', 'reason', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'leaf seem desire smoke competition cook milk ', 'again wax yesterday past kiss voice approval ', '4281 State Hwy 37 Alt', '732-782-3997', '298413536', '353937012');
+INSERT INTO `servicios` VALUES ('507', '19', '52', 'system hand sound', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'purpose cat house edge doubt than enough ever', 'very air bed wine nerve public swim material ', '56 Sr348', '672-183-8977', '76627760', '201219738');
+INSERT INTO `servicios` VALUES ('508', '10', '87', 'curtain false parcel late', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'danger representat as dust for company silver', 'experience come oven attempt attraction feath', '4664 Amber', '761-350-5185', '89855551', '239518099');
+INSERT INTO `servicios` VALUES ('509', '15', '78', 'cheese then addition', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'unit stocking month bitter some stitch hope p', 'shut by money comb store fire voice request m', '9478 State Loop 564', '299-167-4105', '58303606', '771837626');
+INSERT INTO `servicios` VALUES ('510', '1', '29', 'round bath chance necessary', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'dependent love sense old crack protest father', 'stage box hanging smoke and growth taste writ', '5792 Roland Ave', '486-137-6548', '416539072', '665122970');
+INSERT INTO `servicios` VALUES ('511', '22', '9', 'Rejas y portones Juan Carlos', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'crush true off cruel error liquid tooth late ', 'throat value current number daughter adjustme', '21 FM 487', '382-727-1001', '-36.7749285', '-59.8526113');
+INSERT INTO `servicios` VALUES ('512', '17', '56', 'wet horn attraction', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'porter expansion pain same digestion second e', 'branch ice wire exchange linen tired school w', '51 Cbd-Fair Park Link', '355-216-7347', '633422434', '353872004');
+INSERT INTO `servicios` VALUES ('513', '26', '56', 'oven smooth', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'equal monkey against coat or go bright appara', 'quiet competition run existence arm mind wood', '7550 S US Hwy 287', '786-536-4431', '268897645', '612829510');
+INSERT INTO `servicios` VALUES ('514', '37', '11', 'form square', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'talk card effect money yellow boy limit all a', 'do protest cotton mist please increase almost', '293 SE Loop 281', '194-084-5288', '595874535', '153275065');
+INSERT INTO `servicios` VALUES ('515', '19', '87', 'blade smash sound certain', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'expansion match trouble burst wound old grain', 'have solid cup harmony food wing down young l', '515 S Smith Ave', '690-469-6550', '657972316', '761113410');
+INSERT INTO `servicios` VALUES ('516', '30', '3', 'yellow butter fertile society', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'linen writing very stretch conscious strange ', 'with flight love basket send middle low bed n', '232 E Leona St', '748-931-5897', '379126042', '321301679');
+INSERT INTO `servicios` VALUES ('517', '4', '50', 'net middle comfort', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'serious bell fixed narrow steam substance use', 'bag effect digestion store month with coat co', '18 Hwy 67 E', '603-620-3353', '505777127', '116113709');
+INSERT INTO `servicios` VALUES ('518', '36', '41', 'thumb drink brass', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'fold north feeble expert scale stomach use or', 'let theory cook discussion dress impulse west', '90 W 6th St', '522-558-8679', '267337458', '652185998');
+INSERT INTO `servicios` VALUES ('519', '34', '56', 'horn discovery pain', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'bridge road after loud false have burn pull a', 'love theory wave fight bridge bell do unit fe', '20010 Morelos Ave', '193-003-6582', '217007333', '522109329');
+INSERT INTO `servicios` VALUES ('520', '24', '58', 'polish free', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'edge wound record knot humour drop drain shor', 'place wind go insurance cause cart operation ', '2695 NW Loop 564', '275-423-7021', '736060986', '123638337');
+INSERT INTO `servicios` VALUES ('521', '22', '76', 'Aceros de importación', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'room secretary plant false help writing accou', 'town dark pipe polish brother way false shelf', 'Calle 27 al 1359', '619-493-3068', '-36.4826107', '-56.7076295');
+INSERT INTO `servicios` VALUES ('522', '22', '36', 'Herreria los primos', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'statement writing space form will complete na', 'price field ball foolish expert poison comb s', '68 E San Antonio St', '103-513-0952', '-38.7651423', '-62.1279636');
+INSERT INTO `servicios` VALUES ('523', '22', '9', 'Herreria de caballos', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'crush true off cruel error liquid tooth late ', 'throat value current number daughter adjustme', '21 FM 487', '382-727-1001', '-36.7769285', '-59.8586113');
+INSERT INTO `servicios` VALUES ('524', '22', '9', 'Herreria de caballos 2', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'crush true off cruel error liquid tooth late ', 'throat value current number daughter adjustme', '21 FM 487', '382-727-1001', '-36.7765285', '-59.8546113');
 
-
--- Dumping structure for table servix_db.usuarios
+-- ----------------------------
+-- Table structure for `usuarios`
+-- ----------------------------
 DROP TABLE IF EXISTS `usuarios`;
-CREATE TABLE IF NOT EXISTS `usuarios` (
+CREATE TABLE `usuarios` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `email` varchar(100) NOT NULL,
   `clave` varchar(45) NOT NULL,
@@ -2768,21 +2740,10 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `dni` varchar(45) DEFAULT NULL,
   `foto` varchar(45) DEFAULT NULL,
   `verificado` smallint(1) DEFAULT NULL,
-  `telefono` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
--- Dumping data for table servix_db.usuarios: ~7 rows (approximately)
-DELETE FROM `usuarios`;
-/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` (`id`, `email`, `clave`, `nombre`, `apellido`, `dni`, `foto`, `verificado`, `telefono`) VALUES
-	(8, 'pepe@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Pedro', 'DonCorlione', '12918888', 'fotodeperfil.jpg', 1, '4444-5587'),
-	(9, 'usuario1@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Juan', 'Moreno', '12918888', 'fotodeperfil.jpg', 1, '4444-5587'),
-	(10, 'usuario2@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Marcos', 'Carlo', '12918888', 'fotodeperfil.jpg', 1, '4444-5587'),
-	(11, 'usuario3@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Matias', 'Paz', '12918888', 'fotodeperfil.jpg', 1, '4444-5587'),
-	(12, 'usuario4@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Roberto', 'Funiet', '12918888', 'fotodeperfil.jpg', 1, '4444-5587'),
-	(13, 'usuario5@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Carlos', 'Brandon', '12918888', 'fotodeperfil.jpg', 1, '4444-5587'),
-	(14, 'usuario6@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Sebastian', 'Ortega', '12918888', 'fotodeperfil.jpg', 1, '4444-5587');
-/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
-/*!40014 SET FOREIGN_KEY_CHECKS=1 */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+-- ----------------------------
+-- Records of usuarios
+-- ----------------------------
+INSERT INTO `usuarios` VALUES ('8', 'pepe@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Pedro', 'DonCorlione', '12918888', 'fotodeperfil.jpg', null);
