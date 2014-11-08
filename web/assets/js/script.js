@@ -35,29 +35,27 @@ $('document').ready(function(){
 
             $("#formCServ").bootstrapValidator({
                 container: 'tooltip',
-                    feedbackIcons: {
-                        valid: 'glyphicon glyphicon-ok',
-                        invalid: 'glyphicon glyphicon-remove',
-                        validating: 'glyphicon glyphicon-refresh'
-                    },
-                    fields: {
-                        comentario: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'Por favor, ingrese un mensaje'
-                                },
-                                stringLength: {
-                                    max: 300,
-                                    min:10,
-                                    message: 'Por favor, ingrese un mensaje entre 10 y 300 caracteres'
-
-                                }
-
-                               
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    comentario: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Por favor, ingrese un mensaje'
+                            },
+                            stringLength: {
+                                max: 300,
+                                min:10,
+                                message: 'Por favor, ingrese un mensaje entre 10 y 300 caracteres'
                             }
                         }
                     }
-            }).on('success.form.bv', function(e) {
+                }
+            })
+            .on('success.form.bv', function(e){
                   
               // $(this).data('bootstrapValidator').resetForm();
             
@@ -75,13 +73,11 @@ $('document').ready(function(){
                             $("#mensaje").addClass("alert-danger");
                             $("#mensaje").removeClass("hidden");
                          }
-                        
                     },
                     resetForm: true,
                 }
 
-
-                 $(this).ajaxForm(options); 
+                $(this).ajaxForm(options);
                 setTimeout(function() {window.location.reload(); }, 2000);
             });
         },
@@ -95,31 +91,31 @@ $('document').ready(function(){
             });
 
             $('#form_login_ajax').bootstrapValidator({
-                container: 'tooltip',
-                    feedbackIcons: {
-                        valid: 'glyphicon glyphicon-ok',
-                        invalid: 'glyphicon glyphicon-remove',
-                        validating: 'glyphicon glyphicon-refresh'
-                    },
-                    fields: {
-                        usuario: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'Se requiere un email de usuario'
-                                }
-                           
-                            }
-                        },
-                        clave: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'Se requiere una clave'
-                                }
-                            }
+                autoFocus:  true,
+                live:       'submitted',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    usuario: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Se requiere un email de usuario'
+                            },
                         }
-                    }
-            }).on('success.form.bv', function(e) {
-                // Prevent form submission
+                    },
+                    clave: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Se requiere una clave'
+                            },
+                        }
+                    },
+                }
+            })
+            .on('success.form.bv', function(e) {
                 e.preventDefault();
 
                 // Get the form instance
@@ -129,46 +125,38 @@ $('document').ready(function(){
                 var bv = $form.data('bootstrapValidator');
 
                 // Use Ajax to submit form data
-                $.post(urlweb+"validar_login_ajax", $form.serialize(), function(data) { 
-                        console.log(data);
-                       var json = JSON.parse(data);
-                        $(".errorusername, .errorpassword").html("");
-                        if(json.res == "error")
-                        {
-                            if(json.username)
-                            {
-                                $(".errorusername").append( json.username );
-                            }
-                            if(json.password)
-                            {
-                                $(".errorpassword").append( json.password );
-                            }
-                        }
-                        else
-                        {
+                $.post(urlweb + "validar_login_ajax", $form.serialize(), function(data) { 
+                        if(data['res']=='success'){
                             $('#loginModal').modal('hide');//cerramos la modal de bootstrap
                             window.location.reload(); //recargamos la pagina
                         }
-                    }
-
-                )}).error(function(jqXHR, exception){
-                        console.log("Error: " + jqXHR.responseText)
-                    })
-
-
+                        if(data['username']){
+                            bv.updateStatus('usuario', 'INVALID', 'notEmpty');
+                            bv.updateMessage('usuario', 'notEmpty', 'Usuario incorrecto o no registrado');
+                            bv.resetField('clave', true);
+                        }
+                        if(data['password']){
+                            bv.updateStatus('clave', 'INVALID');
+                            bv.updateMessage('clave', 'notEmpty', 'Clave incorrecta');
+                        }
+                    }, 'json'
+                )}
+            )
+            .error(function(jqXHR, exception){
+                console.log("Error: " + jqXHR.responseText)
+            })
+        },
                     
-            },
-
-		
-
 		this.init = function(){
             this.busqueda();
             this.validar_login_ajax();
             this.dropdownMenu();            
             this.validar_comentario_servicio();			
 		}
-	}
+	};
 	
+
+
 
 	$servix = new app();
 	$servix.init();

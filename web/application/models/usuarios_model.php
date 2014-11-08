@@ -28,6 +28,24 @@ Class Usuarios_model extends CI_Model{
 	   	 	return false;
 	   	}
 	}
+	
+
+	public function getEmail($usuario){
+		//VERIFICA QUE EL email DEL usuario ESTE EN LA BASE DE DATOS
+		$query	= "SELECT usuarios.id, usuarios.email FROM usuarios
+					WHERE usuarios.email = '$usuario'
+					LIMIT 1";
+
+		$rs = $this->db->query($query);
+		if($rs -> num_rows() == 1){
+			return $rs->result_array();
+		}
+		else{
+
+			return false;
+		}
+	}
+
 
 	public function getUsuario($id){
 		//Devuelve toda la informacion del usuario, determinado por el id

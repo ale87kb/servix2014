@@ -24,7 +24,6 @@ class Login extends CI_Controller {
 	}
 
 
-
 	public function validacion_login(){
 		//Valida el formulario de login
 		$this->load->library('form_validation');
@@ -51,71 +50,68 @@ class Login extends CI_Controller {
 
 		$this->load->library('form_validation');
 
-		$this->form_validation->set_rules('usuario', 'usuario', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('clave', 'clave', 'trim|required|xss_clean|callback_check_database');
+		$this->form_validation->set_rules('usuario', 'usuario', 'trim|required|xss_clean|callback_check_user_database');
+		$this->form_validation->set_rules('clave', 'clave', 'trim|required|xss_clean|callback_check_password_database');
 
 		
 		/* CON BOOSTRAPVALIDATOR */
 		if($this->form_validation->run() == FALSE)
         {
+            if(form_error('usuario') != "")
+            {
             $data = array(
                 'username' => form_error('usuario'),
-                'password' => form_error('clave'),
                 'res'      => "error"
             );
+            	
+            }
+           	else if(form_error('clave')){
+            $data = array(
+                'password' => form_error('clave'),
+                'res'      => "error"
+			);
+           		
+           	}
 
             echo json_encode($data);
         }
         else
         {
             $data = array(
-				//'message' => "CONECTADO",
                 'res'      => "success"
             );
             echo json_encode($data);
         }
 	}
 
-	// public function validacion_login_ajax(){
+	public function check_user_database(){
+		//Consulta el usuario en base de datos
+		//llama al modelo del usuario a la funcion getEmail verifica usuario registrado
 
-	// 	//valida form como en el ejemplo
-
-	// 	$this->load->library('form_validation');
-
-	// 	$this->form_validation->set_rules('usuario', 'usuario', 'trim|required|xss_clean');
-	// 	$this->form_validation->set_rules('clave', 'clave', 'trim|required|xss_clean|callback_check_database');
-
-		
-	// 	// SIN BOOSTRAPVALIDATOR 
-
-	// 	if($this->form_validation->run() == FALSE)
- //        {
- //            $data = array(
- //                'username' => form_error('usuario'),
- //                'password' => form_error('clave'),
- //                'res'      => "error"
- //            );
- //            echo json_encode($data);
- //        }
- //        else
- //        {
- //            $data = array(
- //                'res'      => "success"
- //            );
- //            echo json_encode($data);
- //            //aquí ya puedes procesar los datos de tu formulario
- //        }
-// 	}
-
-
-	public function check_database($clave){
-		//Consulta datos en base de datos
-		//llama al modelo del usuario a la funcion login verifica usuario con contraseña
-
-		//Field validation succeeded.  Validate against database
+		//Validacion del campo con exito, se comprueba contra la base de datos
 		$user = $this->input->post('usuario');
 
-		//query a la base de datos
+		//Query a la base de datos
+		$resultemail = $this->usuarios_model->getEmail($user);
+
+		if($resultemail){
+			return true;
+		}
+		else{
+			$this->form_validation->set_message('check_user_database', 'Usuario incorrecto o no registrado');
+			return false;
+		}
+	}
+
+
+	public function check_password_database($clave){
+		//Consulta la clave en base de datos
+		//llama al modelo del usuario a la funcion login verifica usuario con contraseña
+
+		//Validacion del campo con exito, se comprueba contra la base de datos
+		$user = $this->input->post('usuario');
+
+		//Query a la base de datos
 		$result = $this->usuarios_model->login($user, $clave);
 
 		if($result)
@@ -132,16 +128,15 @@ class Login extends CI_Controller {
 				 //'apellido' => $row['apellido'],
 				 //'foto' => $row['foto'],
 				 //'verificado' = $row['verificado']
-
 				);
 
-					$this->session->set_userdata('logged_in', $sess_array);
+				$this->session->set_userdata('logged_in', $sess_array);
 			}
-			return TRUE;
+			return true;
 		}
 		else
 		{
-			$this->form_validation->set_message('check_database', 'Usuario o Clave incorrectos');
+			$this->form_validation->set_message('check_password_database', 'Usuario o Clave incorrectos');
 			return false;
 		}
 	}

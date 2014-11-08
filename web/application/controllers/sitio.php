@@ -5,7 +5,6 @@ class sitio extends CI_Controller {
 	public function __construct(){
 
 		parent::__construct();
-		
 		//inicio sesion de usuario preguntandole al modelo
 		$this->usuario = $this->check_login();
 	}
