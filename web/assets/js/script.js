@@ -48,8 +48,11 @@ $('document').ready(function(){
                                 },
                                 stringLength: {
                                     max: 300,
-                                    message: 'Por favor, ingrese un mensaje con menos de 300 caracteres'
+                                    min:10,
+                                    message: 'Por favor, ingrese un mensaje entre 10 y 300 caracteres'
+
                                 }
+
                                
                             }
                         }
