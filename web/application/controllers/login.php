@@ -136,7 +136,7 @@ class Login extends CI_Controller {
 		}
 		else
 		{
-			$this->form_validation->set_message('check_password_database', 'Usuario o Clave incorrectos');
+			$this->form_validation->set_message('check_password_database', 'Clave incorrecta');
 			return false;
 		}
 	}
