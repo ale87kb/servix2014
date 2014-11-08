@@ -19,6 +19,11 @@
   </head>
   <body>
   <nav class="navbar navbar-default navbar-static-top navbar-servix" role="navigation">
+    <div class="container">
+      <div id="logostyle">
+        <a href="<?php echo site_url('');?>" style="padding:15px;line-height:20px;display:block;float:left;">SERVIX</a>
+      </div>
+    </div>
   </nav>
 
 

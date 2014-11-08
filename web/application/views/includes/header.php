@@ -20,6 +20,11 @@ como por ejemplo en carpetas:
       </button>
     </div>
     
+    <div id="logostyle">
+      <a href="<?php echo site_url('');?>" style="padding:15px;line-height:20px;display:block;float:left;">SERVIX</a>
+    </div>
+    
+
     <div id="navbar" class="navbar-collapse collapse">     
       <ul class="nav navbar-nav navbar-right">
         <?php 

@@ -2767,22 +2767,23 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `apellido` varchar(45) DEFAULT NULL,
   `dni` varchar(45) DEFAULT NULL,
   `foto` varchar(45) DEFAULT NULL,
-  `verificado` smallint(1) DEFAULT NULL,
   `telefono` varchar(50) DEFAULT NULL,
+  `direccion` varchar(50) DEFAULT NULL,
+  `verificado` smallint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table servix_db.usuarios: ~7 rows (approximately)
 DELETE FROM `usuarios`;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` (`id`, `email`, `clave`, `nombre`, `apellido`, `dni`, `foto`, `verificado`, `telefono`) VALUES
-	(8, 'pepe@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Pedro', 'DonCorlione', '12918888', 'fotodeperfil.jpg', 1, '4444-5587'),
-	(9, 'usuario1@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Juan', 'Moreno', '12918888', 'fotodeperfil.jpg', 1, '4444-5587'),
-	(10, 'usuario2@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Marcos', 'Carlo', '12918888', 'fotodeperfil.jpg', 1, '4444-5587'),
-	(11, 'usuario3@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Matias', 'Paz', '12918888', 'fotodeperfil.jpg', 1, '4444-5587'),
-	(12, 'usuario4@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Roberto', 'Funiet', '12918888', 'fotodeperfil.jpg', 1, '4444-5587'),
-	(13, 'usuario5@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Carlos', 'Brandon', '12918888', 'fotodeperfil.jpg', 1, '4444-5587'),
-	(14, 'usuario6@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Sebastian', 'Ortega', '12918888', 'fotodeperfil.jpg', 1, '4444-5587');
+INSERT INTO `usuarios` (`id`, `email`, `clave`, `nombre`, `apellido`, `dni`, `foto`, `telefono`, `direccion`, `verificado`) VALUES
+	(1, 'pepe@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Pedro', 'DonCorlione', '12918888', 'fotodeperfil.jpg', '4444-5587', 'Av. Libertador 5966', 1),
+	(2, 'usuario1@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Juan', 'Moreno', '12918888', 'fotodeperfil.jpg', '4444-5587', 'Av. Libertador 5966', 1),
+	(3, 'usuario2@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Marcos', 'Carlo', '12918888', 'fotodeperfil.jpg', '4444-5587', 'Av. Libertador 5966', 1),
+	(4, 'usuario3@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Matias', 'Paz', '12918888', 'fotodeperfil.jpg', '4444-5587', 'Av. Libertador 5966', 1 ),
+	(5, 'usuario4@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Roberto', 'Funiet', '12918888', 'fotodeperfil.jpg', '4444-5587', 'Av. Libertador 5966', 1),
+	(6, 'usuario5@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Carlos', 'Brandon', '12918888', 'fotodeperfil.jpg', '4444-5587', 'Av. Libertador 5966', 1),
+	(7, 'usuario6@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Sebastian', 'Ortega', '12918888', 'fotodeperfil.jpg', '4444-5587', 'Av. Libertador 5966', 1);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 /*!40014 SET FOREIGN_KEY_CHECKS=1 */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

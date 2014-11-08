@@ -10,6 +10,8 @@ Class Usuarios_model extends CI_Model{
 
 
 	public function login($usuario, $clave){
+		//Verifica que el usuario y el email sean 
+		//correspondientes entre si, para corroborar el login
 	   $query 	= "SELECT * FROM usuarios
 	   			WHERE usuarios.email = '$usuario'
 	   			AND usuarios.clave = MD5('$clave')
@@ -27,7 +29,26 @@ Class Usuarios_model extends CI_Model{
 	   	}
 	}
 
+	public function getUsuario($id){
+		//Devuelve toda la informacion del usuario, determinado por el id
+		 $query 	= "SELECT * FROM usuarios
+			   			WHERE usuarios.id = $id
+			   			LIMIT 1";
+
+		$rs    = $this->db->query($query);
+
+ 		if($rs -> num_rows() == 1)
+	   	{
+	    	return $rs->result_array();
+	   	}
+	   	else
+	   	{
+	   	 	return false;
+	   	}
+	}
+
 	public function isLogin(){
+		//Verifica si en la sesion del usuario se encuentra la variable logged_in
 		if($this->session->userdata('logged_in'))
 	   {
 	     $session_data 	   = $this->session->userdata('logged_in');

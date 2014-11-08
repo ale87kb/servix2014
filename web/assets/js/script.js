@@ -61,7 +61,7 @@ $('document').ready(function(){
                   
               // $(this).data('bootstrapValidator').resetForm();
             
-                var options = { 
+                var options = {
 
                     success:function(data){
                          var json = JSON.parse(data);
@@ -85,10 +85,10 @@ $('document').ready(function(){
                 setTimeout(function() {window.location.reload(); }, 2000);
             });
         },
+
+
         this.validar_login_ajax = function(){
             urlweb = this.url;
-
-
            
             $('#loginModal').on('shown.bs.modal', function() {
                 $('#form_login_ajax').bootstrapValidator('resetForm', true);
@@ -150,7 +150,6 @@ $('document').ready(function(){
                             window.location.reload(); //recargamos la pagina
                         }
                     }
-                    
 
                 )}).error(function(jqXHR, exception){
                         console.log("Error: " + jqXHR.responseText)
