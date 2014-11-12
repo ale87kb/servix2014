@@ -5,7 +5,8 @@
   */
 
   $this->load->view('login/head');
-  $this->load->view('login/login_form');
+  //$this->load->view('login/login_form')
+  $this->load->view($vista);
   $this->load->view('login/footer');
  ?>
 

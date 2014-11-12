@@ -1,12 +1,10 @@
 <?php 
 	date_default_timezone_set('America/Argentina/Buenos_Aires');
+	
 	function print_d($dato){
-
-	echo "<pre>";
-	print_r($dato);
-	echo "</pre>";
-
-
+		echo "<pre>";
+		print_r($dato);
+		echo "</pre>";
 	};
 
 	
@@ -19,19 +17,22 @@
 		return $login; 
 	}  
 	
-	function recortar_texto($texto, $limite=100){   
-    $texto = trim($texto);
-    $texto = strip_tags($texto);
-    $tamano = strlen($texto);
-    $resultado = '';
-    if($tamano <= $limite){
-        return $texto;
-    }else{
-        $texto = substr($texto, 0, $limite);
-        $palabras = explode(' ', $texto);
-        $resultado = implode(' ', $palabras);
-        $resultado .= '...';
-    }   
-    return $resultado;
+	function recortar_texto($texto, $limite=100){
+    	$texto = trim($texto);
+    	$texto = strip_tags($texto);
+    	$tamano = strlen($texto);
+    	$resultado = '';
+	    if($tamano <= $limite)
+	    {
+	        return $texto;
+	    }
+	    else
+	    {
+	        $texto = substr($texto, 0, $limite);
+	        $palabras = explode(' ', $texto);
+	        $resultado = implode(' ', $palabras);
+	        $resultado .= '...';
+	    }   
+    	return $resultado;
 	}
 ?>

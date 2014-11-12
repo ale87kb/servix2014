@@ -42,21 +42,21 @@ class sitio extends CI_Controller {
 	
 		$usuario 		= $this->usuarios_model->isLogin();
 		$post 			= $this->input->post();
-		$id_servicio 	=  $this->input->post('id_servicio');
+		$id_servicio 	= $this->input->post('id_servicio');
 		$id_usuario  	= $usuario['id'];
 		$comentario 	= $this->input->post('comentario');
 		$validacion 	= $this->_validar_consulta($usuario);
 
 
 		if($validacion['error'] == false){
-			$this->servicios_model->setConsultaServicio($id_servicio,$id_usuario ,$comentario );
+			$this->servicios_model->setConsultaServicio($id_servicio, $id_usuario, $comentario);
 			$post['nombreUsuario'] = $usuario['usuario'];
 			$post['telUsuario']    = $usuario['telefono'];
 			$post['emailUsuario']  = $usuario['email'];
 
-			$this->servicios_model->sendContacto($post);
-
-			
+			//$this->servicios_model->sendContacto($post);
+			$this->sendContacto($post);
+		
 		}
 
 		echo json_encode($validacion);
@@ -169,7 +169,7 @@ class sitio extends CI_Controller {
 
 	}
 
-	private function _setPaginacion($servicio,$localidad,$urlServ,$urlLoc){
+	private function _setPaginacion($servicio, $localidad, $urlServ, $urlLoc){
 		$pages = 4; //Número de registros mostrados por páginas
 		$paginas_segmento = $this->uri->segment(4);
         $this->load->library('pagination'); //Cargamos la librería de paginación
@@ -185,7 +185,7 @@ class sitio extends CI_Controller {
 	}
 
 
-	private function _gmap($rs,$loc=null,$zoom='auto'){
+	private function _gmap($rs, $loc=null, $zoom='auto'){
 		$this->load->library('googlemaps');	
 		$config 			= array();
 	    $config['region']   = 'Argentina';
@@ -195,36 +195,30 @@ class sitio extends CI_Controller {
 		$config['places'] 	= TRUE; 
 		$config['minifyJS'] = TRUE;
 
-
 		$this->googlemaps->initialize($config);
 
-
 		foreach ($rs as $v) {
-
-		$marker = array();
-		$marker['position']			  = ''.$v['latitud'].' '.$v['longitud'].'';
-		$marker['infowindow_content'] = ('<div style="width: 250px;color: #000;font-size:14px;font-family:Arial, Helvetica, sans-serif;">'.ucwords($v['titulo']).'<br>'.ucfirst($v['direccion']).'			</div>');
-		$marker['infowindowMaxWidth'] = "500";
-		$marker['animation']		  = 'DROP';
-		$this->googlemaps->add_marker($marker);
+			$marker = array();
+			$marker['position']			  = ''.$v['latitud'].' '.$v['longitud'].'';
+			$marker['infowindow_content'] = ('<div style="width: 250px;color: #000;font-size:14px;font-family:Arial, Helvetica, sans-serif;">'.ucwords($v['titulo']).'<br>'.ucfirst($v['direccion']).'			</div>');
+			$marker['infowindowMaxWidth'] = "500";
+			$marker['animation']		  = 'DROP';
+			$this->googlemaps->add_marker($marker);
 		}
 
 		$data['map'] = $this->googlemaps->create_map();
 		return $data['map'];
-	
 	}
-
 
 
 	public function ficha_servicio($servicio=null){
 
 		$id 			 = $this->_parsearIdServicio($servicio);
+		
 		if(is_numeric($id)){
 
 		$servicio 		 = $this->servicios_model->getServicioFicha($id);
 		$opiniones 		 = $this->servicios_model->getOpinionServicio($id);
-
-		
 
 		if(!empty($opiniones)){
 			foreach ($opiniones[0] as $key => $value) {
@@ -234,6 +228,7 @@ class sitio extends CI_Controller {
 		foreach ($servicio[0] as $key => $value) {
 			$data[$key] = $value;
 		}
+
 		$data['servicio']= $data['titulo'];
 		$lat 			 = $servicio[0]['latitud'];
 		$long 			 = $servicio[0]['longitud'];
@@ -243,7 +238,9 @@ class sitio extends CI_Controller {
 		$data['vista']   = 'ficha_servicio_view';
 
 		$this->load->view('home_view',$data);
-		}else{
+		
+		}else
+		{
 			redirect('');
 		}
 	}
@@ -254,6 +251,32 @@ class sitio extends CI_Controller {
 		return $serv[0];
 	}
 
+	public function sendContacto($post){
+		 if(isset($post)){
+
+		 	// print_d($post);
+		 	$this->load->library('email');
+		 	$config['charset'] = 'utf-8';
+	        $config['wordwrap'] = TRUE;
+	        $config['mailtype'] = 'html';
+	        $fromemail          = 'no-responder@servix.com'; // desde
+	        $toemail            = $post['email']; //para 
+	        $mail               = null;
+	        $subject            = "Servix datos de contacto";
+
+	        
+	        $this->email->initialize($config);
+        	$this->email->to($toemail);
+	        $this->email->from($fromemail, $post['nombre']);
+	        
+	        $this->email->subject($subject);
+	        $mesg  = $this->load->view('email/contacto',$post,true);
+	        $this->email->message($mesg);
+	        $mail = $this->email->send();
+	      
+	      	return $mail;
+		 }
+	}
 
 }
 

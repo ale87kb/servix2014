@@ -59,12 +59,16 @@ $route['ficha/(:any)']		    				= "sitio/ficha_servicio/$1";
 
 $route['logout']		   						= "login/logout";
 $route['login']     	       					= "login/index";
-$route['recuperar-clave']      					= "login/recuperar_clave";
 $route['validar_login']        					= "login/validacion_login";
 $route['validar_login_ajax']        			= "login/validacion_login_ajax";
+
+$route['recuperar-clave']      					= "login/recuperar_clave";
+
 $route['registrarse']          					= "login/registrar_usuario";
+$route['validar_nuevo_usuario']          		= "login/validar_nuevo_usuario";
 
 
+$route['usuario/verificar/(:any)']           	= "usuario/verificar";
 $route['mi-perfil']   		   					= "usuario/index";
 $route['mi-perfil/editar-datos']   				= "usuario/editar_datos";
 $route['mi-perfil/editar-servicios']  			= "usuario/editar_servicios";

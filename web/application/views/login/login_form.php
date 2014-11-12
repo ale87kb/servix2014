@@ -17,7 +17,7 @@
     <div class="form-group">
       <label for="clave" class="col-sm-2 control-label">Clave</label>
       <div class="col-sm-7">
-        <input type="password" class="form-control" id="Clave" name="clave" placeholder="Clave">
+        <input type="password" class="form-control" id="clave" name="clave" placeholder="Clave">
       </div>
     </div>
     <div class='errorpassword'></div>

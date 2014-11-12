@@ -91,5 +91,28 @@ Class Usuarios_model extends CI_Model{
 
 	}
 
+	public function add_usuario($nuevoUsuario){
+		//Agrega un nuevo usuario a la base de datos
+
+		$query	= 	"INSERT INTO 'usuarios' ('email','clave', 'nombre', 'apellido', 'dni', 'telefono', 'direccion', 'codigo', 'estado', 'fecha_creacion', 'fecha_mod_estado', 'ultima_edicion')
+					 VALUES (
+						".$nuevoUsuario['usuario'].",
+						".$nuevoUsuario['clave'].",
+						".$nuevoUsuario['nombre'].",
+						".$nuevoUsuario['apellido'].",
+						".$nuevoUsuario['dni'].",
+						".$nuevoUsuario['telefono'].",
+						".$nuevoUsuario['direccion'].",
+						".$nuevoUsuario['codigo'].",
+						".$nuevoUsuario['estado'].",
+						".$nuevoUsuario['fecha'].",
+						".$nuevoUsuario['fecha'].",
+						".$nuevoUsuario['fecha']."
+					);";
+		$rs    = $this->db->query($query);
+		return $rs;
+
+	}
+
 }
 

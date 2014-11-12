@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-Class Usuarios extends CI_controller(){
+class Usuario extends CI_controller{
 
 	public function __construct(){
 		parent::__construct();
@@ -10,6 +10,23 @@ Class Usuarios extends CI_controller(){
 	*/
 	public function index(){
 		echo "index";
+		/*$data['title'] = 'Iniciar sesión';
+		$data['vista'] = 'login/login_form';
+		$this->load->view('login_view',$data);*/
+	}
+
+	public function verificar(){
+		$data['title'] = 'Verificar usuario registrado en Servix';
+		$data['vista'] = 'login/verificar_usuario';
+		if(isset($_GET['codigo']))
+		{
+			$codigoVerificar = $this->input->get('codigo', TRUE);
+			$data['codigoVerificar'] = $codigoVerificar;
+			
+		}
+		echo print_d($data);
+		$this->load->view('login_view',$data);
+
 	}
 
 	public function editar_datos(){
