@@ -46,6 +46,21 @@ Class Usuarios_model extends CI_Model{
 		}
 	}
 
+	public function getDNI($dni){
+	//Verifica que el dni sel usuario sea unico
+		$query = "SELECT usuarios.id, usuarios.dni FROM usuarios
+					WHERE usuarios.dni = '$dni'
+					LIMIT 1";
+
+		$rs = $this->db->query($query);
+		if($rs->num_rows() == 1){
+			return $rs->result_array();
+		}
+		else{
+			return false;
+		}
+	}
+
 
 	public function getUsuario($id){
 		//Devuelve toda la informacion del usuario, determinado por el id
@@ -94,20 +109,21 @@ Class Usuarios_model extends CI_Model{
 	public function add_usuario($nuevoUsuario){
 		//Agrega un nuevo usuario a la base de datos
 
-		$query	= 	"INSERT INTO 'usuarios' ('email','clave', 'nombre', 'apellido', 'dni', 'telefono', 'direccion', 'codigo', 'estado', 'fecha_creacion', 'fecha_mod_estado', 'ultima_edicion')
+		$query	= 	"INSERT INTO usuarios (email, clave, nombre, apellido, dni, telefono, direccion, foto, codigo, estado, fecha_creacion, fecha_mod_estado, ultima_edicion)
 					 VALUES (
-						".$nuevoUsuario['usuario'].",
-						".$nuevoUsuario['clave'].",
-						".$nuevoUsuario['nombre'].",
-						".$nuevoUsuario['apellido'].",
-						".$nuevoUsuario['dni'].",
-						".$nuevoUsuario['telefono'].",
-						".$nuevoUsuario['direccion'].",
-						".$nuevoUsuario['codigo'].",
+						'".$nuevoUsuario['usuario']."',
+						'".$nuevoUsuario['clave']."',
+						'".$nuevoUsuario['nombre']."',
+						'".$nuevoUsuario['apellido']."',
+						'".$nuevoUsuario['dni']."',
+						'".$nuevoUsuario['telefono']."',
+						'".$nuevoUsuario['direccion']."',
+						'".$nuevoUsuario['foto']."',
+						'".$nuevoUsuario['codigo']."',
 						".$nuevoUsuario['estado'].",
-						".$nuevoUsuario['fecha'].",
-						".$nuevoUsuario['fecha'].",
-						".$nuevoUsuario['fecha']."
+						'".$nuevoUsuario['fecha_creacion']."',
+						'".$nuevoUsuario['fecha_mod_estado']."',
+						'".$nuevoUsuario['ultima_edicion']."'
 					);";
 		$rs    = $this->db->query($query);
 		return $rs;

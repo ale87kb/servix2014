@@ -3,9 +3,10 @@
   <h1>Registro de usuario en Servix</h1>
    
    <?php 
-	if (isset($data['correcto'])){
+	if (isset($correcto)){
 
-   		if(isset($data['mailenviado'])){
+   		//if(isset($data['mailenviado'])){
+   		if(isset($mailenviado)){
 	?>
 
 			<p>Tu usuario ha sido creado.</p>
@@ -23,12 +24,12 @@
 
    	<?php
    		}
-   else
+   	}else
 	{
 	?>
 
 		<p>No hemos podido registrar tu usuario.</p>
-		<p>Por favor volve a intentar en unos minutos</p>
+		<p>Por favor vuelve a intentar en unos minutos</p>
 
 	<?php
 	}

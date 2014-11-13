@@ -1,6 +1,5 @@
 <?php 
 
-
 $lang['email_must_be_array'] = "El método de validación de correo debe ser pasado como un arreglo.";
 $lang['email_invalid_address'] = "Dirección de correo no válida: %s";
 $lang['email_attachment_missing'] = "No se ha podido localizar el fichero adjunto: %s";

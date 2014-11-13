@@ -10,7 +10,6 @@ class Login extends CI_Controller {
 	public function index(){
 		//Cargar la vista del formulario de login
    		$this->load->helper(array('form'));
-   		//$this->load->view('login_view');
 		$data['title'] = 'Iniciar sesión';
 		$data['vista'] = 'login/login_form';
 		$this->load->view('login_view',$data);
@@ -43,7 +42,7 @@ class Login extends CI_Controller {
 
 			$this->form_validation->set_rules('nombre', 'nombre', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('apellido', 'apellido', 'trim|required|xss_clean');
-			$this->form_validation->set_rules('dni', 'DNI', 'trim|required|numeric|xss_clean');
+			$this->form_validation->set_rules('dni', 'DNI', 'trim|required|numeric|xss_clean|callback_check_dni_duplicate');
 			$this->form_validation->set_rules('direccion', 'direccion', 'trim|xss_clean');
 			$this->form_validation->set_rules('telefono', 'teléfono', 'trim|xss_clean');
 
@@ -58,50 +57,54 @@ class Login extends CI_Controller {
 			{
 				$fecha = date('Y-m-d H:m:i');
 
-				$nuevoUsuario['fecha'] 		= $fecha;
-				$nuevoUsuario['usuario'] 	= $this->input->post('usuario', TRUE);
-				$nuevoUsuario['clave'] 		= $this->input->post('clave', TRUE);
-				$nuevoUsuario['nombre'] 	= $this->input->post('nombre', TRUE);
-				$nuevoUsuario['apellido'] 	= $this->input->post('apellido');
-				$nuevoUsuario['dni'] 		= $this->input->post('dni', TRUE);
-				$nuevoUsuario['telefono'] 	= $this->input->post('telefono', TRUE);
-				$nuevoUsuario['direccion'] 	= $this->input->post('direccion', TRUE);
-				$nuevoUsuario['codigo'] 	= $this->_generarCodigo();
+				$nuevoUsuario['fecha_creacion'] 	= $fecha;
+				$nuevoUsuario['fecha_mod_estado'] 	= $fecha;
+				$nuevoUsuario['ultima_edicion'] 	= $fecha;
+				$nuevoUsuario['usuario'] 			= $this->input->post('usuario', TRUE);
+				$nuevoUsuario['clave'] 				= $this->input->post('clave', TRUE);
+				$nuevoUsuario['nombre'] 			= $this->input->post('nombre', TRUE);
+				$nuevoUsuario['apellido'] 			= $this->input->post('apellido');
+				$nuevoUsuario['dni'] 				= $this->input->post('dni', TRUE);
+				$nuevoUsuario['telefono'] 			= $this->input->post('telefono', TRUE);
+				$nuevoUsuario['direccion'] 			= $this->input->post('direccion', TRUE);
+				$nuevoUsuario['codigo'] 			= $this->_generarCodigo();
+				$nuevoUsuario['foto'] 				= 'assets/images/profile_640.png';
+
 				
-				$nuevoUsuario['estado'] 	= 0;
+				$nuevoUsuario['estado'] 			= 0;
 				//El estado del usuario puede ser 
 				// 0 : Registrado, email NO verificado 
 				// 1 : Registrado, email verificado
 				// 2 : Usuario dado de baja
-				$this->sendEmailConfirm($nuevoUsuario);
+				
+				//$this->sendEmailConfirm($nuevoUsuario);
 
-				/*$resultAdd = $this->usuarios_model->add_user($nuevoUsuario);
+				$resultAdd = $this->usuarios_model->add_usuario($nuevoUsuario);
+
+
 				if($resultAdd)
 				{
 					//Envio un mail para confirmar usuario
 
 					$mailenviado = $this->sendEmailConfirm($nuevoUsuario);
 					if($mailenviado){
-						$data = array(
-							"mailenviado" = "Mensaje enviado"
-						);
+						$data['mailenviado'] = "Mensaje enviado";
 					}
-					$data = array(
-						"correcto" = "Registro correcto"
-					);
-					
+
+					$data['correcto'] = "Registro correcto";
+
 					$data['title'] = "Registro de Usuario en Servix";
-					$data['vista'] = "registro_respuesta";
+					$data['vista'] = "login/registro_respuesta";
 					$this->load->view("login_view", $data);
 				}
 				else
 				{
 					$data['mensaje'] = "El registro de usuario ha fallado, por favor intente mas tarde.";
 					$data['title'] = "Registro de Usuario en Servix";
-					$data['vista'] = "registro_respuesta";
+					$data['vista'] = "login/registro_respuesta";
 					$this->load->view("login_view", $data);
 				}
-*/
+
 				//redirect();
 			}
 		}
@@ -129,11 +132,28 @@ class Login extends CI_Controller {
 	}
 
 
+	public function check_dni_duplicate(){
+		//Consulta si el dni ingresado esta dubplicado en la base de datos
+
+		$dni = $this->input->post('dni');
+
+		$resultadoDni = $this->usuarios_model->getDNI($dni);
+
+		if($resultadoDni){
+			$this->form_validation->set_message('check_dni_duplicate', 'El DNI ingresado ya esta registrado');
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+
+
 	public function sendEmailConfirm($post){
 		
-	$this->load->view('email/confirmEmail', $post);
-	
-/*
+		//$this->load->view('email/confirmEmail', $post);
+
 		 if(isset($post)){
 
 		 	// print_d($post);
@@ -157,7 +177,7 @@ class Login extends CI_Controller {
 	        $mail = $this->email->send();
 	      
 	      return $mail;
-		 }*/
+		 }
 	}
 
 
