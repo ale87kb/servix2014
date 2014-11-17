@@ -63,6 +63,7 @@ $route['validar_login']        					= "login/validacion_login";
 $route['validar_login_ajax']        			= "login/validacion_login_ajax";
 
 $route['recuperar-clave']      					= "login/recuperar_clave";
+$route['validar_recuperar_clave']      			= "login/validar_recuperar_clave";
 
 $route['registrarse']          					= "login/registrar_usuario";
 $route['validar_nuevo_usuario']          		= "login/validar_nuevo_usuario";

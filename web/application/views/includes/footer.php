@@ -43,7 +43,7 @@
 
           </div>
           <div class="modal-footer">
-            <a href="#">No recuerdo mi contraseña</a>
+            <a href="<?php  echo site_url('recuperar-clave');?>" rel="nofollow">No recuerdo mi contraseña</a>
             <!--<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>-->
           </div>
         </div><!-- /.modal-content -->

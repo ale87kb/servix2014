@@ -17,7 +17,44 @@ class Login extends CI_Controller {
 
 
 	public function recuperar_clave(){
-		echo "recuperar_clave";
+		$this->load->helper(array('form'));
+		$data['title'] = 'Recuperar Clave';
+		$data['vista'] = 'login/recuperar_clave';
+		$this->load->view('login_view',$data);
+	}
+
+	public function validar_recuperar_clave(){
+		if(isset($_POST['grabar']) and $_POST['grabar'] == 'si'){
+			$this->load->library('form_validation');
+			$this->form_validation->set_rules('usuario', 'email', 'trim|required|valid_email|xss_clean|callback_check_user_database');
+			
+			$this->form_validation->set_message('required', 'El campo %s es obligatorio');
+			$this->form_validation->set_message('valid_email', 'Ingrese un %s válido');
+			if($this->form_validation->run() == FALSE)
+			{
+				$this->recuperar_clave();
+			}
+			else
+			{
+				
+				//Si el email es valido, 
+				//actualizo la fehca de la ultima edicion
+				//y genero una nueva contraseña para enviarla por email
+				$fecha = date('Y-m-d H:m:i');
+				$usuariorecupero['ultima_edicion'] 	= $fecha;
+				$usuariorecupero['usuario'] 		= $this->input->post('usuario', TRUE);
+				$usuariorecupero['clave'] 			= $thgis->_generaPass();
+
+				$resultadoRecuClav = $this->usuarios_model->actualizar_clave($usuariorecupero);
+
+				if($resultadoRecuClav){
+
+					$mailenviado = $this->sendEmailNuevaClave($usuariorecupero);
+
+				}
+			}
+		}
+
 	}
 
 
@@ -77,7 +114,7 @@ class Login extends CI_Controller {
 				// 1 : Registrado, email verificado
 				// 2 : Usuario dado de baja
 				
-				//$this->sendEmailConfirm($nuevoUsuario);
+				//$this->sendEmailConfirm($nuevoUsario);
 
 				$resultAdd = $this->usuarios_model->add_usuario($nuevoUsuario);
 
@@ -90,22 +127,25 @@ class Login extends CI_Controller {
 					if($mailenviado){
 						$data['mailenviado'] = "Mensaje enviado";
 					}
+					else
+					{
+						$data['mailnoenviado'] = $this->email->print_debugger();
+					}
 
-					$data['correcto'] = "Registro correcto";
 
-					$data['title'] = "Registro de Usuario en Servix";
-					$data['vista'] = "login/registro_respuesta";
+					$data['correcto'] 	= "Registro correcto";
+
+					$data['title'] 		= "Registro de Usuario en Servix";
+					$data['vista'] 		= "login/registro_respuesta";
 					$this->load->view("login_view", $data);
 				}
 				else
 				{
-					$data['mensaje'] = "El registro de usuario ha fallado, por favor intente mas tarde.";
-					$data['title'] = "Registro de Usuario en Servix";
-					$data['vista'] = "login/registro_respuesta";
+					$data['mensaje'] 	= "El registro de usuario ha fallado, por favor intente mas tarde.";
+					$data['title'] 		= "Registro de Usuario en Servix";
+					$data['vista'] 		= "login/registro_respuesta";
 					$this->load->view("login_view", $data);
 				}
-
-				//redirect();
 			}
 		}
 	}
@@ -158,7 +198,7 @@ class Login extends CI_Controller {
 
 		 	// print_d($post);
 		 	$this->load->library('email');
-		 	$config['charset'] = 'utf-8';
+		 	$config['charset'] 	= 'utf-8';
 	        $config['wordwrap'] = TRUE;
 	        $config['mailtype'] = 'html';
 	        $fromemail          = 'no-responder@servix.com'; // desde
@@ -173,6 +213,36 @@ class Login extends CI_Controller {
 	        
 	        $this->email->subject($subject);
 	        $mesg  = $this->load->view('email/confirmEmail', $post, true);
+	        $this->email->message($mesg);
+	        $mail = $this->email->send();
+	      
+	      return $mail;
+		 }
+	}
+
+	public function sendEmailNuevaClave($post){
+		
+		//$this->load->view('email/confirmEmail', $post);
+
+		 if(isset($post)){
+
+		 	// print_d($post);
+		 	$this->load->library('email');
+		 	$config['charset'] 	= 'utf-8';
+	        $config['wordwrap'] = TRUE;
+	        $config['mailtype'] = 'html';
+	        $fromemail          = 'no-responder@servix.com'; // desde
+	        $toemail            = $post['usuario']; //para
+	        $mail               = null;
+	        $subject            = "Nueva Clave en Servix";
+
+	        
+	        $this->email->initialize($config);
+	        $this->email->from($fromemail, $post['nombre']);
+        	$this->email->to($toemail);
+	        
+	        $this->email->subject($subject);
+	        //$mesg  = $this->load->view('email/confirmEmail', $post, true);
 	        $this->email->message($mesg);
 	        $mail = $this->email->send();
 	      
@@ -313,6 +383,26 @@ class Login extends CI_Controller {
 	private function _generarCodigo() {
 		$key = md5(microtime().rand());
 		return $key;
+	}
+
+	private function _generaPass(){
+	    $cadena = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+	    $longitudCadena = strlen($cadena);
+	     
+	    //Se define la variable que va a contener la contraseña
+	    $pass = "";
+	    //Se define la longitud de la contraseña
+	    $longitudPass = 10;
+	     
+	    //Creamos la contraseña
+	    for($i=1 ; $i<=$longitudPass ; $i++){
+	        //Definimos numero aleatorio entre 0 y la longitud de la cadena de caracteres-1
+	        $pos = rand(0,$longitudCadena-1);
+	     
+	        //Vamos formando la contraseña en cada iteraccion del bucle, añadiendo a la cadena $pass la letra correspondiente a la posicion $pos en la cadena de caracteres definida.
+	        $pass .= substr($cadena,$pos,1);
+	    }
+	    return $pass;
 	}
 
 	/*

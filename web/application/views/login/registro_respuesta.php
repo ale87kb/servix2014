@@ -15,11 +15,12 @@
 
 	<?php
    		}
-   		else
+   		else if (isset($mailnoenviado))
    		{
 	?>
 
 			<p>Tu usuario ha sido creado.</p>
+			<p>No se pudimos enviarte un mensaje a tu casilla de Email para que confirmes tu usuario, la proxima vez que inicies sesión se te pedirá verifiar tu usuario.</p>
 			<p>Gracias por sumarte a Servix</p>
 
    	<?php

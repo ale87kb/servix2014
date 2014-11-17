@@ -130,5 +130,18 @@ Class Usuarios_model extends CI_Model{
 
 	}
 
+
+	
+	//Recibe un array
+	public function actualizar_clave($usuario){
+		$query 	= 	"UPDATE usuarios 
+					SET clave = '".$usuario['clave']."', ultima_edicion = '".$usuario['ultima_edicion']."' 
+					WHERE email = '".$usuario['usuario']."';";
+
+		$rs 	= $this->db->query($query);
+		
+		return $rs;
+	}
+
 }
 
