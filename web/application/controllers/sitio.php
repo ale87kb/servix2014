@@ -91,6 +91,7 @@ class sitio extends CI_Controller {
 		 }
 		 echo  json_encode($arrayDatos);
 	}
+
 	public function busqueda_localidades(){
 		$data = $this->servix_model->geBusquedaLocalProv();
 		 $arrayDatos = array();

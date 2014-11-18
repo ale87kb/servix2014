@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width" />
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Confirmación de Email de registro en Servix</title>
+<title>Recuperar Clave de usuario en Servix</title>
 	
 <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/css/email.css') ?>" />
 
@@ -44,27 +44,26 @@
 			<table>
 				<tr>
 					<td>
-						<h3>Hola <?php echo $nombre ?></h3>
-						<p class="lead">¡Bienvenido a Servix! Acabas de unirte al mejor sitio para buscar servicios y compartir tus servicios con la comunidad. 
-							¡Nos alegra que estés aquí! </p>
-						<p class="lead">Antes de que empieces a explorar servicios y compartir tus propios servicios en Servix, 
-							debemos confirmar que eres una persona y no un robot.</p>
-						<p class="lead">Para completar el registro, haz click en el siguiente botón:</p>
-						<table cellspacing="0" cellpadding="0" border="0" align="center" width="360">
-							<tbody>
-								<tr>
-								    <td>
-								        <p style="width:300px;background:#2786C2;font-family:helvetica, arial, sans-serif;font-size:18px;line-height:18px;text-align:center;padding:14px 10px;border-radius:6px;">
-								        	<a target="_blank" style="color:#fff;text-decoration:none;" href="<?php echo site_url('usuario/verificar?codigo='.$codigo.'&amp;source=email') ?>">
-								        		<strong>Completar el registro</strong>
-								        	</a>
-								        </p>
-								    </td>
-								</tr>
-							</tbody>
+						<h3>Hola <?php echo $usuario ?></h3>
+						<p class="lead">Solicitaste modificar tu contraseña.</p>
+						<p class="lead">Tus nuevos datos para iniciar sesión son los siguientes:</p>
+
+						<table>
+							<tr>
+								<td>Usuario:</td>
+								<td><?php echo $usuario ;?></td>
+							</tr>
+							<tr>
+								<td>Clave:</td>
+								<td><?php echo $clave ;?></td>
+							</tr>
 						</table>
+
+						<p class="lead">Te recordamos que puedes modificar tu clave cuantas veces quieras.</p>
+						<p class="lead">Te invitamos a iniciar sesión en el sitio para seguir disfrutando de Servix</p>
+
 						<p class="lead">Gracias de nuevo por unirte. ¡Nos vemos en este sitio!</p>
-						<p class="lead">Servix</p>
+						<p class="lead"><a href="<?php echo site_url('') ?>">Servix</a></p>
 						
 					</td>
 				</tr>

@@ -43,13 +43,38 @@ class Login extends CI_Controller {
 				$fecha = date('Y-m-d H:m:i');
 				$usuariorecupero['ultima_edicion'] 	= $fecha;
 				$usuariorecupero['usuario'] 		= $this->input->post('usuario', TRUE);
-				$usuariorecupero['clave'] 			= $thgis->_generaPass();
+				$usuariorecupero['clave'] 			= $this->_generaPass();
 
 				$resultadoRecuClav = $this->usuarios_model->actualizar_clave($usuariorecupero);
+
+					
+				//this->sendEmailNuevaClave($usuariorecupero);
 
 				if($resultadoRecuClav){
 
 					$mailenviado = $this->sendEmailNuevaClave($usuariorecupero);
+
+					if($mailenviado){
+
+						$data['mailenviado'] = 'Mensaje enviado';
+					}
+					else
+					{
+						$data['mailnoenviado'] = $this->email->print_debugger();
+					}
+
+					$data['correcto'] 	= "La clave a sido actualizada";
+					$data['title'] 		= "Recuperar Clave";
+					$data['vista'] 		= "login/recuperar_clave_respuesta";
+					$this->load->view("login_view", $data);
+
+				}
+				else
+				{
+					$data['mensaje'] 	= "La actualizacion de la clave de usuario ha fallado, por favor intente mas tarde.";
+					$data['title'] 		= "Recuperar Clave - Error";
+					$data['vista'] 		= "login/recuperar_clave_respuesta";
+					$this->load->view("login_view", $data);
 
 				}
 			}
@@ -114,7 +139,7 @@ class Login extends CI_Controller {
 				// 1 : Registrado, email verificado
 				// 2 : Usuario dado de baja
 				
-				//$this->sendEmailConfirm($nuevoUsario);
+				//$this->sendEmailConfirm($nuevoUsuario);
 
 				$resultAdd = $this->usuarios_model->add_usuario($nuevoUsuario);
 
@@ -142,7 +167,7 @@ class Login extends CI_Controller {
 				else
 				{
 					$data['mensaje'] 	= "El registro de usuario ha fallado, por favor intente mas tarde.";
-					$data['title'] 		= "Registro de Usuario en Servix";
+					$data['title'] 		= "Registro de Usuario en Servix - Error";
 					$data['vista'] 		= "login/registro_respuesta";
 					$this->load->view("login_view", $data);
 				}
@@ -222,7 +247,7 @@ class Login extends CI_Controller {
 
 	public function sendEmailNuevaClave($post){
 		
-		//$this->load->view('email/confirmEmail', $post);
+		//$this->load->view('email/recuperarClave', $post);
 
 		 if(isset($post)){
 
@@ -242,7 +267,7 @@ class Login extends CI_Controller {
         	$this->email->to($toemail);
 	        
 	        $this->email->subject($subject);
-	        //$mesg  = $this->load->view('email/confirmEmail', $post, true);
+	        $mesg  = $this->load->view('email/recuperarClave', $post, true);
 	        $this->email->message($mesg);
 	        $mail = $this->email->send();
 	      
@@ -405,13 +430,21 @@ class Login extends CI_Controller {
 	    return $pass;
 	}
 
+
+
+
+
 	/*
+	.....................................................................................
+	COMENTADA PARA FUTURO USO.. EN ESTOS MOMENTOS ESTA EN DESUSO
+	.....................................................................................
 	public function generarCodigo($longitud) {
 		$key = '';
 		$pattern = '1234567890abcdefghijklmnopqrstuvwxyz';
 		$max = strlen($pattern)-1;
 		for($i=0;$i < $longitud;$i++) $key .= $pattern{mt_rand(0,$max)};
 	}
+
 	*/
 }
 ?>

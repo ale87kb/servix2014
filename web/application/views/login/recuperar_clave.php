@@ -1,7 +1,7 @@
 <div class="container">
   <div class="jumbotron col-md-12">
   <h1>Recuperar clave</h1>
-  <p>Rellena el siguiente coampo con tu email registrado, y te enviaremos un mensaje con una nueva contraseña.</p>
+  <p>Rellena el siguiente campo con tu email registrado, y te enviaremos un mensaje con una nueva contraseña.</p>
   <p>Te recomendamos que luego de iniciar sesión, cambies tu contraseña.</p>
    
    <?php echo validation_errors(); ?>

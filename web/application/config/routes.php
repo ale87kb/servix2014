@@ -67,9 +67,8 @@ $route['validar_recuperar_clave']      			= "login/validar_recuperar_clave";
 
 $route['registrarse']          					= "login/registrar_usuario";
 $route['validar_nuevo_usuario']          		= "login/validar_nuevo_usuario";
-
-
 $route['usuario/verificar/(:any)']           	= "usuario/verificar";
+
 $route['mi-perfil']   		   					= "usuario/index";
 $route['mi-perfil/editar-datos']   				= "usuario/editar_datos";
 $route['mi-perfil/editar-servicios']  			= "usuario/editar_servicios";

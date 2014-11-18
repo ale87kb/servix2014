@@ -108,6 +108,7 @@ Class Usuarios_model extends CI_Model{
 
 	public function add_usuario($nuevoUsuario){
 		//Agrega un nuevo usuario a la base de datos
+		//La calve esta encriptada en md5 desde el controlador login.php
 
 		$query	= 	"INSERT INTO usuarios (email, clave, nombre, apellido, dni, telefono, direccion, foto, codigo, estado, fecha_creacion, fecha_mod_estado, ultima_edicion)
 					 VALUES (
@@ -135,11 +136,32 @@ Class Usuarios_model extends CI_Model{
 	//Recibe un array
 	public function actualizar_clave($usuario){
 		$query 	= 	"UPDATE usuarios 
-					SET clave = '".$usuario['clave']."', ultima_edicion = '".$usuario['ultima_edicion']."' 
+					SET clave = MD5('".$usuario['clave']."'), ultima_edicion = '".$usuario['ultima_edicion']."' 
 					WHERE email = '".$usuario['usuario']."';";
 
 		$rs 	= $this->db->query($query);
 		
+		return $rs;
+	}
+
+
+
+	public function verificarCodigo($codigo){
+		$query 	= "SELECT * FROM usuarios WHERE codigo = '$codigo';";
+
+		$rs 	= $this->db->query($query);
+
+		return $rs->result_array();
+	}
+
+
+
+	//Actualiza el estado del usuario
+	public function actualizarEstadoVerficado($estado, $codigo, $fecha){
+		$query 	= "UPDATE usuarios SET estado = $estado, fecha_mod_estado = '$fecha', ultima_edicion = '$fecha' WHERE codigo = '$codigo';";
+
+		$rs 	= $this->db->query($query);
+
 		return $rs;
 	}
 
