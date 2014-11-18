@@ -30,7 +30,46 @@ $('document').ready(function(){
             );
         },
 
-      
+        this.validar_votacion = function(){
+
+
+
+
+            $("#form_votacion").bootstrapValidator({
+                container: 'tooltip',
+              
+                live: 'enabled',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                excluded: ':disabled',
+                fields: {
+                    puntos: {
+                           validators: {
+                            between: {
+                                min: 1,
+                                max: 5,
+                                message: 'The latitude must be between 1 and 5'
+                            }
+                        }
+                    },
+                    comentario: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Por favor, ingrese un mensaje'
+                            },
+                            stringLength: {
+                                max: 300,
+                                min:10,
+                                message: 'Por favor, ingrese un mensaje entre 10 y 300 caracteres'
+                            }
+                        }
+                    }
+                }
+            })
+        },
         this.validar_comentario_servicio = function(){
 
             $("#formCServ").bootstrapValidator({
@@ -151,7 +190,8 @@ $('document').ready(function(){
             this.busqueda();
             this.validar_login_ajax();
             this.dropdownMenu();            
-            this.validar_comentario_servicio();			
+            this.validar_comentario_servicio();         
+            this.validar_votacion();			
 		}
 	};
 	

@@ -49,18 +49,16 @@ Class Servicios_model extends CI_Model{
 
 	public function getOpinionServicio($id){
 		$query = "SELECT
-				usuarios.apellido,
-				usuarios.nombre,
-				comentarios.comentario,
-				comentarios.fecha,
 				puntuacion.puntos,
-				puntuacion.votado
+				puntuacion.votado,
+				puntuacion.comentario,
+				puntuacion.fecha_votacion,
+				puntuacion.fecha_votacion_usuario
 				FROM
-				comentarios
-				LEFT OUTER JOIN usuarios ON comentarios.id_usuarios = usuarios.id
-				LEFT OUTER JOIN puntuacion ON puntuacion.id_usuarios = usuarios.id
-				WHERE comentarios.id_servicios = $id OR puntuacion.id_servicios = $id";
-		
+				puntuacion
+				WHERE
+				puntuacion.id_servicios = $id";
+						
 		$rs    = $this->db->query($query);
 		
 		return $rs->result_array();

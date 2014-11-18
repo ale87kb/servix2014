@@ -114,36 +114,45 @@
 		        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 		        <h4 class="modal-title" id="modalOpinion-1">Dejanos tu opinion sobre el servicio</h4>
 		      </div>
+					<form class="form-horizontal" role="form" id="form_votacion">
 		      <div class="modal-body">
 		       <div class="votacion">
 			
 					
 					
-					<form class="form-horizontal" role="form">
 					  <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-5 control-label">¿Como Calificarias este servicio?</label>
+					    <label for="puntos" class="col-sm-5 control-label">¿Como Calificarias este servicio?</label>
 					    <div class="col-sm-7">
-					    		  <div id="stars" class="starrr " ></div>
-					    		  <input type="hidden" value="0" id="puntos" name="puntos">
+					    		  <div id="stars" class="starrr " name="puntos2" ></div>
+					    		  <input type="hidden" value="" id="puntos" name="puntos" required>
 					    </div>
 					  </div>
 					  <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-5 control-label">Cuentanos tu experiencia</label>
-					    <div class="col-sm-7">
-					    		  	<textarea class="form-control" rows="3"></textarea>
+					    <label for="fecha" class="col-sm-5 control-label">¿Cuando usaste el servicio?</label>
+					    <div class="col-sm-6">
+					    		<input class="form-control" type="date" name="fecha" id="fecha" required>
+					    </div>
+					  </div>
+					  <div class="form-group">
+					  	<div class="alert  alert-warning" role="alert">
+					  		<p class="text-center">Por favor, sé fiel a los hechos y evita hacer comentarios inapropiados.</p>
+					  	</div>
+					    <label for="comentario" class="col-sm-5 control-label">Cuentanos tu experiencia</label>
+					    <div class="col-sm-6">
+					    		  	<textarea class="form-control"  name="comentario" rows="3" required></textarea>
 					    </div>
 					  </div>
 					 
 					 
-					</form>
 					
 					
 				</div> 
 		      </div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		        <button type="button" class="btn btn-primary">Enviar</button>
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+		        <button type="submit" class="btn btn-primary">Enviar</button>
 		      </div>
+					</form>
 		    </div>
 		  </div>
 		</div>
