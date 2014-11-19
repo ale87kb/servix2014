@@ -10,9 +10,15 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="<?php  echo site_url('assets/js/bootstrap.min.js');?>"></script>
     <script src="<?php  echo site_url('assets/js/bootstrap-typeahead.js');?>"></script>
+    <!-- BootstrapValidator -->
+    <script src="<?php  echo site_url('assets/js/bootstrapValidator.min.js');?>" type="text/javascript"></script>
+    <script src="<?php  echo site_url('assets/js/lang/es_ES.js');?>" type="text/javascript"></script>
+    <script src="<?php  echo site_url('assets/js/jquery.form.min.js');?>" type="text/javascript"></script>
+  
     <script>
       $site_url = "<?php echo site_url();?>";
     </script>
-    <script src="<?php  echo site_url('assets/js/login_page.js');?>"></script>
+    <script src="<?php  echo site_url('assets/js/script.js');?>"></script>
+    <script src="<?php  echo site_url('assets/js/votacion.js');?>"></script>
   </body>
 </html>

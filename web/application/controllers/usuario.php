@@ -4,6 +4,7 @@ class Usuario extends CI_controller{
 
 	public function __construct(){
 		parent::__construct();
+		$data['title'] = 'Servix';
 		$this->UsuarioSession = $this->usuarios_model->isLogin();
 	}
 	/*

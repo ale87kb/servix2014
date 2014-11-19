@@ -29,6 +29,7 @@ class sitio extends CI_Controller {
 
 		$data['usuario'] = $this->UsuarioSession['nombre'];
 		//$data['usuario'] = $this->usuario;
+		$data['title'] = '';
 		$data['vista'] = 'index_view';
 		$this->load->view('home_view',$data);
 	}
@@ -158,7 +159,8 @@ class sitio extends CI_Controller {
 	public function resultado_busqueda(){
 			
 		$busca = $this->session->userdata("busqueda");
-		$data['usuario']   = $this->usuario;
+		$data['usuario']   = $this->UsuarioSession['nombre'];
+		//$data['usuario']   = $this->usuario;
 		$data['servicio']  = $busca['post']['servicio'];
 		$data['localidad'] = $busca['post']['localidad'];
 		$urlLoc 		   = $busca['url']['localidad'];
@@ -171,6 +173,7 @@ class sitio extends CI_Controller {
 		}
 		// print_d($this->db->last_query());
 		
+		$data['title'] = 'Resultado de búsqueda';
 		$data['vista'] = 'resultado_busqueda_view';
 		$this->load->view('home_view',$data);
 
@@ -241,7 +244,9 @@ class sitio extends CI_Controller {
 		$long 			 = $servicio[0]['longitud'];
 		$position	     = "$lat,$long";
 		$data['map'] 	 = $this->_gmap($servicio,$position,14);
-		$data['usuario'] = $this->usuario;
+		$data['usuario'] = $this->UsuarioSession['nombre'];
+		//$data['usuario'] = $this->usuario;
+		$data['title']   = 'Ficha del servicio';
 		$data['vista']   = 'ficha_servicio_view';
 
 		$this->load->view('home_view',$data);
