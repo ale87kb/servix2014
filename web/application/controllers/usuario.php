@@ -140,6 +140,9 @@ class Usuario extends CI_controller{
 
 
 
+	public function validar_voto(){
+		echo "editar_datos";
+	}
 	public function editar_datos(){
 		echo "editar_datos";
 	}

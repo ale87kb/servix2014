@@ -114,7 +114,7 @@
 		        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 		        <h4 class="modal-title" id="modalOpinion-1">Dejanos tu opinion sobre el servicio</h4>
 		      </div>
-					<form class="form-horizontal" role="form" id="form_votacion">
+					<form class="form-horizontal" role="form" id="form_votacion" method="post" action="<?php echo site_url(); ?>">
 		      <div class="modal-body">
 		       <div class="votacion">
 			
@@ -123,8 +123,9 @@
 					  <div class="form-group">
 					    <label for="puntos" class="col-sm-5 control-label">¿Como Calificarias este servicio?</label>
 					    <div class="col-sm-7">
-					    		  <div id="stars" class="starrr " name="puntos2" ></div>
-					    		  <input type="hidden" value="" id="puntos" name="puntos" required>
+
+					    	   <div id="ratyRating"></div>
+					    		
 					    </div>
 					  </div>
 					  <div class="form-group">

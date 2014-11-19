@@ -67,6 +67,7 @@
 	<script>
 		$site_url = "<?php echo site_url();?>";
 	</script>
+  <script src="<?php  echo site_url('assets/js/jquery.raty.js');?>"></script>
 	<script src="<?php  echo site_url('assets/js/script.js');?>"></script>
 	<script src="<?php  echo site_url('assets/js/votacion.js');?>"></script>
 	</body>
