@@ -17,36 +17,6 @@ Class Servicios_model extends CI_Model{
 	}
 
 
-	// LA MOVI A CONTROLADOR SITIO
-	/*
-	public function sendContacto($post){
-		 if(isset($post)){
-
-		 	// print_d($post);
-		 	$this->load->library('email');
-		 	$config['charset'] = 'utf-8';
-	        $config['wordwrap'] = TRUE;
-	        $config['mailtype'] = 'html';
-	        $fromemail          = 'no-responder@servix.com'; // desde
-	        $toemail            = $post['email']; //para 
-	        $mail               = null;
-	        $subject            = "Servix datos de contacto";
-
-	        
-	        $this->email->initialize($config);
-        	$this->email->to($toemail);
-	        $this->email->from($fromemail, $post['nombre']);
-	        
-	        $this->email->subject($subject);
-	        $mesg  = $this->load->view('email/contacto',$post,true);
-	        $this->email->message($mesg);
-	        $mail = $this->email->send();
-	      
-	      	return $mail;
-		 }
-	}
-	*/
-
 	public function getOpinionServicio($id){
 		$query = "SELECT
 				puntuacion.puntos,

@@ -18,15 +18,3 @@
     <![endif]-->
   </head>
   <body>
-  <nav class="navbar navbar-default navbar-static-top navbar-servix" role="navigation">
-    <div class="container">
-      <div id="logostyle">
-        <a href="<?php echo site_url('');?>">
-          <h1 class="s-logo es">Servix - a un click de distancia</h1>
-        </a>
-      </div>
-    </div>
-  </nav>
-
-
-  

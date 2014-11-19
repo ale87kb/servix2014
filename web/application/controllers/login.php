@@ -370,29 +370,34 @@ class Login extends CI_Controller {
 
 		if($result)
 		{
-			$sess_array = array();	
-			foreach($result as $row)
-			{
-				$sess_array = array(
-				 'id' 		=> $row['id'],
-				 'email' 	=> $row['email'],
-				 'usuario' 	=> $row['nombre'],
-				 'apellido' => $row['apellido'],
-				 'dni' 		=> $row['dni'],
-				 'direccion'=> $row['direccion'],
-				 'telefono' => $row['telefono'],
-				 'foto'		=> $row['foto'],
-				 'estado'	=> $row['estado']
-				);
-
-				$this->session->set_userdata('logged_in', $sess_array);
-			}
+			$this->_setDataSession($result);
 			return true;
 		}
 		else
 		{
 			$this->form_validation->set_message('check_password_database', 'Clave incorrecta');
 			return false;
+		}
+	}
+
+	private function _setDataSession($result){
+		$sess_array = array();
+		foreach($result as $row)
+		{
+			$sess_array = array(
+			 'id' 				=> $row['id'],
+			 'email' 			=> $row['email'],
+			 'nombre' 			=> $row['nombre'],
+			 'apellido' 		=> $row['apellido'],
+			 'dni' 				=> $row['dni'],
+			 'direccion'		=> $row['direccion'],
+			 'telefono' 		=> $row['telefono'],
+			 'foto'				=> $row['foto'],
+			 'estado'			=> $row['estado'],
+			 'ultima_edicion'	=> $row['ultima_edicion']
+			);
+
+			$this->session->set_userdata('logged_in', $sess_array);
 		}
 	}
 	

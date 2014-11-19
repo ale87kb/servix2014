@@ -84,17 +84,19 @@ Class Usuarios_model extends CI_Model{
 		//Verifica si en la sesion del usuario se encuentra la variable logged_in
 		if($this->session->userdata('logged_in'))
 	   {
-	     $session_data 	   = $this->session->userdata('logged_in');
-	     $data['id']	   = $session_data['id'];
-	     $data['usuario']  = $session_data['usuario'];
-	     $data['telefono'] = $session_data['telefono'];
-	     $data['email']    = $session_data['email'];
-	    return $data;
+	    	$session_data	= $this->session->userdata('logged_in');
+
+			/*$data['id']	   = $session_data['id'];
+			$data['usuario']  = $session_data['usuario'];
+			$data['telefono'] = $session_data['telefono'];
+			$data['email']    = $session_data['email'];*/
+
+			return $session_data;
 	   }
 	   else
 	   {
-	     //Si no hay sesion
-	    return false;
+		//Si no hay sesion
+	    	return false;
 	   }
 	}
 

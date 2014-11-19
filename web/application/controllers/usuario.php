@@ -4,15 +4,24 @@ class Usuario extends CI_controller{
 
 	public function __construct(){
 		parent::__construct();
+		$this->UsuarioSession = $this->usuarios_model->isLogin();
 	}
 	/*
 	
 	*/
 	public function index(){
-		echo "index";
-		/*$data['title'] = 'Iniciar sesión';
-		$data['vista'] = 'login/login_form';
-		$this->load->view('login_view',$data);*/
+		if($this->UsuarioSession)
+		{
+			$data['usuario'] = $this->UsuarioSession['nombre'];
+			
+			$data['title'] = 'Mi Perfil';
+			$data['vista'] = 'usuario/mi_perfil';
+			$this->load->view('usuarios_view', $data);
+		}
+		else
+		{
+			redirect('', 'refresh');
+		}
 	}
 
 

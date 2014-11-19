@@ -6,14 +6,19 @@ class sitio extends CI_Controller {
 
 		parent::__construct();
 		//inicio sesion de usuario preguntandole al modelo
-		$this->usuario = $this->check_login();
+		$this->UsuarioSession = $this->usuarios_model->isLogin();
+
+		//$this->usuario = $this->check_login();
 	}
 
+	/* 
+	ESTE METODO (check_login) CREO QUE NO NOS HACE FALTA (19/11/2014)
+	*/
 	public function check_login(){
 		$this->usuario = null;
 		$user = $this->usuarios_model->isLogin();
 		if($user){
-			$this->usuario = $user['usuario'];
+			$this->usuario = $user['nombre'];
 		}
 		return $this->usuario;
 	}
@@ -22,7 +27,8 @@ class sitio extends CI_Controller {
 		
 		// print_d($data['usuario']);
 
-		$data['usuario'] = $this->usuario;
+		$data['usuario'] = $this->UsuarioSession['nombre'];
+		//$data['usuario'] = $this->usuario;
 		$data['vista'] = 'index_view';
 		$this->load->view('home_view',$data);
 	}

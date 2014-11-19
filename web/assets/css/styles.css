@@ -1,3 +1,25 @@
+#logostyle a{
+	line-height:20px;
+	display:block;
+	float:left;
+	text-decoration: none;
+}
+	
+#logostyle .s-logo{
+	background-repeat: no-repeat;
+    height: 48px;
+    left: 10px;
+    margin: 0;
+    text-indent: -9000px;
+    top: 7px;
+    width: 129px;
+    margin: 0px;
+}
+
+#logostyle .s-logo.es{
+    background-image: url("../images/servix_logo_48.png");
+}
+
  .footer-servix{
 	margin-bottom: 0px;
  }
