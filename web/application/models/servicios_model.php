@@ -17,17 +17,33 @@ Class Servicios_model extends CI_Model{
 	}
 
 
+	public function getPromedioPuntos($id){
+		$query ="SELECT
+			Count(puntuacion.puntos) AS puntos,
+			Avg(puntuacion.puntos) AS promedio
+			FROM
+			puntuacion
+			WHERE
+			puntuacion.id_servicios = $id";
+						
+		$rs    = $this->db->query($query);
+		
+		return $rs->result_array();
+	}
+
 	public function getOpinionServicio($id){
-		$query = "SELECT
-				puntuacion.puntos,
-				puntuacion.votado,
-				puntuacion.comentario,
-				puntuacion.fecha_votacion,
-				puntuacion.fecha_uso_servicio
-				FROM
-				puntuacion
-				WHERE
-				puntuacion.id_servicios = $id";
+			$query ="SELECT
+			puntuacion.id_usuarios,
+			puntuacion.comentario,
+			puntuacion.puntos,
+			puntuacion.fecha_votacion,
+			puntuacion.fecha_uso_servicio,
+			usuarios.nombre
+			FROM
+			puntuacion
+			INNER JOIN usuarios ON puntuacion.id_usuarios = usuarios.id
+			WHERE
+			puntuacion.id_servicios = $id";
 						
 		$rs    = $this->db->query($query);
 		

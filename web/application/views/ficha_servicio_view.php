@@ -130,7 +130,7 @@
 					  <div class="form-group">
 					    <label for="fecha" class="col-sm-5 control-label">¿Cuando usaste el servicio?</label>
 					    <div class="col-sm-6">
-					    		<input class="form-control" type="date" name="fecha" id="fecha" required>
+					    		<input class="form-control" type="date" max="<?php echo date('Y-m-d'); ?>" name="fecha" id="fecha" required>
 					    </div>
 					  </div>
 					  <div class="form-group">
@@ -165,7 +165,8 @@
 		</div>
 		<div class="clearfix"></div>
 		<?php
-		 if(!empty($comentario) and !empty($puntos)){
+
+		 if(!empty($opiniones)){
 
 		?>
 
@@ -177,40 +178,40 @@
 		</div>
 		<div class="col-md-2">
 			<div class=" text-right">
-					<h2> 240 <small> Votos </small></h2>
-					<p class="startt">
-						<span class="glyphicon .glyphicon-star-empty glyphicon-star"></span>
-						<span class="glyphicon .glyphicon-star-empty glyphicon-star"></span>
-						<span class="glyphicon .glyphicon-star-empty glyphicon-star"></span>
-						<span class="glyphicon .glyphicon-star-empty glyphicon-star"></span>
-						<span class="glyphicon .glyphicon-star-empty glyphicon-star-empty"></span>
-					</p>
-					 <p class="">Promedio de<br> votos 4 Estrellas</p>
+					<h2> <?php echo $puntos; ?> <small> Votos </small></h2>
+					<div class="ratyAVG" data-avg="<?php echo number_format($promedio,2); ?>"></div>
+					 <p class="">Promedio de<br> votos <?php echo number_format($promedio,1); ?> Estrellas</p>
 			       <a href="#modalOpinion" class="btn btn-primary"  data-toggle="modal" data-target="#modalOpinion">Quiero opinar</a>
 				</div>
 		</div>
 		<div class="col-md-10">
 
 	
-				
-                <div class="col-md-12">
-                    <h4 class=""> Mira la del barrio</h4>
-                    <p class=""> Qui diam libris ei, vidisse incorrupte at mel. His euismod salutandi dissentiunt eu. Habeo offendit ea mea. Nostro blandit sea ea, viris timeam molestiae an has. At nisl platonem eum. 
-                       
+				<?php 
+			
+				foreach ($opiniones as $opinion) {
+					$fechaUsoServicio =  strtotime($opinion['fecha_uso_servicio']);
+
+					 // date( 'Y-m-d',  );
+				?>
+				<div class="col-md-12">
+                    <h4 class="">
+
+                    	<?php echo $opinion['nombre']; ?>
+                    </h4>
+                    <div class="ratyAVG" data-avg="<?php echo $opinion['puntos']?>"></div>
+                    <p class=""> <?php echo ucfirst($opinion['comentario'] );?>
                     </p>
+                    <p ><small><?php echo $opinion['nombre']; ?> usó el servicio el  <?php echo fechaEs($fechaUsoServicio); ?></small></p>
+                    <hr>
                 </div>
-                <div class="col-md-12">
-                    <h4 class=""> Mira la del barrio</h4>
-                    <p class=""> Qui diam libris ei, vidisse incorrupte at mel. His euismod salutandi dissentiunt eu. Habeo offendit ea mea. Nostro blandit sea ea, viris timeam molestiae an has. At nisl platonem eum. 
-                       
-                    </p>
-                </div>
-                <div class="col-md-12">
-                    <h4 class=""> Mira la del barrio</h4>
-                    <p class=""> Qui diam libris ei, vidisse incorrupte at mel. His euismod salutandi dissentiunt eu. Habeo offendit ea mea. Nostro blandit sea ea, viris timeam molestiae an has. At nisl platonem eum. 
-                       
-                    </p>
-                </div>
+
+
+				<?php
+				}
+				 ?>
+                
+              
 		</div>
 			<?php
 		} ?>

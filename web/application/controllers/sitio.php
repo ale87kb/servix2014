@@ -5,6 +5,7 @@ class sitio extends CI_Controller {
 	public function __construct(){
 
 		parent::__construct();
+		
 		//inicio sesion de usuario preguntandole al modelo
 		$this->UsuarioSession = $this->usuarios_model->isLogin();
 
@@ -228,10 +229,11 @@ class sitio extends CI_Controller {
 		if(is_numeric($id)){
 
 		$servicio 		 = $this->servicios_model->getServicioFicha($id);
+		$promedio 		 = $this->servicios_model->getPromedioPuntos($id);
 		$opiniones 		 = $this->servicios_model->getOpinionServicio($id);
 
-		if(!empty($opiniones)){
-			foreach ($opiniones[0] as $key => $value) {
+		if(!empty($promedio)){
+			foreach ($promedio[0] as $key => $value) {
 				$data[$key] = $value;
 			}
 		}
@@ -239,15 +241,15 @@ class sitio extends CI_Controller {
 			$data[$key] = $value;
 		}
 
-		$data['servicio']= $data['titulo'];
-		$lat 			 = $servicio[0]['latitud'];
-		$long 			 = $servicio[0]['longitud'];
-		$position	     = "$lat,$long";
-		$data['map'] 	 = $this->_gmap($servicio,$position,14);
-		$data['usuario'] = $this->UsuarioSession['nombre'];
-		//$data['usuario'] = $this->usuario;
-		$data['title']   = 'Ficha del servicio';
-		$data['vista']   = 'ficha_servicio_view';
+		$data['servicio']  = $data['titulo'];
+		$lat 			   = $servicio[0]['latitud'];
+		$long 			   = $servicio[0]['longitud'];
+		$position	       = "$lat,$long";
+		$data['map'] 	   = $this->_gmap($servicio,$position,14);
+		$data['usuario']   = $this->UsuarioSession['nombre'];
+		$data['opiniones'] = $opiniones;
+		$data['title']     = 'Ficha del servicio';
+		$data['vista']     = 'ficha_servicio_view';
 
 		$this->load->view('home_view',$data);
 		

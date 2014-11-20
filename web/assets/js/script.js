@@ -47,6 +47,18 @@ $('document').ready(function(){
                 }
             });
 
+             $('.ratyAVG').each(function( index ) {
+
+                 $avg = $(this).attr('data-avg');
+                 $(this).raty({
+                    path: $site_url+'/assets/css/raty/images',
+                    score: $avg ,
+                    readOnly: true,
+                 });
+            });
+
+             
+
         },
 
         this.validar_votacion = function(){
@@ -118,7 +130,7 @@ $('document').ready(function(){
                 $(this).ajaxForm(options);
 
                  setTimeout(function() {
-                    
+
                     if(error == false){
                         $('#modalOpinion').modal('hide');
                          setTimeout(function() {window.location.reload(); }, 2000);

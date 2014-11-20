@@ -1,11 +1,19 @@
 <?php 
 	date_default_timezone_set('America/Argentina/Buenos_Aires');
-	
+	setlocale(LC_ALL,"es_ES");
 	function print_d($dato){
 		echo "<pre>";
 		print_r($dato);
 		echo "</pre>";
 	};
+
+	function fechaEs($date){
+
+		$dias = array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
+		$meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+	
+		return $dias[date('w',$date)]." ".date('d',$date)." de ".$meses[date('n',$date)-1]. " del ".date('Y',$date) ;
+	}
 
 	
 	function normaliza($cadena) 

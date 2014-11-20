@@ -3,7 +3,7 @@
 -- Server version:               5.6.16 - MySQL Community Server (GPL)
 -- Server OS:                    Win32
 -- HeidiSQL version:             7.0.0.4053
--- Date/time:                    2014-11-19 21:29:24
+-- Date/time:                    2014-11-19 22:53:17
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 DELETE FROM `ci_sessions`;
 /*!40000 ALTER TABLE `ci_sessions` DISABLE KEYS */;
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-	('46b0229fc76da002fd1753fbbe4c8ec6', '::1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36', 1416443103, 'a:3:{s:9:"user_data";s:0:"";s:8:"busqueda";a:2:{s:4:"post";a:2:{s:8:"servicio";s:7:"Herrero";s:9:"localidad";s:12:"Buenos Aires";}s:3:"url";a:2:{s:8:"servicio";s:7:"herrero";s:9:"localidad";s:12:"buenos-aires";}}s:9:"logged_in";a:10:{s:2:"id";s:1:"1";s:5:"email";s:14:"pepe@gmail.com";s:6:"nombre";s:5:"Pedro";s:8:"apellido";s:11:"DonCorlione";s:3:"dni";s:8:"12918888";s:9:"direccion";s:19:"Av. Libertador 5966";s:8:"telefono";s:9:"4444-5587";s:4:"foto";s:16:"fotodeperfil.jpg";s:6:"estado";s:1:"1";s:14:"ultima_edicion";s:19:"0000-00-00 00:00:00";}}');
+	('809a4c67f624f9232bd2d1a70f918f3c', '::1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36', 1416448107, 'a:3:{s:9:"user_data";s:0:"";s:8:"busqueda";a:2:{s:4:"post";a:2:{s:8:"servicio";s:8:"Herreria";s:9:"localidad";s:12:"buenos aires";}s:3:"url";a:2:{s:8:"servicio";s:8:"herreria";s:9:"localidad";s:12:"buenos-aires";}}s:9:"logged_in";a:10:{s:2:"id";s:1:"1";s:5:"email";s:14:"pepe@gmail.com";s:6:"nombre";s:5:"Pedro";s:8:"apellido";s:11:"DonCorlione";s:3:"dni";s:8:"12918888";s:9:"direccion";s:19:"Av. Libertador 5966";s:8:"telefono";s:9:"4444-5587";s:4:"foto";s:16:"fotodeperfil.jpg";s:6:"estado";s:1:"1";s:14:"ultima_edicion";s:19:"0000-00-00 00:00:00";}}');
 /*!40000 ALTER TABLE `ci_sessions` ENABLE KEYS */;
 
 
@@ -2616,7 +2616,6 @@ CREATE TABLE IF NOT EXISTS `puntuacion` (
   `id_usuarios` int(11) unsigned NOT NULL,
   `id_servicios` int(11) unsigned NOT NULL,
   `puntos` int(11) NOT NULL,
-  `votado` int(2) DEFAULT NULL COMMENT 'Verifica si el servicio fue votado o no',
   `comentario` text,
   `fecha_votacion` datetime DEFAULT NULL COMMENT 'Cuando voto el usuario fecha y hora especifica (validacion)',
   `fecha_uso_servicio` datetime DEFAULT NULL COMMENT 'Cuando uso el servicio',
@@ -2625,13 +2624,17 @@ CREATE TABLE IF NOT EXISTS `puntuacion` (
   KEY `id_servicios` (`id_servicios`),
   CONSTRAINT `puntuacion_ibfk_1` FOREIGN KEY (`id_usuarios`) REFERENCES `usuarios` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `puntuacion_ibfk_2` FOREIGN KEY (`id_servicios`) REFERENCES `servicios` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
--- Dumping data for table servix_db.puntuacion: ~1 rows (approximately)
+-- Dumping data for table servix_db.puntuacion: ~2 rows (approximately)
 DELETE FROM `puntuacion`;
 /*!40000 ALTER TABLE `puntuacion` DISABLE KEYS */;
-INSERT INTO `puntuacion` (`id`, `id_usuarios`, `id_servicios`, `puntos`, `votado`, `comentario`, `fecha_votacion`, `fecha_uso_servicio`) VALUES
-	(5, 1, 208, 3, NULL, 'asdsadasdasdasdsad', '2014-11-19 09:28:54', '2014-11-21 00:00:00');
+INSERT INTO `puntuacion` (`id`, `id_usuarios`, `id_servicios`, `puntos`, `comentario`, `fecha_votacion`, `fecha_uso_servicio`) VALUES
+	(5, 1, 208, 3, 'Algunos retrasos con la entrega pero buen trabajo', '2014-11-19 09:28:54', '2014-11-21 00:00:00'),
+	(6, 2, 208, 4, 'Un muy buen servicio con una excelente atencion. 100 % recomendable! Super responsables y profesionales. Muchas gracias!', '2014-11-12 09:28:54', '2014-11-23 03:01:03'),
+	(7, 3, 208, 4, 'Entendieron mi necesidad a la perfeccion y diseñaron una solucion que supero ampliamente mis expectativas.100% recomendable!Muchas gracias!!', '2014-11-11 09:28:54', '2014-11-20 03:01:03'),
+	(8, 5, 208, 5, 'UN SERVICIO EXCELENTE, PROFESIONALES DE PRIMERA LINEA A COSTOS MUY COMPETITIVOS.GRACIAS POR TODO', '2014-11-13 09:28:54', '2014-11-18 03:01:03'),
+	(9, 1, 522, 4, 'muy bueno el trabajo realizado ', '2014-11-19 10:25:36', '2014-11-20 00:00:00');
 /*!40000 ALTER TABLE `puntuacion` ENABLE KEYS */;
 
 
