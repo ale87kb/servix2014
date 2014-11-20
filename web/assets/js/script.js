@@ -15,7 +15,32 @@ $('document').ready(function(){
 					});
 				},'json');
 		},
-
+        this.validar_busqueda = function(){
+            $("#formulario-busqueda").bootstrapValidator({
+                                     
+                    feedbackIcons: {
+                        valid: 'glyphicon glyphicon-ok',
+                        invalid: 'glyphicon glyphicon-remove',
+                        validating: 'glyphicon glyphicon-refresh'
+                    },
+                    fields: {
+                        servicio: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Ingrese un servicio'
+                            }
+                        }
+                        },
+                        localidad: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Ingrese una localidad'
+                            }
+                        }
+                        },
+                    }
+            });
+        },
         this.dropdownMenu = function(){
 
                 $(".dropdown").hover(            
@@ -29,6 +54,8 @@ $('document').ready(function(){
                 }
             );
         },
+
+
 
         this.loadVotacion = function(){
            
@@ -264,6 +291,7 @@ $('document').ready(function(){
                     
 		this.init = function(){
             this.busqueda();
+            this.validar_busqueda();
             this.validar_login_ajax();
             this.dropdownMenu();            
             this.validar_comentario_servicio();         

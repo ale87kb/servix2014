@@ -4,14 +4,14 @@
        <div class="row">
          <div class="col-md-5">
          <div class="form-group input-group-lg">
-            <label class="sr-only" for="busqueda-servicio">Que buscas?</label>
-            <input type="text" class="form-control typeaheadCat" id="busqueda-servicio" value="<?php if(isset($servicio)){echo $servicio;} ?>" name="servicio" autocomplete="off" required="" placeholder="Qué buscas?">
+            <label class="sr-only" for="busqueda-servicio">¿Que buscas?</label>
+            <input type="text" class="form-control typeaheadCat" id="busqueda-servicio" value="<?php if(isset($servicio)){echo $servicio;} ?>" name="servicio" autocomplete="off" required="" placeholder="¿Qué buscas?">
           </div>
        </div> 
        <div class="col-md-5">
          <div class="form-group input-group-lg">
-            <label class="sr-only" for="busqueda-localidad">Donde lo buscas?</label>
-            <input type="text" class="form-control typeheadLoc" id="busqueda-localidad" value="<?php if(isset($localidad)){echo $localidad;} ?>"  name="localidad" autocomplete="off"  required="" placeholder="Dónde lo buscas?">
+            <label class="sr-only" for="busqueda-localidad">¿Donde lo buscas?</label>
+            <input type="text" class="form-control typeheadLoc" id="busqueda-localidad" value="<?php if(isset($localidad)){echo $localidad;} ?>"  name="localidad" autocomplete="off"  required="" placeholder="¿Dónde lo buscas?">
           </div>
        </div>
        <div class="col-md-2">

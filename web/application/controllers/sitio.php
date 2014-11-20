@@ -58,7 +58,7 @@ class sitio extends CI_Controller {
 
 		if($validacion['error'] == false){
 			$this->servicios_model->setConsultaServicio($id_servicio, $id_usuario, $comentario);
-			$post['nombreUsuario'] = $usuario['usuario'];
+			$post['nombreUsuario'] = $usuario['nombre'];
 			$post['telUsuario']    = $usuario['telefono'];
 			$post['emailUsuario']  = $usuario['email'];
 
@@ -172,7 +172,7 @@ class sitio extends CI_Controller {
 		if(!empty($data['result'])){
 		 $data['map'] =	$this->_gmap($data['result'],$busca['post']['localidad']);
 		}
-		// print_d($this->db->last_query());
+		
 		
 		$data['title'] = 'Resultado de búsqueda';
 		$data['vista'] = 'resultado_busqueda_view';
@@ -181,19 +181,31 @@ class sitio extends CI_Controller {
 	}
 
 	private function _setPaginacion($servicio, $localidad, $urlServ, $urlLoc){
-		$pages = 4; //Número de registros mostrados por páginas
-		$paginas_segmento = $this->uri->segment(4);
-        $this->load->library('pagination'); //Cargamos la librería de paginación
-        $config['base_url'] 	= site_url('resultado-de-busqueda/'.$urlServ.'/'.$urlLoc);
-        $config['total_rows'] 	= $this->servix_model->getTotalFilasResultBusqueda($servicio,$localidad);//calcula el número de filas  
-        $config['per_page'] 	= $pages; //Número de registros mostrados por páginas
-        $config['num_links'] 	= 2; //Número de links mostrados en la paginación
-        $config["uri_segment"] 	= (empty($paginas_segmento)) ? 0 : $paginas_segmento;//el segmento de la paginación
 
-        $this->pagination->initialize($config); //inicializamos la paginación  
-        $data["result"] 	= $this->servix_model->getResultadoBusqueda($servicio,$localidad,$config["uri_segment"],$config['per_page']);
-        return $data;        
+
+    	$this->load->library('pagination');
+	    $data = array();
+	    $per_page = 2;
+	    $total = $this->servix_model->getTotalFilasResultBusqueda($servicio,$localidad);
+	    $paginas_segmento 			=  (empty( $this->uri->segment(4) )) ? 0 : $this->uri->segment(4);
+	    $config['base_url'] 		=  site_url('resultado-de-busqueda/'.$urlServ.'/'.$urlLoc);
+	    $config['total_rows'] 		= $total;
+	    $config['per_page'] 		= $per_page;
+	    $config['uri_segment']		= 4;
+	    $config['num_links'] 		= 2;
+	    $config['use_page_numbers'] = TRUE;
+
+	    $data['result'] = $this->servix_model->getResultadoBusqueda($servicio,$localidad, $per_page, $paginas_segmento);
+	   
+
+	    $this->pagination->initialize($config); 
+
+	    $data['pagination'] = $this->pagination->create_links();
+	    return $data;
+       
 	}
+
+	
 
 
 	private function _gmap($rs, $loc=null, $zoom='auto'){
@@ -222,32 +234,64 @@ class sitio extends CI_Controller {
 	}
 
 
-	public function ficha_servicio($servicio=null){
 
+	private function _setPaginacionOpinion($servicio,$id)
+		{
+		    $this->load->library('pagination');
+
+		    $data = array();
+
+		    $per_page = 3;
+		    $total = $this->servicios_model->getTotalOpiniones($id);
+		    $paginas_segmento = $this->uri->segment(5);
+
+		    $config['base_url'] = site_url('ficha/'.$servicio.'/opniones/page');
+		    $config['total_rows'] = $total;
+		    $config['per_page'] = $per_page;
+		    $config['uri_segment'] =  (empty($paginas_segmento)) ? 0 : $paginas_segmento;//el segmento de la ;
+		    $config['num_links'] = 2;
+		    $config['use_page_numbers'] = TRUE;
+
+		  
+
+		    $data['result'] = $this->servicios_model->getOpinionServicio($id,$per_page,$config['uri_segment']);
+		   
+
+		    $this->pagination->initialize($config); 
+
+		    $data['pagination'] = $this->pagination->create_links();
+		    return $data;
+
+		}
+
+
+
+	public function ficha_servicio($servicio=null){
 		$id 			 = $this->_parsearIdServicio($servicio);
-		
+
 		if(is_numeric($id)){
 
-		$servicio 		 = $this->servicios_model->getServicioFicha($id);
+		$opiniones 		 = $this->_setPaginacionOpinion($servicio,$id);
+		// $opiniones 		 = $this->test($servicio,$id);
+		$servicioRS 	 = $this->servicios_model->getServicioFicha($id);
 		$promedio 		 = $this->servicios_model->getPromedioPuntos($id);
-		$opiniones 		 = $this->servicios_model->getOpinionServicio($id);
 
 		if(!empty($promedio)){
 			foreach ($promedio[0] as $key => $value) {
 				$data[$key] = $value;
 			}
 		}
-		foreach ($servicio[0] as $key => $value) {
+		foreach ($servicioRS[0] as $key => $value) {
 			$data[$key] = $value;
 		}
 
 		$data['servicio']  = $data['titulo'];
-		$lat 			   = $servicio[0]['latitud'];
-		$long 			   = $servicio[0]['longitud'];
+		$lat 			   = $servicioRS[0]['latitud'];
+		$long 			   = $servicioRS[0]['longitud'];
 		$position	       = "$lat,$long";
-		$data['map'] 	   = $this->_gmap($servicio,$position,14);
+		$data['map'] 	   = $this->_gmap($servicioRS,$position,14);
 		$data['usuario']   = $this->UsuarioSession['nombre'];
-		$data['opiniones'] = $opiniones;
+		$data['opiniones'] = $opiniones['result'];
 		$data['title']     = 'Ficha del servicio';
 		$data['vista']     = 'ficha_servicio_view';
 

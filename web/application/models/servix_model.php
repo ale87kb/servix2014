@@ -66,7 +66,7 @@ Class Servix_model extends CI_Model{
 		$rs    = $this->db->query($query);
 		return $rs->num_rows();
 	}
-	public function getResultadoBusqueda($servicio,$localidad,$ini=0,$fin=10){
+	public function getResultadoBusqueda($servicio,$localidad,$fin=0,$ini=10){
 
 		$loc = $this->_parsearLocalidad($localidad);
 

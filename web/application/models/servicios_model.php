@@ -31,7 +31,12 @@ Class Servicios_model extends CI_Model{
 		return $rs->result_array();
 	}
 
-	public function getOpinionServicio($id){
+	public function getTotalOpiniones($id){
+		$query = "SELECT count(id) as total FROM puntuacion WHERE id_servicios= $id;";
+		$rs    = $this->db->query($query);
+		return $rs->first_row()->total;
+	}
+	public function getOpinionServicio($id,$fin=4,$ini=0){
 			$query ="SELECT
 			puntuacion.id_usuarios,
 			puntuacion.comentario,
@@ -43,7 +48,7 @@ Class Servicios_model extends CI_Model{
 			puntuacion
 			INNER JOIN usuarios ON puntuacion.id_usuarios = usuarios.id
 			WHERE
-			puntuacion.id_servicios = $id";
+			puntuacion.id_servicios = $id LIMIT $ini,$fin";
 						
 		$rs    = $this->db->query($query);
 		

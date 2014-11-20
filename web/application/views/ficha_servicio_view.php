@@ -48,6 +48,7 @@
 					<?php if(isset($usuario)){
 						?>
 							<strong>Tel:</strong>:<?php echo $telefono; ?><br>
+							<strong>Dirección:</strong>:<?php echo $direccion; ?><br>
 						
 							<strong>Sitio web:</strong>:<a href="#" title=""><?php echo $url_web; ?></a><br>
 						<?php
@@ -209,12 +210,17 @@
 
 				<?php
 				}
+				echo $this->pagination->create_links();  
 				 ?>
                 
               
 		</div>
+
 			<?php
+
+
 		} ?>
+	</div>
 	</div>
 
 </section>
