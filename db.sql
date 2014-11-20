@@ -3,7 +3,7 @@
 -- Server version:               5.6.16 - MySQL Community Server (GPL)
 -- Server OS:                    Win32
 -- HeidiSQL version:             7.0.0.4053
--- Date/time:                    2014-11-18 23:22:22
+-- Date/time:                    2014-11-19 21:29:24
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 DELETE FROM `ci_sessions`;
 /*!40000 ALTER TABLE `ci_sessions` DISABLE KEYS */;
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-	('8d05591d59ef9ea9abd477febd34a4eb', '::1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36', 1416279481, 'a:3:{s:9:"user_data";s:0:"";s:8:"busqueda";a:2:{s:4:"post";a:2:{s:8:"servicio";s:7:"herrero";s:9:"localidad";s:12:"Buenos Aires";}s:3:"url";a:2:{s:8:"servicio";s:7:"herrero";s:9:"localidad";s:12:"buenos-aires";}}s:9:"logged_in";a:9:{s:2:"id";s:1:"1";s:5:"email";s:14:"pepe@gmail.com";s:7:"usuario";s:5:"Pedro";s:8:"apellido";s:11:"DonCorlione";s:3:"dni";s:8:"12918888";s:9:"direccion";s:19:"Av. Libertador 5966";s:8:"telefono";s:9:"4444-5587";s:4:"foto";s:16:"fotodeperfil.jpg";s:6:"estado";s:1:"1";}}');
+	('46b0229fc76da002fd1753fbbe4c8ec6', '::1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36', 1416443103, 'a:3:{s:9:"user_data";s:0:"";s:8:"busqueda";a:2:{s:4:"post";a:2:{s:8:"servicio";s:7:"Herrero";s:9:"localidad";s:12:"Buenos Aires";}s:3:"url";a:2:{s:8:"servicio";s:7:"herrero";s:9:"localidad";s:12:"buenos-aires";}}s:9:"logged_in";a:10:{s:2:"id";s:1:"1";s:5:"email";s:14:"pepe@gmail.com";s:6:"nombre";s:5:"Pedro";s:8:"apellido";s:11:"DonCorlione";s:3:"dni";s:8:"12918888";s:9:"direccion";s:19:"Av. Libertador 5966";s:8:"telefono";s:9:"4444-5587";s:4:"foto";s:16:"fotodeperfil.jpg";s:6:"estado";s:1:"1";s:14:"ultima_edicion";s:19:"0000-00-00 00:00:00";}}');
 /*!40000 ALTER TABLE `ci_sessions` ENABLE KEYS */;
 
 
@@ -2618,18 +2618,20 @@ CREATE TABLE IF NOT EXISTS `puntuacion` (
   `puntos` int(11) NOT NULL,
   `votado` int(2) DEFAULT NULL COMMENT 'Verifica si el servicio fue votado o no',
   `comentario` text,
-  `fecha_votacion` datetime DEFAULT NULL,
-  `fecha_votacion_usuario` datetime DEFAULT NULL,
+  `fecha_votacion` datetime DEFAULT NULL COMMENT 'Cuando voto el usuario fecha y hora especifica (validacion)',
+  `fecha_uso_servicio` datetime DEFAULT NULL COMMENT 'Cuando uso el servicio',
   PRIMARY KEY (`id`),
   KEY `id_usuarios` (`id_usuarios`),
   KEY `id_servicios` (`id_servicios`),
   CONSTRAINT `puntuacion_ibfk_1` FOREIGN KEY (`id_usuarios`) REFERENCES `usuarios` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `puntuacion_ibfk_2` FOREIGN KEY (`id_servicios`) REFERENCES `servicios` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
--- Dumping data for table servix_db.puntuacion: ~0 rows (approximately)
+-- Dumping data for table servix_db.puntuacion: ~1 rows (approximately)
 DELETE FROM `puntuacion`;
 /*!40000 ALTER TABLE `puntuacion` DISABLE KEYS */;
+INSERT INTO `puntuacion` (`id`, `id_usuarios`, `id_servicios`, `puntos`, `votado`, `comentario`, `fecha_votacion`, `fecha_uso_servicio`) VALUES
+	(5, 1, 208, 3, NULL, 'asdsadasdasdasdsad', '2014-11-19 09:28:54', '2014-11-21 00:00:00');
 /*!40000 ALTER TABLE `puntuacion` ENABLE KEYS */;
 
 
@@ -2766,13 +2768,13 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 DELETE FROM `usuarios`;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
 INSERT INTO `usuarios` (`id`, `email`, `clave`, `nombre`, `apellido`, `dni`, `telefono`, `direccion`, `foto`, `codigo`, `estado`, `fecha_creacion`, `fecha_mod_estado`, `ultima_edicion`) VALUES
-	(1, 'pepe@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Pedro', 'DonCorlione', '12918888', '4444-5587', 'Av. Libertador 5966', 'fotodeperfil.jpg', 'aaaaaaaaa', 1, '2014-11-03 21:09:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-	(2, 'usuario1@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Juan', 'Moreno', '12918883', '4444-5587', 'Av. Libertador 5966', 'fotodeperfil.jpg', 'aaaaaaaaa1', 1, '2014-11-03 21:09:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-	(3, 'usuario2@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Marcos', 'Carlo', '32918888', '4444-5587', 'Av. Libertador 5966', 'fotodeperfil.jpg', 'aaaaaaaaa2', 1, '2014-11-03 21:09:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-	(4, 'usuario3@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Matias', 'Paz', '12918488', '4444-5587', 'Av. Libertador 5966', 'fotodeperfil.jpg', 'aaaaaaaaa3', 1, '2014-11-03 21:09:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-	(5, 'usuario4@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Roberto', 'Funiet', '12918856', '4444-5587', 'Av. Libertador 5966', 'fotodeperfil.jpg', 'aaaaaaaaa4', 1, '2014-11-03 21:09:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-	(6, 'usuario5@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Carlos', 'Brandon', '12518888', '4444-5587', 'Av. Libertador 5966', 'fotodeperfil.jpg', 'aaaaaaaaa5', 1, '2014-11-03 21:09:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-	(7, 'usuario6@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Sebastian', 'Ortega', '12348888', '4444-5587', 'Av. Libertador 5966', 'fotodeperfil.jpg', 'aaaaaaaaa6', 1, '2014-11-03 21:09:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+	(1, 'pepe@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Pedro', 'DonCorlione', '12918888', '4444-5587', 'Av. Libertador 5966', 'assets/images/profile_640.png', 'aaaaaaaaa', 1, '2014-11-03 21:09:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+	(2, 'usuario1@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Juan', 'Moreno', '12918883', '4444-5587', 'Av. Libertador 5966', 'assets/images/profile_640.png', 'aaaaaaaaa1', 1, '2014-11-03 21:09:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+	(3, 'usuario2@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Marcos', 'Carlo', '32918888', '4444-5587', 'Av. Libertador 5966', 'assets/images/profile_640.png', 'aaaaaaaaa2', 1, '2014-11-03 21:09:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+	(4, 'usuario3@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Matias', 'Paz', '12918488', '4444-5587', 'Av. Libertador 5966', 'assets/images/profile_640.png', 'aaaaaaaaa3', 1, '2014-11-03 21:09:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+	(5, 'usuario4@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Roberto', 'Funiet', '12918856', '4444-5587', 'Av. Libertador 5966', 'assets/images/profile_640.png', 'aaaaaaaaa4', 1, '2014-11-03 21:09:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+	(6, 'usuario5@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Carlos', 'Brandon', '12518888', '4444-5587', 'Av. Libertador 5966', 'assets/images/profile_640.png', 'aaaaaaaaa5', 1, '2014-11-03 21:09:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+	(7, 'usuario6@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Sebastian', 'Ortega', '12348888', '4444-5587', 'Av. Libertador 5966', 'assets/images/profile_640.png', 'aaaaaaaaa6', 1, '2014-11-03 21:09:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 /*!40014 SET FOREIGN_KEY_CHECKS=1 */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
