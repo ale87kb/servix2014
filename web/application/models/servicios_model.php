@@ -23,7 +23,7 @@ Class Servicios_model extends CI_Model{
 				puntuacion.votado,
 				puntuacion.comentario,
 				puntuacion.fecha_votacion,
-				puntuacion.fecha_votacion_usuario
+				puntuacion.fecha_uso_servicio
 				FROM
 				puntuacion
 				WHERE

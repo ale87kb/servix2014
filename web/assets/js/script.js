@@ -89,7 +89,46 @@ $('document').ready(function(){
                             }
                         }
                     }
-            })
+            }) .on('success.form.bv', function(e){
+                  
+              // $(this).data('bootstrapValidator').resetForm();
+                var json = null;
+                var error = null;
+                var options = {
+
+                    success:function(data){
+                         json = JSON.parse(data);
+                         error  = json.error;
+                         // $("#mensajeVoto").html(json.mensaje);
+                         $('.votacion').addClass('hidden');
+                         if(json.error == false){
+                            $("#mensajeVoto").append(json.mensaje);
+                            $("#mensajeVoto").addClass("alert-success");
+                            $("#mensajeVoto").removeClass("hidden");
+                            // console.log(json);
+                         }else{
+                            $("#mensajeVoto").append(json.mensaje);
+                            $("#mensajeVoto").addClass("alert-danger");
+                            $("#mensajeVoto").removeClass("hidden");
+                         }
+                    },
+                    resetForm: true,
+                }
+
+                $(this).ajaxForm(options);
+
+                 setTimeout(function() {
+                    
+                    if(error == false){
+                        $('#modalOpinion').modal('hide');
+                         setTimeout(function() {window.location.reload(); }, 2000);
+                    }else{
+                        $('#modalOpinion').modal('hide');
+                       
+                    }
+                },2500);
+               
+            });
         },
         this.validar_comentario_servicio = function(){
 

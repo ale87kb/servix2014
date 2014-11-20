@@ -29,6 +29,25 @@ Class Usuarios_model extends CI_Model{
 	   	}
 	}
 	
+	public function checkVoto($idU,$idS,$fecha){
+		$query ="SELECT * FROM puntuacion WHERE puntuacion.id_usuarios = $idU AND puntuacion.id_servicios = $idS AND puntuacion.fecha_votacion >= '$fecha' LIMIT 1";
+		$rs = $this->db->query($query);
+		if($rs->num_rows() == 1){
+			return $rs->result_array();
+		}
+		else{
+
+			return false;
+		}
+	}
+
+
+	public function set_voto($idU,$idS,$puntos,$comentario,$fechaUso){
+		$fechaVotacion = date('Y-m-d h:i:s');
+		$query = "INSERT INTO `puntuacion` (`id_usuarios`, `id_servicios`, `puntos`,  `comentario`, `fecha_votacion`, `fecha_uso_servicio`) VALUES ($idU, $idS, $puntos,'$comentario', '$fechaVotacion', '$fechaUso');";
+		$rs = $this->db->query($query);
+		return $rs;
+	}
 
 	public function getEmail($usuario){
 		//VERIFICA QUE EL email DEL usuario ESTE EN LA BASE DE DATOS

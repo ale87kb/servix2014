@@ -70,6 +70,7 @@ $route['validar_nuevo_usuario']          		= "login/validar_nuevo_usuario";
 $route['usuario/verificar/(:any)']           	= "usuario/verificar";
 
 $route['mi-perfil']   		   					= "usuario/index";
+$route['validar-voto']   		   				= "usuario/validar_voto";
 $route['mi-perfil/editar-datos']   				= "usuario/editar_datos";
 $route['mi-perfil/editar-servicios']  			= "usuario/editar_servicios";
 $route['mi-perfil/favoritos']  					= "usuario/favoritos";

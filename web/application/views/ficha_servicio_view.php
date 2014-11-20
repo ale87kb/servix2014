@@ -113,7 +113,7 @@
 		        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 		        <h4 class="modal-title" id="modalOpinion-1">Dejanos tu opinion sobre el servicio</h4>
 		      </div>
-					<form class="form-horizontal" role="form" id="form_votacion" method="post" action="<?php echo site_url(); ?>">
+					<form class="form-horizontal" role="form" id="form_votacion" method="post" action="<?php echo site_url('validar-voto'); ?>">
 		      <div class="modal-body">
 		       <div class="votacion">
 			
@@ -139,16 +139,23 @@
 					  	</div>
 					    <label for="comentario" class="col-sm-5 control-label">Cuentanos tu experiencia</label>
 					    <div class="col-sm-6">
+					    	<input type="hidden" name="id_servicio" value="<?php echo $id; ?>">
 					    		  	<textarea class="form-control"  name="comentario" rows="3" required></textarea>
 					    </div>
 					  </div>
-					 
+					
 					 
 					
 					
 				</div> 
+
+				<div class="text-center hidden alert" id="mensajeVoto" >
+						
+				</div>
 		      </div>
 		      <div class="modal-footer">
+
+					 
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 		        <button type="submit" class="btn btn-primary">Enviar</button>
 		      </div>

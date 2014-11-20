@@ -142,7 +142,24 @@ class Usuario extends CI_controller{
 
 
 	public function validar_voto(){
-		echo "editar_datos";
+		$fechaHoy    =  date('Y-m-d');
+		$userID 	 = $this->UsuarioSession['id'];
+		$servID 	 = $this->input->post('id_servicio');
+		$puntos  	 = $this->input->post('star');
+		$fechaUso  	 = $this->input->post('fecha');
+		$comentario	 = $this->input->post('comentario');
+		$votoUsuario = $this->usuarios_model->checkVoto($userID,$servID,$fechaHoy);
+		$verificado_result = null;
+		if(!$votoUsuario){
+			$this->usuarios_model-> set_voto($userID,$servID,$puntos,$comentario,$fechaUso);
+			$verificado_result['error']   = false;
+			$verificado_result['mensaje'] =  "Gracias por votar este servicio";
+		}else{
+			$verificado_result['mensaje'] =  "No puede votar 2 veces en un día";
+			$verificado_result['error']   = true;
+						
+		}
+		echo json_encode($verificado_result);
 	}
 	public function editar_datos(){
 		echo "editar_datos";
