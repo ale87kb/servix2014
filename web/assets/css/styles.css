@@ -33,13 +33,17 @@ ul.typeahead.dropdown-menu{
 	width: 93%;
 }
 
-a.list-group-item {
+/*a.list-group-item {
     height:auto;
-    min-height:220px;
+    min-height:120px;
 }
 a.list-group-item.active small {
     color:#fff;
 }
+a.list-group-item {
+    height:auto;
+    min-height:220px;
+}*/
 .stars {
     margin:20px auto 1px;    
 }

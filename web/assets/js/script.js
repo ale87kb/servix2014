@@ -203,6 +203,10 @@ $('document').ready(function(){
                             notEmpty: {
                                 message: 'Se requiere un email de usuario'
                             },
+                            regexp: {
+                                regexp: '^[^@\\s]+@([^@\\s]+\\.)+[^@\\s]+$',
+                                message: 'El email ingresado no es correcto'
+                            }
                         }
                     },
                     clave: {

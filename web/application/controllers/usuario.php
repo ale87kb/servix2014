@@ -14,6 +14,10 @@ class Usuario extends CI_controller{
 		if($this->UsuarioSession)
 		{
 			$data['usuario'] = $this->UsuarioSession['nombre'];
+			//Muesta los datos del usuario de la variable de sesion
+			$data['usuarioSession'] = $this->UsuarioSession;
+
+			//
 			
 			$data['title'] = 'Mi Perfil';
 			$data['vista'] = 'usuario/mi_perfil';
@@ -104,7 +108,7 @@ class Usuario extends CI_controller{
 							'error' 	=>	true,
 							'mensaje'	=>	'El usuario no puede ser verificado.',
 							'estado'	=>	2
-					 	);		
+					 	);
 
 						break;
 					
