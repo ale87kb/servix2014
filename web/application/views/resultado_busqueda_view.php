@@ -14,9 +14,7 @@
           <div class="col-xs-12">
             <h3><?php echo ucfirst($r['titulo']); ?></h3>
             <p><?php echo recortar_texto($r['descripcion'],100); ?></p>
-            <!--<p class="lead"><a href="<?php echo site_url('ficha/'.$r['id'].'-'.normaliza($r['titulo'])) ?>" class="btn btn-default">Ver Más</a></p>-->
-            <p class="lead"><a href="<?php echo site_url($r['linkServicio']); ?>" class="btn btn-default">Ver Más</a></p>
-            
+            <p class="lead"><a href="<?php echo site_url('ficha/'.$r['id'].'-'.normaliza($r['titulo'])) ?>" class="btn btn-default">Ver Más</a></p>
             <p class="pull-right">
               <span class="label label-default"><?php echo ucfirst($r['categoria']); ?></span> 
               <span class="label label-default"><?php echo ucfirst($r['provincia']); ?></span>
