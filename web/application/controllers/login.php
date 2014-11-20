@@ -13,6 +13,7 @@ class Login extends CI_Controller {
    		$this->load->helper(array('form'));
 		$data['title'] = 'Iniciar sesión';
 		$data['vista'] = 'login/login_form';
+		$data['js'] = array('assets/js/login_page.js');
 		$this->load->view('login_view',$data);
 	}
 
@@ -21,6 +22,7 @@ class Login extends CI_Controller {
 		$this->load->helper(array('form'));
 		$data['title'] = 'Recuperar Clave';
 		$data['vista'] = 'login/recuperar_clave';
+		$data['js'] = array('assets/js/login_page.js');
 		$this->load->view('login_view',$data);
 	}
 
@@ -88,6 +90,7 @@ class Login extends CI_Controller {
 		//Carga vista del formulario de registro
 		$data['title'] = 'Registrar usuario';
 		$data['vista'] = 'registro_view';
+		$data['js'] = array('assets/js/registro_page.js');
 		$this->load->view('login_view',$data);
 	}
 

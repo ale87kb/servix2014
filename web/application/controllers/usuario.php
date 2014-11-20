@@ -13,20 +13,47 @@ class Usuario extends CI_controller{
 	public function index(){
 		if($this->UsuarioSession)
 		{
-			$data['usuario'] = $this->UsuarioSession['nombre'];
+			$data['usuario'] 		= $this->UsuarioSession['nombre'];
 			//Muesta los datos del usuario de la variable de sesion
 			$data['usuarioSession'] = $this->UsuarioSession;
 
-			//
+			$Usfavoritos 			= $this->_linkFavoritos($this->UsuarioSession['id'], 0, 5);
+			$UsCOmentarios 			= $this->_comentariosRealizados($this->UsuarioSession['id'], 0, 5);
+
+			$data['favoritos'] 		= $Usfavoritos;
+			$data['comentarios'] 	= $UsCOmentarios;
 			
-			$data['title'] = 'Mi Perfil';
-			$data['vista'] = 'usuario/mi_perfil';
+			$data['title'] 			= 'Mi Perfil';
+			$data['vista'] 			= 'usuario/mi_perfil';
+
 			$this->load->view('usuarios_view', $data);
 		}
 		else
 		{
 			redirect('', 'refresh');
 		}
+	}
+
+	private function _linkFavoritos($idUsuario, $desdeLimit ,$cantidadLimit){
+		$favoritos = $this->usuarios_model->getFavoritos($idUsuario, $desdeLimit ,$cantidadLimit);
+		if($favoritos){
+			foreach ($favoritos as $f => $clave) {
+				$favoritos[$f]['link'] = generarLinkServicio($favoritos[$f]['id'], $favoritos[$f]['titulo']);
+			}
+			return $favoritos;
+		}
+		return false;
+	}
+
+	private function _comentariosRealizados($idUsuario, $desdeLimit ,$cantidadLimit){
+		$comentarios = $this->usuarios_model->getComentariosRealizados($idUsuario, $desdeLimit ,$cantidadLimit);
+		if($comentarios){
+			foreach ($comentarios as $c => $clave) {
+				$comentarios[$c]['link'] = generarLinkServicio($comentarios[$c]['idServicios'], $comentarios[$c]['titulo']);
+			}
+			return $comentarios;
+		}
+		return false;
 	}
 
 

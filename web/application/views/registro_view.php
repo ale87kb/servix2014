@@ -5,7 +5,7 @@
 <h1>Registrar Usuario</h1>
 	<h3>Datos del usuario</h3>
 	<p>Datos requeridos para poder iniciar sesión</p>
-<form class="form-horizontal" role="form" name="form_reg" action="<?php echo site_url('validar_nuevo_usuario');?>" method="post" enctype="multipart/form-data">
+<form id="form_reg" class="form-horizontal" role="form" name="form_reg" action="<?php echo site_url('validar_nuevo_usuario');?>" method="post" enctype="multipart/form-data">
   
 	<div class="form-group">
       <label for="usuario" class="col-sm-2 control-label">* Email</label>

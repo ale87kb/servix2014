@@ -186,5 +186,44 @@ Class Usuarios_model extends CI_Model{
 		return $rs;
 	}
 
-}
 
+	public function getFavoritos($idUsuario, $desdeLimit ,$cantidadLimit){
+		$query 	= "SELECT
+					favoritos.fecha,
+					servicios.titulo,
+					servicios.descripcion,
+					servicios.id
+				FROM
+					favoritos
+				INNER JOIN servicios ON favoritos.id_servicios = servicios.id
+				WHERE
+					favoritos.id_usuarios = $idUsuario
+				ORDER BY
+					favoritos.fecha DESC
+				LIMIT $desdeLimit, $cantidadLimit";
+		$rs 	= $this->db->query($query);
+
+		return $rs->result_array();
+	}
+
+	public function getComentariosRealizados($idUsuario, $desdeLimit ,$cantidadLimit){
+		$query 	=	"SELECT
+						servicios.id AS idServicios,
+						servicios.titulo,
+						comentarios.comentario,
+						comentarios.fecha,
+						comentarios.id as idComentario
+					FROM
+						comentarios
+					INNER JOIN servicios ON comentarios.id_servicios = servicios.id
+					WHERE
+						comentarios.id_usuarios = $idUsuario
+					LIMIT $desdeLimit, $cantidadLimit";
+
+		$rs = $this->db->query($query);
+
+		return $rs->result_array();
+
+	}
+
+}

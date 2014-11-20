@@ -43,4 +43,17 @@
 	    }   
     	return $resultado;
 	}
+
+
+
+	function generarLinkServicio($id, $titulo){
+
+		if (is_numeric($id))
+		{
+			$tituloServicio = normaliza($titulo);
+			$ulrServicio = "ficha/". $id . "-" . $tituloServicio;
+			return $ulrServicio;
+		}
+
+	}
 ?>

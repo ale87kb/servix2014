@@ -13,6 +13,16 @@
     <script>
       $site_url = "<?php echo site_url();?>";
     </script>
-    <script src="<?php  echo site_url('assets/js/login_page.js');?>"></script>
+    <?php 
+    if($js)
+    {
+      foreach ($js as $key ) {
+      }
+      ?>
+      <script src="<?php echo site_url($key);?>"></script>
+      <?php
+
+    }
+    ?>
   </body>
 </html>

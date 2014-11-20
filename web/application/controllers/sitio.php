@@ -157,6 +157,7 @@ class sitio extends CI_Controller {
 
 	}
 
+
 	public function resultado_busqueda(){
 			
 		$busca = $this->session->userdata("busqueda");
