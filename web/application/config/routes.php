@@ -41,10 +41,10 @@
 $route['default_controller'] 					= "sitio";
 //url                        // Controlador/metodo 
 
-$route['condiciones-de-uso']   					= "sitio/condiciones_de_uso";
-$route['preguntas_frecuentes'] 					= "sitio/preguntas_frecuentes";
-$route['solicitud-de-servicio']					= "sitio/solicitar_servicio";
-$route['consultar-servicio']   					= "sitio/consultar_servicio";
+$route['condiciones-de-uso']   					= "sitio/condiciones_de_uso";					//Entra cualquiera
+$route['preguntas_frecuentes'] 					= "sitio/preguntas_frecuentes";					//Entra cualquiera
+$route['solicitud-de-servicio']					= "sitio/solicitar_servicio";					
+$route['consultar-servicio']   					= "sitio/consultar_servicio";			
 $route['ofrecer-servicio']     					= "sitio/ofrecer_servicio";
 $route['categorias']           					= "sitio/categorias";
 $route['checkLogin']           					= "sitio/check_login";
@@ -57,19 +57,19 @@ $route['busqueda'] 								= "sitio/busqueda";
 $route['resultado-de-busqueda/(:any)']			= "sitio/resultado_busqueda";
 $route['ficha/(:any)']		    				= "sitio/ficha_servicio/$1";
 
-$route['logout']		   						= "login/logout";
-$route['login']     	       					= "login/index";
+$route['logout']		   						= "login/logout";								//Usuario logueado
+$route['login']     	       					= "login/index";								//Usuario deslogueado
 $route['validar_login']        					= "login/validacion_login";
 $route['validar_login_ajax']        			= "login/validacion_login_ajax";
 
-$route['recuperar-clave']      					= "login/recuperar_clave";
-$route['validar_recuperar_clave']      			= "login/validar_recuperar_clave";
+$route['recuperar-clave']      					= "login/recuperar_clave";						//Usuario deslogueado
+$route['validar_recuperar_clave']      			= "login/validar_recuperar_clave";				//Usuario deslogueado
 
-$route['registrarse']          					= "login/registrar_usuario";
+$route['registrarse']          					= "login/registrar_usuario";					//Usuario deslogueado
 $route['validar_nuevo_usuario']          		= "login/validar_nuevo_usuario";
-$route['usuario/verificar/(:any)']           	= "usuario/verificar";
+$route['usuario/verificar/(:any)']           	= "usuario/verificar";							//Usuario deslogueado
 
-$route['mi-perfil']   		   					= "usuario/index";
+$route['mi-perfil']   		   					= "usuario/index";								//Usuario logueado
 $route['validar-voto']   		   				= "usuario/validar_voto";
 $route['mi-perfil/editar-datos']   				= "usuario/editar_datos";
 $route['mi-perfil/editar-servicios']  			= "usuario/editar_servicios";

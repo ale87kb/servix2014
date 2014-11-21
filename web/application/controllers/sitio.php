@@ -30,7 +30,6 @@ class sitio extends CI_Controller {
 
 		$data['usuario'] = $this->UsuarioSession['nombre'];
 		//$data['usuario'] = $this->usuario;
-		$data['title'] = '';
 		$data['vista'] = 'index_view';
 		$this->load->view('home_view',$data);
 	}
@@ -182,6 +181,8 @@ class sitio extends CI_Controller {
         $config["total_rows"]   = $this->servix_model->getTotalFilasResultBusqueda($servicio,$localidad);
         $config["per_page"] 	= 4;
         $config["uri_segment"]  = 4;
+        $config['last_link'] = 'Último';
+        $config['first_link'] = 'Primero';
         $this->pagination->initialize($config);
         $page 					= ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
         $data["result"] 		= $this->servix_model->getResultadoBusqueda($servicio,$localidad,  $page, $config["per_page"]); 

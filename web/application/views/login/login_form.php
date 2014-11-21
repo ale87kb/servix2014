@@ -1,4 +1,4 @@
-<div class="container">
+<!--<div class="container">-->
   <div class="jumbotron col-md-12">
   <h1>Inicio de sesión en Servix</h1>
   <p>Inicia sesión con tu email de usuario</p>
@@ -39,4 +39,5 @@
   </form>
 
   </div>
-</div>
+
+  </div><!--/container-fluid-->

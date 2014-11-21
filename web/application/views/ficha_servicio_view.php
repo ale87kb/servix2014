@@ -26,10 +26,8 @@
 						<?php
 						}else{
 							?>
-							<a  data-toggle="modal" href="#loginModal" data-target="#loginModal" rel=""  class="btn btn-link">Recomendar a un amigo</a>
-							<a data-toggle="modal" href="#loginModal" data-target="#loginModal" rel=""  class="btn btn-primary ">Quiero opinar
-							</a>
-
+							<a data-toggle="modal" href="#loginModal" data-target="#loginModal" rel="" class="btn btn-link">Recomendar a un amigo</a>
+							<a data-toggle="modal" href="#loginModal" data-target="#loginModal" rel="" class="btn btn-primary">Quiero opinar</a>
 						
 						<?php
 						} ?>
