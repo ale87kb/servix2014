@@ -188,9 +188,9 @@ class sitio extends CI_Controller {
 	    $data = array();
 	    $per_page = 2;
 	    $total = $this->servix_model->getTotalFilasResultBusqueda($servicio,$localidad);
-	    $segment = $this->uri->segment(4) ;
-	    $paginas_segmento 			=  (empty($segment)) ? 0 :  $segment;
-	    $config['base_url'] 		=  site_url('resultado-de-busqueda/'.$urlServ.'/'.$urlLoc);
+	    $segment = $this->uri->segment(4);
+	    $paginas_segmento 			= (empty($segment)) ? 0 :  (($segment - 1 ) * $per_page);
+	    $config['base_url'] 		= site_url('resultado-de-busqueda/'.$urlServ.'/'.$urlLoc);
 	    $config['total_rows'] 		= $total;
 	    $config['per_page'] 		= $per_page;
 	    $config['uri_segment']		= 4;

@@ -25,7 +25,6 @@ class Usuario extends CI_controller{
 			
 			$data['title'] 			= 'Mi Perfil';
 			$data['vista'] 			= 'usuario/mi_perfil';
-
 			$this->load->view('usuarios_view', $data);
 		}
 		else
@@ -47,9 +46,11 @@ class Usuario extends CI_controller{
 
 	private function _comentariosRealizados($idUsuario, $desdeLimit ,$cantidadLimit){
 		$comentarios = $this->usuarios_model->getComentariosRealizados($idUsuario, $desdeLimit ,$cantidadLimit);
+
 		if($comentarios){
 			foreach ($comentarios as $c => $clave) {
-				$comentarios[$c]['link'] = generarLinkServicio($comentarios[$c]['idServicios'], $comentarios[$c]['titulo']);
+				$comentarios[$c]['link'] = generarLinkServicio($comentarios[$c]['id'], $comentarios[$c]['titulo']);
+				$comentarios[$c]['fecha'] = fechaBarras(strtotime($comentarios[$c]['fecha_votacion']));
 			}
 			return $comentarios;
 		}

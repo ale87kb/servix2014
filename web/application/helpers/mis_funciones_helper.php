@@ -15,7 +15,11 @@
 		return $dias[date('w',$date)]." ".date('d',$date)." de ".$meses[date('n',$date)-1]. " del ".date('Y',$date) ;
 	}
 
-	
+	function fechaBarras($date){
+		return date('d', $date)."/".date('m', $date)."/".date('Y', $date);
+	}
+
+
 	function normaliza($cadena) 
 	{ 
 		$login = strtolower($cadena); 
