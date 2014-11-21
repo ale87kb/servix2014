@@ -11,7 +11,7 @@
 					<p>
 						<img src="http://placehold.it/200x200" class="img-rounded" alt="">
 					</p>
-					<p><a href="#" class="btn btn-link">Recomendar a un amigo</a></p>
+				
 			      <?php
 				 if(empty($comentario) and empty($puntos)){
 				 		
@@ -20,11 +20,15 @@
 						<?php if(isset($usuario)){
 						?>
 						 <a href="#modalOpinion" class="btn btn-primary"  data-toggle="modal" data-target="#modalOpinion">Quiero opinar</a>
+
+  						 <a href="#modalRecomendar" class="btn btn-link" data-toggle="modal" data-target="#modalOpinion" >Recomendar a un amigo</a>
+						 
 						<?php
 						}else{
 							?>
-						<a data-toggle="modal" href="#loginModal" data-target="#loginModal" rel=""  class="btn btn-primary ">Quiero opinar
-						</a>
+							<a  data-toggle="modal" href="#loginModal" data-target="#loginModal" rel=""  class="btn btn-link">Recomendar a un amigo</a>
+							<a data-toggle="modal" href="#loginModal" data-target="#loginModal" rel=""  class="btn btn-primary ">Quiero opinar
+							</a>
 
 						
 						<?php

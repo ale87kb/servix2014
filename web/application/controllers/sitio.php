@@ -36,15 +36,7 @@ class sitio extends CI_Controller {
 	}
 
 
-	// public function mail(){  // test email
-	// 	$post    = $this->input->post();
-	// 	$usuario = $this->usuarios_model->isLogin();
-	// 	$post['nombreUsuario'] = $usuario['usuario'];
-	// 	$post['telUsuario']    = $usuario['telefono'];
-	// 	$post['emailUsuario']  = $usuario['email'];
-		
-	// 	$this->servicios_model->sendContacto($post);
-	// }
+
 
 	public function comentar_servicio(){
 	
@@ -184,26 +176,18 @@ class sitio extends CI_Controller {
 	private function _setPaginacion($servicio, $localidad, $urlServ, $urlLoc){
 
 
-    	$this->load->library('pagination');
-	    $data = array();
-	    $per_page = 2;
-	    $total = $this->servix_model->getTotalFilasResultBusqueda($servicio,$localidad);
-	    $segment = $this->uri->segment(4) ;
-	    $paginas_segmento 			=  (empty($segment)) ? 0 :  $segment;
-	    $config['base_url'] 		=  site_url('resultado-de-busqueda/'.$urlServ.'/'.$urlLoc);
-	    $config['total_rows'] 		= $total;
-	    $config['per_page'] 		= $per_page;
-	    $config['uri_segment']		= 4;
-	    $config['num_links'] 		= 2;
-	    $config['use_page_numbers'] = TRUE;
-
-	    $data['result'] = $this->servix_model->getResultadoBusqueda($servicio,$localidad, $per_page, $paginas_segmento);
-	   
-
-	    $this->pagination->initialize($config); 
-
-	    $data['pagination'] = $this->pagination->create_links();
-	    return $data;
+ 	    $this->load->library('pagination');
+	    $config = array();
+        $config["base_url"] 	= site_url('resultado-de-busqueda/'.$urlServ.'/'.$urlLoc);
+        $config["total_rows"]   = $this->servix_model->getTotalFilasResultBusqueda($servicio,$localidad);
+        $config["per_page"] 	= 4;
+        $config["uri_segment"]  = 4;
+        $this->pagination->initialize($config);
+        $page 					= ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+        $data["result"] 		= $this->servix_model->getResultadoBusqueda($servicio,$localidad,  $page, $config["per_page"]); 
+       
+        $data["links"] 			= $this->pagination->create_links();
+		return $data;
        
 	}
 
@@ -239,30 +223,22 @@ class sitio extends CI_Controller {
 
 	private function _setPaginacionOpinion($servicio,$id)
 		{
-		    $this->load->library('pagination');
-
-		    $data = array();
-
-		    $per_page = 3;
-		    $total = $this->servicios_model->getTotalOpiniones($id);
-		    $paginas_segmento = $this->uri->segment(5);
-
-		    $config['base_url'] = site_url('ficha/'.$servicio.'/opniones/page');
-		    $config['total_rows'] = $total;
-		    $config['per_page'] = $per_page;
-		    $config['uri_segment'] =  (empty($paginas_segmento)) ? 0 : $paginas_segmento;//el segmento de la ;
-		    $config['num_links'] = 2;
-		    $config['use_page_numbers'] = TRUE;
-
-		  
-
-		    $data['result'] = $this->servicios_model->getOpinionServicio($id,$per_page,$config['uri_segment']);
 		   
 
-		    $this->pagination->initialize($config); 
-
-		    $data['pagination'] = $this->pagination->create_links();
-		    return $data;
+		    $this->load->library('pagination');
+		    $config = array();
+	        $config["base_url"] 	= site_url('ficha/'.$servicio.'/opniones/page');
+	        $config["total_rows"]   = $this->servicios_model->getTotalOpiniones($id);
+	        $config["per_page"] 	= 4;
+	        $config["uri_segment"]  = 5;
+	        $this->pagination->initialize($config);
+	        $page 					= ($this->uri->segment(5)) ? $this->uri->segment(5) : 0;
+	        $data["result"] 		= $this->servicios_model->getOpinionServicio($id, $page, $config["per_page"]); 
+	     
+	    
+	        $data["links"] 			= $this->pagination->create_links();
+			return $data;
+	       
 
 		}
 
