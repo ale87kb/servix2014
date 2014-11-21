@@ -65,14 +65,25 @@ class sitio extends CI_Controller {
 
 
 	public function recomendar_servicio(){
-		$fechaHoy    =  date('Y-m-d');
-	 	//error y mensaje
-		if($this->UsuarioSession){
+		$fechaHoy      =  date('Y-m-d');
+		$userID		   = (!($this->UsuarioSession)) ? $this->uri->segment(4) : 0; ;
+		$post 		   = $this->input->post();
+		$json 		   = $this->_validar_recomendacion();
+
+
+		$user = $this->usuarios_model->isLogin();
+		if($user){
+			$userID = $user['id'];
 		}else{
-			
+			$userID = "null";
 		}
-		$json = $this->_validar_recomendacion();
-			$json['usuario'] = $this->UsuarioSession;
+		
+		if(!$json['error']){
+			$this->servicios_model->setRecomendacion($userID ,$post);
+			$this->sendRecomendacion($post);
+		}
+
+		
 		echo json_encode($json);
 
 
@@ -350,6 +361,32 @@ class sitio extends CI_Controller {
 	      	return $mail;
 		 }
 	}
+	public function sendRecomendacion($post){
+			 if(isset($post)){
+
+			 	// print_d($post);
+			 	$this->load->library('email');
+			 	$config['charset'] = 'utf-8';
+		        $config['wordwrap'] = TRUE;
+		        $config['mailtype'] = 'html';
+		        $toemail            = $post['emailAmigo']; //para 
+		        $fromemail          = 'no-responder@servix.com'; // desde
+		        $mail               = null;
+		        $subject            = "Hola ".$post['nombreAmigo']." este servicio puede ser de tu int&eacuteres";
+
+		        
+		        $this->email->initialize($config);
+		        $this->email->from($fromemail);
+	        	$this->email->to($toemail);
+		        
+		        $this->email->subject($subject);
+		        $mesg  = $this->load->view('email/recomendacion',$post,true);
+		        $this->email->message($mesg);
+		        $mail = $this->email->send();
+		      
+		      	return $mail;
+			 }
+		}
 
 }
 

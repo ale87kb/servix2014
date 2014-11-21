@@ -149,7 +149,7 @@ $('document').ready(function(){
 
                     if(error == false){
                         $('#modalRecomendar').modal('hide');
-                         // setTimeout(function() {window.location.reload(); }, 2000);
+                         setTimeout(function() {window.location.reload(); }, 2000);
                     }else{
                         $('#modalRecomendar').modal('hide');
                        

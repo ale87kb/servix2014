@@ -210,6 +210,7 @@
 		      </div>
 		      <div class="modal-footer">
 
+					 <input type="hidden" name="nombreServ" id="nombreServ" value="<?php echo $titulo; ?>"/>
 					 <input type="hidden" name="urlServ" id="urlServ" value="<?php echo $servUrl; ?>"/>
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 		        <button type="submit" class="btn btn-primary">Enviar recomendación</button>
