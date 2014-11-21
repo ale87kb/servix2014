@@ -12,11 +12,12 @@
         <?php
           if(!empty($comentarios)){
            foreach ($comentarios as $c) {
-
           ?>
             <a href="<?php echo $c['link']; ?>" class="list-group-item">
+              <div class="ratyAVG" data-avg="<?php echo $c['puntos'] ;?>"></div>
               <p class="list-group-item-text"><?php echo ucfirst($c['comentario']); ?></p>
-              <p>Realizado en: <span><?php echo ucfirst($c['titulo']); ?></span></p>
+              
+              <p>Realizado el <?php echo $c['fecha'];?> en <span><?php echo ucfirst($c['titulo']); ?></span></p>
             </a>
 
           <?php
@@ -38,6 +39,3 @@
 		</div>
 	</div>
 </div>
-
-
-

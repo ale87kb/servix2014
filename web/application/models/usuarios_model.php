@@ -208,16 +208,16 @@ Class Usuarios_model extends CI_Model{
 
 	public function getComentariosRealizados($idUsuario, $desdeLimit ,$cantidadLimit){
 		$query 	=	"SELECT
-						servicios.id AS idServicios,
+						servicios.id,
 						servicios.titulo,
-						comentarios.comentario,
-						comentarios.fecha,
-						comentarios.id as idComentario
+						puntuacion.comentario,
+						puntuacion.puntos,
+						puntuacion.fecha_votacion
 					FROM
-						comentarios
-					INNER JOIN servicios ON comentarios.id_servicios = servicios.id
+						puntuacion
+					INNER JOIN servicios ON puntuacion.id_servicios = servicios.id
 					WHERE
-						comentarios.id_usuarios = $idUsuario
+						puntuacion.id_usuarios = $idUsuario
 					LIMIT $desdeLimit, $cantidadLimit";
 
 		$rs = $this->db->query($query);
