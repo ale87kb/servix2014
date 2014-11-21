@@ -11,6 +11,12 @@
 					<p>
 						<img src="http://placehold.it/200x200" class="img-rounded" alt="">
 					</p>
+					<p>
+						
+					
+  						<a href="#modalRecomendar" class="btn btn-link" data-toggle="modal" data-target="#modalRecomendar" >Recomendar a un amigo</a>
+					</p>
+
 				
 			      <?php
 				 if(empty($comentario) and empty($puntos)){
@@ -21,13 +27,18 @@
 						?>
 						 <a href="#modalOpinion" class="btn btn-primary"  data-toggle="modal" data-target="#modalOpinion">Quiero opinar</a>
 
-  						 <a href="#modalRecomendar" class="btn btn-link" data-toggle="modal" data-target="#modalOpinion" >Recomendar a un amigo</a>
 						 
 						<?php
 						}else{
 							?>
+<<<<<<< HEAD
 							<a data-toggle="modal" href="#loginModal" data-target="#loginModal" rel="" class="btn btn-link">Recomendar a un amigo</a>
 							<a data-toggle="modal" href="#loginModal" data-target="#loginModal" rel="" class="btn btn-primary">Quiero opinar</a>
+=======
+							<a data-toggle="modal" href="#loginModal" data-target="#loginModal" rel=""  class="btn btn-primary ">Quiero opinar
+							
+
+>>>>>>> origin/ci
 						
 						<?php
 						} ?>
@@ -161,6 +172,53 @@
 					 
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 		        <button type="submit" class="btn btn-primary">Enviar</button>
+		      </div>
+					</form>
+		    </div>
+		  </div>
+		</div>
+		<div class="modal fade" id="modalRecomendar" tabindex="-1" role="dialog" aria-labelledby="modalOpinion-1" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		        <h4 class="modal-title" id="modalOpinion-1">Recomienda este servicio a un amigo</h4>
+		      </div>
+					<form class="form-horizontal" role="form" id="form_recomendacion" method="post" action="<?php echo site_url('validar-recomendacion'); ?>">
+		      <div class="modal-body">
+		       <div class="recomendacion">
+			
+					
+					
+					  <div class="form-group">
+					    <label for="nombreAmigo" class="col-sm-5 control-label">¿Nombre de tu amigo?</label>
+					    <div class="col-sm-6">
+							
+					    	  <input class="form-control" type="text" name="nombreAmigo" id="nombreAmigo" required />
+					    		
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="emailAmigo" class="col-sm-5 control-label">¿Email de tu amigo?</label>
+					    <div class="col-sm-6">
+					    		<input class="form-control" type="email" name="emailAmigo" id="emailAmigo" required />
+					    </div>
+					  </div>
+					  
+					
+					 
+					
+					
+				</div> 
+
+					<div class="text-center hidden alert" id="mensajeRecomendacion" ></div>
+		      </div>
+		      <div class="modal-footer">
+
+					 <input type="hidden" name="nombreServ" id="nombreServ" value="<?php echo $titulo; ?>"/>
+					 <input type="hidden" name="urlServ" id="urlServ" value="<?php echo $servUrl; ?>"/>
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+		        <button type="submit" class="btn btn-primary">Enviar recomendación</button>
 		      </div>
 					</form>
 		    </div>

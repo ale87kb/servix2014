@@ -87,7 +87,77 @@ $('document').ready(function(){
              
 
         },
+        this.validar_recomendacion = function(){
+            $("#form_recomendacion").bootstrapValidator({
+                      // The disabled elements are excluded
+                    // Hidden elements (including the rating star) are included
+                    excluded: ':disabled',
+                        feedbackIcons: {
+                        valid: 'glyphicon glyphicon-ok',
+                        invalid: 'glyphicon glyphicon-remove',
+                        validating: 'glyphicon glyphicon-refresh'
+                    },
+                    fields: {
+                        nombreAmigo: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Ingrese el nombre de su amigo'
+                            }
+                        }
+                        },
+                        emailAmigo: {
+                           validators: {
+                            notEmpty: {
+                                message: 'Ingrese un email valido'
+                            },
+                            regexp: {
+                                regexp: '^[^@\\s]+@([^@\\s]+\\.)+[^@\\s]+$',
+                                message: 'El email ingresado no es correcto'
+                            }
+                        }
+                        }
+                    }
+            }).on('success.form.bv', function(e){
+                  
+              // $(this).data('bootstrapValidator').resetForm();
+                var json = null;
+                var error = null;
+                var options = {
 
+                    success:function(data){
+                         json = JSON.parse(data);
+                         error  = json.error;
+                         // $("#mensajeVoto").html(json.mensaje);
+                         $('.recomendacion').addClass('hidden');
+                         if(!json.error){
+                            $("#mensajeRecomendacion").append(json.mensaje);
+                            $("#mensajeRecomendacion").addClass("alert-success");
+                            $("#mensajeRecomendacion").removeClass("hidden");
+                            console.log(json);
+                         }else{
+                            $("#mensajeRecomendacion").append(json.mensaje);
+                            $("#mensajeRecomendacion").addClass("alert-danger");
+                            $("#mensajeRecomendacion").removeClass("hidden");
+                         }
+                    },
+                    resetForm: true,
+                }
+
+                $(this).ajaxForm(options);
+
+                 setTimeout(function() {
+
+                    if(error == false){
+                        $('#modalRecomendar').modal('hide');
+                         setTimeout(function() {window.location.reload(); }, 2000);
+                    }else{
+                        $('#modalRecomendar').modal('hide');
+                       
+                    }
+                },2500);
+               
+            });
+        },
         this.validar_votacion = function(){
 
 
@@ -128,7 +198,7 @@ $('document').ready(function(){
                             }
                         }
                     }
-            }) .on('success.form.bv', function(e){
+            }).on('success.form.bv', function(e){
                   
               // $(this).data('bootstrapValidator').resetForm();
                 var json = null;
@@ -309,6 +379,7 @@ $('document').ready(function(){
             this.dropdownMenu();            
             this.validar_comentario_servicio();         
             this.loadVotacion();            
+            this.validar_recomendacion();
             this.validar_votacion();            
 		}
 	};

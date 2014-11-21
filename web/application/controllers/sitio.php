@@ -62,6 +62,53 @@ class sitio extends CI_Controller {
 
 	}
 
+
+	public function recomendar_servicio(){
+		$fechaHoy      =  date('Y-m-d');
+		$userID		   = (!($this->UsuarioSession)) ? $this->uri->segment(4) : 0; ;
+		$post 		   = $this->input->post();
+		$json 		   = $this->_validar_recomendacion();
+
+
+		$user = $this->usuarios_model->isLogin();
+		if($user){
+			$userID = $user['id'];
+		}else{
+			$userID = "null";
+		}
+		
+		if(!$json['error']){
+			$this->servicios_model->setRecomendacion($userID ,$post);
+			$this->sendRecomendacion($post);
+		}
+
+		
+		echo json_encode($json);
+
+
+	}
+
+	private function _validar_recomendacion(){
+
+		$json = array();
+	 	$this->form_validation->set_rules('nombreAmigo', 'nombreAmigo', 'trim|required');
+	 	$this->form_validation->set_rules('emailAmigo', 'emailAmigo', 'trim|required|valid_email');
+
+		if ($this->form_validation->run() == FALSE)
+		{
+			$json['error'] = true;
+			$json['mensaje'] = "Error en la validacion del formulario";
+
+		}
+		else
+		{
+			$json['error'] 	 = false;
+			$json['mensaje'] = "Recomendación enviada con exito. Gracias por recomendar este servicio.";
+		}
+
+		return $json;
+	}
+
 	private function _validar_consulta($usuario){
 		if(!empty($usuario)){
 				$this->form_validation->set_rules('comentario', 'comentario', 'trim|required|xss_clean');
@@ -184,7 +231,7 @@ class sitio extends CI_Controller {
         $config['last_link'] = 'Último';
         $config['first_link'] = 'Primero';
         $this->pagination->initialize($config);
-        $page 					= ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+        $page 					= (is_numeric($this->uri->segment(4))) ? $this->uri->segment(4) : 0;
         $data["result"] 		= $this->servix_model->getResultadoBusqueda($servicio,$localidad,  $page, $config["per_page"]); 
        
         $data["links"] 			= $this->pagination->create_links();
@@ -233,7 +280,7 @@ class sitio extends CI_Controller {
 	        $config["per_page"] 	= 4;
 	        $config["uri_segment"]  = 5;
 	        $this->pagination->initialize($config);
-	        $page 					= ($this->uri->segment(5)) ? $this->uri->segment(5) : 0;
+	        $page 					= (is_numeric($this->uri->segment(5))) ? $this->uri->segment(5) : 0;
 	        $data["result"] 		= $this->servicios_model->getOpinionServicio($id, $page, $config["per_page"]); 
 	     
 	    
@@ -272,6 +319,7 @@ class sitio extends CI_Controller {
 		$data['usuario']   = $this->UsuarioSession['nombre'];
 		$data['opiniones'] = $opiniones['result'];
 		$data['title']     = 'Ficha del servicio';
+		$data['servUrl']   =  site_url('ficha/'.$servicio);
 		$data['vista']     = 'ficha_servicio_view';
 
 		$this->load->view('home_view',$data);
@@ -314,6 +362,32 @@ class sitio extends CI_Controller {
 	      	return $mail;
 		 }
 	}
+	public function sendRecomendacion($post){
+			 if(isset($post)){
+
+			 	// print_d($post);
+			 	$this->load->library('email');
+			 	$config['charset'] = 'utf-8';
+		        $config['wordwrap'] = TRUE;
+		        $config['mailtype'] = 'html';
+		        $toemail            = $post['emailAmigo']; //para 
+		        $fromemail          = 'no-responder@servix.com'; // desde
+		        $mail               = null;
+		        $subject            = "Hola ".$post['nombreAmigo']." este servicio puede ser de tu int&eacuteres";
+
+		        
+		        $this->email->initialize($config);
+		        $this->email->from($fromemail);
+	        	$this->email->to($toemail);
+		        
+		        $this->email->subject($subject);
+		        $mesg  = $this->load->view('email/recomendacion',$post,true);
+		        $this->email->message($mesg);
+		        $mail = $this->email->send();
+		      
+		      	return $mail;
+			 }
+		}
 
 }
 

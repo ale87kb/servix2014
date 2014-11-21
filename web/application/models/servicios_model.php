@@ -55,6 +55,12 @@ Class Servicios_model extends CI_Model{
 		return $rs->result_array();
 	}
 
+	public function setRecomendacion($idU,$post){
+		$query  = "INSERT INTO `recomendaciones` (`id_usuario`,`nombre`, `email`, `urlRec`) VALUES ($idU,'".$post['nombreAmigo']."', '".$post['emailAmigo']."', '".$post['urlServ']."');";
+		$rs     = $this->db->query($query);
+		return $rs;
+	}
+
 
 	public function getServicioFicha($id){
 		$query =    "SELECT
