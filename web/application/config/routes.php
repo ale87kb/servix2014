@@ -55,7 +55,10 @@ $route['enviar/comentario-servicio']			= "sitio/comentar_servicio";
 $route['busqueda_localidades']   				= "sitio/busqueda_localidades";
 $route['busqueda'] 								= "sitio/busqueda";
 $route['resultado-de-busqueda/(:any)']			= "sitio/resultado_busqueda";
+$route['ficha/(:any)/opniones/page/(:num)']	= "sitio/ficha_servicio/$1";
 $route['ficha/(:any)']		    				= "sitio/ficha_servicio/$1";
+
+$route['validar-recomendacion']   	        	= "sitio/recomendar_servicio";
 
 $route['logout']		   						= "login/logout";
 $route['login']     	       					= "login/index";
@@ -68,6 +71,7 @@ $route['validar_recuperar_clave']      			= "login/validar_recuperar_clave";
 $route['registrarse']          					= "login/registrar_usuario";
 $route['validar_nuevo_usuario']          		= "login/validar_nuevo_usuario";
 $route['usuario/verificar/(:any)']           	= "usuario/verificar";
+
 
 $route['mi-perfil']   		   					= "usuario/index";
 $route['validar-voto']   		   				= "usuario/validar_voto";
