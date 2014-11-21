@@ -55,18 +55,13 @@ $route['enviar/comentario-servicio']			= "sitio/comentar_servicio";
 $route['busqueda_localidades']   				= "sitio/busqueda_localidades";
 $route['busqueda'] 								= "sitio/busqueda";
 $route['resultado-de-busqueda/(:any)']			= "sitio/resultado_busqueda";
-$route['ficha/(:any)/opniones/page/(:num)']	= "sitio/ficha_servicio/$1";
+$route['ficha/(:any)/opniones/page/(:num)']		= "sitio/ficha_servicio/$1";
 $route['ficha/(:any)']		    				= "sitio/ficha_servicio/$1";
-
-<<<<<<< HEAD
-$route['logout']		   						= "login/logout";								//Usuario logueado
-$route['login']     	       					= "login/index";								//Usuario deslogueado
-=======
 $route['validar-recomendacion']   	        	= "sitio/recomendar_servicio";
 
-$route['logout']		   						= "login/logout";
-$route['login']     	       					= "login/index";
->>>>>>> origin/ci
+$route['logout']		   						= "login/logout";								//Usuario logueado
+$route['login']     	       					= "login/index";								//Usuario deslogueado
+
 $route['validar_login']        					= "login/validacion_login";
 $route['validar_login_ajax']        			= "login/validacion_login_ajax";
 
@@ -77,19 +72,13 @@ $route['registrarse']          					= "login/registrar_usuario";					//Usuario d
 $route['validar_nuevo_usuario']          		= "login/validar_nuevo_usuario";
 $route['usuario/verificar/(:any)']           	= "usuario/verificar";							//Usuario deslogueado
 
-<<<<<<< HEAD
 $route['mi-perfil']   		   					= "usuario/index";								//Usuario logueado
-=======
-
-$route['mi-perfil']   		   					= "usuario/index";
->>>>>>> origin/ci
 $route['validar-voto']   		   				= "usuario/validar_voto";
 $route['mi-perfil/editar-datos']   				= "usuario/editar_datos";
 $route['mi-perfil/editar-servicios']  			= "usuario/editar_servicios";
 $route['mi-perfil/favoritos']  					= "usuario/favoritos";
 $route['mi-perfil/servicios-solicitados']  		= "usuario/servicios_solicitados";
 $route['mis-comentarios']           			= "usuario/mis_comentarios";
-
 
 
 $route['404_override'] 	= '';
