@@ -32,7 +32,9 @@
 						}else{
 							?>
 
-							<a data-toggle="modal" href="#loginModal" data-target="#loginModal" rel=""  class="btn btn-primary ">Quiero opinar
+							<a data-toggle="modal" href="#loginModal" data-target="#loginModal" rel=""  class="btn btn-primary ">Quiero opinar</a>
+
+
 							
 						<?php
 						} ?>
@@ -236,7 +238,23 @@
 					<h2> <?php echo $puntos; ?> <small> Votos </small></h2>
 					<div class="ratyAVG" data-avg="<?php echo number_format($promedio,2); ?>"></div>
 					 <p class="">Promedio de<br> votos <?php echo number_format($promedio,1); ?> Estrellas</p>
-			       <a href="#modalOpinion" class="btn btn-primary"  data-toggle="modal" data-target="#modalOpinion">Quiero opinar</a>
+
+					 <?php if(isset($usuario)){
+						?>
+						 <a href="#modalOpinion" class="btn btn-primary"  data-toggle="modal" data-target="#modalOpinion">Quiero opinar</a>
+
+						 
+						<?php
+						}else{
+							?>
+							<a data-toggle="modal" href="#loginModal" data-target="#loginModal" rel=""  class="btn btn-primary ">Quiero opinar
+							</a>
+
+						
+						<?php
+						} ?>
+
+			     
 				</div>
 		</div>
 		<div class="col-md-10">
