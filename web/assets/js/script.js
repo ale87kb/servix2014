@@ -83,6 +83,8 @@ var app = function(){
                  });
             });
 
+
+
              
 
         },
@@ -249,12 +251,29 @@ var app = function(){
                          success: function(html){
                             //escribo la url del link para no perder la navegacion si se refresca la pagina
                              history.pushState({}, '',$href);
-                             //escribo los comentarios
                             $("#opiniones").html(html);
+                             //escribo los comentarios
                             //inicio servix app y ejecuto la funcion de la votacion para q me cargue los votos (las estrellas)
-                            $servix = new app();
-                            $servix.loadVotacion();
-                   
+                            
+                               $('.ratyAVG').each(function( index ) {
+
+                                     $avg = $(this).attr('data-avg');
+                                     $(this).raty({
+                                        path: $site_url+'/assets/css/raty/images',
+                                        score: $avg ,
+                                        readOnly: true,
+                                     });
+                                });
+                                $(document).load(function(){
+                                    $servix = new app();
+                                
+
+                                    $servix.validar_votacion(); 
+                                   
+                                })
+
+                            
+
 
                           }
                     });               
@@ -394,7 +413,8 @@ var app = function(){
                              //    }
                              // });     
                              window.location.reload();
-                             
+
+                              
                              
                         }
                         if(data['username']){
@@ -413,6 +433,7 @@ var app = function(){
                 console.log("Error: " + jqXHR.responseText)
             })
         },
+      
                     
         this.init = function(){
             this.busqueda();

@@ -10,6 +10,8 @@
 	 <?php
     if(empty($usuario)){
       ?>
+
+
     <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog login_modal">
         <div class="modal-content">
@@ -39,7 +41,7 @@
                   </label>
                 </div>
                 <div class="text-right">
-                  <input type="hidden" name="currentSection" id="currentSection" value="<?php  echo $this->uri->segment(1);  ?>">
+                  <input type="hidden" name="nextAction" id="nextAction" value="">
                   <button class="btn btn-success" type="submit" value="Ingresar">Iniciar Sesión</button>
                 </div>
           </form>
@@ -54,8 +56,122 @@
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
     <?php
-      } 
+      }else{
+        ?>
+                <!-- Modal -->
+      <div class="modal fade" id="modalOpinion" tabindex="-1" role="dialog" aria-labelledby="modalOpinion-1" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+              <h4 class="modal-title" id="modalOpinion-1">Dejanos tu opinion sobre el servicio</h4>
+            </div>
+            <form class="form-horizontal" role="form" id="form_votacion" method="post" action="<?php echo site_url('validar-voto'); ?>">
+            <div class="modal-body">
+             <div class="votacion">
+        
+            
+            
+              <div class="form-group">
+                <label for="puntos" class="col-sm-5 control-label">¿Como Calificarias este servicio?</label>
+                <div class="col-sm-7">
+
+                     <div id="ratyRating"></div>
+                    
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="fecha" class="col-sm-5 control-label">¿Cuando usaste el servicio?</label>
+                <div class="col-sm-6">
+                    <input class="form-control" type="date" max="<?php echo date('Y-m-d'); ?>" name="fecha" id="fecha" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="alert  alert-warning" role="alert">
+                  <p class="text-center">Por favor, sé fiel a los hechos y evita hacer comentarios inapropiados.</p>
+                </div>
+                <label for="comentario" class="col-sm-5 control-label">Cuentanos tu experiencia</label>
+                <div class="col-sm-6">
+                  <input type="hidden" name="id_servicio" value="<?php echo $id; ?>">
+                        <textarea class="form-control"  name="comentario" rows="3" required></textarea>
+                </div>
+              </div>
+            
+             
+            
+            
+          </div> 
+
+          <div class="text-center hidden alert" id="mensajeVoto" >
+              
+          </div>
+            </div>
+            <div class="modal-footer">
+
+             
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+              <button type="submit" class="btn btn-primary">Enviar</button>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+        <?php
+      }
     ?>
+
+    <div class="modal fade" id="modalRecomendar" tabindex="-1" role="dialog" aria-labelledby="modalOpinion-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="modalOpinion-1">Recomienda este servicio a un amigo</h4>
+          </div>
+          <form class="form-horizontal" role="form" id="form_recomendacion" method="post" action="<?php echo site_url('validar-recomendacion'); ?>">
+          <div class="modal-body">
+           <div class="recomendacion">
+      
+          
+          
+            <div class="form-group">
+              <label for="nombreAmigo" class="col-sm-5 control-label">¿Nombre de tu amigo?</label>
+              <div class="col-sm-6">
+              
+                  <input class="form-control" type="text" name="nombreAmigo" id="nombreAmigo" required />
+                  
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="emailAmigo" class="col-sm-5 control-label">¿Email de tu amigo?</label>
+              <div class="col-sm-6">
+                  <input class="form-control" type="email" name="emailAmigo" id="emailAmigo" required />
+              </div>
+            </div>
+            
+          
+           
+          
+          
+        </div> 
+
+          <div class="text-center hidden alert" id="mensajeRecomendacion" ></div>
+          </div>
+          <div class="modal-footer">
+
+           <input type="hidden" name="nombreServ" id="nombreServ" value="<?php echo $titulo; ?>"/>
+           <input type="hidden" name="urlServ" id="urlServ" value="<?php echo $servUrl; ?>"/>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary">Enviar recomendación</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
 
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

@@ -286,6 +286,10 @@ class sitio extends CI_Controller {
 		}
 
 	public function get_opiniones($servicio=null,$num=0){
+		$this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0");
+		$this->output->set_header("Pragma: no-cache"); 
+
+		
 		$id 			 = $this->_parsearIdServicio($servicio);
 
 		if(is_numeric($id)){
@@ -298,11 +302,14 @@ class sitio extends CI_Controller {
 		//si es ajax navego por ajax
 		if($this->input->is_ajax_request()){
 
+
 		$this->load->view('listar_opiniones',$data);
 
 		}else{
+
 		//si refrescan la pagina no pierdo na lavegacion ni la pagina en la que estaba el usuario
 			$this->ficha_servicio($servicio);
+		
 
 		}
 	}
