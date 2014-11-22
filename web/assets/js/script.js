@@ -352,7 +352,6 @@ var app = function(){
                 $.post(urlweb + "validar_login_ajax", $form.serialize(), function(data) {
                         if(data['res']=='success'){
                             $('#loginModal').modal('hide');//cerramos la modal de bootstrap
-<<<<<<< HEAD
                             
                              $.ajax({
                                 url:urlweb+"/menu_usuario",
@@ -362,10 +361,7 @@ var app = function(){
                                     $("#navbar-login").html(data);
                                 }
                              });     
-                            //window.location.reload(); //recargamos la pagina
-=======
-                            // window.location.reload(); //recargamos la pagina
->>>>>>> origin/ci
+
                         }
                         if(data['username']){
                             bv.updateStatus('usuario', 'INVALID', 'notEmpty');
