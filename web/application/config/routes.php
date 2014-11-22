@@ -55,10 +55,10 @@ $route['enviar/comentario-servicio']			= "sitio/comentar_servicio";
 $route['busqueda_localidades']   				= "sitio/busqueda_localidades";
 $route['busqueda'] 								= "sitio/busqueda";
 $route['resultado-de-busqueda/(:any)']			= "sitio/resultado_busqueda";
-<<<<<<< HEAD
-=======
+
+
 $route['ficha/(:any)/opniones/page/(:num)']		= "sitio/ficha_servicio/$1";
->>>>>>> origin/ci
+
 $route['ficha/(:any)']		    				= "sitio/ficha_servicio/$1";
 $route['validar-recomendacion']   	        	= "sitio/recomendar_servicio";
 
