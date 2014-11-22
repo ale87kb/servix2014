@@ -32,7 +32,7 @@
 						}else{
 							?>
 
-							<a data-toggle="modal" href="#loginModal" data-target="#loginModal" rel=""  class="btn btn-primary ">Quiero opinar</a>
+							<a data-toggle="modal" href="#loginModal" data-seccion="ficha" data-target="#loginModal" rel=""  class="btn btn-primary ">Quiero opinar</a>
 
 
 							
@@ -247,7 +247,7 @@
 						<?php
 						}else{
 							?>
-							<a data-toggle="modal" href="#loginModal" data-target="#loginModal" rel=""  class="btn btn-primary ">Quiero opinar
+							<a data-toggle="modal" href="#loginModal"  data-target="#loginModal" rel=""  class="btn btn-primary ">Quiero opinar
 							</a>
 
 						
@@ -257,34 +257,9 @@
 			     
 				</div>
 		</div>
-		<div class="col-md-10">
+		<div class="col-md-10" id="opiniones">
 
-	
-				<?php 
-			
-				foreach ($opiniones as $opinion) {
-					$fechaUsoServicio =  strtotime($opinion['fecha_uso_servicio']);
-
-					 // date( 'Y-m-d',  );
-				?>
-				<div class="col-md-12">
-                    <h4 class="">
-
-                    	<?php echo $opinion['nombre']; ?>
-                    </h4>
-                    <div class="ratyAVG" data-avg="<?php echo $opinion['puntos']?>"></div>
-                    <p class=""> <?php echo ucfirst($opinion['comentario'] );?>
-                    </p>
-                    <p ><small><?php echo $opinion['nombre']; ?> usó el servicio el  <?php echo fechaEs($fechaUsoServicio); ?></small></p>
-                    <hr>
-                </div>
-
-
-				<?php
-				}
-				echo $this->pagination->create_links();  
-				 ?>
-                
+				<?php $this->load->view('listar_opiniones'); ?>
               
 		</div>
 

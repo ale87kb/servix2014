@@ -279,6 +279,8 @@ class sitio extends CI_Controller {
 	        $config["total_rows"]   = $this->servicios_model->getTotalOpiniones($id);
 	        $config["per_page"] 	= 4;
 	        $config["uri_segment"]  = 5;
+	        $config["is_ajax_paging"]    = TRUE; //default FALSE
+	        $config['paging_function'] = 'ajax_paging';// Your jQuery paging
 	        $this->pagination->initialize($config);
 	        $page 					= (is_numeric($this->uri->segment(5))) ? $this->uri->segment(5) : 0;
 	        $data["result"] 		= $this->servicios_model->getOpinionServicio($id, $page, $config["per_page"]); 
@@ -290,7 +292,27 @@ class sitio extends CI_Controller {
 
 		}
 
+	public function get_opiniones($servicio=null,$num=0){
+		$id 			 = $this->_parsearIdServicio($servicio);
 
+		if(is_numeric($id)){
+
+		$opiniones 		 = $this->_setPaginacionOpinion($servicio,$id);
+		}
+		
+		$data['opiniones']     = $opiniones['result'];
+
+		//si es ajax navego por ajax
+		if($this->input->is_ajax_request()){
+
+		$this->load->view('listar_opiniones',$data);
+
+		}else{
+		//si refrescan la pagina no pierdo na lavegacion ni la pagina en la que estaba el usuario
+			$this->ficha_servicio($servicio);
+
+		}
+	}
 
 	public function ficha_servicio($servicio=null){
 		$id 			 = $this->_parsearIdServicio($servicio);

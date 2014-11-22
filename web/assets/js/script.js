@@ -238,6 +238,33 @@ var app = function(){
                
             });
         },
+        this.ajax_paging = function(){
+         
+         $(document).on("click", "#pagination a", function(e) {
+                $href= $(this).attr("href");
+                e.preventDefault();
+                    $.ajax({
+                         type: "GET",
+                         url: $(this).get(),
+                         success: function(html){
+                            //escribo la url del link para no perder la navegacion si se refresca la pagina
+                             history.pushState({}, '',$href);
+                             //escribo los comentarios
+                            $("#opiniones").html(html);
+                            //inicio servix app y ejecuto la funcion de la votacion para q me cargue los votos (las estrellas)
+                            $servix = new app();
+                            $servix.loadVotacion();
+                   
+
+                          }
+                    });               
+                   return false;
+                });            
+      
+      
+              
+                  
+         },
         this.validar_comentario_servicio = function(){
 
             $("#formCServ").bootstrapValidator({
@@ -353,15 +380,18 @@ var app = function(){
                         if(data['res']=='success'){
                             $('#loginModal').modal('hide');//cerramos la modal de bootstrap
                             
-                             $.ajax({
-                                url:urlweb+"/menu_usuario",
-                                dataType:'html',
-                                method:"POST",
-                                success:function(data){
-                                    $("#navbar-login").html(data);
-                                }
-                             });     
+                             // $.ajax({
+                             //    url:urlweb+"/menu_usuario",
+                             //    dataType:'html',
+                             //    method:"POST",
+                             //    success:function(data){
+                             //        $("#navbar-login").html(data);
 
+                             //    }
+                             // });     
+                             window.location.reload();
+                             
+                             
                         }
                         if(data['username']){
                             bv.updateStatus('usuario', 'INVALID', 'notEmpty');
@@ -389,6 +419,7 @@ var app = function(){
             this.loadVotacion();            
             this.validar_recomendacion();
             this.validar_votacion();            
+            this.ajax_paging();            
         }
     };
     

@@ -39,6 +39,7 @@
                   </label>
                 </div>
                 <div class="text-right">
+                  <input type="hidden" name="currentSection" id="currentSection" value="<?php  echo $this->uri->segment(1);  ?>">
                   <button class="btn btn-success" type="submit" value="Ingresar">Iniciar Sesión</button>
                 </div>
           </form>
