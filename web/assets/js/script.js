@@ -350,10 +350,19 @@ $('document').ready(function(){
                 var bv = $form.data('bootstrapValidator');
 
                 // Use Ajax to submit form data
-                $.post(urlweb + "validar_login_ajax", $form.serialize(), function(data) { 
+                $.post(urlweb + "validar_login_ajax", $form.serialize(), function(data) {
                         if(data['res']=='success'){
                             $('#loginModal').modal('hide');//cerramos la modal de bootstrap
-                            window.location.reload(); //recargamos la pagina
+                            
+                             $.ajax({
+                                url:urlweb+"/menu_usuario",
+                                dataType:'html',
+                                method:"POST",
+                                success:function(data){
+                                    $("#navbar-login").html(data);
+                                }
+                             });     
+                            //window.location.reload(); //recargamos la pagina
                         }
                         if(data['username']){
                             bv.updateStatus('usuario', 'INVALID', 'notEmpty');

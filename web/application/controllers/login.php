@@ -353,12 +353,21 @@ class Login extends CI_Controller {
         }
         else
         {
+
             $data = array(
-                'res'      => "success"
+                'res'      	=> "success"
             );
             echo json_encode($data);
         }
 	}
+
+
+	public function menu_usuario(){
+		$data['usuario'] = $this->session->userdata('logged_in');
+		$vista = $this->load->view('includes/user_log',$data,true);
+		echo $vista;
+	}
+
 
 	public function check_user_database(){
 		//Consulta el usuario en base de datos
