@@ -1,20 +1,19 @@
 $('document').ready(function(){
+var app = function(){
+        this.url      = $site_url,
 
-	var app = function(){
-		this.url 	  = $site_url,
-
-		this.busqueda = function(){
-				$.get(this.url+"busqueda_servicio", function(data){
-					$(".typeaheadCat").typeahead({
-					 	source:data 
-					});
-				},'json'),
-				$.get(this.url+"busqueda_localidades", function(data){
-					$(".typeheadLoc").typeahead({
-					 	source:data 
-					});
-				},'json');
-		},
+        this.busqueda = function(){
+                $.get(this.url+"busqueda_servicio", function(data){
+                    $(".typeaheadCat").typeahead({
+                        source:data 
+                    });
+                },'json'),
+                $.get(this.url+"busqueda_localidades", function(data){
+                    $(".typeheadLoc").typeahead({
+                        source:data 
+                    });
+                },'json');
+        },
         this.validar_busqueda = function(){
             $("#formulario-busqueda").bootstrapValidator({
                                      
@@ -340,7 +339,7 @@ $('document').ready(function(){
                 $.post(urlweb + "validar_login_ajax", $form.serialize(), function(data) { 
                         if(data['res']=='success'){
                             $('#loginModal').modal('hide');//cerramos la modal de bootstrap
-                            window.location.reload(); //recargamos la pagina
+                            // window.location.reload(); //recargamos la pagina
                         }
                         if(data['username']){
                             bv.updateStatus('usuario', 'INVALID', 'notEmpty');
@@ -359,7 +358,7 @@ $('document').ready(function(){
             })
         },
                     
-		this.init = function(){
+        this.init = function(){
             this.busqueda();
             this.validar_busqueda();
             this.validar_login_ajax();
@@ -368,13 +367,14 @@ $('document').ready(function(){
             this.loadVotacion();            
             this.validar_recomendacion();
             this.validar_votacion();            
-		}
-	};
+        }
+    };
+    
+
+
+
+    $servix = new app();
+    $servix.init();
 	
-
-
-
-	$servix = new app();
-	$servix.init();
 
 });
