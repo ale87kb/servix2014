@@ -41,6 +41,7 @@
                   </label>
                 </div>
                 <div class="text-right">
+                  <input type="hidden" name="curretSection" id="curretSection" value="<?php echo $this->uri->segment(1); ?>">
                   <input type="hidden" name="nextAction" id="nextAction" value="">
                   <button class="btn btn-success" type="submit" value="Ingresar">Iniciar Sesión</button>
                 </div>

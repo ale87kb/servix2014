@@ -402,16 +402,12 @@ var app = function(){
                 $.post(urlweb + "validar_login_ajax", $form.serialize(), function(data) {
                         if(data['res']=='success'){
                             $('#loginModal').modal('hide');//cerramos la modal de bootstrap
-                            
-                             // $.ajax({
-                             //    url:urlweb+"/menu_usuario",
-                             //    dataType:'html',
-                             //    method:"POST",
-                             //    success:function(data){
-                             //        $("#navbar-login").html(data);
-
-                             //    }
-                             // });     
+                        
+                             if($("#curretSection").val() == 'ficha'){
+                                if($("#nextAction").val() == '#modalOpinion'){
+                                    history.pushState({}, '','#QuieroOpinar');
+                                }
+                             }
                              window.location.reload();
 
                               
@@ -433,8 +429,31 @@ var app = function(){
                 console.log("Error: " + jqXHR.responseText)
             })
         },
-      
-                    
+        this.setAffterAction =function(){
+            $(".affterOpenLogin").on('click',function(){
+            $("#nextAction").val('#modalOpinion');
+
+            });
+            if(window.location.href.indexOf("#QuieroOpinar") > -1) {
+                 // alert("your url contains the name franky");
+                 $('#modalOpinion').modal('show')
+             }
+        },
+         this.favoritosAction = function(){
+           $('#favorito').on('change',function(){
+                 if(this.checked) {
+                    $(this).val('true')
+                 }else{
+                    $(this).val('false')
+                   
+                 }
+                    alert($(this).val())
+            })
+
+        
+
+
+        },
         this.init = function(){
             this.busqueda();
             this.validar_busqueda();
@@ -445,6 +464,8 @@ var app = function(){
             this.validar_recomendacion();
             this.validar_votacion();            
             this.ajax_paging();            
+            this.setAffterAction();            
+            this.favoritosAction();            
         }
     };
     

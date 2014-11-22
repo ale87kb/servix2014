@@ -11,11 +11,27 @@
 					<p>
 						<img src="http://placehold.it/200x200" class="img-rounded" alt="">
 					</p>
-					<p>
+					<div class="col-md-10 col-md-offset-1">
+						<p>
 						
 					
-  						<a href="#modalRecomendar" class="btn btn-link" data-toggle="modal" data-target="#modalRecomendar" >Recomendar a un amigo</a>
-					</p>
+	  						<a href="#modalRecomendar" class="btn btn-sm btn-info btn-block" data-toggle="modal" data-target="#modalRecomendar" >Recomendar a un amigo</a>
+	  						<?php 
+		  						 if(isset($usuario)){ 
+		  						 	?>
+		  						 		<form action="#" method="POST">
+		  						 			<div class="checkbox">
+										        <label>
+										          <input type="checkbox" id="favorito"> Agregar a favoritos
+										        </label>
+										     </div>
+		  						 		</form>
+
+		  						 	<?php
+		  						 }
+	  						 ?>
+						</p>
+					</div>	
 
 				
 			      <?php
@@ -32,7 +48,7 @@
 						}else{
 							?>
 
-							<a data-toggle="modal" href="#loginModal" data-seccion="ficha"  data-target="#loginModal" rel=""  class="btn btn-primary ">Quiero opinar</a>
+							<a data-toggle="modal" href="#loginModal" data-seccion="ficha"  data-target="#loginModal" rel=""  class="btn btn-primary affterOpenLogin">Quiero opinar</a>
 
 
 							
@@ -144,7 +160,7 @@
 						<?php
 						}else{
 							?>
-							<a data-toggle="modal" href="#loginModal"  id="modalOpinion" data-target="#loginModal" rel=""  class="btn btn-primary ">Quiero opinar
+							<a data-toggle="modal" href="#loginModal"   data-target="#loginModal" rel=""  class="btn btn-primary affterOpenLogin ">Quiero opinar
 							</a>
 
 						
