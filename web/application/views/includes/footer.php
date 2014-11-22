@@ -38,12 +38,15 @@
                     <input type="checkbox" value="recordar" name="recordar" id="recordar">Seguir conectado
                   </label>
                 </div>
-                <button class="btn btn-success" type="submit" value="Ingresar">Iniciar Sesión</button>
+                <div class="text-right">
+                  <button class="btn btn-success" type="submit" value="Ingresar">Iniciar Sesión</button>
+                </div>
           </form>
 
           </div>
           <div class="modal-footer">
-            <a href="<?php  echo site_url('recuperar-clave');?>" rel="nofollow">No recuerdo mi contraseña</a>
+            <a class="pull-left" href="<?php echo site_url('registrarse'); ?>"rel="nofollow">Registrarse</a>
+            <a href="<?php echo site_url('recuperar-clave');?>" rel="nofollow">No recuerdo mi contraseña</a>
             <!--<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>-->
           </div>
         </div><!-- /.modal-content -->
@@ -57,18 +60,29 @@
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="<?php  echo site_url('assets/js/jquery.min.js');?>"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="<?php  echo site_url('assets/js/bootstrap.min.js');?>"></script>
-	<script src="<?php  echo site_url('assets/js/bootstrap-typeahead.js');?>"></script>
+	<script src="<?php echo site_url('assets/js/bootstrap.min.js');?>"></script>
+	<script src="<?php echo site_url('assets/js/bootstrap-typeahead.js');?>"></script>
 	<!-- BootstrapValidator -->
-	<script src="<?php  echo site_url('assets/js/bootstrapValidator.min.js');?>" type="text/javascript"></script>
-  <script src="<?php  echo site_url('assets/js/lang/es_ES.js');?>" type="text/javascript"></script>
-	<script src="<?php  echo site_url('assets/js/jquery.form.min.js');?>" type="text/javascript"></script>
-	
+	<script src="<?php echo site_url('assets/js/bootstrapValidator.min.js');?>" type="text/javascript"></script>
+  <script src="<?php echo site_url('assets/js/lang/es_ES.js');?>" type="text/javascript"></script>
+	<script src="<?php echo site_url('assets/js/jquery.form.min.js');?>" type="text/javascript"></script>
+	<?php 
+  /* Javascript agregado desde algun Controlador*/
+    if(isset($js) && $js!=null)
+    {
+      foreach ($js as $key ) {
+  ?>
+      <script src="<?php echo site_url($key);?>" type="text/javascript"></script>
+  <?php
+      }
+    }
+  ?>
+
 	<script>
 		$site_url = "<?php echo site_url();?>";
 	</script>
-  <script src="<?php  echo site_url('assets/js/jquery.raty.js');?>"></script>
-	<script src="<?php  echo site_url('assets/js/script.js');?>"></script>
+  <script src="<?php echo site_url('assets/js/jquery.raty.js');?>" type="text/javascript"></script>
+	<script src="<?php echo site_url('assets/js/script.js');?>" type="text/javascript"></script>
 
 	</body>
 </html>

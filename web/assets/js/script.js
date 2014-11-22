@@ -326,6 +326,19 @@ var app = function(){
                     },
                 }
             })
+            .on('error.validator.bv', function(e, data) {
+                // $(e.target)    --> The field element
+                // data.bv        --> The BootstrapValidator instance
+                // data.field     --> The field name
+                // data.element   --> The field element
+                // data.validator --> The current validator name
+                data.element
+                    .data('bv.messages')
+                    // Hide all the messages
+                    .find('.help-block[data-bv-for="' + data.field + '"]').hide()
+                    // Show only message associated with current validator
+                    .filter('[data-bv-validator="' + data.validator + '"]').show();
+            })
             .on('success.form.bv', function(e) {
                 e.preventDefault();
 

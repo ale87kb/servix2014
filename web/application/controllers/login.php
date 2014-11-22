@@ -5,25 +5,39 @@ class Login extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$data['title'] = 'Servix';
+		$this->UsuarioSession = $this->usuarios_model->isLogin();
 	}
 
 
 	public function index(){
 		//Cargar la vista del formulario de login
-   		$this->load->helper(array('form'));
-		$data['title'] = 'Iniciar sesión';
-		$data['vista'] = 'login/login_form';
-		$data['js'] = array('assets/js/login_page.js');
-		$this->load->view('login_view',$data);
+		if(!$this->UsuarioSession){
+	   		$this->load->helper(array('form'));
+			$data['title'] = 'Iniciar sesión';
+			$data['vista'] = 'login/login_form';
+			$data['js'] = array('assets/js/login_page.js');
+			$this->load->view('login_view',$data);
+		}
+		else
+		{
+			redirect('', 'refresh');
+		}
 	}
 
 
 	public function recuperar_clave(){
-		$this->load->helper(array('form'));
-		$data['title'] = 'Recuperar Clave';
-		$data['vista'] = 'login/recuperar_clave';
-		$data['js'] = array('assets/js/login_page.js');
-		$this->load->view('login_view',$data);
+		if(!$this->UsuarioSession)
+		{
+			$this->load->helper(array('form'));
+			$data['title'] = 'Recuperar Clave';
+			$data['vista'] = 'login/recuperar_clave';
+			$data['js'] = array('assets/js/login_page.js');
+			$this->load->view('login_view',$data);
+		}
+		else
+		{
+			redirect('', 'refresh');
+		}
 	}
 
 	public function validar_recuperar_clave(){
@@ -87,11 +101,17 @@ class Login extends CI_Controller {
 
 
 	public function registrar_usuario(){
-		//Carga vista del formulario de registro
-		$data['title'] = 'Registrar usuario';
-		$data['vista'] = 'registro_view';
-		$data['js'] = array('assets/js/registro_page.js');
-		$this->load->view('login_view',$data);
+		if(!$this->UsuarioSession){
+			//Carga vista del formulario de registro
+			$data['title'] = 'Registrar usuario';
+			$data['vista'] = 'registro_view';
+			$data['js'] = array('assets/js/registro_page.js');
+			$this->load->view('login_view',$data);
+		}
+		else
+		{
+			redirect('', 'refresh');
+		}
 	}
 
 

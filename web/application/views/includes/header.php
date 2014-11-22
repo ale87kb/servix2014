@@ -1,14 +1,3 @@
-<!--<?php
-
-/*Esto es una prueba para ver si el modal box y la lista de login lo ponemos en otro archivo
-como por ejemplo en carpetas: 
-    views/login/ajax/login_form_ajax.php
-    
-*/
-  $this->load->view('includes/nuevo');
-?>-->
-
-
 <nav class="navbar navbar-default navbar-static-top navbar-servix" role="navigation">
   <div class="container">
     <div class="navbar-header">
