@@ -320,6 +320,7 @@ var app = function(){
         this.validar_login_ajax = function(){
             urlweb = this.url;
            
+            //Reseteo el cuadro login cuando aparece
             $('#loginModal').on('shown.bs.modal', function() {
                 $('#form_login_ajax').bootstrapValidator('resetForm', true);
             });
@@ -349,6 +350,9 @@ var app = function(){
                             notEmpty: {
                                 message: 'Se requiere una clave'
                             },
+                        },
+                        onError: function(e, data){
+                           $(e.target).val('');
                         }
                     },
                 }

@@ -12,23 +12,14 @@ class sitio extends CI_Controller {
 		//$this->usuario = $this->check_login();
 	}
 
-	/* 
-	ESTE METODO (check_login) CREO QUE NO NOS HACE FALTA (19/11/2014)
-	*/
-	public function check_login(){
-		$this->usuario = null;
-		$user = $this->usuarios_model->isLogin();
-		if($user){
-			$this->usuario = $user['nombre'];
-		}
-		return $this->usuario;
-	}
 
 	public function index(){
 		
 		// print_d($data['usuario']);
-
-		$data['usuario'] = $this->UsuarioSession['nombre'];
+		if($this->UsuarioSession){
+			$data['usuario'] = $this->UsuarioSession['nombre'];
+			$data['usuarioSession'] = $this->UsuarioSession;
+		}
 		//$data['usuario'] = $this->usuario;
 		$data['vista'] = 'index_view';
 		$this->load->view('home_view',$data);
@@ -39,7 +30,7 @@ class sitio extends CI_Controller {
 
 	public function comentar_servicio(){
 	
-		$usuario 		= $this->usuarios_model->isLogin();
+		$usuario 		= $this->UsuarioSession;
 		$post 			= $this->input->post();
 		$id_servicio 	= $this->input->post('id_servicio');
 		$id_usuario  	= $usuario['id'];
@@ -70,7 +61,7 @@ class sitio extends CI_Controller {
 		$json 		   = $this->_validar_recomendacion();
 
 
-		$user = $this->usuarios_model->isLogin();
+		$user = $this->UsuarioSession;
 		if($user){
 			$userID = $user['id'];
 		}else{
@@ -199,8 +190,10 @@ class sitio extends CI_Controller {
 	public function resultado_busqueda(){
 			
 		$busca = $this->session->userdata("busqueda");
-		$data['usuario']   = $this->UsuarioSession['nombre'];
-		//$data['usuario']   = $this->usuario;
+		if($this->UsuarioSession){
+			$data['usuario'] = $this->UsuarioSession['nombre'];
+			$data['usuarioSession'] = $this->UsuarioSession;
+		}
 		$data['servicio']  = $busca['post']['servicio'];
 		$data['localidad'] = $busca['post']['localidad'];
 		$urlLoc 		   = $busca['url']['localidad'];
@@ -338,7 +331,10 @@ class sitio extends CI_Controller {
 		$long 			   = $servicioRS[0]['longitud'];
 		$position	       = "$lat,$long";
 		$data['map'] 	   = $this->_gmap($servicioRS,$position,14);
-		$data['usuario']   = $this->UsuarioSession['nombre'];
+		if($this->UsuarioSession){
+			$data['usuario'] = $this->UsuarioSession['nombre'];
+			$data['usuarioSession'] = $this->UsuarioSession;
+		}
 		$data['opiniones'] = $opiniones['result'];
 		$data['title']     = 'Ficha del servicio';
 		$data['servUrl']   =  site_url('ficha/'.$servicio);

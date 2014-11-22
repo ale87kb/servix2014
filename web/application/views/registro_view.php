@@ -1,5 +1,4 @@
-<div class="container">
-  <div class="jumbotron col-md-12">
+<div id="box_registro" class="jumbotron col-md-12">
    
 
 <h1>Registrar Usuario</h1>

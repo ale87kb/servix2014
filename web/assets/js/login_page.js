@@ -10,7 +10,7 @@ $('document').ready(function(){
             {
                 e.preventDefault();
 
-                $.post(urlweb+"validar_login_ajax", 
+                $.post(urlweb+"validar_login_ajax",
                     $(this).serialize(),
                     function(data){
                         var json = JSON.parse(data);

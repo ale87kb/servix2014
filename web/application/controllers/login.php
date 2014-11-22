@@ -198,6 +198,118 @@ class Login extends CI_Controller {
 			}
 		}
 	}
+	public function validar_nuevo_usuario_ajax(){
+		//Valida el formulario de registro de nuevo usuario
+
+		if(isset($_POST['grabar']) and $_POST['grabar'] == 'si'){
+
+			$this->load->library('form_validation');
+
+			$this->form_validation->set_rules('usuario', 'email', 'trim|required|valid_email|xss_clean|callback_check_user_duplicate');
+			$this->form_validation->set_rules('clave', 'contraseña', 'trim|required|xss_clean|md5');
+			$this->form_validation->set_rules('rclave', 'repetir contraseña', 'trim|required|matches[clave]|xss_clean|md5');
+
+			$this->form_validation->set_rules('nombre', 'nombre', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('apellido', 'apellido', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('dni', 'DNI', 'trim|required|numeric|xss_clean|callback_check_dni_duplicate');
+			$this->form_validation->set_rules('direccion', 'direccion', 'trim|xss_clean');
+			$this->form_validation->set_rules('telefono', 'teléfono', 'trim|xss_clean');
+
+			$this->form_validation->set_message('required', 'El campo %s es obligatorio');
+			$this->form_validation->set_message('valid_email', 'Ingrese un %s válido');
+
+			$data = array();
+
+			if($this->form_validation->run() == FALSE)
+			{
+				//$this->registrar_usuario();
+				if(form_error('usuario') != "")
+	            {
+		            $data['username'] = form_error('usuario');
+	            }
+	           	if(form_error('dni') != "")
+	           	{
+		            $data['dni'] = form_error('dni');
+	           	}
+	           	$data['res'] = "error";
+
+	            echo json_encode($data);
+			}
+			else
+			{
+				$fecha = date('Y-m-d H:m:i');
+
+				$nuevoUsuario['fecha_creacion'] 	= $fecha;
+				$nuevoUsuario['fecha_mod_estado'] 	= $fecha;
+				$nuevoUsuario['ultima_edicion'] 	= $fecha;
+				$nuevoUsuario['usuario'] 			= $this->input->post('usuario', TRUE);
+				$nuevoUsuario['clave'] 				= $this->input->post('clave', TRUE);
+				$nuevoUsuario['nombre'] 			= $this->input->post('nombre', TRUE);
+				$nuevoUsuario['apellido'] 			= $this->input->post('apellido');
+				$nuevoUsuario['dni'] 				= $this->input->post('dni', TRUE);
+				$nuevoUsuario['telefono'] 			= $this->input->post('telefono', TRUE);
+				$nuevoUsuario['direccion'] 			= $this->input->post('direccion', TRUE);
+				$nuevoUsuario['codigo'] 			= $this->_generarCodigo();
+				$nuevoUsuario['foto'] 				= 'assets/images/profile_640.png';
+
+				
+				$nuevoUsuario['estado'] 			= 0;
+				//El estado del usuario puede ser 
+				// 0 : Registrado, email NO verificado 
+				// 1 : Registrado, email verificado
+				// 2 : Usuario dado de baja
+				
+				//$this->sendEmailConfirm($nuevoUsuario);
+
+				$resultAdd = $this->usuarios_model->add_usuario($nuevoUsuario);
+
+
+				if($resultAdd)
+				{
+					//Envio un mail para confirmar usuario
+
+					$mailenviado = $this->sendEmailConfirm($nuevoUsuario);
+					if($mailenviado){
+						$data['mailenviado'] = "Mensaje enviado";
+					}
+					else
+					{
+						//$data['mailnoenviado'] = $this->email->print_debugger();
+						$data['mailnoenviado'] = "No se pudo enviar el mensaje.";
+
+					}
+
+
+					$data['estado'] 	= true;
+					$data['mensaje'] 	= "Registro correcto";
+					$data['title'] 		= "Registro de Usuario en Servix";
+					$data['vista'] 		= "login/registro_respuesta";
+					//$this->load->view("login_view", $data);
+				}
+				else
+				{
+					$data['estado'] 	= false;
+					$data['mensaje'] 	= "El registro de usuario ha fallado, por favor intente mas tarde.";
+					$data['title'] 		= "Registro de Usuario en Servix - Error";
+					$data['vista'] 		= "login/registro_respuesta";
+					//$this->load->view("login_view", $data);
+				}
+
+				$data['res'] = "success";
+				echo json_encode($data);
+
+			}
+		}
+	}
+	public function registro_respuesta(){
+		//$data['usuarioSession'] = $this->UsuarioSession;
+		$data = $this->input->post(json_decode('datos',true));
+		print_d($data);
+		$vista = $this->load->view('login/registro_respuesta',$data['datos'],true);
+		echo $vista;
+	}
+
+
 	public function check_user_duplicate(){
 		//Consulta si el usuario/email ya existe en la base de datos
 		//llama al modelo del usuario a la funcion getEmail verifica usuario registrado
@@ -330,7 +442,7 @@ class Login extends CI_Controller {
 
 		$this->form_validation->set_rules('usuario', 'usuario', 'trim|required|xss_clean|valid_email|callback_check_user_database');
 		$this->form_validation->set_rules('clave', 'clave', 'trim|required|xss_clean|callback_check_password_database');
-
+		$data = array();
 		
 		/* CON BOOSTRAPVALIDATOR */
 		if($this->form_validation->run() == FALSE)
@@ -348,12 +460,10 @@ class Login extends CI_Controller {
 	                'res'      => "error"
 				);
            	}
-
             echo json_encode($data);
         }
         else
         {
-
             $data = array(
                 'res'      	=> "success"
             );
@@ -363,7 +473,7 @@ class Login extends CI_Controller {
 
 
 	public function menu_usuario(){
-		$data['usuario'] = $this->session->userdata('logged_in');
+		$data['usuarioSession'] = $this->UsuarioSession;
 		$vista = $this->load->view('includes/user_log',$data,true);
 		echo $vista;
 	}

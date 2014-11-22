@@ -76,6 +76,8 @@ $route['validar_recuperar_clave']      			= "login/validar_recuperar_clave";				
 
 $route['registrarse']          					= "login/registrar_usuario";					//Usuario deslogueado
 $route['validar_nuevo_usuario']          		= "login/validar_nuevo_usuario";
+$route['validar_nuevo_usuario_ajax']          	= "login/validar_nuevo_usuario_ajax";
+$route['registro_respuesta']		          	= "login/registro_respuesta";
 $route['usuario/verificar/(:any)']           	= "usuario/verificar";							//Usuario deslogueado
 
 $route['mi-perfil']   		   					= "usuario/index";								//Usuario logueado

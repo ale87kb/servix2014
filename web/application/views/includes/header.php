@@ -17,7 +17,7 @@
     
 
     <div id="navbar-login" class="navbar-collapse collapse">     
-      <ul class="nav navbar-nav navbar-right">
+   <!--   <ul class="nav navbar-nav navbar-right">
         <?php 
         if(isset($usuario)){
           ?>
@@ -38,7 +38,15 @@
           <?php
         }
          ?>
-      </ul>
+      </ul>-->
+      <?php
+      if(isset($usuarioSession)){
+        $this->load->view('includes/user_log');
+        
+      }else{
+        $this->load->view('includes/user_no_log');
+      }
+      ?>
     </div><!--/.nav-collapse -->
 
    

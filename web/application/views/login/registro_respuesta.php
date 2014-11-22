@@ -1,9 +1,8 @@
-<div class="container">
   <div class="jumbotron col-md-12">
   <h1>Registro de usuario en Servix</h1>
    
    <?php 
-	if (isset($correcto)){
+	if (isset($estado) && $estado == true){
 
    		//if(isset($data['mailenviado'])){
    		if(isset($mailenviado)){
@@ -25,7 +24,8 @@
 
    	<?php
    		}
-   	}else
+   	}
+   	else
 	{
 	?>
 

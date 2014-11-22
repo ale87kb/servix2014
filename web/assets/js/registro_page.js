@@ -43,9 +43,7 @@ $('document').ready(function(){
                             
                         },
                         onError: function(e, data){
-                            
-                                
-
+                           $(e.target).val('');
                         }
                     },
                     rclave: {
@@ -61,7 +59,10 @@ $('document').ready(function(){
                             identical: {
                                 field: 'clave',
                                 message: 'La Contraseña y Repetir Contraseña no son iguales'
-                            }                            
+                            }                           
+                        },
+                        onError: function(e, data){
+                           $(e.target).val('');
                         }
                     },
                     nombre: {
@@ -92,7 +93,7 @@ $('document').ready(function(){
                                 message: 'Ingrese su DNI.'
                             },
                             digits: {
-                                message: 'El teléfono debe contener solo números.'
+                                message: 'El dni debe contener solo números.'
                             }
                         }
                     },
@@ -128,6 +129,50 @@ $('document').ready(function(){
                 //$('input[type="password"]').val('');
                 //$('#form_reg').bootstrapValidator('resetField', 'rclave');
 
+            })
+            .on('success.form.bv', function(e) {
+                e.preventDefault();
+
+                // Get the form instance
+                var $form = $(e.target);
+
+                // Get the BootstrapValidator instance
+                var bv = $form.data('bootstrapValidator');
+                // Use Ajax to submit form data
+                $.post(urlweb + "validar_nuevo_usuario_ajax", $form.serialize(), function(data) {
+    console.log(data);
+                        if(data['res'] == 'success'){
+                            $.ajax({
+                                url:urlweb+"registro_respuesta",
+                                dataType:'html',
+                                method:'POST',
+                                data: {'datos':data},
+                                success:function(page){
+                                    $("#box_registro").html(page);
+                                }
+
+                            });
+
+                        }
+                        if(data['res']=='error')
+                        {
+                            if(data['username']){
+                                bv.updateStatus('usuario', 'INVALID', 'notEmpty');
+                                bv.updateMessage('usuario', 'notEmpty', 'El email ingresado ya se encuentra registrado.');
+                                bv.resetField('clave', true);
+                                bv.resetField('rclave', true);
+                            }
+                            if(data['dni']){
+                                bv.updateStatus('dni', 'INVALID', 'notEmpty');
+                                bv.updateMessage('dni', 'notEmpty', 'El DNI ingresado ya se encuentra registrado');
+                                bv.resetField('rclave', true);
+                            }
+                        }
+                    }, 'json'
+                )}
+            )
+            .error(function(jqXHR, exception){
+                console.log("Error: " + jqXHR.responseText)
             })
 
 
