@@ -31,7 +31,7 @@
 						<?php
 						}else{
 							?>
-							<a data-toggle="modal" href="#loginModal" data-target="#loginModal" rel=""  class="btn btn-primary ">Quiero opinar
+							<a data-toggle="modal" href="#loginModal" data-target="#loginModal" rel=""  class="btn btn-primary ">Quiero opinar</a>
 							
 
 						
