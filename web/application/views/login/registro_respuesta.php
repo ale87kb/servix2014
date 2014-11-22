@@ -2,22 +2,19 @@
   <h1>Registro de usuario en Servix</h1>
    
    <?php 
-	if (isset($estado) && $estado == true){
+	if (isset($adduser) && $adduser){
 
-   		//if(isset($data['mailenviado'])){
-   		if(isset($mailenviado)){
+   		if(isset($mailenviado) && $mailenviado){
 	?>
-
 			<p>Tu usuario ha sido creado.</p>
 			<p>Te enviamos un mensaje a tu casilla de Email, para que confirmes tu usuario.</p>
 			<p>Gracias por sumarte a Servix</p>
 
 	<?php
    		}
-   		else if (isset($mailnoenviado))
+   		else if (isset($mailenviado) && !$mailenviado)
    		{
 	?>
-
 			<p>Tu usuario ha sido creado.</p>
 			<p>No se pudimos enviarte un mensaje a tu casilla de Email para que confirmes tu usuario, la proxima vez que inicies sesión se te pedirá verifiar tu usuario.</p>
 			<p>Gracias por sumarte a Servix</p>

@@ -231,8 +231,8 @@ class Login extends CI_Controller {
 	           	{
 		            $data['dni'] = form_error('dni');
 	           	}
+	           	
 	           	$data['res'] = "error";
-
 	            echo json_encode($data);
 			}
 			else
@@ -252,7 +252,6 @@ class Login extends CI_Controller {
 				$nuevoUsuario['codigo'] 			= $this->_generarCodigo();
 				$nuevoUsuario['foto'] 				= 'assets/images/profile_640.png';
 
-				
 				$nuevoUsuario['estado'] 			= 0;
 				//El estado del usuario puede ser 
 				// 0 : Registrado, email NO verificado 
@@ -263,48 +262,49 @@ class Login extends CI_Controller {
 
 				$resultAdd = $this->usuarios_model->add_usuario($nuevoUsuario);
 
-
 				if($resultAdd)
 				{
-					//Envio un mail para confirmar usuario
 
+					$data['adduser'] 	= true;
+					$data['mensaje'] 	= "Registro correcto";
+					$data['title'] 		= "Registro de Usuario en Servix";
+					$data['vista'] 		= "login/registro_respuesta";
+
+					//Envio un mail para confirmar usuario
 					$mailenviado = $this->sendEmailConfirm($nuevoUsuario);
+					
 					if($mailenviado){
-						$data['mailenviado'] = "Mensaje enviado";
+						$data['mailenviado'] 	= true;
+						$data['mailmssg'] 		= "Mensaje enviado";
 					}
 					else
 					{
 						//$data['mailnoenviado'] = $this->email->print_debugger();
-						$data['mailnoenviado'] = "No se pudo enviar el mensaje.";
+						$data['mailenviado'] 	= false;
+						$data['mailmssg'] 		= "No se pudo enviar el mensaje.";
+						
+						log_message('error', $this->email->print_debugger());
 
 					}
-
-
-					$data['estado'] 	= true;
-					$data['mensaje'] 	= "Registro correcto";
-					$data['title'] 		= "Registro de Usuario en Servix";
-					$data['vista'] 		= "login/registro_respuesta";
-					//$this->load->view("login_view", $data);
 				}
 				else
 				{
-					$data['estado'] 	= false;
+					$data['adduser'] 	= false;
 					$data['mensaje'] 	= "El registro de usuario ha fallado, por favor intente mas tarde.";
 					$data['title'] 		= "Registro de Usuario en Servix - Error";
 					$data['vista'] 		= "login/registro_respuesta";
-					//$this->load->view("login_view", $data);
 				}
 
 				$data['res'] = "success";
 				echo json_encode($data);
-
 			}
 		}
 	}
+
+
 	public function registro_respuesta(){
-		//$data['usuarioSession'] = $this->UsuarioSession;
 		$data = $this->input->post(json_decode('datos',true));
-		print_d($data);
+		//print_d($data);
 		$vista = $this->load->view('login/registro_respuesta',$data['datos'],true);
 		echo $vista;
 	}
@@ -355,7 +355,7 @@ class Login extends CI_Controller {
 		
 		//$this->load->view('email/confirmEmail', $post);
 
-		 if(isset($post)){
+		if(isset($post)){
 
 		 	// print_d($post);
 		 	$this->load->library('email');
@@ -378,14 +378,14 @@ class Login extends CI_Controller {
 	        $mail = $this->email->send();
 	      
 	      return $mail;
-		 }
+		}
 	}
 
 	public function sendEmailNuevaClave($post){
 		
 		//$this->load->view('email/recuperarClave', $post);
 
-		 if(isset($post)){
+		if(isset($post)){
 
 		 	// print_d($post);
 		 	$this->load->library('email');
@@ -408,7 +408,7 @@ class Login extends CI_Controller {
 	        $mail = $this->email->send();
 	      
 	      return $mail;
-		 }
+		}
 	}
 
 

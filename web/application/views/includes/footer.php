@@ -8,7 +8,7 @@
 	</div>
 
 	 <?php
-    if(empty($usuario)){
+     if(!isset($usuarioSession)){
       ?>
 
 
@@ -123,7 +123,10 @@
 
         <?php
       }
+
+      if(isset($titulo) && isset($servUrl)){
     ?>
+
 
     <div class="modal fade" id="modalRecomendar" tabindex="-1" role="dialog" aria-labelledby="modalOpinion-1" aria-hidden="true">
       <div class="modal-dialog">
@@ -172,6 +175,9 @@
         </div>
       </div>
     </div>
+    <?php
+      }
+    ?>
 
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

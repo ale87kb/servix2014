@@ -41,9 +41,6 @@ $('document').ready(function(){
                                 message: 'La Contraseña y Repetir Contraseña no son iguales'
                             }
                             
-                        },
-                        onError: function(e, data){
-                           $(e.target).val('');
                         }
                     },
                     rclave: {
@@ -60,9 +57,6 @@ $('document').ready(function(){
                                 field: 'clave',
                                 message: 'La Contraseña y Repetir Contraseña no son iguales'
                             }                           
-                        },
-                        onError: function(e, data){
-                           $(e.target).val('');
                         }
                     },
                     nombre: {
@@ -139,8 +133,8 @@ $('document').ready(function(){
                 // Get the BootstrapValidator instance
                 var bv = $form.data('bootstrapValidator');
                 // Use Ajax to submit form data
-                $.post(urlweb + "validar_nuevo_usuario_ajax", $form.serialize(), function(data) {
-    console.log(data);
+                $.post(urlweb + "validar_nuevo_usuario_ajax", $form.serialize(), 
+                    function(data) {
                         if(data['res'] == 'success'){
                             $.ajax({
                                 url:urlweb+"registro_respuesta",
@@ -159,14 +153,13 @@ $('document').ready(function(){
                             if(data['username']){
                                 bv.updateStatus('usuario', 'INVALID', 'notEmpty');
                                 bv.updateMessage('usuario', 'notEmpty', 'El email ingresado ya se encuentra registrado.');
-                                bv.resetField('clave', true);
-                                bv.resetField('rclave', true);
                             }
                             if(data['dni']){
                                 bv.updateStatus('dni', 'INVALID', 'notEmpty');
                                 bv.updateMessage('dni', 'notEmpty', 'El DNI ingresado ya se encuentra registrado');
-                                bv.resetField('rclave', true);
                             }
+                            bv.resetField('clave', true);
+                            bv.resetField('rclave', true);
                         }
                     }, 'json'
                 )}

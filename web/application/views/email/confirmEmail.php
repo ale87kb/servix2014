@@ -18,16 +18,14 @@
 	<tr>
 		<td></td>
 		<td class="header container" >
-				
-				<div class="content">
-				<table bgcolor="#999999">
-					<tr>
-						<td><img src="http://placehold.it/200x50/&text=SERVIX" /></td>
-						<td align="right"><h6 class="collapse"><?php echo date('d-m-Y H:m'); ?></h6></td>
-					</tr>
-				</table>
-				</div>
-				
+			<div class="content">
+			<table bgcolor="#999999">
+				<tr>
+					<td><img src="http://placehold.it/200x50/&text=SERVIX" /></td>
+					<td align="right"><h6 class="collapse"><?php echo date('d-m-Y H:m'); ?></h6></td>
+				</tr>
+			</table>
+			</div>
 		</td>
 		<td></td>
 	</tr>
@@ -59,6 +57,7 @@
 								        		<strong>Completar el registro</strong>
 								        	</a>
 								        </p>
+								        <p><a href="<?php echo site_url('usuario/verificar?codigo='.$codigo.'&amp;source=email') ?>"><?php echo site_url('usuario/verificar?codigo='.$codigo.'&amp;source=email') ?></a></p>
 								    </td>
 								</tr>
 							</tbody>
