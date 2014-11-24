@@ -3,7 +3,7 @@
 -- Server version:               5.6.16 - MySQL Community Server (GPL)
 -- Server OS:                    Win32
 -- HeidiSQL version:             7.0.0.4053
--- Date/time:                    2014-11-20 19:16:32
+-- Date/time:                    2014-11-24 19:57:07
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -17,7 +17,8 @@ CREATE TABLE IF NOT EXISTS `busquedas_temp` (
   `id_categorias` int(11) unsigned NOT NULL,
   `id_usuario` int(11) unsigned NOT NULL,
   `id_localidad` int(11) unsigned NOT NULL,
-  `fecha` date NOT NULL,
+  `fecha_ini` datetime NOT NULL,
+  `fecha_fin` datetime NOT NULL,
   `busqueda` varchar(250) NOT NULL,
   `vencido` smallint(1) NOT NULL,
   PRIMARY KEY (`id`),
@@ -27,11 +28,13 @@ CREATE TABLE IF NOT EXISTS `busquedas_temp` (
   CONSTRAINT `busquedas_temp_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `busquedas_temp_ibfk_3` FOREIGN KEY (`id_localidad`) REFERENCES `localidades` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `busquedas_temp_ibfk_4` FOREIGN KEY (`id_categorias`) REFERENCES `categorias` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Dumping data for table servix_db.busquedas_temp: ~0 rows (approximately)
+-- Dumping data for table servix_db.busquedas_temp: ~1 rows (approximately)
 DELETE FROM `busquedas_temp`;
 /*!40000 ALTER TABLE `busquedas_temp` DISABLE KEYS */;
+INSERT INTO `busquedas_temp` (`id`, `id_categorias`, `id_usuario`, `id_localidad`, `fecha_ini`, `fecha_fin`, `busqueda`, `vencido`) VALUES
+	(2, 22, 8, 9, '2014-11-24 01:53:27', '2014-11-25 00:53:35', 'Busco un herrero en buenos aires', 0);
 /*!40000 ALTER TABLE `busquedas_temp` ENABLE KEYS */;
 
 
@@ -104,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 DELETE FROM `ci_sessions`;
 /*!40000 ALTER TABLE `ci_sessions` DISABLE KEYS */;
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-	('940b8216c1fd5b555b660d7eacd224af', '::1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.65 Safari/537.36', 1416521516, 'a:3:{s:9:"user_data";s:0:"";s:8:"busqueda";a:2:{s:4:"post";a:2:{s:8:"servicio";s:8:"herreria";s:9:"localidad";s:12:"buenos aires";}s:3:"url";a:2:{s:8:"servicio";s:8:"herreria";s:9:"localidad";s:12:"buenos-aires";}}s:9:"logged_in";a:10:{s:2:"id";s:1:"1";s:5:"email";s:14:"pepe@gmail.com";s:6:"nombre";s:5:"Pedro";s:8:"apellido";s:11:"DonCorlione";s:3:"dni";s:8:"12918888";s:9:"direccion";s:19:"Av. Libertador 5966";s:8:"telefono";s:9:"4444-5587";s:4:"foto";s:29:"assets/images/profile_640.png";s:6:"estado";s:1:"1";s:14:"ultima_edicion";s:19:"0000-00-00 00:00:00";}}');
+	('584c49bae76a8ff52ff62a064538e41f', '::1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.65 Safari/537.36', 1416869443, 'a:3:{s:9:"user_data";s:0:"";s:8:"busqueda";a:2:{s:4:"post";a:2:{s:8:"servicio";s:7:"Herrero";s:9:"localidad";s:6:"buenos";}s:3:"url";a:2:{s:8:"servicio";s:7:"herrero";s:9:"localidad";s:6:"buenos";}}s:9:"logged_in";a:10:{s:2:"id";s:1:"8";s:5:"email";s:19:"horacio@hotmail.com";s:6:"nombre";s:7:"horacio";s:8:"apellido";s:6:"moreno";s:3:"dni";s:8:"35049207";s:9:"direccion";s:20:"av juan b justo 2195";s:8:"telefono";s:10:"1134090733";s:4:"foto";s:29:"assets/images/profile_640.png";s:6:"estado";s:1:"0";s:14:"ultima_edicion";s:19:"2014-11-22 02:11:05";}}');
 /*!40000 ALTER TABLE `ci_sessions` ENABLE KEYS */;
 
 
@@ -119,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `consultas_servicios` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
--- Dumping data for table servix_db.consultas_servicios: ~12 rows (approximately)
+-- Dumping data for table servix_db.consultas_servicios: ~13 rows (approximately)
 DELETE FROM `consultas_servicios`;
 /*!40000 ALTER TABLE `consultas_servicios` DISABLE KEYS */;
 INSERT INTO `consultas_servicios` (`id`, `id_servicio`, `id_usuario`, `fecha`, `consulta`) VALUES
@@ -145,16 +148,22 @@ CREATE TABLE IF NOT EXISTS `favoritos` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_usuarios` int(11) unsigned NOT NULL,
   `id_servicios` int(11) unsigned NOT NULL,
+  `fecha` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_usuarios` (`id_usuarios`),
   KEY `id_servicios` (`id_servicios`),
   CONSTRAINT `favoritos_ibfk_1` FOREIGN KEY (`id_usuarios`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `favoritos_ibfk_2` FOREIGN KEY (`id_servicios`) REFERENCES `servicios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
--- Dumping data for table servix_db.favoritos: ~0 rows (approximately)
+-- Dumping data for table servix_db.favoritos: ~4 rows (approximately)
 DELETE FROM `favoritos`;
 /*!40000 ALTER TABLE `favoritos` DISABLE KEYS */;
+INSERT INTO `favoritos` (`id`, `id_usuarios`, `id_servicios`, `fecha`) VALUES
+	(1, 1, 3, '2014-11-04 18:32:33'),
+	(2, 1, 47, '2014-11-18 18:32:48'),
+	(17, 8, 208, '2014-11-24 07:54:06'),
+	(18, 8, 208, '2014-11-24 07:54:07');
 /*!40000 ALTER TABLE `favoritos` ENABLE KEYS */;
 
 
@@ -2569,11 +2578,13 @@ CREATE TABLE IF NOT EXISTS `postulaciones_temp` (
   KEY `id_usuarios` (`id_usuarios`),
   CONSTRAINT `postulaciones_temp_ibfk_1` FOREIGN KEY (`id_busquedas_temp`) REFERENCES `busquedas_temp` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `postulaciones_temp_ibfk_2` FOREIGN KEY (`id_usuarios`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Dumping data for table servix_db.postulaciones_temp: ~0 rows (approximately)
+-- Dumping data for table servix_db.postulaciones_temp: ~1 rows (approximately)
 DELETE FROM `postulaciones_temp`;
 /*!40000 ALTER TABLE `postulaciones_temp` DISABLE KEYS */;
+INSERT INTO `postulaciones_temp` (`id`, `id_busquedas_temp`, `id_usuarios`) VALUES
+	(1, 2, 8);
 /*!40000 ALTER TABLE `postulaciones_temp` ENABLE KEYS */;
 
 
@@ -2632,9 +2643,9 @@ CREATE TABLE IF NOT EXISTS `puntuacion` (
   KEY `id_servicios` (`id_servicios`),
   CONSTRAINT `puntuacion_ibfk_1` FOREIGN KEY (`id_usuarios`) REFERENCES `usuarios` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `puntuacion_ibfk_2` FOREIGN KEY (`id_servicios`) REFERENCES `servicios` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
--- Dumping data for table servix_db.puntuacion: ~7 rows (approximately)
+-- Dumping data for table servix_db.puntuacion: ~8 rows (approximately)
 DELETE FROM `puntuacion`;
 /*!40000 ALTER TABLE `puntuacion` DISABLE KEYS */;
 INSERT INTO `puntuacion` (`id`, `id_usuarios`, `id_servicios`, `puntos`, `comentario`, `fecha_votacion`, `fecha_uso_servicio`) VALUES
@@ -2644,8 +2655,29 @@ INSERT INTO `puntuacion` (`id`, `id_usuarios`, `id_servicios`, `puntos`, `coment
 	(8, 5, 208, 5, 'UN SERVICIO EXCELENTE, PROFESIONALES DE PRIMERA LINEA A COSTOS MUY COMPETITIVOS.GRACIAS POR TODO', '2014-11-13 09:28:54', '2014-11-18 03:01:03'),
 	(9, 1, 522, 4, 'muy bueno el trabajo realizado ', '2014-11-19 10:25:36', '2014-11-20 00:00:00'),
 	(10, 5, 208, 3, 'lorem  lorem lorems lorem  lorem lorems lorem  lorem lorems lorem  lorem lorems ', '2014-11-11 10:28:54', '2014-11-17 01:01:03'),
-	(11, 5, 208, 3, 'lorem  lorem lorems lorem  lorem lorems lorem  lorem lorems ', '2014-11-15 11:28:54', '2014-11-19 03:01:03');
+	(14, 1, 208, 4, 'testtetetet', '2014-11-22 01:54:54', '2014-11-20 00:00:00'),
+	(15, 8, 502, 2, 'le falto algunas cosas por terminar , poca organizacion', '2014-11-23 11:53:27', '2014-11-11 00:00:00');
 /*!40000 ALTER TABLE `puntuacion` ENABLE KEYS */;
+
+
+-- Dumping structure for table servix_db.recomendaciones
+DROP TABLE IF EXISTS `recomendaciones`;
+CREATE TABLE IF NOT EXISTS `recomendaciones` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `id_usuario` int(10) DEFAULT NULL,
+  `nombre` varchar(150) DEFAULT NULL,
+  `email` varchar(150) DEFAULT NULL,
+  `urlRec` tinytext,
+  `fecha` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table servix_db.recomendaciones: ~1 rows (approximately)
+DELETE FROM `recomendaciones`;
+/*!40000 ALTER TABLE `recomendaciones` DISABLE KEYS */;
+INSERT INTO `recomendaciones` (`id`, `id_usuario`, `nombre`, `email`, `urlRec`, `fecha`) VALUES
+	(2, 8, 'horacio', 'horacio@abm.la', 'http://localhost/servix2014/web/ficha/208-herreria-los-hermanos', '2014-11-24 12:49:44');
+/*!40000 ALTER TABLE `recomendaciones` ENABLE KEYS */;
 
 
 -- Dumping structure for table servix_db.relacion_u_s
@@ -2661,13 +2693,11 @@ CREATE TABLE IF NOT EXISTS `relacion_u_s` (
   CONSTRAINT `relacion_u_s_ibfk_2` FOREIGN KEY (`id_servicios`) REFERENCES `servicios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
--- Dumping data for table servix_db.relacion_u_s: ~6 rows (approximately)
+-- Dumping data for table servix_db.relacion_u_s: ~4 rows (approximately)
 DELETE FROM `relacion_u_s`;
 /*!40000 ALTER TABLE `relacion_u_s` DISABLE KEYS */;
 INSERT INTO `relacion_u_s` (`id`, `id_usurios`, `id_servicios`) VALUES
 	(1, 1, 208),
-	(2, 10, 521),
-	(3, 11, 522),
 	(4, 12, 523),
 	(5, 13, 524),
 	(6, 14, 511);
@@ -2775,9 +2805,9 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `codigo` (`codigo`),
   UNIQUE KEY `dni` (`dni`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
--- Dumping data for table servix_db.usuarios: ~7 rows (approximately)
+-- Dumping data for table servix_db.usuarios: ~8 rows (approximately)
 DELETE FROM `usuarios`;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
 INSERT INTO `usuarios` (`id`, `email`, `clave`, `nombre`, `apellido`, `dni`, `telefono`, `direccion`, `foto`, `codigo`, `estado`, `fecha_creacion`, `fecha_mod_estado`, `ultima_edicion`) VALUES
@@ -2787,7 +2817,8 @@ INSERT INTO `usuarios` (`id`, `email`, `clave`, `nombre`, `apellido`, `dni`, `te
 	(4, 'usuario3@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Matias', 'Paz', '12918488', '4444-5587', 'Av. Libertador 5966', 'assets/images/profile_640.png', 'aaaaaaaaa3', 1, '2014-11-03 21:09:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 	(5, 'usuario4@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Roberto', 'Funiet', '12918856', '4444-5587', 'Av. Libertador 5966', 'assets/images/profile_640.png', 'aaaaaaaaa4', 1, '2014-11-03 21:09:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 	(6, 'usuario5@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Carlos', 'Brandon', '12518888', '4444-5587', 'Av. Libertador 5966', 'assets/images/profile_640.png', 'aaaaaaaaa5', 1, '2014-11-03 21:09:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-	(7, 'usuario6@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Sebastian', 'Ortega', '12348888', '4444-5587', 'Av. Libertador 5966', 'assets/images/profile_640.png', 'aaaaaaaaa6', 1, '2014-11-03 21:09:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+	(7, 'usuario6@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Sebastian', 'Ortega', '12348888', '4444-5587', 'Av. Libertador 5966', 'assets/images/profile_640.png', 'aaaaaaaaa6', 1, '2014-11-03 21:09:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+	(8, 'horacio@hotmail.com', 'd2322d37ded062860f40d5e9791b45e6', 'horacio', 'moreno', '35049207', '1134090733', 'av juan b justo 2195', 'assets/images/profile_640.png', '78574938a220391f2ac5710004fe84cd', 0, '2014-11-22 02:11:05', '2014-11-22 02:11:05', '2014-11-22 02:11:05');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 /*!40014 SET FOREIGN_KEY_CHECKS=1 */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
