@@ -11,27 +11,32 @@
 				<div class="list-group">
         <?php
           if(!empty($comentarios)){
-           foreach ($comentarios as $c) {
-          ?>
+            foreach ($comentarios as $c) {
+            ?>
             <a href="<?php echo $c['link']; ?>" class="list-group-item">
-              <div class="ratyAVG" data-avg="<?php echo $c['puntos'] ;?>"></div>
-              <p class="list-group-item-text"><?php echo ucfirst($c['comentario']); ?></p>
-              
-              <p>Realizado el <?php echo $c['fecha'];?> en <span><?php echo ucfirst($c['titulo']); ?></span></p>
+            <div class="ratyAVG" data-avg="<?php echo $c['puntos'] ;?>"></div>
+            <p class="list-group-item-text"><?php echo ucfirst($c['comentario']); ?></p>
+
+            <p>Realizado el <?php echo $c['fecha'];?> en <span><?php echo ucfirst($c['titulo']); ?></span></p>
             </a>
 
-          <?php
+            <?php
+            }
+            if(count($comentarios) > 4){
+            ?>
+              <a href="#">Ver mas..</a>
+            <?php
             }
           }
           else{
           ?>
-          
-          <h4>No tienes comentarios</h4>
-          <p>Todabía no has realizado ningún comentario en los servicios ofrecidos.</p>
+
+            <h4>No tienes comentarios</h4>
+            <p>Todabía no has realizado ningún comentario en los servicios ofrecidos.</p>
 
           <?php
           }
-          ?>
+        ?>
 
         </div>
 

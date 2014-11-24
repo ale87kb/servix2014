@@ -204,9 +204,10 @@ Class Usuarios_model extends CI_Model{
 	public function getFavoritos($idUsuario, $desdeLimit ,$cantidadLimit){
 		$query 	= "SELECT
 					favoritos.fecha,
+					servicios.id,
 					servicios.titulo,
 					servicios.descripcion,
-					servicios.id
+					servicios.foto
 				FROM
 					favoritos
 				INNER JOIN servicios ON favoritos.id_servicios = servicios.id
@@ -224,14 +225,40 @@ Class Usuarios_model extends CI_Model{
 		$query 	=	"SELECT
 						servicios.id,
 						servicios.titulo,
+						servicios.descripcion,
+						servicios.foto,
 						puntuacion.comentario,
 						puntuacion.puntos,
-						puntuacion.fecha_votacion
+						puntuacion.fecha_votacion,
+						puntuacion.fecha_uso_servicio
 					FROM
 						puntuacion
 					INNER JOIN servicios ON puntuacion.id_servicios = servicios.id
 					WHERE
 						puntuacion.id_usuarios = $idUsuario
+					LIMIT $desdeLimit, $cantidadLimit";
+
+		$rs = $this->db->query($query);
+
+		return $rs->result_array();
+
+	}
+
+	public function getServiciosContactados($idUsuario, $desdeLimit ,$cantidadLimit){
+		$query 	=	"SELECT
+						servicios.id,
+						servicios.titulo,
+						servicios.descripcion,
+						servicios.foto,
+						consultas_servicios.consulta,
+						consultas_servicios.fecha
+					FROM
+						consultas_servicios
+					INNER JOIN servicios ON consultas_servicios.id_servicio = servicios.id
+					WHERE
+						consultas_servicios.id_usuario = $idUsuario
+					ORDER BY
+						consultas_servicios.fecha DESC
 					LIMIT $desdeLimit, $cantidadLimit";
 
 		$rs = $this->db->query($query);

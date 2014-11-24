@@ -9,23 +9,36 @@
 		<div class="row">
 			<div class="col-md-12 ">
 				<div class="list-group">
-					<a href="#" class="list-group-item">
-                		<h4 class="list-group-item-heading">List group heading</h4>
-                		<p class="list-group-item-text">12/11/2014</p>
-          			</a>
-          			<a href="#" class="list-group-item">
-                    		<h4 class="list-group-item-heading">List group heading</h4>
-                    		<p class="list-group-item-text">12/11/2014</p>
-          			</a>
-          			<a href="#" class="list-group-item">
-                    		<h4 class="list-group-item-heading">List group heading</h4>
-                    		<p class="list-group-item-text">12/11/2014</p>
-          			</a>
-          			<a href="#" class="list-group-item">
-                    		<h4 class="list-group-item-heading">List group heading</h4>
-                    		<p class="list-group-item-text">12/11/2014</p>
-          			</a>
-				</div>
+						
+        <?php
+          if(!empty($sContactados)){
+            foreach ($sContactados as $c) {
+            ?>
+              <a href="<?php echo $c['link']; ?>" class="list-group-item">
+                <p class="list-group-item-text"><?php echo ucfirst($c['titulo']); ?></p>
+                <p class="list-group-item-text"><?php echo ucfirst($c['consulta']); ?></p>
+                <p>Realizado el <?php echo $c['fecha'];?></p>
+              </a>
+
+            <?php
+            }
+            if(count($sContactados) > 4){
+            ?>
+              <a href="#">Ver mas..</a>
+            <?php
+            }
+          }
+          else{
+          ?>
+
+            <h4>No has contactado ningún servicio</h4>
+            <p>Todabía no has contactado ningún servicio.</p>
+
+          <?php
+          }
+        ?>
+
+        </div>
 
 			</div>
 		</div>

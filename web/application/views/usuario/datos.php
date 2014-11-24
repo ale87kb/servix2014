@@ -41,7 +41,7 @@
 					</tbody>
 				</table>
 
-				<a href="#" class="btn btn-primary">Editar Mis Datos</a>
+				<a href="<?php echo site_url('mi-perfil/editar-datos'); ?>" class="btn btn-primary">Editar Mis Datos</a>
 			</div>
 		</div>
 	</div>

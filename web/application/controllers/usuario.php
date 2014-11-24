@@ -13,15 +13,16 @@ class Usuario extends CI_controller{
 	public function index(){
 		if($this->UsuarioSession)
 		{
-			$data['usuario'] 		= $this->UsuarioSession['nombre'];
 			//Muesta los datos del usuario de la variable de sesion
 			$data['usuarioSession'] = $this->UsuarioSession;
 
-			$Usfavoritos 			= $this->_linkFavoritos($this->UsuarioSession['id'], 0, 5);
-			$UsCOmentarios 			= $this->_comentariosRealizados($this->UsuarioSession['id'], 0, 5);
+			$Usfavoritos 					= $this->_linkFavoritos($this->UsuarioSession['id'], 0, 5);
+			$UsComentarios 					= $this->_comentariosRealizados($this->UsuarioSession['id'], 0, 5);
+			$UsServiciosContactados			= $this->_serviciosContactados($this->UsuarioSession['id'], 0, 5);
 
 			$data['favoritos'] 		= $Usfavoritos;
-			$data['comentarios'] 	= $UsCOmentarios;
+			$data['comentarios'] 	= $UsComentarios;
+			$data['sContactados'] 	= $UsServiciosContactados;
 			
 			$data['title'] 			= 'Mi Perfil';
 			$data['vista'] 			= 'usuario/mi_perfil';
@@ -53,6 +54,19 @@ class Usuario extends CI_controller{
 				$comentarios[$c]['fecha'] = fechaBarras(strtotime($comentarios[$c]['fecha_votacion']));
 			}
 			return $comentarios;
+		}
+		return false;
+	}
+
+	private function _serviciosContactados($idUsuario, $desdeLimit ,$cantidadLimit){
+		$sContactados = $this->usuarios_model->getServiciosContactados($idUsuario, $desdeLimit ,$cantidadLimit);
+
+		if($sContactados){
+			foreach ($sContactados as $c => $clave) {
+				$sContactados[$c]['link'] = generarLinkServicio($sContactados[$c]['id'], $sContactados[$c]['titulo']);
+				$sContactados[$c]['fecha'] = fechaBarras(strtotime($sContactados[$c]['fecha']));
+			}
+			return $sContactados;
 		}
 		return false;
 	}
@@ -188,7 +202,6 @@ class Usuario extends CI_controller{
 	}
 
 
-
 	public function validar_voto(){
 		$fechaHoy    =  date('Y-m-d');
 		$userID 	 = $this->UsuarioSession['id'];
@@ -210,7 +223,19 @@ class Usuario extends CI_controller{
 		echo json_encode($verificado_result);
 	}
 	public function editar_datos(){
-		echo "editar_datos";
+		if($this->UsuarioSession)
+		{
+			//Muesta los datos del usuario de la variable de sesion
+			$data['usuarioSession'] = $this->UsuarioSession;
+			
+			$data['title'] 			= 'Editar Datos';
+			$data['vista'] 			= 'usuario/editar_datos';
+			$this->load->view('usuarios_view', $data);
+		}
+		else
+		{
+			redirect('', 'refresh');
+		}
 	}
 
 	public function editar_servicios(){
