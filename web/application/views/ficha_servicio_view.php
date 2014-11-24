@@ -18,11 +18,19 @@
 	  						<a href="#modalRecomendar" class="btn btn-sm btn-info btn-block" data-toggle="modal" data-target="#modalRecomendar" >Recomendar a un amigo</a>
 	  						<?php 
 		  						 if(isset($usuario)){ 
+
 		  						 	?>
-		  						 		<form action="#" method="POST">
+		  						 		<form action="<?php echo site_url('set_favorito'); ?>" method="POST" id="favoritosForm">
 		  						 			<div class="checkbox">
 										        <label>
-										          <input type="checkbox" id="favorito"> Agregar a favoritos
+												 <input type="hidden" name="id_servicio" value="<?php echo $id; ?>">	
+										          <input type="checkbox" name="favorito" <?php if($favorito){echo "checked";} ?> id="favorito"><?php 
+										          	if($favorito){
+										          		echo "<span>Agregado a favoritos</span>";
+										          	}else{
+										         		echo "<span>Agregar a favoritos</span>";
+										          	}
+										           ?>
 										        </label>
 										     </div>
 		  						 		</form>

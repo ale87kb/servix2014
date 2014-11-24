@@ -16,6 +16,32 @@ Class Servicios_model extends CI_Model{
 		return $rs;
 	}
 
+	public function getServiciosDestacagdos(){
+		$query = "SELECT
+				servicios.titulo,
+				servicios.descripcion,
+				servicios.foto,
+				categorias.categoria,
+				Avg(puntuacion.puntos) as promedio,
+				count(puntuacion.puntos) as cantPuntos,
+				servicios.id,
+				provincias.provincia,
+				localidades.localidad
+				FROM
+				servicios
+				INNER JOIN puntuacion ON puntuacion.id_servicios = servicios.id
+				INNER JOIN categorias ON servicios.id_categorias = categorias.id
+				INNER JOIN localidades ON servicios.id_localidades = localidades.id
+				INNER JOIN provincias ON localidades.id_provincia = provincias.id
+				GROUP BY servicios.id
+				ORDER BY cantPuntos DESC
+				LIMIT 5";
+
+
+		$rs = $this->db->query($query)->result_array();
+		return $rs;
+	}
+
 
 	public function getPromedioPuntos($id){
 		$query ="SELECT
@@ -56,11 +82,37 @@ Class Servicios_model extends CI_Model{
 	}
 
 	public function setRecomendacion($idU,$post){
-		$query  = "INSERT INTO `recomendaciones` (`id_usuario`,`nombre`, `email`, `urlRec`) VALUES ($idU,'".$post['nombreAmigo']."', '".$post['emailAmigo']."', '".$post['urlServ']."');";
+		$fechaUso = date('Y-m-d h:i:s');
+		$query  = "INSERT INTO `recomendaciones` (`id_usuario`,`nombre`, `email`, `urlRec`,`fecha`) VALUES ($idU,'".$post['nombreAmigo']."', '".$post['emailAmigo']."', '".$post['urlServ']."','$fechaUso');";
 		$rs     = $this->db->query($query);
 		return $rs;
 	}
 
+
+	public function getServiciosSolicitados(){
+		$query = "SELECT
+				categorias.categoria,
+				localidades.localidad,
+				provincias.provincia,
+				usuarios.apellido,
+				usuarios.nombre,
+				busquedas_temp.busqueda,
+				busquedas_temp.fecha_ini,
+				busquedas_temp.fecha_fin
+				FROM
+				busquedas_temp
+				INNER JOIN categorias ON busquedas_temp.id_categorias = categorias.id
+				INNER JOIN localidades ON busquedas_temp.id_localidad = localidades.id
+				INNER JOIN provincias ON localidades.id_provincia = provincias.id
+				INNER JOIN usuarios ON busquedas_temp.id_usuario = usuarios.id
+				WHERE
+				busquedas_temp.vencido = 0
+				LIMIT 5";
+				
+		$rs    = $this->db->query($query);
+		return $rs->result_array();
+
+	}
 
 	public function getServicioFicha($id){
 		$query =    "SELECT

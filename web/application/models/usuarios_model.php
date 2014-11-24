@@ -180,6 +180,26 @@ Class Usuarios_model extends CI_Model{
 		return $rs;
 	}
 
+	public function setFavorito($id_usuario,$id_servicio){
+		$fechaUso = date('Y-m-d h:i:s');
+		$query = "INSERT INTO `favoritos` (`id_usuarios`, `id_servicios`, `fecha`) VALUES ($id_usuario, $id_servicio, '$fechaUso');";
+		$rs = $this->db->query($query);
+		return $rs;
+	}
+	public function getFavorito($id_usuario,$id_servicio){
+		$fechaUso = date('Y-m-d h:i:s');
+		$query = "SELECT * FROM favoritos WHERE id_usuarios = $id_usuario  AND id_servicios = $id_servicio";
+		$rs = $this->db->query($query);
+		return $rs->result_array();
+	}
+
+	public function deleteFavorito($id_servicios){
+		$query ="DELETE FROM `favoritos` WHERE  `id_servicios`=$id_servicios LIMIT 1;";
+		$rs = $this->db->query($query);
+		return $rs;
+	}
+
+
 
 	public function getFavoritos($idUsuario, $desdeLimit ,$cantidadLimit){
 		$query 	= "SELECT

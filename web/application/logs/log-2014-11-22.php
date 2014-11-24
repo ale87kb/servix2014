@@ -8179,3 +8179,877 @@ DEBUG - 2014-11-22 15:36:40 --> Model Class Initialized
 DEBUG - 2014-11-22 15:36:40 --> Controller Class Initialized
 DEBUG - 2014-11-22 15:36:40 --> Final output sent to browser
 DEBUG - 2014-11-22 15:36:40 --> Total execution time: 0.1040
+DEBUG - 2014-11-22 22:37:44 --> Config Class Initialized
+DEBUG - 2014-11-22 22:37:44 --> Hooks Class Initialized
+DEBUG - 2014-11-22 22:37:44 --> Utf8 Class Initialized
+DEBUG - 2014-11-22 22:37:44 --> UTF-8 Support Enabled
+DEBUG - 2014-11-22 22:37:44 --> URI Class Initialized
+DEBUG - 2014-11-22 22:37:44 --> Router Class Initialized
+DEBUG - 2014-11-22 22:37:44 --> Output Class Initialized
+DEBUG - 2014-11-22 22:37:44 --> Security Class Initialized
+DEBUG - 2014-11-22 22:37:44 --> Input Class Initialized
+DEBUG - 2014-11-22 22:37:44 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-22 22:37:44 --> Language Class Initialized
+DEBUG - 2014-11-22 22:37:44 --> Loader Class Initialized
+DEBUG - 2014-11-22 22:37:44 --> Helper loaded: url_helper
+DEBUG - 2014-11-22 22:37:44 --> Helper loaded: file_helper
+DEBUG - 2014-11-22 18:37:44 --> Helper loaded: mis_funciones_helper
+DEBUG - 2014-11-22 18:37:45 --> Database Driver Class Initialized
+ERROR - 2014-11-22 18:37:45 --> Severity: 8192  --> mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\xampp\htdocs\servix2014\web\system\database\drivers\mysql\mysql_driver.php 91
+DEBUG - 2014-11-22 18:37:45 --> Session Class Initialized
+DEBUG - 2014-11-22 18:37:45 --> Helper loaded: string_helper
+DEBUG - 2014-11-22 18:37:45 --> A session cookie was not found.
+DEBUG - 2014-11-22 18:37:45 --> Session routines successfully run
+DEBUG - 2014-11-22 18:37:45 --> Helper loaded: form_helper
+DEBUG - 2014-11-22 18:37:45 --> Form Validation Class Initialized
+DEBUG - 2014-11-22 18:37:45 --> Model Class Initialized
+DEBUG - 2014-11-22 18:37:45 --> Model Class Initialized
+DEBUG - 2014-11-22 18:37:45 --> Model Class Initialized
+DEBUG - 2014-11-22 18:37:45 --> Model Class Initialized
+DEBUG - 2014-11-22 18:37:45 --> Controller Class Initialized
+DEBUG - 2014-11-22 18:37:45 --> Pagination Class Initialized
+DEBUG - 2014-11-22 18:37:45 --> Pagination class already loaded. Second attempt ignored.
+DEBUG - 2014-11-22 18:37:45 --> Google Maps Class Initialized
+DEBUG - 2014-11-22 18:37:45 --> File loaded: application/views/includes/head.php
+DEBUG - 2014-11-22 18:37:45 --> File loaded: application/views/includes/user_no_log.php
+DEBUG - 2014-11-22 18:37:45 --> File loaded: application/views/includes/header.php
+DEBUG - 2014-11-22 18:37:45 --> File loaded: application/views/buscador_view.php
+DEBUG - 2014-11-22 18:37:45 --> File loaded: application/views/listar_opiniones.php
+DEBUG - 2014-11-22 18:37:45 --> File loaded: application/views/ficha_servicio_view.php
+DEBUG - 2014-11-22 18:37:45 --> File loaded: application/views/includes/footer.php
+DEBUG - 2014-11-22 18:37:45 --> File loaded: application/views/home_view.php
+DEBUG - 2014-11-22 18:37:45 --> Final output sent to browser
+DEBUG - 2014-11-22 18:37:45 --> Total execution time: 0.4430
+DEBUG - 2014-11-22 22:37:45 --> Config Class Initialized
+DEBUG - 2014-11-22 22:37:45 --> Hooks Class Initialized
+DEBUG - 2014-11-22 22:37:45 --> Utf8 Class Initialized
+DEBUG - 2014-11-22 22:37:45 --> UTF-8 Support Enabled
+DEBUG - 2014-11-22 22:37:45 --> URI Class Initialized
+DEBUG - 2014-11-22 22:37:45 --> Router Class Initialized
+DEBUG - 2014-11-22 22:37:45 --> Output Class Initialized
+DEBUG - 2014-11-22 22:37:45 --> Security Class Initialized
+DEBUG - 2014-11-22 22:37:45 --> Input Class Initialized
+DEBUG - 2014-11-22 22:37:45 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-22 22:37:45 --> Language Class Initialized
+DEBUG - 2014-11-22 22:37:45 --> Loader Class Initialized
+DEBUG - 2014-11-22 22:37:45 --> Helper loaded: url_helper
+DEBUG - 2014-11-22 22:37:45 --> Helper loaded: file_helper
+DEBUG - 2014-11-22 18:37:45 --> Helper loaded: mis_funciones_helper
+DEBUG - 2014-11-22 18:37:45 --> Database Driver Class Initialized
+ERROR - 2014-11-22 18:37:45 --> Severity: 8192  --> mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\xampp\htdocs\servix2014\web\system\database\drivers\mysql\mysql_driver.php 91
+DEBUG - 2014-11-22 18:37:45 --> Session Class Initialized
+DEBUG - 2014-11-22 18:37:45 --> Helper loaded: string_helper
+DEBUG - 2014-11-22 18:37:45 --> Session routines successfully run
+DEBUG - 2014-11-22 18:37:45 --> Helper loaded: form_helper
+DEBUG - 2014-11-22 18:37:45 --> Form Validation Class Initialized
+DEBUG - 2014-11-22 18:37:45 --> Model Class Initialized
+DEBUG - 2014-11-22 22:37:45 --> Config Class Initialized
+DEBUG - 2014-11-22 18:37:45 --> Model Class Initialized
+DEBUG - 2014-11-22 22:37:45 --> Hooks Class Initialized
+DEBUG - 2014-11-22 18:37:45 --> Model Class Initialized
+DEBUG - 2014-11-22 22:37:45 --> Utf8 Class Initialized
+DEBUG - 2014-11-22 22:37:45 --> UTF-8 Support Enabled
+DEBUG - 2014-11-22 18:37:45 --> Model Class Initialized
+DEBUG - 2014-11-22 18:37:45 --> Controller Class Initialized
+DEBUG - 2014-11-22 22:37:45 --> URI Class Initialized
+DEBUG - 2014-11-22 22:37:45 --> Router Class Initialized
+DEBUG - 2014-11-22 22:37:45 --> Output Class Initialized
+DEBUG - 2014-11-22 22:37:45 --> Security Class Initialized
+DEBUG - 2014-11-22 22:37:45 --> Input Class Initialized
+DEBUG - 2014-11-22 22:37:45 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-22 22:37:45 --> Language Class Initialized
+DEBUG - 2014-11-22 22:37:45 --> Loader Class Initialized
+DEBUG - 2014-11-22 22:37:45 --> Helper loaded: url_helper
+DEBUG - 2014-11-22 22:37:45 --> Helper loaded: file_helper
+DEBUG - 2014-11-22 18:37:45 --> Helper loaded: mis_funciones_helper
+DEBUG - 2014-11-22 18:37:45 --> Database Driver Class Initialized
+ERROR - 2014-11-22 18:37:45 --> Severity: 8192  --> mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\xampp\htdocs\servix2014\web\system\database\drivers\mysql\mysql_driver.php 91
+DEBUG - 2014-11-22 18:37:46 --> Final output sent to browser
+DEBUG - 2014-11-22 18:37:46 --> Total execution time: 0.0610
+DEBUG - 2014-11-22 18:37:46 --> Session Class Initialized
+DEBUG - 2014-11-22 18:37:46 --> Helper loaded: string_helper
+DEBUG - 2014-11-22 18:37:46 --> Session routines successfully run
+DEBUG - 2014-11-22 18:37:46 --> Helper loaded: form_helper
+DEBUG - 2014-11-22 18:37:46 --> Form Validation Class Initialized
+DEBUG - 2014-11-22 18:37:46 --> Model Class Initialized
+DEBUG - 2014-11-22 18:37:46 --> Model Class Initialized
+DEBUG - 2014-11-22 18:37:46 --> Model Class Initialized
+DEBUG - 2014-11-22 18:37:46 --> Model Class Initialized
+DEBUG - 2014-11-22 18:37:46 --> Controller Class Initialized
+DEBUG - 2014-11-22 18:37:46 --> Final output sent to browser
+DEBUG - 2014-11-22 18:37:46 --> Total execution time: 0.0470
+DEBUG - 2014-11-22 22:37:52 --> Config Class Initialized
+DEBUG - 2014-11-22 22:37:52 --> Hooks Class Initialized
+DEBUG - 2014-11-22 22:37:52 --> Utf8 Class Initialized
+DEBUG - 2014-11-22 22:37:52 --> UTF-8 Support Enabled
+DEBUG - 2014-11-22 22:37:52 --> URI Class Initialized
+DEBUG - 2014-11-22 22:37:52 --> Router Class Initialized
+DEBUG - 2014-11-22 22:37:52 --> Output Class Initialized
+DEBUG - 2014-11-22 22:37:52 --> Security Class Initialized
+DEBUG - 2014-11-22 22:37:52 --> Input Class Initialized
+DEBUG - 2014-11-22 22:37:52 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-22 22:37:52 --> Language Class Initialized
+DEBUG - 2014-11-22 22:37:52 --> Loader Class Initialized
+DEBUG - 2014-11-22 22:37:52 --> Helper loaded: url_helper
+DEBUG - 2014-11-22 22:37:52 --> Helper loaded: file_helper
+DEBUG - 2014-11-22 18:37:52 --> Helper loaded: mis_funciones_helper
+DEBUG - 2014-11-22 18:37:52 --> Database Driver Class Initialized
+ERROR - 2014-11-22 18:37:52 --> Severity: 8192  --> mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\xampp\htdocs\servix2014\web\system\database\drivers\mysql\mysql_driver.php 91
+DEBUG - 2014-11-22 18:37:52 --> Session Class Initialized
+DEBUG - 2014-11-22 18:37:52 --> Helper loaded: string_helper
+DEBUG - 2014-11-22 18:37:52 --> Session routines successfully run
+DEBUG - 2014-11-22 18:37:52 --> Helper loaded: form_helper
+DEBUG - 2014-11-22 18:37:52 --> Form Validation Class Initialized
+DEBUG - 2014-11-22 18:37:52 --> Model Class Initialized
+DEBUG - 2014-11-22 18:37:52 --> Model Class Initialized
+DEBUG - 2014-11-22 18:37:52 --> Model Class Initialized
+DEBUG - 2014-11-22 18:37:52 --> Model Class Initialized
+DEBUG - 2014-11-22 18:37:52 --> Controller Class Initialized
+DEBUG - 2014-11-22 18:37:52 --> Pagination Class Initialized
+DEBUG - 2014-11-22 18:37:52 --> Pagination class already loaded. Second attempt ignored.
+DEBUG - 2014-11-22 18:37:52 --> Google Maps Class Initialized
+DEBUG - 2014-11-22 18:37:52 --> File loaded: application/views/includes/head.php
+DEBUG - 2014-11-22 18:37:52 --> File loaded: application/views/includes/user_no_log.php
+DEBUG - 2014-11-22 18:37:52 --> File loaded: application/views/includes/header.php
+DEBUG - 2014-11-22 18:37:52 --> File loaded: application/views/buscador_view.php
+DEBUG - 2014-11-22 18:37:52 --> File loaded: application/views/listar_opiniones.php
+DEBUG - 2014-11-22 18:37:52 --> File loaded: application/views/ficha_servicio_view.php
+DEBUG - 2014-11-22 18:37:52 --> File loaded: application/views/includes/footer.php
+DEBUG - 2014-11-22 18:37:52 --> File loaded: application/views/home_view.php
+DEBUG - 2014-11-22 18:37:52 --> Final output sent to browser
+DEBUG - 2014-11-22 18:37:52 --> Total execution time: 0.3820
+DEBUG - 2014-11-22 22:37:53 --> Config Class Initialized
+DEBUG - 2014-11-22 22:37:53 --> Config Class Initialized
+DEBUG - 2014-11-22 22:37:53 --> Hooks Class Initialized
+DEBUG - 2014-11-22 22:37:53 --> Hooks Class Initialized
+DEBUG - 2014-11-22 22:37:53 --> Utf8 Class Initialized
+DEBUG - 2014-11-22 22:37:53 --> UTF-8 Support Enabled
+DEBUG - 2014-11-22 22:37:53 --> Utf8 Class Initialized
+DEBUG - 2014-11-22 22:37:53 --> UTF-8 Support Enabled
+DEBUG - 2014-11-22 22:37:53 --> URI Class Initialized
+DEBUG - 2014-11-22 22:37:53 --> URI Class Initialized
+DEBUG - 2014-11-22 22:37:53 --> Router Class Initialized
+DEBUG - 2014-11-22 22:37:53 --> Router Class Initialized
+DEBUG - 2014-11-22 22:37:53 --> Output Class Initialized
+DEBUG - 2014-11-22 22:37:53 --> Output Class Initialized
+DEBUG - 2014-11-22 22:37:53 --> Security Class Initialized
+DEBUG - 2014-11-22 22:37:53 --> Security Class Initialized
+DEBUG - 2014-11-22 22:37:53 --> Input Class Initialized
+DEBUG - 2014-11-22 22:37:53 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-22 22:37:53 --> Language Class Initialized
+DEBUG - 2014-11-22 22:37:53 --> Input Class Initialized
+DEBUG - 2014-11-22 22:37:53 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-22 22:37:53 --> Language Class Initialized
+DEBUG - 2014-11-22 22:37:53 --> Loader Class Initialized
+DEBUG - 2014-11-22 22:37:53 --> Helper loaded: url_helper
+DEBUG - 2014-11-22 22:37:53 --> Helper loaded: file_helper
+DEBUG - 2014-11-22 22:37:53 --> Loader Class Initialized
+DEBUG - 2014-11-22 18:37:53 --> Helper loaded: mis_funciones_helper
+DEBUG - 2014-11-22 22:37:53 --> Helper loaded: url_helper
+DEBUG - 2014-11-22 22:37:53 --> Helper loaded: file_helper
+DEBUG - 2014-11-22 18:37:53 --> Helper loaded: mis_funciones_helper
+DEBUG - 2014-11-22 18:37:53 --> Database Driver Class Initialized
+ERROR - 2014-11-22 18:37:53 --> Severity: 8192  --> mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\xampp\htdocs\servix2014\web\system\database\drivers\mysql\mysql_driver.php 91
+DEBUG - 2014-11-22 18:37:53 --> Database Driver Class Initialized
+ERROR - 2014-11-22 18:37:53 --> Severity: 8192  --> mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\xampp\htdocs\servix2014\web\system\database\drivers\mysql\mysql_driver.php 91
+DEBUG - 2014-11-22 18:37:53 --> Session Class Initialized
+DEBUG - 2014-11-22 18:37:53 --> Session Class Initialized
+DEBUG - 2014-11-22 18:37:53 --> Helper loaded: string_helper
+DEBUG - 2014-11-22 18:37:53 --> Helper loaded: string_helper
+DEBUG - 2014-11-22 18:37:53 --> Session routines successfully run
+DEBUG - 2014-11-22 18:37:53 --> Session routines successfully run
+DEBUG - 2014-11-22 18:37:53 --> Helper loaded: form_helper
+DEBUG - 2014-11-22 18:37:53 --> Form Validation Class Initialized
+DEBUG - 2014-11-22 18:37:53 --> Model Class Initialized
+DEBUG - 2014-11-22 18:37:53 --> Helper loaded: form_helper
+DEBUG - 2014-11-22 18:37:53 --> Model Class Initialized
+DEBUG - 2014-11-22 18:37:53 --> Form Validation Class Initialized
+DEBUG - 2014-11-22 18:37:53 --> Model Class Initialized
+DEBUG - 2014-11-22 18:37:53 --> Model Class Initialized
+DEBUG - 2014-11-22 18:37:53 --> Model Class Initialized
+DEBUG - 2014-11-22 18:37:53 --> Model Class Initialized
+DEBUG - 2014-11-22 18:37:53 --> Controller Class Initialized
+DEBUG - 2014-11-22 18:37:53 --> Model Class Initialized
+DEBUG - 2014-11-22 18:37:53 --> Model Class Initialized
+DEBUG - 2014-11-22 18:37:53 --> Final output sent to browser
+DEBUG - 2014-11-22 18:37:53 --> Controller Class Initialized
+DEBUG - 2014-11-22 18:37:53 --> Total execution time: 0.0490
+DEBUG - 2014-11-22 18:37:53 --> Final output sent to browser
+DEBUG - 2014-11-22 18:37:53 --> Total execution time: 0.0650
+DEBUG - 2014-11-22 22:38:03 --> Config Class Initialized
+DEBUG - 2014-11-22 22:38:03 --> Hooks Class Initialized
+DEBUG - 2014-11-22 22:38:03 --> Utf8 Class Initialized
+DEBUG - 2014-11-22 22:38:03 --> UTF-8 Support Enabled
+DEBUG - 2014-11-22 22:38:03 --> URI Class Initialized
+DEBUG - 2014-11-22 22:38:03 --> Router Class Initialized
+DEBUG - 2014-11-22 22:38:03 --> Output Class Initialized
+DEBUG - 2014-11-22 22:38:03 --> Security Class Initialized
+DEBUG - 2014-11-22 22:38:03 --> Input Class Initialized
+DEBUG - 2014-11-22 22:38:03 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-22 22:38:03 --> Language Class Initialized
+DEBUG - 2014-11-22 22:38:03 --> Loader Class Initialized
+DEBUG - 2014-11-22 22:38:03 --> Helper loaded: url_helper
+DEBUG - 2014-11-22 22:38:03 --> Helper loaded: file_helper
+DEBUG - 2014-11-22 18:38:03 --> Helper loaded: mis_funciones_helper
+DEBUG - 2014-11-22 18:38:03 --> Database Driver Class Initialized
+ERROR - 2014-11-22 18:38:03 --> Severity: 8192  --> mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\xampp\htdocs\servix2014\web\system\database\drivers\mysql\mysql_driver.php 91
+DEBUG - 2014-11-22 18:38:03 --> Session Class Initialized
+DEBUG - 2014-11-22 18:38:03 --> Helper loaded: string_helper
+DEBUG - 2014-11-22 18:38:03 --> Session routines successfully run
+DEBUG - 2014-11-22 18:38:03 --> Helper loaded: form_helper
+DEBUG - 2014-11-22 18:38:03 --> Form Validation Class Initialized
+DEBUG - 2014-11-22 18:38:03 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:03 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:03 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:03 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:03 --> Controller Class Initialized
+DEBUG - 2014-11-22 18:38:03 --> Pagination Class Initialized
+DEBUG - 2014-11-22 18:38:03 --> Pagination class already loaded. Second attempt ignored.
+DEBUG - 2014-11-22 18:38:03 --> Google Maps Class Initialized
+DEBUG - 2014-11-22 18:38:03 --> File loaded: application/views/includes/head.php
+DEBUG - 2014-11-22 18:38:03 --> File loaded: application/views/includes/user_no_log.php
+DEBUG - 2014-11-22 18:38:03 --> File loaded: application/views/includes/header.php
+DEBUG - 2014-11-22 18:38:03 --> File loaded: application/views/buscador_view.php
+DEBUG - 2014-11-22 18:38:03 --> File loaded: application/views/listar_opiniones.php
+DEBUG - 2014-11-22 18:38:03 --> File loaded: application/views/ficha_servicio_view.php
+DEBUG - 2014-11-22 18:38:03 --> File loaded: application/views/includes/footer.php
+DEBUG - 2014-11-22 18:38:03 --> File loaded: application/views/home_view.php
+DEBUG - 2014-11-22 18:38:03 --> Final output sent to browser
+DEBUG - 2014-11-22 18:38:03 --> Total execution time: 0.4030
+DEBUG - 2014-11-22 22:38:03 --> Config Class Initialized
+DEBUG - 2014-11-22 22:38:03 --> Hooks Class Initialized
+DEBUG - 2014-11-22 22:38:03 --> Utf8 Class Initialized
+DEBUG - 2014-11-22 22:38:03 --> UTF-8 Support Enabled
+DEBUG - 2014-11-22 22:38:03 --> URI Class Initialized
+DEBUG - 2014-11-22 22:38:03 --> Router Class Initialized
+DEBUG - 2014-11-22 22:38:03 --> Output Class Initialized
+DEBUG - 2014-11-22 22:38:03 --> Config Class Initialized
+DEBUG - 2014-11-22 22:38:03 --> Hooks Class Initialized
+DEBUG - 2014-11-22 22:38:03 --> Utf8 Class Initialized
+DEBUG - 2014-11-22 22:38:03 --> UTF-8 Support Enabled
+DEBUG - 2014-11-22 22:38:03 --> URI Class Initialized
+DEBUG - 2014-11-22 22:38:03 --> Router Class Initialized
+DEBUG - 2014-11-22 22:38:03 --> Security Class Initialized
+DEBUG - 2014-11-22 22:38:03 --> Output Class Initialized
+DEBUG - 2014-11-22 22:38:03 --> Security Class Initialized
+DEBUG - 2014-11-22 22:38:03 --> Input Class Initialized
+DEBUG - 2014-11-22 22:38:03 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-22 22:38:03 --> Language Class Initialized
+DEBUG - 2014-11-22 22:38:03 --> Input Class Initialized
+DEBUG - 2014-11-22 22:38:03 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-22 22:38:03 --> Language Class Initialized
+DEBUG - 2014-11-22 22:38:03 --> Loader Class Initialized
+DEBUG - 2014-11-22 22:38:03 --> Loader Class Initialized
+DEBUG - 2014-11-22 22:38:03 --> Helper loaded: url_helper
+DEBUG - 2014-11-22 22:38:03 --> Helper loaded: url_helper
+DEBUG - 2014-11-22 22:38:03 --> Helper loaded: file_helper
+DEBUG - 2014-11-22 22:38:03 --> Helper loaded: file_helper
+DEBUG - 2014-11-22 18:38:03 --> Helper loaded: mis_funciones_helper
+DEBUG - 2014-11-22 18:38:03 --> Helper loaded: mis_funciones_helper
+DEBUG - 2014-11-22 18:38:03 --> Database Driver Class Initialized
+ERROR - 2014-11-22 18:38:03 --> Severity: 8192  --> mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\xampp\htdocs\servix2014\web\system\database\drivers\mysql\mysql_driver.php 91
+DEBUG - 2014-11-22 18:38:03 --> Database Driver Class Initialized
+ERROR - 2014-11-22 18:38:03 --> Severity: 8192  --> mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\xampp\htdocs\servix2014\web\system\database\drivers\mysql\mysql_driver.php 91
+DEBUG - 2014-11-22 18:38:03 --> Session Class Initialized
+DEBUG - 2014-11-22 18:38:03 --> Helper loaded: string_helper
+DEBUG - 2014-11-22 18:38:03 --> Session Class Initialized
+DEBUG - 2014-11-22 18:38:03 --> Helper loaded: string_helper
+DEBUG - 2014-11-22 18:38:03 --> Session routines successfully run
+DEBUG - 2014-11-22 18:38:03 --> Session routines successfully run
+DEBUG - 2014-11-22 18:38:03 --> Helper loaded: form_helper
+DEBUG - 2014-11-22 18:38:03 --> Helper loaded: form_helper
+DEBUG - 2014-11-22 18:38:03 --> Form Validation Class Initialized
+DEBUG - 2014-11-22 18:38:03 --> Form Validation Class Initialized
+DEBUG - 2014-11-22 18:38:03 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:03 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:03 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:03 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:03 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:03 --> Controller Class Initialized
+DEBUG - 2014-11-22 18:38:03 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:03 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:03 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:03 --> Controller Class Initialized
+DEBUG - 2014-11-22 18:38:03 --> Final output sent to browser
+DEBUG - 2014-11-22 18:38:03 --> Total execution time: 0.0560
+DEBUG - 2014-11-22 18:38:03 --> Final output sent to browser
+DEBUG - 2014-11-22 18:38:03 --> Total execution time: 0.0580
+DEBUG - 2014-11-22 22:38:17 --> Config Class Initialized
+DEBUG - 2014-11-22 22:38:17 --> Hooks Class Initialized
+DEBUG - 2014-11-22 22:38:17 --> Utf8 Class Initialized
+DEBUG - 2014-11-22 22:38:17 --> UTF-8 Support Enabled
+DEBUG - 2014-11-22 22:38:17 --> URI Class Initialized
+DEBUG - 2014-11-22 22:38:17 --> Router Class Initialized
+DEBUG - 2014-11-22 22:38:17 --> Output Class Initialized
+DEBUG - 2014-11-22 22:38:17 --> Security Class Initialized
+DEBUG - 2014-11-22 22:38:17 --> Input Class Initialized
+DEBUG - 2014-11-22 22:38:17 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-22 22:38:17 --> Language Class Initialized
+DEBUG - 2014-11-22 22:38:17 --> Loader Class Initialized
+DEBUG - 2014-11-22 22:38:17 --> Helper loaded: url_helper
+DEBUG - 2014-11-22 22:38:17 --> Helper loaded: file_helper
+DEBUG - 2014-11-22 18:38:17 --> Helper loaded: mis_funciones_helper
+DEBUG - 2014-11-22 18:38:17 --> Database Driver Class Initialized
+ERROR - 2014-11-22 18:38:17 --> Severity: 8192  --> mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\xampp\htdocs\servix2014\web\system\database\drivers\mysql\mysql_driver.php 91
+DEBUG - 2014-11-22 18:38:17 --> Session Class Initialized
+DEBUG - 2014-11-22 18:38:17 --> Helper loaded: string_helper
+DEBUG - 2014-11-22 18:38:17 --> Session routines successfully run
+DEBUG - 2014-11-22 18:38:17 --> Helper loaded: form_helper
+DEBUG - 2014-11-22 18:38:17 --> Form Validation Class Initialized
+DEBUG - 2014-11-22 18:38:17 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:17 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:17 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:17 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:17 --> Controller Class Initialized
+DEBUG - 2014-11-22 18:38:17 --> Pagination Class Initialized
+DEBUG - 2014-11-22 18:38:17 --> Pagination class already loaded. Second attempt ignored.
+DEBUG - 2014-11-22 18:38:17 --> Google Maps Class Initialized
+DEBUG - 2014-11-22 18:38:18 --> File loaded: application/views/includes/head.php
+DEBUG - 2014-11-22 18:38:18 --> File loaded: application/views/includes/user_no_log.php
+DEBUG - 2014-11-22 18:38:18 --> File loaded: application/views/includes/header.php
+DEBUG - 2014-11-22 18:38:18 --> File loaded: application/views/buscador_view.php
+DEBUG - 2014-11-22 18:38:18 --> File loaded: application/views/listar_opiniones.php
+DEBUG - 2014-11-22 18:38:18 --> File loaded: application/views/ficha_servicio_view.php
+DEBUG - 2014-11-22 18:38:18 --> File loaded: application/views/includes/footer.php
+DEBUG - 2014-11-22 18:38:18 --> File loaded: application/views/home_view.php
+DEBUG - 2014-11-22 18:38:18 --> Final output sent to browser
+DEBUG - 2014-11-22 18:38:18 --> Total execution time: 0.3790
+DEBUG - 2014-11-22 22:38:18 --> Config Class Initialized
+DEBUG - 2014-11-22 22:38:18 --> Hooks Class Initialized
+DEBUG - 2014-11-22 22:38:18 --> Utf8 Class Initialized
+DEBUG - 2014-11-22 22:38:18 --> UTF-8 Support Enabled
+DEBUG - 2014-11-22 22:38:18 --> Config Class Initialized
+DEBUG - 2014-11-22 22:38:18 --> Hooks Class Initialized
+DEBUG - 2014-11-22 22:38:18 --> URI Class Initialized
+DEBUG - 2014-11-22 22:38:18 --> Utf8 Class Initialized
+DEBUG - 2014-11-22 22:38:18 --> UTF-8 Support Enabled
+DEBUG - 2014-11-22 22:38:18 --> Router Class Initialized
+DEBUG - 2014-11-22 22:38:18 --> URI Class Initialized
+DEBUG - 2014-11-22 22:38:18 --> Router Class Initialized
+DEBUG - 2014-11-22 22:38:18 --> Output Class Initialized
+DEBUG - 2014-11-22 22:38:18 --> Security Class Initialized
+DEBUG - 2014-11-22 22:38:18 --> Output Class Initialized
+DEBUG - 2014-11-22 22:38:18 --> Input Class Initialized
+DEBUG - 2014-11-22 22:38:18 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-22 22:38:18 --> Security Class Initialized
+DEBUG - 2014-11-22 22:38:18 --> Language Class Initialized
+DEBUG - 2014-11-22 22:38:18 --> Input Class Initialized
+DEBUG - 2014-11-22 22:38:18 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-22 22:38:18 --> Language Class Initialized
+DEBUG - 2014-11-22 22:38:18 --> Loader Class Initialized
+DEBUG - 2014-11-22 22:38:18 --> Loader Class Initialized
+DEBUG - 2014-11-22 22:38:18 --> Helper loaded: url_helper
+DEBUG - 2014-11-22 22:38:18 --> Helper loaded: file_helper
+DEBUG - 2014-11-22 22:38:18 --> Helper loaded: url_helper
+DEBUG - 2014-11-22 18:38:18 --> Helper loaded: mis_funciones_helper
+DEBUG - 2014-11-22 22:38:18 --> Helper loaded: file_helper
+DEBUG - 2014-11-22 18:38:18 --> Helper loaded: mis_funciones_helper
+DEBUG - 2014-11-22 18:38:18 --> Database Driver Class Initialized
+ERROR - 2014-11-22 18:38:18 --> Severity: 8192  --> mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\xampp\htdocs\servix2014\web\system\database\drivers\mysql\mysql_driver.php 91
+DEBUG - 2014-11-22 18:38:18 --> Database Driver Class Initialized
+ERROR - 2014-11-22 18:38:18 --> Severity: 8192  --> mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\xampp\htdocs\servix2014\web\system\database\drivers\mysql\mysql_driver.php 91
+DEBUG - 2014-11-22 18:38:18 --> Session Class Initialized
+DEBUG - 2014-11-22 18:38:18 --> Helper loaded: string_helper
+DEBUG - 2014-11-22 18:38:18 --> Session Class Initialized
+DEBUG - 2014-11-22 18:38:18 --> Helper loaded: string_helper
+DEBUG - 2014-11-22 18:38:18 --> Session routines successfully run
+DEBUG - 2014-11-22 18:38:18 --> Session routines successfully run
+DEBUG - 2014-11-22 18:38:18 --> Helper loaded: form_helper
+DEBUG - 2014-11-22 18:38:18 --> Form Validation Class Initialized
+DEBUG - 2014-11-22 18:38:18 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:18 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:18 --> Helper loaded: form_helper
+DEBUG - 2014-11-22 18:38:18 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:18 --> Form Validation Class Initialized
+DEBUG - 2014-11-22 18:38:18 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:18 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:18 --> Controller Class Initialized
+DEBUG - 2014-11-22 18:38:18 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:18 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:18 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:18 --> Controller Class Initialized
+DEBUG - 2014-11-22 18:38:18 --> Final output sent to browser
+DEBUG - 2014-11-22 18:38:18 --> Total execution time: 0.0510
+DEBUG - 2014-11-22 18:38:18 --> Final output sent to browser
+DEBUG - 2014-11-22 18:38:18 --> Total execution time: 0.0640
+DEBUG - 2014-11-22 22:38:33 --> Config Class Initialized
+DEBUG - 2014-11-22 22:38:33 --> Hooks Class Initialized
+DEBUG - 2014-11-22 22:38:33 --> Utf8 Class Initialized
+DEBUG - 2014-11-22 22:38:33 --> UTF-8 Support Enabled
+DEBUG - 2014-11-22 22:38:33 --> URI Class Initialized
+DEBUG - 2014-11-22 22:38:33 --> Router Class Initialized
+DEBUG - 2014-11-22 22:38:33 --> Output Class Initialized
+DEBUG - 2014-11-22 22:38:33 --> Security Class Initialized
+DEBUG - 2014-11-22 22:38:33 --> Input Class Initialized
+DEBUG - 2014-11-22 22:38:33 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-22 22:38:33 --> Language Class Initialized
+DEBUG - 2014-11-22 22:38:33 --> Loader Class Initialized
+DEBUG - 2014-11-22 22:38:33 --> Helper loaded: url_helper
+DEBUG - 2014-11-22 22:38:33 --> Helper loaded: file_helper
+DEBUG - 2014-11-22 18:38:33 --> Helper loaded: mis_funciones_helper
+DEBUG - 2014-11-22 18:38:33 --> Database Driver Class Initialized
+ERROR - 2014-11-22 18:38:33 --> Severity: 8192  --> mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\xampp\htdocs\servix2014\web\system\database\drivers\mysql\mysql_driver.php 91
+DEBUG - 2014-11-22 18:38:33 --> Session Class Initialized
+DEBUG - 2014-11-22 18:38:33 --> Helper loaded: string_helper
+DEBUG - 2014-11-22 18:38:33 --> Session routines successfully run
+DEBUG - 2014-11-22 18:38:33 --> Helper loaded: form_helper
+DEBUG - 2014-11-22 18:38:33 --> Form Validation Class Initialized
+DEBUG - 2014-11-22 18:38:33 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:33 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:33 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:33 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:33 --> Controller Class Initialized
+DEBUG - 2014-11-22 18:38:33 --> Pagination Class Initialized
+DEBUG - 2014-11-22 18:38:33 --> Pagination class already loaded. Second attempt ignored.
+DEBUG - 2014-11-22 18:38:33 --> Google Maps Class Initialized
+DEBUG - 2014-11-22 18:38:34 --> File loaded: application/views/includes/head.php
+DEBUG - 2014-11-22 18:38:34 --> File loaded: application/views/includes/user_no_log.php
+DEBUG - 2014-11-22 18:38:34 --> File loaded: application/views/includes/header.php
+DEBUG - 2014-11-22 18:38:34 --> File loaded: application/views/buscador_view.php
+DEBUG - 2014-11-22 18:38:34 --> File loaded: application/views/listar_opiniones.php
+DEBUG - 2014-11-22 18:38:34 --> File loaded: application/views/ficha_servicio_view.php
+DEBUG - 2014-11-22 18:38:34 --> File loaded: application/views/includes/footer.php
+DEBUG - 2014-11-22 18:38:34 --> File loaded: application/views/home_view.php
+DEBUG - 2014-11-22 18:38:34 --> Final output sent to browser
+DEBUG - 2014-11-22 18:38:34 --> Total execution time: 0.3700
+DEBUG - 2014-11-22 22:38:34 --> Config Class Initialized
+DEBUG - 2014-11-22 22:38:34 --> Hooks Class Initialized
+DEBUG - 2014-11-22 22:38:34 --> Utf8 Class Initialized
+DEBUG - 2014-11-22 22:38:34 --> UTF-8 Support Enabled
+DEBUG - 2014-11-22 22:38:34 --> URI Class Initialized
+DEBUG - 2014-11-22 22:38:34 --> Router Class Initialized
+DEBUG - 2014-11-22 22:38:34 --> Output Class Initialized
+DEBUG - 2014-11-22 22:38:34 --> Security Class Initialized
+DEBUG - 2014-11-22 22:38:34 --> Input Class Initialized
+DEBUG - 2014-11-22 22:38:34 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-22 22:38:34 --> Language Class Initialized
+DEBUG - 2014-11-22 22:38:34 --> Config Class Initialized
+DEBUG - 2014-11-22 22:38:34 --> Hooks Class Initialized
+DEBUG - 2014-11-22 22:38:34 --> Utf8 Class Initialized
+DEBUG - 2014-11-22 22:38:34 --> UTF-8 Support Enabled
+DEBUG - 2014-11-22 22:38:34 --> Loader Class Initialized
+DEBUG - 2014-11-22 22:38:34 --> URI Class Initialized
+DEBUG - 2014-11-22 22:38:34 --> Router Class Initialized
+DEBUG - 2014-11-22 22:38:34 --> Helper loaded: url_helper
+DEBUG - 2014-11-22 22:38:34 --> Output Class Initialized
+DEBUG - 2014-11-22 22:38:34 --> Helper loaded: file_helper
+DEBUG - 2014-11-22 18:38:34 --> Helper loaded: mis_funciones_helper
+DEBUG - 2014-11-22 22:38:34 --> Security Class Initialized
+DEBUG - 2014-11-22 22:38:34 --> Input Class Initialized
+DEBUG - 2014-11-22 22:38:34 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-22 18:38:34 --> Database Driver Class Initialized
+DEBUG - 2014-11-22 22:38:34 --> Language Class Initialized
+ERROR - 2014-11-22 18:38:34 --> Severity: 8192  --> mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\xampp\htdocs\servix2014\web\system\database\drivers\mysql\mysql_driver.php 91
+DEBUG - 2014-11-22 22:38:34 --> Loader Class Initialized
+DEBUG - 2014-11-22 18:38:34 --> Session Class Initialized
+DEBUG - 2014-11-22 22:38:34 --> Helper loaded: url_helper
+DEBUG - 2014-11-22 18:38:34 --> Helper loaded: string_helper
+DEBUG - 2014-11-22 22:38:34 --> Helper loaded: file_helper
+DEBUG - 2014-11-22 18:38:34 --> Helper loaded: mis_funciones_helper
+DEBUG - 2014-11-22 18:38:34 --> Session routines successfully run
+DEBUG - 2014-11-22 18:38:34 --> Helper loaded: form_helper
+DEBUG - 2014-11-22 18:38:34 --> Form Validation Class Initialized
+DEBUG - 2014-11-22 18:38:34 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:34 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:34 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:34 --> Database Driver Class Initialized
+DEBUG - 2014-11-22 18:38:34 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:34 --> Controller Class Initialized
+ERROR - 2014-11-22 18:38:34 --> Severity: 8192  --> mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\xampp\htdocs\servix2014\web\system\database\drivers\mysql\mysql_driver.php 91
+DEBUG - 2014-11-22 18:38:34 --> Session Class Initialized
+DEBUG - 2014-11-22 18:38:34 --> Helper loaded: string_helper
+DEBUG - 2014-11-22 18:38:34 --> Session routines successfully run
+DEBUG - 2014-11-22 18:38:34 --> Helper loaded: form_helper
+DEBUG - 2014-11-22 18:38:34 --> Form Validation Class Initialized
+DEBUG - 2014-11-22 18:38:34 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:34 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:34 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:34 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:34 --> Controller Class Initialized
+DEBUG - 2014-11-22 18:38:34 --> Final output sent to browser
+DEBUG - 2014-11-22 18:38:34 --> Total execution time: 0.0450
+DEBUG - 2014-11-22 18:38:34 --> Final output sent to browser
+DEBUG - 2014-11-22 18:38:34 --> Total execution time: 0.0630
+DEBUG - 2014-11-22 22:38:46 --> Config Class Initialized
+DEBUG - 2014-11-22 22:38:46 --> Hooks Class Initialized
+DEBUG - 2014-11-22 22:38:46 --> Utf8 Class Initialized
+DEBUG - 2014-11-22 22:38:46 --> UTF-8 Support Enabled
+DEBUG - 2014-11-22 22:38:46 --> URI Class Initialized
+DEBUG - 2014-11-22 22:38:46 --> Router Class Initialized
+DEBUG - 2014-11-22 22:38:46 --> Output Class Initialized
+DEBUG - 2014-11-22 22:38:46 --> Security Class Initialized
+DEBUG - 2014-11-22 22:38:47 --> Input Class Initialized
+DEBUG - 2014-11-22 22:38:47 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-22 22:38:47 --> Language Class Initialized
+DEBUG - 2014-11-22 22:38:47 --> Loader Class Initialized
+DEBUG - 2014-11-22 22:38:47 --> Helper loaded: url_helper
+DEBUG - 2014-11-22 22:38:47 --> Helper loaded: file_helper
+DEBUG - 2014-11-22 18:38:47 --> Helper loaded: mis_funciones_helper
+DEBUG - 2014-11-22 18:38:47 --> Database Driver Class Initialized
+ERROR - 2014-11-22 18:38:47 --> Severity: 8192  --> mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\xampp\htdocs\servix2014\web\system\database\drivers\mysql\mysql_driver.php 91
+DEBUG - 2014-11-22 18:38:47 --> Session Class Initialized
+DEBUG - 2014-11-22 18:38:47 --> Helper loaded: string_helper
+DEBUG - 2014-11-22 18:38:47 --> Session routines successfully run
+DEBUG - 2014-11-22 18:38:47 --> Helper loaded: form_helper
+DEBUG - 2014-11-22 18:38:47 --> Form Validation Class Initialized
+DEBUG - 2014-11-22 18:38:47 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:47 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:47 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:47 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:47 --> Controller Class Initialized
+DEBUG - 2014-11-22 18:38:47 --> Form_validation class already loaded. Second attempt ignored.
+DEBUG - 2014-11-22 18:38:47 --> Language file loaded: language/spanish/form_validation_lang.php
+DEBUG - 2014-11-22 18:38:47 --> XSS Filtering completed
+DEBUG - 2014-11-22 18:38:47 --> XSS Filtering completed
+DEBUG - 2014-11-22 18:38:47 --> Final output sent to browser
+DEBUG - 2014-11-22 18:38:47 --> Total execution time: 0.0930
+DEBUG - 2014-11-22 22:38:47 --> Config Class Initialized
+DEBUG - 2014-11-22 22:38:47 --> Hooks Class Initialized
+DEBUG - 2014-11-22 22:38:47 --> Utf8 Class Initialized
+DEBUG - 2014-11-22 22:38:47 --> UTF-8 Support Enabled
+DEBUG - 2014-11-22 22:38:47 --> URI Class Initialized
+DEBUG - 2014-11-22 22:38:47 --> Router Class Initialized
+DEBUG - 2014-11-22 22:38:47 --> Output Class Initialized
+DEBUG - 2014-11-22 22:38:47 --> Security Class Initialized
+DEBUG - 2014-11-22 22:38:47 --> Input Class Initialized
+DEBUG - 2014-11-22 22:38:47 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-22 22:38:47 --> Language Class Initialized
+DEBUG - 2014-11-22 22:38:47 --> Loader Class Initialized
+DEBUG - 2014-11-22 22:38:47 --> Helper loaded: url_helper
+DEBUG - 2014-11-22 22:38:47 --> Helper loaded: file_helper
+DEBUG - 2014-11-22 18:38:47 --> Helper loaded: mis_funciones_helper
+DEBUG - 2014-11-22 18:38:47 --> Database Driver Class Initialized
+ERROR - 2014-11-22 18:38:47 --> Severity: 8192  --> mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\xampp\htdocs\servix2014\web\system\database\drivers\mysql\mysql_driver.php 91
+DEBUG - 2014-11-22 18:38:47 --> Session Class Initialized
+DEBUG - 2014-11-22 18:38:47 --> Helper loaded: string_helper
+DEBUG - 2014-11-22 18:38:47 --> Session routines successfully run
+DEBUG - 2014-11-22 18:38:47 --> Helper loaded: form_helper
+DEBUG - 2014-11-22 18:38:47 --> Form Validation Class Initialized
+DEBUG - 2014-11-22 18:38:47 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:47 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:47 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:47 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:47 --> Controller Class Initialized
+DEBUG - 2014-11-22 18:38:47 --> Pagination Class Initialized
+DEBUG - 2014-11-22 18:38:47 --> Pagination class already loaded. Second attempt ignored.
+DEBUG - 2014-11-22 18:38:47 --> Google Maps Class Initialized
+DEBUG - 2014-11-22 18:38:47 --> File loaded: application/views/includes/head.php
+DEBUG - 2014-11-22 18:38:47 --> File loaded: application/views/includes/user_log.php
+DEBUG - 2014-11-22 18:38:47 --> File loaded: application/views/includes/header.php
+DEBUG - 2014-11-22 18:38:47 --> File loaded: application/views/buscador_view.php
+DEBUG - 2014-11-22 18:38:47 --> File loaded: application/views/listar_opiniones.php
+DEBUG - 2014-11-22 18:38:47 --> File loaded: application/views/ficha_servicio_view.php
+DEBUG - 2014-11-22 18:38:47 --> File loaded: application/views/includes/footer.php
+DEBUG - 2014-11-22 18:38:47 --> File loaded: application/views/home_view.php
+DEBUG - 2014-11-22 18:38:47 --> Final output sent to browser
+DEBUG - 2014-11-22 18:38:47 --> Total execution time: 0.3720
+DEBUG - 2014-11-22 22:38:47 --> Config Class Initialized
+DEBUG - 2014-11-22 22:38:47 --> Hooks Class Initialized
+DEBUG - 2014-11-22 22:38:47 --> Utf8 Class Initialized
+DEBUG - 2014-11-22 22:38:47 --> UTF-8 Support Enabled
+DEBUG - 2014-11-22 22:38:47 --> URI Class Initialized
+DEBUG - 2014-11-22 22:38:47 --> Router Class Initialized
+DEBUG - 2014-11-22 22:38:47 --> Output Class Initialized
+DEBUG - 2014-11-22 22:38:47 --> Security Class Initialized
+DEBUG - 2014-11-22 22:38:47 --> Input Class Initialized
+DEBUG - 2014-11-22 22:38:47 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-22 22:38:47 --> Language Class Initialized
+DEBUG - 2014-11-22 22:38:47 --> Config Class Initialized
+DEBUG - 2014-11-22 22:38:47 --> Hooks Class Initialized
+DEBUG - 2014-11-22 22:38:47 --> Utf8 Class Initialized
+DEBUG - 2014-11-22 22:38:47 --> UTF-8 Support Enabled
+DEBUG - 2014-11-22 22:38:47 --> URI Class Initialized
+DEBUG - 2014-11-22 22:38:47 --> Loader Class Initialized
+DEBUG - 2014-11-22 22:38:47 --> Router Class Initialized
+DEBUG - 2014-11-22 22:38:47 --> Helper loaded: url_helper
+DEBUG - 2014-11-22 22:38:47 --> Output Class Initialized
+DEBUG - 2014-11-22 22:38:47 --> Helper loaded: file_helper
+DEBUG - 2014-11-22 22:38:47 --> Security Class Initialized
+DEBUG - 2014-11-22 18:38:47 --> Helper loaded: mis_funciones_helper
+DEBUG - 2014-11-22 22:38:47 --> Input Class Initialized
+DEBUG - 2014-11-22 22:38:47 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-22 22:38:47 --> Language Class Initialized
+DEBUG - 2014-11-22 22:38:47 --> Loader Class Initialized
+DEBUG - 2014-11-22 22:38:47 --> Helper loaded: url_helper
+DEBUG - 2014-11-22 18:38:47 --> Database Driver Class Initialized
+DEBUG - 2014-11-22 22:38:47 --> Helper loaded: file_helper
+ERROR - 2014-11-22 18:38:47 --> Severity: 8192  --> mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\xampp\htdocs\servix2014\web\system\database\drivers\mysql\mysql_driver.php 91
+DEBUG - 2014-11-22 18:38:47 --> Helper loaded: mis_funciones_helper
+DEBUG - 2014-11-22 18:38:47 --> Session Class Initialized
+DEBUG - 2014-11-22 18:38:47 --> Helper loaded: string_helper
+DEBUG - 2014-11-22 18:38:47 --> Session routines successfully run
+DEBUG - 2014-11-22 18:38:47 --> Database Driver Class Initialized
+ERROR - 2014-11-22 18:38:47 --> Severity: 8192  --> mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\xampp\htdocs\servix2014\web\system\database\drivers\mysql\mysql_driver.php 91
+DEBUG - 2014-11-22 18:38:47 --> Helper loaded: form_helper
+DEBUG - 2014-11-22 18:38:47 --> Form Validation Class Initialized
+DEBUG - 2014-11-22 18:38:47 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:47 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:47 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:47 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:47 --> Controller Class Initialized
+DEBUG - 2014-11-22 18:38:47 --> Final output sent to browser
+DEBUG - 2014-11-22 18:38:47 --> Session Class Initialized
+DEBUG - 2014-11-22 18:38:47 --> Total execution time: 0.0300
+DEBUG - 2014-11-22 18:38:47 --> Helper loaded: string_helper
+DEBUG - 2014-11-22 18:38:47 --> Session routines successfully run
+DEBUG - 2014-11-22 18:38:47 --> Helper loaded: form_helper
+DEBUG - 2014-11-22 18:38:47 --> Form Validation Class Initialized
+DEBUG - 2014-11-22 18:38:47 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:47 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:47 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:47 --> Model Class Initialized
+DEBUG - 2014-11-22 18:38:47 --> Controller Class Initialized
+DEBUG - 2014-11-22 18:38:47 --> Final output sent to browser
+DEBUG - 2014-11-22 18:38:47 --> Total execution time: 0.0450
+DEBUG - 2014-11-22 23:36:16 --> Config Class Initialized
+DEBUG - 2014-11-22 23:36:16 --> Hooks Class Initialized
+DEBUG - 2014-11-22 23:36:16 --> Utf8 Class Initialized
+DEBUG - 2014-11-22 23:36:16 --> UTF-8 Support Enabled
+DEBUG - 2014-11-22 23:36:16 --> URI Class Initialized
+DEBUG - 2014-11-22 23:36:16 --> Router Class Initialized
+DEBUG - 2014-11-22 23:36:16 --> Output Class Initialized
+DEBUG - 2014-11-22 23:36:16 --> Security Class Initialized
+DEBUG - 2014-11-22 23:36:16 --> Input Class Initialized
+DEBUG - 2014-11-22 23:36:16 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-22 23:36:16 --> Language Class Initialized
+DEBUG - 2014-11-22 23:36:16 --> Loader Class Initialized
+DEBUG - 2014-11-22 23:36:16 --> Helper loaded: url_helper
+DEBUG - 2014-11-22 23:36:16 --> Helper loaded: file_helper
+DEBUG - 2014-11-22 19:36:16 --> Helper loaded: mis_funciones_helper
+DEBUG - 2014-11-22 19:36:16 --> Database Driver Class Initialized
+ERROR - 2014-11-22 19:36:16 --> Severity: 8192  --> mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\xampp\htdocs\servix2014\web\system\database\drivers\mysql\mysql_driver.php 91
+DEBUG - 2014-11-22 19:36:16 --> Session Class Initialized
+DEBUG - 2014-11-22 19:36:16 --> Helper loaded: string_helper
+DEBUG - 2014-11-22 19:36:16 --> Session routines successfully run
+DEBUG - 2014-11-22 19:36:16 --> Helper loaded: form_helper
+DEBUG - 2014-11-22 19:36:16 --> Form Validation Class Initialized
+DEBUG - 2014-11-22 19:36:16 --> Model Class Initialized
+DEBUG - 2014-11-22 19:36:16 --> Model Class Initialized
+DEBUG - 2014-11-22 19:36:16 --> Model Class Initialized
+DEBUG - 2014-11-22 19:36:16 --> Model Class Initialized
+DEBUG - 2014-11-22 19:36:16 --> Controller Class Initialized
+DEBUG - 2014-11-22 19:36:16 --> Pagination Class Initialized
+DEBUG - 2014-11-22 19:36:16 --> Pagination class already loaded. Second attempt ignored.
+DEBUG - 2014-11-22 19:36:16 --> Google Maps Class Initialized
+DEBUG - 2014-11-22 19:36:17 --> File loaded: application/views/includes/head.php
+DEBUG - 2014-11-22 19:36:17 --> File loaded: application/views/includes/user_log.php
+DEBUG - 2014-11-22 19:36:17 --> File loaded: application/views/includes/header.php
+DEBUG - 2014-11-22 19:36:17 --> File loaded: application/views/buscador_view.php
+DEBUG - 2014-11-22 19:36:17 --> File loaded: application/views/listar_opiniones.php
+DEBUG - 2014-11-22 19:36:17 --> File loaded: application/views/ficha_servicio_view.php
+DEBUG - 2014-11-22 19:36:17 --> File loaded: application/views/includes/footer.php
+DEBUG - 2014-11-22 19:36:17 --> File loaded: application/views/home_view.php
+DEBUG - 2014-11-22 19:36:17 --> Final output sent to browser
+DEBUG - 2014-11-22 19:36:17 --> Total execution time: 0.6460
+DEBUG - 2014-11-22 23:36:17 --> Config Class Initialized
+DEBUG - 2014-11-22 23:36:17 --> Hooks Class Initialized
+DEBUG - 2014-11-22 23:36:17 --> Utf8 Class Initialized
+DEBUG - 2014-11-22 23:36:17 --> UTF-8 Support Enabled
+DEBUG - 2014-11-22 23:36:17 --> URI Class Initialized
+DEBUG - 2014-11-22 23:36:17 --> Router Class Initialized
+DEBUG - 2014-11-22 23:36:17 --> Output Class Initialized
+DEBUG - 2014-11-22 23:36:17 --> Security Class Initialized
+DEBUG - 2014-11-22 23:36:17 --> Input Class Initialized
+DEBUG - 2014-11-22 23:36:17 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-22 23:36:17 --> Language Class Initialized
+DEBUG - 2014-11-22 23:36:17 --> Loader Class Initialized
+DEBUG - 2014-11-22 23:36:17 --> Helper loaded: url_helper
+DEBUG - 2014-11-22 23:36:17 --> Helper loaded: file_helper
+DEBUG - 2014-11-22 19:36:17 --> Helper loaded: mis_funciones_helper
+DEBUG - 2014-11-22 19:36:17 --> Database Driver Class Initialized
+ERROR - 2014-11-22 19:36:17 --> Severity: 8192  --> mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\xampp\htdocs\servix2014\web\system\database\drivers\mysql\mysql_driver.php 91
+DEBUG - 2014-11-22 19:36:17 --> Session Class Initialized
+DEBUG - 2014-11-22 19:36:17 --> Helper loaded: string_helper
+DEBUG - 2014-11-22 19:36:17 --> Session routines successfully run
+DEBUG - 2014-11-22 23:36:17 --> Config Class Initialized
+DEBUG - 2014-11-22 23:36:17 --> Hooks Class Initialized
+DEBUG - 2014-11-22 23:36:17 --> Utf8 Class Initialized
+DEBUG - 2014-11-22 23:36:17 --> UTF-8 Support Enabled
+DEBUG - 2014-11-22 23:36:17 --> URI Class Initialized
+DEBUG - 2014-11-22 23:36:17 --> Router Class Initialized
+DEBUG - 2014-11-22 23:36:17 --> Output Class Initialized
+DEBUG - 2014-11-22 19:36:17 --> Helper loaded: form_helper
+DEBUG - 2014-11-22 19:36:17 --> Form Validation Class Initialized
+DEBUG - 2014-11-22 19:36:17 --> Model Class Initialized
+DEBUG - 2014-11-22 19:36:17 --> Model Class Initialized
+DEBUG - 2014-11-22 23:36:17 --> Security Class Initialized
+DEBUG - 2014-11-22 23:36:17 --> Input Class Initialized
+DEBUG - 2014-11-22 23:36:17 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-22 23:36:17 --> Language Class Initialized
+DEBUG - 2014-11-22 23:36:17 --> Loader Class Initialized
+DEBUG - 2014-11-22 19:36:17 --> Model Class Initialized
+DEBUG - 2014-11-22 23:36:17 --> Helper loaded: url_helper
+DEBUG - 2014-11-22 19:36:17 --> Model Class Initialized
+DEBUG - 2014-11-22 19:36:17 --> Controller Class Initialized
+DEBUG - 2014-11-22 23:36:17 --> Helper loaded: file_helper
+DEBUG - 2014-11-22 19:36:17 --> Helper loaded: mis_funciones_helper
+DEBUG - 2014-11-22 19:36:17 --> Database Driver Class Initialized
+ERROR - 2014-11-22 19:36:17 --> Severity: 8192  --> mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\xampp\htdocs\servix2014\web\system\database\drivers\mysql\mysql_driver.php 91
+DEBUG - 2014-11-22 19:36:17 --> Session Class Initialized
+DEBUG - 2014-11-22 19:36:17 --> Helper loaded: string_helper
+DEBUG - 2014-11-22 19:36:17 --> Session routines successfully run
+DEBUG - 2014-11-22 19:36:17 --> Helper loaded: form_helper
+DEBUG - 2014-11-22 19:36:17 --> Form Validation Class Initialized
+DEBUG - 2014-11-22 19:36:17 --> Model Class Initialized
+DEBUG - 2014-11-22 19:36:17 --> Model Class Initialized
+DEBUG - 2014-11-22 19:36:17 --> Model Class Initialized
+DEBUG - 2014-11-22 19:36:17 --> Model Class Initialized
+DEBUG - 2014-11-22 19:36:17 --> Controller Class Initialized
+DEBUG - 2014-11-22 19:36:17 --> Final output sent to browser
+DEBUG - 2014-11-22 19:36:17 --> Total execution time: 0.0410
+DEBUG - 2014-11-22 19:36:17 --> Final output sent to browser
+DEBUG - 2014-11-22 19:36:17 --> Total execution time: 0.0730
+DEBUG - 2014-11-22 23:40:34 --> Config Class Initialized
+DEBUG - 2014-11-22 23:40:34 --> Hooks Class Initialized
+DEBUG - 2014-11-22 23:40:34 --> Utf8 Class Initialized
+DEBUG - 2014-11-22 23:40:34 --> UTF-8 Support Enabled
+DEBUG - 2014-11-22 23:40:34 --> URI Class Initialized
+DEBUG - 2014-11-22 23:40:34 --> Router Class Initialized
+DEBUG - 2014-11-22 23:40:34 --> Output Class Initialized
+DEBUG - 2014-11-22 23:40:34 --> Security Class Initialized
+DEBUG - 2014-11-22 23:40:34 --> Input Class Initialized
+DEBUG - 2014-11-22 23:40:34 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-22 23:40:34 --> Language Class Initialized
+DEBUG - 2014-11-22 23:40:34 --> Loader Class Initialized
+DEBUG - 2014-11-22 23:40:34 --> Helper loaded: url_helper
+DEBUG - 2014-11-22 23:40:34 --> Helper loaded: file_helper
+DEBUG - 2014-11-22 19:40:34 --> Helper loaded: mis_funciones_helper
+DEBUG - 2014-11-22 19:40:34 --> Database Driver Class Initialized
+ERROR - 2014-11-22 19:40:34 --> Severity: 8192  --> mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\xampp\htdocs\servix2014\web\system\database\drivers\mysql\mysql_driver.php 91
+DEBUG - 2014-11-22 19:40:34 --> Session Class Initialized
+DEBUG - 2014-11-22 19:40:34 --> Helper loaded: string_helper
+DEBUG - 2014-11-22 19:40:35 --> Session routines successfully run
+DEBUG - 2014-11-22 19:40:35 --> Helper loaded: form_helper
+DEBUG - 2014-11-22 19:40:35 --> Form Validation Class Initialized
+DEBUG - 2014-11-22 19:40:35 --> Model Class Initialized
+DEBUG - 2014-11-22 19:40:35 --> Model Class Initialized
+DEBUG - 2014-11-22 19:40:35 --> Model Class Initialized
+DEBUG - 2014-11-22 19:40:35 --> Model Class Initialized
+DEBUG - 2014-11-22 19:40:35 --> Controller Class Initialized
+DEBUG - 2014-11-22 19:40:35 --> Pagination Class Initialized
+DEBUG - 2014-11-22 19:40:35 --> Pagination class already loaded. Second attempt ignored.
+DEBUG - 2014-11-22 19:40:35 --> Google Maps Class Initialized
+DEBUG - 2014-11-22 19:40:35 --> File loaded: application/views/includes/head.php
+DEBUG - 2014-11-22 19:40:35 --> File loaded: application/views/includes/user_log.php
+DEBUG - 2014-11-22 19:40:35 --> File loaded: application/views/includes/header.php
+DEBUG - 2014-11-22 19:40:35 --> File loaded: application/views/buscador_view.php
+DEBUG - 2014-11-22 19:40:35 --> File loaded: application/views/listar_opiniones.php
+DEBUG - 2014-11-22 19:40:35 --> File loaded: application/views/ficha_servicio_view.php
+DEBUG - 2014-11-22 19:40:35 --> File loaded: application/views/includes/footer.php
+DEBUG - 2014-11-22 19:40:35 --> File loaded: application/views/home_view.php
+DEBUG - 2014-11-22 19:40:35 --> Final output sent to browser
+DEBUG - 2014-11-22 19:40:35 --> Total execution time: 0.4980
+DEBUG - 2014-11-22 23:40:35 --> Config Class Initialized
+DEBUG - 2014-11-22 23:40:35 --> Hooks Class Initialized
+DEBUG - 2014-11-22 23:40:35 --> Utf8 Class Initialized
+DEBUG - 2014-11-22 23:40:35 --> UTF-8 Support Enabled
+DEBUG - 2014-11-22 23:40:35 --> URI Class Initialized
+DEBUG - 2014-11-22 23:40:35 --> Router Class Initialized
+DEBUG - 2014-11-22 23:40:35 --> Output Class Initialized
+DEBUG - 2014-11-22 23:40:35 --> Security Class Initialized
+DEBUG - 2014-11-22 23:40:35 --> Input Class Initialized
+DEBUG - 2014-11-22 23:40:35 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-22 23:40:35 --> Language Class Initialized
+DEBUG - 2014-11-22 23:40:35 --> Loader Class Initialized
+DEBUG - 2014-11-22 23:40:35 --> Helper loaded: url_helper
+DEBUG - 2014-11-22 23:40:35 --> Helper loaded: file_helper
+DEBUG - 2014-11-22 19:40:35 --> Helper loaded: mis_funciones_helper
+DEBUG - 2014-11-22 19:40:35 --> Database Driver Class Initialized
+ERROR - 2014-11-22 19:40:35 --> Severity: 8192  --> mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\xampp\htdocs\servix2014\web\system\database\drivers\mysql\mysql_driver.php 91
+DEBUG - 2014-11-22 19:40:36 --> Session Class Initialized
+DEBUG - 2014-11-22 19:40:36 --> Helper loaded: string_helper
+DEBUG - 2014-11-22 19:40:36 --> Session routines successfully run
+DEBUG - 2014-11-22 19:40:36 --> Helper loaded: form_helper
+DEBUG - 2014-11-22 19:40:36 --> Form Validation Class Initialized
+DEBUG - 2014-11-22 19:40:36 --> Model Class Initialized
+DEBUG - 2014-11-22 19:40:36 --> Model Class Initialized
+DEBUG - 2014-11-22 19:40:36 --> Model Class Initialized
+DEBUG - 2014-11-22 19:40:36 --> Model Class Initialized
+DEBUG - 2014-11-22 19:40:36 --> Controller Class Initialized
+DEBUG - 2014-11-22 19:40:36 --> Final output sent to browser
+DEBUG - 2014-11-22 19:40:36 --> Total execution time: 0.0350
+DEBUG - 2014-11-22 23:40:36 --> Config Class Initialized
+DEBUG - 2014-11-22 23:40:36 --> Hooks Class Initialized
+DEBUG - 2014-11-22 23:40:36 --> Utf8 Class Initialized
+DEBUG - 2014-11-22 23:40:36 --> UTF-8 Support Enabled
+DEBUG - 2014-11-22 23:40:36 --> URI Class Initialized
+DEBUG - 2014-11-22 23:40:36 --> Router Class Initialized
+DEBUG - 2014-11-22 23:40:36 --> Output Class Initialized
+DEBUG - 2014-11-22 23:40:36 --> Security Class Initialized
+DEBUG - 2014-11-22 23:40:36 --> Input Class Initialized
+DEBUG - 2014-11-22 23:40:36 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-22 23:40:36 --> Language Class Initialized
+DEBUG - 2014-11-22 23:40:36 --> Loader Class Initialized
+DEBUG - 2014-11-22 23:40:36 --> Helper loaded: url_helper
+DEBUG - 2014-11-22 23:40:36 --> Helper loaded: file_helper
+DEBUG - 2014-11-22 19:40:36 --> Helper loaded: mis_funciones_helper
+DEBUG - 2014-11-22 19:40:36 --> Database Driver Class Initialized
+ERROR - 2014-11-22 19:40:36 --> Severity: 8192  --> mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\xampp\htdocs\servix2014\web\system\database\drivers\mysql\mysql_driver.php 91
+DEBUG - 2014-11-22 19:40:36 --> Session Class Initialized
+DEBUG - 2014-11-22 19:40:36 --> Helper loaded: string_helper
+DEBUG - 2014-11-22 19:40:36 --> Session routines successfully run
+DEBUG - 2014-11-22 19:40:36 --> Helper loaded: form_helper
+DEBUG - 2014-11-22 19:40:36 --> Form Validation Class Initialized
+DEBUG - 2014-11-22 19:40:36 --> Model Class Initialized
+DEBUG - 2014-11-22 19:40:36 --> Model Class Initialized
+DEBUG - 2014-11-22 19:40:36 --> Model Class Initialized
+DEBUG - 2014-11-22 19:40:36 --> Model Class Initialized
+DEBUG - 2014-11-22 19:40:36 --> Controller Class Initialized
+DEBUG - 2014-11-22 19:40:36 --> Final output sent to browser
+DEBUG - 2014-11-22 19:40:36 --> Total execution time: 0.0660
+DEBUG - 2014-11-22 20:00:55 --> Helper loaded: mis_funciones_helper
+DEBUG - 2014-11-22 20:00:55 --> Database Driver Class Initialized
+ERROR - 2014-11-22 20:00:55 --> Severity: 8192  --> mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\xampp\htdocs\servix2014\web\system\database\drivers\mysql\mysql_driver.php 91
+DEBUG - 2014-11-22 20:00:55 --> Session Class Initialized
+DEBUG - 2014-11-22 20:00:55 --> Helper loaded: string_helper
+DEBUG - 2014-11-22 20:00:55 --> Session routines successfully run
+DEBUG - 2014-11-22 20:00:55 --> Helper loaded: form_helper
+DEBUG - 2014-11-22 20:00:55 --> Form Validation Class Initialized
+DEBUG - 2014-11-22 20:00:55 --> Model Class Initialized
+DEBUG - 2014-11-22 20:00:55 --> Model Class Initialized
+DEBUG - 2014-11-22 20:00:55 --> Model Class Initialized
+DEBUG - 2014-11-22 20:00:55 --> Model Class Initialized
+DEBUG - 2014-11-22 20:00:55 --> Controller Class Initialized
+DEBUG - 2014-11-22 20:00:55 --> Pagination Class Initialized
+DEBUG - 2014-11-22 20:00:55 --> Pagination class already loaded. Second attempt ignored.
+DEBUG - 2014-11-22 20:00:55 --> Google Maps Class Initialized
+DEBUG - 2014-11-22 20:00:56 --> File loaded: application/views/includes/head.php
+DEBUG - 2014-11-22 20:00:56 --> File loaded: application/views/includes/user_log.php
+DEBUG - 2014-11-22 20:00:56 --> File loaded: application/views/includes/header.php
+DEBUG - 2014-11-22 20:00:56 --> File loaded: application/views/buscador_view.php
+DEBUG - 2014-11-22 20:00:56 --> File loaded: application/views/listar_opiniones.php
+DEBUG - 2014-11-22 20:00:56 --> File loaded: application/views/ficha_servicio_view.php
+DEBUG - 2014-11-22 20:00:56 --> File loaded: application/views/includes/footer.php
+DEBUG - 2014-11-22 20:00:56 --> File loaded: application/views/home_view.php
+DEBUG - 2014-11-22 20:00:56 --> Final output sent to browser
+DEBUG - 2014-11-22 20:00:56 --> Total execution time: 0.4810
+DEBUG - 2014-11-22 20:00:56 --> Helper loaded: mis_funciones_helper
+DEBUG - 2014-11-22 20:00:56 --> Helper loaded: mis_funciones_helper
+DEBUG - 2014-11-22 20:00:56 --> Database Driver Class Initialized
+ERROR - 2014-11-22 20:00:56 --> Severity: 8192  --> mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\xampp\htdocs\servix2014\web\system\database\drivers\mysql\mysql_driver.php 91
+DEBUG - 2014-11-22 20:00:56 --> Database Driver Class Initialized
+ERROR - 2014-11-22 20:00:56 --> Severity: 8192  --> mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\xampp\htdocs\servix2014\web\system\database\drivers\mysql\mysql_driver.php 91
+DEBUG - 2014-11-22 20:00:56 --> Session Class Initialized
+DEBUG - 2014-11-22 20:00:56 --> Session Class Initialized
+DEBUG - 2014-11-22 20:00:56 --> Helper loaded: string_helper
+DEBUG - 2014-11-22 20:00:56 --> Helper loaded: string_helper
+DEBUG - 2014-11-22 20:00:56 --> Session routines successfully run
+DEBUG - 2014-11-22 20:00:56 --> Session routines successfully run
+DEBUG - 2014-11-22 20:00:56 --> Helper loaded: form_helper
+DEBUG - 2014-11-22 20:00:56 --> Form Validation Class Initialized
+DEBUG - 2014-11-22 20:00:56 --> Helper loaded: form_helper
+DEBUG - 2014-11-22 20:00:56 --> Form Validation Class Initialized
+DEBUG - 2014-11-22 20:00:56 --> Model Class Initialized
+DEBUG - 2014-11-22 20:00:56 --> Model Class Initialized
+DEBUG - 2014-11-22 20:00:56 --> Model Class Initialized
+DEBUG - 2014-11-22 20:00:56 --> Model Class Initialized
+DEBUG - 2014-11-22 20:00:56 --> Model Class Initialized
+DEBUG - 2014-11-22 20:00:56 --> Model Class Initialized
+DEBUG - 2014-11-22 20:00:56 --> Model Class Initialized
+DEBUG - 2014-11-22 20:00:56 --> Controller Class Initialized
+DEBUG - 2014-11-22 20:00:56 --> Model Class Initialized
+DEBUG - 2014-11-22 20:00:56 --> Controller Class Initialized
+DEBUG - 2014-11-22 20:00:56 --> Final output sent to browser
+DEBUG - 2014-11-22 20:00:56 --> Total execution time: 0.0430
+DEBUG - 2014-11-22 20:00:56 --> Final output sent to browser
+DEBUG - 2014-11-22 20:00:56 --> Total execution time: 0.0550

@@ -439,15 +439,24 @@ var app = function(){
                  $('#modalOpinion').modal('show')
              }
         },
-         this.favoritosAction = function(){
-           $('#favorito').on('change',function(){
-                 if(this.checked) {
-                    $(this).val('true')
-                 }else{
-                    $(this).val('false')
-                   
-                 }
-                    alert($(this).val())
+        this.favoritosAction = function(){
+           $('#favorito').on('click',function(){
+                
+                if($(this).prop('checked')){
+                    $(this).next('span').text('Agregado a favoritos')
+                }else{
+                    $(this).next('span').text('Agregar a favoritos')
+
+                }
+                console.log()
+
+                 $val = $(this).val();
+                 $url = $(this).closest('form').attr('action');
+                 $postData = $(this).closest('form').serialize();
+                 $.post($url,$postData,function(data){
+                      
+                       console.log(data)
+                 },'json')
             })
 
         

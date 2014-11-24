@@ -92,6 +92,22 @@ class Usuario extends CI_controller{
 		}
 	}
 
+	public function set_favorito(){
+		$id_servicio = $this->input->post('id_servicio');
+		$id_usuario  = $this->UsuarioSession['id'];
+
+
+		if($this->input->post('favorito') == 'on'){
+			$this->usuarios_model->setFavorito($id_usuario,$id_servicio);
+			echo json_encode("insert");
+		}else{
+			$this->usuarios_model->deleteFavorito($id_servicio);
+			echo json_encode("delete");
+			
+		}
+
+	}
+
 	private function _verificarCodigoEstado($codigo = null){
 		//compruebo que el codigo sea valido
 		$codigo = $codigo;

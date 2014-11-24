@@ -1,7 +1,48 @@
   <!--center-->
   <div class="col-sm-8">
     <h1>Servicios Destacados</h1>
-    <div class="row">
+
+    <?php 
+      if(!empty($destacados)){
+
+        foreach ($destacados as $servicio) {
+          ?>
+
+            <div class="row">
+              <div class="col-xs-12">
+                <h3><?php echo $servicio['titulo']; ?></h3>
+                <p><?php echo $servicio['descripcion']; ?></p>
+                <p class="lead"><a href=" <?php echo generarLinkServicio($servicio['id'], $servicio['titulo']); ?> " class="btn btn-default">Más info</a></p>
+                <p class="pull-right"><span class="label label-default"><?php echo ucfirst( $servicio['categoria']); ?></span> <span class="label label-default"><?php echo $servicio['provincia']; ?></span> <span class="label label-default"><?php echo $servicio['localidad']; ?></span></p>
+
+
+                <ul class="list-inline"><li><span>Promedio </span><span class="ratyAVG" data-avg="<?php echo number_format($servicio['promedio'],2); ?>"></span> <?php echo number_format($servicio['promedio'],2); ?> Puntos<span> 
+                <?php 
+                  if($servicio['cantPuntos']>1){
+                    echo ", Votado: ".$servicio['cantPuntos']." veces";
+                  }else{
+                    echo ", Votado: ".$servicio['cantPuntos']." vez";
+                  }
+                 ?>
+                </span></li></ul>
+              </div>
+            </div>
+            <hr>
+          
+          <?php
+          
+        }
+      }else{
+        ?>
+        <div class="row">
+          <div class="col-xs-12">
+            <p>Aún no tenemos ningun servicio destacado</p>
+          </div>
+        </div>
+        <?php
+      }
+     ?>
+   <!--  <div class="row">
       <div class="col-xs-12">
         <h3>Article Heading</h3>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
@@ -38,7 +79,7 @@
         <p class="pull-right"><span class="label label-default">keyword</span> <span class="label label-default">tag</span> <span class="label label-default">post</span></p>
         <ul class="list-inline"><li><a href="#">1 Week Ago</a></li><li><a href="#"><i class="glyphicon glyphicon-comment"></i> 4 Comments</a></li><li><a href="#"><i class="glyphicon glyphicon-share"></i> 34 Shares</a></li></ul>
       </div>
-    </div>
+    </div> -->
     <hr>
   </div><!--/center-->
 

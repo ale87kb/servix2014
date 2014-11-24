@@ -85,6 +85,7 @@ $route['validar-voto']   		   				= "usuario/validar_voto";
 $route['mi-perfil/editar-datos']   				= "usuario/editar_datos";
 $route['mi-perfil/editar-servicios']  			= "usuario/editar_servicios";
 $route['mi-perfil/favoritos']  					= "usuario/favoritos";
+$route['set_favorito']  						= "usuario/set_favorito";
 $route['mi-perfil/servicios-solicitados']  		= "usuario/servicios_solicitados";
 $route['mis-comentarios']           			= "usuario/mis_comentarios";
 

@@ -21,6 +21,12 @@ class sitio extends CI_Controller {
 			$data['usuarioSession'] = $this->UsuarioSession;
 		}
 		//$data['usuario'] = $this->usuario;
+		$destacados = $this->servicios_model->getServiciosDestacagdos();
+		if(!empty($destacados)){
+			$data['destacados'] = $destacados;
+		}else{
+			$data['destacados'] = null;
+		}
 		$data['vista'] = 'index_view';
 		$this->load->view('home_view',$data);
 	}
@@ -333,6 +339,14 @@ class sitio extends CI_Controller {
 			$data[$key] = $value;
 		}
 
+		$data['favorito'] =  null;
+		if($this->UsuarioSession){
+			$fav = $this->usuarios_model->getFavorito($this->UsuarioSession['id'],$id);
+			if(!empty($fav)){
+				$data['favorito'] = true;
+			}
+		}
+
 		$data['servicio']  = $data['titulo'];
 		$lat 			   = $servicioRS[0]['latitud'];
 		$long 			   = $servicioRS[0]['longitud'];
@@ -343,6 +357,7 @@ class sitio extends CI_Controller {
 			$data['usuarioSession'] = $this->UsuarioSession;
 		}
 		$data['opiniones'] = $opiniones['result'];
+
 		$data['title']     = 'Ficha del servicio';
 		$data['servUrl']   =  site_url('ficha/'.$servicio);
 		$data['vista']     = 'ficha_servicio_view';
