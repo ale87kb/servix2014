@@ -106,8 +106,6 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 -- Dumping data for table servix_db.ci_sessions: ~1 rows (approximately)
 DELETE FROM `ci_sessions`;
 /*!40000 ALTER TABLE `ci_sessions` DISABLE KEYS */;
-INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-	('584c49bae76a8ff52ff62a064538e41f', '::1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.65 Safari/537.36', 1416869443, 'a:3:{s:9:"user_data";s:0:"";s:8:"busqueda";a:2:{s:4:"post";a:2:{s:8:"servicio";s:7:"Herrero";s:9:"localidad";s:6:"buenos";}s:3:"url";a:2:{s:8:"servicio";s:7:"herrero";s:9:"localidad";s:6:"buenos";}}s:9:"logged_in";a:10:{s:2:"id";s:1:"8";s:5:"email";s:19:"horacio@hotmail.com";s:6:"nombre";s:7:"horacio";s:8:"apellido";s:6:"moreno";s:3:"dni";s:8:"35049207";s:9:"direccion";s:20:"av juan b justo 2195";s:8:"telefono";s:10:"1134090733";s:4:"foto";s:29:"assets/images/profile_640.png";s:6:"estado";s:1:"0";s:14:"ultima_edicion";s:19:"2014-11-22 02:11:05";}}');
 /*!40000 ALTER TABLE `ci_sessions` ENABLE KEYS */;
 
 
