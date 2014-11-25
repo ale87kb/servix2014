@@ -462,6 +462,20 @@ var app = function(){
         
 
 
+        }, 
+        this.pagSolicitados = function(){
+           $('#pagSolicitados a').on('click',function(e){
+                
+               e.preventDefault();
+               $url = $(this).attr('href');
+               $.post($url,function(data){
+                 $("#solicitados").html(data)
+               },'html')
+            })
+
+        
+
+
         },
         this.init = function(){
 
@@ -476,7 +490,8 @@ var app = function(){
             this.validar_votacion();            
             this.ajax_paging();            
             this.setAffterAction();            
-            this.favoritosAction();            
+            this.favoritosAction();   
+            this.pagSolicitados();         
         }
     };
     

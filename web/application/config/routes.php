@@ -51,6 +51,7 @@ $route['checkLogin']           					= "sitio/check_login";
 $route['mail']           						= "sitio/mail";
 $route['servicios-solicitados/(:num)']         	= "sitio/index";
 $route['servicios-solicitados']           		= "sitio/index";
+$route['servicio-solicitado/(:any)']	        = "sitio/servicio_solicitado/$1";
 
 $route['busqueda_servicio']						= "sitio/busqueda_servicio";
 $route['enviar/comentario-servicio']			= "sitio/comentar_servicio";

@@ -58,7 +58,11 @@
     </div><!-- /.modal -->
     <?php
       }else{
+        if(isset($seccion) && ($seccion == 'ficha')){
+
         ?>
+
+
                 <!-- Modal -->
       <div class="modal fade" id="modalOpinion" tabindex="-1" role="dialog" aria-labelledby="modalOpinion-1" aria-hidden="true">
         <div class="modal-dialog">
@@ -123,9 +127,10 @@
 
 
         <?php
+        }
       }
 
-      if(isset($titulo) && isset($servUrl)){
+      if(isset($seccion) && ($seccion == 'ficha')){
     ?>
 
 
