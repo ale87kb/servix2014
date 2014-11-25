@@ -24,7 +24,7 @@ class sitio extends CI_Controller {
 		$seccion = "servicios-solicitados";
 
 		$destacados  	 = $this->servicios_model->getServiciosDestacados();
-		$solicitados 	 = $this->_setPagSolicitados();
+		$solicitados 	 = $this->_setPagSolicitados($seccion);
 		
 		if(!empty($destacados)){
 			$data['destacados'] = $destacados;
