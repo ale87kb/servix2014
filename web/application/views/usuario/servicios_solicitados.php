@@ -22,7 +22,7 @@
               	<p>
                 	<?php echo $c['busqueda']; ?>
               	</p>
-           		<a href="#" class="btn btn-sm btn-default pull-right">Ver solicitud</a>
+           		<a href="<?php echo site_url($c['link']); ?>" class="btn btn-sm btn-default pull-right">Ver solicitud</a>
         	</div>
         	<div class="panel-footer">
           		Fecha de publicación: <?php echo $c['fecha']; ?>

@@ -76,9 +76,8 @@ class Usuario extends CI_controller{
 		$sSolicitados = $this->usuarios_model->getUServiciosSolicitados($idUsuario, $desdeLimit ,$cantidadLimit);
 		if($sSolicitados){
 			foreach ($sSolicitados as $c => $clave) {
-				/*$sSolicitados[$c]['link'] = generarLinkServicio($sSolicitados[$c]['id'], $sSolicitados[$c]['titulo']);*/
+				$sSolicitados[$c]['link'] = generarLinkServicio($sSolicitados[$c]['id'],$sSolicitados[$c]['categoria']."-en-".$sSolicitados[$c]['localidad']."-".$sSolicitados[$c]['provincia'],'servicio-solicitado');
 				$sSolicitados[$c]['fecha'] = fechaBarras(strtotime($sSolicitados[$c]['fecha_ini']));
-			print_d($this->db->last_query());
 			}
 			return $sSolicitados;
 		}
