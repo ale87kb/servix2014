@@ -11781,6 +11781,7 @@ ERROR - 2014-11-24 20:13:06 --> Severity: Notice  --> Undefined variable: id C:\
 =======
 >>>>>>> origin/ci
 >>>>>>> origin/ci
+<<<<<<< HEAD
 ERROR - 2014-11-24 20:30:11 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
 ERROR - 2014-11-24 20:30:14 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
 ERROR - 2014-11-24 20:30:17 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
@@ -12057,3 +12058,13 @@ ERROR - 2014-11-24 23:50:18 --> Severity: Notice  --> Undefined variable: id C:\
 ERROR - 2014-11-24 23:55:21 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
 ERROR - 2014-11-24 23:55:42 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
 ERROR - 2014-11-24 23:55:55 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+=======
+ERROR - 2014-11-24 20:13:05 --> Severity: 8192  --> mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\xampp\htdocs\servix2014\web\system\database\drivers\mysql\mysql_driver.php 91
+ERROR - 2014-11-24 20:13:05 --> Severity: Notice  --> Undefined variable: id G:\xampp\htdocs\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 20:13:05 --> Severity: 8192  --> mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\xampp\htdocs\servix2014\web\system\database\drivers\mysql\mysql_driver.php 91
+ERROR - 2014-11-24 20:13:05 --> Severity: 8192  --> mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\xampp\htdocs\servix2014\web\system\database\drivers\mysql\mysql_driver.php 91
+ERROR - 2014-11-24 20:13:57 --> Severity: 8192  --> mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\xampp\htdocs\servix2014\web\system\database\drivers\mysql\mysql_driver.php 91
+ERROR - 2014-11-24 20:13:57 --> Severity: Notice  --> Undefined variable: id G:\xampp\htdocs\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 20:13:57 --> Severity: 8192  --> mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\xampp\htdocs\servix2014\web\system\database\drivers\mysql\mysql_driver.php 91
+ERROR - 2014-11-24 20:13:57 --> Severity: 8192  --> mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\xampp\htdocs\servix2014\web\system\database\drivers\mysql\mysql_driver.php 91
+>>>>>>> origin/ci
