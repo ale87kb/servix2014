@@ -104,6 +104,7 @@ Class Servicios_model extends CI_Model{
 	}
 	public function getServiciosSolicitados($fecha,$ini,$fin){
 		$query = "SELECT
+			      busquedas_temp.id,
 				  categorias.categoria,
 				  localidades.localidad,
 				  provincias.provincia,

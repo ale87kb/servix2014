@@ -50,12 +50,12 @@
 
 
 
-	function generarLinkServicio($id, $titulo){
+	function generarLinkServicio($id, $titulo,$sec='ficha'){
 
 		if (is_numeric($id))
 		{
 			$tituloServicio = normaliza($titulo);
-			$ulrServicio = "ficha/". $id . "-" . $tituloServicio;
+			$ulrServicio = $sec."/". $id . "-" . $tituloServicio;
 			return $ulrServicio;
 		}
 

@@ -40,7 +40,14 @@ class sitio extends CI_Controller {
 
 		$data['paginacion'] = $solicitados['links'];
 		$data['vista'] = 'index_view';
-		$this->load->view('home_view',$data);
+
+		if ($this->input->is_ajax_request()) {
+			$this->load->view('servicios_solicitados',$data);
+		
+		}else{
+			$this->load->view('home_view',$data);
+       
+		}
 	}
 
 
@@ -63,6 +70,7 @@ class sitio extends CI_Controller {
        
         $data["links"] 			= $this->pagination->create_links();
 		return $data;
+
        
 	}
 
@@ -362,9 +370,26 @@ class sitio extends CI_Controller {
 		}
 	}
 
-	public function ficha_servicio($servicio=null){
+	public function servicio_solicitado($servicio=null){
 		$id 			 = $this->_parsearIdServicio($servicio);
 
+		if(is_numeric($id)){
+
+			$data['title']     = 'Ficha del servicio';
+			$data['servUrl']   =  site_url('ficha/'.$servicio);
+			$data['vista']     = 'servicio_solicitado';
+
+			$this->load->view('home_view',$data);
+		}else{
+
+			redirect('');	
+		}
+		
+	}
+
+	public function ficha_servicio($servicio=null){
+		$id 			 = $this->_parsearIdServicio($servicio);
+		$data['seccion'] = 'ficha';
 		if(is_numeric($id)){
 
 		$opiniones 		 = $this->_setPaginacionOpinion($servicio,$id);
