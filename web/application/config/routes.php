@@ -83,6 +83,7 @@ $route['usuario/verificar/(:any)']           	= "usuario/verificar";							//Usu
 $route['mi-perfil']   		   					= "usuario/index";								//Usuario logueado
 $route['validar-voto']   		   				= "usuario/validar_voto";
 $route['mi-perfil/editar-datos']   				= "usuario/editar_datos";
+$route['mi-perfil/validar_editar_datos']   		= "usuario/validar_editar_datos";
 $route['mi-perfil/editar-servicios']  			= "usuario/editar_servicios";
 $route['mi-perfil/favoritos']  					= "usuario/favoritos";
 $route['set_favorito']  						= "usuario/set_favorito";

@@ -7,7 +7,7 @@
 	<div class="panel-body">
 		<div class="row">
 			<div class="col-md-3" align="center">
-				<img alt="User Pic" src="<?php echo $usuarioSession['foto'];?>" class="img-circle" width="105" >
+				<img alt="User Pic" src="<?php echo site_url($usuarioSession['foto']);?>" class="img-circle" width="105" >
 				<a href="#">Editar Foto</a>
 			</div>
 			<div class=" col-md-9 col-lg-9 "> 

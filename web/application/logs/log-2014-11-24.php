@@ -11781,3 +11781,279 @@ ERROR - 2014-11-24 20:13:06 --> Severity: Notice  --> Undefined variable: id C:\
 =======
 >>>>>>> origin/ci
 >>>>>>> origin/ci
+ERROR - 2014-11-24 20:30:11 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 20:30:14 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 20:30:17 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 20:30:42 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 20:35:13 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 20:36:02 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 20:36:14 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 20:37:40 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 20:39:16 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 20:39:23 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 20:40:24 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 20:40:49 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 20:41:58 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 20:42:31 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 20:42:54 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 20:43:11 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 20:43:28 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 20:44:18 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 20:44:36 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 20:45:13 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 20:45:20 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 20:45:32 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 20:46:00 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 20:46:40 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 20:47:02 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 20:47:52 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 20:48:52 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 20:54:37 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 20:55:02 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 20:55:06 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 20:55:08 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 20:55:59 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 20:56:24 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 20:56:26 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 20:56:45 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 20:57:16 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 21:00:22 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 21:00:48 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 21:13:34 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 21:20:23 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 21:20:59 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 21:25:28 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 21:26:05 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 21:26:36 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 21:26:51 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 21:27:07 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 21:27:14 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 21:27:49 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 21:29:34 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 21:30:00 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 21:31:12 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 21:31:27 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 21:31:32 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 21:32:12 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 21:33:41 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 21:34:04 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 21:34:08 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 21:34:10 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 21:34:34 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 21:34:35 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 21:34:37 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 21:36:54 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 21:37:48 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 21:38:20 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 21:38:46 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 21:39:11 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 21:39:26 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 21:51:53 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 22:23:07 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 22:23:19 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 22:29:21 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 22:31:57 --> Severity: Warning  --> mail() [<a href='function.mail'>function.mail</a>]: Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() C:\wamp\www\servix2014\web\system\libraries\Email.php 1553
+ERROR - 2014-11-24 22:31:57 --> No puedo enviar el correo usando la función mail() de PHP.  Su servidor puede no estar configurado para usar este metodo de envío.<br /><pre>User-Agent: CodeIgniter
+Date: Mon, 24 Nov 2014 22:31:56 -0300
+From: &quot;Ale&quot; &lt;no-responder@servix.com&gt;
+Return-Path: &lt;no-responder@servix.com&gt;
+Reply-To: &quot;no-responder@servix.com&quot; &lt;no-responder@servix.com&gt;
+X-Sender: no-responder@servix.com
+X-Mailer: CodeIgniter
+X-Priority: 3 (Normal)
+Message-ID: &lt;5473dc0c75dc2@servix.com&gt;
+Mime-Version: 1.0
+Content-Type: multipart/alternative; boundary=&quot;B_ALT_5473dc0c75dd3&quot;
+=?utf-8?Q?Confirmaci=c3=b3n_de_Email_de_registro_en_Servix?=
+This is a multi-part message in MIME format.
+Your email application may not support this format.
+
+--B_ALT_5473dc0c75dd3
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+24-11-2014 22:11
+
+Hola Ale
+¡Bienvenido a Servix! Acabas de unirte al mejor sitio para buscar servicios
+y compartir tus servicios con la comunidad. 
+¡Nos alegra que estés aquí! 
+Antes de que empieces a explorar servicios y compartir tus propios servicios
+en Servix, 
+debemos confirmar que eres una persona y no un robot.
+Para completar el registro, haz click en el siguiente botón:
+
+ 
+ 
+ 
+ Completar el registro
+ 
+ 
+ http://localhost/servix2014/web/usuario/verificar?codigo=7851396d2d5061226675666912a8fa1e&amp;amp;source=email
+ 
+
+Gracias de nuevo por unirte. ¡Nos vemos en este sitio!
+Servix
+
+www.servixs.com.ar
+
+
+--B_ALT_5473dc0c75dd3
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.=
+w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;
+&lt;html xmlns=3D&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+&lt;head&gt;
+&lt;!-- If you delete this meta tag, Half Life 3 will never be released. --&gt;
+&lt;meta name=3D&quot;viewport&quot; content=3D&quot;width=3Ddevice-width&quot; /&gt;
+
+&lt;meta http-equiv=3D&quot;Content-Type&quot; content=3D&quot;text/html; charset=3DUTF-8&quot; /&gt;
+&lt;title&gt;Confirmación de Email de registro en Servix&lt;/title&gt;
+=09
+&lt;link rel=3D&quot;stylesheet&quot; type=3D&quot;text/css&quot; href=3D&quot;http://localhost/servix2=
+014/web/assets/css/email.css&quot; /&gt;
+
+&lt;/head&gt;
+=20
+&lt;body bgcolor=3D&quot;#FFFFFF&quot;&gt;
+
+&lt;!-- HEADER --&gt;
+&lt;table class=3D&quot;head-wrap&quot; bgcolor=3D&quot;#999999&quot;&gt;
+	&lt;tr&gt;
+		&lt;td&gt;&lt;/td&gt;
+		&lt;td class=3D&quot;header container&quot; &gt;
+			&lt;div class=3D&quot;content&quot;&gt;
+			&lt;table bgcolor=3D&quot;#999999&quot;&gt;
+				&lt;tr&gt;
+					&lt;td&gt;&lt;img src=3D&quot;http://placehold.it/200x50/&amp;text=3DSERVIX&quot; /&gt;&lt;/td&gt;
+					&lt;td align=3D&quot;right&quot;&gt;&lt;h6 class=3D&quot;collapse&quot;&gt;24-11-2014 22:11&lt;/h6&gt;&lt;/td&gt;
+				&lt;/tr&gt;
+			&lt;/table&gt;
+			&lt;/div&gt;
+		&lt;/td&gt;
+		&lt;td&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;&lt;!-- /HEADER --&gt;
+
+
+&lt;!-- BODY --&gt;
+&lt;table class=3D&quot;body-wrap&quot;&gt;
+	&lt;tr&gt;
+		&lt;td&gt;&lt;/td&gt;
+		&lt;td class=3D&quot;container&quot; bgcolor=3D&quot;#FFFFFF&quot;&gt;
+
+			&lt;div class=3D&quot;content&quot;&gt;
+			&lt;table&gt;
+				&lt;tr&gt;
+					&lt;td&gt;
+						&lt;h3&gt;Hola Ale&lt;/h3&gt;
+						&lt;p class=3D&quot;lead&quot;&gt;¡Bienvenido a Servix! Acabas de unirte al mejor si=
+tio para buscar servicios y compartir tus servicios con la comunidad.=20
+							¡Nos alegra que estés aquí! &lt;/p&gt;
+						&lt;p class=3D&quot;lead&quot;&gt;Antes de que empieces a explorar servicios y compar=
+tir tus propios servicios en Servix,=20
+							debemos confirmar que eres una persona y no un robot.&lt;/p&gt;
+						&lt;p class=3D&quot;lead&quot;&gt;Para completar el registro, haz click en el siguien=
+te botón:&lt;/p&gt;
+						&lt;table cellspacing=3D&quot;0&quot; cellpadding=3D&quot;0&quot; border=3D&quot;0&quot; align=3D&quot;cent=
+er&quot; width=3D&quot;360&quot;&gt;
+							&lt;tbody&gt;
+								&lt;tr&gt;
+								 &lt;td&gt;
+								 &lt;p style=3D&quot;width:300px;background:#2786C2;font-family:helvetica, =
+arial, sans-serif;font-size:18px;line-height:18px;text-align:center;padding=
+:14px 10px;border-radius:6px;&quot;&gt;
+								 	&lt;a target=3D&quot;_blank&quot; style=3D&quot;color:#fff;text-decoration:none;&quot; h=
+ref=3D&quot;http://localhost/servix2014/web/usuario/verificar?codigo=3D7851396d2=
+d5061226675666912a8fa1e&amp;amp;source=3Demail&quot;&gt;
+								 		&lt;strong&gt;Completar el registro&lt;/strong&gt;
+								 	&lt;/a&gt;
+								 &lt;/p&gt;
+								 &lt;p&gt;&lt;a href=3D&quot;http://localhost/servix2014/web/usuario/verificar?co=
+digo=3D7851396d2d5061226675666912a8fa1e&amp;amp;source=3Demail&quot;&gt;http://localhos=
+t/servix2014/web/usuario/verificar?codigo=3D7851396d2d5061226675666912a8fa1=
+e&amp;amp;source=3Demail&lt;/a&gt;&lt;/p&gt;
+								 &lt;/td&gt;
+								&lt;/tr&gt;
+							&lt;/tbody&gt;
+						&lt;/table&gt;
+						&lt;p class=3D&quot;lead&quot;&gt;Gracias de nuevo por unirte. ¡Nos vemos en este si=
+tio!&lt;/p&gt;
+						&lt;p class=3D&quot;lead&quot;&gt;Servix&lt;/p&gt;
+					=09
+					&lt;/td&gt;
+				&lt;/tr&gt;
+			&lt;/table&gt;
+			&lt;/div&gt;&lt;!-- /content --&gt;
+								=09
+		&lt;/td&gt;
+		&lt;td&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;&lt;!-- /BODY --&gt;
+
+&lt;!-- FOOTER --&gt;
+&lt;table class=3D&quot;footer-wrap&quot;&gt;
+	&lt;tr&gt;
+		&lt;td&gt;&lt;/td&gt;
+		&lt;td class=3D&quot;container&quot;&gt;
+		=09
+				&lt;!-- content --&gt;
+				&lt;div class=3D&quot;content&quot;&gt;
+				&lt;table&gt;
+				&lt;tr&gt;
+					&lt;td align=3D&quot;center&quot;&gt;
+						&lt;p&gt;
+						=09
+							&lt;a href=3D&quot;#&quot;&gt;www.servixs.com.ar&lt;/a&gt;=20
+					=09
+						&lt;/p&gt;
+					&lt;/td&gt;
+				&lt;/tr&gt;
+			&lt;/table&gt;
+				&lt;/div&gt;&lt;!-- /content --&gt;
+			=09
+		&lt;/td&gt;
+		&lt;td&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;&lt;!-- /FOOTER --&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+--B_ALT_5473dc0c75dd3--</pre>
+ERROR - 2014-11-24 22:37:36 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 22:37:53 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 22:37:56 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 22:38:54 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 22:39:09 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 22:40:04 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 22:42:09 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 22:43:13 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 22:43:46 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 22:44:15 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 22:44:39 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 23:24:05 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 23:24:13 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 23:24:40 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 23:26:47 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 23:27:28 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 23:29:22 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 23:30:42 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 23:34:59 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 23:36:42 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 23:37:00 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 23:40:26 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 23:40:53 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 23:43:12 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 23:43:13 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 23:46:08 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 23:47:10 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 23:47:27 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 23:48:24 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 23:49:49 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 23:50:18 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 23:55:21 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 23:55:42 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96
+ERROR - 2014-11-24 23:55:55 --> Severity: Notice  --> Undefined variable: id C:\wamp\www\servix2014\web\application\views\includes\footer.php 96

@@ -4,48 +4,76 @@
 		<div class="col-md-12">
 			<div class="row">
 
-<div id="box_registro" class="jumbotron col-md-12">
+<div id="box_registro" class="col-md-12">
    
 
-<h1>Editar Usuario</h1>
-	<h3>Datos del usuario</h3>
-	<p>Datos requeridos para poder iniciar sesión</p>
+<h1>Editar perfil</h1>
+<h3>Datos del usuario</h3>
+
 <form id="form_edit_user" class="form-horizontal" role="form" name="form_reg" action="<?php echo site_url('');?>" method="post" enctype="multipart/form-data">
   
-	<div class="form-group">
-      <label for="usuario" class="col-sm-2 control-label">* Email</label>
-      <div class="col-sm-7">
-        <input type="email" class="form-control" id="usuario" name="usuario" placeholder="Email de usuario" value="<?php echo set_value('usuario') ?>">
-      </div>
+  <div class="form-group">
+    <div class="col-md-2" align="center">
+        <img class="img-circle" src="<?php echo site_url($usuarioSession['foto']);?>" alt="foto-<?php echo $usuarioSession['email']; ?>" width="125" />
+        <a href="#">Editar Foto</a>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="usuario" class="col-sm-2 control-label">* E-mail</label>
+    <div class="col-sm-7">
+      <p class="form-control-static" id="eTusuario"><?php echo $usuarioSession['email']; ?>&nbsp;<span>(<a href="#">Cambiar</a>)</span></p>
+      <input style="display:none;" type="email" class="form-control" id="eIusuario" name="usuario" placeholder="Email de usuario" value="<?php echo $usuarioSession['email']; ?>">
+    </div>
+  </div>
+    <div class='errorusername' style="color:red;">
+      <?php echo form_error('usuario'); ?>
     </div>
 
+  <div class="form-group">
+  <p style="display:block;" id="cClaveT" class="col-sm-offset-2 col-sm-7"><a href="#">Cambiar contraseña</a></p>
+  </div>
+
+  <div id="nuevaClaveBox" class="" style="">
     <div class="form-group">
-      <label for="clave" class="col-sm-2 control-label">* Contraseña</label>
-      <div class="col-sm-7">
-        <input type="password" class="form-control" id="clave" name="clave" placeholder="Contraseña">
+      <div id="cClaveB">
+        <label for="clave" class="col-sm-2 control-label">* Contraseña Actual</label>
+        <div class="col-sm-7">
+          <input style="" type="password" class="form-control" id="clave" name="clave" placeholder="Contraseña">
+        </div>
       </div>
     </div>
     <div class='errorpassword' style="color:red;">
       <?php echo form_error('clave'); ?>
     </div>
+    
+    <div class="form-group">
+      <label for="nclave" class="col-sm-2 control-label">* Nueva Contraseña</label>
+      <div class="col-sm-7">
+        <input style="" type="password" class="form-control" id="nclave" name="nclave" placeholder="Nueva Contraseña">
+      </div>
+    </div>
+    <div class='errorpassword' style="color:red;">
+      <?php echo form_error('nclave'); ?>
+    </div>
 
     <div class="form-group">
-      <label for="rclave" class="col-sm-2 control-label">* Repetir Contraseña</label>
+      <label for="rclave" class="col-sm-2 control-label">* Repetir Nueva Contraseña</label>
       <div class="col-sm-7">
-        <input type="password" class="form-control" id="rclave" name="rclave" placeholder="Repetir Contraseña">
+        <input style="" type="password" class="form-control" id="rclave" name="rclave" placeholder="Repetir Nueva Contraseña">
       </div>
     </div>
     <div class='errorpasswordr' style="color:red;">
       <?php echo form_error('rclave'); ?>
     </div>
+  </div>
 
   <h3>Datos personales</h3>
-  <p>Datos requeridos para conocerte un poco mas</p>
 
   <div class="form-group">
       <label for="nombre" class="col-sm-2 control-label">* Nombre/s</label>
       <div class="col-sm-7">
-        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre/s" value="<?php echo set_value('nombre') ?>">
+        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre/s" value="<?php echo $usuarioSession['nombre']; ?>">
       </div>
     </div>
     <div class='errornombre' style="color:red;">
@@ -55,7 +83,7 @@
     <div class="form-group">
       <label for="apellido" class="col-sm-2 control-label">* Apellido/s</label>
       <div class="col-sm-7">
-        <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellido/s" value="<?php echo set_value('apellido') ?>">
+        <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellido/s" value="<?php echo $usuarioSession['apellido']; ?>">
       </div>
     </div>
     <div class='errorapellido' style="color:red;">
@@ -65,17 +93,14 @@
   <div class="form-group">
       <label for="usuario" class="col-sm-2 control-label">* DNI</label>
       <div class="col-sm-7">
-        <input type="text" class="form-control" id="dni" name="dni" placeholder="Documento de Identidad" value="<?php echo set_value('dni') ?>">
+        <p class="form-control-static"><?php echo $usuarioSession['dni']; ?></p>
       </div>
-    </div>
-    <div class='errordni' style="color:red;">
-      <?php echo form_error('dni'); ?>
     </div>
 
     <div class="form-group">
       <label for="clave" class="col-sm-2 control-label">Dirección</label>
       <div class="col-sm-7">
-        <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Tu Dirección" value="<?php echo set_value('direccion') ?>">
+        <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Tu Dirección" value="<?php echo $usuarioSession['direccion']; ?>">
       </div>
     </div>
     <div class='errordireccion' style="color:red;">
@@ -85,23 +110,19 @@
     <div class="form-group">
       <label for="rclave" class="col-sm-2 control-label">Teléfono</label>
       <div class="col-sm-7">
-        <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Tu Teléfono" value="<?php echo set_value('telefono') ?>">
+        <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Tu Teléfono" value="<?php echo $usuarioSession['telefono']; ?>">
       </div>
     </div>
     <div class='errortelefono' style="color:red;">
       <?php echo form_error('telefono'); ?>
     </div>
-    
-    <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-10">
-        <p>Al hacer clic en Registrarse, aceptas las <a href="#">Condiciones</a> y que has leído la <a href="#">Política de uso de datos</a>, incluido el <a href="#">Uso de cookies</a>.</p>
-      </div>
-    </div> 
 
  <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" name="registro_submit" class="btn btn-default">Registrarse</button>
+      <div class="col-sm-offset-2 col-sm-7">
+        <button type="submit" name="registro_submit" class="btn btn-success">Guardar</button>
+        <a href="<?php echo site_url('mi-perfil');?>" class="btn btn-default pull-right" role="button">Volver a Mi Perfil</a>
         <input type="hidden" name="grabar" value="si" />
+        <input type="hidden" name="user" value="<?php echo $usuarioSession['id']; ?>" />
       </div>
     </div>
 

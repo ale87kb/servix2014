@@ -30,7 +30,11 @@ Class Usuarios_model extends CI_Model{
 	}
 	
 	public function checkVoto($idU,$idS,$fecha){
-		$query ="SELECT * FROM puntuacion WHERE puntuacion.id_usuarios = $idU AND puntuacion.id_servicios = $idS AND puntuacion.fecha_votacion >= '$fecha' LIMIT 1";
+		$query ="SELECT * FROM puntuacion 
+				WHERE puntuacion.id_usuarios = $idU 
+				AND puntuacion.id_servicios = $idS 
+				AND puntuacion.fecha_votacion >= '$fecha' 
+				LIMIT 1";
 		$rs = $this->db->query($query);
 		if($rs->num_rows() == 1){
 			return $rs->result_array();
@@ -44,7 +48,8 @@ Class Usuarios_model extends CI_Model{
 
 	public function set_voto($idU,$idS,$puntos,$comentario,$fechaUso){
 		$fechaVotacion = date('Y-m-d h:i:s');
-		$query = "INSERT INTO `puntuacion` (`id_usuarios`, `id_servicios`, `puntos`,  `comentario`, `fecha_votacion`, `fecha_uso_servicio`) VALUES ($idU, $idS, $puntos,'$comentario', '$fechaVotacion', '$fechaUso');";
+		$query = "INSERT INTO puntuacion (id_usuarios, id_servicios, puntos, comentario, fecha_votacion, fecha_uso_servicio) 
+				VALUES ($idU, $idS, $puntos,'$comentario', '$fechaVotacion', '$fechaUso');";
 		$rs = $this->db->query($query);
 		return $rs;
 	}
@@ -67,7 +72,7 @@ Class Usuarios_model extends CI_Model{
 
 	public function getDNI($dni){
 	//Verifica que el dni sel usuario sea unico
-		$query = "SELECT usuarios.id, usuarios.dni FROM usuarios
+		$query 	= 	"SELECT usuarios.id, usuarios.dni FROM usuarios
 					WHERE usuarios.dni = '$dni'
 					LIMIT 1";
 
@@ -83,9 +88,9 @@ Class Usuarios_model extends CI_Model{
 
 	public function getUsuario($id){
 		//Devuelve toda la informacion del usuario, determinado por el id
-		 $query 	= "SELECT * FROM usuarios
-			   			WHERE usuarios.id = $id
-			   			LIMIT 1";
+		 $query = 	"SELECT * FROM usuarios
+			   		WHERE usuarios.id = $id
+			   		LIMIT 1";
 
 		$rs    = $this->db->query($query);
 
@@ -147,12 +152,49 @@ Class Usuarios_model extends CI_Model{
 	}
 
 
+	//Edita el usuario
+	public function editar_email($usuario){
+		$query = "UPDATE usuarios
+			SET email = '".$usuario['usuario']."', 
+				codigo = '".$usuario['codigo']."', 
+				estado = ".$usuario['estado'].", 
+				ultima_edicion = '".$usuario['ultima_edicion']."' 
+			WHERE id = ".$usuario['id']."";
+		$rs = $this->db->query($query);
+		return $rs;
+	}
 	
-	//Recibe un array
+
+	//Edita una nueva clave dependiendo el id de usuario
+	public function editar_clave($usuario){
+		$query="UPDATE usuarios
+				SET clave = MD5('".$usuario['clave']."'), 
+					ultima_edicion = '".$usuario['ultima_edicion']."' 
+				WHERE id = ".$usuario['id']."";
+		$rs = $this->db->query($query);
+		return $rs;
+	}
+
+	//Edita el usuario dependiendo el id de usuario
+	public function editar_usuario($usuario){
+		$query="UPDATE usuarios
+				SET nombre = '".$usuario['nombre']."', 
+					apellido ='".$usuario['apellido']."', 
+				 	telefono = '".$usuario['telefono']."', 
+				 	direccion = '".$usuario['direccion']."', 
+				 	ultima_edicion = '".$usuario['ultima_edicion']."'
+				WHERE id = ".$usuario['id']."";
+		$rs = $this->db->query($query);
+		return $rs;
+	}
+
+
+	//Actualiza la clave dependiendo el email del usuarios: Recibe un array
 	public function actualizar_clave($usuario){
 		$query 	= 	"UPDATE usuarios 
-					SET clave = MD5('".$usuario['clave']."'), ultima_edicion = '".$usuario['ultima_edicion']."' 
-					WHERE email = '".$usuario['usuario']."';";
+					SET clave = MD5('".$usuario['clave']."'), 
+						ultima_edicion = '".$usuario['ultima_edicion']."' 
+					WHERE email = '".$usuario['usuario']."'";
 
 		$rs 	= $this->db->query($query);
 		
@@ -173,7 +215,11 @@ Class Usuarios_model extends CI_Model{
 
 	//Actualiza el estado del usuario
 	public function actualizarEstadoVerficado($estado, $codigo, $fecha){
-		$query 	= "UPDATE usuarios SET estado = $estado, fecha_mod_estado = '$fecha', ultima_edicion = '$fecha' WHERE codigo = '$codigo';";
+		$query 	= 	"UPDATE usuarios 
+					SET estado = $estado, 
+						fecha_mod_estado = '$fecha', 
+						ultima_edicion = '$fecha' 
+					WHERE codigo = '$codigo';";
 
 		$rs 	= $this->db->query($query);
 
@@ -182,7 +228,7 @@ Class Usuarios_model extends CI_Model{
 
 	public function setFavorito($id_usuario,$id_servicio){
 		$fechaUso = date('Y-m-d h:i:s');
-		$query = "INSERT INTO `favoritos` (`id_usuarios`, `id_servicios`, `fecha`) VALUES ($id_usuario, $id_servicio, '$fechaUso');";
+		$query = "INSERT INTO favoritos (id_usuarios, id_servicios, fecha) VALUES ($id_usuario, $id_servicio, '$fechaUso');";
 		$rs = $this->db->query($query);
 		return $rs;
 	}
@@ -193,12 +239,11 @@ Class Usuarios_model extends CI_Model{
 		return $rs->result_array();
 	}
 
-	public function deleteFavorito($id_servicios){
-		$query ="DELETE FROM `favoritos` WHERE  `id_servicios`=$id_servicios LIMIT 1;";
+	public function deleteFavorito($id_servicios, $id_usuario){
+		$query ="DELETE FROM favoritos WHERE  id_servicios=$id_servicios AND id_usuarios = $id_usuario";
 		$rs = $this->db->query($query);
 		return $rs;
 	}
-
 
 
 	public function getFavoritos($idUsuario, $desdeLimit ,$cantidadLimit){

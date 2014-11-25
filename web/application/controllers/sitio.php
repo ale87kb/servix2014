@@ -45,13 +45,20 @@ class sitio extends CI_Controller {
 
 
 		if($validacion['error'] == false){
-			$this->servicios_model->setConsultaServicio($id_servicio, $id_usuario, $comentario);
+			
 			$post['nombreUsuario'] = $usuario['nombre'];
 			$post['telUsuario']    = $usuario['telefono'];
 			$post['emailUsuario']  = $usuario['email'];
 
-			//$this->servicios_model->sendContacto($post);
-			$this->sendContacto($post);
+			$email = $this->sendContacto($post);
+			//Si se envia el comentario por e-mail, se graba en la base de datos
+			if($email){
+				$this->servicios_model->setConsultaServicio($id_servicio, $id_usuario, $comentario);
+			}
+			else
+			{
+				$validacion['mensaje'] = 'No se ha podido enviar su consulta. Intente mas tarde.';
+			}
 		
 		}
 

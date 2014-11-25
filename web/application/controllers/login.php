@@ -43,7 +43,7 @@ class Login extends CI_Controller {
 	public function validar_recuperar_clave(){
 		if(isset($_POST['grabar']) and $_POST['grabar'] == 'si'){
 			$this->load->library('form_validation');
-			$this->form_validation->set_rules('usuario', 'email', 'trim|required|valid_email|xss_clean|callback_check_user_database');
+			$this->form_validation->set_rules('usuario', 'e-mail', 'trim|required|valid_email|xss_clean|callback_check_user_database');
 			
 			$this->form_validation->set_message('required', 'El campo %s es obligatorio');
 			$this->form_validation->set_message('valid_email', 'Ingrese un %s válido');
@@ -122,7 +122,7 @@ class Login extends CI_Controller {
 
 			$this->load->library('form_validation');
 
-			$this->form_validation->set_rules('usuario', 'email', 'trim|required|valid_email|xss_clean|callback_check_user_duplicate');
+			$this->form_validation->set_rules('usuario', 'e-mail', 'trim|required|valid_email|xss_clean|callback_check_user_duplicate');
 			$this->form_validation->set_rules('clave', 'contraseña', 'trim|required|xss_clean|md5');
 			$this->form_validation->set_rules('rclave', 'repetir contraseña', 'trim|required|matches[clave]|xss_clean|md5');
 
@@ -205,7 +205,7 @@ class Login extends CI_Controller {
 
 			$this->load->library('form_validation');
 
-			$this->form_validation->set_rules('usuario', 'email', 'trim|required|valid_email|xss_clean|callback_check_user_duplicate');
+			$this->form_validation->set_rules('usuario', 'e-mail', 'trim|required|valid_email|xss_clean|callback_check_user_duplicate');
 			$this->form_validation->set_rules('clave', 'contraseña', 'trim|required|xss_clean|md5');
 			$this->form_validation->set_rules('rclave', 'repetir contraseña', 'trim|required|matches[clave]|xss_clean|md5');
 
@@ -223,11 +223,12 @@ class Login extends CI_Controller {
 			if($this->form_validation->run() == FALSE)
 			{
 				//$this->registrar_usuario();
-				if(form_error('usuario') != "")
+/*				if(form_error('usuario') != "")*/
+				if(form_error('usuario'))
 	            {
 		            $data['username'] = form_error('usuario');
 	            }
-	           	if(form_error('dni') != "")
+	           	if(form_error('dni'))
 	           	{
 		            $data['dni'] = form_error('dni');
 	           	}
@@ -301,6 +302,158 @@ class Login extends CI_Controller {
 		}
 	}
 
+	public function check_newPassword($clave){
+		$user = (int)$this->input->post('user');
+		$UsuarioRegistrado	= $this->usuarios_model->getUsuario($user);
+
+		$result = $this->usuarios_model->login($UsuarioRegistrado['email'], $clave);
+
+		if($result)
+		{
+			return true;
+		}
+		else
+		{
+			$this->form_validation->set_message('check_newPassword', 'Clave incorrecta.');
+			return false;
+		}
+	}
+
+	public function validar_editar_datos(){
+		//Valida el formulario de edicion de usuario
+
+		if(isset($_POST['grabar']) and $_POST['grabar'] == 'si'){
+
+			$id_usuario 		= (int)$this->input->post('user');
+			$UsuarioRegistrado	= $this->usuarios_model->getUsuario($id_usuario);
+			$usuario 			= $this->input->post('usuario');
+			$clave 				= $this->input->post('clave');
+
+			$this->load->library('form_validation');
+
+			if($usuario){
+				if($usuario != $UsuarioRegistrado['email']){
+					$this->form_validation->set_rules('usuario', 'e-mail', 'trim|required|valid_email|xss_clean|callback_check_user_duplicate');
+				}
+			}
+
+			if($clave){
+				$this->form_validation->set_rules('clave', 'contraseña', 'trim|required|xss_clean|md5|callback_check_newPassword');
+				$this->form_validation->set_rules('nclave', 'nueva contraseña', 'trim|required|xss_clean|md5');
+				$this->form_validation->set_rules('rclave', 'repetir nueva contraseña', 'trim|required|matches[nclave]|xss_clean|md5');
+			}
+
+			$this->form_validation->set_rules('nombre', 'nombre', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('apellido', 'apellido', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('direccion', 'direccion', 'trim|xss_clean');
+			$this->form_validation->set_rules('telefono', 'teléfono', 'trim|xss_clean');
+
+			$this->form_validation->set_message('required', 'El campo %s es obligatorio');
+			$this->form_validation->set_message('valid_email', 'Ingrese un %s válido');
+
+			$data = array();
+
+			if($this->form_validation->run() == FALSE)
+			{
+				//$this->registrar_usuario();
+				if(form_error('usuario'))
+	            {
+		            $data['username'] 	= form_error('usuario');
+	            }
+	            if(form_error('clave'))
+	            {
+	            	$data['clave'] 		= form_error('clave');
+	            }
+	           	
+	           	$data['res'] = "error";
+	            echo json_encode($data);
+			}
+			else
+			{
+				//Si cambia email, modifico el estado a 0 con nuevo codigo para que verifique nuevamente el usuario mandando un email.
+				//Si cambia la contraseña, mando un emial notificando.
+				//Si cambia datos, modifica db
+				$fecha = date('Y-m-d H:m:i');
+
+				$usuarioEditado['id'] 				= (int)$id_usuario;
+				$usuarioEditado['nombre'] 			= $this->input->post('nombre', TRUE);
+				$usuarioEditado['apellido'] 		= $this->input->post('apellido');
+				$usuarioEditado['telefono'] 		= $this->input->post('telefono', TRUE);
+				$usuarioEditado['direccion'] 		= $this->input->post('direccion', TRUE);
+				$usuarioEditado['ultima_edicion'] 	= $fecha;
+
+				if($usuario)
+				{
+					$usuarioEditado['usuario'] 		= $this->input->post('usuario', TRUE);
+					$usuarioEditado['codigo'] 		= $this->_generarCodigo();
+					$usuarioEditado['estado'] 		= 0;
+					//El estado del usuario puede ser 
+					// 0 : Registrado, email NO verificado 
+					// 1 : Registrado, email verificado
+					// 2 : Usuario dado de baja
+					
+					$resultadoE = $this->usuarios_model->editar_email($usuarioEditado);
+					if($resultadoEusuarioEditado					{
+						//$this->sendEmailConfirm($nUserEmail);
+						//$enviarmail = $this->sendEmailConfirm($usuarioEditado);
+					}
+				}
+
+				if($clave)
+				{
+					$usuarioEditado['clave'] 		= $this->input->post('clave', TRUE);
+
+					$resultadoC = $this->usuarios_model->editar_clave($usuarioEditado);
+				}
+
+
+				$resultadoU = $this->usuarios_model->editar_usuario($usuarioEditado);
+
+				
+
+				/*ANTERIOR
+				$resultAdd = $this->usuarios_model->add_usuario($nuevoUsuario);
+
+				if($resultAdd)
+				{
+
+					$data['adduser'] 	= true;
+					$data['mensaje'] 	= "Registro correcto";
+					$data['title'] 		= "Registro de Usuario en Servix";
+					$data['vista'] 		= "login/registro_respuesta";
+
+					//Envio un mail para confirmar usuario
+					$mailenviado = $this->sendEmailConfirm($nuevoUsuario);
+					
+					if($mailenviado){
+						$data['mailenviado'] 	= true;
+						$data['mailmssg'] 		= "Mensaje enviado";
+					}
+					else
+					{
+						//$data['mailnoenviado'] = $this->email->print_debugger();
+						$data['mailenviado'] 	= false;
+						$data['mailmssg'] 		= "No se pudo enviar el mensaje.";
+						
+						log_message('error', $this->email->print_debugger());
+
+					}
+				}
+				else
+				{
+					$data['adduser'] 	= false;
+					$data['mensaje'] 	= "El registro de usuario ha fallado, por favor intente mas tarde.";
+					$data['title'] 		= "Registro de Usuario en Servix - Error";
+					$data['vista'] 		= "login/registro_respuesta";
+				}
+
+				$data['res'] = "success";
+				echo json_encode($data);*/
+			}
+		}
+	}
+
+
 
 	public function registro_respuesta(){
 		$data = $this->input->post(json_decode('datos',true));
@@ -322,7 +475,7 @@ class Login extends CI_Controller {
 
 		if($resultEmail)
 		{
-			$this->form_validation->set_message('check_user_duplicate', 'El Email ingresado ya esta registrado');
+			$this->form_validation->set_message('check_user_duplicate', 'El E-mail ingresado ya esta registrado.');
 			return false;
 		}
 		else
@@ -341,7 +494,7 @@ class Login extends CI_Controller {
 		$resultadoDni = $this->usuarios_model->getDNI($dni);
 
 		if($resultadoDni){
-			$this->form_validation->set_message('check_dni_duplicate', 'El DNI ingresado ya esta registrado');
+			$this->form_validation->set_message('check_dni_duplicate', 'El DNI ingresado ya esta registrado.');
 			return false;
 		}
 		else
@@ -365,7 +518,7 @@ class Login extends CI_Controller {
 	        $fromemail          = 'no-responder@servix.com'; // desde
 	        $toemail            = $post['usuario']; //para
 	        $mail               = null;
-	        $subject            = "Confirmación de Email de registro en Servix";
+	        $subject            = "Confirmación de E-mail de registro en Servix";
 
 	        
 	        $this->email->initialize($config);
@@ -447,7 +600,7 @@ class Login extends CI_Controller {
 		/* CON BOOSTRAPVALIDATOR */
 		if($this->form_validation->run() == FALSE)
         {
-            if(form_error('usuario') != "")
+            if(form_error('usuario'))
             {
 	            $data = array(
 	                'username' => form_error('usuario'),

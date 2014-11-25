@@ -115,7 +115,7 @@ class Usuario extends CI_controller{
 			$this->usuarios_model->setFavorito($id_usuario,$id_servicio);
 			echo json_encode("insert");
 		}else{
-			$this->usuarios_model->deleteFavorito($id_servicio);
+			$this->usuarios_model->deleteFavorito($id_servicio, $id_usuario);
 			echo json_encode("delete");
 			
 		}
@@ -228,7 +228,8 @@ class Usuario extends CI_controller{
 			//Muesta los datos del usuario de la variable de sesion
 			$data['usuarioSession'] = $this->UsuarioSession;
 			
-			$data['title'] 			= 'Editar Datos';
+			$data['js'] = array('assets/js/edit_user.js');
+			$data['title'] 			= 'Editar perfil';
 			$data['vista'] 			= 'usuario/editar_datos';
 			$this->load->view('usuarios_view', $data);
 		}
