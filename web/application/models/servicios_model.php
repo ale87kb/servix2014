@@ -125,7 +125,8 @@ Class Servicios_model extends CI_Model{
 				INNER JOIN servix_db.provincias ON servix_db.provincias.id = servix_db.localidades.id_provincia
 				WHERE
 				servix_db.busquedas_temp.id = $id";
-
+		$rs    = $this->db->query($query);
+		return $rs->result_array();
 	 }
 
 

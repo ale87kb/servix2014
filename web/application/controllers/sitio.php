@@ -378,7 +378,7 @@ class sitio extends CI_Controller {
 		if(is_numeric($id)){
 
 			$data['title']   = 'Ficha del servicio';
-			$solicitado 	 = $this->servix_model->getServicioSolicitado($id);
+			$solicitado 	 = $this->servicios_model->getServicioSolicitado($id);
 			$solicitados 	 = $this->_setPagSolicitados($seccion,$segment);
 
 			if(!empty($solicitados)){
