@@ -16,7 +16,7 @@ Class Servicios_model extends CI_Model{
 		return $rs;
 	}
 
-	public function getServiciosDestacagdos(){
+	public function getServiciosDestacados(){
 		$query = "SELECT
 				servicios.titulo,
 				servicios.descripcion,

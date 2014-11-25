@@ -23,7 +23,7 @@ class sitio extends CI_Controller {
 		//$data['usuario'] = $this->usuario;
 		
 
-		$destacados  	 = $this->servicios_model->getServiciosDestacagdos();
+		$destacados  	 = $this->servicios_model->getServiciosDestacados();
 		$solicitados 	 = $this->_setPagSolicitados();
 		
 		if(!empty($destacados)){

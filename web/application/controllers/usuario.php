@@ -19,10 +19,12 @@ class Usuario extends CI_controller{
 			$Usfavoritos 					= $this->_linkFavoritos($this->UsuarioSession['id'], 0, 5);
 			$UsComentarios 					= $this->_comentariosRealizados($this->UsuarioSession['id'], 0, 5);
 			$UsServiciosContactados			= $this->_serviciosContactados($this->UsuarioSession['id'], 0, 5);
+			$UsServiciosSolicitados			= $this->_serviciosSolicitados($this->UsuarioSession['id'], 0, 5);
 
 			$data['favoritos'] 		= $Usfavoritos;
 			$data['comentarios'] 	= $UsComentarios;
 			$data['sContactados'] 	= $UsServiciosContactados;
+			$data['sSolicitados'] 	= $UsServiciosSolicitados;
 			
 			$data['title'] 			= 'Mi Perfil';
 			$data['vista'] 			= 'usuario/mi_perfil';
@@ -67,6 +69,18 @@ class Usuario extends CI_controller{
 				$sContactados[$c]['fecha'] = fechaBarras(strtotime($sContactados[$c]['fecha']));
 			}
 			return $sContactados;
+		}
+		return false;
+	}
+	private function _serviciosSolicitados($idUsuario, $desdeLimit ,$cantidadLimit){
+		$sSolicitados = $this->usuarios_model->getUServiciosSolicitados($idUsuario, $desdeLimit ,$cantidadLimit);
+		if($sSolicitados){
+			foreach ($sSolicitados as $c => $clave) {
+				/*$sSolicitados[$c]['link'] = generarLinkServicio($sSolicitados[$c]['id'], $sSolicitados[$c]['titulo']);*/
+				$sSolicitados[$c]['fecha'] = fechaBarras(strtotime($sSolicitados[$c]['fecha_ini']));
+			print_d($this->db->last_query());
+			}
+			return $sSolicitados;
 		}
 		return false;
 	}

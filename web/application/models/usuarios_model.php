@@ -312,4 +312,27 @@ Class Usuarios_model extends CI_Model{
 
 	}
 
+	public function getUServiciosSolicitados($idUsuario, $desdeLimit, $cantidadLimit){
+		$query =	"SELECT
+						busquedas_temp.id,
+						categorias.categoria,
+						provincias.provincia,
+						localidades.localidad,
+						busquedas_temp.fecha_ini,
+						busquedas_temp.fecha_fin,
+						busquedas_temp.busqueda,
+						busquedas_temp.vencido
+					FROM
+						busquedas_temp
+					INNER JOIN categorias ON busquedas_temp.id_categorias = categorias.id
+					INNER JOIN localidades ON busquedas_temp.id_localidad = localidades.id
+					INNER JOIN provincias ON localidades.id_provincia = provincias.id
+					WHERE busquedas_temp.id_usuario = $idUsuario
+					ORDER BY busquedas_temp.fecha_ini DESC
+					LIMIT $desdeLimit, $cantidadLimit";
+		$rs = $this->db->query($query);
+		return $rs->result_array();
+
+	}
+
 }

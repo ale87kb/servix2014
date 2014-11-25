@@ -14,7 +14,12 @@
 	$this->load->view('usuario/servicios_contactados');
 ?>
 			</div>
-	
+			<div class="row">
+<?php 
+	$this->load->view('usuario/servicios_solicitados');
+?>
+			</div>
+
 		</div>
 	</div>
 </div>
