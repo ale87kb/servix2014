@@ -89,7 +89,20 @@ Class Servicios_model extends CI_Model{
 	}
 
 
-	public function getServiciosSolicitados($fecha){
+	public function getTotalFilasSolicitados($fecha){
+		$query="SELECT
+				  count(id) as total 
+				  FROM
+				  busquedas_temp
+				  WHERE
+				  busquedas_temp.vencido = 0
+				  AND
+				  busquedas_temp.fecha_ini >= '$fecha'
+				  ORDER BY busquedas_temp.fecha_ini DESC LIMIT 100";
+		$rs    = $this->db->query($query);
+		return $rs->first_row()->total;
+	}
+	public function getServiciosSolicitados($fecha,$ini,$fin){
 		$query = "SELECT
 				  categorias.categoria,
 				  localidades.localidad,
@@ -110,7 +123,7 @@ Class Servicios_model extends CI_Model{
 				  AND
 				  busquedas_temp.fecha_ini >= '$fecha'
 				  ORDER BY busquedas_temp.fecha_ini DESC
-				  LIMIT 5";
+				  LIMIT $ini,$fin";
 				
 		$rs    = $this->db->query($query);
 		return $rs->result_array();

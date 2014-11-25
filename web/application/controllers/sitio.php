@@ -21,12 +21,10 @@ class sitio extends CI_Controller {
 			$data['usuarioSession'] = $this->UsuarioSession;
 		}
 		//$data['usuario'] = $this->usuario;
-		$semanaActual  	 = strtotime("-7 day");
-		$semanaSolicitado= date('Y-m-d h:i:s',$semanaActual); 
-	 	
-	 	
+		
+
 		$destacados  	 = $this->servicios_model->getServiciosDestacagdos();
-		$solicitados 	 = $this->servicios_model->getServiciosSolicitados($semanaSolicitado);
+		$solicitados 	 = $this->_setPagSolicitados();
 		
 		if(!empty($destacados)){
 			$data['destacados'] = $destacados;
@@ -35,13 +33,37 @@ class sitio extends CI_Controller {
 		}
 
 		if(!empty($solicitados)){
-			$data['solicitados'] = $solicitados;
+			$data['solicitados'] = $solicitados['result'];
 		}else{
 			$data['solicitados'] = null;
 		}
 
+		$data['paginacion'] = $solicitados['links'];
 		$data['vista'] = 'index_view';
 		$this->load->view('home_view',$data);
+	}
+
+
+	private function _setPagSolicitados(){
+
+  		$semanaActual  			= strtotime("-7 day");
+		$semanaSolicitado		= date('Y-m-d h:i:s',$semanaActual); 
+ 	    $this->load->library('pagination');
+	    $config = array();
+        $config["base_url"] 	= site_url('servicios-solicitados');
+        $config["total_rows"]   = $this->servicios_model->getTotalFilasSolicitados($semanaSolicitado);
+        $config["per_page"] 	= 4;
+        $config["uri_segment"]  = 2;
+        $config['last_link'] 	= 'Último';
+        $config['first_link'] 	= 'Primero';
+        $this->pagination->initialize($config);
+      
+        $page 					= (is_numeric($this->uri->segment(2))) ? $this->uri->segment(2) : 0;
+        $data["result"] 		= $this->servicios_model->getServiciosSolicitados($semanaSolicitado , $page, $config["per_page"]); 
+       
+        $data["links"] 			= $this->pagination->create_links();
+		return $data;
+       
 	}
 
 
@@ -289,27 +311,27 @@ class sitio extends CI_Controller {
 
 
 	private function _setPaginacionOpinion($servicio,$id)
-		{
-		   
+	{
+	   
 
-		    $this->load->library('pagination');
-		    $config = array();
-	        $config["base_url"] 	= site_url('ficha/'.$servicio.'/opniones/page');
-	        $config["total_rows"]   = $this->servicios_model->getTotalOpiniones($id);
-	        $config["per_page"] 	= 4;
-	        $config["uri_segment"]  = 5;
-	        $config["is_ajax_paging"]    = TRUE; //default FALSE
-	        $config['paging_function'] = 'ajax_paging';// Your jQuery paging
-	        $this->pagination->initialize($config);
-	        $page 					= (is_numeric($this->uri->segment(5))) ? $this->uri->segment(5) : 0;
-	        $data["result"] 		= $this->servicios_model->getOpinionServicio($id, $page, $config["per_page"]); 
-	     
-	    
-	        $data["links"] 			= $this->pagination->create_links();
-			return $data;
-	       
+	    $this->load->library('pagination');
+	    $config = array();
+        $config["base_url"] 	= site_url('ficha/'.$servicio.'/opniones/page');
+        $config["total_rows"]   = $this->servicios_model->getTotalOpiniones($id);
+        $config["per_page"] 	= 4;
+        $config["uri_segment"]  = 5;
+        $config["is_ajax_paging"]    = TRUE; //default FALSE
+        $config['paging_function'] = 'ajax_paging';// Your jQuery paging
+        $this->pagination->initialize($config);
+        $page 					= (is_numeric($this->uri->segment(5))) ? $this->uri->segment(5) : 0;
+        $data["result"] 		= $this->servicios_model->getOpinionServicio($id, $page, $config["per_page"]); 
+     
+    
+        $data["links"] 			= $this->pagination->create_links();
+		return $data;
+       
 
-		}
+	}
 
 	public function get_opiniones($servicio=null,$num=0){
 		$this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0");
