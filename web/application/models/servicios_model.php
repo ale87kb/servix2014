@@ -89,25 +89,28 @@ Class Servicios_model extends CI_Model{
 	}
 
 
-	public function getServiciosSolicitados(){
+	public function getServiciosSolicitados($fecha){
 		$query = "SELECT
-				categorias.categoria,
-				localidades.localidad,
-				provincias.provincia,
-				usuarios.apellido,
-				usuarios.nombre,
-				busquedas_temp.busqueda,
-				busquedas_temp.fecha_ini,
-				busquedas_temp.fecha_fin
-				FROM
-				busquedas_temp
-				INNER JOIN categorias ON busquedas_temp.id_categorias = categorias.id
-				INNER JOIN localidades ON busquedas_temp.id_localidad = localidades.id
-				INNER JOIN provincias ON localidades.id_provincia = provincias.id
-				INNER JOIN usuarios ON busquedas_temp.id_usuario = usuarios.id
-				WHERE
-				busquedas_temp.vencido = 0
-				LIMIT 5";
+				  categorias.categoria,
+				  localidades.localidad,
+				  provincias.provincia,
+				  usuarios.apellido,
+				  usuarios.nombre,
+				  busquedas_temp.busqueda,
+				  busquedas_temp.fecha_ini,
+				  busquedas_temp.fecha_fin
+				  FROM
+				  busquedas_temp
+				  INNER JOIN categorias ON busquedas_temp.id_categorias = categorias.id
+				  INNER JOIN localidades ON busquedas_temp.id_localidad = localidades.id
+				  INNER JOIN provincias ON localidades.id_provincia = provincias.id
+				  INNER JOIN usuarios ON busquedas_temp.id_usuario = usuarios.id
+				  WHERE
+				  busquedas_temp.vencido = 0
+				  AND
+				  busquedas_temp.fecha_ini >= '$fecha'
+				  ORDER BY busquedas_temp.fecha_ini DESC
+				  LIMIT 5";
 				
 		$rs    = $this->db->query($query);
 		return $rs->result_array();

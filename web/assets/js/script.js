@@ -464,6 +464,8 @@ var app = function(){
 
         },
         this.init = function(){
+
+
             this.busqueda();
             this.validar_busqueda();
             this.validar_login_ajax();

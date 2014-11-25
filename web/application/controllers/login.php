@@ -393,7 +393,7 @@ class Login extends CI_Controller {
 					// 2 : Usuario dado de baja
 					
 					$resultadoE = $this->usuarios_model->editar_email($usuarioEditado);
-					if($resultadoEusuarioEditado					{
+					if($resultadoEusuarioEditado	)				{
 						//$this->sendEmailConfirm($nUserEmail);
 						//$enviarmail = $this->sendEmailConfirm($usuarioEditado);
 					}

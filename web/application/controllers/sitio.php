@@ -21,12 +21,25 @@ class sitio extends CI_Controller {
 			$data['usuarioSession'] = $this->UsuarioSession;
 		}
 		//$data['usuario'] = $this->usuario;
-		$destacados = $this->servicios_model->getServiciosDestacagdos();
+		$semanaActual  	 = strtotime("-7 day");
+		$semanaSolicitado= date('Y-m-d h:i:s',$semanaActual); 
+	 	
+	 	
+		$destacados  	 = $this->servicios_model->getServiciosDestacagdos();
+		$solicitados 	 = $this->servicios_model->getServiciosSolicitados($semanaSolicitado);
+		
 		if(!empty($destacados)){
 			$data['destacados'] = $destacados;
 		}else{
 			$data['destacados'] = null;
 		}
+
+		if(!empty($solicitados)){
+			$data['solicitados'] = $solicitados;
+		}else{
+			$data['solicitados'] = null;
+		}
+
 		$data['vista'] = 'index_view';
 		$this->load->view('home_view',$data);
 	}
