@@ -102,6 +102,33 @@ Class Servicios_model extends CI_Model{
 		$rs    = $this->db->query($query);
 		return $rs->first_row()->total;
 	}
+
+
+	public function getServicioSolicitado($id){ 
+		$query ="SELECT
+				servix_db.busquedas_temp.id,
+				servix_db.provincias.provincia,
+				servix_db.localidades.localidad,
+				servix_db.categorias.categoria,
+				servix_db.busquedas_temp.busqueda,
+				servix_db.busquedas_temp.vencido,
+				servix_db.busquedas_temp.fecha_fin,
+				servix_db.busquedas_temp.fecha_ini,
+				servix_db.usuarios.nombre,
+				servix_db.usuarios.apellido
+
+				FROM
+				servix_db.busquedas_temp
+				INNER JOIN servix_db.usuarios ON servix_db.busquedas_temp.id_usuario = servix_db.usuarios.id
+				INNER JOIN servix_db.categorias ON servix_db.categorias.id = servix_db.busquedas_temp.id_categorias
+				INNER JOIN servix_db.localidades ON servix_db.localidades.localidad = servix_db.busquedas_temp.id_localidad
+				INNER JOIN servix_db.provincias ON servix_db.provincias.id = servix_db.localidades.id_provincia
+				WHERE
+				servix_db.busquedas_temp.id = $id";
+
+	 }
+
+
 	public function getServiciosSolicitados($fecha,$ini,$fin){
 		$query = "SELECT
 			      busquedas_temp.id,
