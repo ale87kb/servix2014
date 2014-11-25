@@ -21,7 +21,7 @@ class sitio extends CI_Controller {
 			$data['usuarioSession'] = $this->UsuarioSession;
 		}
 		//$data['usuario'] = $this->usuario;
-		
+		$seccion = "servicios-solicitados";
 
 		$destacados  	 = $this->servicios_model->getServiciosDestacagdos();
 		$solicitados 	 = $this->_setPagSolicitados();
@@ -51,21 +51,21 @@ class sitio extends CI_Controller {
 	}
 
 
-	private function _setPagSolicitados(){
+	private function _setPagSolicitados($seccion,$segment=2){
 
   		$semanaActual  			= strtotime("-7 day");
 		$semanaSolicitado		= date('Y-m-d h:i:s',$semanaActual); 
  	    $this->load->library('pagination');
 	    $config = array();
-        $config["base_url"] 	= site_url('servicios-solicitados');
+        $config["base_url"] 	= site_url($seccion);
         $config["total_rows"]   = $this->servicios_model->getTotalFilasSolicitados($semanaSolicitado);
         $config["per_page"] 	= 4;
-        $config["uri_segment"]  = 2;
+        $config["uri_segment"]  = $segment;
         $config['last_link'] 	= 'Último';
         $config['first_link'] 	= 'Primero';
         $this->pagination->initialize($config);
       
-        $page 					= (is_numeric($this->uri->segment(2))) ? $this->uri->segment(2) : 0;
+        $page 					= (is_numeric($this->uri->segment($segment))) ? $this->uri->segment($segment) : 0;
         $data["result"] 		= $this->servicios_model->getServiciosSolicitados($semanaSolicitado , $page, $config["per_page"]); 
        
         $data["links"] 			= $this->pagination->create_links();
@@ -373,13 +373,35 @@ class sitio extends CI_Controller {
 	public function servicio_solicitado($servicio=null){
 		$id 			 = $this->_parsearIdServicio($servicio);
 
+		$seccion ="servicio-solicitado/".$servicio;
+		$segment = 3;
 		if(is_numeric($id)){
 
-			$data['title']     = 'Ficha del servicio';
+			$data['title']   = 'Ficha del servicio';
+			$solicitado 	 = $this->servix_model->getServicioSolicitado($id);
+			$solicitados 	 = $this->_setPagSolicitados($seccion,$segment);
+
+			if(!empty($solicitados)){
+				$data['solicitados'] = $solicitados['result'];
+			}else{
+				$data['solicitados'] = null;
+			}
+			$data['paginacion'] = $solicitados['links'];
 			$data['servUrl']   =  site_url('ficha/'.$servicio);
 			$data['vista']     = 'servicio_solicitado';
 
-			$this->load->view('home_view',$data);
+			// $this->load->view('home_view',$data);
+
+
+			if ($this->input->is_ajax_request()) {
+					$this->load->view('servicios_solicitados',$data);
+			
+			}else{
+				$this->load->view('home_view',$data);
+	       
+			}
+
+
 		}else{
 
 			redirect('');	
