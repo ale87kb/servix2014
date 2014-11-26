@@ -240,6 +240,8 @@ var app = function(){
                
             });
         },
+
+
         this.ajax_paging = function(){
          
          $(document).on("click", "#pagination a", function(e) {
@@ -280,10 +282,10 @@ var app = function(){
                    return false;
                 });            
       
-      
-              
                   
          },
+
+         
         this.validar_comentario_servicio = function(){
 
             $("#formCServ").bootstrapValidator({
@@ -498,8 +500,8 @@ var app = function(){
 
 
 
-    $servix = new app();
-    $servix.init();
+    var servix = new app();
+    servix.init();
 	
 
 });

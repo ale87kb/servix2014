@@ -10,7 +10,7 @@
 	?>
 
 			<p>Tu clave ha sido modificada.</p>
-			<p>Te enviamos un mensaje a tu casilla de Email, con tu nueva clave, para que puedas iniciar sesión.</p>
+			<p>Te enviamos un mensaje a tu casilla de e-mail, con tu nueva clave, para que puedas iniciar sesión.</p>
 			<p>Te recomendamos que luego de iniciar sesión modifiques tu clave.</p>
 			<p>Servix</p>
 
@@ -21,7 +21,7 @@
 	?>
 
 			<p>Tu clave ha sido modificada.</p>
-			<p>No pudimos enviarte un mensaje a tu casilla de Email con tu nueva clave.</p>
+			<p>No pudimos enviarte un mensaje a tu casilla de e-mail con tu nueva clave.</p>
 			<p>Por favor comunicate con nuestros sistemas de contacto para que te facilitemos tu nueva clave.</p>
 			<p>Servix</p>
 

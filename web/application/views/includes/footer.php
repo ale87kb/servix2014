@@ -17,7 +17,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Iniciar Sesión con tu email</h4>
+            <h4 class="modal-title">Iniciar Sesión con tu e-mail</h4>
           </div>
           <div class="modal-body login_modal_body">
 
@@ -27,7 +27,7 @@
               </div>
               <div class="form-group">
                 <label for="usuario">Usuario</label>
-                <input type="email" name="usuario" class="form-control" placeholder="Email de usuario">
+                <input type="email" name="usuario" class="form-control" placeholder="E-mail de usuario">
                 <span class='errorusername'></span>
               </div>
               <div class="form-group">
@@ -156,7 +156,7 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="emailAmigo" class="col-sm-5 control-label">¿Email de tu amigo?</label>
+              <label for="emailAmigo" class="col-sm-5 control-label">¿E-mail de tu amigo?</label>
               <div class="col-sm-6">
                   <input class="form-control" type="email" name="emailAmigo" id="emailAmigo" required />
               </div>

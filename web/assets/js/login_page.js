@@ -43,7 +43,7 @@ $('document').ready(function(){
 	}
 	
 
-	$servix = new login();
-	$servix.init();
+	var servix = new login();
+	servix.init();
 
 });

@@ -1,7 +1,7 @@
 <!--<div class="container">-->
   <div class="jumbotron col-md-12">
   <h1>Inicio de sesión en Servix</h1>
-  <p>Inicia sesión con tu email de usuario</p>
+  <p>Inicia sesión con tu e-mail de usuario</p>
    
    <?php echo validation_errors(); ?>
 
@@ -9,7 +9,7 @@
     <div class="form-group">
       <label for="usuario" class="col-sm-2 control-label">Usuario</label>
       <div class="col-sm-7">
-        <input type="email" class="form-control" id="usuario" name="usuario" placeholder="Email de usuario">
+        <input type="email" class="form-control" id="usuario" name="usuario" placeholder="E-mail de usuario">
       </div>
     </div>
     <div class='errorusername'></div>

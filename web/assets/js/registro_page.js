@@ -22,7 +22,7 @@ $('document').ready(function(){
                             },
                             regexp: {
                                 regexp: '^[^@\\s]+@([^@\\s]+\\.)+[^@\\s]+$',
-                                message: 'El email ingresado no es correcto'
+                                message: 'El e-mail ingresado no es correcto'
                             }
                         }
                     }, 
@@ -152,7 +152,7 @@ $('document').ready(function(){
                         {
                             if(data['username']){
                                 bv.updateStatus('usuario', 'INVALID', 'notEmpty');
-                                bv.updateMessage('usuario', 'notEmpty', 'El email ingresado ya se encuentra registrado.');
+                                bv.updateMessage('usuario', 'notEmpty', 'El e-mail ingresado ya se encuentra registrado.');
                             }
                             if(data['dni']){
                                 bv.updateStatus('dni', 'INVALID', 'notEmpty');
@@ -208,7 +208,7 @@ $('document').ready(function(){
 	}
 	
 
-	$servix = new registro();
-	$servix.init();
+	var servix = new registro();
+	servix.init();
 
 });

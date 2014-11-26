@@ -31,7 +31,7 @@
 ?>
 				<p><?php echo $mensaje; ?></p>
 
-				<p>Verificá el código que aparece en el email que te enviamos cuando te registraste.</p>
+				<p>Verificá el código que aparece en el e-mail que te enviamos cuando te registraste.</p>
 <?php
 				break;
 		}

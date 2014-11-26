@@ -4,13 +4,13 @@
 		<div class="col-md-12">
 			<div class="row">
 
-<div id="box_registro" class="col-md-12">
+<div id="box_edicionUser" class="col-md-12">
    
 
 <h1>Editar perfil</h1>
 <h3>Datos del usuario</h3>
 
-<form id="form_edit_user" class="form-horizontal" role="form" name="form_reg" action="<?php echo site_url('');?>" method="post" enctype="multipart/form-data">
+<form id="form_edit_user" class="form-horizontal" role="form" name="form_reg" action="<?php echo site_url('mi-perfil/validar_editar_datos');?>" method="post" enctype="multipart/form-data">
   
   <div class="form-group">
     <div class="col-md-2" align="center">
@@ -22,8 +22,8 @@
   <div class="form-group">
     <label for="usuario" class="col-sm-2 control-label">* E-mail</label>
     <div class="col-sm-7">
-      <p class="form-control-static" id="eTusuario"><?php echo $usuarioSession['email']; ?>&nbsp;<span>(<a href="#">Cambiar</a>)</span></p>
-      <input style="display:none;" type="email" class="form-control" id="eIusuario" name="usuario" placeholder="Email de usuario" value="<?php echo $usuarioSession['email']; ?>">
+      <p class="form-control-static input-hide-email" id="eTusuario"><?php echo $usuarioSession['email']; ?>&nbsp;<span>(<a href="#editarEmail" id="cImail">Cambiar</a>)</span></p>
+      <input style="display:none;" type="email" class="form-control input-hidden-email" id="eIusuario" name="usuario" placeholder="E-mail de usuario" value="<?php echo $usuarioSession['email']; ?>">
     </div>
   </div>
     <div class='errorusername' style="color:red;">
@@ -31,15 +31,15 @@
     </div>
 
   <div class="form-group">
-  <p style="display:block;" id="cClaveT" class="col-sm-offset-2 col-sm-7"><a href="#">Cambiar contraseña</a></p>
+  <p class="col-sm-offset-2 col-sm-7"><a href="#cambiarClave" id="cClaveT">Cambiar contraseña</a></p>
   </div>
 
-  <div id="nuevaClaveBox" class="" style="">
+  <div id="nuevaClaveBox" class="" style="display:none;">
     <div class="form-group">
       <div id="cClaveB">
         <label for="clave" class="col-sm-2 control-label">* Contraseña Actual</label>
         <div class="col-sm-7">
-          <input style="" type="password" class="form-control" id="clave" name="clave" placeholder="Contraseña">
+          <input style="display:none;" type="password" class="form-control" id="clave" name="clave" placeholder="Contraseña">
         </div>
       </div>
     </div>
@@ -50,7 +50,7 @@
     <div class="form-group">
       <label for="nclave" class="col-sm-2 control-label">* Nueva Contraseña</label>
       <div class="col-sm-7">
-        <input style="" type="password" class="form-control" id="nclave" name="nclave" placeholder="Nueva Contraseña">
+        <input style="display:none;" type="password" class="form-control" id="nclave" name="nclave" placeholder="Nueva Contraseña">
       </div>
     </div>
     <div class='errorpassword' style="color:red;">
@@ -60,7 +60,7 @@
     <div class="form-group">
       <label for="rclave" class="col-sm-2 control-label">* Repetir Nueva Contraseña</label>
       <div class="col-sm-7">
-        <input style="" type="password" class="form-control" id="rclave" name="rclave" placeholder="Repetir Nueva Contraseña">
+        <input style="display:none;" type="password" class="form-control" id="rclave" name="rclave" placeholder="Repetir Nueva Contraseña">
       </div>
     </div>
     <div class='errorpasswordr' style="color:red;">

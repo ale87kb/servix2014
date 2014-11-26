@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width" />
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Consulta Servix</title>
+<title>Modificacion en Clave en Servix</title>
 	
 <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/css/email.css') ?>" />
 
@@ -44,46 +44,26 @@
 			<table>
 				<tr>
 					<td>
-						<h3>Hola, <?php echo $nombre ?></h3>
-						<p class="lead">Te contactaron por el servicio de <strong><?php echo $nombre_servicio; ?></strong></p>
-						
-						<!-- Callout Panel -->
-						<p class="callout">
-							<strong>Mensaje</strong>:<br>
-							<?php 
-							echo htmlentities($comentario);
-							 ?>
-						</p><!-- /Callout Panel -->					
-												
-						<!-- social & contact -->
-						<table class="social" width="100%">
+						<h3>Hola <?php echo $usuario ?></h3>
+						<p class="lead">Modificaste tu contraseña en Servix.</p>
+						<p class="lead">Tus nuevos datos para iniciar sesión son los siguientes:</p>
+
+						<table>
 							<tr>
-								<td>
-									
-									<!-- column 1 -->
-									
-									
-									<!-- column 2 -->
-									<table align="left" class="column">
-										<tr>
-											<td>				
-																			
-												<h5 class="">Contact Info:</h5>												
-											
-												<p>
-													Nombre: <strong><?php echo $nombreUsuario; ?></strong></br>
-													Teléfono: <strong><?php echo $telUsuario; ?></strong><br/>
-            										E-mail: <strong><a href="emailto:hseldon@trantor.com"><?php echo $emailUsuario; ?></a></strong></p>
-                
-											</td>
-										</tr>
-									</table><!-- /column 2 -->
-									
-									<span class="clear"></span>	
-									
-								</td>
+								<td>Usuario:</td>
+								<td><?php echo $usuario ;?></td>
 							</tr>
-						</table><!-- /social & contact -->
+							<tr>
+								<td>Clave:</td>
+								<td><?php echo $clave ;?></td>
+							</tr>
+						</table>
+
+						<p class="lead">Te recordamos que puedes modificar tu clave cuantas veces quieras.</p>
+						<p class="lead">Te invitamos a iniciar sesión en el sitio para seguir disfrutando de Servix</p>
+
+						<p class="lead">¡Saludos!</p>
+						<p class="lead"><a href="<?php echo site_url('') ?>">Servix</a></p>
 						
 					</td>
 				</tr>

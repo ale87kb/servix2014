@@ -7,9 +7,9 @@
 <form id="form_reg" class="form-horizontal" role="form" name="form_reg" action="<?php echo site_url('validar_nuevo_usuario');?>" method="post" enctype="multipart/form-data">
   
 	<div class="form-group">
-      <label for="usuario" class="col-sm-2 control-label">* Email</label>
+      <label for="usuario" class="col-sm-2 control-label">* E-mail</label>
       <div class="col-sm-7">
-        <input type="email" class="form-control" id="usuario" name="usuario" placeholder="Email de usuario" value="<?php echo set_value('usuario') ?>">
+        <input type="email" class="form-control" id="usuario" name="usuario" placeholder="E-mail de usuario" value="<?php echo set_value('usuario') ?>">
       </div>
     </div>
     <div class='errorusername' style="color:red;">

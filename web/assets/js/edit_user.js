@@ -2,13 +2,25 @@ $('document').ready(function(){
 
 	var edit_user = function(){
 		this.url 	  = $site_url,
-        this.email_change = function(){}
-        
-        this.validar_clave = function(){}
+
+        this.email_change = function(){
+            $('#cImail').click(function(){
+                $('.input-hide-email').hide();
+                $('.input-hidden-email').show().focus();
+            });
+        },
+
+        this.clave_change = function(){
+            $('#cClaveT').click(function(){
+                $(this).parent().parent().hide();
+                $('#nuevaClaveBox').show();
+                $('#nuevaClaveBox input[type=password]').show();
+            });
+
+        },
 
 		this.validar_edicion = function(){
             urlweb = this.url;
-            
             $('#form_edit_user').bootstrapValidator({
                 autoFocus:  true,
                 live:       'submitted',
@@ -18,6 +30,17 @@ $('document').ready(function(){
                     validating: 'glyphicon glyphicon-refresh'
                 },
                 fields: {
+                    usuario: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Ingrese un e-mail.'
+                            },
+                            regexp: {
+                                regexp: '^[^@\\s]+@([^@\\s]+\\.)+[^@\\s]+$',
+                                message: 'El e-mail ingresado no es correcto'
+                            }
+                        }
+                    },
                     clave: {
                         validators: {
                             notEmpty: {
@@ -42,7 +65,7 @@ $('document').ready(function(){
                             },
                             identical: {
                                 field: 'rclave',
-                                message: 'La Contraseña y Repetir Contraseña no son iguales'
+                                message: 'La Nueva Contraseña y Repetir Nueva Contraseña no son iguales.'
                             }
                             
                         }
@@ -59,7 +82,7 @@ $('document').ready(function(){
                             },
                             identical: {
                                 field: 'clave',
-                                message: 'La Contraseña y Repetir Contraseña no son iguales'
+                                message: 'La Nueva Contraseña y Repetir Nueva Contraseña no son iguales.'
                             }                           
                         }
                     },
@@ -70,7 +93,7 @@ $('document').ready(function(){
                             },
                             regexp: {
                                 regexp: /^[A-Zñáéíóú\s]+$/i,
-                                message: 'El nombre puede contener solamente letras y espacios'
+                                message: 'El nombre puede contener solamente letras y espacios.'
                             }                            
                         }
                     },
@@ -81,7 +104,7 @@ $('document').ready(function(){
                             },
                             regexp: {
                                 regexp: /^[A-Zñáéíóú\s]+$/i,
-                                message: 'El apellido puede contener solamente letras y espacios'
+                                message: 'El apellido puede contener solamente letras y espacios.'
                             }                            
                         }
                     },
@@ -112,11 +135,6 @@ $('document').ready(function(){
                     .find('.help-block[data-bv-for="' + data.field + '"]').hide()
                     // Show only message associated with current validator
                     .filter('[data-bv-validator="' + data.validator + '"]').show();
-                
-                //$('#form_reg').bootstrapValidator('resetField', 'clave', true);
-                //$('input[type="password"]').val('');
-                //$('#form_reg').bootstrapValidator('resetField', 'rclave');
-
             })
             .on('success.form.bv', function(e) {
                 e.preventDefault();
@@ -127,16 +145,16 @@ $('document').ready(function(){
                 // Get the BootstrapValidator instance
                 var bv = $form.data('bootstrapValidator');
                 // Use Ajax to submit form data
-                $.post(urlweb + "validar_nuevo_usuario_ajax", $form.serialize(), 
+                $.post(urlweb + "mi-perfil/validar_editar_datos", $form.serialize(), 
                     function(data) {
                         if(data['res'] == 'success'){
                             $.ajax({
-                                url:urlweb+"registro_respuesta",
+                                url:urlweb+"editar_usuario_respuesta",
                                 dataType:'html',
                                 method:'POST',
                                 data: {'datos':data},
                                 success:function(page){
-                                    $("#box_registro").html(page);
+                                    $("#box_edicionUser").html(page);
                                 }
 
                             });
@@ -144,12 +162,20 @@ $('document').ready(function(){
                         }
                         if(data['res']=='error')
                         {
-                            if(data['username']){
+                            if(data['username'])
+                            {
                                 bv.updateStatus('usuario', 'INVALID', 'notEmpty');
-                                bv.updateMessage('usuario', 'notEmpty', 'El email ingresado ya se encuentra registrado.');
+                                bv.updateMessage('usuario', 'notEmpty', 'El e-mail ingresado ya se encuentra registrado.');
                             }
                             bv.resetField('clave', true);
+                            bv.resetField('nclave', true);
                             bv.resetField('rclave', true);
+                            
+                            if(data['clave'])
+                            {
+                                bv.updateStatus('clave', 'INVALID', 'notEmpty');
+                                bv.updateMessage('clave', 'notEmpty', 'Clave incorrecta');
+                            }
                         }
                     }, 'json'
                 )}
@@ -162,14 +188,14 @@ $('document').ready(function(){
 
 		
 		this.init = function(){
-          /*  this.email_change();
+            this.email_change();
+            this.clave_change();
             this.validar_edicion();
-            this.validar_clave();*/
 		}
 	}
 	
 
-	/*$servix = new edit_user();
-	$servix.init();*/
+	var servix = new edit_user();
+	servix.init();
 
 });
