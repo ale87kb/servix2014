@@ -402,10 +402,10 @@ class sitio extends CI_Controller {
 			if($this->UsuarioSession){
 				$data['usuario'] = $this->UsuarioSession['nombre'];
 				$data['usuarioSession'] = $this->UsuarioSession;
+				$user_postulado = $this->servicios_model->userPostulado($data['id_usuario'],$id);
 				if(!empty($user_postulado)){
 				$data['user_postulado'] = true;
 				}
-				$user_postulado = $this->servicios_model->userPostulado($data['id_usuario'],$id);
 			}
 
 			// $this->load->view('home_view',$data);
