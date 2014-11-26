@@ -32,7 +32,7 @@
             }else{
               ?>
 
-              <a data-toggle="modal" href="#loginModal" data-seccion="busqueda-temporal"  data-target="#loginModal" rel=""  class="btn btn-warning affterOpenLogin">Click Aquí</a>
+              <a data-toggle="modal" href="#loginModal" data-seccion="busqueda-temporal"  data-target="#loginModal" rel=""  class="btn btn-warning gobusquedaTemp">Click Aquí</a>
              
 
               

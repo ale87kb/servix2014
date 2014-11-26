@@ -441,12 +441,18 @@ var app = function(){
             $("#nextAction").val('#modalOpinion');
 
             });
+
+
+            $(".gobusquedaTemp").on('click',function(){
+            $("#nextAction").val('solicitar-servicios');
+
+            });
             if(window.location.href.indexOf("#QuieroOpinar") > -1) {
                  // alert("your url contains the name franky");
                  $('#modalOpinion').modal('show')
              }
 
-             
+
         },
         this.favoritosAction = function(){
            $('#favorito').on('click',function(){
