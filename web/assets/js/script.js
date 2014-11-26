@@ -409,8 +409,13 @@ var app = function(){
                                 if($("#nextAction").val() == '#modalOpinion'){
                                     history.pushState({}, '','#QuieroOpinar');
                                 }
+                             }else if($("#nextAction").val() == 'busqueda-temporal'){
+
+                                  window.location.href='busqueda-temporal';
+                             }else{
+
+                                window.location.reload();
                              }
-                             window.location.reload();
 
                               
                              
@@ -440,6 +445,8 @@ var app = function(){
                  // alert("your url contains the name franky");
                  $('#modalOpinion').modal('show')
              }
+
+             
         },
         this.favoritosAction = function(){
            $('#favorito').on('click',function(){
@@ -466,10 +473,10 @@ var app = function(){
 
         }, 
         this.pagSolicitados = function(){
-           $('#pagSolicitados a').on('click',function(e){
+           $(document).on('click','#pagSolicitados a',function(e){
                 
                e.preventDefault();
-
+               console.log("asd")
                $url = $(this).attr('href');
                $.post($url,function(data){
                  $("#solicitados").html(data)

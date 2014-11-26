@@ -23,8 +23,23 @@
   </div>
   <div class="col-md-5">
     <h3>Solicitá un servicio</h3>
-    <small><p>¿No encontrás lo que estás buscando?</p></small>
-    <a href="#" class="btn btn-warning">Click Aquí</a>
+      <small><p>¿No encontrás lo que estás buscando?</p></small>
+            <?php if(isset($usuario)){
+            ?>
+           
+               <a href="#" class="btn btn-warning">Click Aquí</a>
+            <?php
+            }else{
+              ?>
+
+              <a data-toggle="modal" href="#loginModal" data-seccion="busqueda-temporal"  data-target="#loginModal" rel=""  class="btn btn-warning affterOpenLogin">Click Aquí</a>
+             
+
+              
+            <?php
+            } ?>
+  
+  
   </div>
   <div class="col-md-6">
     <h3>Publicá un servicio</h3>
