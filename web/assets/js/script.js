@@ -479,14 +479,17 @@ var app = function(){
             })
 
         },
-        this.confirmBox = function{
-            cancelar_postulacion
-             if (confirm('Do you wanna to submit?')) {
-                   yourformelement.submit();
+        this.confirmBox = function(){
+            $("#cancelar_postulacion").on('click',function(){
+
+             if (confirm('Esta seguro que desea cancelar esta postulación')) {
+                  $("#formCancelPostu").submit();
               } else {
                    return false;
               }
+            });
         },
+
         this.init = function(){
 
 
@@ -501,7 +504,8 @@ var app = function(){
             this.ajax_paging();            
             this.setAffterAction();            
             this.favoritosAction();   
-            this.pagSolicitados();         
+            this.pagSolicitados();      
+            this.confirmBox();   
         }
     };
     

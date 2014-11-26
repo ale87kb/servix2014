@@ -47,7 +47,7 @@
 							if($solicitado['userID'] != $id_usuario){
 								if(isset($user_postulado)){
 									?>
-									<form action="<?php echo site_url('unset_postulacion'); ?>" method="post" >
+									<form action="<?php echo site_url('unset_postulacion'); ?>" method="post"  id="formCancelPostu">
 										<input type="hidden" name="id_busqueda_temp"  value="<?php echo $solicitado['id']; ?>">
 									 	<p class="text-right">
 									 		<button type="submit" id="cancelar_postulacion" class="btn btn-danger btn-sm " ><i class="fa fa-times"></i> Cancelar Postulación</button>
