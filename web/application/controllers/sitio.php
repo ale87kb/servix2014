@@ -399,7 +399,7 @@ class sitio extends CI_Controller {
 			$data['id_usuario'] = $this->UsuarioSession['id'];
 			
 			
-			if(isset($this->UsuarioSession)){
+			if($this->UsuarioSession){
 				$data['usuario'] = $this->UsuarioSession['nombre'];
 				$data['usuarioSession'] = $this->UsuarioSession;
 				$user_postulado = $this->servicios_model->userPostulado($data['id_usuario'],$id);
