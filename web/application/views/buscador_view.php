@@ -27,12 +27,12 @@
             <?php if(isset($usuario)){
             ?>
            
-               <a href="#" class="btn btn-warning">Click Aquí</a>
+               <a href="<?php echo site_url('solicitar-servicio'); ?>" class="btn btn-warning">Click Aquí</a>
             <?php
             }else{
               ?>
 
-              <a data-toggle="modal" href="#loginModal" data-seccion="busqueda-temporal"  data-target="#loginModal" rel=""  class="btn btn-warning gobusquedaTemp">Click Aquí</a>
+              <a data-toggle="modal" href="#loginModal"  data-target="#loginModal" rel=""  class="btn btn-warning gobusquedaTemp">Click Aquí</a>
              
 
               

@@ -409,9 +409,9 @@ var app = function(){
                                 if($("#nextAction").val() == '#modalOpinion'){
                                     history.pushState({}, '','#QuieroOpinar');
                                 }
-                             }else if($("#nextAction").val() == 'busqueda-temporal'){
+                             }else if($("#nextAction").val() == 'solicitar-servicio'){
 
-                                  window.location.href='busqueda-temporal';
+                                  window.location.href='solicitar-servicio';
                              }else{
 
                                 window.location.reload();
@@ -444,7 +444,7 @@ var app = function(){
 
 
             $(".gobusquedaTemp").on('click',function(){
-            $("#nextAction").val('solicitar-servicios');
+            $("#nextAction").val('solicitar-servicio');
 
             });
             if(window.location.href.indexOf("#QuieroOpinar") > -1) {
@@ -463,7 +463,7 @@ var app = function(){
                     $(this).next('span').text('Agregar a favoritos')
 
                 }
-                console.log()
+           
 
                  $val = $(this).val();
                  $url = $(this).closest('form').attr('action');

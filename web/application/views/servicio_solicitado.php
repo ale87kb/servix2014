@@ -70,6 +70,10 @@
 
 						 
 						<?php
+							}else{
+								?>
+								<span class="label label-default">Mi servicio solicitado</span>
+								<?php
 							}
 						}else{
 							?>

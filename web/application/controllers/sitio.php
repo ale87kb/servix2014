@@ -399,7 +399,7 @@ class sitio extends CI_Controller {
 			$data['id_usuario'] = $this->UsuarioSession['id'];
 			
 			
-			if($this->UsuarioSession){
+			if(isset($this->UsuarioSession)){
 				$data['usuario'] = $this->UsuarioSession['nombre'];
 				$data['usuarioSession'] = $this->UsuarioSession;
 				$user_postulado = $this->servicios_model->userPostulado($data['id_usuario'],$id);
@@ -441,6 +441,8 @@ class sitio extends CI_Controller {
 		redirect($_SERVER['HTTP_REFERER']);
 
 	}
+
+
 
 	public function ficha_servicio($servicio=null){
 		$id 			 = $this->_parsearIdServicio($servicio);
@@ -524,6 +526,8 @@ class sitio extends CI_Controller {
 	      	return $mail;
 		 }
 	}
+
+
 	public function sendRecomendacion($post){
 			 if(isset($post)){
 
