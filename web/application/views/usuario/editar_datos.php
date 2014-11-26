@@ -81,11 +81,11 @@
   <legend>Datos personales</legend>
 
     <div class="form-group">
-    <div class="col-xs-12 col-md-offset-2">
+    <div class="col-xs-9 col-md-offset-3">
 
   <div class="form-group">
     <label for="nombre" class="col-sm-2 control-label">* Nombre/s</label>
-    <div class="col-sm-5">
+    <div class="col-sm-6">
       <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre/s" value="<?php echo $usuarioSession['nombre']; ?>">
     </div>
   </div>
@@ -95,7 +95,7 @@
 
   <div class="form-group">
     <label for="apellido" class="col-sm-2 control-label">* Apellido/s</label>
-    <div class="col-sm-5">
+    <div class="col-sm-6">
       <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellido/s" value="<?php echo $usuarioSession['apellido']; ?>">
     </div>
   </div>
@@ -105,14 +105,14 @@
 
   <div class="form-group">
     <label for="usuario" class="col-sm-2 control-label">* DNI</label>
-    <div class="col-sm-5">
+    <div class="col-sm-6">
       <p class="form-control-static"><?php echo $usuarioSession['dni']; ?></p>
     </div>
   </div>
 
   <div class="form-group">
     <label for="clave" class="col-sm-2 control-label">Dirección</label>
-    <div class="col-sm-5">
+    <div class="col-sm-6">
       <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Tu Dirección" value="<?php echo $usuarioSession['direccion']; ?>">
     </div>
   </div>
@@ -122,7 +122,7 @@
 
   <div class="form-group">
     <label for="rclave" class="col-sm-2 control-label">Teléfono</label>
-    <div class="col-sm-5">
+    <div class="col-sm-6">
       <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Tu Teléfono" value="<?php echo $usuarioSession['telefono']; ?>">
     </div>
   </div>

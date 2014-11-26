@@ -33,8 +33,8 @@
           else{
           ?>
 
-            <h4>No tienes comentarios</h4>
-            <p>Todabía no has realizado ningún comentario en los servicios ofrecidos.</p>
+            <h4>No tienes opiniones</h4>
+            <p>Todabía no has realizado ninguna opinión en los servicios ofrecidos.</p>
 
           <?php
           }

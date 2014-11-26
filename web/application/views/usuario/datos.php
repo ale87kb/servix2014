@@ -7,8 +7,9 @@
 	<div class="panel-body">
 		<div class="row">
 			<div class="col-md-3" align="center">
-				<img alt="User Pic" src="<?php echo site_url($usuarioSession['foto']);?>" class="img-circle" width="105" >
-				<a href="#">Editar Foto</a>
+				<figure>
+					<img alt="User Pic" src="<?php echo site_url($usuarioSession['foto']);?>" class="img-circle" width="105" >
+				</figure>
 			</div>
 			<div class=" col-md-9 col-lg-9 "> 
 				<table class="table table-user-information">
@@ -46,6 +47,3 @@
 		</div>
 	</div>
 </div>
-
-
-

@@ -8,9 +8,6 @@
 	<div class="panel-body">
 		<div class="row">
 
-
-			
-
 						
        <?php
           if(!empty($sSolicitados)){
@@ -48,8 +45,6 @@
           <?php
           }
         ?>
-
-
 
 		</div>
 	</div>
