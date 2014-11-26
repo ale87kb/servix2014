@@ -52,6 +52,8 @@ $route['mail']           						= "sitio/mail";
 $route['servicios-solicitados/(:num)']         	= "sitio/index";
 $route['servicios-solicitados']           		= "sitio/index";
 $route['servicio-solicitado/(:any)']	        = "sitio/servicio_solicitado/$1";
+$route['set_postulacion']	        			= "sitio/set_postulacion";
+$route['unset_postulacion']	        			= "sitio/unset_postulacion";
 
 $route['busqueda_servicio']						= "sitio/busqueda_servicio";
 $route['enviar/comentario-servicio']			= "sitio/comentar_servicio";

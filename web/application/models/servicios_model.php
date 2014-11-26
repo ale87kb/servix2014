@@ -115,6 +115,24 @@ Class Servicios_model extends CI_Model{
 		return $rs->result_array();
 	}
 
+	public function setPostulacion($id_busquedas_temp,$id_usurio){
+		$query = "INSERT INTO `postulaciones_temp` (`id_busquedas_temp`, `id_usuarios`) VALUES ($id_busquedas_temp,$id_usurio);";
+		$rs    = $this->db->query($query);
+		return $rs;
+	}
+	public function unsetPostulacion($id_busquedas_temp,$id_usurio){
+		$query = "DELETE FROM `postulaciones_temp` WHERE  `id_busquedas_temp`= $id_busquedas_temp  AND id_usuarios = $id_usurio LIMIT 1;";
+		$rs    = $this->db->query($query);
+		return $rs;
+	}
+
+	public function userPostulado($id_usuario,$id_busqueda){
+		$query = "SELECT * FROM postulaciones_temp WHERE id_busquedas_temp = $id_busqueda AND id_usuarios = $id_usuario";
+		$rs    = $this->db->query($query);
+		return $rs->result_array();
+
+	}
+
 	public function getServicioSolicitado($id){ 
 		$query ="SELECT
 				servix_db.busquedas_temp.id,
@@ -126,7 +144,8 @@ Class Servicios_model extends CI_Model{
 				servix_db.busquedas_temp.fecha_fin,
 				servix_db.busquedas_temp.fecha_ini,
 				servix_db.usuarios.nombre,
-				servix_db.usuarios.apellido
+				usuarios.apellido,
+				usuarios.id as userID
 
 				FROM
 				servix_db.busquedas_temp

@@ -43,11 +43,34 @@
 			    <p class="text-right">
 						<!-- <a href="#" class="btn btn-success btn-sm"> Quiero postularme!</a> -->
 						<?php if(isset($usuario)){
+
+							if($solicitado['userID'] != $id_usuario){
+								if(isset($user_postulado)){
+									?>
+									<form action="<?php echo site_url('unset_postulacion'); ?>" method="post" >
+										<input type="hidden" name="id_busqueda_temp"  value="<?php echo $solicitado['id']; ?>">
+									 	<p class="text-right">
+									 		<button type="submit" id="cancelar_postulacion" class="btn btn-danger btn-sm " ><i class="fa fa-times"></i> Cancelar Postulación</button>
+									 	</p>
+									</form>
+									<?php
+								}else{
+									?>
+									<form action="<?php echo site_url('set_postulacion'); ?>" method="post" >
+										<input type="hidden" name="id_busqueda_temp"  value="<?php echo $solicitado['id']; ?>">
+									 	<p class="text-right">
+									 		<button type="submit" class="btn btn-success btn-sm " ><i class="fa fa-check"></i> Quiero postularme</button>
+									 	</p>
+									</form>
+									<?php
+								}
 						?>
-						 <a href="#" class="btn btn-success btn-sm" > Quiero postularme</a>
+
+						
 
 						 
 						<?php
+							}
 						}else{
 							?>
 

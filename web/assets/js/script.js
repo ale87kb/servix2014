@@ -469,15 +469,23 @@ var app = function(){
            $('#pagSolicitados a').on('click',function(e){
                 
                e.preventDefault();
+
                $url = $(this).attr('href');
                $.post($url,function(data){
                  $("#solicitados").html(data)
                },'html')
+
+                history.pushState({}, '', $url);
             })
 
-        
-
-
+        },
+        this.confirmBox = function{
+            cancelar_postulacion
+             if (confirm('Do you wanna to submit?')) {
+                   yourformelement.submit();
+              } else {
+                   return false;
+              }
         },
         this.init = function(){
 

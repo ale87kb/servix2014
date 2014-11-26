@@ -40,6 +40,7 @@ class sitio extends CI_Controller {
 
 		$data['paginacion'] = $solicitados['links'];
 		$data['vista'] = 'index_view';
+		$data['current_page'] = $solicitados['current_page'];
 
 		if ($this->input->is_ajax_request()) {
 			$this->load->view('servicios_solicitados',$data);
@@ -51,28 +52,7 @@ class sitio extends CI_Controller {
 	}
 
 
-	private function _setPagSolicitados($seccion,$segment=2){
-
-  		$semanaActual  			= strtotime("-7 day");
-		$semanaSolicitado		= date('Y-m-d h:i:s',$semanaActual); 
- 	    $this->load->library('pagination');
-	    $config = array();
-        $config["base_url"] 	= site_url($seccion);
-        $config["total_rows"]   = $this->servicios_model->getTotalFilasSolicitados($semanaSolicitado);
-        $config["per_page"] 	= 4;
-        $config["uri_segment"]  = $segment;
-        $config['last_link'] 	= 'Último';
-        $config['first_link'] 	= 'Primero';
-        $this->pagination->initialize($config);
-      
-        $page 					= (is_numeric($this->uri->segment($segment))) ? $this->uri->segment($segment) : 0;
-        $data["result"] 		= $this->servicios_model->getServiciosSolicitados($semanaSolicitado , $page, $config["per_page"]); 
-       
-        $data["links"] 			= $this->pagination->create_links();
-		return $data;
-
-       
-	}
+	
 
 
 
@@ -370,10 +350,33 @@ class sitio extends CI_Controller {
 		}
 	}
 
+	private function _setPagSolicitados($seccion,$segment=2){
+
+  		$semanaActual  			= strtotime("-7 day");
+		$semanaSolicitado		= date('Y-m-d h:i:s',$semanaActual); 
+ 	    $this->load->library('pagination');
+	    $config = array();
+        $config["base_url"] 	= site_url($seccion);
+        $config["total_rows"]   = $this->servicios_model->getTotalFilasSolicitados($semanaSolicitado);
+        $config["per_page"] 	= 4;
+        $config["uri_segment"]  = $segment;
+        $config['last_link'] 	= 'Último';
+        $config['first_link'] 	= 'Primero';
+        $this->pagination->initialize($config);
+      
+        $page 					= (is_numeric($this->uri->segment($segment))) ? $this->uri->segment($segment) : 0;
+        $data["result"] 		= $this->servicios_model->getServiciosSolicitados($semanaSolicitado , $page, $config["per_page"]); 
+        $data['current_page']   = $page;
+        $data["links"] 			= $this->pagination->create_links();
+		return $data;
+
+       
+	}
+
 	public function servicio_solicitado($servicio=null){
 		$id 			 = $this->_parsearIdServicio($servicio);
 
-		$seccion ="servicio-solicitado/".$servicio;
+		$seccion ="servicio-solicitado/".$servicio."/";
 		$segment = 3;
 		if(is_numeric($id)){
 
@@ -387,11 +390,16 @@ class sitio extends CI_Controller {
 			}else{
 				$data['solicitados'] = null;
 			}
-			$data['paginacion'] = $solicitados['links'];
-			$data['servUrl']    = site_url('ficha/'.$servicio);
+			$data['paginacion']   = $solicitados['links'];
+			$data['current_page'] = ( $solicitados['current_page'] > 0) ?  $solicitados['current_page'] : "";
 			$data['vista']      = 'servicio_solicitado';
 			$data['userPostu']  = $userPostulados;
 			$data['solicitado'] = $solicitado[0];
+			$data['id_usuario'] = $this->UsuarioSession['id'];
+			$user_postulado = $this->servicios_model->userPostulado($data['id_usuario'],$id);
+			if(!empty($user_postulado)){
+				$data['user_postulado'] = true;
+			}
 			if($this->UsuarioSession){
 				$data['usuario'] = $this->UsuarioSession['nombre'];
 				$data['usuarioSession'] = $this->UsuarioSession;
@@ -414,6 +422,21 @@ class sitio extends CI_Controller {
 			redirect('');	
 		}
 		
+	}
+
+	public function set_postulacion(){
+		$id_busqueda_temp = $this->input->post('id_busqueda_temp');
+		$id_usuario 	  = $this->UsuarioSession['id'];
+		$this->servicios_model->setPostulacion($id_busqueda_temp,$id_usuario);
+		redirect($_SERVER['HTTP_REFERER']);
+	}
+
+	public function unset_postulacion(){
+		$id_busqueda_temp = $this->input->post('id_busqueda_temp');
+		$id_usuario 	  = $this->UsuarioSession['id'];
+		$this->servicios_model->unsetPostulacion($id_busqueda_temp,$id_usuario);
+		redirect($_SERVER['HTTP_REFERER']);
+
 	}
 
 	public function ficha_servicio($servicio=null){

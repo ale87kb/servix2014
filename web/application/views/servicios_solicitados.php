@@ -17,7 +17,21 @@
                 <?php echo $servicio['busqueda']; ?>
 
               </p>
-               <a href="<?php echo site_url(generarLinkServicio($servicio['id'],$servicio['categoria']."-en-".$servicio['localidad']."-".$servicio['provincia'],'servicio-solicitado')); ?> " class="btn btn-sm btn-default pull-right">Ver solicitud</a>
+              <?php
+               if(isset($current_page)){
+                 
+                ?>
+                  <a href="<?php echo site_url(generarLinkServicio($servicio['id'],$servicio['categoria']."-en-".$servicio['localidad']."-".$servicio['provincia']."/".$current_page,'servicio-solicitado')); ?> " class="btn btn-sm btn-default pull-right">Ver solicitud</a>
+                <?php
+               } else{
+                ?>
+                  <a href="<?php echo site_url(generarLinkServicio($servicio['id'],$servicio['categoria']."-en-".$servicio['localidad']."-".$servicio['provincia'],'servicio-solicitado')); ?> " class="btn btn-sm btn-default pull-right">Ver solicitud</a>
+
+                <?php
+
+               }
+              ?>
+             
             </div>
             <div class="panel-footer">
               fecha de publicación: <?php echo date('d-m-Y' ,strtotime($servicio['fecha_ini'])); ?>
