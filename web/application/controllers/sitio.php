@@ -380,6 +380,7 @@ class sitio extends CI_Controller {
 			$data['title']   = 'Ficha del servicio';
 			$solicitado 	 = $this->servicios_model->getServicioSolicitado($id);
 			$solicitados 	 = $this->_setPagSolicitados($seccion,$segment);
+			$userPostulados	 = $this->servicios_model->userPostulados($id);
 
 			if(!empty($solicitados)){
 				$data['solicitados'] = $solicitados['result'];
@@ -387,8 +388,14 @@ class sitio extends CI_Controller {
 				$data['solicitados'] = null;
 			}
 			$data['paginacion'] = $solicitados['links'];
-			$data['servUrl']   =  site_url('ficha/'.$servicio);
-			$data['vista']     = 'servicio_solicitado';
+			$data['servUrl']    = site_url('ficha/'.$servicio);
+			$data['vista']      = 'servicio_solicitado';
+			$data['userPostu']  = $userPostulados;
+			$data['solicitado'] = $solicitado[0];
+			if($this->UsuarioSession){
+				$data['usuario'] = $this->UsuarioSession['nombre'];
+				$data['usuarioSession'] = $this->UsuarioSession;
+			}
 
 			// $this->load->view('home_view',$data);
 

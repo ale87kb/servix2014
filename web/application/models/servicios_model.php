@@ -103,6 +103,17 @@ Class Servicios_model extends CI_Model{
 		return $rs->first_row()->total;
 	}
 
+	public function userPostulados($id){
+		$query = "SELECT
+				servix_db.usuarios.nombre,
+				servix_db.usuarios.apellido
+				FROM
+				servix_db.postulaciones_temp
+				INNER JOIN servix_db.usuarios ON servix_db.postulaciones_temp.id_usuarios = servix_db.usuarios.id
+				WHERE servix_db.postulaciones_temp.id_busquedas_temp = $id";
+		$rs    = $this->db->query($query);
+		return $rs->result_array();
+	}
 
 	public function getServicioSolicitado($id){ 
 		$query ="SELECT
@@ -121,8 +132,8 @@ Class Servicios_model extends CI_Model{
 				servix_db.busquedas_temp
 				INNER JOIN servix_db.usuarios ON servix_db.busquedas_temp.id_usuario = servix_db.usuarios.id
 				INNER JOIN servix_db.categorias ON servix_db.categorias.id = servix_db.busquedas_temp.id_categorias
-				INNER JOIN servix_db.localidades ON servix_db.localidades.localidad = servix_db.busquedas_temp.id_localidad
-				INNER JOIN servix_db.provincias ON servix_db.provincias.id = servix_db.localidades.id_provincia
+				INNER JOIN servix_db.localidades ON servix_db.busquedas_temp.id_localidad = servix_db.localidades.id
+				INNER JOIN servix_db.provincias ON servix_db.localidades.id_provincia = servix_db.provincias.id
 				WHERE
 				servix_db.busquedas_temp.id = $id";
 		$rs    = $this->db->query($query);
