@@ -776,8 +776,13 @@ class Login extends CI_Controller {
 			 'telefono' 		=> $row['telefono'],
 			 'foto'				=> $row['foto'],		//default -> assets/images/profile_640.png
 			 'estado'			=> $row['estado'],
-			 'ultima_edicion'	=> $row['ultima_edicion']
+			 'ultima_edicion'	=> $row['ultima_edicion'], 
+
+			 'foto_thumb'		=> agregar_nombre_archivo($row['foto'], '_thumb'),
+			 'foto_path'		=> path_archivos('assets/images/usuarios/', $row['foto']),
+			 'foto_thumb_path'	=> path_archivos('assets/images/usuarios/', agregar_nombre_archivo($row['foto'], '_thumb'))
 			);
+			
 			$this->session->set_userdata('logged_in', $sess_array);
 		}
 	}
@@ -822,7 +827,6 @@ class Login extends CI_Controller {
 				$user[]
 			}
 	}*/
-
 
 
 

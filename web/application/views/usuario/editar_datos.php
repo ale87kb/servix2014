@@ -18,7 +18,7 @@
 
       <div class="col-xs-12 col-sm-3 text-center">      
         <figure>
-          <img id="user_foto" class="img-circle" src="<?php echo site_url($usuarioSession['foto']);?>" alt="foto-<?php echo $usuarioSession['email']; ?>" width="125" />
+          <img id="user_foto" class="img-circle" src="<?php echo site_url($usuarioSession['foto_thumb_path']);?>" alt="foto-<?php echo $usuarioSession['email']; ?>" width="125" />
           <figcaption><a id="editPhoto" href="#editar_foto" data-toggle="modal" data-target="#edit_photo">Editar Foto</a></figcaption>
         </figure>
       </div>

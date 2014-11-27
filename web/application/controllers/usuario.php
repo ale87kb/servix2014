@@ -285,18 +285,18 @@ class Usuario extends CI_controller{
 
 	public function actulaizar_foto_perfil(){
 
-	    $status = "";
-	    $msg = "";
-	    $file = "";
-	    $file_element_name = 'mifoto';
+	    $status 			= "";
+	    $msg 				= "";
+	    $file 				= "";
+	    $file_element_name 	= 'mifoto';
      
 	    if ($status != "error")
 	    {
 	        /*$config['upload_path'] = site_url('/assets/images/usuarios/');*/
-	        $config['upload_path'] = './assets/images/usuarios/';
-	        $config['allowed_types'] = 'jpg|png';
-	        $config['max_size'] = 1024 * 8;
-	        $config['encrypt_name'] = TRUE;
+	        $config['upload_path'] 		= './assets/images/usuarios/';
+	        $config['allowed_types'] 	= 'jpg|png';
+	        $config['max_size'] 		= 1024 * 8;
+	        $config['encrypt_name'] 	= TRUE;
 	 
 	        $this->load->library('upload', $config);
 	 
@@ -307,30 +307,55 @@ class Usuario extends CI_controller{
 	        }
 	        else
 	        {
-	            $data = $this->upload->data();
+	            $data 	= $this->upload->data();
+	            $width 	= 125;
+	            $height = 125;
 
-	            $this->_generarThumbnail($data);
+	            $this->_generarThumbnail($data, $width, $height);
 	            
-	            $user['id'] 			= $this->UsuarioSession['id'];
-	            $user['ultima_edicion'] = date('Y-m-d H:m:i');
-	            $user['foto']			= $data['file_name'];
+	            $user 						= $this->UsuarioSession;
+            	$foto_anterior 				= $user['foto'];
+	            $path_foto_anterior			= $config['upload_path'].$foto_anterior;
+	            $path_foto_thumb_anterior	= $config['upload_path'].$user['foto_thumb'];
+	            $user['ultima_edicion'] 	= date('Y-m-d H:m:i');
+	            $user['foto']				= $data['file_name'];
+
+	            if($foto_anterior != "")
+	            {
+	            	$this->_borarArchivoFotoAnterior($path_foto_anterior);
+	            	$this->_borarArchivoFotoAnterior($path_foto_thumb_anterior);
+	            }
 
 	            $file_id = $this->usuarios_model->actulaizar_foto_usuario($user);
 
+	            $this->UsuarioSession['foto'] = $data['file_name'];
+	            $this->UsuarioSession['foto_thumb'] = agregar_nombre_archivo($data['file_name'], '_thumb');
+	            $this->UsuarioSession['foto_path'] = path_archivos('assets/images/usuarios/', $data['file_name']);
+	            $this->UsuarioSession['foto_thumb_path'] = path_archivos('assets/images/usuarios/', agregar_nombre_archivo($data['file_name'], '_thumb'));
 
+	            $this->session->set_userdata('logged_in', $this->UsuarioSession);
+	            
 	            if($file_id)
 	            {
 	                $status = "success";
-	                $msg = "Foto actulaizada correctamente";
-	                $file = site_url('assets/images/usuarios/'.$data['file_name']);
+	                $msg 	= "Foto actulaizada correctamente";
+	                //$file 	= site_url('assets/images/usuarios/'.$data['file_name']);
+	                $file 	= site_url($this->UsuarioSession['foto_thumb_path']);
+	                
 
 	            }
 	            else
 	            {
-	                unlink($data['full_path']);
+	                
+	                $dalete_file = unlink($data['full_path']);
+	                if(!$dalete_file)
+	                {
+						log_message('error', 'No se pudo eliminar la imagen'.$data['full_path'] );
+	                }
+
 	                $status = "error";
-	                $msg = "Algo ocurrió mal cuando actualizabamos tu archivo, por favor volvé a intentarlo.";
-	                $file = "";
+	                $msg 	= "Algo ocurrió mal cuando actualizabamos tu archivo, por favor volvé a intentarlo.";
+	                $file 	= "";
 	            }
 	        }
 	        @unlink($_FILES[$file_element_name]);
@@ -339,20 +364,29 @@ class Usuario extends CI_controller{
 
 	}
 
-	private function _generarThumbnail($file){
+	private function _generarThumbnail($file, $width, $height){
 
-		$config['image_library'] = 'GD';
-		$config['source_image'] = $file['full_path'];
-		$config['create_thumb'] = TRUE;
-		$config['maintain_ratio'] = TRUE;
-		$config['width'] = 125;
-		$config['height'] = 125;
+		$config['image_library'] 	= 'GD';
+		$config['source_image'] 	= $file['full_path'];
+		$config['create_thumb'] 	= TRUE;
+		$config['thumb_marker'] 	= '_thumb';
+		$config['maintain_ratio'] 	= TRUE;
+		$config['width'] 			= $width;
+		$config['height'] 			= $height;
+		$config['quality'] 			= '100%';
 
 		$this->load->library('image_lib', $config);
 
 		$result = $this->image_lib->resize();
 		if(!$result){
 			log_message('error', $this->image_lib->display_errors());
+		}
+	}
+
+	private function _borarArchivoFotoAnterior($archivoPath){
+		$dalete = unlink($archivoPath);
+		if(!$dalete){
+			log_message('error', 'No se pudo eliminar la imagen'.$archivoPath);
 		}
 	}
 

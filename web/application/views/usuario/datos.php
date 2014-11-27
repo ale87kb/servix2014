@@ -8,7 +8,7 @@
 		<div class="row">
 			<div class="col-md-3" align="center">
 				<figure>
-					<img alt="User Pic" src="<?php echo site_url($usuarioSession['foto']);?>" class="img-circle" width="105" >
+					<img alt="User Pic" src="<?php echo site_url($usuarioSession['foto_thumb_path']);?>" class="img-circle" width="105">
 				</figure>
 			</div>
 			<div class=" col-md-9 col-lg-9 "> 

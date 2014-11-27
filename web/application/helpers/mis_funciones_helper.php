@@ -65,4 +65,21 @@
 		$fecha = date('siH_mYd');
 		return $fecha;
 	}
+
+	
+	//Ejemplo $path = 'assets/js/', $archivo = 'archivo.jpg'
+	function path_archivos($path, $archivo){
+		$path_archivo = $path . $archivo;
+		return $path_archivo;
+	}
+
+	function agregar_nombre_archivo($archivo, $agregado){
+		$nuevo_nombre = "";
+		if(!$archivo == ''){
+			$ext = explode('.',$archivo);
+			$extension = $ext[1];
+			$nuevo_nombre = $ext[0] . $agregado . '.' . $extension;
+		}
+		return $nuevo_nombre;
+	}
 ?>
