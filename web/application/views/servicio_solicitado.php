@@ -61,7 +61,7 @@
 										<input type="hidden" name="id_busqueda_temp"  value="<?php echo $solicitado['id']; ?>">
 										<input type="hidden" name="id_user_publicacion"  value="<?php echo $solicitado['userID'];  ?>">
 										<?php
-										 
+
 										if(isset($user_postulado) && $user_postulado == 0){
 											?>
 											<p class="text-right">
@@ -104,57 +104,84 @@
 			    <hr>
 
 			    <?php 
+			     if(isset($usuario)){
 
-			    if (!empty($userPostu)) {
-			    	foreach ($userPostu as $value) {
-			    	
+				     if (!empty($userPostu)) {
+				    	foreach ($userPostu as $value) {
+				    	
 
 
-			    			?>
+				    			?>
 
-			    			 <div class="col-md-6 box-postulaciones">
-							   	   	<div class="media">
-							      <span class="media-left" href="">
-							        <img data-src="holder.js/64x64" alt="64x64" src="http://placehold.it/180x180" data-holder-rendered="true" style="width: 60px; height: 60px;">
-							      </span>
-							      <div class="media-body">
-							        <h4 class="media-heading">
-							        	
-							        	<?php echo ucfirst( $value['nombre']) ." ".ucfirst($value['apellido']); ?>
+				    			 <div class="col-md-6 box-postulaciones">
+								   	   	<div class="media">
+								      <span class="media-left" href="">
+								        <img data-src="holder.js/64x64" alt="64x64" src="http://placehold.it/180x180" data-holder-rendered="true" style="width: 60px; height: 60px;">
+								      </span>
+								      <div class="media-body">
+								        <h4 class="media-heading">
+								        	
+								        	<?php echo ucfirst( $value['nombre']) ." ".ucfirst($value['apellido']); ?>
+											
+								        </h4>
+								        <h5>
+								        	<?php 
+						        				if($value['postulado'] == 1){ 
+						        				?>
+						        					<small>
+														<span class="label label-success">Se postulo para esta publicación</span>
+													</small>
+						        				<?php
+						        				}else{
+						        				?>
+													<small>
+														Se postulo para esta publicación,<br>
+														<span class="label label-default">Cancelo la postulación</span>
+													</small>
+						        				<?php
+						        				}
+								        	 ?>
 										
-							        </h4>
-							        <h5>
-							        	<?php 
-					        				if($value['postulado'] == 1){ 
-					        				?>
-					        					<small>
-													<span class="label label-success">Se postulo para esta publicación</span>
-												</small>
-					        				<?php
-					        				}else{
-					        				?>
-												<small>
-													Se postulo para esta publicación,<br>
-													<span class="label label-default">Cancelo la postulación</span>
-												</small>
-					        				<?php
-					        				}
-							        	 ?>
-									
-									</h5>
-							   		</div>
-									</div>
-							   </div> 
+										</h5>
+								   		</div>
+										</div>
+								   </div> 
 
-			    			<?php
-			    			
-			    		}	
-			    	?>
-					
-			    	<?php
-			     }else{
-			     	echo "<p>Aún no hay postulaciones para esta solicitud</p>";
-			     } ?>
+				    			<?php
+				    			
+				    		}	
+				    	?>
+						
+				    	<?php
+				    	
+				     }else{
+				     	echo "<p>Aún no hay postulaciones para esta solicitud</p>";
+				     }
+			 	 }else{
+			 	 	if (!empty($userPostu)) { 
+			 	 		$c= 0;
+			 	 		foreach ($userPostu as $value) {
+			 	 			if($value['postulado'] == 1){ 
+			 	 				$c++;
+			 	 			}
+			 	 		}
+			 	 		if( $c >1){
+			 	 		  $userCant = $c." usuarios postulados, ";
+			 	 		 }else{
+			 	 		  $userCant = $c." usuario postulado, ";
+		 	 			}  
+		 	 			?> 
+			 	 		<p class="text-center">Esta solicitud tiene <?php echo $userCant; ?>
+			 	 		
+		 	 			 para más información <a data-toggle="modal" href="#loginModal"  data-target="#loginModal" rel=""   >Ingresa al sitio</a>
+		 	 			</p>
+			 	 		<?php
+
+			 	 	}else{
+			 	 		echo "<p>Aún no hay postulaciones para esta solicitud</p>";
+			 	 	}
+			 	 }
+			      ?>
 			 
 
 				
