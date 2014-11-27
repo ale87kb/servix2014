@@ -241,7 +241,8 @@ class Usuario extends CI_controller{
 			//Muesta los datos del usuario de la variable de sesion
 			$data['usuarioSession'] = $this->UsuarioSession;
 			
-			$data['js'] = array('assets/js/edit_user.js');
+			$data['js'] 			= array('assets/js/edit_user.js', 'assets/js/bootstrap.file-input.js');
+			$data['editar_perfil'] 	= true;
 			$data['title'] 			= 'Editar perfil';
 			$data['vista'] 			= 'usuario/editar_datos';
 			$this->load->view('usuarios_view', $data);
@@ -281,6 +282,80 @@ class Usuario extends CI_controller{
 		}
 		return true;
 	}
+
+	public function actulaizar_foto_perfil(){
+
+	    $status = "";
+	    $msg = "";
+	    $file = "";
+	    $file_element_name = 'mifoto';
+     
+	    if ($status != "error")
+	    {
+	        /*$config['upload_path'] = site_url('/assets/images/usuarios/');*/
+	        $config['upload_path'] = './assets/images/usuarios/';
+	        $config['allowed_types'] = 'jpg|png';
+	        $config['max_size'] = 1024 * 8;
+	        $config['encrypt_name'] = TRUE;
+	 
+	        $this->load->library('upload', $config);
+	 
+	        if (!$this->upload->do_upload($file_element_name))
+	        {
+	            $status = "error";
+	            $msg = $this->upload->display_errors('', '');
+	        }
+	        else
+	        {
+	            $data = $this->upload->data();
+
+	            $this->_generarThumbnail($data);
+	            
+	            $user['id'] 			= $this->UsuarioSession['id'];
+	            $user['ultima_edicion'] = date('Y-m-d H:m:i');
+	            $user['foto']			= $data['file_name'];
+
+	            $file_id = $this->usuarios_model->actulaizar_foto_usuario($user);
+
+
+	            if($file_id)
+	            {
+	                $status = "success";
+	                $msg = "Foto actulaizada correctamente";
+	                $file = site_url('assets/images/usuarios/'.$data['file_name']);
+
+	            }
+	            else
+	            {
+	                unlink($data['full_path']);
+	                $status = "error";
+	                $msg = "Algo ocurrió mal cuando actualizabamos tu archivo, por favor volvé a intentarlo.";
+	                $file = "";
+	            }
+	        }
+	        @unlink($_FILES[$file_element_name]);
+	    }
+	    echo json_encode(array('status' => $status, 'msg' => $msg, 'file' => $file));
+
+	}
+
+	private function _generarThumbnail($file){
+
+		$config['image_library'] = 'GD';
+		$config['source_image'] = $file['full_path'];
+		$config['create_thumb'] = TRUE;
+		$config['maintain_ratio'] = TRUE;
+		$config['width'] = 125;
+		$config['height'] = 125;
+
+		$this->load->library('image_lib', $config);
+
+		$result = $this->image_lib->resize();
+		if(!$result){
+			log_message('error', $this->image_lib->display_errors());
+		}
+	}
+
 
 }
 

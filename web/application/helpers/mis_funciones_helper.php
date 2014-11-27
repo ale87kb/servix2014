@@ -60,4 +60,9 @@
 		}
 
 	}
+
+	function date_siH_mYd(){
+		$fecha = date('siH_mYd');
+		return $fecha;
+	}
 ?>

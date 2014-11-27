@@ -91,6 +91,8 @@ $route['validar-voto']   		   				= "usuario/validar_voto";
 $route['mi-perfil/editar-datos']   				= "usuario/editar_datos";
 $route['mi-perfil/validar_editar_datos']   		= "login/validar_editar_datos";
 $route['editar_usuario_respuesta']				= "login/editar_usuario_respuesta";
+$route['actulaizar_foto_perfil']				= "usuario/actulaizar_foto_perfil";
+
 $route['mi-perfil/editar-servicios']  			= "usuario/editar_servicios";
 $route['mi-perfil/favoritos']  					= "usuario/favoritos";
 $route['set_favorito']  						= "usuario/set_favorito";

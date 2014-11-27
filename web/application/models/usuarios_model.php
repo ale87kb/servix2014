@@ -202,6 +202,15 @@ Class Usuarios_model extends CI_Model{
 	}
 
 
+	public function actulaizar_foto_usuario($foto){
+		$query = 	"UPDATE usuarios
+					SET foto = '".$foto['foto']."',
+					ultima_edicion = '".$foto['ultima_edicion']."' 
+					WHERE id = ".$foto['id']."";
+		$rs = $this->db->query($query);
+		return $rs;
+	}
+
 
 	public function verificarCodigo($codigo){
 		$query 	= "SELECT * FROM usuarios WHERE codigo = '$codigo';";

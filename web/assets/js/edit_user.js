@@ -7,6 +7,7 @@ $('document').ready(function(){
             $('#cImail').click(function(){
                 $('.input-hide-email').hide();
                 $('.input-hidden-email').show().focus();
+                return false;
             });
         },
 
@@ -15,6 +16,7 @@ $('document').ready(function(){
                 $(this).parent().parent().hide();
                 $('#nuevaClaveBox').show();
                 $('#nuevaClaveBox input[type=password]').show();
+                return false;
             });
 
         },
@@ -186,10 +188,53 @@ $('document').ready(function(){
 
         },
 
+        this.modal_foto = function(){
+            
+
+            var bar = $('.bar');
+            var percent = $('.percent');
+            var status = $('#status_pic');
+               
+            $('#form_edit_foto').ajaxForm({
+                beforeSend: function() {
+                    status.empty();
+                    var percentVal = '0%';
+                    bar.width(percentVal)
+                    percent.html(percentVal);
+                },
+                uploadProgress: function(event, position, total, percentComplete) {
+                    var percentVal = percentComplete + '%';
+                    bar.width(percentVal)
+                    percent.html(percentVal);
+                },
+                success: function() {
+                    var percentVal = '100%';
+                    bar.width(percentVal)
+                    percent.html(percentVal);
+                },
+                complete: function(xhr) {
+                    var out = JSON.parse(xhr.responseText);
+                    status.html('<p>'+out['msg']+'</p>')
+                    $('#user_foto').attr('src', out['file']);
+                }
+            });
+        }
+
+        this.editar_foto = function(){
+            var modal_foto = this.modal_foto;
+            $('#editPhoto').click(function(){
+                $('input[type=file]').replaceWith($('input[type=file]').val('').clone(true));
+                $('input[type=file]').bootstrapFileInput();
+                $('.file-inputs').bootstrapFileInput();
+                modal_foto();
+            });
+        }
+
 		
 		this.init = function(){
             this.email_change();
             this.clave_change();
+            this.editar_foto();
             this.validar_edicion();
 		}
 	}

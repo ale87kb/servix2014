@@ -11,7 +11,7 @@
      if(!isset($usuarioSession)){
       ?>
 
-
+  <!-- Login Modal -->
     <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog login_modal">
         <div class="modal-content">
@@ -21,7 +21,7 @@
           </div>
           <div class="modal-body login_modal_body">
 
-            <form role="form" id="form_login_ajax" name="login_ajax" action="<?php echo site_url('validar_login_ajax');?>" method="POST">
+            <form role="form" id="form_login_ajax" name="login_ajax" action="<?php echo site_url('validar_login_ajax');?>" method="POST" enctype="application/x-www-form-urlencoded">
               <div class="form-group">
                 <ul id="errors"></ul>
               </div>
@@ -61,9 +61,7 @@
         if(isset($seccion) && ($seccion == 'ficha')){
 
         ?>
-
-
-                <!-- Modal -->
+                <!-- Opinion Modal -->
       <div class="modal fade" id="modalOpinion" tabindex="-1" role="dialog" aria-labelledby="modalOpinion-1" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -71,11 +69,9 @@
               <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
               <h4 class="modal-title" id="modalOpinion-1">Dejanos tu opinion sobre el servicio</h4>
             </div>
-            <form class="form-horizontal" role="form" id="form_votacion" method="post" action="<?php echo site_url('validar-voto'); ?>">
+            <form class="form-horizontal" role="form" id="form_votacion" method="post" action="<?php echo site_url('validar-voto'); ?>" enctype="application/x-www-form-urlencoded">
             <div class="modal-body">
              <div class="votacion">
-        
-            
             
               <div class="form-group">
                 <label for="puntos" class="col-sm-5 control-label">¿Como Calificarias este servicio?</label>
@@ -101,9 +97,6 @@
                         <textarea class="form-control"  name="comentario" rows="3" required></textarea>
                 </div>
               </div>
-            
-             
-            
             
           </div> 
 
@@ -133,7 +126,7 @@
       if(isset($seccion) && ($seccion == 'ficha')){
     ?>
 
-
+    <!-- Recomendar Modal -->
     <div class="modal fade" id="modalRecomendar" tabindex="-1" role="dialog" aria-labelledby="modalOpinion-1" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -141,11 +134,9 @@
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
             <h4 class="modal-title" id="modalOpinion-1">Recomienda este servicio a un amigo</h4>
           </div>
-          <form class="form-horizontal" role="form" id="form_recomendacion" method="post" action="<?php echo site_url('validar-recomendacion'); ?>">
+          <form class="form-horizontal" role="form" id="form_recomendacion" method="post" action="<?php echo site_url('validar-recomendacion'); ?>" enctype="application/x-www-form-urlencoded">
           <div class="modal-body">
            <div class="recomendacion">
-      
-          
           
             <div class="form-group">
               <label for="nombreAmigo" class="col-sm-5 control-label">¿Nombre de tu amigo?</label>
@@ -161,10 +152,6 @@
                   <input class="form-control" type="email" name="emailAmigo" id="emailAmigo" required />
               </div>
             </div>
-            
-          
-           
-          
           
         </div> 
 
@@ -183,8 +170,45 @@
     </div>
     <?php
       }
-    ?>
+      if(isset($editar_perfil)){
 
+      ?>
+      <!-- Editar foto Modal -->
+      <div class="modal fade" id="edit_photo" tabindex="-1" role="dialog" aria-labelledby="title_edit_foto" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+              <h4 class="modal-title" id="title_edit_foto">Editar foto de perfil</h4>
+            </div>
+            <div class="modal-body">
+              <p>Sube un archivo para actualizar tu foto de perfil.</p>
+
+
+                <form action="<?php echo site_url('actulaizar_foto_perfil'); ?>" method="post" enctype="multipart/form-data" id="form_edit_foto">
+                  <input type="file" title="Subir foto de perfil" name="mifoto" class="btn-primary">
+                  <input type="submit" value="Subir foto">
+                </form>
+                    
+                <div class="progress">
+                    <div class="bar"></div>
+                    <div class="percent">0%</div>
+                </div>
+                    
+                <div id="status_pic"></div>
+
+
+            </div>
+            <div class="modal-footer">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <?php
+
+      }
+    ?>
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="<?php  echo site_url('assets/js/jquery.min.js');?>"></script>
