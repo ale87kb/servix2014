@@ -1,4 +1,4 @@
-
+</div>
 	<div class="navbar navbar-default navbar-static-bottom footer-servix">
 	  <div class="container">
 	    <span class="navbar-text">
@@ -214,7 +214,9 @@
 	<script src="<?php  echo site_url('assets/js/jquery.min.js');?>"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="<?php echo site_url('assets/js/bootstrap.min.js');?>"></script>
-	<script src="<?php echo site_url('assets/js/bootstrap-typeahead.js');?>"></script>
+  <script src="<?php echo site_url('assets/js/bootstrap-typeahead.js');?>"></script>
+  <script src="<?php echo site_url('assets/js/moment-with-locales.js');?>"></script>
+	<script src="<?php echo site_url('assets/js/bootstrap-datetimepicker.min.js');?>"></script>
 	<!-- BootstrapValidator -->
 	<script src="<?php echo site_url('assets/js/bootstrapValidator.min.js');?>" type="text/javascript"></script>
   <script src="<?php echo site_url('assets/js/lang/es_ES.js');?>" type="text/javascript"></script>

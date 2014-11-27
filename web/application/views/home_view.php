@@ -9,7 +9,9 @@
 
 	$this->load->view('includes/head');
 	$this->load->view('includes/header');
-	$this->load->view('buscador_view');
+	if(!isset($buscador_off)){
+		$this->load->view('buscador_view');
+	}
 	$this->load->view($vista);
 	$this->load->view('includes/footer');
  ?>

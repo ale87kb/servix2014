@@ -17,6 +17,13 @@ Class Servix_model extends CI_Model{
 
 	}
 
+	public function getBusquedaCategoria(){
+		$query ="SELECT categorias.categoria FROM categorias";
+		$rs    = $this->db->query($query);
+		return $rs->result_array();
+
+	}
+
 	public function geBusquedaLocalProv(){
 		$query = "(SELECT localidades.localidad,provincias.provincia
 				FROM
