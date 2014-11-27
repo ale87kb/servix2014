@@ -404,7 +404,10 @@ class sitio extends CI_Controller {
 				$data['usuarioSession'] = $this->UsuarioSession;
 				$user_postulado = $this->servicios_model->userPostulado($data['id_usuario'],$id);
 				if(!empty($user_postulado)){
-				$data['user_postulado'] = true;
+					foreach ($user_postulado as $value) {
+						$user_postulado = $value['postulado'];
+					}
+					$data['user_postulado'] = $user_postulado;
 				}
 			}
 
@@ -428,16 +431,46 @@ class sitio extends CI_Controller {
 	}
 
 	public function set_postulacion(){
-		$id_busqueda_temp = $this->input->post('id_busqueda_temp');
-		$id_usuario 	  = $this->UsuarioSession['id'];
-		$this->servicios_model->setPostulacion($id_busqueda_temp,$id_usuario);
-		redirect($_SERVER['HTTP_REFERER']);
+		if($this->UsuarioSession){
+			$id_busqueda_temp 	  = $this->input->post('id_busqueda_temp');
+			$id_usuario 	  	  = $this->UsuarioSession['id'];
+			
+
+			//
+			$user_postulado = $this->servicios_model->userPostulado($id_usuario ,$id_busqueda_temp);
+
+
+			if(!empty($user_postulado)){
+				
+					foreach ($user_postulado as $value) {
+
+						if(($value['postulado'] == 0) &&  ( $value['envio_mail'] == 1 ) ){
+							$this->servicios_model->updatePostulacion($id_busqueda_temp ,$id_usuario,1);
+
+						}
+					
+					}
+			}else{
+				 $id_user_publicacion  = $this->input->post('id_user_publicacion');
+				 $userSolicitudData    = $this->usuarios_model->getUsuario($id_user_publicacion);
+				 $usuario 			   = $this->UsuarioSession;
+				 $servicioSolicitado   = $this->servicios_model->getServicioSolicitado($id_busqueda_temp);
+
+
+				//envio mail metodo
+				 $this->_crearEmailTemplacePostulacion($userSolicitudData,$servicioSolicitado,$usuario);
+				
+				 $this->servicios_model->setPostulacion($id_busqueda_temp,$id_usuario,1,1);
+			}
+				 redirect($_SERVER['HTTP_REFERER']);
+		}
 	}
 
 	public function unset_postulacion(){
 		$id_busqueda_temp = $this->input->post('id_busqueda_temp');
 		$id_usuario 	  = $this->UsuarioSession['id'];
-		$this->servicios_model->unsetPostulacion($id_busqueda_temp,$id_usuario);
+		$this->servicios_model->updatePostulacion($id_busqueda_temp ,$id_usuario,0);
+		// $this->servicios_model->unsetPostulacion($id_busqueda_temp,$id_usuario);
 		redirect($_SERVER['HTTP_REFERER']);
 
 	}
@@ -499,6 +532,66 @@ class sitio extends CI_Controller {
 		$serv = explode('-', $servicio);
 		return $serv[0];
 	}
+
+	private function _crearEmailTemplacePostulacion($dataUserSolicitud,$dataServicioSoliciutd,$dataUserPostulante){
+		
+		foreach ($dataUserSolicitud as  $value) {
+			$data['nombreUs'] 	= $value['nombre'];
+			$data['emailUS'] 	= $value['email'];
+			
+		}
+		
+		foreach ($dataServicioSoliciutd as $value) {
+			$data['nombreSS'] = ucfirst($value['categoria'])." en ".ucfirst($value['localidad'])." ".ucfirst($value['provincia']);
+			$data['linkSS']	  = site_url(generarLinkServicio($value['id'],$value['categoria']."-en-".$value['localidad']."-".$value['provincia'],'servicio-solicitado'));
+		}
+
+	
+		$data['nombreUP']   = $dataUserPostulante['nombre'];
+		$data['apellidoUP'] = $dataUserPostulante['apellido'];
+		$data['emailUP'] 	= $dataUserPostulante['email'];
+		$data['telefonoUP']	= $dataUserPostulante['telefono'];
+		
+		$vista = $this->load->view('email/servicioPostulacion',$data,true);
+		// print_d($data);
+		$this->sendPostulacion($data['emailUS'],$vista);
+
+		
+
+	}
+
+
+
+
+	public function sendPostulacion($para,$vista){
+		
+
+		 	// print_d($post);
+		 	$this->load->library('email');
+		 	$config['charset'] = 'utf-8';
+	        $config['wordwrap'] = TRUE;
+	        $config['mailtype'] = 'html';
+	        $fromemail          = 'no-responder@servix.com'; // desde
+	        $toemail            = $para; //para 
+	        $mail               = null;
+	        $subject            = "Tienes una nueva postulaci&oacute;n en tu solicitud de servicio";
+
+	        
+	        $this->email->initialize($config);
+        	$this->email->to($toemail);
+	        $this->email->from($fromemail, 'Servix');
+	        
+	        $this->email->subject($subject);
+	        $mesg  = $vista;
+	        $this->email->message($mesg);
+	        $mail = $this->email->send();
+	        // echo $this->email->print_debugger();
+
+	      	return $mail;
+		 
+	}
+
+
 
 	public function sendContacto($post){
 		 if(isset($post)){

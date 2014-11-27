@@ -3,7 +3,7 @@
 -- Server version:               5.6.16 - MySQL Community Server (GPL)
 -- Server OS:                    Win32
 -- HeidiSQL version:             7.0.0.4053
--- Date/time:                    2014-11-25 17:01:03
+-- Date/time:                    2014-11-27 00:23:01
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `busquedas_temp` (
   CONSTRAINT `busquedas_temp_ibfk_4` FOREIGN KEY (`id_categorias`) REFERENCES `categorias` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1 COMMENT='Guarda las busquedas de servicios temporales';
 
--- Dumping data for table servix_db.busquedas_temp: ~0 rows (approximately)
+-- Dumping data for table servix_db.busquedas_temp: ~6 rows (approximately)
 DELETE FROM `busquedas_temp`;
 /*!40000 ALTER TABLE `busquedas_temp` DISABLE KEYS */;
 INSERT INTO `busquedas_temp` (`id`, `id_categorias`, `id_usuario`, `id_localidad`, `fecha_ini`, `fecha_fin`, `busqueda`, `vencido`) VALUES
@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 DELETE FROM `ci_sessions`;
 /*!40000 ALTER TABLE `ci_sessions` DISABLE KEYS */;
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-	('9b86cb3b233ed55ccb08d1d207aea2da', '::1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.65 Safari/537.36', 1416945623, 'a:1:{s:9:"logged_in";a:10:{s:2:"id";s:1:"1";s:5:"email";s:14:"pepe@gmail.com";s:6:"nombre";s:5:"Pedro";s:8:"apellido";s:11:"DonCorlione";s:3:"dni";s:8:"12918888";s:9:"direccion";s:19:"Av. Libertador 5966";s:8:"telefono";s:9:"4444-5587";s:4:"foto";s:29:"assets/images/profile_640.png";s:6:"estado";s:1:"1";s:14:"ultima_edicion";s:19:"0000-00-00 00:00:00";}}');
+	('64b3eba80c8a1370ab49774b663e8524', '::1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.65 Safari/537.36', 1417058399, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:10:{s:2:"id";s:1:"1";s:5:"email";s:14:"pepe@gmail.com";s:6:"nombre";s:5:"Pedro";s:8:"apellido";s:11:"DonCorlione";s:3:"dni";s:8:"12918888";s:9:"direccion";s:19:"Av. Libertador 5966";s:8:"telefono";s:9:"4444-5587";s:4:"foto";s:29:"assets/images/profile_640.png";s:6:"estado";s:1:"1";s:14:"ultima_edicion";s:19:"0000-00-00 00:00:00";}}');
 /*!40000 ALTER TABLE `ci_sessions` ENABLE KEYS */;
 
 
@@ -2578,18 +2578,33 @@ CREATE TABLE IF NOT EXISTS `postulaciones_temp` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_busquedas_temp` int(11) unsigned NOT NULL,
   `id_usuarios` int(11) unsigned NOT NULL,
+  `postulado` tinyint(1) unsigned NOT NULL,
+  `envio_mail` tinyint(1) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_busquedas_temp` (`id_busquedas_temp`),
   KEY `id_usuarios` (`id_usuarios`),
   CONSTRAINT `postulaciones_temp_ibfk_1` FOREIGN KEY (`id_busquedas_temp`) REFERENCES `busquedas_temp` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `postulaciones_temp_ibfk_2` FOREIGN KEY (`id_usuarios`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COMMENT='Guarda las postulaciones temporales de servicios';
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1 COMMENT='Guarda las postulaciones temporales de servicios';
 
--- Dumping data for table servix_db.postulaciones_temp: ~0 rows (approximately)
+-- Dumping data for table servix_db.postulaciones_temp: ~14 rows (approximately)
 DELETE FROM `postulaciones_temp`;
 /*!40000 ALTER TABLE `postulaciones_temp` DISABLE KEYS */;
-INSERT INTO `postulaciones_temp` (`id`, `id_busquedas_temp`, `id_usuarios`) VALUES
-	(1, 2, 8);
+INSERT INTO `postulaciones_temp` (`id`, `id_busquedas_temp`, `id_usuarios`, `postulado`, `envio_mail`) VALUES
+	(1, 2, 6, 1, 0),
+	(2, 3, 3, 1, 0),
+	(3, 3, 6, 1, 0),
+	(4, 3, 2, 1, 0),
+	(6, 4, 6, 1, 0),
+	(7, 4, 4, 1, 0),
+	(9, 5, 7, 1, 0),
+	(11, 6, 2, 1, 0),
+	(12, 7, 5, 1, 0),
+	(13, 7, 7, 1, 0),
+	(28, 5, 1, 1, 0),
+	(31, 7, 1, 1, 0),
+	(35, 4, 8, 1, 0),
+	(43, 2, 1, 0, 1);
 /*!40000 ALTER TABLE `postulaciones_temp` ENABLE KEYS */;
 
 

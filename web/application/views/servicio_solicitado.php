@@ -45,7 +45,8 @@
 						<?php if(isset($usuario)){
 
 							if($solicitado['userID'] != $id_usuario){
-								if(isset($user_postulado)){
+								if(isset($user_postulado) &&( $user_postulado == 1)){
+
 									?>
 									<form action="<?php echo site_url('unset_postulacion'); ?>" method="post"  id="formCancelPostu">
 										<input type="hidden" name="id_busqueda_temp"  value="<?php echo $solicitado['id']; ?>">
@@ -58,6 +59,7 @@
 									?>
 									<form action="<?php echo site_url('set_postulacion'); ?>" method="post" >
 										<input type="hidden" name="id_busqueda_temp"  value="<?php echo $solicitado['id']; ?>">
+										<input type="hidden" name="id_user_publicacion"  value="<?php echo $solicitado['userID'];  ?>">
 									 	<p class="text-right">
 									 		<button type="submit" class="btn btn-success btn-sm " ><i class="fa fa-check"></i> Quiero postularme</button>
 									 	</p>
@@ -78,7 +80,7 @@
 						}else{
 							?>
 
-							<a data-toggle="modal" href="#loginModal"  data-target="#loginModal" rel=""  class="btn  btn-success btn-sm"> Quiero postularme!</a>
+							<a data-toggle="modal" href="#loginModal"  data-target="#loginModal" rel=""  class="btn  btn-success btn-sm"><i class="fa fa-check"></i> Quiero postularme</a>
 
 
 							
@@ -91,13 +93,16 @@
 
 			    if (!empty($userPostu)) {
 			    	foreach ($userPostu as $value) {
+			    	
+
+
 			    			?>
 
-			    			 <div class="col-md-6">
+			    			 <div class="col-md-6 box-postulaciones">
 							   	   	<div class="media">
-							      <a class="media-left" href="#">
-							        <img data-src="holder.js/64x64" alt="64x64" src="http://placehold.it/100x100" data-holder-rendered="true" style="width: 50px; height: 50px;">
-							      </a>
+							      <span class="media-left" href="">
+							        <img data-src="holder.js/64x64" alt="64x64" src="http://placehold.it/180x180" data-holder-rendered="true" style="width: 60px; height: 60px;">
+							      </span>
 							      <div class="media-body">
 							        <h4 class="media-heading">
 							        	
@@ -105,15 +110,30 @@
 										
 							        </h4>
 							        <h5>
-										<small>
-											se postulo para esta publicación
-										</small>
+							        	<?php 
+					        				if($value['postulado'] == 1){ 
+					        				?>
+					        					<small>
+													<span class="label label-success">Se postulo para esta publicación</span>
+												</small>
+					        				<?php
+					        				}else{
+					        				?>
+												<small>
+													Se postulo para esta publicación,<br>
+													<span class="label label-default">Cancelo la postulación</span>
+												</small>
+					        				<?php
+					        				}
+							        	 ?>
+									
 									</h5>
 							   		</div>
 									</div>
 							   </div> 
 
 			    			<?php
+			    			
 			    		}	
 			    	?>
 					

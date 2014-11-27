@@ -81,7 +81,16 @@ a.list-group-item {
     margin-left: 2px;
     vertical-align: middle;
 }
-
+.box-postulaciones{
+    margin:10px 0px;
+}
+.box-postulaciones h5{
+    margin: 0px;
+}
+.box-postulaciones small span{
+    font-size:10px;
+    margin-top: 5px;
+}
 
 /***********LOGIN MODALBOX ******************/
 .login_modal{

@@ -15,28 +15,7 @@
     </div>
 
     <div id="navbar-login" class="navbar-collapse collapse">     
-   <!--   <ul class="nav navbar-nav navbar-right">
-        <?php 
-        if(isset($usuario)){
-          ?>
-          <li class="dropdown">
-            <a href="#" rel="nofollow" class="dropdown-toggle" data-toggle="dropdown"><?php echo $usuario;?><span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="<?php echo site_url('mi-perfil'); ?>">Mi perfil</a></li>
-              <li><a href="#">Mis favoritos</a></li>
-              <li class="divider"></li>
-              <li><a href="<?php echo site_url('logout');?>">Cerrar Sesión</a></li>
-            </ul>
-          </li>
-          <?php
-        }else{
-          ?>
-          <li><a href="<?php echo site_url('registrarse'); ?>">Registrarse</a></li>
-          <li><a data-toggle="modal" href="#loginModal"  data-target="#loginModal" rel="nofollow">Iniciar Sesión</a></li>
-          <?php
-        }
-         ?>
-      </ul>-->
+  
       <?php
       if(isset($usuarioSession)){
         $this->load->view('includes/user_log');

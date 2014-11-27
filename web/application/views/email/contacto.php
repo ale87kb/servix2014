@@ -22,7 +22,7 @@
 				<div class="content">
 				<table bgcolor="#999999">
 					<tr>
-						<td><img src="http://placehold.it/200x50/&text=SERVIX" /></td>
+						<td><a href="<?php echo site_url(); ?> "><img src="<?php echo site_url('assets/images/servix_logo_48.png'); ?>" /></a></td>
 						<td align="right"><h6 class="collapse"><?php echo date('d-m-Y H:m'); ?></h6></td>
 					</tr>
 				</table>

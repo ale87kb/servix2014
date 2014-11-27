@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width" />
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Recuperar Clave de usuario en Servix</title>
+<title>Te han recomendado un Servix ;)</title>
 	
 <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/css/email.css') ?>" />
 
@@ -44,26 +44,31 @@
 			<table>
 				<tr>
 					<td>
-						<h3>Hola <?php echo $usuario ?></h3>
-						<p class="lead">Solicitaste modificar tu contraseña.</p>
-						<p class="lead">Tus nuevos datos para iniciar sesión son los siguientes:</p>
+						<h3>Hola, <?php echo ucfirst($nombreUs );?> </h3>
+						<p class="lead">Tienes una nueva postulaci&oacute;n en tu solicitud de <a href="<?php echo $linkSS; ?>"><strong><?php  echo $nombreSS; ?></strong></a></p>
+						
+						<!-- Callout Panel -->
+						<h4>Sus datos de contacto son:</h4>
 
-						<table>
-							<tr>
-								<td>Usuario:</td>
-								<td><?php echo $usuario ;?></td>
-							</tr>
-							<tr>
-								<td>Clave:</td>
-								<td><?php echo $clave ;?></td>
-							</tr>
-						</table>
+						<ul>
+							<li>Nombre: <?php echo $nombreUP." ".$apellidoUP; ?></li>
+							<li>Email: <?php echo $emailUP; ?></li>
+							<?php 
+							if(isset($telefonoUP)){
+							?>
+								<li>Tel&eacute;fono: <?php echo $telefonoUP; ?></li>
+							 <?php
+								
+							}
+							?>
+						</ul>
+						<p class="callout">
+							
+							Si estas interesado en esta postulaci&oacute;n ponte en contacto con &eacute;l
 
-						<p class="lead">Te recordamos que puedes modificar tu clave cuantas veces quieras.</p>
-						<p class="lead">Te invitamos a iniciar sesión en el sitio para seguir disfrutando de Servix</p>
-
-						<p class="lead">Gracias de nuevo por unirte. ¡Nos vemos en este sitio!</p>
-						<p class="lead"><a href="<?php echo site_url('') ?>">Servix</a></p>
+						</p><!-- /Callout Panel		 -->			
+												
+					
 						
 					</td>
 				</tr>

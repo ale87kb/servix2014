@@ -106,7 +106,8 @@ Class Servicios_model extends CI_Model{
 	public function userPostulados($id){
 		$query = "SELECT
 				servix_db.usuarios.nombre,
-				servix_db.usuarios.apellido
+				servix_db.usuarios.apellido,
+				servix_db.postulaciones_temp.postulado
 				FROM
 				servix_db.postulaciones_temp
 				INNER JOIN servix_db.usuarios ON servix_db.postulaciones_temp.id_usuarios = servix_db.usuarios.id
@@ -115,8 +116,14 @@ Class Servicios_model extends CI_Model{
 		return $rs->result_array();
 	}
 
-	public function setPostulacion($id_busquedas_temp,$id_usurio){
-		$query = "INSERT INTO `postulaciones_temp` (`id_busquedas_temp`, `id_usuarios`) VALUES ($id_busquedas_temp,$id_usurio);";
+	public function updatePostulacion($id_busquedas_temp ,$id_usuario,$postulado){
+		$query = "UPDATE `postulaciones_temp` SET `postulado`=$postulado WHERE  `id_busquedas_temp`=$id_busquedas_temp AND id_usuarios = $id_usuario LIMIT 1;";
+		$rs    = $this->db->query($query);
+		return $rs;
+	}
+
+	public function setPostulacion($id_busquedas_temp,$id_usurio,$postu,$emailEnvio){
+		$query = "INSERT INTO `postulaciones_temp` (`id_busquedas_temp`, `id_usuarios`, `postulado`, `envio_mail`) VALUES ($id_busquedas_temp,$id_usurio,$postu,$emailEnvio);";
 		$rs    = $this->db->query($query);
 		return $rs;
 	}
@@ -127,7 +134,7 @@ Class Servicios_model extends CI_Model{
 	}
 
 	public function userPostulado($id_usuario,$id_busqueda){
-		$query = "SELECT * FROM postulaciones_temp WHERE id_busquedas_temp = $id_busqueda AND id_usuarios = $id_usuario";
+		$query = "SELECT * FROM postulaciones_temp WHERE id_busquedas_temp = $id_busqueda AND id_usuarios = $id_usuario ORDER BY postulado DESC";
 		$rs    = $this->db->query($query);
 		return $rs->result_array();
 
