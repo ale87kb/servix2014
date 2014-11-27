@@ -60,9 +60,23 @@
 									<form action="<?php echo site_url('set_postulacion'); ?>" method="post" >
 										<input type="hidden" name="id_busqueda_temp"  value="<?php echo $solicitado['id']; ?>">
 										<input type="hidden" name="id_user_publicacion"  value="<?php echo $solicitado['userID'];  ?>">
-									 	<p class="text-right">
-									 		<button type="submit" class="btn btn-success btn-sm " ><i class="fa fa-check"></i> Quiero postularme</button>
-									 	</p>
+										<?php
+										 
+										if(isset($user_postulado) && $user_postulado == 0){
+											?>
+											<p class="text-right">
+									 			<button type="submit" class="btn btn-success btn-sm " ><i class="fa fa-check"></i> Volver a postularme</button>
+									 		</p>
+											<?php
+										}else{
+											?>
+											<p class="text-right">
+									 			<button type="submit" class="btn btn-success btn-sm " ><i class="fa fa-check"></i> Quiero postularme</button>
+									 		</p>
+											<?php
+										}
+										?>
+									 	
 									</form>
 									<?php
 								}
