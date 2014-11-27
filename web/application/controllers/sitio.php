@@ -9,18 +9,15 @@ class sitio extends CI_Controller {
 		//inicio sesion de usuario preguntandole al modelo
 		$this->UsuarioSession = $this->usuarios_model->isLogin();
 
-		//$this->usuario = $this->check_login();
 	}
 
 
 	public function index(){
 		
-		// print_d($data['usuario']);
 		if($this->UsuarioSession){
 			$data['usuario'] = $this->UsuarioSession['nombre'];
 			$data['usuarioSession'] = $this->UsuarioSession;
 		}
-		//$data['usuario'] = $this->usuario;
 		$seccion = "servicios-solicitados";
 
 		$destacados  	 = $this->servicios_model->getServiciosDestacados();
@@ -51,12 +48,6 @@ class sitio extends CI_Controller {
 		}
 	}
 
-
-	
-
-
-
-
 	public function comentar_servicio(){
 	
 		$usuario 		= $this->UsuarioSession;
@@ -74,7 +65,6 @@ class sitio extends CI_Controller {
 			$post['emailUsuario']  = $usuario['email'];
 
 			$email = $this->sendContacto($post);
-			//Si se envia el comentario por e-mail, se graba en la base de datos
 			if($email){
 				$this->servicios_model->setConsultaServicio($id_servicio, $id_usuario, $comentario);
 			}
@@ -123,7 +113,7 @@ class sitio extends CI_Controller {
 
 		if ($this->form_validation->run() == FALSE)
 		{
-			$json['error'] = true;
+			$json['error'] 	 = true;
 			$json['mensaje'] = "Error en la validacion del formulario";
 
 		}
@@ -164,6 +154,14 @@ class sitio extends CI_Controller {
 		 }
 		 echo  json_encode($arrayDatos);
 	}
+	public function busqueda_categoria(){
+		 $data = $this->servix_model->getBusquedaCategoria();
+		 $arrayDatos = array();
+		 foreach ($data as $d) {
+		 	$arrayDatos[] = ucfirst($d['categoria']);
+		 }
+		 echo  json_encode($arrayDatos);
+	}
 
 	public function busqueda_localidades(){
 		$data = $this->servix_model->geBusquedaLocalProv();
@@ -184,40 +182,38 @@ class sitio extends CI_Controller {
 	public function condiciones_de_uso(){
 		echo "condiciones_de_uso";  		
 	}
+
 	public function preguntas_frecuentes(){
 		echo "preguntas_frecuentes";  	
 	}
+
 	public function solicitar_servicio(){
-		echo "solicitar_servicio";	 
+		// $this->load->view('home_view');
+		$data['buscador_off'] = true;
+		if($this->UsuarioSession){
+			$data['usuario'] = $this->UsuarioSession['nombre'];
+			$data['usuarioSession'] = $this->UsuarioSession;
+		}
+		$data['vista'] = 'solicitar_servicio';
+		$this->load->view('home_view',$data);
 	}
-	public function consultar_servicio(){
-		echo "consultar_servicio";	 
-	}
+	
 	public function ofrecer_servicio(){
 		echo "ofrecer_servicio";	 
 	}
+
 	public function categorias(){
 		echo "categorias";	 
 	}
 
 	public function busqueda(){
 		 $post = $this->input->post();
-		 //$post tiene el input value de servicio, localidad 
-		 //los tiene tal como te lo envia el usuario con tildes y acentos y ñ
-
 		 $busqueda = array();
 		 foreach ($post as $k => $v) {
 			$busqueda['post'][$k] = ($v);
-			//la funcion normaliza sale del helper
-			// todas las funciones que no tengan $this->algo->funcion() 
-			//provienen de un helper
-
 			$busqueda['url'][$k]  = normaliza(trim($v));
 		 }
-		 //seteo una nueva variable de session que me guarde los datos de las busqueda con su post y url a mostrar
-
 		 $this->session->set_userdata("busqueda",$busqueda);
-		 //esto es lo que te envio el usuario por post parseado para la url para tener una url friendly
 		 return redirect("resultado-de-busqueda/".$busqueda['url']['servicio']."-en-".$busqueda['url']['localidad']);
 
 	}
@@ -234,16 +230,13 @@ class sitio extends CI_Controller {
 		$data['localidad'] = $busca['post']['localidad'];
 		$urlLoc 		   = $busca['url']['localidad'];
 		$urlServ 		   = $busca['url']['servicio'];
-		//aca llamo al model de servix y le paso como parametro el post sin parsear para que busque en la db
-		$result	   = $this->_setPaginacion($data['servicio'],$data['localidad'],$urlServ,$urlLoc);
-		$data['result'] = $result['result'];
+		$result	   		   = $this->_setPaginacion($data['servicio'],$data['localidad'],$urlServ,$urlLoc);
+		$data['result']    = $result['result'];
 		if(!empty($data['result'])){
-		 $data['map'] =	$this->_gmap($data['result'],$busca['post']['localidad']);
+		 $data['map'] 	   =	$this->_gmap($data['result'],$busca['post']['localidad']);
 		}
-		
-		
-		$data['title'] = 'Resultado de búsqueda';
-		$data['vista'] = 'resultado_busqueda_view';
+		$data['title'] 	   = 'Resultado de búsqueda';
+		$data['vista'] 	   = 'resultado_busqueda_view';
 		$this->load->view('home_view',$data);
 
 	}
@@ -257,12 +250,11 @@ class sitio extends CI_Controller {
         $config["total_rows"]   = $this->servix_model->getTotalFilasResultBusqueda($servicio,$localidad);
         $config["per_page"] 	= 4;
         $config["uri_segment"]  = 4;
-        $config['last_link'] = 'Último';
-        $config['first_link'] = 'Primero';
+        $config['last_link'] 	= 'Último';
+        $config['first_link'] 	= 'Primero';
         $this->pagination->initialize($config);
         $page 					= (is_numeric($this->uri->segment(4))) ? $this->uri->segment(4) : 0;
         $data["result"] 		= $this->servix_model->getResultadoBusqueda($servicio,$localidad,  $page, $config["per_page"]); 
-       
         $data["links"] 			= $this->pagination->create_links();
 		return $data;
        
@@ -300,7 +292,6 @@ class sitio extends CI_Controller {
 
 	private function _setPaginacionOpinion($servicio,$id)
 	{
-	   
 
 	    $this->load->library('pagination');
 	    $config = array();
@@ -308,45 +299,27 @@ class sitio extends CI_Controller {
         $config["total_rows"]   = $this->servicios_model->getTotalOpiniones($id);
         $config["per_page"] 	= 4;
         $config["uri_segment"]  = 5;
-        $config["is_ajax_paging"]    = TRUE; //default FALSE
-        $config['paging_function'] = 'ajax_paging';// Your jQuery paging
+        $config["is_ajax_paging"]    = TRUE; 
+        $config['paging_function'] = 'ajax_paging';
         $this->pagination->initialize($config);
         $page 					= (is_numeric($this->uri->segment(5))) ? $this->uri->segment(5) : 0;
         $data["result"] 		= $this->servicios_model->getOpinionServicio($id, $page, $config["per_page"]); 
-     
-    
         $data["links"] 			= $this->pagination->create_links();
 		return $data;
-       
-
 	}
 
 	public function get_opiniones($servicio=null,$num=0){
 		$this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0");
 		$this->output->set_header("Pragma: no-cache"); 
-
-		
-		$id 			 = $this->_parsearIdServicio($servicio);
-
+		$id = $this->_parsearIdServicio($servicio);
 		if(is_numeric($id)){
-
-		$opiniones 		 = $this->_setPaginacionOpinion($servicio,$id);
+			$opiniones = $this->_setPaginacionOpinion($servicio,$id);
 		}
-		
-		$data['opiniones']     = $opiniones['result'];
-
-		//si es ajax navego por ajax
+		$data['opiniones'] = $opiniones['result'];
 		if($this->input->is_ajax_request()){
-
-
-		$this->load->view('listar_opiniones',$data);
-
+			$this->load->view('listar_opiniones',$data);
 		}else{
-
-		//si refrescan la pagina no pierdo na lavegacion ni la pagina en la que estaba el usuario
 			$this->ficha_servicio($servicio);
-		
-
 		}
 	}
 
@@ -374,16 +347,16 @@ class sitio extends CI_Controller {
 	}
 
 	public function servicio_solicitado($servicio=null){
-		$id 			 = $this->_parsearIdServicio($servicio);
 
-		$seccion ="servicio-solicitado/".$servicio."/";
+		$id 	 = $this->_parsearIdServicio($servicio);
+		$seccion = "servicio-solicitado/".$servicio."/";
 		$segment = 3;
+
 		if(is_numeric($id)){
 
 			$data['title']   = 'Ficha del servicio';
 			$solicitado 	 = $this->servicios_model->getServicioSolicitado($id);
 			$solicitados 	 = $this->_setPagSolicitados($seccion,$segment);
-
 			$userPostulados	 = $this->servicios_model->userPostulados($id);
 
 			if(!empty($solicitados)){
@@ -391,18 +364,19 @@ class sitio extends CI_Controller {
 			}else{
 				$data['solicitados'] = null;
 			}
+
 			$data['paginacion']   = $solicitados['links'];
 			$data['current_page'] = ( $solicitados['current_page'] > 0) ?  $solicitados['current_page'] : "";
-			$data['vista']      = 'servicio_solicitado';
-			$data['userPostu']  = $userPostulados;
-			$data['solicitado'] = $solicitado[0];
-			$data['id_usuario'] = $this->UsuarioSession['id'];
+			$data['vista']        = 'servicio_solicitado';
+			$data['userPostu']    = $userPostulados;
+			$data['solicitado']   = $solicitado[0];
+			$data['id_usuario']   = $this->UsuarioSession['id'];
 			
 			
 			if($this->UsuarioSession){
-				$data['usuario'] = $this->UsuarioSession['nombre'];
+				$data['usuario'] 		= $this->UsuarioSession['nombre'];
 				$data['usuarioSession'] = $this->UsuarioSession;
-				$user_postulado = $this->servicios_model->userPostulado($data['id_usuario'],$id);
+				$user_postulado 		= $this->servicios_model->userPostulado($data['id_usuario'],$id);
 				if(!empty($user_postulado)){
 					foreach ($user_postulado as $value) {
 						$user_postulado = $value['postulado'];
@@ -411,34 +385,27 @@ class sitio extends CI_Controller {
 				}
 			}
 
-			// $this->load->view('home_view',$data);
-
-
 			if ($this->input->is_ajax_request()) {
-					$this->load->view('servicios_solicitados',$data);
-			
+				$this->load->view('servicios_solicitados',$data);
 			}else{
 				$this->load->view('home_view',$data);
-	       
 			}
 
 
 		}else{
 
-			redirect('');	
+			return redirect('');	
 		}
 		
 	}
 
 	public function set_postulacion(){
+		
 		if($this->UsuarioSession){
-			$id_busqueda_temp 	  = $this->input->post('id_busqueda_temp');
-			$id_usuario 	  	  = $this->UsuarioSession['id'];
-			
 
-			//
-			$user_postulado = $this->servicios_model->userPostulado($id_usuario ,$id_busqueda_temp);
-
+			$id_busqueda_temp = $this->input->post('id_busqueda_temp');
+			$id_usuario 	  = $this->UsuarioSession['id'];
+			$user_postulado   = $this->servicios_model->userPostulado($id_usuario ,$id_busqueda_temp);
 
 			if(!empty($user_postulado)){
 				
@@ -450,80 +417,84 @@ class sitio extends CI_Controller {
 						}
 					
 					}
+
 			}else{
 				 $id_user_publicacion  = $this->input->post('id_user_publicacion');
 				 $userSolicitudData    = $this->usuarios_model->getUsuario($id_user_publicacion);
 				 $usuario 			   = $this->UsuarioSession;
 				 $servicioSolicitado   = $this->servicios_model->getServicioSolicitado($id_busqueda_temp);
-
-
-				//envio mail metodo
-				 $this->_crearEmailTemplacePostulacion($userSolicitudData,$servicioSolicitado,$usuario);
-				
-				 $this->servicios_model->setPostulacion($id_busqueda_temp,$id_usuario,1,1);
+				 $mail = $this->_crearEmailTemplacePostulacion($userSolicitudData,$servicioSolicitado,$usuario);
+				 if($mail){
+				 	$this->servicios_model->setPostulacion($id_busqueda_temp,$id_usuario,1,1);
+				 }
 			}
-				 redirect($_SERVER['HTTP_REFERER']);
+
+	        return redirect($_SERVER['HTTP_REFERER']);
 		}
 	}
 
 	public function unset_postulacion(){
+		
 		$id_busqueda_temp = $this->input->post('id_busqueda_temp');
 		$id_usuario 	  = $this->UsuarioSession['id'];
 		$this->servicios_model->updatePostulacion($id_busqueda_temp ,$id_usuario,0);
-		// $this->servicios_model->unsetPostulacion($id_busqueda_temp,$id_usuario);
-		redirect($_SERVER['HTTP_REFERER']);
+
+		return redirect($_SERVER['HTTP_REFERER']);
 
 	}
 
 
 
 	public function ficha_servicio($servicio=null){
+		
 		$id 			 = $this->_parsearIdServicio($servicio);
 		$data['seccion'] = 'ficha';
+		$data['favorito']=  null;
+
 		if(is_numeric($id)){
 
-		$opiniones 		 = $this->_setPaginacionOpinion($servicio,$id);
-		// $opiniones 		 = $this->test($servicio,$id);
-		$servicioRS 	 = $this->servicios_model->getServicioFicha($id);
-		$promedio 		 = $this->servicios_model->getPromedioPuntos($id);
+			$opiniones 	 = $this->_setPaginacionOpinion($servicio,$id);
+			$servicioRS  = $this->servicios_model->getServicioFicha($id);
+			$promedio 	 = $this->servicios_model->getPromedioPuntos($id);
 
-		if(!empty($promedio)){
-			foreach ($promedio[0] as $key => $value) {
+			if(!empty($promedio)){
+				foreach ($promedio[0] as $key => $value) {
+					$data[$key] = $value;
+				}
+			}
+
+			foreach ($servicioRS[0] as $key => $value) {
 				$data[$key] = $value;
 			}
-		}
-		foreach ($servicioRS[0] as $key => $value) {
-			$data[$key] = $value;
-		}
 
-		$data['favorito'] =  null;
-		if($this->UsuarioSession){
-			$fav = $this->usuarios_model->getFavorito($this->UsuarioSession['id'],$id);
-			if(!empty($fav)){
-				$data['favorito'] = true;
+			if($this->UsuarioSession){
+				$fav = $this->usuarios_model->getFavorito($this->UsuarioSession['id'],$id);
+				if(!empty($fav)){
+					$data['favorito'] = true;
+				}
 			}
-		}
 
-		$data['servicio']  = $data['titulo'];
-		$lat 			   = $servicioRS[0]['latitud'];
-		$long 			   = $servicioRS[0]['longitud'];
-		$position	       = "$lat,$long";
-		$data['map'] 	   = $this->_gmap($servicioRS,$position,14);
-		if($this->UsuarioSession){
-			$data['usuario'] = $this->UsuarioSession['nombre'];
-			$data['usuarioSession'] = $this->UsuarioSession;
-		}
-		$data['opiniones'] = $opiniones['result'];
+			$data['servicio']  = $data['titulo'];
+			$lat 			   = $servicioRS[0]['latitud'];
+			$long 			   = $servicioRS[0]['longitud'];
+			$position	       = "$lat,$long";
+			$data['map'] 	   = $this->_gmap($servicioRS,$position,14);
+		
+			if($this->UsuarioSession){
+				$data['usuario']	    = $this->UsuarioSession['nombre'];
+				$data['usuarioSession'] = $this->UsuarioSession;
+			}
 
-		$data['title']     = 'Ficha del servicio';
-		$data['servUrl']   =  site_url('ficha/'.$servicio);
-		$data['vista']     = 'ficha_servicio_view';
+			$data['opiniones'] = $opiniones['result'];
+			$data['title']     = 'Ficha del servicio';
+			$data['servUrl']   =  site_url('ficha/'.$servicio);
+			$data['vista']     = 'ficha_servicio_view';
 
-		$this->load->view('home_view',$data);
+			return $this->load->view('home_view',$data);
 		
 		}else
 		{
-			redirect('');
+			return redirect('');
 		}
 	}
 
@@ -553,22 +524,17 @@ class sitio extends CI_Controller {
 		$data['telefonoUP']	= $dataUserPostulante['telefono'];
 		
 		$vista = $this->load->view('email/servicioPostulacion',$data,true);
-		// print_d($data);
-		$this->sendPostulacion($data['emailUS'],$vista);
+		
+		return $this->sendPostulacion($data['emailUS'],$vista);
 
 		
 
 	}
 
-
-
-
 	public function sendPostulacion($para,$vista){
 		
-
-		 	// print_d($post);
 		 	$this->load->library('email');
-		 	$config['charset'] = 'utf-8';
+		 	$config['charset']  = 'utf-8';
 	        $config['wordwrap'] = TRUE;
 	        $config['mailtype'] = 'html';
 	        $fromemail          = 'no-responder@servix.com'; // desde
@@ -582,11 +548,10 @@ class sitio extends CI_Controller {
 	        $this->email->from($fromemail, 'Servix');
 	        
 	        $this->email->subject($subject);
-	        $mesg  = $vista;
+	        $mesg = $vista;
 	        $this->email->message($mesg);
 	        $mail = $this->email->send();
 	        // echo $this->email->print_debugger();
-
 	      	return $mail;
 		 
 	}
@@ -594,11 +559,11 @@ class sitio extends CI_Controller {
 
 
 	public function sendContacto($post){
+
 		 if(isset($post)){
 
-		 	// print_d($post);
 		 	$this->load->library('email');
-		 	$config['charset'] = 'utf-8';
+		 	$config['charset']  = 'utf-8';
 	        $config['wordwrap'] = TRUE;
 	        $config['mailtype'] = 'html';
 	        $fromemail          = 'no-responder@servix.com'; // desde
@@ -612,7 +577,7 @@ class sitio extends CI_Controller {
 	        $this->email->from($fromemail, $post['nombre']);
 	        
 	        $this->email->subject($subject);
-	        $mesg  = $this->load->view('email/contacto',$post,true);
+	        $mesg = $this->load->view('email/contacto',$post,true);
 	        $this->email->message($mesg);
 	        $mail = $this->email->send();
 	      
@@ -622,11 +587,11 @@ class sitio extends CI_Controller {
 
 
 	public function sendRecomendacion($post){
+
 			 if(isset($post)){
 
-			 	// print_d($post);
 			 	$this->load->library('email');
-			 	$config['charset'] = 'utf-8';
+			 	$config['charset']  = 'utf-8';
 		        $config['wordwrap'] = TRUE;
 		        $config['mailtype'] = 'html';
 		        $toemail            = $post['emailAmigo']; //para 
@@ -634,13 +599,12 @@ class sitio extends CI_Controller {
 		        $mail               = null;
 		        $subject            = "Hola ".$post['nombreAmigo']." este servicio puede ser de tu int&eacuteres";
 
-		        
 		        $this->email->initialize($config);
 		        $this->email->from($fromemail);
 	        	$this->email->to($toemail);
 		        
 		        $this->email->subject($subject);
-		        $mesg  = $this->load->view('email/recomendacion',$post,true);
+		        $mesg = $this->load->view('email/recomendacion',$post,true);
 		        $this->email->message($mesg);
 		        $mail = $this->email->send();
 		      

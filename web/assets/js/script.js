@@ -8,6 +8,11 @@ var app = function(){
                         source:data 
                     });
                 },'json'),
+                 $.get(this.url+"busqueda_categoria", function(data){
+                    $(".typeaheadOnlyCat").typeahead({
+                        source:data 
+                    });
+                },'json'),
                 $.get(this.url+"busqueda_localidades", function(data){
                     $(".typeheadLoc").typeahead({
                         source:data 
@@ -502,6 +507,12 @@ var app = function(){
               }
             });
         },
+        this.datePiker = function(){
+
+            $('#datetimepicker2').datetimepicker({
+                    language: 'es'
+            });
+        },
 
         this.init = function(){
 
@@ -519,6 +530,7 @@ var app = function(){
             this.favoritosAction();   
             this.pagSolicitados();      
             this.confirmBox();   
+            this.datePiker();
         }
     };
     

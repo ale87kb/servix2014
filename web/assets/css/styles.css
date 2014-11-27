@@ -1,12 +1,12 @@
 #logostyle a{
-	line-height:20px;
-	display:block;
-	float:left;
-	text-decoration: none;
+    line-height:20px;
+    display:block;
+    float:left;
+    text-decoration: none;
 }
-	
+    
 #logostyle .s-logo{
-	background-repeat: no-repeat;
+    background-repeat: no-repeat;
     height: 48px;
     left: 10px;
     margin: 0;
@@ -21,16 +21,20 @@
 }
 
  .footer-servix{
-	margin-bottom: 0px;
- }
+    margin-bottom: 0px;
+ 
+    border-left: 0px;
+    border-right: 0px;
+    border-radius: 0px;
+}
 
  .search-box{
- 	display: inline-block;
- 	margin: 25px auto 0px;
+    display: inline-block;
+    margin: 25px auto 0px;
  }
 
 ul.typeahead.dropdown-menu{
-	width: 93%;
+    width: 93%;
 }
 
 /*a.list-group-item {
@@ -49,26 +53,26 @@ a.list-group-item {
 }
 
 .footer-servix{
-	margin-top: 20px;
+    margin-top: 20px;
 }
 
 .ficha h1{
-	margin-bottom: 40px;
+    margin-bottom: 40px;
 }
 .ficha h2{
-	margin-top:0px;
-	margin-bottom: 20px;
+    margin-top:0px;
+    margin-bottom: 20px;
 }
 .votacion h3{
-	margin-bottom: 30px;
+    margin-bottom: 30px;
 }
  .starrr,.startt{
- 	color:gold;
+    color:gold;
  }
 .votacion .starrr{
-	font-size: 28px;
-	color: gold;
-	margin-top: 0px;
+    font-size: 28px;
+    color: gold;
+    margin-top: 0px;
 }
 .caret-up {
     width: 0; 
@@ -94,13 +98,29 @@ a.list-group-item {
 
 /***********LOGIN MODALBOX ******************/
 .login_modal{
-	width: 420px;
+    width: 420px;
 }
 .login_modal_body{
-	padding: 15px 30px;
+    padding: 15px 30px;
 }
 
 /***********FIN LOGIN MODALBOX ******************/
 #edit_photo .progress{ position:relative;}
 #edit_photo .bar { background-color: #B4F5B4; width:0%; height:20px; border-radius: 3px; }
 #edit_photo .percent { position:absolute; display:inline-block; top:3px; left:45%; }
+
+/***********SOLICITUD SERVICIO ******************/
+.guia-uso ul{margin-top: 30px; }
+.guia-uso ul li p{
+    font-size: 16px;
+}
+
+.guia-uso ul li{
+    margin:45px 0px;
+}
+.from-box form{
+    margin-top: 30px;
+}
+.from-box form textarea{
+    resize:vertical;
+}

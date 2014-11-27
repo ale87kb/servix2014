@@ -188,3 +188,4 @@
 			</div>
 			<?php $this->load->view('servicios_solicitados'); ?>
 </div>
+</div>
