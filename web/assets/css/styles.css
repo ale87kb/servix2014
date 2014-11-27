@@ -101,4 +101,6 @@ a.list-group-item {
 }
 
 /***********FIN LOGIN MODALBOX ******************/
-
+#edit_photo .progress{ position:relative;}
+#edit_photo .bar { background-color: #B4F5B4; width:0%; height:20px; border-radius: 3px; }
+#edit_photo .percent { position:absolute; display:inline-block; top:3px; left:45%; }

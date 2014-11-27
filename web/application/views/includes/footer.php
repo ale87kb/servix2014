@@ -186,7 +186,7 @@
 
 
                 <form action="<?php echo site_url('actulaizar_foto_perfil'); ?>" method="post" enctype="multipart/form-data" id="form_edit_foto">
-                  <input type="file" title="Subir foto de perfil" name="mifoto" class="btn-primary">
+                  <input type="file" title="Elegir archivo" name="mifoto" class="btn-primary">
                   <input type="submit" value="Subir foto">
                 </form>
                     

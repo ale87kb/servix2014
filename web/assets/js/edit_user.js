@@ -215,19 +215,26 @@ $('document').ready(function(){
                 complete: function(xhr) {
                     var out = JSON.parse(xhr.responseText);
                     status.html('<p>'+out['msg']+'</p>')
-                    $('#user_foto').attr('src', out['file']);
+                    if(out['file']!=""){$('#user_foto').attr('src', out['file']);}
                 }
             });
         }
 
         this.editar_foto = function(){
             var modal_foto = this.modal_foto;
+            var reset_form_foto = this.reset_form_foto;
+            $('input[type=file]').bootstrapFileInput();
+            $('.file-inputs').bootstrapFileInput();
             $('#editPhoto').click(function(){
-                $('input[type=file]').replaceWith($('input[type=file]').val('').clone(true));
-                $('input[type=file]').bootstrapFileInput();
-                $('.file-inputs').bootstrapFileInput();
+                reset_form_foto();
                 modal_foto();
             });
+        }
+        this.reset_form_foto = function(){
+            //$('input[type=file]').replaceWith($('input[type=file]').val('').clone(true));
+            $('.file-input-name , #status_pic').html('');
+            $('.bar').width('0%')
+            $('.percent').html('0%');
         }
 
 		
