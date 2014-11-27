@@ -366,14 +366,16 @@ class Usuario extends CI_controller{
 
 	private function _generarThumbnail($file, $width, $height){
 
-		$config['image_library'] 	= 'GD';
+		//Tipos de 'image_library': 'GD', 'GD2', 'ImageMagick', 'NetPBM'
+
+		$config['image_library'] 	= 'GD2'; //o usar libreria 'ImageMagic'
 		$config['source_image'] 	= $file['full_path'];
 		$config['create_thumb'] 	= TRUE;
 		$config['thumb_marker'] 	= '_thumb';
 		$config['maintain_ratio'] 	= TRUE;
 		$config['width'] 			= $width;
 		$config['height'] 			= $height;
-		$config['quality'] 			= '100%';
+		$config['quality'] 			= '100';
 
 		$this->load->library('image_lib', $config);
 
