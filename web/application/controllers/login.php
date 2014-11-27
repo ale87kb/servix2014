@@ -154,7 +154,7 @@ class Login extends CI_Controller {
 				$nuevoUsuario['telefono'] 			= $this->input->post('telefono', TRUE);
 				$nuevoUsuario['direccion'] 			= $this->input->post('direccion', TRUE);
 				$nuevoUsuario['codigo'] 			= $this->_generarCodigo();
-				$nuevoUsuario['foto'] 				= 'assets/images/profile_640.png';
+				$nuevoUsuario['foto'] 				= '';
 
 				
 				$nuevoUsuario['estado'] 			= 0;
@@ -251,7 +251,7 @@ class Login extends CI_Controller {
 				$nuevoUsuario['telefono'] 			= $this->input->post('telefono', TRUE);
 				$nuevoUsuario['direccion'] 			= $this->input->post('direccion', TRUE);
 				$nuevoUsuario['codigo'] 			= $this->_generarCodigo();
-				$nuevoUsuario['foto'] 				= 'assets/images/profile_640.png';
+				$nuevoUsuario['foto'] 				= '';
 
 				$nuevoUsuario['estado'] 			= 0;
 				//El estado del usuario puede ser 
@@ -774,11 +774,10 @@ class Login extends CI_Controller {
 			 'dni' 				=> $row['dni'],
 			 'direccion'		=> $row['direccion'],
 			 'telefono' 		=> $row['telefono'],
-			 'foto'				=> $row['foto'],
+			 'foto'				=> $row['foto'],		//default -> assets/images/profile_640.png
 			 'estado'			=> $row['estado'],
 			 'ultima_edicion'	=> $row['ultima_edicion']
 			);
-
 			$this->session->set_userdata('logged_in', $sess_array);
 		}
 	}
@@ -817,6 +816,12 @@ class Login extends CI_Controller {
 	    return $pass;
 	}
 
+	//Chequea que la foto no este vacia, y si lo esta devuelve la foto por default: assets/images/profile_640.png
+	/*private function _chekFotoDB($user){
+			if($user['foto'] == ""){
+				$user[]
+			}
+	}*/
 
 
 
