@@ -2,7 +2,7 @@
 <div class="col-md-6 panel-info">
 
 	<div class="panel-heading">
-		<h3 class="panel-title">Servicios Solicitados</h3>
+		<h3 class="panel-title">Mis servicios solicitados</h3>
 	</div>
 
 	<div class="panel-body">

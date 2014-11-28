@@ -307,11 +307,12 @@ class Usuario extends CI_controller{
 	        }
 	        else
 	        {
-	            $data 	= $this->upload->data();
-	            $width 	= 125;
-	            $height = 125;
-
-	            $this->_generarThumbnail($data, $width, $height);
+	            $data 			= $this->upload->data();
+	            $size_thumb		= 125;
+	            $img_thumb_path = path_archivos('assets/images/usuarios/', agregar_nombre_archivo($data['file_name'], '_thumb'));
+    
+	            //$this->_generarThumbnail($data, $width, $height);
+	            $this->_generarThumbnail($data, $size_thumb, $img_thumb_path);
 	            
 	            $user 						= $this->UsuarioSession;
             	$foto_anterior 				= $user['foto'];
@@ -328,10 +329,10 @@ class Usuario extends CI_controller{
 
 	            $file_id = $this->usuarios_model->actulaizar_foto_usuario($user);
 
-	            $this->UsuarioSession['foto'] = $data['file_name'];
-	            $this->UsuarioSession['foto_thumb'] = agregar_nombre_archivo($data['file_name'], '_thumb');
-	            $this->UsuarioSession['foto_path'] = path_archivos('assets/images/usuarios/', $data['file_name']);
-	            $this->UsuarioSession['foto_thumb_path'] = path_archivos('assets/images/usuarios/', agregar_nombre_archivo($data['file_name'], '_thumb'));
+	            $this->UsuarioSession['foto'] 			= $data['file_name'];
+	            $this->UsuarioSession['foto_thumb'] 	= agregar_nombre_archivo($data['file_name'], '_thumb');
+	            $this->UsuarioSession['foto_path'] 		= path_archivos('assets/images/usuarios/', $data['file_name']);
+	            $this->UsuarioSession['foto_thumb_path']= $img_thumb_path;
 
 	            $this->session->set_userdata('logged_in', $this->UsuarioSession);
 	            
@@ -346,8 +347,8 @@ class Usuario extends CI_controller{
 	            }
 	            else
 	            {
-	                
 	                $dalete_file = unlink($data['full_path']);
+	                
 	                if(!$dalete_file)
 	                {
 						log_message('error', 'No se pudo eliminar la imagen'.$data['full_path'] );
@@ -364,7 +365,7 @@ class Usuario extends CI_controller{
 
 	}
 
-	private function _generarThumbnail($file, $width, $height){
+	/*private function _generarThumbnail($file, $width, $height){
 
 		//Tipos de 'image_library': 'GD', 'GD2', 'ImageMagick', 'NetPBM'
 
@@ -383,7 +384,91 @@ class Usuario extends CI_controller{
 		if(!$result){
 			log_message('error', $this->image_lib->display_errors());
 		}
+	}*/
+
+
+
+	private function _generarThumbnail($file, $size, $img_path)
+	{
+	 	$img_thumb = $img_path;
+
+	    $config['image_library'] = 'gd2';
+	    $config['source_image'] = $file['full_path'];
+	    $config['create_thumb'] = TRUE;
+	    $config['maintain_ratio'] = FALSE;
+	   
+	    $_width = $file['image_width'];
+	    $_height = $file['image_height'];
+
+	    $img_type = '';
+	    $thumb_size = $size;
+
+	    if ($_width > $_height)
+	    {
+	        // wide image
+	        $config['width'] = intval(($_width / $_height) * $thumb_size);
+	        if ($config['width'] % 2 != 0)
+	        {
+	            $config['width']++;
+	        }
+	        $config['height'] = $thumb_size;
+	        $img_type = 'wide';
+	    }
+	    else if ($_width < $_height)
+	    {
+	        // landscape image
+	        $config['width'] = $thumb_size;
+	        $config['height'] = intval(($_height / $_width) * $thumb_size);
+	        if ($config['height'] % 2 != 0)
+	        {
+	            $config['height']++;
+	        }
+	        $img_type = 'landscape';
+	    }
+	    else
+	    {
+	        // square image
+	        $config['width'] = $thumb_size;
+	        $config['height'] = $thumb_size;
+	        $img_type = 'square';
+	    }
+
+	    $this->load->library('image_lib');
+	    $this->image_lib->initialize($config);
+	    $this->image_lib->resize();
+
+
+	    // reconfiguramos para cortar el thumbnail
+	    $conf_new = array(
+	        'image_library' => 'gd2',
+	        'source_image' => $img_thumb,
+	        'create_thumb' => FALSE,
+	        'maintain_ratio' => FALSE,
+	        'width' => $thumb_size,
+	        'height' => $thumb_size
+	    );
+
+	    if ($img_type == 'wide')
+	    {
+	        $conf_new['x_axis'] = ($config['width'] - $thumb_size) / 2 ;
+	        $conf_new['y_axis'] = 0;
+	    }
+	    else if($img_type == 'landscape')
+	    {
+	        $conf_new['x_axis'] = 0;
+	        $conf_new['y_axis'] = ($config['height'] - $thumb_size) / 2;
+	    }
+	    else
+	    {
+	        $conf_new['x_axis'] = 0;
+	        $conf_new['y_axis'] = 0;
+	    }
+
+	    $this->image_lib->initialize($conf_new);
+
+	    $this->image_lib->crop();
 	}
+
 
 	private function _borarArchivoFotoAnterior($archivoPath){
 		$dalete = unlink($archivoPath);

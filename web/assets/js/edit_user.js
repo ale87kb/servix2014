@@ -216,6 +216,7 @@ $('document').ready(function(){
                     var out = JSON.parse(xhr.responseText);
                     status.html('<p>'+out['msg']+'</p>')
                     if(out['file']!=""){$('#user_foto').attr('src', out['file']);}
+                    setTimeout(function() { $("#edit_photo").modal('hide') }, 3000);
                 }
             });
         }

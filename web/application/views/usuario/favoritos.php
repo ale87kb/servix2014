@@ -1,7 +1,7 @@
 <div class="col-md-6 panel-info">
 
 	<div class="panel-heading">
-		<h3 class="panel-title">Favoritos</h3>
+		<h3 class="panel-title">Mis favoritos</h3>
 	</div>
 
 	<div class="panel-body">
