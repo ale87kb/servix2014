@@ -81,16 +81,6 @@ $('document').ready(function(){
                             }                            
                         }
                     },
-                    dni: {
-                        validators: {
-                            notEmpty: {
-                                message: 'Ingrese su DNI.'
-                            },
-                            digits: {
-                                message: 'El dni debe contener solo números.'
-                            }
-                        }
-                    },
                     direccion: {
                         validators: {
                             
@@ -153,10 +143,6 @@ $('document').ready(function(){
                             if(data['username']){
                                 bv.updateStatus('usuario', 'INVALID', 'notEmpty');
                                 bv.updateMessage('usuario', 'notEmpty', 'El e-mail ingresado ya se encuentra registrado.');
-                            }
-                            if(data['dni']){
-                                bv.updateStatus('dni', 'INVALID', 'notEmpty');
-                                bv.updateMessage('dni', 'notEmpty', 'El DNI ingresado ya se encuentra registrado');
                             }
                             bv.resetField('clave', true);
                             bv.resetField('rclave', true);

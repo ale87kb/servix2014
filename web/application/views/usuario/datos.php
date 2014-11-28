@@ -27,11 +27,6 @@
 							<td><?php echo $usuarioSession['apellido']; ?></td>
 						</tr>
 						<tr>
-							<td>DNI</td>
-							<td><?php echo $usuarioSession['dni']; ?></td>
-						</tr>
-
-						<tr>
 							<td>Teléfono</td>
 							<td><?php echo $usuarioSession['telefono']; ?></td>
 						</tr>

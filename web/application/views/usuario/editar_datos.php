@@ -104,13 +104,6 @@
     </div>
 
     <div class="form-group">
-      <label for="usuario" class="col-md-2 control-label">* DNI</label>
-      <div class="col-md-6">
-        <p class="form-control-static"><?php echo $usuarioSession['dni']; ?></p>
-      </div>
-    </div>
-
-    <div class="form-group">
       <label for="clave" class="col-md-2 control-label">Dirección</label>
       <div class="col-md-6">
         <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Tu Dirección" value="<?php echo $usuarioSession['direccion']; ?>">

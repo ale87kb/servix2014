@@ -59,16 +59,6 @@
       <?php echo form_error('apellido'); ?>
     </div>
 
-  <div class="form-group">
-      <label for="usuario" class="col-sm-2 control-label">* DNI</label>
-      <div class="col-sm-7">
-        <input type="text" class="form-control" id="dni" name="dni" placeholder="Documento de Identidad" value="<?php echo set_value('dni') ?>">
-      </div>
-    </div>
-    <div class='errordni' style="color:red;">
-      <?php echo form_error('dni'); ?>
-    </div>
-
     <div class="form-group">
       <label for="clave" class="col-sm-2 control-label">Dirección</label>
       <div class="col-sm-7">

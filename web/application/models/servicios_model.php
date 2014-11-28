@@ -105,13 +105,13 @@ Class Servicios_model extends CI_Model{
 
 	public function userPostulados($id){
 		$query = "SELECT
-				servix_db.usuarios.nombre,
-				servix_db.usuarios.apellido,
-				servix_db.postulaciones_temp.postulado
+				usuarios.nombre,
+				usuarios.apellido,
+				postulaciones_temp.postulado
 				FROM
-				servix_db.postulaciones_temp
-				INNER JOIN servix_db.usuarios ON servix_db.postulaciones_temp.id_usuarios = servix_db.usuarios.id
-				WHERE servix_db.postulaciones_temp.id_busquedas_temp = $id";
+				postulaciones_temp
+				INNER JOIN usuarios ON postulaciones_temp.id_usuarios = usuarios.id
+				WHERE postulaciones_temp.id_busquedas_temp = $id";
 		$rs    = $this->db->query($query);
 		return $rs->result_array();
 	}
@@ -142,28 +142,28 @@ Class Servicios_model extends CI_Model{
 
 	public function getServicioSolicitado($id){ 
 		$query ="SELECT
-				servix_db.busquedas_temp.id,
-				servix_db.provincias.provincia,
-				servix_db.localidades.localidad,
-				servix_db.categorias.categoria,
-				servix_db.busquedas_temp.busqueda,
-				servix_db.busquedas_temp.vencido,
-				servix_db.busquedas_temp.fecha_fin,
-				servix_db.busquedas_temp.fecha_ini,
-				servix_db.usuarios.nombre,
+				busquedas_temp.id,
+				provincias.provincia,
+				localidades.localidad,
+				categorias.categoria,
+				busquedas_temp.busqueda,
+				busquedas_temp.vencido,
+				busquedas_temp.fecha_fin,
+				busquedas_temp.fecha_ini,
+				usuarios.nombre,
 				usuarios.apellido,
 				usuarios.id as userID,
 				cat_nodb.categoria as otra_cat
 
 				FROM
-				servix_db.busquedas_temp
-				INNER JOIN servix_db.usuarios ON servix_db.busquedas_temp.id_usuario = servix_db.usuarios.id
-				INNER JOIN servix_db.categorias ON servix_db.categorias.id = servix_db.busquedas_temp.id_categorias
-				INNER JOIN servix_db.localidades ON servix_db.busquedas_temp.id_localidad = servix_db.localidades.id
-				INNER JOIN servix_db.provincias ON servix_db.localidades.id_provincia = servix_db.provincias.id
+				busquedas_temp
+				INNER JOIN usuarios ON busquedas_temp.id_usuario = usuarios.id
+				INNER JOIN categorias ON categorias.id = busquedas_temp.id_categorias
+				INNER JOIN localidades ON busquedas_temp.id_localidad = localidades.id
+				INNER JOIN provincias ON localidades.id_provincia = provincias.id
 				LEFT OUTER JOIN cat_nodb ON busquedas_temp.id_cat_nodb = cat_nodb.id
 				WHERE
-				servix_db.busquedas_temp.id = $id";
+				busquedas_temp.id = $id";
 		$rs    = $this->db->query($query);
 		return $rs->result_array();
 	 }

@@ -128,7 +128,6 @@ class Login extends CI_Controller {
 
 			$this->form_validation->set_rules('nombre', 'nombre', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('apellido', 'apellido', 'trim|required|xss_clean');
-			$this->form_validation->set_rules('dni', 'DNI', 'trim|required|numeric|xss_clean|callback_check_dni_duplicate');
 			$this->form_validation->set_rules('direccion', 'direccion', 'trim|xss_clean');
 			$this->form_validation->set_rules('telefono', 'teléfono', 'trim|xss_clean');
 
@@ -150,7 +149,6 @@ class Login extends CI_Controller {
 				$nuevoUsuario['clave'] 				= $this->input->post('clave', TRUE);
 				$nuevoUsuario['nombre'] 			= $this->input->post('nombre', TRUE);
 				$nuevoUsuario['apellido'] 			= $this->input->post('apellido');
-				$nuevoUsuario['dni'] 				= $this->input->post('dni', TRUE);
 				$nuevoUsuario['telefono'] 			= $this->input->post('telefono', TRUE);
 				$nuevoUsuario['direccion'] 			= $this->input->post('direccion', TRUE);
 				$nuevoUsuario['codigo'] 			= $this->_generarCodigo();
@@ -211,7 +209,6 @@ class Login extends CI_Controller {
 
 			$this->form_validation->set_rules('nombre', 'nombre', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('apellido', 'apellido', 'trim|required|xss_clean');
-			$this->form_validation->set_rules('dni', 'DNI', 'trim|required|numeric|xss_clean|callback_check_dni_duplicate');
 			$this->form_validation->set_rules('direccion', 'direccion', 'trim|xss_clean');
 			$this->form_validation->set_rules('telefono', 'teléfono', 'trim|xss_clean');
 
@@ -228,10 +225,6 @@ class Login extends CI_Controller {
 	            {
 		            $data['username'] = form_error('usuario');
 	            }
-	           	if(form_error('dni'))
-	           	{
-		            $data['dni'] = form_error('dni');
-	           	}
 	           	
 	           	$data['res'] = "error";
 	            echo json_encode($data);
@@ -247,7 +240,6 @@ class Login extends CI_Controller {
 				$nuevoUsuario['clave'] 				= $this->input->post('clave', TRUE);
 				$nuevoUsuario['nombre'] 			= $this->input->post('nombre', TRUE);
 				$nuevoUsuario['apellido'] 			= $this->input->post('apellido');
-				$nuevoUsuario['dni'] 				= $this->input->post('dni', TRUE);
 				$nuevoUsuario['telefono'] 			= $this->input->post('telefono', TRUE);
 				$nuevoUsuario['direccion'] 			= $this->input->post('direccion', TRUE);
 				$nuevoUsuario['codigo'] 			= $this->_generarCodigo();
@@ -511,25 +503,6 @@ class Login extends CI_Controller {
 
 	}
 
-
-	public function check_dni_duplicate(){
-		//Consulta si el dni ingresado esta dubplicado en la base de datos
-
-		$dni = $this->input->post('dni');
-
-		$resultadoDni = $this->usuarios_model->getDNI($dni);
-
-		if($resultadoDni){
-			$this->form_validation->set_message('check_dni_duplicate', 'El DNI ingresado ya esta registrado.');
-			return false;
-		}
-		else
-		{
-			return true;
-		}
-	}
-
-
 	public function sendEmailConfirm($post){
 		
 		//$this->load->view('email/confirmEmail', $post);
@@ -771,7 +744,6 @@ class Login extends CI_Controller {
 			 'email' 			=> $row['email'],
 			 'nombre' 			=> $row['nombre'],
 			 'apellido' 		=> $row['apellido'],
-			 'dni' 				=> $row['dni'],
 			 'direccion'		=> $row['direccion'],
 			 'telefono' 		=> $row['telefono'],
 			 'foto'				=> $row['foto'],		//default -> assets/images/profile_640.png
