@@ -5,7 +5,7 @@
 ?>
 	<p><?php echo $mensaje; ?></p>
 
-	<p>Te invitamos a iniciar sesión para empezar a disfrutar de Servix.</p>
+	<p>Te invitamos a iniciar sesión para empezar a disfrutar de <?php echo APP_NAME;?>.</p>
 
 
 <?php

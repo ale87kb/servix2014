@@ -541,14 +541,14 @@ class Login extends CI_Controller {
 		 	$config['charset'] 	= 'utf-8';
 	        $config['wordwrap'] = TRUE;
 	        $config['mailtype'] = 'html';
-	        $fromemail          = 'no-responder@servix.com'; // desde
+	        $fromemail          = MAIL_NO_RESPONDER; // desde
 	        $toemail            = $post['usuario']; //para
 	        $mail               = null;
 	        $subject            = "Confirmación de e-mail de registro en Servix";
 
 	        
 	        $this->email->initialize($config);
-	        $this->email->from($fromemail, 'Servix');
+	        $this->email->from($fromemail, APP_NAME);
         	$this->email->to($toemail);
 	        
 	        $this->email->subject($subject);
@@ -571,14 +571,14 @@ class Login extends CI_Controller {
 		 	$config['charset'] 	= 'utf-8';
 	        $config['wordwrap'] = TRUE;
 	        $config['mailtype'] = 'html';
-	        $fromemail          = 'no-responder@servix.com'; // desde
+	        $fromemail          = MAIL_NO_RESPONDER; // desde
 	        $toemail            = $post['usuario']; //para
 	        $mail               = null;
 	        $subject            = "Nueva Clave en Servix";
 
 	        
 	        $this->email->initialize($config);
-	        $this->email->from($fromemail, 'Servix');
+	        $this->email->from($fromemail, APP_NAME);
         	$this->email->to($toemail);
 	        
 	        $this->email->subject($subject);
@@ -601,14 +601,14 @@ class Login extends CI_Controller {
 		 	$config['charset'] 	= 'utf-8';
 	        $config['wordwrap'] = TRUE;
 	        $config['mailtype'] = 'html';
-	        $fromemail          = 'no-responder@servix.com'; // desde
+	        $fromemail          = MAIL_NO_RESPONDER; // desde
 	        $toemail            = $post['usuario']; //para
 	        $mail               = null;
 	        $subject            = "Confirmación de nuevo e-mail de usuario en Servix";
 
 	        
 	        $this->email->initialize($config);
-	        $this->email->from($fromemail, 'Servix');
+	        $this->email->from($fromemail, APP_NAME);
         	$this->email->to($toemail);
 	        
 	        $this->email->subject($subject);
@@ -631,14 +631,14 @@ class Login extends CI_Controller {
 		 	$config['charset'] 	= 'utf-8';
 	        $config['wordwrap'] = TRUE;
 	        $config['mailtype'] = 'html';
-	        $fromemail          = 'no-responder@servix.com'; // desde
+	        $fromemail          = MAIL_NO_RESPONDER; // desde
 	        $toemail            = $post['usuario']; //para
 	        $mail               = null;
 	        $subject            = "Modificación de Clave en Servix";
 
 	        
 	        $this->email->initialize($config);
-	        $this->email->from($fromemail, 'Servix');
+	        $this->email->from($fromemail, APP_NAME);
         	$this->email->to($toemail);
 	        
 	        $this->email->subject($subject);

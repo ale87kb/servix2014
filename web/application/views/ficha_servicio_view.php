@@ -137,7 +137,7 @@
 		</div>
 		<div class="col-md-12">
 			<hr>
-			<p class="text-center"><small>Servix no vende este servicio y no participa en ninguna negociación. Sólo se limita a la publicación de anuncios de sus usuarios.</small></p>
+			<p class="text-center"><small><?php echo APP_NAME;?> no vende este servicio y no participa en ninguna negociación. Sólo se limita a la publicación de anuncios de sus usuarios.</small></p>
 		</div>
 		
 		

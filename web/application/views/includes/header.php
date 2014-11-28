@@ -9,7 +9,7 @@
       </button>
       <div id="logostyle">
         <a href="<?php echo site_url('');?>">
-          <h1 class="s-logo es">Servix - a un click de distancia</h1>
+          <h1 class="s-logo es"><?php echo APP_NAME . " - ". APP_SLOGAN; ?></h1>
         </a>
       </div>
     </div>

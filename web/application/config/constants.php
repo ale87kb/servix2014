@@ -36,6 +36,33 @@ define('FOPEN_READ_WRITE_CREATE',				'a+b');
 define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
+/*
+|--------------------------------------------------------------------------
+| Custom defines
+|--------------------------------------------------------------------------
+|
+| Definiciones para la aplicacion.
+|
+*/
+
+/*CONTROLADOR POR DEFECTO*/
+define('DEFAULT_CONTROLLER', 'index');
+
+/*LAYOUT POR DEFECTO*/
+define('DEFAULT_LAYOUT', 'default');
+
+/*NOMBRE DE LA APLICACION*/
+define('APP_NAME', 'Servix');
+
+/*SLOGAN DE LA APLICACION*/
+define('APP_SLOGAN', 'A un click de distancia');
+
+/*COMPANIA DE LA APLICACION*/
+define('APP_COMPANY', 'Servix');
+
+/*E-MAIL DE LA COMPAÑIA AL CUAL NO RESPONDER*/
+define('MAIL_NO_RESPONDER', 'no-responder@servix.com');
+
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

@@ -241,7 +241,7 @@ class sitio extends CI_Controller {
 			$displayErros = array();
 
 			if($rs){
-				$displayErros = array('mensaje_e'=> 'Gracias por publicar tu solicitud en Servix' , 'error' => 0);
+				$displayErros = array('mensaje_e'=> 'Gracias por publicar tu solicitud en ' .  APP_NAME , 'error' => 0);
 
 				$this->session->set_flashdata('mensaje_e', $displayErros);
 
@@ -609,7 +609,7 @@ class sitio extends CI_Controller {
 		 	$config['charset']  = 'utf-8';
 	        $config['wordwrap'] = TRUE;
 	        $config['mailtype'] = 'html';
-	        $fromemail          = 'no-responder@servix.com'; // desde
+	        $fromemail          = MAIL_NO_RESPONDER; // desde
 	        $toemail            = $para; //para 
 	        $mail               = null;
 	        $subject            = "Tienes una nueva postulaci&oacute;n en tu solicitud de servicio";
@@ -617,7 +617,7 @@ class sitio extends CI_Controller {
 	        
 	        $this->email->initialize($config);
         	$this->email->to($toemail);
-	        $this->email->from($fromemail, 'Servix');
+	        $this->email->from($fromemail, APP_NAME);
 	        
 	        $this->email->subject($subject);
 	        $mesg = $vista;
@@ -638,7 +638,7 @@ class sitio extends CI_Controller {
 		 	$config['charset']  = 'utf-8';
 	        $config['wordwrap'] = TRUE;
 	        $config['mailtype'] = 'html';
-	        $fromemail          = 'no-responder@servix.com'; // desde
+	        $fromemail          = MAIL_NO_RESPONDER; // desde
 	        $toemail            = $post['email']; //para 
 	        $mail               = null;
 	        $subject            = "Servix datos de contacto";
@@ -646,7 +646,7 @@ class sitio extends CI_Controller {
 	        
 	        $this->email->initialize($config);
         	$this->email->to($toemail);
-	        $this->email->from($fromemail, $post['nombre']);
+	        $this->email->from($fromemail, APP_NAME);
 	        
 	        $this->email->subject($subject);
 	        $mesg = $this->load->view('email/contacto',$post,true);
@@ -667,12 +667,12 @@ class sitio extends CI_Controller {
 		        $config['wordwrap'] = TRUE;
 		        $config['mailtype'] = 'html';
 		        $toemail            = $post['emailAmigo']; //para 
-		        $fromemail          = 'no-responder@servix.com'; // desde
+		        $fromemail          = MAIL_NO_RESPONDER; // desde
 		        $mail               = null;
 		        $subject            = "Hola ".$post['nombreAmigo']." este servicio puede ser de tu int&eacuteres";
 
 		        $this->email->initialize($config);
-		        $this->email->from($fromemail);
+		        $this->email->from($fromemail, APP_NAME);
 	        	$this->email->to($toemail);
 		        
 		        $this->email->subject($subject);

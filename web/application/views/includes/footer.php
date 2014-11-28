@@ -2,7 +2,7 @@
 	<div class="navbar navbar-default navbar-static-bottom footer-servix">
 	  <div class="container">
 	    <span class="navbar-text">
-	    &copy; Servix 2014. Todos los derechos reservados.
+	    &copy; <?php echo APP_NAME; ?> 2014. Todos los derechos reservados.
 	    </span>
 	  </div>
 	</div>

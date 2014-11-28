@@ -97,13 +97,13 @@ class Usuario extends CI_controller{
 			$data['error'] = $verificacionCodigo['error'];
 
 			if($verificacionCodigo['error'] == false){
-				$data['title'] 		= 'Verificar usuario registrado en Servix';
+				$data['title'] 		= 'Verificar usuario registrado';
 				$data['mensaje'] 	=  $verificacionCodigo['mensaje'];
 				$data['estado'] 	=  $verificacionCodigo['estado'];
 			}
 			else
 			{
-				$data['title'] 		= 'Error al verificar usuario registrado en Servix';
+				$data['title'] 		= 'Error al verificar usuario registrado';
 				$data['mensaje'] 	=  $verificacionCodigo['mensaje'];
 				$data['estado']		=  $verificacionCodigo['estado'];
 			}
