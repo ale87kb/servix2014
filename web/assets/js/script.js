@@ -587,7 +587,8 @@ var app = function(){
 
             $('#datetimepicker2').datetimepicker({
                     language: 'es',
-                    minDate:fechaManiana() 
+                    defaultDate:fechaManiana(), 
+                    minDate:fechaManiana()
 
             });
             $('#datetimepicker2').on('dp.change dp.show', function(e) {
