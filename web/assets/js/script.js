@@ -587,13 +587,19 @@ var app = function(){
 
             $('#datetimepicker2').datetimepicker({
                     language: 'es',
-                    defaultDate:fechaManiana(), 
+                    // defaultDate:fechaManiana(), 
+                    showToday: false,  
                     minDate:fechaManiana()
 
             });
             $('#datetimepicker2').on('dp.change dp.show', function(e) {
                $('#formulario-solicitud').bootstrapValidator('revalidateField', 'fecha_fin');
             });
+
+             $("#datetimepicker2, #datetimepicker2 .input-group-addon").click(function () {
+                // alert("asd")
+                $('#datetimepicker2').data("DateTimePicker").setDate(fechaManiana());
+            });  
 
           
              
