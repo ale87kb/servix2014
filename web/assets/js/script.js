@@ -494,7 +494,7 @@ var app = function(){
                                 message: 'Se requiere una fecha'
                             },
                             date: {
-                                format: 'DD/MM/YYYY hh:mm',
+                                format: 'DD/MM/YYYY HH:mm',
                                 message: 'Se requiere una fecha y hora valida'
                             }
                         }

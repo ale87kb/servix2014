@@ -217,18 +217,20 @@ class sitio extends CI_Controller {
 			$catPOST = strtolower($this->input->post('categoria'));
 
 			$categoria = $this->servix_model->getCategoria($catPOST);
-			$fecha_ini = date('Y-m-d h:i:s');
-			$fecha_fin = date('Y-m-d h:i:s' , strtotime($this->input->post('fecha_fin')));
+			$fecha_ini = date('Y-m-d H:i:s');
+			$fecha_fin = strtotime(str_replace('/', '-', $this->input->post('fecha_fin') ));
+			$fecha_fin = date('Y-m-d H:i:s' , $fecha_fin);
 			if(!empty($categoria)){
-				echo "Esta en la base";
+				$POST['cat_en_db'] = true;
 			}else{
-				echo "No esta en la base";
+				$POST['cat_en_db'] = false;
 			}
+			$POST['fecha_ini'] = $fecha_ini;
+			$POST['fecha_fin'] = $fecha_fin;
 			
 			
-			print_d($fecha_ini);
-			print_d($fecha_fin);
-			// print_d($this->input->post() );
+		
+			print_d($POST  );
 		}else{
 			return redirect('');
 		}

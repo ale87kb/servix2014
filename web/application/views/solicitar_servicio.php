@@ -27,7 +27,7 @@
 		                <label for="fecha_fin">¿Para cuando lo necesitas?</label>
 		                
 		                <div class='input-group date' id='datetimepicker2'>
-		                    <input type='text' class="form-control" name="fecha_fin" id="fecha_fin" placeholder="Fecha y hora"   data-date-format="DD/MM/YYYY hh:mm" />
+		                    <input type='text' class="form-control" name="fecha_fin" id="fecha_fin" placeholder="Fecha y hora"   data-date-format="DD/MM/YYYY HH:mm" />
 		                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
 		                    </span>
 		                </div>
