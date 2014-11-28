@@ -783,10 +783,22 @@ class Login extends CI_Controller {
 			 'foto_thumb_path'	=> path_archivos('assets/images/usuarios/', agregar_nombre_archivo($row['foto'], '_thumb'))
 			);
 			
+			$sess_array = $this->_chekFotoDB($sess_array, 'assets/images/profile_640.png');
+
 			$this->session->set_userdata('logged_in', $sess_array);
 		}
 	}
 	
+
+	//Chequea que la foto no este vacia, y si lo esta devuelve la foto por default: assets/images/profile_640.png
+	private function _chekFotoDB($sess_array, $path){
+		if($sess_array['foto'] == ""){
+		 	$sess_array['foto_path']		= $path;
+		 	$sess_array['foto_thumb_path']	= $path;
+		}
+		return $sess_array;
+	}
+
 
 	public function logout(){
 		//Destruye la sesion del usuario y vuelve a login.
@@ -821,12 +833,7 @@ class Login extends CI_Controller {
 	    return $pass;
 	}
 
-	//Chequea que la foto no este vacia, y si lo esta devuelve la foto por default: assets/images/profile_640.png
-	/*private function _chekFotoDB($user){
-			if($user['foto'] == ""){
-				$user[]
-			}
-	}*/
+
 
 
 
