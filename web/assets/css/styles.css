@@ -130,3 +130,6 @@ a.list-group-item {
     resize:vertical;
 }
 
+.from-box form ul.typeahead.dropdown-menu{
+    width: 100%;
+}

@@ -55,10 +55,12 @@ $route['servicio-solicitado/(:any)']	        = "sitio/servicio_solicitado/$1";
 $route['set_postulacion']	        			= "sitio/set_postulacion";
 $route['unset_postulacion']	        			= "sitio/unset_postulacion";
 $route['solicitar-servicio']	        		= "sitio/solicitar_servicio";
+$route['validar-solicitud-servicio']	        = "sitio/validar_solicitud_servicio";
 
 $route['busqueda_servicio']						= "sitio/busqueda_servicio";
 $route['busqueda_categoria']					= "sitio/busqueda_categoria";
 $route['enviar/comentario-servicio']			= "sitio/comentar_servicio";
+$route['busqueda_localidades_buscador'] 		= "sitio/busqueda_localidades_buscador";
 $route['busqueda_localidades']   				= "sitio/busqueda_localidades";
 $route['busqueda'] 								= "sitio/busqueda";
 $route['resultado-de-busqueda/(:any)']			= "sitio/resultado_busqueda";

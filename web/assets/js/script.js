@@ -12,12 +12,34 @@ var app = function(){
                     $(".typeaheadOnlyCat").typeahead({
                         source:data 
                     });
-                },'json'),
-                $.get(this.url+"busqueda_localidades", function(data){
-                    $(".typeheadLoc").typeahead({
+                },'json'), 
+
+                 $.get(this.url+"busqueda_localidades_buscador", function(data){
+                    $(".typeheadLoc2").typeahead({
                         source:data 
                     });
-                },'json');
+                },'json'),
+
+                $url = this.url;
+                 $(".typeheadLoc").typeahead({
+                    source : function(query, process) {
+                        return $.post($url+"busqueda_localidades", {
+                            localidad : query
+                        }, function(data) {
+                            var json = JSON.parse(data);
+                            return process(json);
+                        });
+                    },
+                    items : 5,
+                    minLength: 3
+                });
+
+                $('.typeheadLoc').on('blur', function(e) {
+                     $('#formulario-solicitud').bootstrapValidator('revalidateField', 'localidad');
+                });
+               
+
+               
         },
         this.validar_busqueda = function(){
             $("#formulario-busqueda").bootstrapValidator({
@@ -441,6 +463,57 @@ var app = function(){
                 console.log("Error: " + jqXHR.responseText)
             })
         },
+        this.validar_solicitud = function(){
+            $("#formulario-solicitud").bootstrapValidator({
+                autoFocus:  true,
+                live:       'submitted',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                excluded: ':disabled',
+                fields: {
+                    categoria: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Se requiere una categoria'
+                            }
+                        }
+                    },
+                    localidad: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Se requiere una localidad'
+                            }
+                        }
+                    },
+                    fecha_fin: {
+                        validators: {
+                             notEmpty: {
+                                message: 'Se requiere una fecha'
+                            },
+                            date: {
+                                format: 'DD/MM/YYYY hh:mm',
+                                message: 'Se requiere una fecha y hora valida'
+                            }
+                        }
+                    },
+                    comentario: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Por favor, ingrese un mensaje'
+                            },
+                            stringLength: {
+                                max: 300,
+                                min:10,
+                                message: 'Por favor, ingrese un mensaje entre 10 y 300 caracteres'
+                            }
+                        }
+                    }
+                }
+            })
+        }
         this.setAffterAction =function(){
             $(".affterOpenLogin").on('click',function(){
             $("#nextAction").val('#modalOpinion');
@@ -479,9 +552,6 @@ var app = function(){
                  },'json')
             })
 
-        
-
-
         }, 
         this.pagSolicitados = function(){
            $(document).on('click','#pagSolicitados a',function(e){
@@ -509,14 +579,70 @@ var app = function(){
         },
         this.datePiker = function(){
 
+            function fechaManiana() {
+               var today = moment();
+               var tomorrow = today.add(1,'days');
+               return moment(tomorrow).format("DD-MM-YYYY");
+            }
+
             $('#datetimepicker2').datetimepicker({
-                    language: 'es'
+                    language: 'es',
+                    minDate:fechaManiana() 
+
             });
+            $('#datetimepicker2').on('dp.change dp.show', function(e) {
+               $('#formulario-solicitud').bootstrapValidator('revalidateField', 'fecha_fin');
+            });
+
+          
+             
+        }, 
+        this.selectPiker = function(){
+
+           var options = {
+                ajax: {
+                    url: this.url+"busqueda_localidades",
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        q: '{{{q}}}'
+                    }
+                },
+                locale: {
+                    emptyTitle: 'Buscá tu localidad',
+                    searchPlaceholder:'Buscar',
+                    currentlySelected:'Seleccionado actualmente',
+                    errorText:'No se encontraron resultados',
+                    statusInitialized:'Para empezar escribe una localidad, Ej:(Flores, Palermo)..'
+                },
+                log: 3,
+                preprocessData: function (data) {
+
+                    var i, l = data.length, array = [];
+                    if (l) {
+                        for(i = 0; i < l; i++){
+
+                            array.push($.extend(true, data[i], {
+
+                                text: data[i].localidad,
+                                value:data[i].idLoc,
+                               
+                            }));
+                        }
+                    }
+                    return array;
+                }
+            };
+
+            $('.selectpicker').selectpicker().filter('.with-ajax').ajaxSelectPicker(options);
+
+            $('select.selectpicker').on('change', function(){
+                 $('#formulario-solicitud').bootstrapValidator('revalidateField', 'localidad');
+             });
+             
         },
 
         this.init = function(){
-
-
             this.busqueda();
             this.validar_busqueda();
             this.validar_login_ajax();
@@ -524,6 +650,7 @@ var app = function(){
             this.validar_comentario_servicio();         
             this.loadVotacion();            
             this.validar_recomendacion();
+            this.validar_solicitud();
             this.validar_votacion();            
             this.ajax_paging();            
             this.setAffterAction();            
@@ -531,6 +658,7 @@ var app = function(){
             this.pagSolicitados();      
             this.confirmBox();   
             this.datePiker();
+            this.selectPiker();
         }
     };
     

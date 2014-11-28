@@ -12,7 +12,7 @@
        <div class="col-md-5">
          <div class="form-group input-group-lg">
             <label class="sr-only" for="busqueda-localidad">¿Donde lo buscas?</label>
-            <input type="text" class="form-control typeheadLoc" id="busqueda-localidad" value="<?php if(isset($localidad)){echo $localidad;} ?>"  name="localidad" autocomplete="off"  required="" placeholder="¿Dónde lo buscas?">
+            <input type="text" class="form-control typeheadLoc2" id="busqueda-localidad" value="<?php if(isset($localidad)){echo $localidad;} ?>"  name="localidad" autocomplete="off"  required="" placeholder="¿Dónde lo buscas?">
           </div>
        </div>
        <div class="col-md-2">

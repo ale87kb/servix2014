@@ -218,7 +218,9 @@
   <script src="<?php echo site_url('assets/js/moment-with-locales.js');?>"></script>
 	<script src="<?php echo site_url('assets/js/bootstrap-datetimepicker.min.js');?>"></script>
 	<!-- BootstrapValidator -->
-	<script src="<?php echo site_url('assets/js/bootstrapValidator.min.js');?>" type="text/javascript"></script>
+  <script src="<?php echo site_url('assets/js/bootstrapValidator.min.js');?>" type="text/javascript"></script>
+  <script src="<?php echo site_url('assets/js/bootstrap-select.min.js');?>" type="text/javascript"></script>
+	<script src="<?php echo site_url('assets/js/ajax-bootstrap-select.min.js');?>" type="text/javascript"></script>
   <script src="<?php echo site_url('assets/js/lang/es_ES.js');?>" type="text/javascript"></script>
 	<script src="<?php echo site_url('assets/js/jquery.form.min.js');?>" type="text/javascript"></script>
 	<?php 
