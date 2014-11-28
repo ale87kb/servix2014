@@ -20,7 +20,15 @@
 						?>
 						
 						<small>
-							<?php echo ucfirst($solicitado['categoria'])." en ".$solicitado['localidad']." ".$solicitado['provincia']; ?>
+
+						<?php 
+						 if( $solicitado['categoria'] == 'Otros'){
+				                echo ucfirst( $solicitado['categoria'])." (".ucfirst($solicitado['otra_cat']).")";
+				            }else{
+				             echo ucfirst( $solicitado['categoria']);
+				            }
+				             ?>
+							<?php echo" en ".$solicitado['localidad']." ".$solicitado['provincia']; ?>
 						</small>
 			        </h4>
 			        	<p><strong>Comentario:</strong><?php echo ucfirst( $solicitado['busqueda']); ?></p>

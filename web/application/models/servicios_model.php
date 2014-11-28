@@ -152,7 +152,8 @@ Class Servicios_model extends CI_Model{
 				servix_db.busquedas_temp.fecha_ini,
 				servix_db.usuarios.nombre,
 				usuarios.apellido,
-				usuarios.id as userID
+				usuarios.id as userID,
+				cat_nodb.categoria as otra_cat
 
 				FROM
 				servix_db.busquedas_temp
@@ -160,6 +161,7 @@ Class Servicios_model extends CI_Model{
 				INNER JOIN servix_db.categorias ON servix_db.categorias.id = servix_db.busquedas_temp.id_categorias
 				INNER JOIN servix_db.localidades ON servix_db.busquedas_temp.id_localidad = servix_db.localidades.id
 				INNER JOIN servix_db.provincias ON servix_db.localidades.id_provincia = servix_db.provincias.id
+				LEFT OUTER JOIN cat_nodb ON busquedas_temp.id_cat_nodb = cat_nodb.id
 				WHERE
 				servix_db.busquedas_temp.id = $id";
 		$rs    = $this->db->query($query);
@@ -169,27 +171,30 @@ Class Servicios_model extends CI_Model{
 
 	public function getServiciosSolicitados($fecha,$ini,$fin){
 		$query = "SELECT
-			      busquedas_temp.id,
-				  categorias.categoria,
-				  localidades.localidad,
-				  provincias.provincia,
-				  usuarios.apellido,
-				  usuarios.nombre,
-				  busquedas_temp.busqueda,
-				  busquedas_temp.fecha_ini,
-				  busquedas_temp.fecha_fin
-				  FROM
-				  busquedas_temp
-				  INNER JOIN categorias ON busquedas_temp.id_categorias = categorias.id
-				  INNER JOIN localidades ON busquedas_temp.id_localidad = localidades.id
-				  INNER JOIN provincias ON localidades.id_provincia = provincias.id
-				  INNER JOIN usuarios ON busquedas_temp.id_usuario = usuarios.id
-				  WHERE
-				  busquedas_temp.vencido = 0
-				  AND
-				  busquedas_temp.fecha_ini >= '$fecha'
-				  ORDER BY busquedas_temp.fecha_ini DESC
-				  LIMIT $ini,$fin";
+					busquedas_temp.id,
+					categorias.categoria,
+					localidades.localidad,
+					provincias.provincia,
+					usuarios.apellido,
+					usuarios.nombre,
+					busquedas_temp.busqueda,
+					busquedas_temp.fecha_ini,
+					busquedas_temp.fecha_fin,
+					cat_nodb.categoria as otra_cat
+					FROM
+					busquedas_temp
+					INNER JOIN categorias ON busquedas_temp.id_categorias = categorias.id
+					INNER JOIN localidades ON busquedas_temp.id_localidad = localidades.id
+					INNER JOIN provincias ON localidades.id_provincia = provincias.id
+					INNER JOIN usuarios ON busquedas_temp.id_usuario = usuarios.id
+					LEFT OUTER JOIN cat_nodb ON busquedas_temp.id_cat_nodb = cat_nodb.id
+					WHERE
+					busquedas_temp.vencido = 0
+					  AND
+					busquedas_temp.fecha_ini >=  '$fecha'
+					ORDER BY busquedas_temp.fecha_ini DESC
+					LIMIT $ini,$fin";
+
 				
 		$rs    = $this->db->query($query);
 		return $rs->result_array();

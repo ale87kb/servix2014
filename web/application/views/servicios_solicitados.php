@@ -10,7 +10,15 @@
           foreach ($solicitados as $servicio) {
           ?>
           <div class="panel panel-default">
-            <div class="panel-heading"><?php echo ucfirst( $servicio['categoria']); ?> en <?php echo $servicio['localidad']." ". $servicio['provincia']; ?></div>
+            <div class="panel-heading"><?php
+
+            if( $servicio['categoria'] == 'Otros'){
+                echo ucfirst( $servicio['categoria'])." (".ucfirst($servicio['otra_cat']).")";
+            }else{
+             echo ucfirst( $servicio['categoria']);
+            }
+
+              ?> en <?php echo $servicio['localidad']." ". $servicio['provincia']; ?></div>
             <div class="panel-body">
               <strong><small><?php echo ucfirst($servicio['nombre']) ." ".ucfirst($servicio['apellido']); ?>: </small></strong>
               <p>
