@@ -37,6 +37,16 @@ var app = function(){
                 $('.typeheadLoc').on('blur', function(e) {
                      $('#formulario-solicitud').bootstrapValidator('revalidateField', 'localidad');
                 });
+
+                // $('.typeaheadOnlyCat').on('blur', function(e) {
+                //      $('#formulario-solicitud').bootstrapValidator('revalidateField', 'categoria');
+                // });
+
+                // $('#formulario-solicitud #comentario').on('blur', function(e) {
+                //      $('#formulario-solicitud').bootstrapValidator('revalidateField', 'comentario');
+                // });
+
+               
                
 
                
@@ -207,9 +217,13 @@ var app = function(){
                         }
                         },
                         fecha: {
-                            validators: {
+                           validators: {
                                 notEmpty: {
-                                    message: 'Fecha Incorrecta'
+                                    message: 'Se requiere una fecha'
+                                },
+                                date: {
+                                    format: 'DD/MM/YYYY',
+                                    message: 'Se requiere una fecha valida'
                                 }
                             }
                         },
@@ -478,6 +492,11 @@ var app = function(){
                         validators: {
                             notEmpty: {
                                 message: 'Se requiere una categoria'
+                            },
+                             stringLength: {
+                                max: 30,
+                                min:3,
+                                message: 'Por favor, su categoria debe tener entre 3 y 30'
                             }
                         }
                     },
@@ -584,6 +603,20 @@ var app = function(){
                var tomorrow = today.add(1,'days');
                return moment(tomorrow).format("DD-MM-YYYY");
             }
+            function fechaHoy() {
+               var today = moment();
+             
+               return today.format("DD-MM-YYYY");
+            }
+
+            $('#datetimepicker1').datetimepicker({
+                    language: 'es',
+                    pickTime: false, 
+                    // useCurrent: false,
+                    // showToday: false,  
+                    maxDate:fechaHoy()
+
+            });
 
             $('#datetimepicker2').datetimepicker({
                     language: 'es',
@@ -592,13 +625,18 @@ var app = function(){
                     minDate:fechaManiana()
 
             });
+
             $('#datetimepicker2').on('dp.change dp.show', function(e) {
                $('#formulario-solicitud').bootstrapValidator('revalidateField', 'fecha_fin');
             });
 
+            $('#datetimepicker1').on('dp.change dp.show', function(e) {
+               $('#form_votacion').bootstrapValidator('revalidateField', 'fecha');
+            });
+
              $("#datetimepicker2, #datetimepicker2 .input-group-addon").click(function () {
                 // alert("asd")
-                $('#datetimepicker2').data("DateTimePicker").setDate(fechaManiana());
+                $('#datetimepicker2').data("DateTimePicker").setDate();
             });  
 
           
@@ -648,6 +686,9 @@ var app = function(){
              });
              
         },
+        this.hideMensaje= function(){
+            setTimeout(function(){$("#mensaje_e").fadeOut('fast')},2000);
+        }
 
         this.init = function(){
             this.busqueda();
@@ -666,6 +707,7 @@ var app = function(){
             this.confirmBox();   
             this.datePiker();
             this.selectPiker();
+            this.hideMensaje();
         }
     };
     

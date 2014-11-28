@@ -84,7 +84,12 @@
               <div class="form-group">
                 <label for="fecha" class="col-sm-5 control-label">¿Cuando usaste el servicio?</label>
                 <div class="col-sm-6">
-                    <input class="form-control" type="date" max="<?php echo date('Y-m-d'); ?>" name="fecha" id="fecha" required>
+                    <!-- <input class="form-control" type="date" max="<?php echo date('Y-m-d'); ?>" name="fecha" id="fecha" required> -->
+                 <div class='input-group date' id='datetimepicker1'>
+                        <input type='text' class="form-control" name="fecha" id="fecha" placeholder="Fecha"   data-date-format="DD/MM/YYYY" />
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
                 </div>
               </div>
               <div class="form-group">

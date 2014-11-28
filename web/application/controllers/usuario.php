@@ -221,6 +221,8 @@ class Usuario extends CI_controller{
 		$servID 	 = $this->input->post('id_servicio');
 		$puntos  	 = $this->input->post('star');
 		$fechaUso  	 = $this->input->post('fecha');
+		$fechaUso    = strtotime($fechaUso);
+		$fechaUso    = date('Y-m-d H:i:s' , $fechaUso);
 		$comentario	 = $this->input->post('comentario');
 		$votoUsuario = $this->usuarios_model->checkVoto($userID,$servID,$fechaHoy);
 		$verificado_result = null;

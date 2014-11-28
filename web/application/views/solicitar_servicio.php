@@ -11,6 +11,24 @@
 
 			<div class="col-md-6 from-box">
 				<h3>Formulario de solicitud</h3>
+				<?php 
+				$msj = $this->session->flashdata('mensaje_e');
+				if(!empty($msj)){
+						if($msj['error'] == 0){
+							?>
+							 <div class="alert alert-success" id="mensaje_e" role="alert"><?php echo $msj['mensaje_e']; ?></div>
+							<?php
+						}else{
+
+							?>
+							<div class="alert alert-warning" id="mensaje_e" role="alert"><?php echo $msj['mensaje_e']; ?></div>
+							<?php
+
+						}
+						
+				}
+				 ?>
+				
 				<form action="<?php echo site_url('validar-solicitud-servicio'); ?>" method="post" id="formulario-solicitud">
 					  <div class="form-group">
 		                <label for="busqueda-servicio">¿En que categoría lo estas buscando?</label>
@@ -64,6 +82,7 @@
 					</li>
 					<li>
 						<p>Completa tu fecha para cuando necesitas este servicio.
+
 
 						</p>
 					</li>

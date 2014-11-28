@@ -24,10 +24,16 @@ Class Servix_model extends CI_Model{
 
 	}
 	public function getCategoria($string){
-		$query ="SELECT categorias.categoria FROM categorias WHERE categoria = '$string'";
+		$query ="SELECT categorias.id,categorias.categoria FROM categorias WHERE categoria = '$string'";
 		$rs    = $this->db->query($query);
 		return $rs->result_array();
 
+	}
+
+	public function setCatNobd($id_usuario,$cat_nodb,$comentario,$fecha_ini){
+		$query = "INSERT INTO `cat_nodb` (`id_usuario`, `categoria`, `comentario`, `fecha`) VALUES ($id_usuario, '$cat_nodb', '$comentario', '$fecha_ini');";
+		$rs    = $this->db->query($query);
+		return $this->db->insert_id();
 	}
 
 	public function geBusquedaLocalProvBuscador(){
@@ -52,6 +58,12 @@ Class Servix_model extends CI_Model{
 		$rs    = $this->db->query($query);
 		return $rs->result_array();
 
+	}
+
+	public function setSolicitarServicio($idCat,$idUser,$idLoc,$idCatNodb=null,$fecha_ini,$fecha_fin,$comentario){
+		$query = "INSERT INTO `busquedas_temp` (`id_categorias`, `id_usuario`, `id_localidad`, `id_cat_nodb`, `fecha_ini`, `fecha_fin`, `busqueda`, `vencido`) VALUES ($idCat, $idUser, $idLoc, $idCatNodb, '$fecha_ini', '$fecha_fin', '$comentario', 0);";
+		$rs    = $this->db->query($query);
+		return $rs;
 	}
 
 	private function _parsearLocalidad($localidad){

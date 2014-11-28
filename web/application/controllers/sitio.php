@@ -22,7 +22,7 @@ class sitio extends CI_Controller {
 
 		$destacados  	 = $this->servicios_model->getServiciosDestacados();
 		$solicitados 	 = $this->_setPagSolicitados($seccion);
-		
+		// print_d($this->db->last_query());
 		if(!empty($destacados)){
 			$data['destacados'] = $destacados;
 		}else{
@@ -216,24 +216,57 @@ class sitio extends CI_Controller {
 		if( isset($POST) ){
 			$catPOST = strtolower($this->input->post('categoria'));
 
+			$post['categoria'] = $catPOST;
 			$categoria = $this->servix_model->getCategoria($catPOST);
 			$fecha_ini = date('Y-m-d H:i:s');
 			$fecha_fin = strtotime(str_replace('/', '-', $this->input->post('fecha_fin') ));
 			$fecha_fin = date('Y-m-d H:i:s' , $fecha_fin);
+			$POST['fecha_ini']  = $fecha_ini;
+			$POST['fecha_fin']  = $fecha_fin;
+			$POST['id_usuario']   = $this->UsuarioSession['id'];
+
 			if(!empty($categoria)){
-				$POST['cat_en_db'] = true;
+				$POST['id_categoria'] = $categoria[0]['id'];
+				$POST['cat_en_db'] = 'null';
+				$rs = $this->_set_servicio_solicitado($POST);
 			}else{
-				$POST['cat_en_db'] = false;
+
+				$POST['id_categoria'] = 40;
+
+				$POST['cat_en_db'] = $this->_set_cat_nodb($POST);
+				$rs = $this->_set_servicio_solicitado($POST);
 			}
-			$POST['fecha_ini'] = $fecha_ini;
-			$POST['fecha_fin'] = $fecha_fin;
 			
-			
-		
-			print_d($POST  );
+	
+			$displayErros = array();
+
+			if($rs){
+				$displayErros = array('mensaje_e'=> 'Gracias por publicar tu solicitud en Servix' , 'error' => 0);
+
+				$this->session->set_flashdata('mensaje_e', $displayErros);
+
+			}else{
+
+				$displayErros = array('mensaje_e'=> 'Ups.. tenemos un problema por favor intenta más tarde' , 'error' => 1);
+
+				$this->session->set_flashdata('mensaje_e', $displayErros);
+			}
+			return redirect($_SERVER['HTTP_REFERER']);
+
 		}else{
 			return redirect('');
 		}
+	}
+
+	private function _set_servicio_solicitado($post){
+
+		$insert = $this->servix_model->setSolicitarServicio($post['id_categoria'],$post['id_usuario'],$post['localidad'],$post['cat_en_db'],$post['fecha_ini'],$post['fecha_fin'],$post['comentario']);
+		return $insert;
+	}
+
+	private function _set_cat_nodb($post){
+		$insert = $this->servix_model->setCatNobd($post['id_usuario'],$post['categoria'],$post['comentario'],$post['fecha_fin']);
+		return $insert;
 	}
 	
 	public function ofrecer_servicio(){
@@ -395,6 +428,7 @@ class sitio extends CI_Controller {
 			$data['title']   = 'Ficha del servicio';
 			$solicitado 	 = $this->servicios_model->getServicioSolicitado($id);
 			$solicitados 	 = $this->_setPagSolicitados($seccion,$segment);
+
 			$userPostulados	 = $this->servicios_model->userPostulados($id);
 
 			if(!empty($solicitados)){
