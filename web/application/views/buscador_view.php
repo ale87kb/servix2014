@@ -45,7 +45,22 @@
   <div class="col-md-6">
     <h3>Publicá un servicio</h3>
     <small><p>¿Querés ofrecer un servicio?</p></small>
-    <a href="#" class="btn btn-warning">Click Aquí</a>
+
+           <?php if(isset($usuario)){
+            ?>
+           
+               <a href="<?php echo site_url('ofrecer-servicio'); ?>" class="btn btn-warning">Click Aquí</a>
+            <?php
+            }else{
+              ?>
+
+              <a data-toggle="modal" href="#loginModal"  data-target="#loginModal" rel=""  class="btn btn-warning goOfrecerServicio">Click Aquí</a>
+             
+
+              
+            <?php
+            } ?>
+
   </div>
  </div>
 

@@ -199,6 +199,8 @@ class sitio extends CI_Controller {
 
 	public function solicitar_servicio(){
 		// $this->load->view('home_view');
+		if($this->UsuarioSession){
+
 		$data['buscador_off'] = true;
 		if($this->UsuarioSession){
 			$data['usuario'] = $this->UsuarioSession['nombre'];
@@ -209,6 +211,9 @@ class sitio extends CI_Controller {
 
 
 		$this->load->view('home_view',$data);
+		}else{
+			return redirect('');
+		}
 	}
 
 	public function validar_solicitud_servicio(){
@@ -270,7 +275,21 @@ class sitio extends CI_Controller {
 	}
 	
 	public function ofrecer_servicio(){
-		echo "ofrecer_servicio";	 
+		if($this->UsuarioSession){
+
+		$data['buscador_off'] = true;
+		if($this->UsuarioSession){
+			$data['usuario'] = $this->UsuarioSession['nombre'];
+			$data['usuarioSession'] = $this->UsuarioSession;
+		}
+		$data['vista'] = 'ofrecer_servicio';
+
+
+
+		$this->load->view('home_view',$data);
+		}else{
+			return redirect('');
+		}
 	}
 
 	public function categorias(){
@@ -496,8 +515,15 @@ class sitio extends CI_Controller {
 				 $usuario 			   = $this->UsuarioSession;
 				 $servicioSolicitado   = $this->servicios_model->getServicioSolicitado($id_busqueda_temp);
 				 $mail = $this->_crearEmailTemplacePostulacion($userSolicitudData,$servicioSolicitado,$usuario);
+				 $this->servicios_model->setPostulacion($id_busqueda_temp,$id_usuario,1,1);
+
 				 if($mail){
-				 	$this->servicios_model->setPostulacion($id_busqueda_temp,$id_usuario,1,1);
+
+				 	$displayErros = array('mensaje_e'=> 'Gracias por publicar tu solicitud en ' .  APP_NAME , 'error' => 0);
+					$this->session->set_flashdata('mensaje_e', $displayErros);
+
+				 }else{
+
 				 }
 			}
 

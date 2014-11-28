@@ -450,9 +450,14 @@ var app = function(){
                                 if($("#nextAction").val() == '#modalOpinion'){
                                     history.pushState({}, '','#QuieroOpinar');
                                 }
-                             }else if($("#nextAction").val() == 'solicitar-servicio'){
+                             }else if(($("#nextAction").val() == 'solicitar-servicio') &&  $("#curretSection").val() == ''){
 
                                   window.location.href='solicitar-servicio';
+
+                             }else if(($("#nextAction").val() == 'ofrecer-servicio') &&  $("#curretSection").val() == '' ){
+
+                                  window.location.href='ofrecer-servicio';
+
                              }else{
 
                                 window.location.reload();
@@ -542,6 +547,10 @@ var app = function(){
 
             $(".gobusquedaTemp").on('click',function(){
             $("#nextAction").val('solicitar-servicio');
+
+            });
+            $(".goOfrecerServicio").on('click',function(){
+            $("#nextAction").val('ofrecer-servicio');
 
             });
             if(window.location.href.indexOf("#QuieroOpinar") > -1) {
