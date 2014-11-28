@@ -23,8 +23,14 @@ Class Servix_model extends CI_Model{
 		return $rs->result_array();
 
 	}
+	public function getCategoria($string){
+		$query ="SELECT categorias.categoria FROM categorias WHERE categoria = '$string'";
+		$rs    = $this->db->query($query);
+		return $rs->result_array();
 
-	public function geBusquedaLocalProv(){
+	}
+
+	public function geBusquedaLocalProvBuscador(){
 		$query = "(SELECT localidades.localidad,provincias.provincia
 				FROM
 				provincias
@@ -33,6 +39,16 @@ Class Servix_model extends CI_Model{
 				( SELECT provincias.provincia ,provincias.provincia
 				FROM provincias)
 				";
+		$rs    = $this->db->query($query);
+		return $rs->result_array();
+
+	}
+	public function geBusquedaLocalProv($loc){
+		$query = "	SELECT localidades.id,localidades.localidad,provincias.provincia
+					FROM
+					provincias
+					INNER JOIN localidades ON localidades.id_provincia = provincias.id
+					WHERE localidades.localidad LIKE '%$loc%' OR provincias.provincia LIKE '%$loc%' LIMIT 10";
 		$rs    = $this->db->query($query);
 		return $rs->result_array();
 

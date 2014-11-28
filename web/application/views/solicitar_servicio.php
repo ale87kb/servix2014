@@ -11,7 +11,7 @@
 
 			<div class="col-md-6 from-box">
 				<h3>Formulario de solicitud</h3>
-				<form action="#" method="post">
+				<form action="<?php echo site_url('validar-solicitud-servicio'); ?>" method="post" id="formulario-solicitud">
 					  <div class="form-group">
 		                <label for="busqueda-servicio">¿En que categoría lo estas buscando?</label>
 		                <input type="text" class="form-control typeaheadOnlyCat" id="busqueda-servicio" value="" name="categoria" autocomplete="off" required="" placeholder="¿Qué buscas?">
@@ -19,14 +19,15 @@
 		              </div>
 		               <div class="form-group">
 		                <label for="busqueda-localidad">¿En que localidad lo estas solicitando?</label>
-		                <input type="text" class="form-control typeheadLoc" id="busqueda-localidad" value=""  name="localidad"  autocomplete="off"  required="" placeholder="¿Dónde lo buscas?">
+		              
+		                 <select id="ajax-select" class="form-control selectpicker with-ajax" name="localidad" placeholder="Buscar" data-live-search="true" ></select>
 		               
 		              </div>
 					  <div class="form-group">
 		                <label for="fecha_fin">¿Para cuando lo necesitas?</label>
 		                
 		                <div class='input-group date' id='datetimepicker2'>
-		                    <input type='text' class="form-control" name="fecha_fin" id="fecha_fin" placeholder="Fecha y hora" />
+		                    <input type='text' class="form-control" name="fecha_fin" id="fecha_fin" placeholder="Fecha y hora"   data-date-format="DD/MM/YYYY hh:mm" />
 		                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
 		                    </span>
 		                </div>

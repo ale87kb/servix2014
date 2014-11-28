@@ -163,8 +163,8 @@ class sitio extends CI_Controller {
 		 echo  json_encode($arrayDatos);
 	}
 
-	public function busqueda_localidades(){
-		$data = $this->servix_model->geBusquedaLocalProv();
+	public function busqueda_localidades_buscador(){
+		$data = $this->servix_model->geBusquedaLocalProvBuscador();
 		 $arrayDatos = array();
 		 foreach ($data as $d) {
 		 	if($d['localidad']==$d['provincia']){
@@ -174,6 +174,16 @@ class sitio extends CI_Controller {
 		 	$arrayDatos[] = trim($loc,", ") ;
 		 }
 		 echo  json_encode($arrayDatos);
+	}
+
+	public function busqueda_localidades(){
+	
+		$data = $this->servix_model->geBusquedaLocalProv($this->input->post('q'));
+		 foreach ($data as $d) {
+		 	$provLoc 	  = $d['localidad'].", ".$d['provincia'];
+		  	$arrayDatos []= array('localidad'=>$provLoc , 'idLoc'=> $d['id']);
+		}
+			echo  json_encode($arrayDatos);
 	}
 
 	
@@ -195,7 +205,33 @@ class sitio extends CI_Controller {
 			$data['usuarioSession'] = $this->UsuarioSession;
 		}
 		$data['vista'] = 'solicitar_servicio';
+
+
+
 		$this->load->view('home_view',$data);
+	}
+
+	public function validar_solicitud_servicio(){
+		$POST = $this->input->post();
+		if( isset($POST) ){
+			$catPOST = strtolower($this->input->post('categoria'));
+
+			$categoria = $this->servix_model->getCategoria($catPOST);
+			$fecha_ini = date('Y-m-d h:i:s');
+			$fecha_fin = date('Y-m-d h:i:s' , strtotime($this->input->post('fecha_fin')));
+			if(!empty($categoria)){
+				echo "Esta en la base";
+			}else{
+				echo "No esta en la base";
+			}
+			
+			
+			print_d($fecha_ini);
+			print_d($fecha_fin);
+			// print_d($this->input->post() );
+		}else{
+			return redirect('');
+		}
 	}
 	
 	public function ofrecer_servicio(){
