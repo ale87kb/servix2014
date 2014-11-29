@@ -282,11 +282,24 @@ class sitio extends CI_Controller {
 			$data['usuario'] = $this->UsuarioSession['nombre'];
 			$data['usuarioSession'] = $this->UsuarioSession;
 		}
+		$this->load->library('googlemaps');
+		$config = array();
+		$config['center'] = 'auto';
+		$config['zoom'] = 'auto';
+		$config['places'] = TRUE;
+		$config['placesAutocompleteInputID'] 	= 'myPlaceTextBox';
+		$config['placesAutocompleteBoundsMap'] 	= TRUE;
+		// $opciones = array('cities'); 
+		$config['placesAutocompleteRestrict'] 	= 'AR'; 
+		$config['placesAutocompleteOnChange'] 	= gmapScript();//viene del helper de mis_funciones
+		$this->googlemaps->initialize($config);
+	
+		$data['map'] = $this->googlemaps->create_map();
 		$data['vista'] = 'ofrecer_servicio';
-
-
-
 		$this->load->view('home_view',$data);
+
+
+
 		}else{
 			return redirect('');
 		}

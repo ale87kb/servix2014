@@ -540,9 +540,18 @@ var app = function(){
         },
         this.validar_ofrecer = function(){
 
+            $('#formulario-ofrecer').find('input').keypress(function(e){
+                if ( e.which == 13 ) // Enter key = keycode 13
+                {
+       
+                    return false;
+                }
+            });
+
             $('#formulario-ofrecer') .bootstrapValidator({
                 autoFocus:  true,
                 live:       'submitted',
+                // submitButtons: 'button[type="submit"]',
                 feedbackIcons: {
                     valid: 'glyphicon glyphicon-ok',
                     invalid: 'glyphicon glyphicon-remove',
@@ -827,6 +836,15 @@ var app = function(){
                 var e = $('#tab li:last').hasClass('active'); 
             return e;
             }
+
+            $("#tab li a[href='#paso_3']").on('shown.bs.tab', function (e) { 
+                    var center = map.getCenter();
+                    google.maps.event.trigger(map, "resize");
+                    map.setCenter(center);
+            });
+
+          
+          
         }
 
         this.init = function(){

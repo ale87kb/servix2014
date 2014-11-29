@@ -147,6 +147,7 @@ class Googlemaps {
 	var $placesName					= '';						// A term to be matched against when searching for places to display on the map
 	var $placesAutocompleteInputID	= '';						// The ID attribute of the textfield that the autocomplete should effect
 	var $placesAutocompleteTypes	= array();					// The types of places for the autocomplete to return. Options can be seen here https://developers.google.com/maps/documentation/javascript/places#places_autocomplete but include 'establishment' to only return business results, '(cities)', or '(regions)'
+	var $placesAutocompleteRestrict = '';
 	var $placesAutocompleteBoundSW	= '';						// By specifying an area in which to search for Places, the results are biased towards, but not restricted to, Places contained within these bounds.
 	var $placesAutocompleteBoundNE	= '';						// Both South-West (lat/long co-ordinate or address) and North-East (lat/long co-ordinate or address) values are required if wishing to set bounds
 	var $placesAutocompleteBoundsMap= FALSE;					// An alternative to setting the SW and NE bounds is to use the bounds of the current viewport. If set to TRUE, the bounds will be set to the viewport of the visible map, even if dragged or zoomed
@@ -1720,6 +1721,15 @@ class Googlemaps {
 					}
 					$autocompleteOptions .= 'types: [\''.implode("','", $this->placesAutocompleteTypes).'\']';
 				}
+				if($this->placesAutocompleteRestrict){
+					if ($autocompleteOptions != "") 
+					{
+						 $autocompleteOptions .= ',
+						 '; 
+					}
+					$autocompleteOptions .= 'componentRestrictions: {country:"'.$this->placesAutocompleteRestrict.'"}';
+				}
+
 				$this->output_js_contents .= $autocompleteOptions;
 				$this->output_js_contents .= '}';
 				
