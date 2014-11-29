@@ -20,11 +20,13 @@ class Usuario extends CI_controller{
 			$UsComentarios 					= $this->_comentariosRealizados($this->UsuarioSession['id'], 0, 5);
 			$UsServiciosContactados			= $this->_serviciosContactados($this->UsuarioSession['id'], 0, 5);
 			$UsServiciosSolicitados			= $this->_serviciosSolicitados($this->UsuarioSession['id'], 0, 5);
+			$UsPostulaciones 				= $this->_postulacionesRealizadas($this->UsuarioSession['id'], 0, 5);
 
 			$data['favoritos'] 		= $Usfavoritos;
 			$data['comentarios'] 	= $UsComentarios;
 			$data['sContactados'] 	= $UsServiciosContactados;
 			$data['sSolicitados'] 	= $UsServiciosSolicitados;
+			$data['postulaciones'] 	= $UsPostulaciones;
 			
 			$data['title'] 			= 'Mi Perfil';
 			$data['vista'] 			= 'usuario/mi_perfil';
@@ -39,8 +41,8 @@ class Usuario extends CI_controller{
 	private function _linkFavoritos($idUsuario, $desdeLimit ,$cantidadLimit){
 		$favoritos = $this->usuarios_model->getFavoritos($idUsuario, $desdeLimit ,$cantidadLimit);
 		if($favoritos){
-			foreach ($favoritos as $f => $clave) {
-				$favoritos[$f]['link'] = generarLinkServicio($favoritos[$f]['id'], $favoritos[$f]['titulo']);
+			foreach ($favoritos as $key => $vlaue) {
+				$favoritos[$key]['link'] = generarLinkServicio($favoritos[$key]['id'], $favoritos[$key]['titulo']);
 			}
 			return $favoritos;
 		}
@@ -51,9 +53,9 @@ class Usuario extends CI_controller{
 		$comentarios = $this->usuarios_model->getComentariosRealizados($idUsuario, $desdeLimit ,$cantidadLimit);
 
 		if($comentarios){
-			foreach ($comentarios as $c => $clave) {
-				$comentarios[$c]['link'] = generarLinkServicio($comentarios[$c]['id'], $comentarios[$c]['titulo']);
-				$comentarios[$c]['fecha'] = fechaBarras(strtotime($comentarios[$c]['fecha_votacion']));
+			foreach ($comentarios as $key => $value) {
+				$comentarios[$key]['link'] 	= generarLinkServicio($comentarios[$key]['id'], $comentarios[$key]['titulo']);
+				$comentarios[$key]['fecha'] = fechaBarras(strtotime($comentarios[$key]['fecha_votacion']));
 			}
 			return $comentarios;
 		}
@@ -64,9 +66,9 @@ class Usuario extends CI_controller{
 		$sContactados = $this->usuarios_model->getServiciosContactados($idUsuario, $desdeLimit ,$cantidadLimit);
 
 		if($sContactados){
-			foreach ($sContactados as $c => $clave) {
-				$sContactados[$c]['link'] = generarLinkServicio($sContactados[$c]['id'], $sContactados[$c]['titulo']);
-				$sContactados[$c]['fecha'] = fechaBarras(strtotime($sContactados[$c]['fecha']));
+			foreach ($sContactados as $key => $value) {
+				$sContactados[$key]['link'] = generarLinkServicio($sContactados[$key]['id'], $sContactados[$key]['titulo']);
+				$sContactados[$key]['fecha'] = fechaBarras(strtotime($sContactados[$key]['fecha']));
 			}
 			return $sContactados;
 		}
@@ -75,11 +77,26 @@ class Usuario extends CI_controller{
 	private function _serviciosSolicitados($idUsuario, $desdeLimit ,$cantidadLimit){
 		$sSolicitados = $this->usuarios_model->getUServiciosSolicitados($idUsuario, $desdeLimit ,$cantidadLimit);
 		if($sSolicitados){
-			foreach ($sSolicitados as $c => $clave) {
-				$sSolicitados[$c]['link'] = generarLinkServicio($sSolicitados[$c]['id'],$sSolicitados[$c]['categoria']."-en-".$sSolicitados[$c]['localidad']."-".$sSolicitados[$c]['provincia'],'servicio-solicitado');
-				$sSolicitados[$c]['fecha'] = fechaBarras(strtotime($sSolicitados[$c]['fecha_ini']));
+			foreach ($sSolicitados as $key => $value) {
+				$sSolicitados[$key]['link'] = generarLinkServicio($sSolicitados[$key]['id'],$sSolicitados[$key]['categoria']."-en-".$sSolicitados[$key]['localidad']."-".$sSolicitados[$key]['provincia'],'servicio-solicitado');
+				$sSolicitados[$key]['fecha'] = fechaBarras(strtotime($sSolicitados[$key]['fecha_ini']));
 			}
 			return $sSolicitados;
+		}
+		return false;
+	}
+
+	private function _postulacionesRealizadas($idUsuario, $desdeLimit ,$cantidadLimit){
+		$postulaciones = $this->usuarios_model->getUPostulaciones($idUsuario, $desdeLimit ,$cantidadLimit);
+		if($postulaciones){
+			foreach ($postulaciones as $key => $value) {
+				$postulaciones[$key]['link'] = generarLinkServicio($postulaciones[$key]['id'],$postulaciones[$key]['categoria']."-en-".$postulaciones[$key]['localidad']."-".$postulaciones[$key]['provincia'],'servicio-solicitado');
+				$postulaciones[$key]['fecha'] = fechaBarras(strtotime($postulaciones[$key]['fecha_ini']));
+				$postulaciones[$key]['fecha_fin'] = fechaBarras(strtotime($postulaciones[$key]['fecha_fin']));
+				$postulaciones[$key]['DuenioSolicitud'] = $this->usuarios_model->getUsuario($postulaciones[$key]['id_usuario']);
+			}
+
+			return $postulaciones;
 		}
 		return false;
 	}
@@ -477,6 +494,11 @@ class Usuario extends CI_controller{
 		if(!$dalete){
 			log_message('error', 'No se pudo eliminar la imagen'.$archivoPath);
 		}
+	}
+
+
+	public function perfil_usuario(){
+		
 	}
 
 

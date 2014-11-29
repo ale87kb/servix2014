@@ -17,6 +17,7 @@
 			<div class="row">
 			<?php 
 				$this->load->view('usuario/servicios_solicitados');
+				$this->load->view('usuario/postulaciones');
 			?>
 			</div>
 
