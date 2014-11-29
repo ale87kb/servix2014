@@ -1,7 +1,7 @@
 <div class="row">
     <div class="jumbotron col-md-12">
       <div class="row">
-      
+    
         <div class="col-md-12">
           <h1>Ofrecer un servicio</h1>
           <p>En solo 3 pasos publica tu servicio en Servix</p>
@@ -13,7 +13,7 @@
 
                   <div class="col-md-12">
                       <!-- Nav tabs -->
-                    <ul class="nav nav-pills " role="tablist">
+                    <ul class="nav nav-pills " role="tablist" id="tab">
                     <li role="presentation" class="active"><a href="#paso_1" aria-controls="paso_1" role="tab" data-toggle="tab">Paso 1</a></li>
                     <li role="presentation" ><a href="#paso_2" aria-controls="paso_2"  role="tab" data-toggle="tab">Paso 2</a></li>
                     <li role="presentation"><a href="#paso_3" aria-controls="paso_3" role="tab" data-toggle="tab">Paso 3</a></li>
@@ -24,7 +24,7 @@
                         <!-- Tab panes -->
                       <form action="<?php echo site_url('validar-ofrecer-servicio'); ?>" method="post" id="formulario-ofrecer">
                         <div class="tab-content">
-                          <div role="tabpanel" class="tab-pane active" id="paso_1">
+                          <div role="tabpanel fade " class="tab-pane active" id="paso_1">
                             <div class="col-md-12">
                               <h2>Completa tus datos de servicio</h2>
                             </div>
@@ -36,7 +36,7 @@
                               </div>
                               <div class="form-group">
                               <label for="busqueda-servicio">¿En que categoría lo estas ofreciendo?</label>
-                              <input type="text" class="form-control typeaheadOnlyCat" id="busqueda-servicio" value="" name="categoria" autocomplete="off" required="" placeholder="¿Qué buscas?">
+                              <input type="text" class="form-control typeaheadOnlyCat" id="busqueda-servicio" value="" name="categoria" autocomplete="off" required="" placeholder="Ej: Herrero, carpintero, panadero..">
 
                               </div>
 
@@ -47,7 +47,7 @@
                               </div>
                               <div class="form-group">
                               <label for="sitioweb">¿Sitio web?</label>
-                              <input type="text" class="form-control" id="sitioweb" value="" name="sitioweb"  required="" placeholder="www.misitio.com">
+                              <input type="text" class="form-control" id="sitioweb" value="" name="sitioweb"   placeholder="www.misitio.com">
 
                               </div>
 
@@ -63,12 +63,12 @@
                             </div>
                             <div class="col-md-12">
                                 <p class="text-right">
-                                    <a href="#" class="btn btn-primary">Ir al paso 2</a>
+                                    <a href="#" class="btn btn-primary btnNext">Ir al paso 2</a>
                                 </p>
                             </div>
 
                           </div>
-                          <div role="tabpanel" class="tab-pane" id="paso_2">
+                          <div role="tabpanel" class="tab-pane fade " id="paso_2">
                              <div class="col-md-12">
                               <h2>Bien, ahora describe tu servicio </h2>
                             </div>
@@ -99,18 +99,18 @@
                                 <div class="row">
                                   <div class="col-md-6">
                                         <p class="text-left">
-                                            <a href="#" class="btn btn-primary">Ir al paso 1</a>
+                                            <a href="#" class="btn btn-primary btnPrev">Ir al paso 1</a>
                                         </p>
                                     </div>
                                     <div class="col-md-6">
                                         <p class="text-right">
-                                            <a href="#" class="btn btn-primary">Ir al paso 2</a>
+                                            <a href="#" class="btn btn-primary btnNext">Ir al paso 3</a>
                                         </p>
                                     </div>
                                 </div>
                             </div>
                           </div>
-                          <div role="tabpanel" class="tab-pane" id="paso_3">
+                          <div role="tabpanel" class="tab-pane fade " id="paso_3">
                                  <div class="col-md-12">
                                   <h2>Ulimo paso, en que localidad ofreces el servicio </h2>
                                 </div>
@@ -146,12 +146,12 @@
                                     <div class="row">
                                       <div class="col-md-6">
                                             <p class="text-left">
-                                                <a href="#" class="btn btn-primary">Ir al paso 2</a>
+                                                <a href="#" class="btn btn-primary btnPrev">Ir al paso 2</a>
                                             </p>
                                         </div>
                                         <div class="col-md-6">
                                             <p class="text-right">
-                                                <a href="#" class="btn btn-success">Publicar Servicio</a>
+                                                <button type="submit" class="btn btn-success">Publicar Servicio</button>
                                             </p>
                                         </div>
                                     </div>

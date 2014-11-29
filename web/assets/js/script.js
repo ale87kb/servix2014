@@ -537,7 +537,102 @@ var app = function(){
                     }
                 }
             })
-        }
+        },
+        this.validar_ofrecer = function(){
+
+            $('#formulario-ofrecer') .bootstrapValidator({
+                autoFocus:  true,
+                live:       'submitted',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                excluded: ':disabled',
+                fields: {
+                    titulo: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Por favor introduce un titulo'
+                            }
+                        }
+                    },
+                    categoria: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Por favor introduce una categoría'
+                            }
+                        }
+                    },
+                    telefono: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Ingresa un teléfono'
+                            }
+                        }
+                    },
+                  
+                    descripcion: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Por favor ingresa una descripción'
+                            }
+                        }
+                    },
+                    localidad: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Por favor ingresa una localidad'
+                            }
+                        }
+                    },
+                    direccion: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Por favor ingresa una dirección'
+                            }
+                        }
+                    }
+                }
+            })
+            // Called when a field is invalid
+            .on('error.field.bv', function(e, data) {
+                // data.element --> The field element
+
+                var $tabPane = data.element.parents('.tab-pane'),
+                    tabId    = $tabPane.attr('id');
+                    console.log(tabId);
+
+                $('a[href="#' + tabId + '"][data-toggle="tab"]')
+                    .parent()
+                    .find('i')
+                    .removeClass('fa-check')
+                    .addClass('fa-times');
+            })
+            // Called when a field is valid
+            .on('success.field.bv', function(e, data) {
+                // data.bv      --> The BootstrapValidator instance
+                // data.element --> The field element
+
+                var $tabPane = data.element.parents('.tab-pane'),
+                    tabId    = $tabPane.attr('id'),
+                    $icon    = $('a[href="#' + tabId + '"][data-toggle="tab"]')
+                                .parent()
+                                .find('i')
+                                .removeClass('fa-check fa-times');
+
+                // Check if the submit button is clicked
+                if (data.bv.getSubmitButton()) {
+                    // Check if all fields in tab are valid
+                    var isValidTab = data.bv.isValidContainer($tabPane);
+                    $icon.addClass(isValidTab ? 'fa-check' : 'fa-times');
+                }
+            }).on('success.form.bv', function(e) {
+                e.preventDefault();
+                alert("todo ok")
+            });
+
+        },
         this.setAffterAction =function(){
             $(".affterOpenLogin").on('click',function(){
             $("#nextAction").val('#modalOpinion');
@@ -698,6 +793,41 @@ var app = function(){
         this.hideMensaje= function(){
             setTimeout(function(){$("#mensaje_e").fadeOut('fast')},2000);
         }
+        this.compWizzard = function(){
+            $(function() {
+
+                $('.btnNext').on('click', function(e) {    
+                    e.preventDefault();    
+                    nextTab();  
+                });
+
+                $('.btnPrev').on('click', function(e) {    
+                    e.preventDefault();    
+                    prevTab();  
+                });
+
+                $('a[data-toggle="tab"]').on('shown', function (e) {
+                    isLastTab();
+                });
+
+            });
+
+            function nextTab() {
+                var e = $('#tab li.active').next().find('a[data-toggle="tab"]');  
+                if(e.length > 0) e.click();  
+                isLastTab();
+            }
+            function prevTab() {
+                var e = $('#tab li.active').prev().find('a[data-toggle="tab"]');  
+                if(e.length > 0) e.click();  
+                isLastTab();
+            }
+
+            function isLastTab() {
+                var e = $('#tab li:last').hasClass('active'); 
+            return e;
+            }
+        }
 
         this.init = function(){
             this.busqueda();
@@ -717,6 +847,8 @@ var app = function(){
             this.datePiker();
             this.selectPiker();
             this.hideMensaje();
+            this.compWizzard();
+            this.validar_ofrecer();
         }
     };
     
