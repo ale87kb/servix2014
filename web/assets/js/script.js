@@ -637,8 +637,8 @@ var app = function(){
                     $icon.addClass(isValidTab ? 'fa-check' : 'fa-times');
                 }
             }).on('success.form.bv', function(e) {
-                e.preventDefault();
-                alert("todo ok")
+                // e.preventDefault();
+                // alert("todo ok")
             });
 
         },

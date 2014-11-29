@@ -127,7 +127,21 @@
                 (place.address_components[2] && place.address_components[2].short_name || "")
               ].join(" ");
             }
-            console.log(iw_map.setContent);
+            console.log(place.address_components);
+            
+
+            
+
+            document.getElementById("id")
+            var $latitud =  place.geometry.location.k; 
+            document.getElementById("lati").value = $latitud;
+
+           
+            //$longitud = $logitud.slice(0,10);
+
+            var $longitud = place.geometry.location.B;
+			$longitud = $longitud.toString().slice(0, 12);
+            document.getElementById("long").value = $longitud;
 
             iw_map.setContent("<div><strong>" + place.name + "</strong><br>" + address);
             iw_map.open(map, marker);';

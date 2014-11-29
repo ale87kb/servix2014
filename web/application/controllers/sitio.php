@@ -216,6 +216,10 @@ class sitio extends CI_Controller {
 		}
 	}
 
+	public function validar_ofrecer_servicio(){
+		print_d($this->input->post());
+	}
+
 	public function validar_solicitud_servicio(){
 		$POST = $this->input->post();
 		if( isset($POST) ){
@@ -380,6 +384,12 @@ class sitio extends CI_Controller {
 
 		foreach ($rs as $v) {
 			$marker = array();
+			$marker['icon'] = site_url('assets/images/servix_marker.png');
+			$marker['icon_size']   = '25, 66';
+			$marker['icon_origin'] = '0, 0';
+			$marker['icon_anchor'] = '17, 34';
+			$marker['icon_scaledSize'] = '20, 35';
+
 			$marker['position']			  = ''.$v['latitud'].' '.$v['longitud'].'';
 			$marker['infowindow_content'] = ('<div style="width: 250px;color: #000;font-size:14px;font-family:Arial, Helvetica, sans-serif;">'.ucwords($v['titulo']).'<br>'.ucfirst($v['direccion']).'			</div>');
 			$marker['infowindowMaxWidth'] = "500";
@@ -586,10 +596,14 @@ class sitio extends CI_Controller {
 			}
 
 			$data['servicio']  = $data['titulo'];
-			$lat 			   = $servicioRS[0]['latitud'];
-			$long 			   = $servicioRS[0]['longitud'];
-			$position	       = "$lat,$long";
-			$data['map'] 	   = $this->_gmap($servicioRS,$position,14);
+			if(isset($servicioRS[0]['latitud']) && isset($servicioRS[0]['longitud'])){
+
+				$lat 			   = $servicioRS[0]['latitud'];
+				$long 			   = $servicioRS[0]['longitud'];
+				$position	       = "$lat,$long";
+				$data['map'] 	   = $this->_gmap($servicioRS,$position,14);
+
+			}
 		
 			if($this->UsuarioSession){
 				$data['usuario']	    = $this->UsuarioSession['nombre'];

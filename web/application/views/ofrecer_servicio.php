@@ -112,12 +112,18 @@
                           </div>
                           <div role="tabpanel" class="tab-pane fade " id="paso_3">
                                  <div class="col-md-12">
-                                  <h2>Ulimo paso, en que localidad ofreces el servicio </h2>
+                                  <h2>Ulimo paso, en que localidad, barrio ofreces el servicio </h2>
                                 </div>
                                 <div class="col-md-6">
+                                   <div class="form-group">
+                                      <label for="busqueda-localidad">¿En que localidad, barrio lo estas ofreciendo?</label>
+                                    
+                                       <select id="ajax-select" class="form-control selectpicker with-ajax" name="localidad" placeholder="Buscar" data-live-search="true" ></select>
+                                     
+                                    </div>
                                   
                                     <div class="form-group">
-                                      <label for="direccion">Escribe la dirección en donde ofreces el servicio</label>
+                                      <label for="direccion">Escribe, y selecciona la dirección en donde ofreces el servicio</label>
                                       <!-- <img src="http://placehold.it/480x400&text=google map" alt=""> -->
                                         <p>
                                            <input type="text" id="myPlaceTextBox" class="form-control" placeholder="Ej: Av Rivadavia 5555" />
@@ -126,20 +132,19 @@
                                       <div class="map">
                                          <?php echo $map['html']; ?>
                                       </div>
+                                      <input type="hidden" name="lati" id="lati" >
+                                      <input type="hidden" name="long" id="long" >
                                     </div>
 
                                 </div>
                                 <div class="col-md-6">
                                   <h3>Guia para ofrecer un servicio paso 3</h3>
                                   <p>
-                                    Busca tu dirección en el mapa para que la gente que encuentre tu servicio sepa en donde lo ofrece.
-                                   
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus ipsum nisi autem at iusto illum excepturi perspiciatis. Praesentium, quod eligendi consectetur officia nemo dolorum quo. Tempora nostrum debitis laudantium porro.
                                   </p>
                                   <p>
-                                     Si no dispone de una dirección, 
-                                    por favor ingrese la localidad en donde ofrece el servicio.
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus ipsum nisi autem at iusto illum excepturi perspiciatis. Praesentium, quod eligendi consectetur officia nemo dolorum quo. Tempora nostrum debitis laudantium porro.
                                   </p>
-                                 
                                 </div>
                                 <div class="col-md-12">
                                   
