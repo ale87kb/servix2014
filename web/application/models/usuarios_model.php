@@ -327,4 +327,35 @@ Class Usuarios_model extends CI_Model{
 
 	}
 
+
+	public function getUPostulaciones($idUsuario, $desdeLimit, $cantidadLimit){
+		$query =	"SELECT
+						busquedas_temp.id,
+						busquedas_temp.fecha_ini,
+						busquedas_temp.fecha_fin,
+						busquedas_temp.busqueda,
+						busquedas_temp.vencido,
+						postulaciones_temp.postulado,
+						usuarios.id as id_usuario,
+						categorias.categoria,
+						cat_nodb.categoria as otra_cat,
+						localidades.localidad,
+						provincias.provincia
+					FROM
+						busquedas_temp
+					INNER JOIN categorias ON busquedas_temp.id_categorias = categorias.id
+					INNER JOIN localidades ON busquedas_temp.id_localidad = localidades.id
+					INNER JOIN postulaciones_temp ON postulaciones_temp.id_busquedas_temp = busquedas_temp.id
+					INNER JOIN provincias ON localidades.id_provincia = provincias.id
+					INNER JOIN usuarios ON busquedas_temp.id_usuario = usuarios.id
+					LEFT OUTER JOIN cat_nodb ON busquedas_temp.id_cat_nodb = cat_nodb.id
+					WHERE postulaciones_temp.id_usuarios = $idUsuario
+					ORDER BY busquedas_temp.fecha_ini ASC
+					LIMIT $desdeLimit, $cantidadLimit";
+		$rs = $this->db->query($query);
+		return $rs->result_array();
+	}
+
+
+
 }

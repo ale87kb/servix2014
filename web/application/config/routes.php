@@ -72,13 +72,12 @@ $route['ficha/(:any)/opniones/page/(:num)']		= "sitio/get_opiniones/$1/$2";
 $route['ficha/(:any)']		    				= "sitio/ficha_servicio/$1";
 $route['validar-recomendacion']   	        	= "sitio/recomendar_servicio";
 
+
+/*--- LOGIN/LOGOUT/REGISTRO --------------------*/
 $route['logout']		   						= "login/logout";								//Usuario logueado
 $route['login']     	       					= "login/index";								//Usuario deslogueado
-
 $route['validar_login']        					= "login/validacion_login";
 $route['validar_login_ajax']        			= "login/validacion_login_ajax";
-$route['menu_usuario']							= "login/menu_usuario";
-
 
 $route['recuperar-clave']      					= "login/recuperar_clave";						//Usuario deslogueado
 $route['validar_recuperar_clave']      			= "login/validar_recuperar_clave";				//Usuario deslogueado
@@ -88,6 +87,10 @@ $route['validar_nuevo_usuario']          		= "login/validar_nuevo_usuario";
 $route['validar_nuevo_usuario_ajax']          	= "login/validar_nuevo_usuario_ajax";
 $route['registro_respuesta']		          	= "login/registro_respuesta";
 $route['usuario/verificar/(:any)']           	= "usuario/verificar";							//Usuario deslogueado
+/*----------------------------------------------*/
+
+/*--- USUARIO ----------------------------------*/
+$route['menu_usuario']							= "login/menu_usuario";
 
 $route['mi-perfil']   		   					= "usuario/index";								//Usuario logueado
 $route['validar-voto']   		   				= "usuario/validar_voto";
@@ -101,6 +104,8 @@ $route['mi-perfil/favoritos']  					= "usuario/favoritos";
 $route['set_favorito']  						= "usuario/set_favorito";
 $route['mi-perfil/servicios-solicitados']  		= "usuario/servicios_solicitados";
 $route['mis-comentarios']           			= "usuario/mis_comentarios";
+
+$route['usuario/perfil/(:any)'] 				= "usuario/perfil_usuario";
 
 
 $route['404_override'] 	= '';
