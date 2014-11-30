@@ -112,23 +112,28 @@
                           </div>
                           <div role="tabpanel" class="tab-pane fade " id="paso_3">
                                  <div class="col-md-12">
-                                  <h2>Ulimo paso, en que localidad ofreces el servicio </h2>
+                                  <h2>Ulimo paso, en que localidad, barrio ofreces el servicio </h2>
                                 </div>
                                 <div class="col-md-6">
                                    <div class="form-group">
-                                      <label for="busqueda-localidad">¿En que localidad lo estas ofreciendo?</label>
+                                      <label for="busqueda-localidad">¿En que localidad, barrio lo estas ofreciendo?</label>
                                     
                                        <select id="ajax-select" class="form-control selectpicker with-ajax" name="localidad" placeholder="Buscar" data-live-search="true" ></select>
                                      
                                     </div>
-                                  <div class="form-group">
-                                    <label for="direccion">En que dirección ofreces el servicio</label>
-                                  <input type="text" class="form-control" id="direccion" value="" name="direccion"  required="" placeholder="Dirección">
-
-                                  </div>
+                                  
                                     <div class="form-group">
-                                      <label for="direccion">Marca en el mapa tu dirección</label>
-                                      <img src="http://placehold.it/480x400&text=google map" alt="">
+                                      <label for="direccion">Escribe, y selecciona la dirección en donde ofreces el servicio</label>
+                                      <!-- <img src="http://placehold.it/480x400&text=google map" alt=""> -->
+                                        <p>
+                                           <input type="text" id="myPlaceTextBox" class="form-control" placeholder="Ej: Av Rivadavia 5555" />
+                                        </p>
+                                        <br>
+                                      <div class="map">
+                                         <?php echo $map['html']; ?>
+                                      </div>
+                                      <input type="hidden" name="lati" id="lati" >
+                                      <input type="hidden" name="long" id="long" >
                                     </div>
 
                                 </div>
