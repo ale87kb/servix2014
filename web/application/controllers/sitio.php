@@ -5,8 +5,10 @@ class sitio extends CI_Controller {
 	public function __construct(){
 
 		parent::__construct();
+		
 		//inicio sesion de usuario preguntandole al modelo
 		$this->UsuarioSession = $this->usuarios_model->isLogin();
+
 	}
 
 
@@ -20,17 +22,17 @@ class sitio extends CI_Controller {
 
 		$destacados  	 = $this->servicios_model->getServiciosDestacados();
 		$solicitados 	 = $this->_setPagSolicitados($seccion);
-
-		$data['destacados'] = null;
-		$data['solicitados'] = null;
-		
 		// print_d($this->db->last_query());
 		if(!empty($destacados)){
 			$data['destacados'] = $destacados;
+		}else{
+			$data['destacados'] = null;
 		}
 
 		if(!empty($solicitados)){
 			$data['solicitados'] = $solicitados['result'];
+		}else{
+			$data['solicitados'] = null;
 		}
 
 		$data['paginacion'] = $solicitados['links'];
@@ -215,72 +217,209 @@ class sitio extends CI_Controller {
 	}
 
 	public function validar_ofrecer_servicio(){
+	
+		//******Validacion form*********//
+		$this->form_validation->set_rules('titulo', 'titulo', 'trim|required|min_length[3]|max_length[40]|xss_clean');
+
+		$this->form_validation->set_rules('categoria', 'categoria', 'trim|required|min_length[5]|max_length[40]|xss_clean');
+
+		$this->form_validation->set_rules('telefono', 'telefono', 'trim|required|xss_clean');
+
+		$this->form_validation->set_rules('sitioweb', 'sitioweb', 'trim|xss_clean');
+
+		$this->form_validation->set_rules('descripcion', 'descripcion', 'trim|required|min_length[10]|max_length[800]|xss_clean');
+
+		$this->form_validation->set_rules('localidad', 'localidad', 'trim|required|xss_clean');
+
+		$this->form_validation->set_rules('direccion', 'direccion', 'trim|xss_clean');
+
+			//si carga un archivo lo valido y si esta todo bien lo subo, con un resize y borro la original
+		$files = $this->_fileUpload($_FILES);
+		//******fin form*********//
+
+		print_d($files);
+
+			// si algo de los inputs falla mando errores a la vista
+			// y configuro una variable flashdata para mantener las post Vars
+			if ($this->form_validation->run() == FALSE)
+			{
+				$this->session->set_flashdata('post', $this->input->post());
+				redirect($_SERVER['HTTP_REFERER']);
+			}
+			else if($files['error']){
+			//si el archivo que esta subiendo no cumple con los requisitos minimos devuelvo el error en la vista en la pagina 2 del formulario y seteo las vars post en una var flash
+
+			
+				$this->session->set_flashdata('mensaje_e', $files);
+				$this->session->set_flashdata('post', $this->input->post());
+
+				redirect($_SERVER['HTTP_REFERER']."#paso_2");
+
+			}else
+			{	
+				$post = $this->input->post();
+				$post['imagen'] = $files['file_name'];
+
+				//si esta todo bien chequeo la categoria, si existe en la db , o si se asigna a la categoria de otros y se graba en la tabla de cats_no_db
+				$categoria = $this->_checkCategoria( $this->input->post('categoria') );
+				$post['categoria'] = $categoria;
+
+				//ahora guardo los datos del servicio en la db
+
+				$rs = $this->servicios_model->setServicio($post);
 
 
-		print_d($this->input->post());
-		$this->form_validation->set_rules('titulo', 'titulo', 'required');
-		$this->form_validation->set_rules('categoria', 'categoria', 'required');
-		$this->form_validation->set_rules('telefono', 'telefono', 'required');
-		$this->form_validation->set_rules('descripcion', 'descripcion', 'required');
-		$this->form_validation->set_rules('localidad', 'localidad', 'required');
+				if($rs){
+					//todo bien
+					redirect('ofrecer-servicio/msj/registro_ok');
+				}else{
+					//error en db
+					redirect('ofrecer-servicio/msj/registro_e');
+				}
+				
 
-		if ($this->form_validation->run() == FALSE)
-		{
-			echo "error";
+				
+
+			}
+		
+	}
+
+	public function off_serv_mensaje($param){
+		// echo $param;
+
+		if($this->UsuarioSession){
+
+		$data['buscador_off'] = true;
+		if($this->UsuarioSession){
+			$data['usuario'] = $this->UsuarioSession['nombre'];
+			$data['usuarioSession'] = $this->UsuarioSession;
 		}
-		else
-		{
+		$data['vista'] = 'mensaje_registro_servicio';
+		$data['error'] = ($param === 'registro_ok') ? 0 :1; 
 
-			$categoria = $this->_checkCategoria( $this->input->post('categoria') );
-			print_d($_FILES);
-			$this->_fileUpload($_FILES);
+
+
+		$this->load->view('home_view',$data);
+		}else{
+			return redirect('');
+		}
+	}
+	
+
+	private function _fileUpload($files){
+		if($files['fotoServicio']['name']!=""){
+		$this->load->library('upload');
+		$sizeFoto  = $files['fotoServicio']['size'];
+		$this->load->helper('inflector');
+
+		$config['upload_path'] 	 = './assets/images/servicios/'; 
+		$config['allowed_types'] = 'jpg|jpeg|png'; 
+		$config['max_size'] 	 = '2097152';   
+		$config['encrypt_name']  = '768';
+		$config['overwrite'] 	 = FALSE; 
+		$this->upload->initialize($config);
+
+		if( ! $this->upload->do_upload("fotoServicio")){
+			$mjs = array('error' => 1 , 'mensaje_e' => $this->upload->display_errors() );
+		    return $mjs;
+		}else{
+
+			$data 			= $this->upload->data();
+		    $size_thumb		= 300;
+		    $thumbNombre	= '';
+		    $img_thumb_path = path_archivos('assets/images/servicios/', agregar_nombre_archivo($data['file_name'], $thumbNombre));
+	
+		    $this->_generarThumbnail($data, $size_thumb, $img_thumb_path,'_srx');
+		     @unlink($img_thumb_path);
+		     $mjs = array('error' => 0 , 'file_name' => agregar_nombre_archivo($data['file_name'], '_srx') );
+		     return $mjs;
+
+		}
 
 		}
 	}
 
-	private function _fileUpload($files){
-		//Check if the file exists in the form
-		if($files['fotoServicio']['name']!=""){
 
-		//load library
-		$this->load->library('upload');
-		$sizeFoto  = $files['fotoServicio']['size'];
+	private function _generarThumbnail($file, $size, $img_path, $thumbNombre)
+	{
+	 	$img_thumb = $img_path;
 
-		$this->load->helper('inflector');
-		$file_name = md5(time()).'_'.underscore($_FILES['fotoServicio']['name']);
-		// agregar_nombre_archivo($files['fotoServicio']['name'],'_big');
-		
+	    $config['image_library'] 	= 'gd2';
+	    $config['source_image'] 	= $file['full_path'];
+	    $config['create_thumb'] 	= TRUE;
+	    $config['maintain_ratio'] 	= FALSE;
+		$config['thumb_marker'] 	= $thumbNombre;
+	   
+	    $_width = $file['image_width'];
+	    $_height = $file['image_height'];
 
-		//Set the config
-		$config['upload_path'] 	 = './assets/images/servicios/'; //Use relative or absolute path
-		$config['allowed_types'] = 'jpg|png'; 
-		$config['max_size'] 	 = 1024*8;
-		$config['max_width'] 	 = '1024';
-		$config['max_height'] 	 = '768';
-		$config['overwrite'] 	 = FALSE; //If the file exists it will be saved with a progressive number appended
-		print_d($config['max_size']);
-		$config['file_name'] = $file_name;
+	    $img_type = '';
+	    $thumb_size = $size;
 
-		if($sizeFoto > $config['max_width'] ) {
-			echo "error";
-		}
+	    if ($_width > $_height)
+	    {
+	        // wide image
+	        $config['width'] = intval(($_width / $_height) * $thumb_size);
+	        if ($config['width'] % 2 != 0)
+	        {
+	            $config['width']++;
+	        }
+	        $config['height'] = $thumb_size;
+	        $img_type = 'wide';
+	    }
+	    else if ($_width < $_height)
+	    {
+	        // landscape image
+	        $config['width'] = $thumb_size;
+	        $config['height'] = intval(($_height / $_width) * $thumb_size);
+	        if ($config['height'] % 2 != 0)
+	        {
+	            $config['height']++;
+	        }
+	        $img_type = 'landscape';
+	    }
+	    else
+	    {
+	        // square image
+	        $config['width'] = $thumb_size;
+	        $config['height'] = $thumb_size;
+	        $img_type = 'square';
+	    }
 
-		//Initialize
-		$this->upload->initialize($config);
-
-		//Upload file
-		if( ! $this->upload->do_upload("fotoServicio")){
-
-		    //echo the errors
-		    echo $this->upload->display_errors();
-		}
+	    $this->load->library('image_lib');
+	    $this->image_lib->initialize($config);
+	    $this->image_lib->resize();
 
 
-		//If the upload success
-		$file_name = $this->upload->file_name;
+	    // reconfiguramos para cortar el thumbnail
+	    $conf_new = array(
+	        'image_library' => 'gd2',
+	        'source_image' => $img_thumb,
+	        'create_thumb' => FALSE,
+	        'maintain_ratio' => FALSE,
+	        'width' => $thumb_size,
+	        'height' => $thumb_size
+	    );
 
-		//Save the file name into the db
-		}
+	    if ($img_type == 'wide')
+	    {
+	        $conf_new['x_axis'] = ($config['width'] - $thumb_size) / 2 ;
+	        $conf_new['y_axis'] = 0;
+	    }
+	    else if($img_type == 'landscape')
+	    {
+	        $conf_new['x_axis'] = 0;
+	        $conf_new['y_axis'] = ($config['height'] - $thumb_size) / 2;
+	    }
+	    else
+	    {
+	        $conf_new['x_axis'] = 0;
+	        $conf_new['y_axis'] = 0;
+	    }
+
+	    $this->image_lib->initialize($conf_new);
+
+	    $this->image_lib->crop();
 	}
 
 	private function _checkCategoria($cat){
@@ -381,6 +520,7 @@ class sitio extends CI_Controller {
 		$this->googlemaps->initialize($config);
 	
 		$data['map'] = $this->googlemaps->create_map();
+		$data['post'] = null;
 		$data['vista'] = 'ofrecer_servicio';
 		$this->load->view('home_view',$data);
 
@@ -490,24 +630,15 @@ class sitio extends CI_Controller {
 
 	    $this->load->library('pagination');
 	    $config = array();
-        $config["base_url"] 		= site_url('ficha/'.$servicio.'/opniones/page');
-        $config["total_rows"]   	= $this->servicios_model->getTotalOpiniones($id);
-        $config["per_page"] 		= 4;
-        $config["uri_segment"]  	= 5;
-        $config["is_ajax_paging"]   = TRUE; 
-        $config['paging_function']	= 'ajax_paging';
+        $config["base_url"] 	= site_url('ficha/'.$servicio.'/opniones/page');
+        $config["total_rows"]   = $this->servicios_model->getTotalOpiniones($id);
+        $config["per_page"] 	= 4;
+        $config["uri_segment"]  = 5;
+        $config["is_ajax_paging"]    = TRUE; 
+        $config['paging_function'] = 'ajax_paging';
         $this->pagination->initialize($config);
-        
-        $page 			= (is_numeric($this->uri->segment(5))) ? $this->uri->segment(5) : 0;
-        $resultDB		= $this->servicios_model->getOpinionServicio($id, $page, $config["per_page"]);
-        if($resultDB)
-		{
-			foreach ($resultDB as $opinion => $value) {
-				$resultDB[$opinion]['link_user'] = site_url('usuario/perfil/'.$resultDB[$opinion]['id'].'-'.$resultDB[$opinion]['nombre'].'-'.$resultDB[$opinion]['apellido']);
-			}
-		}
-
-        $data["result"] 		= $resultDB;
+        $page 					= (is_numeric($this->uri->segment(5))) ? $this->uri->segment(5) : 0;
+        $data["result"] 		= $this->servicios_model->getOpinionServicio($id, $page, $config["per_page"]); 
         $data["links"] 			= $this->pagination->create_links();
 		return $data;
 	}
@@ -561,45 +692,8 @@ class sitio extends CI_Controller {
 			$data['title']   = 'Ficha del servicio';
 			$solicitado 	 = $this->servicios_model->getServicioSolicitado($id);
 			$solicitados 	 = $this->_setPagSolicitados($seccion,$segment);
+
 			$userPostulados	 = $this->servicios_model->userPostulados($id);
-
-			if($solicitado)
-			{
-				$solicitado[0]['link_user'] = site_url('usuario/perfil/'.$solicitado[0]['userID'].'-'.$solicitado[0]['nombre'].'-'.$solicitado[0]['apellido']);
-
-				if($solicitado[0]['foto'] == "" || $solicitado[0]['foto'] == null)
-				{
-					$solicitado[0]['foto_path'] = 'assets/images/perfil_200.png';
-				}
-				else if(file_exists('./assets/images/usuarios/' . $solicitado[0]['foto']))
-				{
-					$solicitado[0]['foto_path'] = path_archivos('assets/images/usuarios/', agregar_nombre_archivo($solicitado[0]['foto'], '_thumb'));
-				}
-				else 
-				{
-					$solicitado[0]['foto_path'] = 'assets/images/perfil_200.png';
-				}
-			}
-
-			if($userPostulados)
-			{
-				foreach ($userPostulados as $postulado => $value) {
-				$userPostulados[$postulado]['link_user'] = site_url('usuario/perfil/'.$userPostulados[$postulado]['id'].'-'.$userPostulados[$postulado]['nombre'].'-'.$userPostulados[$postulado]['apellido']);
-				if($userPostulados[$postulado]['foto'] == "" || $userPostulados[$postulado]['foto'] == null)
-				{
-					$userPostulados[$postulado]['foto_path'] = 'assets/images/perfil_200.png';
-				}
-				else if(file_exists('./assets/images/usuarios/' . $userPostulados[$postulado]['foto']))
-				{
-					$userPostulados[$postulado]['foto_path'] = path_archivos('assets/images/usuarios/', agregar_nombre_archivo($userPostulados[$postulado]['foto'], '_thumb'));
-				}
-				else 
-				{
-					$userPostulados[$postulado]['foto_path'] = 'assets/images/perfil_200.png';
-				}
-				}
-			}
-			
 
 			if(!empty($solicitados)){
 				$data['solicitados'] = $solicitados['result'];
@@ -608,7 +702,7 @@ class sitio extends CI_Controller {
 			}
 
 			$data['paginacion']   = $solicitados['links'];
-			$data['current_page'] = ($solicitados['current_page'] > 0) ?  $solicitados['current_page'] : "";
+			$data['current_page'] = ( $solicitados['current_page'] > 0) ?  $solicitados['current_page'] : "";
 			$data['vista']        = 'servicio_solicitado';
 			$data['userPostu']    = $userPostulados;
 			$data['solicitado']   = $solicitado[0];
@@ -713,22 +807,20 @@ class sitio extends CI_Controller {
 			}
 
 			foreach ($servicioRS[0] as $key => $value) {
-				
 				$data[$key] = $value;
-
 				$data['link_user'] = site_url('usuario/perfil/'. $servicioRS[0]['userID'].'-'.$servicioRS[0]['nombre'].'-'.$servicioRS[0]['apellido']);
-				if($servicioRS[0]['foto'] == "" || $servicioRS[0]['foto'] == null)
-				{
-					$data['foto_path'] = 'assets/images/servicio_200.jpg';
-				}
-				else if(file_exists('./assets/images/servicios/' . $servicioRS[0]['foto']))
-				{
-					$data['foto_path'] = path_archivos('assets/images/servicios/', agregar_nombre_archivo($servicioRS[0]['foto'], '_thumb'));
-				}
-				else 
-				{
-					$data['foto_path'] = 'assets/images/servicio_200.jpg';
-				}
+			    if($servicioRS[0]['foto'] == "" || $servicioRS[0]['foto'] == null)
+			    {
+			     $data['foto_path'] = 'assets/images/servicio_200.jpg';
+			    }
+			    else if(file_exists('./assets/images/servicios/' . $servicioRS[0]['foto']))
+			    {
+			     $data['foto_path'] = path_archivos('assets/images/servicios/', agregar_nombre_archivo($servicioRS[0]['foto'], ''));
+			    }
+			    else 
+			    {
+			     $data['foto_path'] = 'assets/images/servicio_200.jpg';
+			    }
 			}
 
 			if($this->UsuarioSession){

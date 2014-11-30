@@ -237,6 +237,22 @@ Class Servicios_model extends CI_Model{
 
 	}
 
+	public function setServicio($post=null){
+
+		if(isset($post)){
+
+			$query = "INSERT INTO `servicios` (`id_categorias`, `id_localidades`, `titulo`, `descripcion`, `foto`, `url_web`, `direccion`, `telefono`, `latitud`, `longitud`) VALUES (".$post['categoria'].", ".$post['localidad'].", '".$post['titulo']."', '".$post['descripcion']."', '".$post['imagen']."','".$post['sitioweb']."','".$post['direccion']."', '".$post['telefono']."', '".$post['lati']."', '".$post['long']."');";
+			$rs    = $this->db->query($query);
+
+			return $rs;
+
+		}else{
+
+			return false;		
+		}
+
+	}
+
 
 	public function getServicioEnPerfil($id_usuario){
 		$query =    "SELECT

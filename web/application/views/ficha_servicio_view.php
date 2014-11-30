@@ -8,7 +8,7 @@
 				<div class="row  text-center">
 					<p>
 						<!--<img src="http://placehold.it/200x200" class="img-rounded" alt="">-->
-						<img src="<?php echo site_url($foto_path);?>" class="img-rounded" alt="">
+						<img src="<?php echo site_url($foto_path);?>" class="img-rounded img-responsive" alt="">
 					</p>
 					<div class="col-md-10 col-md-offset-1">
 						<p>

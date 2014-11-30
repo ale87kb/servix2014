@@ -7,6 +7,11 @@
           <p>En solo 3 pasos publica tu servicio en Servix</p>
         </div>
         </div>
+        <?php 
+
+          $post = $this->session->flashdata('post');
+        
+        ?>
             <div class="row bg-white tab-box">
                <div class="col-md-12 ">
                   <div role="tabpanel">
@@ -31,24 +36,32 @@
                             <div class="col-md-6">
                               <div class="form-group">
                               <label for="titulo">¿Titulo del servicio?</label>
-                              <input type="text" class="form-control" id="titulo" value="" name="titulo"  required="" placeholder="¿Como se llama tu servicio?">
-
+                              <input type="text" class="form-control" id="titulo" value="<?php echo $post['titulo']?>" name="titulo"  required="" placeholder="¿Como se llama tu servicio?">
+                              <div class='titulo' style="color:red;">
+                                <?php echo form_error('titulo'); ?>
+                              </div>
                               </div>
                               <div class="form-group">
                               <label for="busqueda-servicio">¿En que categoría lo estas ofreciendo?</label>
-                              <input type="text" class="form-control typeaheadOnlyCat" id="busqueda-servicio" value="" name="categoria" autocomplete="off" required="" placeholder="Ej: Herrero, carpintero, panadero..">
-
+                              <input type="text" class="form-control typeaheadOnlyCat" id="busqueda-servicio" value="<?php echo $post['categoria'];?>" name="categoria" autocomplete="off" required="" placeholder="Ej: Herrero, carpintero, panadero..">
+                               <div class='categoria' style="color:red;">
+                                <?php echo form_error('categoria'); ?>
+                              </div> 
                               </div>
 
                               <div class="form-group">
                               <label for="telefono">¿Cual es el numero de teléfono del servicio?</label>
-                              <input type="text" class="form-control" id="telefono" value="" name="telefono"  required="" placeholder="¿A que numero te pueden llamar?">
-
+                              <input type="text" class="form-control" id="telefono" value="<?php echo $post['telefono'];?>" name="telefono"  required="" placeholder="¿A que numero te pueden llamar?">
+                               <div class='telefono' style="color:red;">
+                                <?php echo form_error('telefono'); ?>
+                              </div> 
                               </div>
                               <div class="form-group">
                               <label for="sitioweb">¿Sitio web?</label>
-                              <input type="text" class="form-control" id="sitioweb" value="" name="sitioweb"   placeholder="www.misitio.com">
-
+                              <input type="text" class="form-control" id="sitioweb" value="<?php echo $post['sitioweb'];?>" name="sitioweb"   placeholder="www.misitio.com">
+                               <div class='sitioweb' style="color:red;">
+                                <?php echo form_error('sitioweb'); ?>
+                              </div> 
                               </div>
 
                             </div>
@@ -72,6 +85,46 @@
                              <div class="col-md-12">
                               <h2>Bien, ahora describe tu servicio </h2>
                             </div>
+
+                             <div class="col-md-12  ">
+                                  
+                                    <?php 
+                                    $msj = $this->session->flashdata('mensaje_e');
+                                   
+                                    if(!empty($msj)){
+                                      ?>
+
+                                      <div class="col-md-12 ">
+                                        
+                                      
+                                      <?php
+                                        if($msj['error'] == 0){
+                                          ?>
+                                           <div class="alert alert-success"  role="alert">
+                                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                            <?php echo $msj['mensaje_e']; ?>
+                                           </div>
+                                          <?php
+                                        }else{
+
+                                          ?>
+                                          <div class="alert alert-warning"  role="alert">
+                                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                            <?php echo $msj['mensaje_e']; ?>
+                                          </div>
+                                          <?php
+
+                                        }
+                                        ?>
+                                        </div>
+                                        <?php
+                                        
+                                    }
+                                     ?>
+                  
+                              </div>
+                         
+                        
                             <div class="col-md-6">
                               <div class="form-group">
                                 <label for="fotoServicio">Sube una foto del servicio que ofreces</label>
@@ -80,8 +133,10 @@
                               </div>
                               <div class="form-group">
                                 <label for="descripcion">Describe el servicio que ofreces</label>
-                               <textarea class="form-control" id="descripcion" name="descripcion" rows="8"></textarea>
-
+                               <textarea class="form-control" id="descripcion" name="descripcion" rows="8"><?php echo $post['descripcion'];?></textarea>
+                                <div class='descripcion' style="color:red;">
+                                <?php echo form_error('descripcion'); ?>
+                                </div> 
                               </div>
 
                             </div>
@@ -118,22 +173,30 @@
                                    <div class="form-group">
                                       <label for="busqueda-localidad">¿En que localidad, barrio lo estas ofreciendo?</label>
                                     
-                                       <select id="ajax-select" class="form-control selectpicker with-ajax" name="localidad" placeholder="Buscar" data-live-search="true" ></select>
-                                     
+                                       <select id="ajax-select" class="form-control selectpicker with-ajax" name="localidad" placeholder="Buscar" data-live-search="true" >
+                                       <?php echo $post['localidad'];?>
+                                       </select>
+                                     <div class='localidad' style="color:red;">
+                                      <?php echo form_error('localidad'); ?>
+                                      </div> 
                                     </div>
                                   
                                     <div class="form-group">
                                       <label for="direccion">Escribe, y selecciona la dirección en donde ofreces el servicio</label>
                                       <!-- <img src="http://placehold.it/480x400&text=google map" alt=""> -->
                                         <p>
-                                           <input type="text" id="myPlaceTextBox" class="form-control" placeholder="Ej: Av Rivadavia 5555" />
+                                           <input type="text" id="myPlaceTextBox" name="direccion" class="form-control" placeholder="Ej: Av Rivadavia 5555" value="<?php echo $post['direccion'];?>" />
                                         </p>
                                         <br>
                                       <div class="map">
                                          <?php echo $map['html']; ?>
                                       </div>
-                                      <input type="hidden" name="lati" id="lati" >
-                                      <input type="hidden" name="long" id="long" >
+                                      <input type="hidden" name="lati" value="<?php echo $post['lati'];?>" id="lati" >
+                                      <input type="hidden" name="long" value="<?php echo $post['long'];?>" id="long" >
+
+                                      <div class='direccion' style="color:red;">
+                                      <?php echo form_error('direccion'); ?>
+                                      </div> 
                                     </div>
 
                                 </div>

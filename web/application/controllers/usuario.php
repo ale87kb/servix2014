@@ -312,7 +312,7 @@ class Usuario extends CI_controller{
 	    {
 	        /*$config['upload_path'] = site_url('/assets/images/usuarios/');*/
 	        $config['upload_path'] 		= './assets/images/usuarios/';
-	        $config['allowed_types'] 	= 'jpg|png';
+	        $config['allowed_types'] 	= 'jpg|jpeg|png';
 	        $config['max_size'] 		= 1024 * 8;
 	        $config['encrypt_name'] 	= TRUE;
 	 

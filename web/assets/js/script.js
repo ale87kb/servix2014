@@ -612,7 +612,18 @@ var app = function(){
                                 message: 'Por favor ingresa una localidad'
                             }
                         }
+                    },
+                    fotoServicio: {
+                        validators: {
+                            file: {
+                                extension: 'jpeg,png',
+                                type: 'image/jpeg,image/png',
+                                maxSize: 2097152,   // 2048 * 1024
+                                message: 'Archivo invalido'
+                            }
+                        }
                     }
+
                 }
             })
             // Called when a field is invalid
@@ -853,6 +864,20 @@ var app = function(){
                     google.maps.event.trigger(map, "resize");
                     map.setCenter(center);
             });
+
+            var url = document.location.toString();
+            if (url.match('#')) {
+                $('#tab li a[href=#'+url.split('#')[1]+']').tab('show') ;
+            } 
+
+            //  history.pushState({}, '',e.target.hash);
+
+            // Change hash for page-reload
+            $('#tab li a').on('shown', function (e) {
+
+                window.location.hash = e.target.hash;
+            })
+
 
           
           

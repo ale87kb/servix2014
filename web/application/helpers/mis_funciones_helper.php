@@ -150,6 +150,8 @@
 
 	}
 
+
+
 	function existe_archivo($fileUrl){
 		$AgetHeaders = @get_headers($fileUrl);
 		if (preg_match("|200|", $AgetHeaders[0])) {

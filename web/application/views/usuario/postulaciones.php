@@ -37,17 +37,17 @@
 
 					</p>
 					
+										<?php
+					if($postulacion['postulado'] == 1){
+					?>
+						<small><span class="label label-success">Estás postulado</span></small>
 					<?php
-if($postulacion['postulado'] == 1){
-?>
-	<small><span class="label label-success">Estás postulado</span></small>
-<?php
-}else{
-?>
-<small><span class="label label-default">Cancelaste esta postulación</span></small>
+					}else{
+					?>
+					<small><span class="label label-default">Cancelaste esta postulación</span></small>
 
-<?php
-}
+					<?php
+					}
 					?>
 					<a href="<?php echo site_url($postulacion['link']); ?> " class="btn btn-sm btn-default pull-right">Ver solicitud</a>
 
