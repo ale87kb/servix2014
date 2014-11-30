@@ -540,7 +540,7 @@ class Usuario extends CI_controller{
 					$perfil[0]['foto_path'] = 'assets/images/perfil_200.png';
 				}
 
-				$data['perfil'] = $perfil;
+				$data['perfil'] = $perfil[0];
 			}
 			
 			$servicios = $this->servicios_model->getServicioEnPerfil($id);

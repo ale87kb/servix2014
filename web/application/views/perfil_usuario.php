@@ -7,16 +7,16 @@
 		 	<div class="col-md-3">
 		 		<div class="row text-center">
 		 			<p>
-						<img src="<?php echo site_url($perfil[0]['foto_path']); ?>" class="img-rounded" alt="Foto de Perfil">
+						<img src="<?php echo site_url($perfil['foto_path']); ?>" class="img-rounded" alt="Foto de Perfil">
                     </p>
                 </div>
 		 	</div>
 
 		 	<div class="col-md-5">
 				<h2>Datos personales</h2>
-				<p><strong>Nombre: </strong><?php echo $perfil[0]['nombre']; ?></p>
-				<p><strong>Apellido: </strong><?php echo $perfil[0]['apellido']; ?></p>
-				<p><strong>E-mail: </strong><?php echo $perfil[0]['email']; ?></p>
+				<p><strong>Nombre: </strong><?php echo $perfil['nombre']; ?></p>
+				<p><strong>Apellido: </strong><?php echo $perfil['apellido']; ?></p>
+				<p><strong>E-mail: </strong><?php echo $perfil['email']; ?></p>
 			</div>
 			<div class="col-md-3">
 				<table class="table table-bordered text-center">

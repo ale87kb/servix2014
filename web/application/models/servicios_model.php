@@ -107,8 +107,10 @@ Class Servicios_model extends CI_Model{
 
 	public function userPostulados($id){
 		$query = "SELECT
+				usuarios.id,
 				usuarios.nombre,
 				usuarios.apellido,
+				usuarios.foto,
 				postulaciones_temp.postulado
 				FROM
 				postulaciones_temp
@@ -152,9 +154,10 @@ Class Servicios_model extends CI_Model{
 				busquedas_temp.vencido,
 				busquedas_temp.fecha_fin,
 				busquedas_temp.fecha_ini,
+				usuarios.id as userID,
 				usuarios.nombre,
 				usuarios.apellido,
-				usuarios.id as userID,
+				usuarios.foto,
 				cat_nodb.categoria as otra_cat
 
 				FROM
@@ -216,7 +219,9 @@ Class Servicios_model extends CI_Model{
 					servicios.longitud,
 					localidades.localidad,
 					categorias.categoria,
+					usuarios.id AS userID,
 					usuarios.nombre,
+					usuarios.apellido,
 					usuarios.email
 					FROM
 					servicios

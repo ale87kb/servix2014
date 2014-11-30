@@ -5,10 +5,8 @@ class sitio extends CI_Controller {
 	public function __construct(){
 
 		parent::__construct();
-		
 		//inicio sesion de usuario preguntandole al modelo
 		$this->UsuarioSession = $this->usuarios_model->isLogin();
-
 	}
 
 
@@ -505,7 +503,7 @@ class sitio extends CI_Controller {
         if($resultDB)
 		{
 			foreach ($resultDB as $opinion => $value) {
-				$resultDB[$opinion]['link_user'] = 'usuario/perfil/'.$resultDB[$opinion]['id'].'-'.$resultDB[$opinion]['nombre'].'-'.$resultDB[$opinion]['apellido'];
+				$resultDB[$opinion]['link_user'] = site_url('usuario/perfil/'.$resultDB[$opinion]['id'].'-'.$resultDB[$opinion]['nombre'].'-'.$resultDB[$opinion]['apellido']);
 			}
 		}
 
@@ -563,8 +561,45 @@ class sitio extends CI_Controller {
 			$data['title']   = 'Ficha del servicio';
 			$solicitado 	 = $this->servicios_model->getServicioSolicitado($id);
 			$solicitados 	 = $this->_setPagSolicitados($seccion,$segment);
-
 			$userPostulados	 = $this->servicios_model->userPostulados($id);
+
+			if($solicitado)
+			{
+				$solicitado[0]['link_user'] = site_url('usuario/perfil/'.$solicitado[0]['userID'].'-'.$solicitado[0]['nombre'].'-'.$solicitado[0]['apellido']);
+
+				if($solicitado[0]['foto'] == "" || $solicitado[0]['foto'] == null)
+				{
+					$solicitado[0]['foto_path'] = 'assets/images/perfil_200.png';
+				}
+				else if(file_exists('./assets/images/usuarios/' . $solicitado[0]['foto']))
+				{
+					$solicitado[0]['foto_path'] = path_archivos('assets/images/usuarios/', agregar_nombre_archivo($solicitado[0]['foto'], '_thumb'));
+				}
+				else 
+				{
+					$solicitado[0]['foto_path'] = 'assets/images/perfil_200.png';
+				}
+			}
+
+			if($userPostulados)
+			{
+				foreach ($userPostulados as $postulado => $value) {
+				$userPostulados[$postulado]['link_user'] = site_url('usuario/perfil/'.$userPostulados[$postulado]['id'].'-'.$userPostulados[$postulado]['nombre'].'-'.$userPostulados[$postulado]['apellido']);
+				if($userPostulados[$postulado]['foto'] == "" || $userPostulados[$postulado]['foto'] == null)
+				{
+					$userPostulados[$postulado]['foto_path'] = 'assets/images/perfil_200.png';
+				}
+				else if(file_exists('./assets/images/usuarios/' . $userPostulados[$postulado]['foto']))
+				{
+					$userPostulados[$postulado]['foto_path'] = path_archivos('assets/images/usuarios/', agregar_nombre_archivo($userPostulados[$postulado]['foto'], '_thumb'));
+				}
+				else 
+				{
+					$userPostulados[$postulado]['foto_path'] = 'assets/images/perfil_200.png';
+				}
+				}
+			}
+			
 
 			if(!empty($solicitados)){
 				$data['solicitados'] = $solicitados['result'];
@@ -573,7 +608,7 @@ class sitio extends CI_Controller {
 			}
 
 			$data['paginacion']   = $solicitados['links'];
-			$data['current_page'] = ( $solicitados['current_page'] > 0) ?  $solicitados['current_page'] : "";
+			$data['current_page'] = ($solicitados['current_page'] > 0) ?  $solicitados['current_page'] : "";
 			$data['vista']        = 'servicio_solicitado';
 			$data['userPostu']    = $userPostulados;
 			$data['solicitado']   = $solicitado[0];
@@ -678,7 +713,22 @@ class sitio extends CI_Controller {
 			}
 
 			foreach ($servicioRS[0] as $key => $value) {
+				
 				$data[$key] = $value;
+
+				$data['link_user'] = site_url('usuario/perfil/'. $servicioRS[0]['userID'].'-'.$servicioRS[0]['nombre'].'-'.$servicioRS[0]['apellido']);
+				if($servicioRS[0]['foto'] == "" || $servicioRS[0]['foto'] == null)
+				{
+					$data['foto_path'] = 'assets/images/servicio_200.jpg';
+				}
+				else if(file_exists('./assets/images/servicios/' . $servicioRS[0]['foto']))
+				{
+					$data['foto_path'] = path_archivos('assets/images/servicios/', agregar_nombre_archivo($servicioRS[0]['foto'], '_thumb'));
+				}
+				else 
+				{
+					$data['foto_path'] = 'assets/images/servicio_200.jpg';
+				}
 			}
 
 			if($this->UsuarioSession){
