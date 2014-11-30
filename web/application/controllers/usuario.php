@@ -43,6 +43,18 @@ class Usuario extends CI_controller{
 		if($favoritos){
 			foreach ($favoritos as $key => $vlaue) {
 				$favoritos[$key]['link'] = generarLinkServicio($favoritos[$key]['id'], $favoritos[$key]['titulo']);
+				if($favoritos[$key]['foto'] == "" || $favoritos[$key]['foto'] == null)
+				{
+					$favoritos[$key]['foto_path'] = 'assets/images/servicio_125.jpg';
+				}
+				else if(file_exists('./assets/images/servicios/' . $favoritos[$key]['foto']))
+				{
+					$favoritos[$key]['foto_path'] = path_archivos('assets/images/servicios/', agregar_nombre_archivo($favoritos[$key]['foto'], '_thumb'));
+				}
+				else 
+				{
+					$favoritos[$key]['foto_path'] = 'assets/images/servicio_125.jpg';
+				}
 			}
 			return $favoritos;
 		}

@@ -11,12 +11,21 @@
 
         <?php
           if(!empty($favoritos)){
-            foreach ($favoritos as $f) {
+            foreach ($favoritos as $fav) {
 
             ?>
-              <a href="<?php echo $f['link']; ?>" class="list-group-item">
-                <h4 class="list-group-item-heading"><?php echo ucfirst($f['titulo']); ?></h4>
-                <p class="list-group-item-text"><?php echo ucfirst($f['descripcion']); ?></p>
+              <a href="<?php echo $fav['link']; ?>" class="list-group-item">
+                <div class="row">
+                  
+                  <div class="col-md-4">
+                    <figure><img src="<?php echo site_url($fav['foto_path']); ?>" alt=""></figure>
+                  </div>
+                  <div class="col-dm-8">
+                    
+                    <h4 class="list-group-item-heading"><?php echo ucfirst($fav['titulo']); ?></h4>
+                    <p class="list-group-item-text"><?php echo ucfirst($fav['descripcion']); ?></p>
+                  </div>
+                </div>
               </a>
 
             <?php
