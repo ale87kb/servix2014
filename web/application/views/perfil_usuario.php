@@ -64,11 +64,11 @@
                 <div class="col-md-12">
                     <div class="col-md-2">
                         <figure>
-                            <img class="media-object img-rounded img-responsive" src="<?php echo site_url($servicio['foto_path']); ?>" alt="Foto <?php echo $servicio['titulo']; ?>" >
+                            <a href="<?php echo $servicio['link_servicio']; ?>"><img class="media-object img-rounded img-responsive" src="<?php echo site_url($servicio['foto_path']); ?>" alt="Foto <?php echo $servicio['titulo']; ?>" ></a>
                         </figure>
                     </div>
                     <div class="col-md-7">
-                        <h4 class="list-group-item-heading"><?php echo $servicio['titulo'] ; ?></h4>
+                        <h4 class="list-group-item-heading"><a href="<?php echo $servicio['link_servicio']; ?>"><?php echo $servicio['titulo'] ; ?></a></h4>
                         <p class="list-group-item-text"><?php echo $servicio['descripcion']; ?></p>
                        
                     </div>

@@ -518,7 +518,6 @@ class Usuario extends CI_controller{
 
 		if(is_numeric($id))
 		{
-
 			$data['perfil'] = null;
 			$data['servicios'] = null;
 			$data['canServicios'] = null;
@@ -547,6 +546,8 @@ class Usuario extends CI_controller{
 			if($servicios)
 			{
 				foreach ($servicios as $servicio => $value) {
+					
+					$servicios[$servicio]['link_servicio'] = site_url(generarLinkServicio($servicios[$servicio]['id'], $servicios[$servicio]['titulo'] ));
 					
 					if($servicios[$servicio]['foto'] == "" || $servicios[$servicio]['foto'] == null)
 					{

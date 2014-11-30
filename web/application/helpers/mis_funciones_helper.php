@@ -50,7 +50,7 @@
 
 
 
-	function generarLinkServicio($id, $titulo,$sec='ficha'){
+	function generarLinkServicio($id, $titulo, $sec='ficha'){
 
 		if (is_numeric($id))
 		{
