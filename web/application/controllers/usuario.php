@@ -582,7 +582,7 @@ class Usuario extends CI_controller{
 
 			$data['title']     = 'Perfil de Usuario';
 			$data['vista']     = 'perfil_usuario';
-			return $this->load->view('home_view',$data);
+			$this->load->view('home_view',$data);
 		}
 		else
 		{

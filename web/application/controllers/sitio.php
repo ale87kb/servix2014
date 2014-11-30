@@ -492,15 +492,24 @@ class sitio extends CI_Controller {
 
 	    $this->load->library('pagination');
 	    $config = array();
-        $config["base_url"] 	= site_url('ficha/'.$servicio.'/opniones/page');
-        $config["total_rows"]   = $this->servicios_model->getTotalOpiniones($id);
-        $config["per_page"] 	= 4;
-        $config["uri_segment"]  = 5;
-        $config["is_ajax_paging"]    = TRUE; 
-        $config['paging_function'] = 'ajax_paging';
+        $config["base_url"] 		= site_url('ficha/'.$servicio.'/opniones/page');
+        $config["total_rows"]   	= $this->servicios_model->getTotalOpiniones($id);
+        $config["per_page"] 		= 4;
+        $config["uri_segment"]  	= 5;
+        $config["is_ajax_paging"]   = TRUE; 
+        $config['paging_function']	= 'ajax_paging';
         $this->pagination->initialize($config);
-        $page 					= (is_numeric($this->uri->segment(5))) ? $this->uri->segment(5) : 0;
-        $data["result"] 		= $this->servicios_model->getOpinionServicio($id, $page, $config["per_page"]); 
+        
+        $page 			= (is_numeric($this->uri->segment(5))) ? $this->uri->segment(5) : 0;
+        $resultDB		= $this->servicios_model->getOpinionServicio($id, $page, $config["per_page"]);
+        if($resultDB)
+		{
+			foreach ($resultDB as $opinion => $value) {
+				$resultDB[$opinion]['link_user'] = 'usuario/perfil/'.$resultDB[$opinion]['id'].'-'.$resultDB[$opinion]['nombre'].'-'.$resultDB[$opinion]['apellido'];
+			}
+		}
+
+        $data["result"] 		= $resultDB;
         $data["links"] 			= $this->pagination->create_links();
 		return $data;
 	}

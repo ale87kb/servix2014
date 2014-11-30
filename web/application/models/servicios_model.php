@@ -69,7 +69,9 @@ Class Servicios_model extends CI_Model{
 			puntuacion.puntos,
 			puntuacion.fecha_votacion,
 			puntuacion.fecha_uso_servicio,
-			usuarios.nombre
+			usuarios.id,
+			usuarios.nombre,
+			usuarios.apellido
 			FROM
 			puntuacion
 			INNER JOIN usuarios ON puntuacion.id_usuarios = usuarios.id

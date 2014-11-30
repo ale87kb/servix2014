@@ -77,24 +77,31 @@
 				</p>
 				<br>
 				<h4>Datos de contacto</h4>
+				
 				<p>
+						
+
 					<?php if(isset($usuario)){
 						?>
-							<strong>Tel:</strong>:<?php echo $telefono; ?><br>
-							<strong>Dirección:</strong>:<?php echo $direccion; ?><br>
+
+
+							<strong>Teléfono: </strong><?php echo $telefono; ?><br>
+							<strong>Dirección: </strong><?php echo $direccion; ?><br>
 						
-							<strong>Sitio web:</strong>:<a href="#" title=""><?php echo $url_web; ?></a><br>
+							<strong>Sitio web: </strong><a href="<?php echo $url_web; ?>" title="<?php echo $titulo; ?>"><?php echo $url_web; ?></a><br>
+							<strong>Titular: </strong><br />
 						<?php
 					}else{
 						?>
-						<strong>Nombre:</strong>:<?php echo $nombre; ?><br>
-						<strong>Tel:</strong>:<?php echo $telefono; ?><br>
+						<strong>Nombre: </strong><?php echo $nombre; ?><br>
+						<strong>Tel: </strong><?php echo $telefono; ?><br>
 						
 						<?php
 					} ?>
-					
-					
+
 				</p>
+
+					
 				<div class="clearfix"><br></div>
 				<div class="alert hidden alert-dismissible" id="mensaje" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button></div>
 				<form action="<?php echo site_url('enviar/comentario-servicio'); ?>" method="post" id="formCServ">
@@ -149,45 +156,31 @@
 		?>
 
 		<div class="col-md-12">
-
-
 			<h3>Opiniones:</h3>
 			<hr>
 		</div>
 		<div class="col-md-2">
 			<div class=" text-right">
-					<h2> <?php echo $puntos; ?> <small> Votos </small></h2>
-					<div class="ratyAVG" data-avg="<?php echo number_format($promedio,2); ?>"></div>
-					 <p class="">Promedio de<br> votos <?php echo number_format($promedio,1); ?> Estrellas</p>
-
-					 <?php if(isset($usuario)){
-						?>
-						 <a href="#modalOpinion" class="btn btn-primary"  data-toggle="modal" data-target="#modalOpinion">Quiero opinar</a>
-
-						 
-						<?php
-						}else{
-							?>
-							<a data-toggle="modal" href="#loginModal"   data-target="#loginModal" rel=""  class="btn btn-primary affterOpenLogin ">Quiero opinar
-							</a>
-
-						
-						<?php
-						} ?>
-
-			     
-				</div>
+				<h2> <?php echo $puntos; ?> <small> Votos </small></h2>
+				<div class="ratyAVG" data-avg="<?php echo number_format($promedio,2); ?>"></div>
+				<p class="">Promedio <?php echo number_format($promedio,1); ?> </p>
+			 <?php if(isset($usuario)){
+					?>
+				<a href="#modalOpinion" class="btn btn-primary"  data-toggle="modal" data-target="#modalOpinion">Quiero opinar</a>
+				<?php
+					}else{
+					?>
+				<a data-toggle="modal" href="#loginModal"   data-target="#loginModal" rel=""  class="btn btn-primary affterOpenLogin ">Quiero opinar</a>
+					<?php
+					} ?>
+			</div>
 		</div>
 		<div class="col-md-10" id="opiniones">
-
-				<?php $this->load->view('listar_opiniones'); ?>
-              
+		<?php $this->load->view('listar_opiniones'); ?>
 		</div>
-
-			<?php
-
-
-		} ?>
+	<?php
+		} 
+	?>
 	</div>
 	</div>
 
