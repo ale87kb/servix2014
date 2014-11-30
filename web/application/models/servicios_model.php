@@ -230,4 +230,33 @@ Class Servicios_model extends CI_Model{
 
 	}
 
+
+	public function getServicioEnPerfil($id_usuario){
+		$query =    "SELECT
+						servicios.id,
+						servicios.titulo,
+						servicios.descripcion,
+						servicios.foto,
+						categorias.categoria,
+						localidades.localidad,
+						provincias.provincia,
+						AVG(puntuacion.puntos) as promedio,
+						COUNT(puntuacion.puntos) as cantVotado
+					FROM
+						relacion_u_s
+					INNER JOIN servicios ON relacion_u_s.id_servicios = servicios.id
+					INNER JOIN usuarios ON relacion_u_s.id_usurios = usuarios.id
+					INNER JOIN categorias ON servicios.id_categorias = categorias.id
+					INNER JOIN localidades ON servicios.id_localidades = localidades.id
+					INNER JOIN provincias ON localidades.id_provincia = provincias.id
+					LEFT JOIN puntuacion ON puntuacion.id_servicios = servicios.id
+					WHERE relacion_u_s.id_usurios = $id_usuario
+					GROUP BY servicios.id
+					ORDER BY promedio DESC";
+
+		$rs    = $this->db->query($query);
+		return $rs->result_array();
+
+	}
+
 }

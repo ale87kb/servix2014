@@ -22,17 +22,17 @@ class sitio extends CI_Controller {
 
 		$destacados  	 = $this->servicios_model->getServiciosDestacados();
 		$solicitados 	 = $this->_setPagSolicitados($seccion);
+
+		$data['destacados'] = null;
+		$data['solicitados'] = null;
+		
 		// print_d($this->db->last_query());
 		if(!empty($destacados)){
 			$data['destacados'] = $destacados;
-		}else{
-			$data['destacados'] = null;
 		}
 
 		if(!empty($solicitados)){
 			$data['solicitados'] = $solicitados['result'];
-		}else{
-			$data['solicitados'] = null;
 		}
 
 		$data['paginacion'] = $solicitados['links'];

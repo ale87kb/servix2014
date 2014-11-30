@@ -327,6 +327,37 @@ Class Usuarios_model extends CI_Model{
 
 	}
 
+	public function getCantidadPostulados($id, $vencido){
+		$query = "SELECT
+					count(postulaciones_temp.id)
+				FROM
+					postulaciones_temp
+				INNER JOIN busquedas_temp ON postulaciones_temp.id_busquedas_temp = busquedas_temp.id
+				WHERE
+					postulaciones_temp.id_usuarios = $id
+				AND
+					busquedas_temp.vencido = $vencido
+				AND 
+					postulaciones_temp.postulado = 1";
+		$rs = $this->db->query($query);
+
+		return $rs->row();
+	}
+
+	public function getCantidadSolicitados($id, $vencido){
+		$query = "SELECT
+					count(busquedas_temp.id)
+				FROM
+					busquedas_temp
+				WHERE
+					busquedas_temp.id_usuario = $id
+				AND
+					busquedas_temp.vencido = $vencido";
+		$rs = $this->db->query($query);
+
+		return $rs->row();
+	}
+
 
 	public function getUPostulaciones($idUsuario, $desdeLimit, $cantidadLimit){
 		$query =	"SELECT

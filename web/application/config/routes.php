@@ -105,7 +105,7 @@ $route['set_favorito']  						= "usuario/set_favorito";
 $route['mi-perfil/servicios-solicitados']  		= "usuario/servicios_solicitados";
 $route['mis-comentarios']           			= "usuario/mis_comentarios";
 
-$route['usuario/perfil/(:any)'] 				= "usuario/perfil_usuario";
+$route['usuario/perfil/(:any)'] 				= "usuario/perfil_usuario/$1";
 
 
 $route['404_override'] 	= '';

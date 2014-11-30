@@ -149,7 +149,6 @@ class Usuario extends CI_controller{
 			echo json_encode("delete");
 			
 		}
-
 	}
 
 	private function _verificarCodigoEstado($codigo = null){
@@ -328,11 +327,20 @@ class Usuario extends CI_controller{
 	        {
 	            $data 			= $this->upload->data();
 	            $size_thumb		= 125;
-	            $img_thumb_path = path_archivos('assets/images/usuarios/', agregar_nombre_archivo($data['file_name'], '_thumb'));
+	            $thumbNombre	= '_thumb';
+	            $img_thumb_path = path_archivos('assets/images/usuarios/', agregar_nombre_archivo($data['file_name'], $thumbNombre));
     
 	            //$this->_generarThumbnail($data, $width, $height);
+	            //GENERO EL THUMBNAIL DE 125
 	            $this->_generarThumbnail($data, $size_thumb, $img_thumb_path);
-	            
+
+	            //GENERO EL THUMBNAIL DE 200
+	           /* $size_thumb		= 200;
+	            $thumbNombre	= '_thumbx200';
+	            $img_thumb_path = path_archivos('assets/images/usuarios/', agregar_nombre_archivo($data['file_name'], $thumbNombre));
+	            $this->_generarThumbnail($data, $size_thumb, $img_thumb_path, $thumbNombre);*/
+
+
 	            $user 						= $this->UsuarioSession;
             	$foto_anterior 				= $user['foto'];
 	            $path_foto_anterior			= $config['upload_path'].$foto_anterior;
@@ -407,14 +415,15 @@ class Usuario extends CI_controller{
 
 
 
-	private function _generarThumbnail($file, $size, $img_path)
+	private function _generarThumbnail($file, $size, $img_path, $thumbNombre)
 	{
 	 	$img_thumb = $img_path;
 
-	    $config['image_library'] = 'gd2';
-	    $config['source_image'] = $file['full_path'];
-	    $config['create_thumb'] = TRUE;
-	    $config['maintain_ratio'] = FALSE;
+	    $config['image_library'] 	= 'gd2';
+	    $config['source_image'] 	= $file['full_path'];
+	    $config['create_thumb'] 	= TRUE;
+	    $config['maintain_ratio'] 	= FALSE;
+		$config['thumb_marker'] 	= $thumbNombre;
 	   
 	    $_width = $file['image_width'];
 	    $_height = $file['image_height'];
@@ -490,15 +499,101 @@ class Usuario extends CI_controller{
 
 
 	private function _borarArchivoFotoAnterior($archivoPath){
-		$dalete = unlink($archivoPath);
-		if(!$dalete){
-			log_message('error', 'No se pudo eliminar la imagen'.$archivoPath);
+		if(file_exists($archivoPath)){
+			$dalete = unlink($archivoPath);
+			if(!$dalete){
+				log_message('error', 'No se pudo eliminar la imagen'.$archivoPath);
+			}
 		}
 	}
 
 
-	public function perfil_usuario(){
+	public function perfil_usuario($usuario = null){
+		if($this->UsuarioSession){
+			$data['usuario'] = $this->UsuarioSession['nombre'];
+			$data['usuarioSession'] = $this->UsuarioSession;
+		}
+
+		$id = $this->_parseIdUsuario($usuario);
+
+		if(is_numeric($id))
+		{
+
+			$data['perfil'] = null;
+			$data['servicios'] = null;
+			$data['canServicios'] = null;
+			$data['canSolicitados'] = null;
+			$perfil = $this->usuarios_model->getUsuario($id);
+			if($perfil)
+			{
+
+				if($perfil[0]['foto'] == "" || $perfil[0]['foto'] == null)
+				{
+					$perfil[0]['foto_path'] = 'assets/images/perfil_200.png';
+				}
+				else if(file_exists('./assets/images/usuarios/' . $perfil[0]['foto']))
+				{
+					$perfil[0]['foto_path'] = path_archivos('assets/images/usuarios/', agregar_nombre_archivo($perfil[0]['foto'], '_thumb'));
+				}
+				else 
+				{
+					$perfil[0]['foto_path'] = 'assets/images/perfil_200.png';
+				}
+
+				$data['perfil'] = $perfil;
+			}
+			
+			$servicios = $this->servicios_model->getServicioEnPerfil($id);
+			if($servicios)
+			{
+				foreach ($servicios as $servicio => $value) {
+					
+					if($servicios[$servicio]['foto'] == "" || $servicios[$servicio]['foto'] == null)
+					{
+						$servicios[$servicio]['foto_path'] = 'assets/images/servicio_200.jpg';
+					}
+					else if(file_exists('./assets/images/usuarios/' . $servicios[$servicio]['foto']))
+					{
+						$servicios[$servicio]['foto_path'] = path_archivos('assets/images/servicios/', $servicios[$servicio]['foto']);
+					}
+					else
+					{
+						$servicios[$servicio]['foto_path'] = 'assets/images/servicio_200.jpg';
+					}
+				}
+				$data['servicios'] = $servicios;
+
+			}
+
+			$cantidadSolicitadosC = COUNT($this->usuarios_model->getCantidadSolicitados($id, 1));
+			$cantidadSolicitadosV = COUNT($this->usuarios_model->getCantidadSolicitados($id, 0));
+			$cantidadSolicitadosTotal = $cantidadSolicitadosC + $cantidadSolicitadosV;
+
+			$data['cantSolicitados'] = $cantidadSolicitadosC;
+			$data['cantSolicitadosT'] = $cantidadSolicitadosTotal;
+
+
+
+			$cantidadPostulacionesC = COUNT($this->usuarios_model->getCantidadPostulados($id, 1));
+			$cantidadPostulacionesV = COUNT($this->usuarios_model->getCantidadPostulados($id, 0));
+			$cantTotalPostulaciones = $cantidadPostulacionesC + $cantidadPostulacionesV;
+			
+			$data['cantPostulaciones'] = $cantTotalPostulaciones;
+
+			$data['title']     = 'Perfil de Usuario';
+			$data['vista']     = 'perfil_usuario';
+			return $this->load->view('home_view',$data);
+		}
+		else
+		{
+			redirect('');
+		}
 		
+	}
+
+	private function _parseIdUsuario($usuario){
+		$user = explode('-', $usuario);
+		return $user[0];
 	}
 
 

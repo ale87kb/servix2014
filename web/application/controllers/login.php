@@ -746,7 +746,7 @@ class Login extends CI_Controller {
 			 'apellido' 		=> $row['apellido'],
 			 'direccion'		=> $row['direccion'],
 			 'telefono' 		=> $row['telefono'],
-			 'foto'				=> $row['foto'],		//default -> assets/images/profile_640.png
+			 'foto'				=> $row['foto'],		//default -> assets/images/perfil_640.png
 			 'estado'			=> $row['estado'],
 			 'ultima_edicion'	=> $row['ultima_edicion'], 
 
@@ -755,18 +755,18 @@ class Login extends CI_Controller {
 			 'foto_thumb_path'	=> path_archivos('assets/images/usuarios/', agregar_nombre_archivo($row['foto'], '_thumb'))
 			);
 			
-			$sess_array = $this->_chekFotoDB($sess_array, 'assets/images/profile_640.png');
+			$sess_array = $this->_chekFotoDB($sess_array, 'assets/images/perfil_200.png', 'assets/images/perfil_125.png');
 
 			$this->session->set_userdata('logged_in', $sess_array);
 		}
 	}
 	
 
-	//Chequea que la foto no este vacia, y si lo esta devuelve la foto por default: assets/images/profile_640.png
-	private function _chekFotoDB($sess_array, $path){
+	//Chequea que la foto no este vacia, y si lo esta devuelve la foto por default: assets/images/perfil_640.png
+	private function _chekFotoDB($sess_array, $path ,$path_thumb){
 		if($sess_array['foto'] == ""){
 		 	$sess_array['foto_path']		= $path;
-		 	$sess_array['foto_thumb_path']	= $path;
+		 	$sess_array['foto_thumb_path']	= $path_thumb;
 		}
 		return $sess_array;
 	}
