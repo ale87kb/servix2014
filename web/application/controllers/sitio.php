@@ -217,7 +217,90 @@ class sitio extends CI_Controller {
 	}
 
 	public function validar_ofrecer_servicio(){
+
+
 		print_d($this->input->post());
+		$this->form_validation->set_rules('titulo', 'titulo', 'required');
+		$this->form_validation->set_rules('categoria', 'categoria', 'required');
+		$this->form_validation->set_rules('telefono', 'telefono', 'required');
+		$this->form_validation->set_rules('descripcion', 'descripcion', 'required');
+		$this->form_validation->set_rules('localidad', 'localidad', 'required');
+
+		if ($this->form_validation->run() == FALSE)
+		{
+			echo "error";
+		}
+		else
+		{
+
+			$categoria = $this->_checkCategoria( $this->input->post('categoria') );
+			print_d($_FILES);
+			$this->_fileUpload($_FILES);
+
+		}
+	}
+
+	private function _fileUpload($files){
+		//Check if the file exists in the form
+		if($files['fotoServicio']['name']!=""){
+
+		//load library
+		$this->load->library('upload');
+		$sizeFoto  = $files['fotoServicio']['size'];
+
+		$this->load->helper('inflector');
+		$file_name = md5(time()).'_'.underscore($_FILES['fotoServicio']['name']);
+		// agregar_nombre_archivo($files['fotoServicio']['name'],'_big');
+		
+
+		//Set the config
+		$config['upload_path'] 	 = './assets/images/servicios/'; //Use relative or absolute path
+		$config['allowed_types'] = 'jpg|png'; 
+		$config['max_size'] 	 = 1024*8;
+		$config['max_width'] 	 = '1024';
+		$config['max_height'] 	 = '768';
+		$config['overwrite'] 	 = FALSE; //If the file exists it will be saved with a progressive number appended
+		print_d($config['max_size']);
+		$config['file_name'] = $file_name;
+
+		if($sizeFoto > $config['max_width'] ) {
+			echo "error";
+		}
+
+		//Initialize
+		$this->upload->initialize($config);
+
+		//Upload file
+		if( ! $this->upload->do_upload("fotoServicio")){
+
+		    //echo the errors
+		    echo $this->upload->display_errors();
+		}
+
+
+		//If the upload success
+		$file_name = $this->upload->file_name;
+
+		//Save the file name into the db
+		}
+	}
+
+	private function _checkCategoria($cat){
+		if(isset($cat)){
+
+		$param = strtolower($cat);
+		$categoria = $this->servix_model->getCategoria($param);
+
+		if(!empty($categoria)){
+			$categoria = $categoria[0]['id'];
+		}else{
+
+			$categoria =  40;
+		}
+			return $categoria;
+		}else{
+			return false;
+		}
 	}
 
 	public function validar_solicitud_servicio(){
@@ -291,6 +374,7 @@ class sitio extends CI_Controller {
 		$config['center'] = 'auto';
 		$config['zoom'] = 'auto';
 		$config['places'] = TRUE;
+		$config['scrollwheel'] = FALSE;
 		$config['placesAutocompleteInputID'] 	= 'myPlaceTextBox';
 		$config['placesAutocompleteBoundsMap'] 	= TRUE;
 		// $opciones = array('cities'); 

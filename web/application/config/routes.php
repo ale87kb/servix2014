@@ -57,6 +57,7 @@ $route['unset_postulacion']	        			= "sitio/unset_postulacion";
 $route['solicitar-servicio']	        		= "sitio/solicitar_servicio";
 $route['validar-solicitud-servicio']	        = "sitio/validar_solicitud_servicio";
 $route['validar-ofrecer-servicio']	        	= "sitio/validar_ofrecer_servicio";
+$route['file_upload_image']	        			= "sitio/file_upload_image";
 
 $route['busqueda_servicio']						= "sitio/busqueda_servicio";
 $route['busqueda_categoria']					= "sitio/busqueda_categoria";

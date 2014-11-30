@@ -543,7 +543,7 @@ var app = function(){
             $('#formulario-ofrecer').find('input').keypress(function(e){
                 if ( e.which == 13 ) // Enter key = keycode 13
                 {
-       
+
                     return false;
                 }
             });
@@ -563,6 +563,11 @@ var app = function(){
                         validators: {
                             notEmpty: {
                                 message: 'Por favor introduce un titulo'
+                            },
+                            stringLength: {
+                                max:45,
+                                min:3,
+                                message: 'Por favor, ingrese un titulo entre 3 y 60 caracteres'
                             }
                         }
                     },
@@ -570,6 +575,11 @@ var app = function(){
                         validators: {
                             notEmpty: {
                                 message: 'Por favor introduce una categoría'
+                            },
+                            stringLength: {
+                                max:20,
+                                min:3,
+                                message: 'Por favor, ingrese una categoria entre 3 y 20 caracteres'
                             }
                         }
                     },
@@ -577,6 +587,9 @@ var app = function(){
                         validators: {
                             notEmpty: {
                                 message: 'Ingresa un teléfono'
+                            }, 
+                            digits: {
+                                message: 'El teléfono debe contener solo números.'
                             }
                         }
                     },
@@ -585,6 +598,11 @@ var app = function(){
                         validators: {
                             notEmpty: {
                                 message: 'Por favor ingresa una descripción'
+                            },
+                            stringLength: {
+                                max:800,
+                                min:10,
+                                message: 'Por favor, ingrese una categoria entre 10 y 800 caracteres'
                             }
                         }
                     },
@@ -592,13 +610,6 @@ var app = function(){
                         validators: {
                             notEmpty: {
                                 message: 'Por favor ingresa una localidad'
-                            }
-                        }
-                    },
-                    direccion: {
-                        validators: {
-                            notEmpty: {
-                                message: 'Por favor ingresa una dirección'
                             }
                         }
                     }

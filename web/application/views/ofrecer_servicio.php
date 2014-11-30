@@ -22,7 +22,7 @@
                   </div>
                     <div class="col-md-12">
                         <!-- Tab panes -->
-                      <form action="<?php echo site_url('validar-ofrecer-servicio'); ?>" method="post" id="formulario-ofrecer">
+                      <form action="<?php echo site_url('validar-ofrecer-servicio'); ?>" method="post" id="formulario-ofrecer" enctype="multipart/form-data">
                         <div class="tab-content">
                           <div role="tabpanel fade " class="tab-pane active" id="paso_1">
                             <div class="col-md-12">
