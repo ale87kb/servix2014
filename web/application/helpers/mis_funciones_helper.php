@@ -157,4 +157,6 @@
 		} else {
 		return FALSE;
 		}
+	}
+
 ?>
