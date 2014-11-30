@@ -217,6 +217,8 @@ class sitio extends CI_Controller {
 	}
 
 	public function validar_ofrecer_servicio(){
+
+		if($this->UsuarioSession){
 	
 		//******Validacion form*********//
 		$this->form_validation->set_rules('titulo', 'titulo', 'trim|required|min_length[3]|max_length[40]|xss_clean');
@@ -237,7 +239,7 @@ class sitio extends CI_Controller {
 		$files = $this->_fileUpload($_FILES);
 		//******fin form*********//
 
-		print_d($files);
+		// print_d($files);
 
 			// si algo de los inputs falla mando errores a la vista
 			// y configuro una variable flashdata para mantener las post Vars
@@ -267,7 +269,7 @@ class sitio extends CI_Controller {
 				//ahora guardo los datos del servicio en la db
 
 				$rs = $this->servicios_model->setServicio($post);
-
+				$this->servix_model->setRelacionUS($this->UsuarioSession['id'],$rs);
 
 				if($rs){
 					//todo bien
@@ -281,6 +283,7 @@ class sitio extends CI_Controller {
 				
 
 			}
+		}
 		
 	}
 
@@ -699,6 +702,43 @@ class sitio extends CI_Controller {
 				$data['solicitados'] = $solicitados['result'];
 			}else{
 				$data['solicitados'] = null;
+			}
+
+			if($solicitado)
+			{
+				$solicitado[0]['link_user'] = site_url('usuario/perfil/'.$solicitado[0]['userID'].'-'.$solicitado[0]['nombre'].'-'.$solicitado[0]['apellido']);
+
+				if($solicitado[0]['foto'] == "" || $solicitado[0]['foto'] == null)
+				{
+					$solicitado[0]['foto_path'] = 'assets/images/perfil_200.png';
+				}
+				else if(file_exists('./assets/images/usuarios/' . $solicitado[0]['foto']))
+				{
+					$solicitado[0]['foto_path'] = path_archivos('assets/images/usuarios/', agregar_nombre_archivo($solicitado[0]['foto'], '_thumb'));
+				}
+				else 
+				{
+					$solicitado[0]['foto_path'] = 'assets/images/perfil_200.png';
+				}
+			}
+
+			if($userPostulados)
+			{
+				foreach ($userPostulados as $postulado => $value) {
+				$userPostulados[$postulado]['link_user'] = site_url('usuario/perfil/'.$userPostulados[$postulado]['id'].'-'.$userPostulados[$postulado]['nombre'].'-'.$userPostulados[$postulado]['apellido']);
+				if($userPostulados[$postulado]['foto'] == "" || $userPostulados[$postulado]['foto'] == null)
+				{
+					$userPostulados[$postulado]['foto_path'] = 'assets/images/perfil_200.png';
+				}
+				else if(file_exists('./assets/images/usuarios/' . $userPostulados[$postulado]['foto']))
+				{
+					$userPostulados[$postulado]['foto_path'] = path_archivos('assets/images/usuarios/', agregar_nombre_archivo($userPostulados[$postulado]['foto'], '_thumb'));
+				}
+				else 
+				{
+					$userPostulados[$postulado]['foto_path'] = 'assets/images/perfil_200.png';
+				}
+				}
 			}
 
 			$data['paginacion']   = $solicitados['links'];

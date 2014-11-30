@@ -30,6 +30,15 @@ Class Servix_model extends CI_Model{
 
 	}
 
+	public function setRelacionUS($idUser,$idServ){
+
+		$query = "INSERT INTO `relacion_u_s` (`id_usurios`, `id_servicios`) VALUES ($idUser,$idServ);";
+		$rs    = $this->db->query($query);
+		
+		return $rs;
+	}
+
+
 	public function setCatNobd($id_usuario,$cat_nodb,$comentario,$fecha_ini){
 		$query = "INSERT INTO `cat_nodb` (`id_usuario`, `categoria`, `comentario`, `fecha`) VALUES ($id_usuario, '$cat_nodb', '$comentario', '$fecha_ini');";
 		$rs    = $this->db->query($query);
