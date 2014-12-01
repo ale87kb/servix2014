@@ -41,6 +41,7 @@
 $route['default_controller'] 					= "sitio";
 //url                        // Controlador/metodo 
 
+$route['test_page']   							= "sitio/test_page";					//Entra cualquiera
 $route['condiciones-de-uso']   					= "sitio/condiciones_de_uso";					//Entra cualquiera
 $route['preguntas_frecuentes'] 					= "sitio/preguntas_frecuentes";					//Entra cualquiera
 $route['solicitud-de-servicio']					= "sitio/solicitar_servicio";					

@@ -19,6 +19,9 @@
 		return date('d', $date)."/".date('m', $date)."/".date('Y', $date);
 	}
 
+	
+
+	
 
 	function normaliza($cadena) 
 	{ 

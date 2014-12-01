@@ -175,10 +175,16 @@
                                       <label for="busqueda-localidad">¿En que localidad, barrio lo estas ofreciendo?</label>
                                     
                                        <select id="ajax-select" class="form-control selectpicker with-ajax" name="localidad" placeholder="Buscar" data-live-search="true" >
-                                       <option value="<?php echo $post['id_localidad'] ?>">
+                                        <?php 
+                                          if(isset($post['id_localidad'])){
+                                            ?>
+                                             <option value="<?php echo $post['id_localidad'] ?>">
                                         
-                                       <?php echo $post['localidad'] .", ".$post['provincia']; ?>
-                                       </option>
+                                             <?php echo $post['localidad'] .", ".$post['provincia']; ?>
+                                             </option>
+                                            <?php
+                                          }
+                                         ?>
                                        </select>
                                      <div class='localidad' style="color:red;">
                                       <?php echo $form_error['localidad']; ?>
