@@ -1,3 +1,4 @@
+<div class="container" id="main">
   <!--center-->
 
     <h1>Resultado de busqueda</h1>

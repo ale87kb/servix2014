@@ -1,3 +1,4 @@
+</div>
 <section class="bg-gray" id="secCat">
 	
 

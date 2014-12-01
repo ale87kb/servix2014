@@ -34,11 +34,11 @@ class sitio extends CI_Controller {
 		}else{
 			$data['solicitados'] = null;
 		}
-		$data['categorias'] = $this->servix_model->getCategorias();
 
 		$data['paginacion'] = $solicitados['links'];
 		$data['vista'] = 'index_view';
 		$data['current_page'] = $solicitados['current_page'];
+		$data['categorias'] = $this->servix_model->getCategorias();
 		$data['foot_cat'] ='footCat';
 
 		if ($this->input->is_ajax_request()) {
@@ -641,7 +641,7 @@ class sitio extends CI_Controller {
 			$busqueda['post'][$k] = ($v);
 			$busqueda['url'][$k]  = normaliza(trim($v));
 		 }
-		 $this->session->set_userdata("busqueda",$busqueda);
+		 // $this->session->set_userdata("busqueda",$busqueda);
 		 return redirect("resultado-de-busqueda/".$busqueda['url']['servicio']."-en-".$busqueda['url']['localidad']);
 
 	}
@@ -656,19 +656,18 @@ class sitio extends CI_Controller {
 			$data['usuario'] = $this->UsuarioSession['nombre'];
 			$data['usuarioSession'] = $this->UsuarioSession;
 		}
-		if($l == 'argentina'){
-			$urlq 			   = $q."-en-".$l;
-			$l= '';
-		}
-		// print_d($busca);
-		$data['servicio']  = str_replace('-', ' ', $q);
-		$data['localidad'] = str_replace('-', ' ', $l);
 		
+		$urlq 			   = $q."-en-".$l;
+		$data['localidad'] = str_replace('-', ' ', $l);
+		$data['servicio']  = str_replace('-', ' ', $q);
 
-		$result	   		   = $this->_setPaginacion($data['servicio'],$data['localidad'],$urlq );
-
-
-		// print_d($this->db->last_query());
+		if($l == 'argentina'){
+			$result	   		   = $this->_setPaginacion($data['servicio'],'',$urlq );
+		}else{
+			$result	   		   = $this->_setPaginacion($data['servicio'],$data['localidad'],$urlq );
+		}
+		
+		
 		$data['result']    = $result['result'];
 		if(!empty($data['result'])){
 
