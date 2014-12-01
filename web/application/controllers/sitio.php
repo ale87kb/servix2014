@@ -849,62 +849,71 @@ class sitio extends CI_Controller {
 			$servicioRS  = $this->servicios_model->getServicioFicha($id);
 			$promedio 	 = $this->servicios_model->getPromedioPuntos($id);
 
-			if(!empty($promedio)){
-				foreach ($promedio[0] as $key => $value) {
+			if($servicioRS){
+
+				if(!empty($promedio)){
+					foreach ($promedio[0] as $key => $value) {
+						$data[$key] = $value;
+					}
+				}
+
+				foreach ($servicioRS[0] as $key => $value) {
 					$data[$key] = $value;
+					$data['link_user'] = site_url('usuario/perfil/'. $servicioRS[0]['userID'].'-'.$servicioRS[0]['nombre'].'-'.$servicioRS[0]['apellido']);
+				    if($servicioRS[0]['foto'] == "" || $servicioRS[0]['foto'] == null)
+				    {
+				     $data['foto_path'] = 'assets/images/servicio_200.jpg';
+				    }
+				    else if(file_exists('./assets/images/servicios/' . $servicioRS[0]['foto']))
+				    {
+				     $data['foto_path'] = path_archivos('assets/images/servicios/', agregar_nombre_archivo($servicioRS[0]['foto'], ''));
+				    }
+				    else 
+				    {
+				     $data['foto_path'] = 'assets/images/servicio_200.jpg';
+				    }
 				}
-			}
 
-			foreach ($servicioRS[0] as $key => $value) {
-				$data[$key] = $value;
-				$data['link_user'] = site_url('usuario/perfil/'. $servicioRS[0]['userID'].'-'.$servicioRS[0]['nombre'].'-'.$servicioRS[0]['apellido']);
-			    if($servicioRS[0]['foto'] == "" || $servicioRS[0]['foto'] == null)
-			    {
-			     $data['foto_path'] = 'assets/images/servicio_200.jpg';
-			    }
-			    else if(file_exists('./assets/images/servicios/' . $servicioRS[0]['foto']))
-			    {
-			     $data['foto_path'] = path_archivos('assets/images/servicios/', agregar_nombre_archivo($servicioRS[0]['foto'], ''));
-			    }
-			    else 
-			    {
-			     $data['foto_path'] = 'assets/images/servicio_200.jpg';
-			    }
-			}
-
-			if($this->UsuarioSession){
-				$fav = $this->usuarios_model->getFavorito($this->UsuarioSession['id'],$id);
-				if(!empty($fav)){
-					$data['favorito'] = true;
+				if($this->UsuarioSession){
+					$fav = $this->usuarios_model->getFavorito($this->UsuarioSession['id'],$id);
+					if(!empty($fav)){
+						$data['favorito'] = true;
+					}
 				}
+
+				$data['servicio']  = $data['titulo'];
+				if(isset($servicioRS[0]['latitud']) && isset($servicioRS[0]['longitud'])){
+
+					$lat 			   = $servicioRS[0]['latitud'];
+					$long 			   = $servicioRS[0]['longitud'];
+					$position	       = "$lat,$long";
+					$data['map'] 	   = $this->_gmap($servicioRS,$position,14);
+
+				}
+			
+				if($this->UsuarioSession){
+					$data['usuario']	    = $this->UsuarioSession['nombre'];
+					$data['usuarioSession'] = $this->UsuarioSession;
+				}
+
+				$data['opiniones'] = $opiniones['result'];
+				$data['title']     = 'Ficha del servicio';
+				$data['servUrl']   =  site_url('ficha/'.$servicio);
+				$data['vista']     = 'ficha_servicio_view';
+
 			}
-
-			$data['servicio']  = $data['titulo'];
-			if(isset($servicioRS[0]['latitud']) && isset($servicioRS[0]['longitud'])){
-
-				$lat 			   = $servicioRS[0]['latitud'];
-				$long 			   = $servicioRS[0]['longitud'];
-				$position	       = "$lat,$long";
-				$data['map'] 	   = $this->_gmap($servicioRS,$position,14);
-
+			else
+			{
+				$data['title']     = 'Ficha del servicio no encontrada';
+				$data['vista']     = 'ficha_servicio_no_encontrado_view';
 			}
-		
-			if($this->UsuarioSession){
-				$data['usuario']	    = $this->UsuarioSession['nombre'];
-				$data['usuarioSession'] = $this->UsuarioSession;
-			}
-
-			$data['opiniones'] = $opiniones['result'];
-			$data['title']     = 'Ficha del servicio';
-			$data['servUrl']   =  site_url('ficha/'.$servicio);
-			$data['vista']     = 'ficha_servicio_view';
-
-			return $this->load->view('home_view',$data);
-		
-		}else
-		{
-			return redirect('');
 		}
+		else
+		{
+			$data['title']     = 'Ficha del servicio no encontrada';
+			$data['vista']     = 'ficha_servicio_no_encontrado_view';
+		}
+		return $this->load->view('home_view',$data);
 	}
 
 

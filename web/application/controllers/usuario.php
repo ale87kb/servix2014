@@ -521,86 +521,99 @@ class Usuario extends CI_controller{
 
 
 	public function perfil_usuario($usuario = null){
-		if($this->UsuarioSession){
+		if($this->UsuarioSession)
+		{
 			$data['usuario'] = $this->UsuarioSession['nombre'];
 			$data['usuarioSession'] = $this->UsuarioSession;
-		}
 
-		$id = $this->_parseIdUsuario($usuario);
+			$id = $this->_parseIdUsuario($usuario);
 
-		if(is_numeric($id))
-		{
-			$data['perfil'] = null;
-			$data['servicios'] = null;
-			$data['canServicios'] = null;
-			$data['canSolicitados'] = null;
-			$perfil = $this->usuarios_model->getUsuario($id);
-			if($perfil)
+			if(is_numeric($id))
 			{
+				$data['perfil'] = null;
+				$data['servicios'] = null;
+				$data['canServicios'] = null;
+				$data['canSolicitados'] = null;
+				$perfil = $this->usuarios_model->getUsuario($id);
+				if($perfil)
+				{
 
-				if($perfil[0]['foto'] == "" || $perfil[0]['foto'] == null)
-				{
-					$perfil[0]['foto_path'] = 'assets/images/perfil_200.png';
-				}
-				else if(file_exists('./assets/images/usuarios/' . $perfil[0]['foto']))
-				{
-					$perfil[0]['foto_path'] = path_archivos('assets/images/usuarios/', agregar_nombre_archivo($perfil[0]['foto'], '_thumb'));
-				}
-				else 
-				{
-					$perfil[0]['foto_path'] = 'assets/images/perfil_200.png';
-				}
+					if($perfil[0]['foto'] == "" || $perfil[0]['foto'] == null)
+					{
+						$perfil[0]['foto_path'] = 'assets/images/perfil_200.png';
+					}
+					else if(file_exists('./assets/images/usuarios/' . $perfil[0]['foto']))
+					{
+						$perfil[0]['foto_path'] = path_archivos('assets/images/usuarios/', agregar_nombre_archivo($perfil[0]['foto'], '_thumb'));
+					}
+					else 
+					{
+						$perfil[0]['foto_path'] = 'assets/images/perfil_200.png';
+					}
 
-				$data['perfil'] = $perfil[0];
+					$data['perfil'] = $perfil[0];
+				
+					$servicios = $this->servicios_model->getServicioEnPerfil($id);
+					if($servicios)
+					{
+						foreach ($servicios as $servicio => $value) {
+							
+							$servicios[$servicio]['link_servicio'] = site_url(generarLinkServicio($servicios[$servicio]['id'], $servicios[$servicio]['titulo'] ));
+							
+							if($servicios[$servicio]['foto'] == "" || $servicios[$servicio]['foto'] == null)
+							{
+								$servicios[$servicio]['foto_path'] = 'assets/images/servicio_200.jpg';
+							}
+							else if(file_exists('./assets/images/usuarios/' . $servicios[$servicio]['foto']))
+							{
+								$servicios[$servicio]['foto_path'] = path_archivos('assets/images/servicios/', $servicios[$servicio]['foto']);
+							}
+							else
+							{
+								$servicios[$servicio]['foto_path'] = 'assets/images/servicio_200.jpg';
+							}
+						}
+						$data['servicios'] = $servicios;
+
+					}
+
+					$cantidadSolicitadosC = COUNT($this->usuarios_model->getCantidadSolicitados($id, 1));
+					$cantidadSolicitadosV = COUNT($this->usuarios_model->getCantidadSolicitados($id, 0));
+					$cantidadSolicitadosTotal = $cantidadSolicitadosC + $cantidadSolicitadosV;
+
+					$data['cantSolicitados'] = $cantidadSolicitadosC;
+					$data['cantSolicitadosT'] = $cantidadSolicitadosTotal;
+
+
+
+					$cantidadPostulacionesC = COUNT($this->usuarios_model->getCantidadPostulados($id, 1));
+					$cantidadPostulacionesV = COUNT($this->usuarios_model->getCantidadPostulados($id, 0));
+					$cantTotalPostulaciones = $cantidadPostulacionesC + $cantidadPostulacionesV;
+					
+					$data['cantPostulaciones'] = $cantTotalPostulaciones;
+
+					$data['title']     = 'Perfil de Usuario';
+					$data['vista']     = 'perfil_usuario';
+				}
+				else
+				{
+					$data['title']     = 'Perfil no encontrado';
+					$data['vista']     = 'perfil_no_encontrado';
+				}
 			}
-			
-			$servicios = $this->servicios_model->getServicioEnPerfil($id);
-			if($servicios)
+			else
 			{
-				foreach ($servicios as $servicio => $value) {
-					
-					$servicios[$servicio]['link_servicio'] = site_url(generarLinkServicio($servicios[$servicio]['id'], $servicios[$servicio]['titulo'] ));
-					
-					if($servicios[$servicio]['foto'] == "" || $servicios[$servicio]['foto'] == null)
-					{
-						$servicios[$servicio]['foto_path'] = 'assets/images/servicio_200.jpg';
-					}
-					else if(file_exists('./assets/images/usuarios/' . $servicios[$servicio]['foto']))
-					{
-						$servicios[$servicio]['foto_path'] = path_archivos('assets/images/servicios/', $servicios[$servicio]['foto']);
-					}
-					else
-					{
-						$servicios[$servicio]['foto_path'] = 'assets/images/servicio_200.jpg';
-					}
-				}
-				$data['servicios'] = $servicios;
-
+					$data['title']     = 'Perfil no encontrado';
+					$data['vista']     = 'perfil_no_encontrado';
 			}
-
-			$cantidadSolicitadosC = COUNT($this->usuarios_model->getCantidadSolicitados($id, 1));
-			$cantidadSolicitadosV = COUNT($this->usuarios_model->getCantidadSolicitados($id, 0));
-			$cantidadSolicitadosTotal = $cantidadSolicitadosC + $cantidadSolicitadosV;
-
-			$data['cantSolicitados'] = $cantidadSolicitadosC;
-			$data['cantSolicitadosT'] = $cantidadSolicitadosTotal;
-
-
-
-			$cantidadPostulacionesC = COUNT($this->usuarios_model->getCantidadPostulados($id, 1));
-			$cantidadPostulacionesV = COUNT($this->usuarios_model->getCantidadPostulados($id, 0));
-			$cantTotalPostulaciones = $cantidadPostulacionesC + $cantidadPostulacionesV;
-			
-			$data['cantPostulaciones'] = $cantTotalPostulaciones;
-
-			$data['title']     = 'Perfil de Usuario';
-			$data['vista']     = 'perfil_usuario';
-			$this->load->view('home_view',$data);
 		}
 		else
 		{
-			redirect('');
+			$data['title']     = 'Perfil no encontrado';
+			$data['vista']     = 'perfil_no_encontrado';
+			$data['nologueado'] = TRUE;
 		}
+		$this->load->view('home_view',$data);
 		
 	}
 
