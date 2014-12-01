@@ -32,7 +32,7 @@ Class Servix_model extends CI_Model{
 
 	public function setRelacionUS($idUser,$idServ){
 
-		$query = "INSERT INTO `relacion_u_s` (`id_usurios`, `id_servicios`) VALUES ($idUser,$idServ);";
+		$query = "INSERT INTO relacion_u_s (id_usurios, id_servicios) VALUES ($idUser,$idServ);";
 		$rs    = $this->db->query($query);
 		
 		return $rs;
@@ -40,7 +40,7 @@ Class Servix_model extends CI_Model{
 
 
 	public function setCatNobd($id_usuario,$cat_nodb,$comentario,$fecha_ini){
-		$query = "INSERT INTO `cat_nodb` (`id_usuario`, `categoria`, `comentario`, `fecha`) VALUES ($id_usuario, '$cat_nodb', '$comentario', '$fecha_ini');";
+		$query = "INSERT INTO cat_nodb (id_usuario, categoria, comentario, fecha) VALUES ($id_usuario, '$cat_nodb', '$comentario', '$fecha_ini');";
 		$rs    = $this->db->query($query);
 		return $this->db->insert_id();
 	}
@@ -59,7 +59,7 @@ Class Servix_model extends CI_Model{
 
 	}
 	public function geBusquedaLocalProv($loc){
-		$query = "	SELECT localidades.id,localidades.localidad,provincias.provincia
+		$query = "SELECT localidades.id,localidades.localidad,provincias.provincia
 					FROM
 					provincias
 					INNER JOIN localidades ON localidades.id_provincia = provincias.id
@@ -70,7 +70,7 @@ Class Servix_model extends CI_Model{
 	}
 
 	public function setSolicitarServicio($idCat,$idUser,$idLoc,$idCatNodb=null,$fecha_ini,$fecha_fin,$comentario){
-		$query = "INSERT INTO `busquedas_temp` (`id_categorias`, `id_usuario`, `id_localidad`, `id_cat_nodb`, `fecha_ini`, `fecha_fin`, `busqueda`, `vencido`) VALUES ($idCat, $idUser, $idLoc, $idCatNodb, '$fecha_ini', '$fecha_fin', '$comentario', 0);";
+		$query = "INSERT INTO busquedas_temp (id_categorias, id_usuario, id_localidad, id_cat_nodb, fecha_ini, fecha_fin, busqueda, vencido) VALUES ($idCat, $idUser, $idLoc, $idCatNodb, '$fecha_ini', '$fecha_fin', '$comentario', 0);";
 		$rs    = $this->db->query($query);
 		return $rs;
 	}

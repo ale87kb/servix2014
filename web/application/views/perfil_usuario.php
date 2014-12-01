@@ -6,9 +6,9 @@
 		<div class="col-md-12">
 		 	<div class="col-md-3">
 		 		<div class="row text-center">
-		 			<p>
+		 			<figure>
 						<img src="<?php echo site_url($perfil['foto_path']); ?>" class="img-rounded" alt="Foto de Perfil">
-                    </p>
+                    </figure>
                 </div>
 		 	</div>
 

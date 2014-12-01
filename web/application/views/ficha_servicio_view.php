@@ -6,10 +6,9 @@
 		<div class="col-md-12">
 			<div class="col-md-3">
 				<div class="row  text-center">
-					<p>
-						<!--<img src="http://placehold.it/200x200" class="img-rounded" alt="">-->
-						<img src="<?php echo site_url($foto_path);?>" class="img-rounded img-responsive" alt="">
-					</p>
+					<figure>
+						<img src="<?php echo site_url($foto_path);?>" class="img-rounded" alt="">
+					</figure>
 					<div class="col-md-10 col-md-offset-1">
 						<p>
   							<a href="#modalRecomendar" class="btn btn-sm btn-info btn-block" data-toggle="modal" data-target="#modalRecomendar" >Recomendar a un amigo</a>
