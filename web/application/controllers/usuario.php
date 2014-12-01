@@ -15,21 +15,34 @@ class Usuario extends CI_controller{
 		{
 			//Muesta los datos del usuario de la variable de sesion
 			$data['usuarioSession'] = $this->UsuarioSession;
-
-			$Usfavoritos 					= $this->_linkFavoritos($this->UsuarioSession['id'], 0, 5);
-			$UsComentarios 					= $this->_comentariosRealizados($this->UsuarioSession['id'], 0, 5);
-			$UsServiciosContactados			= $this->_serviciosContactados($this->UsuarioSession['id'], 0, 5);
-			$UsServiciosSolicitados			= $this->_serviciosSolicitados($this->UsuarioSession['id'], 0, 5);
-			$UsPostulaciones 				= $this->_postulacionesRealizadas($this->UsuarioSession['id'], 0, 5);
-
-			$data['favoritos'] 		= $Usfavoritos;
-			$data['comentarios'] 	= $UsComentarios;
-			$data['sContactados'] 	= $UsServiciosContactados;
-			$data['sSolicitados'] 	= $UsServiciosSolicitados;
-			$data['postulaciones'] 	= $UsPostulaciones;
-			
 			$data['title'] 			= 'Mi Perfil';
 			$data['vista'] 			= 'usuario/mi_perfil';
+
+			//LA VISTA DEL DATOS LA CARGA CON $this->UsuarioSession
+
+			
+
+			$Usfavoritos 			= $this->_linkFavoritos($this->UsuarioSession['id'], 0, 5);
+			$data['favoritos'] 		= $Usfavoritos;
+
+			$UsComentarios 			= $this->_comentariosRealizados($this->UsuarioSession['id'], 0, 5);
+			$data['comentarios'] 	= $UsComentarios;
+
+			$UsServiciosContactados	= $this->_serviciosContactados($this->UsuarioSession['id'], 0, 5);
+			$data['sContactados'] 	= $UsServiciosContactados;
+
+			$UsServiciosSolicitados	= $this->_serviciosSolicitados($this->UsuarioSession['id'], 0, 5);
+			$data['sSolicitados'] 	= $UsServiciosSolicitados;
+
+			$UsPostulaciones 		= $this->_postulacionesRealizadas($this->UsuarioSession['id'], 0, 5);
+			$data['postulaciones'] 	= $UsPostulaciones;
+
+			$UsServicios 			= $this->_serviciosUsuario($this->UsuarioSession['id'], 0, 5);
+			$cantidadServicios 		= $this->usuarios_model->getCantidadServicioPropios($this->UsuarioSession['id']);
+			$data['cantidad'] 		= $cantidadServicios;
+			$data['serviciosPropios']= $UsServicios;
+
+			
 			$this->load->view('usuarios_view', $data);
 		}
 		else
@@ -112,6 +125,19 @@ class Usuario extends CI_controller{
 		}
 		return false;
 	}
+
+	private function _serviciosUsuario($idUsuario, $desdeLimit ,$cantidadLimit){
+		$servicios = $this->usuarios_model->getServiciosProrpios($idUsuario, $desdeLimit ,$cantidadLimit);
+		if($servicios){
+			foreach ($servicios as $key => $value) {
+				$servicios[$key]['link'] = generarLinkServicio($servicios[$key]['id'],$servicios[$key]['titulo']);
+			}
+
+			return $servicios;
+		}
+		return false;
+	}
+
 
 
 	public function verificar(){
@@ -577,8 +603,8 @@ class Usuario extends CI_controller{
 
 					}
 
-					$cantidadSolicitadosC = COUNT($this->usuarios_model->getCantidadSolicitados($id, 1));
-					$cantidadSolicitadosV = COUNT($this->usuarios_model->getCantidadSolicitados($id, 0));
+					/*$cantidadSolicitadosC = $this->usuarios_model->getCantidadSolicitados($id, 1);
+					$cantidadSolicitadosV = $this->usuarios_model->getCantidadSolicitados($id, 0);
 					$cantidadSolicitadosTotal = $cantidadSolicitadosC + $cantidadSolicitadosV;
 
 					$data['cantSolicitados'] = $cantidadSolicitadosC;
@@ -586,12 +612,12 @@ class Usuario extends CI_controller{
 
 
 
-					$cantidadPostulacionesC = COUNT($this->usuarios_model->getCantidadPostulados($id, 1));
-					$cantidadPostulacionesV = COUNT($this->usuarios_model->getCantidadPostulados($id, 0));
+					$cantidadPostulacionesC = $this->usuarios_model->getCantidadPostulados($id, 1);
+					$cantidadPostulacionesV = $this->usuarios_model->getCantidadPostulados($id, 0);
 					$cantTotalPostulaciones = $cantidadPostulacionesC + $cantidadPostulacionesV;
 					
 					$data['cantPostulaciones'] = $cantTotalPostulaciones;
-
+**/
 					$data['title']     = 'Perfil de Usuario';
 					$data['vista']     = 'perfil_usuario';
 				}

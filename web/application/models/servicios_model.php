@@ -246,6 +246,7 @@ Class Servicios_model extends CI_Model{
 						servicios.latitud,
 						servicios.longitud,
 						localidades.localidad,
+						provincias.provincia,
 						categorias.categoria,
 						usuarios.id AS userID,
 						usuarios.nombre,
@@ -254,6 +255,7 @@ Class Servicios_model extends CI_Model{
 					FROM
 						servicios
 					LEFT OUTER JOIN localidades ON servicios.id_localidades = localidades.id
+					LEFT OUTER JOIN provincias ON localidades.id_provincia = provincias.id
 					LEFT OUTER JOIN categorias ON servicios.id_categorias = categorias.id
 					LEFT OUTER JOIN relacion_u_s ON relacion_u_s.id_servicios = servicios.id
 					LEFT OUTER JOIN usuarios ON relacion_u_s.id_usurios = usuarios.id

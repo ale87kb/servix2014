@@ -60,6 +60,14 @@
 				</div>
 			</div>
 			<div class="col-md-6">
+                <div class="row">
+                	<p class="pull-right">
+	                	<span class="label label-default"><?php echo ucfirst($categoria); ?></span>
+	                	<span class="label label-default"><?php echo ucfirst($localidad); ?></span>
+	                	<span class="label label-default"><?php echo ucfirst($provincia); ?></span>
+                	</p>
+            	</div>
+
 				<h2><?php echo $titulo; ?></h2>
 				<p><?php echo  $descripcion; ?></p>
 				<br>

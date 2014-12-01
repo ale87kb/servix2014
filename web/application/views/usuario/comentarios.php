@@ -11,15 +11,15 @@
 				<div class="list-group">
         <?php
           if(!empty($comentarios)){
-            foreach ($comentarios as $c) {
+            foreach ($comentarios as $comen) {
             ?>
 
-            <a href="<?php echo $c['link']; ?>" class="list-group-item">
-              <strong><span><?php echo ucfirst($c['titulo']); ?></span></strong>
-            <div class="ratyAVG" data-avg="<?php echo $c['puntos'] ;?>"></div>
-            <p class="list-group-item-text"><?php echo ucfirst($c['comentario']); ?></p>
+            <a href="<?php echo $comen['link']; ?>" class="list-group-item">
+              <strong><span><?php echo ucfirst($comen['titulo']); ?></span></strong>
+            <div class="ratyAVG" data-avg="<?php echo $comen['puntos'] ;?>"></div>
+            <p class="list-group-item-text"><?php echo ucfirst($comen['comentario']); ?></p>
 
-            <p>Realizado el <?php echo fechaEs(strtotime($c['fecha_votacion']));?> </p>
+            <p>Realizado el <?php echo fechaEs(strtotime($comen['fecha_votacion']));?> </p>
             </a>
 
             <?php

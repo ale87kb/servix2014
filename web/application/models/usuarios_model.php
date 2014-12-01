@@ -237,6 +237,32 @@ Class Usuarios_model extends CI_Model{
 		return $rs;
 	}
 
+	public function getServiciosProrpios($idUsuario, $desdeLimit ,$cantidadLimit){
+		$query = "SELECT
+					servicios.id,
+					servicios.titulo,
+					servicios.descripcion,
+					servicios.foto,
+					servicios.url_web,
+					servicios.direccion,
+					servicios.telefono,
+					servicios.latitud,
+					servicios.longitud,
+					localidades.localidad,
+					provincias.provincia,
+					categorias.categoria
+				FROM
+					relacion_u_s
+				INNER JOIN servicios ON relacion_u_s.id_servicios = servicios.id
+				INNER JOIN localidades ON servicios.id_localidades = localidades.id
+				INNER JOIN provincias ON localidades.id_provincia = provincias.id
+				INNER JOIN categorias ON servicios.id_categorias = categorias.id
+				WHERE
+					relacion_u_s.id_usurios = $idUsuario
+				LIMIT $desdeLimit, $cantidadLimit";
+		$rs = $this->db->query($query);
+		return $rs->result_array();
+	}
 
 	public function getFavoritos($idUsuario, $desdeLimit ,$cantidadLimit){
 		$query 	= "SELECT
@@ -280,6 +306,19 @@ Class Usuarios_model extends CI_Model{
 		return $rs->result_array();
 
 	}
+
+	public function getCantidadServicioPropios($idUsuario){
+		$query = "SELECT
+					COUNT(servicios.id) AS cantidad
+				FROM
+					relacion_u_s
+				INNER JOIN servicios ON relacion_u_s.id_servicios = servicios.id
+				WHERE
+				relacion_u_s.id_usurios = $idUsuario";
+		$rs = $this->db->query($query);
+		return $rs->row()->cantidad;
+	}
+
 
 	public function getServiciosContactados($idUsuario, $desdeLimit ,$cantidadLimit){
 		$query 	=	"SELECT
@@ -329,7 +368,7 @@ Class Usuarios_model extends CI_Model{
 
 	public function getCantidadPostulados($id, $vencido){
 		$query = "SELECT
-					count(postulaciones_temp.id)
+					count(postulaciones_temp.id) AS cantidad
 				FROM
 					postulaciones_temp
 				INNER JOIN busquedas_temp ON postulaciones_temp.id_busquedas_temp = busquedas_temp.id
@@ -341,12 +380,12 @@ Class Usuarios_model extends CI_Model{
 					postulaciones_temp.postulado = 1";
 		$rs = $this->db->query($query);
 
-		return $rs->row();
+		return $rs->row()->cantidad;
 	}
 
 	public function getCantidadSolicitados($id, $vencido){
 		$query = "SELECT
-					count(busquedas_temp.id)
+					count(busquedas_temp.id) AS cantidad
 				FROM
 					busquedas_temp
 				WHERE
@@ -355,7 +394,7 @@ Class Usuarios_model extends CI_Model{
 					busquedas_temp.vencido = $vencido";
 		$rs = $this->db->query($query);
 
-		return $rs->row();
+		return $rs->row()->cantidad;
 	}
 
 

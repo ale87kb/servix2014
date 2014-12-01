@@ -862,15 +862,15 @@ class sitio extends CI_Controller {
 					$data['link_user'] = site_url('usuario/perfil/'. $servicioRS[0]['userID'].'-'.$servicioRS[0]['nombre'].'-'.$servicioRS[0]['apellido']);
 				    if($servicioRS[0]['foto'] == "" || $servicioRS[0]['foto'] == null)
 				    {
-				     $data['foto_path'] = 'assets/images/servicio_200.jpg';
+				    	$data['foto_path'] = 'assets/images/servicio_200.jpg';
 				    }
 				    else if(file_exists('./assets/images/servicios/' . $servicioRS[0]['foto']))
 				    {
-				     $data['foto_path'] = path_archivos('assets/images/servicios/', agregar_nombre_archivo($servicioRS[0]['foto'], ''));
+				    	$data['foto_path'] = path_archivos('assets/images/servicios/', agregar_nombre_archivo($servicioRS[0]['foto'], ''));
 				    }
 				    else 
 				    {
-				     $data['foto_path'] = 'assets/images/servicio_200.jpg';
+				    	$data['foto_path'] = 'assets/images/servicio_200.jpg';
 				    }
 				}
 

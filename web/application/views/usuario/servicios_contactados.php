@@ -12,12 +12,12 @@
 						
         <?php
           if(!empty($sContactados)){
-            foreach ($sContactados as $c) {
+            foreach ($sContactados as $scont) {
             ?>
-              <a href="<?php echo $c['link']; ?>" class="list-group-item">
-                <p class="list-group-item-text"><?php echo ucfirst($c['titulo']); ?></p>
-                <p class="list-group-item-text"><?php echo ucfirst($c['consulta']); ?></p>
-                <p>Realizado el <?php echo $c['fecha'];?></p>
+              <a href="<?php echo $scont['link']; ?>" class="list-group-item">
+                <p class="list-group-item-text"><?php echo ucfirst($scont['titulo']); ?></p>
+                <p class="list-group-item-text"><?php echo ucfirst($scont['consulta']); ?></p>
+                <p>Realizado el <?php echo $scont['fecha'];?></p>
               </a>
 
             <?php

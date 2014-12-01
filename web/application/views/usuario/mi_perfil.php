@@ -20,6 +20,11 @@
 				$this->load->view('usuario/postulaciones');
 			?>
 			</div>
+			<div class="row">
+			<?php 
+				$this->load->view('usuario/servicios_usuario');
+			?>
+			</div>
 
 		</div>
 	</div>

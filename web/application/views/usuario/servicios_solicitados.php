@@ -11,18 +11,18 @@
 						
        <?php
           if(!empty($sSolicitados)){
-            foreach ($sSolicitados as $c) {
+            foreach ($sSolicitados as $ssol) {
             ?>
           <div class="panel panel-default">
-          	<div class="panel-heading"><?php echo ucfirst( $c['categoria']); ?> en <?php echo $c['localidad']." ". $c['provincia']; ?></div>
+          	<div class="panel-heading"><?php echo ucfirst( $ssol['categoria']); ?> en <?php echo $ssol['localidad']." ". $ssol['provincia']; ?></div>
         	<div class="panel-body">
               	<p>
-                	<?php echo $c['busqueda']; ?>
+                	<?php echo $ssol['busqueda']; ?>
               	</p>
-           		<a href="<?php echo site_url($c['link']); ?>" class="btn btn-sm btn-default pull-right">Ver solicitud</a>
+           		<a href="<?php echo site_url($ssol['link']); ?>" class="btn btn-sm btn-default pull-right">Ver solicitud</a>
         	</div>
         	<div class="panel-footer">
-          		Fecha de publicación: <?php echo $c['fecha']; ?>
+          		Fecha de publicación: <?php echo $ssol['fecha']; ?>
         	</div>
         	</div>
 

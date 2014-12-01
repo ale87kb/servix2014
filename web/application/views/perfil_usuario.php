@@ -29,28 +29,10 @@
 			        <tr>
 			          <td><?php echo count($servicios); ?></td>
 			        </tr>
-			      <tr>                    
-                    <td>Servicios Solicitados Activos</td>
-                  </tr>
-                  <tr>
-                    <td><?php echo $cantSolicitados; ?></td>
-                  </tr>
-                  <tr>                    
-                    <td>Total Servicios Solicitados</td>
-                  </tr>
-                  <tr>
-                    <td><?php echo $cantSolicitadosT; ?></td>
-                  </tr>
-                  <tr>                    
-			      	<td>Postulaciones</td>
-			      </tr>
-			      <tr>
-			      	<td><?php echo $cantPostulaciones; ?></td>
-			      </tr>
 			      </tbody>
 			    </table>
 			</diV>
-		</div>
+        </div>
 				
 		<div class="col-md-12">
 			<hr/>
