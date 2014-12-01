@@ -1,3 +1,4 @@
+<div class="container" id="main">
 <div id="box_registro" class="jumbotron col-md-12">
    
 
