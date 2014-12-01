@@ -245,13 +245,15 @@ Class Servicios_model extends CI_Model{
 						servicios.telefono,
 						servicios.latitud,
 						servicios.longitud,
+						localidades.id as id_localidad,
 						localidades.localidad,
 						provincias.provincia,
 						categorias.categoria,
 						usuarios.id AS userID,
 						usuarios.nombre,
 						usuarios.apellido,
-						usuarios.email
+						usuarios.email,
+						provincias.provincia
 					FROM
 						servicios
 					LEFT OUTER JOIN localidades ON servicios.id_localidades = localidades.id
@@ -259,12 +261,50 @@ Class Servicios_model extends CI_Model{
 					LEFT OUTER JOIN categorias ON servicios.id_categorias = categorias.id
 					LEFT OUTER JOIN relacion_u_s ON relacion_u_s.id_servicios = servicios.id
 					LEFT OUTER JOIN usuarios ON relacion_u_s.id_usurios = usuarios.id
+					LEFT OUTER JOIN provincias ON localidades.id_provincia = provincias.id
 					WHERE
 						servicios.id = $id LIMIT 1";
 
 		$rs    = $this->db->query($query);
 		return $rs->result_array();
 
+	}
+
+	public function updateServicio($post){
+		/*
+		Array
+		(
+		    $post['titulo'] => Reparador de pc2
+		    $post['categoria'] => 41
+		    $post['telefono'] => 11340907331
+		    $post['sitioweb'] => www.google1.com
+		    $post['descripcion'] => Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus ipsum nisi autem at iusto illum excepturi perspiciatis. Praesentium, quod eligendi consectetur officia nemo dolorum quo. Tempora nostrum debitis laudantium porro.1
+		    $post['localidad'] => 167
+		    $post['direccion'] => El Cisne, Ciudad Evita, Buenos Aires, Argentina1
+		    $post['lati'] => -34.73237611
+		    $post['long'] => -58.523746501
+		    $post['seccion'] => editar-servicio
+		    $post['foto'] => 76ced2891a8050ca5c7bdcbc12c9fb5ca_srx.jpeg
+		    $post['id_servicio'] => 529
+		    $post['imagen'] => 76ced2891a8050ca5c7bdcbc12c9fb5ca_srx.jpeg
+		)
+		*/
+		$query = "	UPDATE `servicios` SET
+		    `id_categorias`=".$post['categoria'].",
+			`id_localidades`=".$post['localidad'].",
+			`titulo`='".$post['titulo']."',
+			`foto`='".$post['imagen']."',
+			`url_web`='".$post['sitioweb']."',
+			`direccion`='".$post['direccion']."',
+			`telefono`='".$post['telefono']."',
+			`latitud`='".$post['lati']."',
+			`longitud`='".$post['long']."' 
+			WHERE  
+			`id`=".$post['id_servicio']." 
+			LIMIT 1;";
+
+			$rs    = $this->db->query($query);
+			return $rs;
 	}
 
 	public function setServicio($post=null){

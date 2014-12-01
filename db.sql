@@ -3,7 +3,7 @@
 -- Server version:               5.6.16 - MySQL Community Server (GPL)
 -- Server OS:                    Win32
 -- HeidiSQL version:             7.0.0.4053
--- Date/time:                    2014-11-30 19:44:02
+-- Date/time:                    2014-12-01 02:38:37
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `categorias` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1 COMMENT='Guarda las categorias de los servicios';
 
--- Dumping data for table servix_db.categorias: ~40 rows (approximately)
+-- Dumping data for table servix_db.categorias: ~41 rows (approximately)
 DELETE FROM `categorias`;
 /*!40000 ALTER TABLE `categorias` DISABLE KEYS */;
 INSERT INTO `categorias` (`id`, `categoria`) VALUES
@@ -140,7 +140,7 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 DELETE FROM `ci_sessions`;
 /*!40000 ALTER TABLE `ci_sessions` DISABLE KEYS */;
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-	('9b7a643b80cbfd6f5f47921a2231f2d2', '::1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36', 1417387229, 'a:3:{s:9:"user_data";s:0:"";s:9:"logged_in";a:12:{s:2:"id";s:1:"8";s:5:"email";s:19:"horacio@hotmail.com";s:6:"nombre";s:7:"horacio";s:8:"apellido";s:6:"moreno";s:9:"direccion";s:20:"av juan b justo 2195";s:8:"telefono";s:10:"1134090733";s:4:"foto";s:36:"5198225b4dcf3938b80db9a5ccba1c43.jpg";s:6:"estado";s:1:"0";s:14:"ultima_edicion";s:19:"2014-11-28 01:11:34";s:10:"foto_thumb";s:42:"5198225b4dcf3938b80db9a5ccba1c43_thumb.jpg";s:9:"foto_path";s:59:"assets/images/usuarios/5198225b4dcf3938b80db9a5ccba1c43.jpg";s:15:"foto_thumb_path";s:65:"assets/images/usuarios/5198225b4dcf3938b80db9a5ccba1c43_thumb.jpg";}s:8:"busqueda";a:2:{s:4:"post";a:2:{s:8:"servicio";s:15:"Reparador de pc";s:9:"localidad";s:12:"Buenos Aires";}s:3:"url";a:2:{s:8:"servicio";s:15:"reparador-de-pc";s:9:"localidad";s:12:"buenos-aires";}}}');
+	('65c870b3cd6343b9717485687f07cc05', '::1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36', 1417412212, 'a:3:{s:9:"user_data";s:0:"";s:8:"busqueda";a:2:{s:4:"post";a:2:{s:8:"servicio";s:14:"Diseñador web";s:9:"localidad";s:12:"Buenos Aires";}s:3:"url";a:2:{s:8:"servicio";s:13:"disenador-web";s:9:"localidad";s:12:"buenos-aires";}}s:9:"logged_in";a:12:{s:2:"id";s:1:"8";s:5:"email";s:19:"horacio@hotmail.com";s:6:"nombre";s:7:"horacio";s:8:"apellido";s:6:"moreno";s:9:"direccion";s:20:"av juan b justo 2195";s:8:"telefono";s:10:"1134090733";s:4:"foto";s:36:"5198225b4dcf3938b80db9a5ccba1c43.jpg";s:6:"estado";s:1:"0";s:14:"ultima_edicion";s:19:"2014-11-28 01:11:34";s:10:"foto_thumb";s:42:"5198225b4dcf3938b80db9a5ccba1c43_thumb.jpg";s:9:"foto_path";s:59:"assets/images/usuarios/5198225b4dcf3938b80db9a5ccba1c43.jpg";s:15:"foto_thumb_path";s:65:"assets/images/usuarios/5198225b4dcf3938b80db9a5ccba1c43_thumb.jpg";}}');
 /*!40000 ALTER TABLE `ci_sessions` ENABLE KEYS */;
 
 
@@ -195,8 +195,7 @@ DELETE FROM `favoritos`;
 INSERT INTO `favoritos` (`id`, `id_usuarios`, `id_servicios`, `fecha`) VALUES
 	(1, 1, 3, '2014-11-04 18:32:33'),
 	(2, 1, 47, '2014-11-18 18:32:48'),
-	(17, 8, 208, '2014-11-24 07:54:06'),
-	(18, 8, 208, '2014-11-24 07:54:07');
+	(19, 8, 208, '2014-11-30 08:28:46');
 /*!40000 ALTER TABLE `favoritos` ENABLE KEYS */;
 
 
@@ -2754,7 +2753,10 @@ INSERT INTO `relacion_u_s` (`id`, `id_usurios`, `id_servicios`) VALUES
 	(1, 1, 208),
 	(4, 12, 523),
 	(5, 13, 524),
-	(6, 14, 511);
+	(6, 14, 511),
+	(8, 8, 529),
+	(10, 8, 531),
+	(11, 8, 532);
 /*!40000 ALTER TABLE `relacion_u_s` ENABLE KEYS */;
 
 
@@ -2779,7 +2781,7 @@ CREATE TABLE IF NOT EXISTS `servicios` (
   CONSTRAINT `servicios_ibfk_2` FOREIGN KEY (`id_categorias`) REFERENCES `categorias` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=530 DEFAULT CHARSET=latin1 COMMENT='Guarda los datos del servicio';
 
--- Dumping data for table servix_db.servicios: ~52 rows (approximately)
+-- Dumping data for table servix_db.servicios: ~53 rows (approximately)
 DELETE FROM `servicios`;
 /*!40000 ALTER TABLE `servicios` DISABLE KEYS */;
 INSERT INTO `servicios` (`id`, `id_categorias`, `id_localidades`, `titulo`, `descripcion`, `foto`, `url_web`, `direccion`, `telefono`, `latitud`, `longitud`) VALUES
@@ -2797,7 +2799,7 @@ INSERT INTO `servicios` (`id`, `id_categorias`, `id_localidades`, `titulo`, `des
 	(147, 28, 28, 'pleasure music table act', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'tired steel comfort chin back simple stone ta', 'stocking plate summer destruction twist fowl ', '45767 US Hwy 90U Bus', '606-845-1455', '371332870', '191471041'),
 	(193, 21, 12, 'now angle', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'ticket very fixed watch grip mother necessary', 'sort fear poor committee level probable ficti', '27697 US Hwy 81D Bus', '145-690-6530', '326322070', '216826337'),
 	(204, 12, 74, 'tray line', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'society wide second test clean cruel very orn', 'jump condition powder tree up regular thumb b', '49777 Doak St', '362-147-9691', '379852742', '11069465'),
-	(208, 22, 36, 'Herreria los hermanos', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'statement writing space form will complete na', 'http://www.misitioweb.com.ar', '68 E San Antonio St', '103-513-0952', '-38.7751423', '-62.1179636'),
+	(208, 22, 36, 'Herreria los hermanos', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', '', 'http://www.misitioweb.com.ar', '68 E San Antonio St', '103-513-0952', '-38.7751423', '-62.1179636'),
 	(226, 8, 54, 'over thin root learning', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'fire such news decision near account line pro', 'arch coal twist pin milk till brain kind blue', '5068 FM 852', '186-704-1261', '698183890', '671562056'),
 	(244, 37, 64, 'basin', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'credit canvas hospital cold whistle rest moon', 'low order room apparatus complete crack level', '628 US Hwy 259', '581-510-7535', '340245738', '217866679'),
 	(262, 3, 58, 'night', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'station kiss through yellow brush language ha', 'increase east bridge development grass drawer', '630 Byrd Ave', '650-850-9951', '119930610', '183885541'),
@@ -2835,7 +2837,9 @@ INSERT INTO `servicios` (`id`, `id_categorias`, `id_localidades`, `titulo`, `des
 	(522, 22, 36, 'Herreria los primos', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'statement writing space form will complete na', 'price field ball foolish expert poison comb s', '68 E San Antonio St', '103-513-0952', '-38.7651423', '-62.1279636'),
 	(523, 22, 9, 'Herreria de caballos', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'crush true off cruel error liquid tooth late ', 'throat value current number daughter adjustme', '21 FM 487', '382-727-1001', '-36.7769285', '-59.8586113'),
 	(524, 22, 9, 'Herreria de caballos 2', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'crush true off cruel error liquid tooth late ', 'throat value current number daughter adjustme', '21 FM 487', '382-727-1001', '-36.7765285', '-59.8546113'),
-	(529, 41, 166, 'Reparador de pc', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus ipsum nisi autem at iusto illum excepturi perspiciatis. Praesentium, quod eligendi consectetur officia nemo dolorum quo. Tempora nostrum debitis laudantium porro.', '76ced2891a8050ca5c7bdcbc12c9fb5c_srx.jpeg', 'www.google.com', 'El Cisne, Ciudad Evita, Buenos Aires, Argentina', '1134090733', '-34.7323761', '-58.52374650');
+	(529, 41, 167, 'Reparador de pc1', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus ipsum nisi autem at iusto illum excepturi perspiciatis. Praesentium, quod eligendi consectetur officia nemo dolorum quo. Tempora nostrum debitis laudantium porro.1', 'e697b8cadc3c639cda0033bad57a7130_srx.jpeg', 'www.google1.com', 'Acceso A El Cisne, Ciudad Evita, Buenos Aires, Argentina', '11340907331', '-34.7320954', '-58.52353959'),
+	(531, 29, 1, 'rep pc3', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus ipsum nisi autem at iusto illum excepturi perspiciatis. Praesentium, quod eligendi consectetur officia nemo dolorum quo. Tempora nostrum debitis laudantium porro.', 'f6d79b57bbb35140396c7b95f0f2cceb_srx.jpeg', 'www.google.com', 'Av Corrientes, Buenos Aires, Argentina', '1134090733', '-34.6040268', '-58.41047670'),
+	(532, 18, 166, 'Diseñador web', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus ipsum nisi autem at iusto illum excepturi perspiciatis. Praesentium, quod eligendi consectetur officia nemo dolorum quo. Tempora nostrum debitis laudantium porro.\r\n\r\nLorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus ipsum nisi autem at iusto illum excepturi perspiciatis. Praesentium, quod eligendi consectetur officia nemo dolorum quo. Tempora nostrum debitis laudantium porro.', '8c557e3ede44591e93cdbddc576fd035_srx.jpg', 'http://mahoo.com.ar', 'El Cisne, Ciudad Evita, Buenos Aires, Argentina', '1134090733', '-34.7323761', '-58.52374650');
 /*!40000 ALTER TABLE `servicios` ENABLE KEYS */;
 
 

@@ -202,10 +202,10 @@ class sitio extends CI_Controller {
 		if($this->UsuarioSession){
 
 		$data['buscador_off'] = true;
-		if($this->UsuarioSession){
-			$data['usuario'] = $this->UsuarioSession['nombre'];
-			$data['usuarioSession'] = $this->UsuarioSession;
-		}
+		
+		$data['usuario'] = $this->UsuarioSession['nombre'];
+		$data['usuarioSession'] = $this->UsuarioSession;
+	
 		$data['vista'] = 'solicitar_servicio';
 
 
@@ -216,76 +216,7 @@ class sitio extends CI_Controller {
 		}
 	}
 
-	public function validar_ofrecer_servicio(){
-
-		if($this->UsuarioSession){
 	
-		//******Validacion form*********//
-		$this->form_validation->set_rules('titulo', 'titulo', 'trim|required|min_length[3]|max_length[40]|xss_clean');
-
-		$this->form_validation->set_rules('categoria', 'categoria', 'trim|required|min_length[5]|max_length[40]|xss_clean');
-
-		$this->form_validation->set_rules('telefono', 'telefono', 'trim|required|xss_clean');
-
-		$this->form_validation->set_rules('sitioweb', 'sitioweb', 'trim|xss_clean');
-
-		$this->form_validation->set_rules('descripcion', 'descripcion', 'trim|required|min_length[10]|max_length[800]|xss_clean');
-
-		$this->form_validation->set_rules('localidad', 'localidad', 'trim|required|xss_clean');
-
-		$this->form_validation->set_rules('direccion', 'direccion', 'trim|xss_clean');
-
-			//si carga un archivo lo valido y si esta todo bien lo subo, con un resize y borro la original
-		$files = $this->_fileUpload($_FILES);
-		//******fin form*********//
-
-		// print_d($files);
-
-			// si algo de los inputs falla mando errores a la vista
-			// y configuro una variable flashdata para mantener las post Vars
-			if ($this->form_validation->run() == FALSE)
-			{
-				$this->session->set_flashdata('post', $this->input->post());
-				redirect($_SERVER['HTTP_REFERER']);
-			}
-			else if($files['error']){
-			//si el archivo que esta subiendo no cumple con los requisitos minimos devuelvo el error en la vista en la pagina 2 del formulario y seteo las vars post en una var flash
-
-			
-				$this->session->set_flashdata('mensaje_e', $files);
-				$this->session->set_flashdata('post', $this->input->post());
-
-				redirect($_SERVER['HTTP_REFERER']."#paso_2");
-
-			}else
-			{	
-				$post = $this->input->post();
-				$post['imagen'] = $files['file_name'];
-
-				//si esta todo bien chequeo la categoria, si existe en la db , o si se asigna a la categoria de otros y se graba en la tabla de cats_no_db
-				$categoria = $this->_checkCategoria( $this->input->post('categoria') );
-				$post['categoria'] = $categoria;
-
-				//ahora guardo los datos del servicio en la db
-
-				$rs = $this->servicios_model->setServicio($post);
-				$this->servix_model->setRelacionUS($this->UsuarioSession['id'],$rs);
-
-				if($rs){
-					//todo bien
-					redirect('ofrecer-servicio/msj/registro_ok');
-				}else{
-					//error en db
-					redirect('ofrecer-servicio/msj/registro_e');
-				}
-				
-
-				
-
-			}
-		}
-		
-	}
 
 	public function off_serv_mensaje($param){
 		// echo $param;
@@ -500,10 +431,172 @@ class sitio extends CI_Controller {
 		$insert = $this->servix_model->setCatNobd($post['id_usuario'],$post['categoria'],$post['comentario'],$post['fecha_fin']);
 		return $insert;
 	}
+
+	public function validar_ofrecer_servicio(){
+		$seccion = $this->input->post('seccion');
+		if($this->UsuarioSession){
+	
+		//******Validacion form*********//
+		$this->form_validation->set_rules('titulo', 'titulo', 'trim|required|min_length[3]|max_length[40]|xss_clean');
+
+		$this->form_validation->set_rules('categoria', 'categoria', 'trim|required|min_length[5]|max_length[40]|xss_clean');
+
+		$this->form_validation->set_rules('telefono', 'telefono', 'trim|required|xss_clean');
+
+		$this->form_validation->set_rules('sitioweb', 'sitioweb', 'trim|xss_clean');
+
+		$this->form_validation->set_rules('descripcion', 'descripcion', 'trim|required|min_length[10]|max_length[800]|xss_clean');
+
+		$this->form_validation->set_rules('localidad', 'localidad', 'trim|required|xss_clean');
+
+		$this->form_validation->set_rules('direccion', 'direccion', 'trim|xss_clean');
+
+			//si carga un archivo lo valido y si esta todo bien lo subo, con un resize y borro la original
+		$files = $this->_fileUpload($_FILES);
+		//******fin form*********//
+
+		// print_d($files);
+
+			// si algo de los inputs falla mando errores a la vista
+			// y configuro una variable flashdata para mantener las post Vars
+			if ($this->form_validation->run() == FALSE)
+			{
+				$form_errors = array(
+					'titulo' => form_error('titulo'), 
+					'categoria' => form_error('categoria'), 
+					'telefono' => form_error('telefono'), 
+					'sitioweb' => form_error('sitioweb'), 
+					'descripcion' => form_error('descripcion'), 
+					'localidad' => form_error('localidad'), 
+					'direccion' => form_error('direccion'), 
+				);
+				$this->session->set_flashdata('post', $this->input->post());
+				$this->session->set_flashdata('form_error', $form_errors);	
+				 
+
+				redirect($_SERVER['HTTP_REFERER']);
+			}
+			else if($files['error']){
+			//si el archivo que esta subiendo no cumple con los requisitos minimos devuelvo el error en la vista en la pagina 2 del formulario y seteo las vars post en una var flash
+
+			
+				$this->session->set_flashdata('mensaje_e', $files);
+				$this->session->set_flashdata('post', $this->input->post());
+
+				redirect($_SERVER['HTTP_REFERER']."#paso_2");
+
+			}else
+			{	
+				$post = $this->input->post();
+				$post['imagen'] = $files['file_name'];
+
+				//si esta todo bien chequeo la categoria, si existe en la db , o si se asigna a la categoria de otros y se graba en la tabla de cats_no_db
+				$categoria = $this->_checkCategoria( $this->input->post('categoria') );
+				$post['categoria'] = $categoria;
+
+				//ahora guardo los datos del servicio en la db
+				if($seccion == 'publicar-servicio'){
+					$rs = $this->servicios_model->setServicio($post);
+					$this->servix_model->setRelacionUS($this->UsuarioSession['id'],$rs);
+
+					if($rs){
+						//todo bien
+						redirect('ofrecer-servicio/msj/registro_ok');
+					}else{
+						//error en db
+						redirect('ofrecer-servicio/msj/registro_e');
+					}
+				}else if($seccion == 'editar-servicio'){
+
+					if(empty($post['imagen'])){
+						$post['imagen'] = $post['foto'];
+					}else{
+						$img_thumb_path = path_archivos('assets/images/servicios/', agregar_nombre_archivo($post['foto'],''));
+						@unlink($img_thumb_path);
+					}
+					$rs = $this->servicios_model->updateServicio($post);
+
+					if($rs){
+						//todo bien
+						//redirect('ofrecer-servicio/msj/registro_ok');
+						echo "todo bien";
+					}else{
+						//error en db
+						//redirect('ofrecer-servicio/msj/registro_e');
+						echo "ups error";
+					}
+
+				}
+				
+
+				
+
+			}
+		}
+		
+	}
+
+
+	public function editar_servicio($q){
+		if($this->UsuarioSession)
+		{
+			$data['seccion'] = 'editar-servicio';
+			$data['buscador_off'] = true;
+			if($this->UsuarioSession){
+				$data['usuario'] = $this->UsuarioSession['nombre'];
+				$data['usuarioSession'] = $this->UsuarioSession;
+			}
+			$this->load->library('googlemaps');
+			
+			$rs = $this->servicios_model->getServicioFicha($q);	
+			foreach ($rs as $v) {
+
+			$config = array();
+			$latLong = ''.$v['latitud'].' '.$v['longitud'].'';
+			if(empty($latLon)){
+				$latLon = $v['localidad'];
+			}
+			$config['center'] = $latLong;
+			
+			$config['zoom'] = '17';
+			$config['places'] = TRUE;
+			$config['scrollwheel'] = FALSE;
+			$config['placesAutocompleteInputID'] 	= 'myPlaceTextBox';
+			$config['placesAutocompleteBoundsMap'] 	= TRUE;
+			// $opciones = array('cities'); 
+			$config['placesAutocompleteRestrict'] 	= 'AR'; 
+			$config['placesAutocompleteOnChange'] 	= gmapScript();//viene del helper de mis_funciones
+			$this->googlemaps->initialize($config);
+		
+
+			$marker = array();
+			$marker['icon'] = site_url('assets/images/servix_marker.png');
+			$marker['icon_size']   = '25, 66';
+			$marker['icon_origin'] = '0, 0';
+			$marker['icon_anchor'] = '17, 34';
+			$marker['icon_scaledSize'] = '20, 35';
+
+			$marker['position']			  = $latLong;
+
+			$marker['infowindow_content'] = ('<div style="width: 250px;color: #000;font-size:14px;font-family:Arial, Helvetica, sans-serif;">'.ucwords($v['titulo']).'<br>'.ucfirst($v['direccion']).'			</div>');
+			$marker['infowindowMaxWidth'] = "500";
+			$marker['animation']		  = 'DROP';
+			$this->googlemaps->add_marker($marker);
+			}
+			// print_d($rs);
+			$data['map'] = $this->googlemaps->create_map();
+			$data['post'] = $rs[0];
+			$data['form_errors'] =null;
+			$data['vista'] = 'editar_servicio';
+			$this->load->view('home_view',$data);
+
+	
+		}
+	}
 	
 	public function ofrecer_servicio(){
 		if($this->UsuarioSession){
-
+		$data['seccion'] = 'publicar-servicio';	
 		$data['buscador_off'] = true;
 		if($this->UsuarioSession){
 			$data['usuario'] = $this->UsuarioSession['nombre'];
@@ -524,6 +617,7 @@ class sitio extends CI_Controller {
 	
 		$data['map'] = $this->googlemaps->create_map();
 		$data['post'] = null;
+		$data['form_errors'] =null;
 		$data['vista'] = 'ofrecer_servicio';
 		$this->load->view('home_view',$data);
 

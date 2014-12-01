@@ -7,7 +7,9 @@
 			<div class="col-md-3">
 				<div class="row  text-center">
 					<figure>
-						<img src="<?php echo site_url($foto_path);?>" class="img-rounded" alt="">
+						<img src="<?php echo site_url($foto_path);?>" class="img-rounded img-responsive" alt="" style="
+    margin: 0px auto 10px;
+">
 					</figure>
 					<div class="col-md-10 col-md-offset-1">
 						<p>

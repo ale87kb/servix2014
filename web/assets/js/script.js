@@ -565,9 +565,9 @@ var app = function(){
                                 message: 'Por favor introduce un titulo'
                             },
                             stringLength: {
-                                max:45,
+                                max:40,
                                 min:3,
-                                message: 'Por favor, ingrese un titulo entre 3 y 60 caracteres'
+                                message: 'Por favor, ingrese un titulo entre 3 y 40 caracteres'
                             }
                         }
                     },
@@ -616,7 +616,7 @@ var app = function(){
                     fotoServicio: {
                         validators: {
                             file: {
-                                extension: 'jpeg,png',
+                                extension: 'jpeg,jpg,png',
                                 type: 'image/jpeg,image/png',
                                 maxSize: 2097152,   // 2048 * 1024
                                 message: 'Archivo invalido'
@@ -881,7 +881,28 @@ var app = function(){
 
           
           
-        }
+        },
+        this.previewImgUpload = function(){
+
+            function readURL(input) {
+
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#previewImg').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            $("#fotoServicio").change(function(){
+                readURL(this);
+            });
+
+        },
+
 
         this.init = function(){
             this.busqueda();
@@ -903,6 +924,7 @@ var app = function(){
             this.hideMensaje();
             this.compWizzard();
             this.validar_ofrecer();
+            this.previewImgUpload();
         }
     };
     

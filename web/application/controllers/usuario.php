@@ -51,6 +51,8 @@ class Usuario extends CI_controller{
 		}
 	}
 
+	
+
 	private function _linkFavoritos($idUsuario, $desdeLimit ,$cantidadLimit){
 		$favoritos = $this->usuarios_model->getFavoritos($idUsuario, $desdeLimit ,$cantidadLimit);
 		if($favoritos){

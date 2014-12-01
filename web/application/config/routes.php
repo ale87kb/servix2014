@@ -57,6 +57,7 @@ $route['unset_postulacion']	        			= "sitio/unset_postulacion";
 $route['solicitar-servicio']	        		= "sitio/solicitar_servicio";
 $route['validar-solicitud-servicio']	        = "sitio/validar_solicitud_servicio";
 $route['validar-ofrecer-servicio']	        	= "sitio/validar_ofrecer_servicio";
+$route['validar-editar-servicio']	        	= "sitio/validar_ofrecer_servicio";
 $route['ofrecer-servicio/msj/(registro_ok|registro_e)']  	= "sitio/off_serv_mensaje/$1";
 $route['file_upload_image']	        			= "sitio/file_upload_image";
 
@@ -106,6 +107,9 @@ $route['mi-perfil/editar-servicios']  			= "usuario/editar_servicios";
 $route['mi-perfil/favoritos']  					= "usuario/favoritos";
 $route['set_favorito']  						= "usuario/set_favorito";
 $route['mi-perfil/servicios-solicitados']  		= "usuario/servicios_solicitados";
+
+$route['mi-perfil/servicios/editar/(:num)-(:any)']  = "sitio/editar_servicio/$1";
+
 $route['mis-comentarios']           			= "usuario/mis_comentarios";
 
 $route['usuario/perfil/(:any)'] 				= "usuario/perfil_usuario/$1";
