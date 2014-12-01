@@ -22,6 +22,8 @@
                 <p class="list-group-item-text"><?php echo ucfirst($ser['localidad']) . " " . ucfirst($ser['provincia']);?></p>
               </a>
 
+             <p class="text-right"> <a href="<?php echo site_url(generarLinkServicio($ser['id'],$ser['titulo'],'mi-perfil/servicios/editar/')); ?>">Editar servicio</a></p>
+          
             <?php
             }
             if(count($serviciosPropios) > 4){

@@ -252,8 +252,7 @@ Class Servicios_model extends CI_Model{
 						usuarios.id AS userID,
 						usuarios.nombre,
 						usuarios.apellido,
-						usuarios.email,
-						provincias.provincia
+						usuarios.email
 					FROM
 						servicios
 					LEFT OUTER JOIN localidades ON servicios.id_localidades = localidades.id
@@ -261,7 +260,7 @@ Class Servicios_model extends CI_Model{
 					LEFT OUTER JOIN categorias ON servicios.id_categorias = categorias.id
 					LEFT OUTER JOIN relacion_u_s ON relacion_u_s.id_servicios = servicios.id
 					LEFT OUTER JOIN usuarios ON relacion_u_s.id_usurios = usuarios.id
-					LEFT OUTER JOIN provincias ON localidades.id_provincia = provincias.id
+			
 					WHERE
 						servicios.id = $id LIMIT 1";
 

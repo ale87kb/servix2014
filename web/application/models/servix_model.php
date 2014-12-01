@@ -30,6 +30,13 @@ Class Servix_model extends CI_Model{
 
 	}
 
+	public function getCategorias(){
+		$query = "SELECT * FROM categorias ORDER BY categoria ASC LIMIT 100";
+		$rs    = $this->db->query($query);
+		return $rs->result_array();
+
+	}
+
 	public function setRelacionUS($idUser,$idServ){
 
 		$query = "INSERT INTO relacion_u_s (id_usurios, id_servicios) VALUES ($idUser,$idServ);";

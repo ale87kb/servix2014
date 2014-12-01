@@ -13,5 +13,8 @@
 		$this->load->view('buscador_view');
 	}
 	$this->load->view($vista);
+	if(isset($foot_cat)){
+		$this->load->view('includes/footCat');
+	}
 	$this->load->view('includes/footer');
  ?>

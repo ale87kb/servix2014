@@ -78,7 +78,7 @@
 		if(!$archivo == ''){
 			$ext = explode('.',$archivo);
 			$extension = $ext[1];
-			$nuevo_nombre = $ext[0] . $agregado . '.' . $extension;
+			@$nuevo_nombre = $ext[0] . $agregado . '.' . $extension;
 		}
 		return $nuevo_nombre;
 	}

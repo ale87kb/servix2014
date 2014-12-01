@@ -34,10 +34,12 @@ class sitio extends CI_Controller {
 		}else{
 			$data['solicitados'] = null;
 		}
+		$data['categorias'] = $this->servix_model->getCategorias();
 
 		$data['paginacion'] = $solicitados['links'];
 		$data['vista'] = 'index_view';
 		$data['current_page'] = $solicitados['current_page'];
+		$data['foot_cat'] ='footCat';
 
 		if ($this->input->is_ajax_request()) {
 			$this->load->view('servicios_solicitados',$data);
@@ -645,41 +647,53 @@ class sitio extends CI_Controller {
 	}
 
 
-	public function resultado_busqueda(){
+	public function resultado_busqueda($q=null,$l='buenos aires'){
 			
 		$busca = $this->session->userdata("busqueda");
+	
+
 		if($this->UsuarioSession){
 			$data['usuario'] = $this->UsuarioSession['nombre'];
 			$data['usuarioSession'] = $this->UsuarioSession;
 		}
-		$data['servicio']  = $busca['post']['servicio'];
-		$data['localidad'] = $busca['post']['localidad'];
-		$urlLoc 		   = $busca['url']['localidad'];
-		$urlServ 		   = $busca['url']['servicio'];
-		$result	   		   = $this->_setPaginacion($data['servicio'],$data['localidad'],$urlServ,$urlLoc);
+		if($l == 'argentina'){
+			$urlq 			   = $q."-en-".$l;
+			$l= '';
+		}
+		// print_d($busca);
+		$data['servicio']  = str_replace('-', ' ', $q);
+		$data['localidad'] = str_replace('-', ' ', $l);
+		
+
+		$result	   		   = $this->_setPaginacion($data['servicio'],$data['localidad'],$urlq );
+
+
+		// print_d($this->db->last_query());
 		$data['result']    = $result['result'];
 		if(!empty($data['result'])){
-		 $data['map'] 	   =	$this->_gmap($data['result'],$busca['post']['localidad']);
+
+		 $data['map'] 	   =	$this->_gmap($data['result'],$data['localidad']);
 		}
 		$data['title'] 	   = 'Resultado de búsqueda';
 		$data['vista'] 	   = 'resultado_busqueda_view';
 		$this->load->view('home_view',$data);
 
+
 	}
 
-	private function _setPaginacion($servicio, $localidad, $urlServ, $urlLoc){
+	private function _setPaginacion($servicio, $localidad,$q){
 
 
  	    $this->load->library('pagination');
 	    $config = array();
-        $config["base_url"] 	= site_url('resultado-de-busqueda/'.$urlServ.'/'.$urlLoc);
+        $config["base_url"] 	= site_url('resultado-de-busqueda/'.$q);
         $config["total_rows"]   = $this->servix_model->getTotalFilasResultBusqueda($servicio,$localidad);
         $config["per_page"] 	= 4;
-        $config["uri_segment"]  = 4;
+        $config["uri_segment"]  = 3;
         $config['last_link'] 	= 'Último';
         $config['first_link'] 	= 'Primero';
         $this->pagination->initialize($config);
-        $page 					= (is_numeric($this->uri->segment(4))) ? $this->uri->segment(4) : 0;
+        $page 					= (is_numeric($this->uri->segment(3))) ? $this->uri->segment(3) : 0;
         $data["result"] 		= $this->servix_model->getResultadoBusqueda($servicio,$localidad,  $page, $config["per_page"]); 
         $data["links"] 			= $this->pagination->create_links();
 		return $data;

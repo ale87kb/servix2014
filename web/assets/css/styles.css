@@ -53,7 +53,7 @@ a.list-group-item {
 }
 
 .footer-servix{
-    margin-top: 20px;
+    margin-top: 0px;
 }
 
 .ficha h1{
@@ -133,7 +133,17 @@ a.list-group-item {
 .from-box form ul.typeahead.dropdown-menu{
     width: 100%;
 }
+#secCat ul{
+    list-style:none;
+    padding: 0px;
+}
+#secCat ul li {
+    padding: 0px;
+}
 
+.bg-gray{
+       background: #f1f1f1;
+}
 
 
 .bg-white{

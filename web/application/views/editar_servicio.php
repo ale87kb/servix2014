@@ -186,7 +186,7 @@
                                       <label for="busqueda-localidad">Tu Localidad </label>
                                     
                                        <select id="ajax-select" class="form-control selectpicker with-ajax" name="localidad" placeholder="Buscar" data-live-search="true" >
-                                       	<?php isset($post['id_localidad']){
+                                       	<?php if(isset($post['id_localidad'])){
                                        		?>
                                        		  <option value="<?php echo $post['id_localidad']; ?>">
                                        	
