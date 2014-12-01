@@ -1,7 +1,7 @@
 <section id="search">
  <div class="container">
-    <div class="jumbotron col-md-12">
- <div class="row">
+    <div class="jumbotron col-md-10 col-md-offset-1">
+ <div class="row"> 
     <div class="search-box col-md-12"  >
     <form class="form" role="form" id="formulario-busqueda" action="<?php echo site_url('busqueda');?>" method="POST">
        <div class="row">

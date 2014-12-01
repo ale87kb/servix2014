@@ -177,7 +177,7 @@ a.list-group-item {
     background-size: cover;
 }
 
-#search .jumbotron.col-md-12 {
+#search .jumbotron {
     background: rgba(0,0,0,0.7);
     color: #fff;
     padding-top: 20px;
