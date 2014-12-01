@@ -372,7 +372,7 @@ class Usuario extends CI_controller{
     
 	            //$this->_generarThumbnail($data, $width, $height);
 	            //GENERO EL THUMBNAIL DE 125
-	            $this->_generarThumbnail($data, $size_thumb, $img_thumb_path);
+	            $this->_generarThumbnail($data, $size_thumb, $img_thumb_path, $thumbNombre);
 
 	            //GENERO EL THUMBNAIL DE 200
 	           /* $size_thumb		= 200;
