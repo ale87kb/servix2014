@@ -1,3 +1,4 @@
+<div class="container" id="main">
 <div class="usuario">
 
 	<div class="row">
