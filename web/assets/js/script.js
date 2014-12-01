@@ -449,6 +449,7 @@ var app = function(){
                              if($("#curretSection").val() == 'ficha'){
                                 if($("#nextAction").val() == '#modalOpinion'){
                                     history.pushState({}, '','#QuieroOpinar');
+                                    window.location.reload();
                                 }
                              }else if(($("#nextAction").val() == 'solicitar-servicio') &&  $("#curretSection").val() == ''){
 
@@ -458,10 +459,12 @@ var app = function(){
 
                                   window.location.href='ofrecer-servicio';
 
+                             
                              }else{
 
                                 window.location.reload();
                              }
+
 
                               
                              
