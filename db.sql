@@ -3,7 +3,7 @@
 -- Server version:               5.6.16 - MySQL Community Server (GPL)
 -- Server OS:                    Win32
 -- HeidiSQL version:             7.0.0.4053
--- Date/time:                    2014-12-01 02:38:37
+-- Date/time:                    2014-12-01 17:27:25
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `categorias` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1 COMMENT='Guarda las categorias de los servicios';
 
--- Dumping data for table servix_db.categorias: ~41 rows (approximately)
+-- Dumping data for table servix_db.categorias: ~40 rows (approximately)
 DELETE FROM `categorias`;
 /*!40000 ALTER TABLE `categorias` DISABLE KEYS */;
 INSERT INTO `categorias` (`id`, `categoria`) VALUES
@@ -97,7 +97,6 @@ INSERT INTO `categorias` (`id`, `categoria`) VALUES
 	(36, 'electricista'),
 	(37, 'estampadora '),
 	(38, 'costurero'),
-	(39, 'Otros'),
 	(40, 'Otros'),
 	(41, 'Servicio Técnico');
 /*!40000 ALTER TABLE `categorias` ENABLE KEYS */;
@@ -140,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 DELETE FROM `ci_sessions`;
 /*!40000 ALTER TABLE `ci_sessions` DISABLE KEYS */;
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-	('65c870b3cd6343b9717485687f07cc05', '::1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36', 1417412212, 'a:3:{s:9:"user_data";s:0:"";s:8:"busqueda";a:2:{s:4:"post";a:2:{s:8:"servicio";s:14:"Diseñador web";s:9:"localidad";s:12:"Buenos Aires";}s:3:"url";a:2:{s:8:"servicio";s:13:"disenador-web";s:9:"localidad";s:12:"buenos-aires";}}s:9:"logged_in";a:12:{s:2:"id";s:1:"8";s:5:"email";s:19:"horacio@hotmail.com";s:6:"nombre";s:7:"horacio";s:8:"apellido";s:6:"moreno";s:9:"direccion";s:20:"av juan b justo 2195";s:8:"telefono";s:10:"1134090733";s:4:"foto";s:36:"5198225b4dcf3938b80db9a5ccba1c43.jpg";s:6:"estado";s:1:"0";s:14:"ultima_edicion";s:19:"2014-11-28 01:11:34";s:10:"foto_thumb";s:42:"5198225b4dcf3938b80db9a5ccba1c43_thumb.jpg";s:9:"foto_path";s:59:"assets/images/usuarios/5198225b4dcf3938b80db9a5ccba1c43.jpg";s:15:"foto_thumb_path";s:65:"assets/images/usuarios/5198225b4dcf3938b80db9a5ccba1c43_thumb.jpg";}}');
+	('45f65ee4f587faabd5413e3b01ff8e4b', '::1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36', 1417465347, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:12:{s:2:"id";s:1:"8";s:5:"email";s:19:"horacio@hotmail.com";s:6:"nombre";s:7:"horacio";s:8:"apellido";s:6:"moreno";s:9:"direccion";s:20:"av juan b justo 2195";s:8:"telefono";s:10:"1134090733";s:4:"foto";s:36:"7bd532a167d602fb7135c7c50f0482ed.jpg";s:6:"estado";s:1:"0";s:14:"ultima_edicion";s:19:"2014-11-28 01:11:34";s:10:"foto_thumb";s:42:"7bd532a167d602fb7135c7c50f0482ed_thumb.jpg";s:9:"foto_path";s:59:"assets/images/usuarios/7bd532a167d602fb7135c7c50f0482ed.jpg";s:15:"foto_thumb_path";s:65:"assets/images/usuarios/7bd532a167d602fb7135c7c50f0482ed_thumb.jpg";}}');
 /*!40000 ALTER TABLE `ci_sessions` ENABLE KEYS */;
 
 
@@ -187,9 +186,9 @@ CREATE TABLE IF NOT EXISTS `favoritos` (
   KEY `id_servicios` (`id_servicios`),
   CONSTRAINT `favoritos_ibfk_1` FOREIGN KEY (`id_usuarios`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `favoritos_ibfk_2` FOREIGN KEY (`id_servicios`) REFERENCES `servicios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1 COMMENT='Guarda los favoritos de los usuarios';
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1 COMMENT='Guarda los favoritos de los usuarios';
 
--- Dumping data for table servix_db.favoritos: ~4 rows (approximately)
+-- Dumping data for table servix_db.favoritos: ~2 rows (approximately)
 DELETE FROM `favoritos`;
 /*!40000 ALTER TABLE `favoritos` DISABLE KEYS */;
 INSERT INTO `favoritos` (`id`, `id_usuarios`, `id_servicios`, `fecha`) VALUES
@@ -2613,9 +2612,9 @@ CREATE TABLE IF NOT EXISTS `postulaciones_temp` (
   KEY `id_usuarios` (`id_usuarios`),
   CONSTRAINT `postulaciones_temp_ibfk_1` FOREIGN KEY (`id_busquedas_temp`) REFERENCES `busquedas_temp` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `postulaciones_temp_ibfk_2` FOREIGN KEY (`id_usuarios`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=latin1 COMMENT='Guarda las postulaciones temporales de servicios';
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=latin1 COMMENT='Guarda las postulaciones temporales de servicios';
 
--- Dumping data for table servix_db.postulaciones_temp: ~16 rows (approximately)
+-- Dumping data for table servix_db.postulaciones_temp: ~19 rows (approximately)
 DELETE FROM `postulaciones_temp`;
 /*!40000 ALTER TABLE `postulaciones_temp` DISABLE KEYS */;
 INSERT INTO `postulaciones_temp` (`id`, `id_busquedas_temp`, `id_usuarios`, `postulado`, `envio_mail`) VALUES
@@ -2634,7 +2633,10 @@ INSERT INTO `postulaciones_temp` (`id`, `id_busquedas_temp`, `id_usuarios`, `pos
 	(44, 3, 8, 1, 1),
 	(45, 5, 8, 1, 1),
 	(46, 4, 1, 1, 1),
-	(48, 17, 7, 1, 1);
+	(48, 17, 7, 1, 1),
+	(49, 14, 8, 1, 1),
+	(50, 16, 8, 0, 1),
+	(51, 17, 8, 0, 1);
 /*!40000 ALTER TABLE `postulaciones_temp` ENABLE KEYS */;
 
 
@@ -2694,7 +2696,7 @@ CREATE TABLE IF NOT EXISTS `puntuacion` (
   KEY `id_servicios` (`id_servicios`),
   CONSTRAINT `puntuacion_ibfk_1` FOREIGN KEY (`id_usuarios`) REFERENCES `usuarios` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `puntuacion_ibfk_2` FOREIGN KEY (`id_servicios`) REFERENCES `servicios` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1 COMMENT='Guarda el comentario, puntuacion, fecha del comentario y fecha de uso realizado por un usuario sobre un servicio';
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1 COMMENT='Guarda el comentario, puntuacion, fecha del comentario y fecha de uso realizado por un usuario sobre un servicio';
 
 -- Dumping data for table servix_db.puntuacion: ~9 rows (approximately)
 DELETE FROM `puntuacion`;
@@ -2708,7 +2710,8 @@ INSERT INTO `puntuacion` (`id`, `id_usuarios`, `id_servicios`, `puntos`, `coment
 	(10, 5, 208, 3, 'lorem  lorem lorems lorem  lorem lorems lorem  lorem lorems lorem  lorem lorems ', '2014-11-11 10:28:54', '2014-11-17 01:01:03'),
 	(14, 1, 208, 4, 'testtetetet', '2014-11-22 01:54:54', '2014-11-20 00:00:00'),
 	(15, 8, 502, 2, 'le falto algunas cosas por terminar , poca organizacion', '2014-11-23 11:53:27', '2014-11-11 00:00:00'),
-	(16, 1, 208, 3, 'todo bien muchas gracias', '2014-11-28 12:13:01', '2014-07-11 00:00:00');
+	(16, 1, 208, 3, 'todo bien muchas gracias', '2014-11-28 12:13:01', '2014-07-11 00:00:00'),
+	(17, 1, 522, 4, 'todo bien muy buena atencion', '2014-12-01 04:24:08', '1969-12-31 21:00:00');
 /*!40000 ALTER TABLE `puntuacion` ENABLE KEYS */;
 
 
@@ -2744,9 +2747,9 @@ CREATE TABLE IF NOT EXISTS `relacion_u_s` (
   KEY `id_servicios` (`id_servicios`),
   CONSTRAINT `relacion_u_s_ibfk_1` FOREIGN KEY (`id_usurios`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `relacion_u_s_ibfk_2` FOREIGN KEY (`id_servicios`) REFERENCES `servicios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COMMENT='Relaciopnes entre servicios y usuarios';
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1 COMMENT='Relaciopnes entre servicios y usuarios';
 
--- Dumping data for table servix_db.relacion_u_s: ~4 rows (approximately)
+-- Dumping data for table servix_db.relacion_u_s: ~6 rows (approximately)
 DELETE FROM `relacion_u_s`;
 /*!40000 ALTER TABLE `relacion_u_s` DISABLE KEYS */;
 INSERT INTO `relacion_u_s` (`id`, `id_usurios`, `id_servicios`) VALUES
@@ -2756,7 +2759,8 @@ INSERT INTO `relacion_u_s` (`id`, `id_usurios`, `id_servicios`) VALUES
 	(6, 14, 511),
 	(8, 8, 529),
 	(10, 8, 531),
-	(11, 8, 532);
+	(11, 8, 532),
+	(12, 5, 522);
 /*!40000 ALTER TABLE `relacion_u_s` ENABLE KEYS */;
 
 
@@ -2779,9 +2783,9 @@ CREATE TABLE IF NOT EXISTS `servicios` (
   KEY `id_categorias` (`id_categorias`),
   CONSTRAINT `servicios_ibfk_1` FOREIGN KEY (`id_localidades`) REFERENCES `localidades` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `servicios_ibfk_2` FOREIGN KEY (`id_categorias`) REFERENCES `categorias` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=530 DEFAULT CHARSET=latin1 COMMENT='Guarda los datos del servicio';
+) ENGINE=InnoDB AUTO_INCREMENT=533 DEFAULT CHARSET=latin1 COMMENT='Guarda los datos del servicio';
 
--- Dumping data for table servix_db.servicios: ~53 rows (approximately)
+-- Dumping data for table servix_db.servicios: ~54 rows (approximately)
 DELETE FROM `servicios`;
 /*!40000 ALTER TABLE `servicios` DISABLE KEYS */;
 INSERT INTO `servicios` (`id`, `id_categorias`, `id_localidades`, `titulo`, `descripcion`, `foto`, `url_web`, `direccion`, `telefono`, `latitud`, `longitud`) VALUES
@@ -2799,7 +2803,7 @@ INSERT INTO `servicios` (`id`, `id_categorias`, `id_localidades`, `titulo`, `des
 	(147, 28, 28, 'pleasure music table act', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'tired steel comfort chin back simple stone ta', 'stocking plate summer destruction twist fowl ', '45767 US Hwy 90U Bus', '606-845-1455', '371332870', '191471041'),
 	(193, 21, 12, 'now angle', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'ticket very fixed watch grip mother necessary', 'sort fear poor committee level probable ficti', '27697 US Hwy 81D Bus', '145-690-6530', '326322070', '216826337'),
 	(204, 12, 74, 'tray line', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'society wide second test clean cruel very orn', 'jump condition powder tree up regular thumb b', '49777 Doak St', '362-147-9691', '379852742', '11069465'),
-	(208, 22, 36, 'Herreria los hermanos', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', '', 'http://www.misitioweb.com.ar', '68 E San Antonio St', '103-513-0952', '-38.7751423', '-62.1179636'),
+	(208, 22, 10, 'Herreria los hermanos', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', '', 'http://www.misitioweb.com.ar', 'México 2520, Bahía Blanca, Buenos Aires, Argentina', '1035130952', '-38.7549405', '-62.27314319'),
 	(226, 8, 54, 'over thin root learning', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'fire such news decision near account line pro', 'arch coal twist pin milk till brain kind blue', '5068 FM 852', '186-704-1261', '698183890', '671562056'),
 	(244, 37, 64, 'basin', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'credit canvas hospital cold whistle rest moon', 'low order room apparatus complete crack level', '628 US Hwy 259', '581-510-7535', '340245738', '217866679'),
 	(262, 3, 58, 'night', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'station kiss through yellow brush language ha', 'increase east bridge development grass drawer', '630 Byrd Ave', '650-850-9951', '119930610', '183885541'),
@@ -2834,7 +2838,7 @@ INSERT INTO `servicios` (`id`, `id_categorias`, `id_localidades`, `titulo`, `des
 	(519, 34, 56, 'horn discovery pain', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'bridge road after loud false have burn pull a', 'love theory wave fight bridge bell do unit fe', '20010 Morelos Ave', '193-003-6582', '217007333', '522109329'),
 	(520, 24, 58, 'polish free', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'edge wound record knot humour drop drain shor', 'place wind go insurance cause cart operation ', '2695 NW Loop 564', '275-423-7021', '736060986', '123638337'),
 	(521, 22, 76, 'Aceros de importación', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'room secretary plant false help writing accou', 'town dark pipe polish brother way false shelf', 'Calle 27 al 1359', '619-493-3068', '-36.4826107', '-56.7076295'),
-	(522, 22, 36, 'Herreria los primos', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'statement writing space form will complete na', 'price field ball foolish expert poison comb s', '68 E San Antonio St', '103-513-0952', '-38.7651423', '-62.1279636'),
+	(522, 22, 294, 'Herreria los primos', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', '7138498055311398271d9ff7e0283b2f_srx.jpg', '', 'Flores, Buenos Aires, Argentina', '1035130952', '-34.633333', '-58.46666699'),
 	(523, 22, 9, 'Herreria de caballos', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'crush true off cruel error liquid tooth late ', 'throat value current number daughter adjustme', '21 FM 487', '382-727-1001', '-36.7769285', '-59.8586113'),
 	(524, 22, 9, 'Herreria de caballos 2', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años', 'crush true off cruel error liquid tooth late ', 'throat value current number daughter adjustme', '21 FM 487', '382-727-1001', '-36.7765285', '-59.8546113'),
 	(529, 41, 167, 'Reparador de pc1', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus ipsum nisi autem at iusto illum excepturi perspiciatis. Praesentium, quod eligendi consectetur officia nemo dolorum quo. Tempora nostrum debitis laudantium porro.1', 'e697b8cadc3c639cda0033bad57a7130_srx.jpeg', 'www.google1.com', 'Acceso A El Cisne, Ciudad Evita, Buenos Aires, Argentina', '11340907331', '-34.7320954', '-58.52353959'),
@@ -2875,7 +2879,7 @@ INSERT INTO `usuarios` (`id`, `email`, `clave`, `nombre`, `apellido`, `telefono`
 	(5, 'usuario4@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Roberto', 'Funiet', '4444-5587', 'Av. Libertador 5966', '', 'aaaaaaaaa4', 1, '2014-11-03 21:09:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 	(6, 'usuario5@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Juliana', 'Brandon', '4444-5587', 'Av. Libertador 5966', '', 'aaaaaaaaa5', 1, '2014-11-03 21:09:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 	(7, 'usuario6@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Sebastian', 'Ortega', '4444-5587', 'Av. Libertador 5966', '', 'aaaaaaaaa6', 1, '2014-11-03 21:09:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-	(8, 'horacio@hotmail.com', 'd2322d37ded062860f40d5e9791b45e6', 'horacio', 'moreno', '1134090733', 'av juan b justo 2195', '5198225b4dcf3938b80db9a5ccba1c43.jpg', '78574938a220391f2ac5710004fe84cd', 0, '2014-11-22 02:11:05', '2014-11-22 02:11:05', '2014-11-28 01:11:34'),
+	(8, 'horacio@hotmail.com', 'd2322d37ded062860f40d5e9791b45e6', 'horacio', 'moreno', '1134090733', 'av juan b justo 2195', '7bd532a167d602fb7135c7c50f0482ed.jpg', '78574938a220391f2ac5710004fe84cd', 0, '2014-11-22 02:11:05', '2014-11-22 02:11:05', '2014-12-01 17:12:26'),
 	(9, 'alejandro@servix.com', 'e10adc3949ba59abbe56e057f20f883e', 'Alejandro', 'DAddezio', '477777775', 'Darregueyra', '', '9c22a1b834b84338dffc533ccc840234', 0, '2014-11-28 16:11:26', '2014-11-28 16:11:26', '2014-11-28 16:11:26');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 /*!40014 SET FOREIGN_KEY_CHECKS=1 */;
