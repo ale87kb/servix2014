@@ -74,7 +74,7 @@ $route['resultado-de-busqueda/(:any)-en-(:any)/(:num)']   = "sitio/resultado_bus
 $route['ficha/(:any)/opniones/page']			= "sitio/get_opiniones/$1/$2";
 $route['ficha/(:any)/opniones/page/(:num)']		= "sitio/get_opiniones/$1/$2";
 
-// $route['ficha/(:any)']		    				= "sitio/ficha_servicio/$1";
+
 $route['ficha/(:num)-(:any)']   	    		   = "sitio/ficha_servicio/$1/$2";					//Entra cualquiera
 $route['ficha/(:num)-(:any)/opniones/page/(:num)'] = "sitio/ficha_servicio/$1/$2/$3";					//Entra cualquiera
 
@@ -113,6 +113,7 @@ $route['set_favorito']  						= "usuario/set_favorito";
 $route['mi-perfil/servicios-solicitados']  		= "usuario/servicios_solicitados";
 
 $route['mi-perfil/servicios/editar/(:num)-(:any)']  = "sitio/editar_servicio/$1";
+$route['elimiar-servicio']  					= "sitio/unset_servicio";
 
 $route['mis-comentarios']           			= "usuario/mis_comentarios";
 

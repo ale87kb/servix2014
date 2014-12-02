@@ -733,6 +733,14 @@ var app = function(){
                    return false;
               }
             });
+            $("#borrar_servicio").on('click',function(){
+
+             if (confirm('Esta seguro que desea borrar este servicio')) {
+                  $("#form_del_servicio").submit();
+              } else {
+                   return false;
+              }
+            });
         },
         this.datePiker = function(){
 

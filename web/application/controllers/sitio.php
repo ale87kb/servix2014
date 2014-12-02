@@ -656,7 +656,7 @@ class sitio extends CI_Controller {
 	}
 
 
-	public function resultado_busqueda($q=null,$l='buenos aires'){
+	public function resultado_busqueda($q,$l){
 		$q = urldecode($q);
 		$l = urldecode($l);
 		$busca = $this->session->userdata("busqueda");
@@ -706,13 +706,17 @@ class sitio extends CI_Controller {
 			$marker['animation']		  = 'DROP';
 			$this->googlemaps->add_marker($marker);
 		}
-		$data['map'] = $this->googlemaps->create_map();
+		if(count($ltn) >= 1){
+			$data['map'] = $this->googlemaps->create_map();
+		}
 		$data['title'] 	   = 'Resultado de búsqueda';
 		$data['vista'] 	   = 'resultado_busqueda_view';
 		$this->load->view('home_view',$data);
 
 
 	}
+
+	
 
 	private function _setPaginacion($servicio, $localidad,$q){
 
@@ -964,6 +968,26 @@ class sitio extends CI_Controller {
 
 	        return redirect($_SERVER['HTTP_REFERER']);
 		}
+	}
+
+	public function unset_servicio(){
+
+		if( $this->UsuarioSession){
+			$post = $this->input->post();
+			if(isset($post)){
+			
+				$id_servicio	  = $this->input->post('id_servicio');
+				$rs = $this->servicios_model->unsetServicio($id_servicio);
+				if($rs){
+					redirect($_SERVER['HTTP_REFERER']);
+				}
+			}else{
+				return false;
+			}
+		}else{
+			return false;
+		}
+
 	}
 
 	public function unset_postulacion(){

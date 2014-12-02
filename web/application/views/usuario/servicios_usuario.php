@@ -21,7 +21,10 @@
                 <p class="list-group-item-text">Categoria: <?php echo ucfirst($ser['categoria']) ?></p>
                 <p class="list-group-item-text"><?php echo ucfirst($ser['localidad']) . " " . ucfirst($ser['provincia']);?></p>
               </a>
-
+            <form action="<?php echo site_url('elimiar-servicio'); ?>" method="post" id="form_del_servicio" class="pull-left">
+  
+                <button class="btn btn-link" value="<?php echo $ser['id']; ?>" id="borrar_servicio" name="id_servicio">Eliminar Servicio</button>
+            </form>
              <p class="text-right"> <a href="<?php echo site_url(generarLinkServicio($ser['id'],$ser['titulo'],'mi-perfil/servicios/editar')); ?>">Editar servicio</a></p>
           
             <?php
