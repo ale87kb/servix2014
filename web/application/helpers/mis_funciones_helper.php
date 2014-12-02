@@ -25,9 +25,11 @@
 
 	function normaliza($cadena) 
 	{ 
-		$login = strtolower($cadena); 
-		$b     = array("á","é","í","ó","ú","ä","ë","ï","ö","ü","à","è","ì","ò","ù","ñ"," ",",",".",";",":","¡","!","¿","?",'"'); 
-		$c     = array("a","e","i","o","u","a","e","i","o","u","a","e","i","o","u","n","-","","","","","","","","",''); 
+		//strtolower no anda bien
+		//http://php.net/manual/es/function.mb-strtolower.php
+		$login = mb_strtolower($cadena); 
+		$b     = array("","","","","","ä","ë","ï","ö","ü","à","è","ì","ò","ù",""," ",",",".",";",":","¡","!","¿","?",'"'); 
+		$c     = array("","","","","","a","e","i","o","u","a","e","i","o","u","","-","","","","","","","","",''); 
 		$login = str_replace($b,$c,$login); 
 		return $login; 
 	}  

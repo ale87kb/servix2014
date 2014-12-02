@@ -11,6 +11,7 @@ class sitio extends CI_Controller {
 
 	}
 
+	
 
 	public function index(){
 		
@@ -553,11 +554,16 @@ class sitio extends CI_Controller {
 			$rs = $this->servicios_model->getServicioFicha($q);	
 			foreach ($rs as $v) {
 
+
 			$config = array();
-			$latLong = ''.$v['latitud'].' '.$v['longitud'].'';
+			$latLong = $v['latitud'].','.$v['longitud'];
 			if(empty($latLon)){
 				$latLon = $v['localidad'];
 			}
+			$data['titulo'] = $v['titulo'];
+			$data['direccion'] = $v['direccion'];
+			}
+
 			$config['center'] = $latLong;
 			
 			$config['zoom'] = '17';
@@ -565,7 +571,6 @@ class sitio extends CI_Controller {
 			$config['scrollwheel'] = FALSE;
 			$config['placesAutocompleteInputID'] 	= 'myPlaceTextBox';
 			$config['placesAutocompleteBoundsMap'] 	= TRUE;
-			// $opciones = array('cities'); 
 			$config['placesAutocompleteRestrict'] 	= 'AR'; 
 			$config['placesAutocompleteOnChange'] 	= gmapScript();//viene del helper de mis_funciones
 			$this->googlemaps->initialize($config);
@@ -584,9 +589,11 @@ class sitio extends CI_Controller {
 			$marker['infowindowMaxWidth'] = "500";
 			$marker['animation']		  = 'DROP';
 			$this->googlemaps->add_marker($marker);
-			}
-			// print_d($rs);
+			
+			
 			$data['map'] = $this->googlemaps->create_map();
+
+
 			$data['post'] = $rs[0];
 			$data['form_errors'] =null;
 			$data['vista'] = 'editar_servicio';
@@ -636,21 +643,24 @@ class sitio extends CI_Controller {
 
 	public function busqueda(){
 		 $post = $this->input->post();
+
 		 $busqueda = array();
 		 foreach ($post as $k => $v) {
 			$busqueda['post'][$k] = ($v);
 			$busqueda['url'][$k]  = normaliza(trim($v));
 		 }
-		 // $this->session->set_userdata("busqueda",$busqueda);
+
+		 $this->session->set_userdata("busqueda",$busqueda);
 		 return redirect("resultado-de-busqueda/".$busqueda['url']['servicio']."-en-".$busqueda['url']['localidad']);
 
 	}
 
 
 	public function resultado_busqueda($q=null,$l='buenos aires'){
-			
+		$q = urldecode($q);
+		$l = urldecode($l);
 		$busca = $this->session->userdata("busqueda");
-	
+		$this->load->library('googlemaps');	
 
 		if($this->UsuarioSession){
 			$data['usuario'] = $this->UsuarioSession['nombre'];
@@ -669,10 +679,34 @@ class sitio extends CI_Controller {
 		
 		
 		$data['result']    = $result['result'];
-		if(!empty($data['result'])){
+		
+		$config 			= array();
 
-		 $data['map'] 	   =	$this->_gmap($data['result'],$data['localidad']);
+	    $config['region']   = 'Argentina';
+		$config['center']	= "center";
+   		$config['zoom']		= "auto";
+		$config['cluster'] 	= TRUE;
+		$config['places'] 	= TRUE; 
+		// $config['minifyJS'] = TRUE;
+		$this->googlemaps->initialize($config);
+
+		$marker = array();
+
+		foreach ($data['result'] as  $value) {
+			$ltn =  $value['latitud'].','. $value['longitud'];
+			$marker['icon'] = site_url('assets/images/servix_marker.png');
+			$marker['icon_size']   = '25, 66';
+			$marker['icon_origin'] = '0, 0';
+			$marker['icon_anchor'] = '17, 34';
+			$marker['icon_scaledSize'] = '20, 35';
+			$marker['position'] = $ltn;
+
+			$marker['infowindow_content'] = ('<div style="width: 250px;color: #000;font-size:14px;font-family:Arial, Helvetica, sans-serif;">'.ucwords($value['titulo']).'<br>'.ucfirst($value['direccion']).'			</div>');
+			$marker['infowindowMaxWidth'] = "500";
+			$marker['animation']		  = 'DROP';
+			$this->googlemaps->add_marker($marker);
 		}
+		$data['map'] = $this->googlemaps->create_map();
 		$data['title'] 	   = 'Resultado de búsqueda';
 		$data['vista'] 	   = 'resultado_busqueda_view';
 		$this->load->view('home_view',$data);
@@ -773,7 +807,7 @@ class sitio extends CI_Controller {
 		if($this->input->is_ajax_request()){
 			$this->load->view('listar_opiniones',$data);
 		}else{
-			$this->ficha_servicio($servicio);
+			$this->ficha_servicio($id,$servicio);
 		}
 	}
 
@@ -942,87 +976,102 @@ class sitio extends CI_Controller {
 
 	}
 
+	public function ficha_servicio($id,$servicio,$page=null){
 
-
-	public function ficha_servicio($servicio=null){
-		
-		$id 			 = $this->_parsearIdServicio($servicio);
-		$data['seccion'] = 'ficha';
-		$data['favorito']=  null;
+		$this->load->library('googlemaps');
 
 		if(is_numeric($id)){
 
-			$opiniones 	 = $this->_setPaginacionOpinion($servicio,$id);
-			$servicioRS  = $this->servicios_model->getServicioFicha($id);
-			$promedio 	 = $this->servicios_model->getPromedioPuntos($id);
+		$data['seccion']  = 'ficha';
+		$data['favorito'] =  null;
+		$data['servicio'] = null;
 
-			if($servicioRS){
+		
+		$opiniones 	 = $this->_setPaginacionOpinion('208-herreria-los-hermanos',$id);
+		$servicioRS  = $this->servicios_model->getServicioFicha($id);
+		$promedio 	 = $this->servicios_model->getPromedioPuntos($id);
 
-				if(!empty($promedio)){
-					foreach ($promedio[0] as $key => $value) {
-						$data[$key] = $value;
-					}
-				}
+		if($servicioRS){
 
-				foreach ($servicioRS[0] as $key => $value) {
-					$data[$key] = $value;
-					$data['link_user'] = site_url('usuario/perfil/'. $servicioRS[0]['userID'].'-'.$servicioRS[0]['nombre'].'-'.$servicioRS[0]['apellido']);
-				    if($servicioRS[0]['foto'] == "" || $servicioRS[0]['foto'] == null)
-				    {
-				    	$data['foto_path'] = 'assets/images/servicio_200.jpg';
-				    }
-				    else if(file_exists('./assets/images/servicios/' . $servicioRS[0]['foto']))
-				    {
-				    	$data['foto_path'] = path_archivos('assets/images/servicios/', agregar_nombre_archivo($servicioRS[0]['foto'], ''));
-				    }
-				    else 
-				    {
-				    	$data['foto_path'] = 'assets/images/servicio_200.jpg';
-				    }
-				}
+		
+		foreach ($servicioRS[0] as $key => $value) {
+			$data[$key] = $value;
+			$data['link_user'] = site_url('usuario/perfil/'. $servicioRS[0]['userID'].'-'.$servicioRS[0]['nombre'].'-'.$servicioRS[0]['apellido']);
+		    if($servicioRS[0]['foto'] == "" || $servicioRS[0]['foto'] == null)
+		    {
+		    	$data['foto_path'] = 'assets/images/servicio_200.jpg';
+		    }
+		    else if(file_exists('./assets/images/servicios/' . $servicioRS[0]['foto']))
+		    {
+		    	$data['foto_path'] = path_archivos('assets/images/servicios/', agregar_nombre_archivo($servicioRS[0]['foto'], ''));
+		    }
+		    else 
+		    {
+		    	$data['foto_path'] = 'assets/images/servicio_200.jpg';
+		    }
+		    $ltn =   $servicioRS[0]['latitud'].','.$servicioRS[0]['longitud'];
+	
+		}
+			$config = array();
+			$config['center'] = $ltn;
+			$config['zoom'] = '17';
+			$this->googlemaps->initialize($config);
 
-				if($this->UsuarioSession){
-					$fav = $this->usuarios_model->getFavorito($this->UsuarioSession['id'],$id);
-					if(!empty($fav)){
-						$data['favorito'] = true;
-					}
-				}
+			$marker = array();
 
-				$data['servicio']  = $data['titulo'];
-				if(isset($servicioRS[0]['latitud']) && isset($servicioRS[0]['longitud'])){
+			$marker['icon'] = site_url('assets/images/servix_marker.png');
+			$marker['icon_size']   = '25, 66';
+			$marker['icon_origin'] = '0, 0';
+			$marker['icon_anchor'] = '17, 34';
+			$marker['icon_scaledSize'] = '20, 35';
+			$marker['position'] = $ltn;
 
-					$lat 			   = $servicioRS[0]['latitud'];
-					$long 			   = $servicioRS[0]['longitud'];
-					$position	       = "$lat,$long";
-					$data['map'] 	   = $this->_gmap($servicioRS,$position,14);
+			$marker['infowindow_content'] = ('<div style="width: 250px;color: #000;font-size:14px;font-family:Arial, Helvetica, sans-serif;">'.ucwords($data['titulo']).'<br>'.ucfirst($data['direccion']).'			</div>');
+			$marker['infowindowMaxWidth'] = "500";
+			$marker['animation']		  = 'DROP';
 
-				}
-			
-				if($this->UsuarioSession){
-					$data['usuario']	    = $this->UsuarioSession['nombre'];
-					$data['usuarioSession'] = $this->UsuarioSession;
-				}
+			$this->googlemaps->add_marker($marker);
+			$data['map'] = $this->googlemaps->create_map();
 
-				$data['opiniones'] = $opiniones['result'];
-				$data['title']     = 'Ficha del servicio';
-				$data['servUrl']   =  site_url('ficha/'.$servicio);
-				$data['vista']     = 'ficha_servicio_view';
 
+		if(!empty($promedio)){
+			foreach ($promedio[0] as $key => $value) {
+				$data[$key] = $value;
 			}
-			else
-			{
+		}
+
+		if($this->UsuarioSession){
+			$data['usuario'] 		= $this->UsuarioSession['nombre'];
+			$data['usuarioSession'] = $this->UsuarioSession;
+			$fav = $this->usuarios_model->getFavorito($this->UsuarioSession['id'],$id);
+			if(!empty($fav)){
+				$data['favorito'] = true;
+			}
+		}
+
+		$data['servicio']  = $data['titulo'];
+		$data['opiniones'] = $opiniones['result'];
+		$data['title']     = 'Ficha del servicio';
+		$data['servUrl']   =  site_url('ficha/'.$servicio);
+		$data['vista'] = "ficha_servicio_view";
+
+		}else{
 				$data['title']     = 'Ficha del servicio no encontrada';
 				$data['vista']     = 'ficha_servicio_no_encontrado_view';
-			}
 		}
-		else
-		{
-			$data['title']     = 'Ficha del servicio no encontrada';
+		
+
+		
+
+		 }else{
+		 	$data['title']     = 'Ficha del servicio no encontrada';
 			$data['vista']     = 'ficha_servicio_no_encontrado_view';
 		}
-		return $this->load->view('home_view',$data);
+
+		$this->load->view('home_view',$data);
 	}
 
+	
 
 	private function _parsearIdServicio($servicio){
 		$serv = explode('-', $servicio);
