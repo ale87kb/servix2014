@@ -1,4 +1,3 @@
-      <!--<?php print_d($postulaciones);?>-->
 <div class="col-md-6 panel-info">
 
 	<div class="panel-heading">

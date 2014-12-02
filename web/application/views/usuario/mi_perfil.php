@@ -1,34 +1,34 @@
 <div class="container" id="main">
-<div class="usuario">
+	<div class="usuario">
 
-	<div class="row">
-		<div class="col-md-12">
-			<div class="row">
-			<?php
-				$this->load->view('usuario/datos');
-				$this->load->view('usuario/favoritos');
-			?>
-			</div>
-			<div class="row">
-			<?php 
-				$this->load->view('usuario/comentarios');
-				$this->load->view('usuario/servicios_contactados');
-			?>
-			</div>
-			<div class="row">
-			<?php 
-				$this->load->view('usuario/servicios_solicitados');
-				$this->load->view('usuario/postulaciones');
-			?>
-			</div>
-			<div class="row">
-			<?php 
-				$this->load->view('usuario/servicios_usuario');
-			?>
-			</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="row">
+				<?php
+					$this->load->view('usuario/datos');
+					$this->load->view('usuario/favoritos');
+				?>
+				</div>
+				<div class="row">
+				<?php 
+					$this->load->view('usuario/comentarios');
+					$this->load->view('usuario/servicios_contactados');
+				?>
+				</div>
+				<div class="row">
+				<?php 
+					$this->load->view('usuario/servicios_solicitados');
+					$this->load->view('usuario/postulaciones');
+				?>
+				</div>
+				<div class="row">
+				<?php 
+					$this->load->view('usuario/servicios_usuario');
+				?>
+				</div>
 
+			</div>
 		</div>
 	</div>
-</div>
 
 </div><!--/container-fluid-->
