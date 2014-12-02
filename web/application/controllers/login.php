@@ -2,6 +2,8 @@
 
 class Login extends CI_Controller {
 
+	var $UsuarioSession = null;
+
 	public function __construct(){
 		parent::__construct();
 		$data['title'] = 'Servix';

@@ -125,22 +125,31 @@ Class Servix_model extends CI_Model{
 				servicios.id,
 				servicios.titulo,
 				servicios.descripcion,
+				servicios.foto, 
 				servicios.latitud,
 				servicios.longitud,
 				servicios.direccion,
 				localidades.localidad,
 				provincias.provincia,
-				categorias.categoria				
+				categorias.categoria,
+				AVG(puntuacion.puntos) AS promedio,
+				COUNT(puntuacion.puntos) AS cantPuntos
 				FROM
 				servicios
 				INNER JOIN categorias ON servicios.id_categorias = categorias.id
 				INNER JOIN localidades ON servicios.id_localidades = localidades.id
 				INNER JOIN provincias ON localidades.id_provincia = provincias.id
+				LEFT OUTER JOIN puntuacion ON puntuacion.id_servicios = servicios.id
 				WHERE
 				(servicios.titulo LIKE '%$servicio%' OR categorias.categoria LIKE '%$servicio%')
 				AND
 				(localidades.localidad LIKE '%".$loc['localidad']."%' ".$loc['cond']." provincias.provincia LIKE '%".$loc['provincia']."%')
+<<<<<<< HEAD
 				ORDER BY servicios.id_localidades ASC
+=======
+				GROUP BY servicios.id
+				ORDER BY cantPuntos DESC
+>>>>>>> origin/ci
 				LIMIT $ini,$fin
 				";
 				
