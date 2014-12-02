@@ -21,7 +21,7 @@
 								?>
 								<li>
 									
-									<a href="<?php echo site_url('resultado-de-busqueda/'.normaliza(strtolower($val['categoria'])).'-en-argentina'); ?>" class="btn btn-link"><?php echo ucfirst($val['categoria']); ?></a>
+									<a href="<?php echo site_url('resultado-de-busqueda/'.normaliza($val['categoria']).'-en-argentina'); ?>" class="btn btn-link"><?php echo ucfirst($val['categoria']); ?></a>
 								</li>
 								<?php
 							}

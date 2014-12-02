@@ -41,7 +41,6 @@
 $route['default_controller'] 					= "sitio";
 //url                        // Controlador/metodo 
 
-$route['test_page']   							= "sitio/test_page";					//Entra cualquiera
 $route['condiciones-de-uso']   					= "sitio/condiciones_de_uso";					//Entra cualquiera
 $route['preguntas_frecuentes'] 					= "sitio/preguntas_frecuentes";					//Entra cualquiera
 $route['solicitud-de-servicio']					= "sitio/solicitar_servicio";					
@@ -75,7 +74,10 @@ $route['resultado-de-busqueda/(:any)-en-(:any)/(:num)']   = "sitio/resultado_bus
 $route['ficha/(:any)/opniones/page']			= "sitio/get_opiniones/$1/$2";
 $route['ficha/(:any)/opniones/page/(:num)']		= "sitio/get_opiniones/$1/$2";
 
-$route['ficha/(:any)']		    				= "sitio/ficha_servicio/$1";
+// $route['ficha/(:any)']		    				= "sitio/ficha_servicio/$1";
+$route['ficha/(:num)-(:any)']   	    		   = "sitio/ficha_servicio/$1/$2";					//Entra cualquiera
+$route['ficha/(:num)-(:any)/opniones/page/(:num)'] = "sitio/ficha_servicio/$1/$2/$3";					//Entra cualquiera
+
 $route['validar-recomendacion']   	        	= "sitio/recomendar_servicio";
 
 
