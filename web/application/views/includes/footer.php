@@ -1,4 +1,4 @@
-</div>
+
 	<div class="navbar navbar-default navbar-static-bottom footer-servix">
 	  <div class="container">
 	    <span class="navbar-text">

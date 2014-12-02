@@ -658,11 +658,10 @@ class sitio extends CI_Controller {
 	}
 
 
-<<<<<<< HEAD
+
 	public function resultado_busqueda($q,$l){
-=======
-	public function resultado_busqueda($q=null, $l='buenos aires'){
->>>>>>> origin/ci
+
+
 		$q = urldecode($q);
 		$l = urldecode($l);
 
@@ -723,13 +722,11 @@ class sitio extends CI_Controller {
 
 	}
 
-<<<<<<< HEAD
+
 	
 
 	private function _setPaginacion($servicio, $localidad,$q){
-=======
-	private function _setPaginacion($servicio, $localidad, $q){
->>>>>>> origin/ci
+
 
 
  	    $this->load->library('pagination');

@@ -144,12 +144,8 @@ Class Servix_model extends CI_Model{
 				(servicios.titulo LIKE '%$servicio%' OR categorias.categoria LIKE '%$servicio%')
 				AND
 				(localidades.localidad LIKE '%".$loc['localidad']."%' ".$loc['cond']." provincias.provincia LIKE '%".$loc['provincia']."%')
-<<<<<<< HEAD
-				ORDER BY servicios.id_localidades ASC
-=======
 				GROUP BY servicios.id
-				ORDER BY cantPuntos DESC
->>>>>>> origin/ci
+				ORDER BY cantPuntos DESC , servicios.id_localidades ASC
 				LIMIT $ini,$fin
 				";
 				

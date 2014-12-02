@@ -1,9 +1,6 @@
-<div class="container" id="main">
-<div id="solicitados">
-  
-  
+
   <!--right-->
-  <div class="col-sm-5">
+  <div class="col-sm-5" id="solicitados">
         <h1>Servicios Solicitados</h1>
         <h4>Servicios solicitados de los ultimos 7 dias</h4>
         <?php 
@@ -61,6 +58,4 @@
         </div>
         <?php
         } ?>
-      
-  </div><!--/right-->
 </div>
