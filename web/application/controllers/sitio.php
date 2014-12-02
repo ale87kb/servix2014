@@ -685,7 +685,7 @@ class sitio extends CI_Controller {
 		
 		
 		$data['result']    = $result['result'];
-		
+		$ltn = null;
 		$config 			= array();
 
 	    $config['region']   = 'Argentina';
