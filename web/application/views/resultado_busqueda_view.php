@@ -18,9 +18,21 @@
             <p class="lead"><a href="<?php echo site_url('ficha/'.$r['id'].'-'.normaliza($r['titulo'])) ?>" class="btn btn-default">Ver Más</a></p>
             <p class="pull-right">
               <span class="label label-default"><?php echo ucfirst($r['categoria']); ?></span> 
-              <span class="label label-default"><?php echo ucfirst($r['provincia']); ?></span>
               <span class="label label-default"><?php echo ucfirst($r['localidad']); ?></span>
+              <span class="label label-default"><?php echo ucfirst($r['provincia']); ?></span>
              </p>
+              <ul class="list-inline">
+                <li><span>Promedio </span>
+                  <span class="ratyAVG" data-avg="<?php echo number_format($r['promedio'],2); ?>"></span>
+                  <?php echo number_format($r['promedio'],2); ?> Puntos<span> 
+                <?php 
+                  if($r['cantPuntos']>1){
+                    echo ", Votado: ".$r['cantPuntos']." veces";
+                  }else{
+                    echo ", Votado: ".$r['cantPuntos']." vez";
+                  }
+                 ?>
+                </span></li></ul>
             
           </div>
         </div>
@@ -49,7 +61,7 @@
          <div class="row">
           <div class="col-xs-12">
             <h3>No tenemos resultados para esta busqueda</h3>
-            <p>Si no encontras lo que estas buscando, Solicitalo<a href="#" class="btn btn-link">Acá</a></p>
+            <p>Si no encontras lo que estas buscando, Solicitalo <a href="#" class="btn btn-link">Acá</a></p>
           </div>
         </div>
        
@@ -61,7 +73,7 @@
          <div class="row">
           <div class="col-xs-12">
             <h3>Por favor ingrese una busqueda</h3>
-            <p>Si no encontras lo que estas buscando, Solicitalo  <a href="#" class="btn btn-link"> Aquí</a></p>
+            <p>Si no encontras lo que estas buscando, Solicitalo <a href="#" class="btn btn-link">Aquí</a></p>
           </div>
         </div>
         <?php

@@ -14,9 +14,9 @@
                 <p><?php echo recortar_texto($servicio['descripcion'],250); ?></p>
                 <p class="lead"><a href=" <?php echo site_url(generarLinkServicio($servicio['id'], $servicio['titulo'])); ?> " class="btn btn-default">Más info</a></p>
                 <p class="pull-right">
-                    <span class="label label-default"><?php echo ucfirst( $servicio['categoria']); ?></span>
-                    <span class="label label-default"><?php echo $servicio['localidad']; ?></span>
-                    <span class="label label-default"><?php echo $servicio['provincia']; ?></span>
+                    <span class="label label-default"><?php echo ucfirst($servicio['categoria']); ?></span>
+                    <span class="label label-default"><?php echo ucfirst($servicio['localidad']); ?></span>
+                    <span class="label label-default"><?php echo ucfirst($servicio['provincia']); ?></span>
                   </p>
 
 

@@ -2,6 +2,8 @@
 
 class sitio extends CI_Controller {
 
+	var $UsuarioSession		= null;
+
 	public function __construct(){
 
 		parent::__construct();
@@ -647,7 +649,7 @@ class sitio extends CI_Controller {
 	}
 
 
-	public function resultado_busqueda($q=null,$l='buenos aires'){
+	public function resultado_busqueda($q=null, $l='buenos aires'){
 			
 		$busca = $this->session->userdata("busqueda");
 	
@@ -680,20 +682,20 @@ class sitio extends CI_Controller {
 
 	}
 
-	private function _setPaginacion($servicio, $localidad,$q){
+	private function _setPaginacion($servicio, $localidad, $q){
 
 
  	    $this->load->library('pagination');
 	    $config = array();
         $config["base_url"] 	= site_url('resultado-de-busqueda/'.$q);
-        $config["total_rows"]   = $this->servix_model->getTotalFilasResultBusqueda($servicio,$localidad);
+        $config["total_rows"]   = $this->servix_model->getTotalFilasResultBusqueda($servicio, $localidad);
         $config["per_page"] 	= 4;
         $config["uri_segment"]  = 3;
         $config['last_link'] 	= 'Último';
         $config['first_link'] 	= 'Primero';
         $this->pagination->initialize($config);
         $page 					= (is_numeric($this->uri->segment(3))) ? $this->uri->segment(3) : 0;
-        $data["result"] 		= $this->servix_model->getResultadoBusqueda($servicio,$localidad,  $page, $config["per_page"]); 
+        $data["result"] 		= $this->servix_model->getResultadoBusqueda($servicio, $localidad, $page, $config["per_page"]); 
         $data["links"] 			= $this->pagination->create_links();
 		return $data;
        
@@ -865,27 +867,33 @@ class sitio extends CI_Controller {
 			$data['id_usuario']   = $this->UsuarioSession['id'];
 			
 			
-			if($this->UsuarioSession){
+			if($this->UsuarioSession)
+			{
 				$data['usuario'] 		= $this->UsuarioSession['nombre'];
 				$data['usuarioSession'] = $this->UsuarioSession;
 				$user_postulado 		= $this->servicios_model->userPostulado($data['id_usuario'],$id);
-				if(!empty($user_postulado)){
-					foreach ($user_postulado as $value) {
+				if(!empty($user_postulado))
+				{
+					foreach ($user_postulado as $value)
+					{
 						$user_postulado = $value['postulado'];
 					}
 					$data['user_postulado'] = $user_postulado;
 				}
 			}
 
-			if ($this->input->is_ajax_request()) {
+			if($this->input->is_ajax_request())
+			{
 				$this->load->view('servicios_solicitados',$data);
-			}else{
+			}
+			else
+			{
 				$this->load->view('home_view',$data);
 			}
 
-
-		}else{
-
+		}
+		else
+		{
 			return redirect('');	
 		}
 		

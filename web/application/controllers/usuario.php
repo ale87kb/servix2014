@@ -2,6 +2,8 @@
 
 class Usuario extends CI_controller{
 
+	var $UsuarioSession = null;
+	
 	public function __construct(){
 		parent::__construct();
 		$data['title'] = 'Servix';
