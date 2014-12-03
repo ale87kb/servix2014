@@ -8,7 +8,6 @@ Class Usuarios_model extends CI_Model{
 
 	}
 
-
 	public function login($usuario, $clave){
 		//Verifica que el usuario y el email sean 
 		//correspondientes entre si, para corroborar el login
@@ -237,6 +236,9 @@ Class Usuarios_model extends CI_Model{
 		return $rs;
 	}
 
+	/*-------------------------------*/
+
+	//Servicios propios del Usuario
 	public function getServiciosProrpios($idUsuario, $desdeLimit ,$cantidadLimit){
 		$query = "SELECT
 					servicios.id,
@@ -264,6 +266,21 @@ Class Usuarios_model extends CI_Model{
 		return $rs->result_array();
 	}
 
+	//Cantidad de servicios propios del usuario
+	public function getCantidadServicioPropios($idUsuario){
+		$query = "SELECT
+					COUNT(servicios.id) AS cantidad
+				FROM
+					relacion_u_s
+				INNER JOIN servicios ON relacion_u_s.id_servicios = servicios.id
+				WHERE
+				relacion_u_s.id_usurios = $idUsuario";
+		$rs = $this->db->query($query);
+		return $rs->row()->cantidad;
+	}
+	/*-------------------------------*/
+
+	//Favoritos del usuario
 	public function getFavoritos($idUsuario, $desdeLimit ,$cantidadLimit){
 		$query 	= "SELECT
 					favoritos.fecha,
@@ -291,6 +308,9 @@ Class Usuarios_model extends CI_Model{
 		return $rs->result_array();
 	}
 
+	/*-------------------------------*/
+
+	//Servicios comentados por el usuario. Los comentarios aparecen en ela ficha
 	public function getComentariosRealizados($idUsuario, $desdeLimit ,$cantidadLimit){
 		$query 	=	"SELECT
 						servicios.id,
@@ -320,19 +340,21 @@ Class Usuarios_model extends CI_Model{
 
 	}
 
-	public function getCantidadServicioPropios($idUsuario){
-		$query = "SELECT
-					COUNT(servicios.id) AS cantidad
-				FROM
-					relacion_u_s
-				INNER JOIN servicios ON relacion_u_s.id_servicios = servicios.id
-				WHERE
-				relacion_u_s.id_usurios = $idUsuario";
+	//Cantidad de servicios comentados
+	public function getCantidadComentariosRealizados($idUsuario){
+		$query 	=	"SELECT
+						COUNT(servicios.id) AS cantidad
+					FROM
+						puntuacion
+					INNER JOIN servicios ON puntuacion.id_servicios = servicios.id
+					WHERE
+						puntuacion.id_usuarios = $idUsuario";
 		$rs = $this->db->query($query);
 		return $rs->row()->cantidad;
 	}
+	/*-------------------------------*/
 
-
+	//Servicios contactados/consultados por el usuario. Se les envia un e-mail
 	public function getServiciosContactados($idUsuario, $desdeLimit ,$cantidadLimit){
 		$query 	=	"SELECT
 						servicios.id,
@@ -358,11 +380,25 @@ Class Usuarios_model extends CI_Model{
 					LIMIT $desdeLimit, $cantidadLimit";
 
 		$rs = $this->db->query($query);
-
 		return $rs->result_array();
-
 	}
 
+	public function getCantidadServiciosContactados($idUsuario){
+		$query 	=	"SELECT
+						COUNT(servicios.id) AS cantidad
+					FROM
+						consultas_servicios
+					INNER JOIN servicios ON consultas_servicios.id_servicio = servicios.id
+					WHERE
+						consultas_servicios.id_usuario = $idUsuario";
+		$rs = $this->db->query($query);
+		return $rs->row()->cantidad;
+	}
+
+
+	/*-------------------------------*/
+
+	//Servicios solicitados temporales por el usuario
 	public function getUServiciosSolicitados($idUsuario, $desdeLimit, $cantidadLimit){
 		$query =	"SELECT
 						busquedas_temp.id,
@@ -386,23 +422,7 @@ Class Usuarios_model extends CI_Model{
 
 	}
 
-	public function getCantidadPostulados($id, $vencido){
-		$query = "SELECT
-					count(postulaciones_temp.id) AS cantidad
-				FROM
-					postulaciones_temp
-				INNER JOIN busquedas_temp ON postulaciones_temp.id_busquedas_temp = busquedas_temp.id
-				WHERE
-					postulaciones_temp.id_usuarios = $id
-				AND
-					busquedas_temp.vencido = $vencido
-				AND 
-					postulaciones_temp.postulado = 1";
-		$rs = $this->db->query($query);
-
-		return $rs->row()->cantidad;
-	}
-
+	//Cantidad de servicios solicitados por el usuario
 	public function getCantidadSolicitados($id, $vencido){
 		$query = "SELECT
 					count(busquedas_temp.id) AS cantidad
@@ -416,8 +436,9 @@ Class Usuarios_model extends CI_Model{
 
 		return $rs->row()->cantidad;
 	}
+	/*-------------------------------*/
 
-
+	//Postulaciones a servicios solicitados
 	public function getUPostulaciones($idUsuario, $desdeLimit, $cantidadLimit){
 		$query =	"SELECT
 						busquedas_temp.id,
@@ -444,6 +465,25 @@ Class Usuarios_model extends CI_Model{
 					LIMIT $desdeLimit, $cantidadLimit";
 		$rs = $this->db->query($query);
 		return $rs->result_array();
+	}
+
+
+	//Cantidad de servicios solicitados a cuales el usuario se postulo
+	public function getCantidadPostulados($id, $vencido){
+		$query = "SELECT
+					COUNT(postulaciones_temp.id) AS cantidad
+				FROM
+					postulaciones_temp
+				INNER JOIN busquedas_temp ON postulaciones_temp.id_busquedas_temp = busquedas_temp.id
+				WHERE
+					postulaciones_temp.id_usuarios = $id
+				AND
+					busquedas_temp.vencido = $vencido
+				AND 
+					postulaciones_temp.postulado = 1";
+		$rs = $this->db->query($query);
+
+		return $rs->row()->cantidad;
 	}
 
 

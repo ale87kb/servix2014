@@ -9,9 +9,8 @@ class Usuario extends CI_controller{
 		$data['title'] = 'Servix';
 		$this->UsuarioSession = $this->usuarios_model->isLogin();
 	}
-	/*
-	
-	*/
+
+
 	public function index(){
 		if($this->UsuarioSession)
 		{
@@ -23,29 +22,6 @@ class Usuario extends CI_controller{
 			$data['page_active']	= 1;
 
 			//LA VISTA DEL DATOS LA CARGA CON $this->UsuarioSession
-
-			
-
-			$Usfavoritos 			= $this->_linkFavoritos($this->UsuarioSession['id'], 0, 5);
-			$data['favoritos'] 		= $Usfavoritos;
-
-			$UsComentarios 			= $this->_comentariosRealizados($this->UsuarioSession['id'], 0, 5);
-			$data['comentarios'] 	= $UsComentarios;
-
-			$UsServiciosContactados	= $this->_serviciosContactados($this->UsuarioSession['id'], 0, 5);
-			$data['sContactados'] 	= $UsServiciosContactados;
-
-			$UsServiciosSolicitados	= $this->_serviciosSolicitados($this->UsuarioSession['id'], 0, 5);
-			$data['sSolicitados'] 	= $UsServiciosSolicitados;
-
-			$UsPostulaciones 		= $this->_postulacionesRealizadas($this->UsuarioSession['id'], 0, 5);
-			$data['postulaciones'] 	= $UsPostulaciones;
-
-			$UsServicios 			= $this->_serviciosUsuario($this->UsuarioSession['id'], 0, 5);
-			$cantidadServicios 		= $this->usuarios_model->getCantidadServicioPropios($this->UsuarioSession['id']);
-			$data['cantidad'] 		= $cantidadServicios;
-			$data['serviciosPropios']= $UsServicios;
-
 			
 			$this->load->view('usuarios_view', $data);
 		}
@@ -54,6 +30,7 @@ class Usuario extends CI_controller{
 			redirect('', 'refresh');
 		}
 	}
+	/*------------------------------------------------------------*/
 
 	public function servicios_usuario(){
 		if($this->UsuarioSession)
@@ -74,171 +51,6 @@ class Usuario extends CI_controller{
 			redirect('', 'refresh');
 		}
 
-	}
-	public function favoritos_usuario(){
-		if($this->UsuarioSession)
-		{
-			$data['usuarioSession'] = $this->UsuarioSession;
-			$Usfavoritos 			= $this->_linkFavoritos($this->UsuarioSession['id'], 0, 5);
-			$data['favoritos'] 		= $Usfavoritos;
-			$data['title'] 			= 'Mis Favoritos';
-			$data['vista'] 			= 'usuario/mi_perfil';
-			$data['vistaPerfil']	= 'usuario/favoritos';
-			$data['page_active']	= 3;
-			$this->load->view('usuarios_view', $data);
-		}
-		else
-		{
-			redirect('', 'refresh');
-		}
-
-	}
-	public function mis_opiniones(){
-		if($this->UsuarioSession)
-		{
-			$data['usuarioSession'] = $this->UsuarioSession;
-			$UsComentarios 			= $this->_comentariosRealizados($this->UsuarioSession['id'], 0, 5);
-			$data['comentarios'] 	= $UsComentarios;
-			$data['title'] 			= 'Mis Opiniones';
-			$data['vista'] 			= 'usuario/mi_perfil';
-			$data['vistaPerfil']	= 'usuario/comentarios';
-			$data['page_active']	= 4;
-			$this->load->view('usuarios_view', $data);
-		}
-		else
-		{
-			redirect('', 'refresh');
-		}
-
-	}
-	public function servicios_contactados_usuario(){
-		if($this->UsuarioSession)
-		{
-			$data['usuarioSession'] = $this->UsuarioSession;
-			$UsServiciosContactados	= $this->_serviciosContactados($this->UsuarioSession['id'], 0, 5);
-			$data['sContactados'] 	= $UsServiciosContactados;
-			$data['title'] 			= 'Servicios Contactados';
-			$data['vista'] 			= 'usuario/mi_perfil';
-			$data['vistaPerfil']	= 'usuario/servicios_contactados';
-			$data['page_active']	= 5;
-			$this->load->view('usuarios_view', $data);
-		}
-		else
-		{
-			redirect('', 'refresh');
-		}
-
-	}
-	public function servicios_solicitados_usuario(){
-		if($this->UsuarioSession)
-		{
-			$data['usuarioSession'] = $this->UsuarioSession;
-			$UsServiciosSolicitados	= $this->_serviciosSolicitados($this->UsuarioSession['id'], 0, 5);
-			$data['sSolicitados'] 	= $UsServiciosSolicitados;
-			$data['title'] 			= 'Mis Servicios Solicitados';
-			$data['vista'] 			= 'usuario/mi_perfil';
-			$data['vistaPerfil']	= 'usuario/servicios_solicitados';
-			$data['page_active']	= 6;
-			$this->load->view('usuarios_view', $data);
-		}
-		else
-		{
-			redirect('', 'refresh');
-		}
-
-	}
-	public function postulaciones_usuario(){
-		if($this->UsuarioSession)
-		{
-			$data['usuarioSession'] = $this->UsuarioSession;
-			$UsPostulaciones 		= $this->_postulacionesRealizadas($this->UsuarioSession['id'], 0, 5);
-			$data['postulaciones'] 	= $UsPostulaciones;
-			$data['title'] 			= 'Mis Postulaciones';
-			$data['vista'] 			= 'usuario/mi_perfil';
-			$data['vistaPerfil']	= 'usuario/postulaciones';
-			$data['page_active']	= 7;
-			$this->load->view('usuarios_view', $data);
-		}
-		else
-		{
-			redirect('', 'refresh');
-		}
-
-	}
-
-	private function _linkFavoritos($idUsuario, $desdeLimit ,$cantidadLimit){
-		$favoritos = $this->usuarios_model->getFavoritos($idUsuario, $desdeLimit ,$cantidadLimit);
-		if($favoritos){
-			foreach ($favoritos as $key => $vlaue) {
-				$favoritos[$key]['link'] = generarLinkServicio($favoritos[$key]['id'], $favoritos[$key]['titulo']);
-				if($favoritos[$key]['foto'] == "" || $favoritos[$key]['foto'] == null)
-				{
-					$favoritos[$key]['foto_path'] = 'assets/images/servicio_125.jpg';
-				}
-				else if(file_exists('./assets/images/servicios/' . $favoritos[$key]['foto']))
-				{
-					$favoritos[$key]['foto_path'] = path_archivos('assets/images/servicios/', agregar_nombre_archivo($favoritos[$key]['foto'], '_thumb'));
-				}
-				else 
-				{
-					$favoritos[$key]['foto_path'] = 'assets/images/servicio_125.jpg';
-				}
-			}
-			return $favoritos;
-		}
-		return false;
-	}
-
-	private function _comentariosRealizados($idUsuario, $desdeLimit ,$cantidadLimit){
-		$comentarios = $this->usuarios_model->getComentariosRealizados($idUsuario, $desdeLimit ,$cantidadLimit);
-
-		if($comentarios){
-			foreach ($comentarios as $key => $value) {
-				$comentarios[$key]['link'] 	= generarLinkServicio($comentarios[$key]['id'], $comentarios[$key]['titulo']);
-				$comentarios[$key]['fecha'] = fechaBarras(strtotime($comentarios[$key]['fecha_votacion']));
-			}
-			return $comentarios;
-		}
-		return false;
-	}
-
-	private function _serviciosContactados($idUsuario, $desdeLimit ,$cantidadLimit){
-		$sContactados = $this->usuarios_model->getServiciosContactados($idUsuario, $desdeLimit ,$cantidadLimit);
-
-		if($sContactados){
-			foreach ($sContactados as $key => $value) {
-				$sContactados[$key]['link'] = generarLinkServicio($sContactados[$key]['id'], $sContactados[$key]['titulo']);
-				$sContactados[$key]['fecha'] = fechaBarras(strtotime($sContactados[$key]['fecha']));
-			}
-			return $sContactados;
-		}
-		return false;
-	}
-	private function _serviciosSolicitados($idUsuario, $desdeLimit ,$cantidadLimit){
-		$sSolicitados = $this->usuarios_model->getUServiciosSolicitados($idUsuario, $desdeLimit ,$cantidadLimit);
-		if($sSolicitados){
-			foreach ($sSolicitados as $key => $value) {
-				$sSolicitados[$key]['link'] = generarLinkServicio($sSolicitados[$key]['id'],$sSolicitados[$key]['categoria']."-en-".$sSolicitados[$key]['localidad']."-".$sSolicitados[$key]['provincia'],'servicio-solicitado');
-				$sSolicitados[$key]['fecha'] = fechaBarras(strtotime($sSolicitados[$key]['fecha_ini']));
-			}
-			return $sSolicitados;
-		}
-		return false;
-	}
-
-	private function _postulacionesRealizadas($idUsuario, $desdeLimit ,$cantidadLimit){
-		$postulaciones = $this->usuarios_model->getUPostulaciones($idUsuario, $desdeLimit ,$cantidadLimit);
-		if($postulaciones){
-			foreach ($postulaciones as $key => $value) {
-				$postulaciones[$key]['link'] = generarLinkServicio($postulaciones[$key]['id'],$postulaciones[$key]['categoria']."-en-".$postulaciones[$key]['localidad']."-".$postulaciones[$key]['provincia'],'servicio-solicitado');
-				$postulaciones[$key]['fecha'] = fechaBarras(strtotime($postulaciones[$key]['fecha_ini']));
-				$postulaciones[$key]['fecha_fin'] = fechaBarras(strtotime($postulaciones[$key]['fecha_fin']));
-				$postulaciones[$key]['DuenioSolicitud'] = $this->usuarios_model->getUsuario($postulaciones[$key]['id_usuario']);
-			}
-
-			return $postulaciones;
-		}
-		return false;
 	}
 
 	private function _serviciosUsuario($idUsuario, $desdeLimit ,$cantidadLimit){
@@ -265,6 +77,216 @@ class Usuario extends CI_controller{
 		return false;
 	}
 
+	/*------------------------------------------------------------*/
+
+	public function favoritos_usuario(){
+		if($this->UsuarioSession)
+		{
+			$data['usuarioSession'] = $this->UsuarioSession;
+			$Usfavoritos 			= $this->_linkFavoritos($this->UsuarioSession['id'], 0, 5);
+			$data['favoritos'] 		= $Usfavoritos;
+			$data['title'] 			= 'Mis Favoritos';
+			$data['vista'] 			= 'usuario/mi_perfil';
+			$data['vistaPerfil']	= 'usuario/favoritos';
+			$data['page_active']	= 3;
+			$this->load->view('usuarios_view', $data);
+		}
+		else
+		{
+			redirect('', 'refresh');
+		}
+
+	}
+	
+	private function _linkFavoritos($idUsuario, $desdeLimit ,$cantidadLimit){
+		$favoritos = $this->usuarios_model->getFavoritos($idUsuario, $desdeLimit ,$cantidadLimit);
+		if($favoritos){
+			foreach ($favoritos as $key => $vlaue) {
+				$favoritos[$key]['link'] = generarLinkServicio($favoritos[$key]['id'], $favoritos[$key]['titulo']);
+				if($favoritos[$key]['foto'] == "" || $favoritos[$key]['foto'] == null)
+				{
+					$favoritos[$key]['foto_path'] = 'assets/images/servicio_125.jpg';
+				}
+				else if(file_exists('./assets/images/servicios/' . $favoritos[$key]['foto']))
+				{
+					$favoritos[$key]['foto_path'] = path_archivos('assets/images/servicios/', agregar_nombre_archivo($favoritos[$key]['foto'], '_thumb'));
+				}
+				else 
+				{
+					$favoritos[$key]['foto_path'] = 'assets/images/servicio_125.jpg';
+				}
+			}
+			return $favoritos;
+		}
+		return false;
+	}	
+	/*------------------------------------------------------------*/
+	public function mis_opiniones(){
+		if($this->UsuarioSession)
+		{
+			$data['usuarioSession'] = $this->UsuarioSession;
+			$UsComentarios 			= $this->_comentariosRealizados($this->UsuarioSession['id'], 0, 5);
+			$data['comentarios'] 	= $UsComentarios;
+			$data['title'] 			= 'Mis Opiniones';
+			$data['vista'] 			= 'usuario/mi_perfil';
+			$data['vistaPerfil']	= 'usuario/comentarios';
+			$data['page_active']	= 4;
+			$this->load->view('usuarios_view', $data);
+		}
+		else
+		{
+			redirect('', 'refresh');
+		}
+
+	}
+
+	private function _comentariosRealizados($idUsuario, $desdeLimit ,$cantidadLimit){
+		$comentarios = $this->usuarios_model->getComentariosRealizados($idUsuario, $desdeLimit ,$cantidadLimit);
+
+		if($comentarios){
+			foreach ($comentarios as $key => $value) {
+				$comentarios[$key]['link'] 	= generarLinkServicio($comentarios[$key]['id'], $comentarios[$key]['titulo']);
+				$comentarios[$key]['fecha'] = fechaBarras(strtotime($comentarios[$key]['fecha_votacion']));
+			}
+			return $comentarios;
+		}
+		return false;
+	}
+
+	/*------------------------------------------------------------*/
+	public function servicios_contactados_usuario(){
+		if($this->UsuarioSession)
+		{
+			$data['usuarioSession'] = $this->UsuarioSession;
+			$UsServiciosContactados	= $this->_serviciosContactados($this->UsuarioSession['id'], 0, 5);
+			$data['sContactados'] 	= $UsServiciosContactados['sContactados'];
+			$data['title'] 			= 'Servicios Contactados';
+			$data['vista'] 			= 'usuario/mi_perfil';
+			$data['vistaPerfil']	= 'usuario/servicios_contactados';
+			$data['page_active']	= 5;
+			$data['paginacion'] 	= $UsServiciosContactados['vinculos'];
+			$this->load->view('usuarios_view', $data);
+		}
+		else
+		{
+			redirect('', 'refresh');
+		}
+
+	}
+
+	/*private function _serviciosContactados($idUsuario, $desdeLimit ,$cantidadLimit){
+		$sContactados = $this->usuarios_model->getServiciosContactados($idUsuario, $desdeLimit ,$cantidadLimit);
+
+		if($sContactados){
+			foreach ($sContactados as $key => $value) {
+				$sContactados[$key]['link'] = generarLinkServicio($sContactados[$key]['id'], $sContactados[$key]['titulo']);
+				$sContactados[$key]['fecha'] = fechaBarras(strtotime($sContactados[$key]['fecha']));
+			}
+			return $sContactados;
+		}
+		return false;
+	}*/
+
+	private function _serviciosContactados($idUsuario, $desdeLimit, $cantidadLimit){
+
+		$this->load->library('pagination');
+	    $config = array();
+        $config["base_url"] 	= site_url('mi-perfil/servicios-contactados');
+        $config["total_rows"]   = $this->usuarios_model->getCantidadServiciosContactados($idUsuario);       
+        $config["per_page"] 	= $cantidadLimit;
+        $config["uri_segment"]  = 3;
+        $config['last_link'] 	= 'Último';
+        $config['first_link'] 	= 'Primero';
+        $this->pagination->initialize($config);
+
+        $page 					= (is_numeric($this->uri->segment(3))) ? $this->uri->segment(3) : 0;
+		$sContactados 			= $this->usuarios_model->getServiciosContactados($idUsuario, $page, $cantidadLimit);
+
+		$data = null;
+
+		if($sContactados){
+			foreach ($sContactados as $key => $value) {
+				$sContactados[$key]['link'] = generarLinkServicio($sContactados[$key]['id'], $sContactados[$key]['titulo']);
+				$sContactados[$key]['fecha'] = fechaBarras(strtotime($sContactados[$key]['fecha']));
+			}
+
+			$data['sContactados'] = $sContactados;
+			$data['vinculos'] = $this->pagination->create_links();
+
+			return $data;
+		}
+
+		return false;
+	}
+
+
+	/*------------------------------------------------------------*/
+	public function servicios_solicitados_usuario(){
+		if($this->UsuarioSession)
+		{
+			$data['usuarioSession'] = $this->UsuarioSession;
+			$UsServiciosSolicitados	= $this->_serviciosSolicitados($this->UsuarioSession['id'], 0, 5);
+			$data['sSolicitados'] 	= $UsServiciosSolicitados;
+			$data['title'] 			= 'Mis Servicios Solicitados';
+			$data['vista'] 			= 'usuario/mi_perfil';
+			$data['vistaPerfil']	= 'usuario/servicios_solicitados';
+			$data['page_active']	= 6;
+			$this->load->view('usuarios_view', $data);
+		}
+		else
+		{
+			redirect('', 'refresh');
+		}
+
+	}
+
+	private function _serviciosSolicitados($idUsuario, $desdeLimit ,$cantidadLimit){
+		$sSolicitados = $this->usuarios_model->getUServiciosSolicitados($idUsuario, $desdeLimit ,$cantidadLimit);
+		if($sSolicitados){
+			foreach ($sSolicitados as $key => $value) {
+				$sSolicitados[$key]['link'] = generarLinkServicio($sSolicitados[$key]['id'],$sSolicitados[$key]['categoria']."-en-".$sSolicitados[$key]['localidad']."-".$sSolicitados[$key]['provincia'],'servicio-solicitado');
+				$sSolicitados[$key]['fecha'] = fechaBarras(strtotime($sSolicitados[$key]['fecha_ini']));
+			}
+			return $sSolicitados;
+		}
+		return false;
+	}
+
+	/*------------------------------------------------------------*/
+	public function postulaciones_usuario(){
+		if($this->UsuarioSession)
+		{
+			$data['usuarioSession'] = $this->UsuarioSession;
+			$UsPostulaciones 		= $this->_postulacionesRealizadas($this->UsuarioSession['id'], 0, 5);
+			$data['postulaciones'] 	= $UsPostulaciones;
+			$data['title'] 			= 'Mis Postulaciones';
+			$data['vista'] 			= 'usuario/mi_perfil';
+			$data['vistaPerfil']	= 'usuario/postulaciones';
+			$data['page_active']	= 7;
+			$this->load->view('usuarios_view', $data);
+		}
+		else
+		{
+			redirect('', 'refresh');
+		}
+
+	}
+
+	private function _postulacionesRealizadas($idUsuario, $desdeLimit ,$cantidadLimit){
+		$postulaciones = $this->usuarios_model->getUPostulaciones($idUsuario, $desdeLimit ,$cantidadLimit);
+		if($postulaciones){
+			foreach ($postulaciones as $key => $value) {
+				$postulaciones[$key]['link'] = generarLinkServicio($postulaciones[$key]['id'],$postulaciones[$key]['categoria']."-en-".$postulaciones[$key]['localidad']."-".$postulaciones[$key]['provincia'],'servicio-solicitado');
+				$postulaciones[$key]['fecha'] = fechaBarras(strtotime($postulaciones[$key]['fecha_ini']));
+				$postulaciones[$key]['fecha_fin'] = fechaBarras(strtotime($postulaciones[$key]['fecha_fin']));
+				$postulaciones[$key]['DuenioSolicitud'] = $this->usuarios_model->getUsuario($postulaciones[$key]['id_usuario']);
+			}
+
+			return $postulaciones;
+		}
+		return false;
+	}
+	/*------------------------------------------------------------*/
 
 
 	public function verificar(){
@@ -713,22 +735,6 @@ class Usuario extends CI_controller{
 						$data['servicios'] = $servicios;
 
 					}
-
-					/*$cantidadSolicitadosC = $this->usuarios_model->getCantidadSolicitados($id, 1);
-					$cantidadSolicitadosV = $this->usuarios_model->getCantidadSolicitados($id, 0);
-					$cantidadSolicitadosTotal = $cantidadSolicitadosC + $cantidadSolicitadosV;
-
-					$data['cantSolicitados'] = $cantidadSolicitadosC;
-					$data['cantSolicitadosT'] = $cantidadSolicitadosTotal;
-
-
-
-					$cantidadPostulacionesC = $this->usuarios_model->getCantidadPostulados($id, 1);
-					$cantidadPostulacionesV = $this->usuarios_model->getCantidadPostulados($id, 0);
-					$cantTotalPostulaciones = $cantidadPostulacionesC + $cantidadPostulacionesV;
-					
-					$data['cantPostulaciones'] = $cantTotalPostulaciones;
-**/
 					$data['title']     = 'Perfil de Usuario';
 					$data['vista']     = 'perfil_usuario';
 				}
@@ -773,8 +779,5 @@ class Usuario extends CI_controller{
 		return $user[0];
 	}
 
-
 }
-
-
 ?>

@@ -117,6 +117,7 @@ Class Servix_model extends CI_Model{
 		$rs    = $this->db->query($query);
 		return $rs->num_rows();
 	}
+	
 	public function getResultadoBusqueda($servicio,$localidad,$ini=10,$fin=0){
 
 		$loc = $this->_parsearLocalidad($localidad);
@@ -146,8 +147,7 @@ Class Servix_model extends CI_Model{
 				(localidades.localidad LIKE '%".$loc['localidad']."%' ".$loc['cond']." provincias.provincia LIKE '%".$loc['provincia']."%')
 				GROUP BY servicios.id
 				ORDER BY cantPuntos DESC , servicios.id_localidades ASC
-				LIMIT $ini,$fin
-				";
+				LIMIT $ini,$fin";
 				
 		$rs    = $this->db->query($query);
 		return $rs->result_array();

@@ -24,6 +24,7 @@
         <a href="#">Ver mas..</a>
       <?php
       }
+        echo "<div>" . $paginacion . "</div>";
     }
     else
     {
