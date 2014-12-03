@@ -82,6 +82,12 @@ Class Servix_model extends CI_Model{
 		return $rs;
 	}
 
+	public function unsetSolicitudServicio($id){
+		$query = "DELETE FROM `busquedas_temp` WHERE  `id`=$id LIMIT 1;";
+		$rs    = $this->db->query($query);
+		return $rs;
+	}
+
 	private function _parsearLocalidad($localidad){
 
 		$loc = explode(',', $localidad );

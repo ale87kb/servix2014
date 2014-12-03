@@ -27,8 +27,8 @@ nada
 
 
 <!--------SOLICITAR SERVICIO-------------->
-select picker 
 typehead
+select picker 
 datepicker
 <!--------FIN SOLICITAR SERVICIO----------->
 
@@ -36,6 +36,7 @@ datepicker
 <!--------OFRECER SERVICIO y EDITAR-------------->
 select picker
 typehead
+
 <!--------FIN OFRECER SERVICIO-------------->
 
 <!--------USUARIO / PERFIL-------------->

@@ -7,12 +7,20 @@
       {
   ?>
         <div class="panel panel-default">
-          <div class="panel-heading"><?php echo ucfirst( $ssol['categoria']); ?> en <?php echo $ssol['localidad']." ". $ssol['provincia']; ?></div>
+          <div class="panel-heading">
+              <a href="<?php echo site_url($ssol['link']); ?>" class="btn btn-link ">
+            <?php
+             echo ucfirst( $ssol['categoria']); ?> en <?php echo $ssol['localidad']." ". $ssol['provincia']; ?>
+             </a>
+              <form action="<?php echo site_url('eliminar-servicio-solicitado') ?>" method="post" class="pull-right" id="form_del_servicio_solicitado" >
+                 <button type="submit" class="btn btn-default  btn-sm " id="borrar_s_solicitado" name="id_busqueda_temp" value="<?php echo $ssol['id']; ?>">x</button>
+              </form>
+          </div>
         <div class="panel-body">
               <p>
                 <?php echo $ssol['busqueda']; ?>
               </p>
-            <a href="<?php echo site_url($ssol['link']); ?>" class="btn btn-sm btn-default pull-right">Ver solicitud</a>
+           
             <a href="<?php echo site_url('mi-perfil/servicios-solicitados#'); ?>" class="btn btn-sm btn-default pull-right">Editar</a>
         </div>
         <div class="panel-footer">

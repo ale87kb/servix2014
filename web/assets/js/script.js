@@ -654,6 +654,14 @@ var app = function(){
                    return false;
               }
             });
+            $("#borrar_s_solicitado").on('click',function(){
+
+             if (confirm('Esta seguro que desea borrar este servicio solicitado')) {
+                  $("#form_del_servicio_solicitado").submit();
+              } else {
+                   return false;
+              }
+            });
         },
         this.hideMensaje= function(){
             setTimeout(function(){$("#mensaje_e").fadeOut('fast')},2000);

@@ -20,7 +20,7 @@
             <div class="panel-body">
               <strong><small><?php echo ucfirst($servicio['nombre']) ." ".ucfirst($servicio['apellido']); ?>: </small></strong>
               <p>
-                <?php echo $servicio['busqueda']; ?>
+                <?php echo recortar_texto($servicio['busqueda'],100); ?>
 
               </p>
               <?php
