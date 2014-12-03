@@ -59,68 +59,74 @@ $route['validar-solicitud-servicio']	        = "sitio/validar_solicitud_servicio
 $route['validar-ofrecer-servicio']	        	= "sitio/validar_ofrecer_servicio";
 $route['validar-editar-servicio']	        	= "sitio/validar_ofrecer_servicio";
 $route['ofrecer-servicio/msj/(registro_ok|registro_e)']  	= "sitio/off_serv_mensaje/$1";
-$route['file_upload_image']	        			= "sitio/file_upload_image";
+$route['file_upload_image']	        				= "sitio/file_upload_image";
 
-$route['busqueda_servicio']						= "sitio/busqueda_servicio";
-$route['busqueda_categoria']					= "sitio/busqueda_categoria";
-$route['enviar/comentario-servicio']			= "sitio/comentar_servicio";
-$route['busqueda_localidades_buscador'] 		= "sitio/busqueda_localidades_buscador";
-$route['busqueda_localidades']   				= "sitio/busqueda_localidades";
-$route['busqueda'] 								= "sitio/busqueda";
-$route['resultado-de-busqueda/(:any)-en-(:any)']   = "sitio/resultado_busqueda/$1/$2";
+$route['busqueda_servicio']							= "sitio/busqueda_servicio";
+$route['busqueda_categoria']						= "sitio/busqueda_categoria";
+$route['enviar/comentario-servicio']				= "sitio/comentar_servicio";
+$route['busqueda_localidades_buscador'] 			= "sitio/busqueda_localidades_buscador";
+$route['busqueda_localidades']   					= "sitio/busqueda_localidades";
+$route['busqueda'] 									= "sitio/busqueda";
+$route['resultado-de-busqueda/(:any)-en-(:any)']  	 = "sitio/resultado_busqueda/$1/$2";
 $route['resultado-de-busqueda/(:any)-en-(:any)/(:num)']   = "sitio/resultado_busqueda/$1/$2/$3";
 
 
-$route['ficha/(:any)/opniones/page']			= "sitio/get_opiniones/$1/$2";
-$route['ficha/(:any)/opniones/page/(:num)']		= "sitio/get_opiniones/$1/$2";
+$route['ficha/(:any)/opniones/page']				= "sitio/get_opiniones/$1/$2";
+$route['ficha/(:any)/opniones/page/(:num)']			= "sitio/get_opiniones/$1/$2";
 
 
-$route['ficha/(:num)-(:any)']   	    		   = "sitio/ficha_servicio/$1/$2";					//Entra cualquiera
-$route['ficha/(:num)-(:any)/opniones/page/(:num)'] = "sitio/ficha_servicio/$1/$2/$3";					//Entra cualquiera
+$route['ficha/(:num)-(:any)']   	    		   	= "sitio/ficha_servicio/$1/$2";					//Entra cualquiera
+$route['ficha/(:num)-(:any)/opniones/page/(:num)']	= "sitio/ficha_servicio/$1/$2/$3";					//Entra cualquiera
 
-$route['validar-recomendacion']   	        	= "sitio/recomendar_servicio";
+$route['validar-recomendacion']   	       		 	= "sitio/recomendar_servicio";
 
 
 /*--- LOGIN/LOGOUT/REGISTRO --------------------*/
-$route['logout']		   						= "login/logout";								//Usuario logueado
-$route['login']     	       					= "login/index";								//Usuario deslogueado
-$route['validar_login']        					= "login/validacion_login";
-$route['validar_login_ajax']        			= "login/validacion_login_ajax";
+$route['logout']		   							= "login/logout";								//Usuario logueado
+$route['login']     	       						= "login/index";								//Usuario deslogueado
+$route['validar_login']        						= "login/validacion_login";
+$route['validar_login_ajax']        				= "login/validacion_login_ajax";
 
-$route['recuperar-clave']      					= "login/recuperar_clave";						//Usuario deslogueado
-$route['validar_recuperar_clave']      			= "login/validar_recuperar_clave";				//Usuario deslogueado
+$route['recuperar-clave']      						= "login/recuperar_clave";						//Usuario deslogueado
+$route['validar_recuperar_clave']      				= "login/validar_recuperar_clave";				//Usuario deslogueado
 
-$route['registrarse']          					= "login/registrar_usuario";					//Usuario deslogueado
-$route['validar_nuevo_usuario']          		= "login/validar_nuevo_usuario";
-$route['validar_nuevo_usuario_ajax']          	= "login/validar_nuevo_usuario_ajax";
-$route['registro_respuesta']		          	= "login/registro_respuesta";
-$route['usuario/verificar/(:any)']           	= "usuario/verificar";							//Usuario deslogueado
+$route['registrarse']          						= "login/registrar_usuario";					//Usuario deslogueado
+$route['validar_nuevo_usuario']          			= "login/validar_nuevo_usuario";
+$route['validar_nuevo_usuario_ajax']          		= "login/validar_nuevo_usuario_ajax";
+$route['registro_respuesta']		          		= "login/registro_respuesta";
+$route['usuario/verificar/(:any)']           		= "usuario/verificar";							//Usuario deslogueado
 /*----------------------------------------------*/
 
 /*--- USUARIO ----------------------------------*/
-$route['menu_usuario']							= "login/menu_usuario";
+$route['menu_usuario']								= "login/menu_usuario";
 
-$route['mi-perfil']   		   					= "usuario/index";								//Mi-Perfil Usuario logueado
-$route['mi-perfil/servicios']   		   		= "usuario/servicios_usuario";
-$route['mi-perfil/favoritos']  					= "usuario/favoritos_usuario";
-$route['mi-perfil/mis-opiniones']    			= "usuario/mis_opiniones";
-$route['mi-perfil/servicios-contactados']  		= "usuario/servicios_contactados_usuario";
-$route['mi-perfil/servicios-solicitados']  		= "usuario/servicios_solicitados_usuario";
-$route['mi-perfil/postulaciones']		  		= "usuario/postulaciones_usuario";
+$route['mi-perfil']   		   						= "usuario/index";								//Mi-Perfil Usuario logueado
+$route['mi-perfil/servicios']   		   			= "usuario/servicios_usuario";
+$route['mi-perfil/favoritos']  						= "usuario/favoritos_usuario";
+$route['mi-perfil/mis-opiniones']    				= "usuario/mis_opiniones";
+$route['mi-perfil/servicios-contactados']  			= "usuario/servicios_contactados_usuario";
+$route['mi-perfil/servicios-contactados/(:num)']  	= "usuario/servicios_contactados_usuario";
+$route['mi-perfil/servicios-solicitados']  			= "usuario/servicios_solicitados_usuario";
+$route['mi-perfil/postulaciones']		  			= "usuario/postulaciones_usuario";
 
-$route['validar-voto']   		   				= "usuario/validar_voto";
-$route['mi-perfil/editar-datos']   				= "usuario/editar_datos";
-$route['mi-perfil/validar_editar_datos']   		= "login/validar_editar_datos";
-$route['editar_usuario_respuesta']				= "login/editar_usuario_respuesta";
-$route['actulaizar_foto_perfil']				= "usuario/actulaizar_foto_perfil";
+$route['validar-voto']   		   					= "usuario/validar_voto";
+$route['mi-perfil/editar-datos']   					= "usuario/editar_datos";
+$route['mi-perfil/validar_editar_datos']   			= "login/validar_editar_datos";
+$route['editar_usuario_respuesta']					= "login/editar_usuario_respuesta";
+$route['actulaizar_foto_perfil']					= "usuario/actulaizar_foto_perfil";
 
-$route['set_favorito']  						= "usuario/set_favorito";
+$route['set_favorito']  							= "usuario/set_favorito";
 
 $route['mi-perfil/servicios/editar/(:num)-(:any)']  = "sitio/editar_servicio/$1";
+<<<<<<< HEAD
 $route['elimiar-servicio']  					= "sitio/unset_servicio";
 $route['eliminar-servicio-solicitado']  		= "sitio/unset_servicio_solicitado";
+=======
+$route['elimiar-servicio']  						= "sitio/unset_servicio";
 
-$route['usuario/perfil/(:any)'] 				= "usuario/perfil_usuario/$1";
+>>>>>>> origin/ci
+
+$route['usuario/perfil/(:any)'] 					= "usuario/perfil_usuario/$1";
 
 
 $route['404_override'] 	= '';
