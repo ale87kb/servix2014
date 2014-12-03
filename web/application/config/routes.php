@@ -112,6 +112,7 @@ $route['mi-perfil/servicios-contactados/(:num)']  	= "usuario/servicios_contacta
 $route['mi-perfil/servicios-solicitados']  			= "usuario/servicios_solicitados_usuario";
 $route['mi-perfil/servicios-solicitados/(:num)']	= "usuario/servicios_solicitados_usuario";
 $route['mi-perfil/postulaciones']		  			= "usuario/postulaciones_usuario";
+$route['mi-perfil/postulaciones/(:num)']  			= "usuario/postulaciones_usuario";
 
 $route['validar-voto']   		   					= "usuario/validar_voto";
 $route['mi-perfil/editar-datos']   					= "usuario/editar_datos";

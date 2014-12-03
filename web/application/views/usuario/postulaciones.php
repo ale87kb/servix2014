@@ -1,5 +1,8 @@
 <h1>Mis postulaciones</h1>
 <div class="col-md-12">
+  <div class="row">
+    <div class="col-md-12"><p>Cantidad de postulaciones: <?php echo $cantidad; ?></p></div>
+  </div>
 	<?php 
         if(!empty($postulaciones))
         {
@@ -64,6 +67,8 @@
 			</div>
     <?php
     		}
+      	echo "<div class='paginacion'>" . $paginacion . "</div>";
+
       	}
     ?>
 </div>

@@ -482,7 +482,7 @@ Class Usuarios_model extends CI_Model{
 
 
 	//Cantidad de servicios solicitados a cuales el usuario se postulo
-	public function getCantidadPostulados($id, $vencido){
+	public function getCantidadPostulados($id, $vencido, $postulado){
 		$query = "SELECT
 					COUNT(postulaciones_temp.id) AS cantidad
 				FROM
@@ -493,7 +493,7 @@ Class Usuarios_model extends CI_Model{
 				AND
 					busquedas_temp.vencido = $vencido
 				AND 
-					postulaciones_temp.postulado = 1";
+					postulaciones_temp.postulado = $postulado";
 		$rs = $this->db->query($query);
 
 		return $rs->row()->cantidad;

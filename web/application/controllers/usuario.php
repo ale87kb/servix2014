@@ -157,7 +157,6 @@ class Usuario extends CI_controller{
 	}
 
 	/*------------------------------------------------------------*/
-	/*		print_d($this->db->last_query());*/
 
 	public function mis_opiniones(){
 		if($this->UsuarioSession)
@@ -313,11 +312,16 @@ class Usuario extends CI_controller{
 		if($this->UsuarioSession)
 		{
 			$data['usuarioSession'] = $this->UsuarioSession;
-			$UsPostulaciones 		= $this->_postulacionesRealizadas($this->UsuarioSession['id'], 0, 5);
-			$data['postulaciones'] 	= $UsPostulaciones;
+			$cantidadPostulacionesA	= $this->usuarios_model->getCantidadPostulados($this->UsuarioSession['id'], 0, 1);
+			$cantidadPostulacionesV	= $this->usuarios_model->getCantidadPostulados($this->UsuarioSession['id'], 0, 0);
+			$cantidadTotal			= $cantidadPostulacionesA + $cantidadPostulacionesV;
+			$UsPostulaciones 		= $this->_postulacionesRealizadas($this->UsuarioSession['id'], $cantidadTotal, 5);
+			$data['cantidad']		= $cantidadTotal;
+			$data['postulaciones'] 	= $UsPostulaciones['postulaciones'];
 			$data['title'] 			= 'Mis Postulaciones';
 			$data['vista'] 			= 'usuario/mi_perfil';
 			$data['vistaPerfil']	= 'usuario/postulaciones';
+			$data['paginacion']		= $UsPostulaciones['vinculos'];
 			$data['page_active']	= 7;
 			$this->load->view('usuarios_view', $data);
 		}
@@ -327,8 +331,21 @@ class Usuario extends CI_controller{
 		}
 	}
 
-	private function _postulacionesRealizadas($idUsuario, $desdeLimit ,$cantidadLimit){
-		$postulaciones = $this->usuarios_model->getUPostulaciones($idUsuario, $desdeLimit ,$cantidadLimit);
+	private function _postulacionesRealizadas($idUsuario, $totalRows, $cantidadLimit){
+		$this->load->library('pagination');
+	    $config = array();
+        $config["base_url"] 	= site_url('mi-perfil/postulaciones');
+        $config["total_rows"]   = $totalRows;       
+        $config["per_page"] 	= $cantidadLimit;
+        $config["uri_segment"]  = 3;
+        $config['last_link'] 	= 'Último';
+        $config['first_link'] 	= 'Primero';
+        $this->pagination->initialize($config);
+
+		$page 			= (is_numeric($this->uri->segment(3))) ? $this->uri->segment(3) : 0;
+		$data 			= null;
+		$postulaciones 	= $this->usuarios_model->getUPostulaciones($idUsuario, $page, $cantidadLimit);
+
 		if($postulaciones){
 			foreach ($postulaciones as $key => $value) {
 				$postulaciones[$key]['link'] = generarLinkServicio($postulaciones[$key]['id'],$postulaciones[$key]['categoria']."-en-".$postulaciones[$key]['localidad']."-".$postulaciones[$key]['provincia'],'servicio-solicitado');
@@ -336,11 +353,13 @@ class Usuario extends CI_controller{
 				$postulaciones[$key]['fecha_fin'] = fechaBarras(strtotime($postulaciones[$key]['fecha_fin']));
 				$postulaciones[$key]['DuenioSolicitud'] = $this->usuarios_model->getUsuario($postulaciones[$key]['id_usuario']);
 			}
-
-			return $postulaciones;
+			$data['postulaciones'] 	= $postulaciones;
+			$data['vinculos'] 		= $this->pagination->create_links();
+			return $data;
 		}
 		return false;
 	}
+
 	/*------------------------------------------------------------*/
 
 
