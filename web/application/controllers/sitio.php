@@ -798,10 +798,13 @@ class sitio extends CI_Controller {
 		'assets/js/script-typehead.js',
 		'assets/js/script-raty.js',
 		);
+
 		$this->_css = array(
 		'assets/css/raty/jquery.raty.css',
 		'assets/css/bootstrap-select.min.css',
 		);
+		$data['css'] = $this->_css;
+		$data['js'] = $this->_js;
 
 		$this->load->view('home_view',$data);
 
