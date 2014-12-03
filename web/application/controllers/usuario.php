@@ -64,9 +64,9 @@ class Usuario extends CI_controller{
         $config['first_link'] 	= 'Primero';
         $this->pagination->initialize($config);
 
-        $page = (is_numeric($this->uri->segment(3))) ? $this->uri->segment(3) : 0;
-		$data = null;
-		$servicios = $this->usuarios_model->getServiciosProrpios($idUsuario, $page, $cantidadLimit);
+        $page 		= (is_numeric($this->uri->segment(3))) ? $this->uri->segment(3) : 0;
+		$data 		= null;
+		$servicios 	= $this->usuarios_model->getServiciosProrpios($idUsuario, $page, $cantidadLimit);
 
 		if($servicios)
 		{
@@ -127,9 +127,9 @@ class Usuario extends CI_controller{
         $config['first_link'] 	= 'Primero';
         $this->pagination->initialize($config);
 
-        $page = (is_numeric($this->uri->segment(3))) ? $this->uri->segment(3) : 0;
-        $data = null;
-		$favoritos = $this->usuarios_model->getFavoritos($idUsuario, $page, $cantidadLimit);
+        $page 		= (is_numeric($this->uri->segment(3))) ? $this->uri->segment(3) : 0;
+        $data 		= null;
+		$favoritos 	= $this->usuarios_model->getFavoritos($idUsuario, $page, $cantidadLimit);
 
 		if($favoritos)
 		{
@@ -191,9 +191,9 @@ class Usuario extends CI_controller{
         $config['first_link'] 	= 'Primero';
         $this->pagination->initialize($config);
 
-        $page = (is_numeric($this->uri->segment(3))) ? $this->uri->segment(3) : 0;
-        $data = null;
-		$comentarios = $this->usuarios_model->getComentariosRealizados($idUsuario, $page, $cantidadLimit);
+        $page 			= (is_numeric($this->uri->segment(3))) ? $this->uri->segment(3) : 0;
+        $data 			= null;
+		$comentarios 	= $this->usuarios_model->getComentariosRealizados($idUsuario, $page, $cantidadLimit);
 
 		if($comentarios)
 		{
@@ -242,9 +242,9 @@ class Usuario extends CI_controller{
         $config['first_link'] 	= 'Primero';
         $this->pagination->initialize($config);
 
-        $page 					= (is_numeric($this->uri->segment(3))) ? $this->uri->segment(3) : 0;
-		$data = null;
-		$sContactados 			= $this->usuarios_model->getServiciosContactados($idUsuario, $page, $cantidadLimit);
+        $page 			= (is_numeric($this->uri->segment(3))) ? $this->uri->segment(3) : 0;
+		$data 			= null;
+		$sContactados 	= $this->usuarios_model->getServiciosContactados($idUsuario, $page, $cantidadLimit);
 
 		if($sContactados){
 			foreach ($sContactados as $key => $value) {
@@ -262,13 +262,18 @@ class Usuario extends CI_controller{
 	public function servicios_solicitados_usuario(){
 		if($this->UsuarioSession)
 		{
-			$data['usuarioSession'] = $this->UsuarioSession;
-			$UsServiciosSolicitados	= $this->_serviciosSolicitados($this->UsuarioSession['id'], 0, 5);
-			$data['sSolicitados'] 	= $UsServiciosSolicitados;
-			$data['title'] 			= 'Mis Servicios Solicitados';
-			$data['vista'] 			= 'usuario/mi_perfil';
-			$data['vistaPerfil']	= 'usuario/servicios_solicitados';
-			$data['page_active']	= 6;
+			$data['usuarioSession'] 		= $this->UsuarioSession;
+			$cantidadSolicitadosActivos		= $this->usuarios_model->getCantidadSolicitados($this->UsuarioSession['id'], 0);
+			$cantidadSolicitadosVencidos	= $this->usuarios_model->getCantidadSolicitados($this->UsuarioSession['id'], 1);
+			$cantidadTotal					= $cantidadSolicitadosActivos + $cantidadSolicitadosVencidos;
+			$UsServiciosSolicitados			= $this->_serviciosSolicitados($this->UsuarioSession['id'], $cantidadTotal, 5);
+			$data['cantidad'] 				= $cantidadTotal;
+			$data['sSolicitados'] 			= $UsServiciosSolicitados['sSolicitados'];
+			$data['title'] 					= 'Mis Servicios Solicitados';
+			$data['vista'] 					= 'usuario/mi_perfil';
+			$data['vistaPerfil']			= 'usuario/servicios_solicitados';
+			$data['page_active']			= 6;
+			$data['paginacion'] 			= $UsServiciosSolicitados['vinculos'];
 			$this->load->view('usuarios_view', $data);
 		}
 		else
@@ -277,26 +282,28 @@ class Usuario extends CI_controller{
 		}
 	}
 
-	/*private function _serviciosSolicitados($idUsuario, $desdeLimit ,$cantidadLimit){
-		$sSolicitados = $this->usuarios_model->getUServiciosSolicitados($idUsuario, $desdeLimit ,$cantidadLimit);
-		if($sSolicitados){
-			foreach ($sSolicitados as $key => $value) {
-				$sSolicitados[$key]['link'] = generarLinkServicio($sSolicitados[$key]['id'],$sSolicitados[$key]['categoria']."-en-".$sSolicitados[$key]['localidad']."-".$sSolicitados[$key]['provincia'],'servicio-solicitado');
-				$sSolicitados[$key]['fecha'] = fechaBarras(strtotime($sSolicitados[$key]['fecha_ini']));
-			}
-			return $sSolicitados;
-		}
-		return false;
-	}	*/
+	private function _serviciosSolicitados($idUsuario, $totalRows, $cantidadLimit){
+		$this->load->library('pagination');
+	    $config = array();
+        $config["base_url"] 	= site_url('mi-perfil/servicios-solicitados');
+        $config["total_rows"]   = $totalRows;       
+        $config["per_page"] 	= $cantidadLimit;
+        $config["uri_segment"]  = 3;
+        $config['last_link'] 	= 'Último';
+        $config['first_link'] 	= 'Primero';
+        $this->pagination->initialize($config);
 
-	private function _serviciosSolicitados($idUsuario, $desdeLimit ,$cantidadLimit){
-		$sSolicitados = $this->usuarios_model->getUServiciosSolicitados($idUsuario, $desdeLimit ,$cantidadLimit);
+		$page 			= (is_numeric($this->uri->segment(3))) ? $this->uri->segment(3) : 0;
+		$data 			= null;
+		$sSolicitados 	= $this->usuarios_model->getUServiciosSolicitados($idUsuario, $page, $cantidadLimit);
 		if($sSolicitados){
 			foreach ($sSolicitados as $key => $value) {
 				$sSolicitados[$key]['link'] = generarLinkServicio($sSolicitados[$key]['id'],$sSolicitados[$key]['categoria']."-en-".$sSolicitados[$key]['localidad']."-".$sSolicitados[$key]['provincia'],'servicio-solicitado');
 				$sSolicitados[$key]['fecha'] = fechaBarras(strtotime($sSolicitados[$key]['fecha_ini']));
 			}
-			return $sSolicitados;
+			$data['sSolicitados'] = $sSolicitados;
+			$data['vinculos'] = $this->pagination->create_links();
+			return $data;
 		}
 		return false;
 	}
@@ -318,7 +325,6 @@ class Usuario extends CI_controller{
 		{
 			redirect('', 'refresh');
 		}
-
 	}
 
 	private function _postulacionesRealizadas($idUsuario, $desdeLimit ,$cantidadLimit){

@@ -1,5 +1,8 @@
 <h1>Mis servicios solicitados</h1>
 <div class="col-md-12">
+  <div class="row">
+    <div class="col-md-12"><p>Cantidad de servicios solicitados: <?php echo $cantidad; ?></p></div>
+  </div>
   <?php
     if(!empty($sSolicitados))
     {
@@ -30,12 +33,7 @@
 
       <?php
       }
-      if(count($sSolicitados) > 4)
-      {
-      ?>
-        <a href="#">Ver mas..</a>
-      <?php
-      }
+      echo "<div class='paginacion'>" . $paginacion . "</div>";
     }
     else
     {
