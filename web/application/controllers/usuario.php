@@ -750,6 +750,20 @@ class Usuario extends CI_controller{
 			$data['vista']     = 'perfil_no_encontrado';
 			$data['nologueado'] = TRUE;
 		}
+
+		$this->_js = array(
+		'assets/js/jquery.raty.js',
+		'assets/js/script-raty.js',
+		);
+
+		$this->_css = array(
+		'assets/css/raty/jquery.raty.css',
+		);
+
+
+		$data['css'] = $this->_css;
+		$data['js'] = $this->_js;
+		
 		$this->load->view('home_view',$data);
 		
 	}

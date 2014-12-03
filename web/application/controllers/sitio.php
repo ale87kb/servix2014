@@ -2,15 +2,14 @@
 
 class sitio extends CI_Controller {
 
-	var $UsuarioSession		= null;
+	private $UsuarioSession	= null;
+	private $_js 			= null; 
+	private $_css 			= null; 
+
 
 	public function __construct(){
-
 		parent::__construct();
-		
-		//inicio sesion de usuario preguntandole al modelo
 		$this->UsuarioSession = $this->usuarios_model->isLogin();
-
 	}
 
 	
@@ -43,6 +42,26 @@ class sitio extends CI_Controller {
 		$data['current_page'] = $solicitados['current_page'];
 		$data['categorias'] = $this->servix_model->getCategorias();
 		$data['foot_cat'] ='footCat';
+
+	
+		
+		
+
+		$this->_js = array(
+		'assets/js/bootstrap-typeahead.js',
+		'assets/js/jquery.raty.js',
+		'assets/js/script-typehead.js',
+		'assets/js/script-raty.js',
+		);
+
+		$this->_css = array(
+		'assets/css/raty/jquery.raty.css',
+		'assets/css/bootstrap-select.min.css',
+		);
+
+
+		$data['css'] = $this->_css;
+		$data['js'] = $this->_js;
 
 		if ($this->input->is_ajax_request()) {
 			$this->load->view('servicios_solicitados',$data);
@@ -215,6 +234,27 @@ class sitio extends CI_Controller {
 
 
 
+		$this->_js = array(
+		'assets/js/bootstrap-typeahead.js',
+		'assets/js/moment-with-locales.js',
+		'assets/js/bootstrap-datetimepicker.min.js',
+		'assets/js/bootstrap-select.min.js',
+		'assets/js/ajax-bootstrap-select.min.js',
+		'assets/js/script-typehead.js',
+		'assets/js/script-datepicker.js',
+		'assets/js/script-selectpicker.js',
+
+		);
+
+
+
+		$this->_css = array(
+		'assets/css/bootstrap-datetimepicker.min.css',
+		'assets/css/bootstrap-select.min.css',
+		);
+
+		$data['css'] = $this->_css;
+		$data['js'] = $this->_js;
 		$this->load->view('home_view',$data);
 		}else{
 			return redirect('');
@@ -599,6 +639,23 @@ class sitio extends CI_Controller {
 			$data['post'] = $rs[0];
 			$data['form_errors'] =null;
 			$data['vista'] = 'editar_servicio';
+
+			$this->_js = array(
+			'assets/js/bootstrap-typeahead.js',
+			'assets/js/bootstrap-select.min.js',
+			'assets/js/ajax-bootstrap-select.min.js',
+			'assets/js/script-typehead.js',
+			'assets/js/script-selectpicker.js',
+			);
+
+			$this->_css = array(
+			'assets/css/bootstrap-select.min.css',
+			);
+
+
+			$data['css'] = $this->_css;
+			$data['js'] = $this->_js;
+
 			$this->load->view('home_view',$data);
 
 	
@@ -630,6 +687,21 @@ class sitio extends CI_Controller {
 		$data['post'] = null;
 		$data['form_errors'] =null;
 		$data['vista'] = 'ofrecer_servicio';
+		$this->_js = array(
+		'assets/js/bootstrap-typeahead.js',
+		'assets/js/bootstrap-select.min.js',
+		'assets/js/ajax-bootstrap-select.min.js',
+		'assets/js/script-typehead.js',
+		'assets/js/script-selectpicker.js',
+		);
+
+		$this->_css = array(
+		'assets/css/bootstrap-select.min.css',
+		);
+
+
+		$data['css'] = $this->_css;
+		$data['js'] = $this->_js;
 		$this->load->view('home_view',$data);
 
 
@@ -717,6 +789,20 @@ class sitio extends CI_Controller {
 		}
 		$data['title'] 	   = 'Resultado de búsqueda';
 		$data['vista'] 	   = 'resultado_busqueda_view';
+
+		
+
+		$this->_js = array(
+		'assets/js/bootstrap-typeahead.js',
+		'assets/js/jquery.raty.js',
+		'assets/js/script-typehead.js',
+		'assets/js/script-raty.js',
+		);
+		$this->_css = array(
+		'assets/css/raty/jquery.raty.css',
+		'assets/css/bootstrap-select.min.css',
+		);
+
 		$this->load->view('home_view',$data);
 
 
@@ -1105,6 +1191,31 @@ class sitio extends CI_Controller {
 		 	$data['title']     = 'Ficha del servicio no encontrada';
 			$data['vista']     = 'ficha_servicio_no_encontrado_view';
 		}
+
+		
+
+
+		$this->_js = array(
+		'assets/js/bootstrap-typeahead.js',
+		'assets/js/moment-with-locales.js',
+		'assets/js/bootstrap-datetimepicker.min.js',
+		'assets/js/jquery.raty.js',
+		'assets/js/script-typehead.js',
+		'assets/js/script-datepicker.js',
+		'assets/js/script-raty.js',
+
+		);
+
+
+
+		$this->_css = array(
+		'assets/css/raty/jquery.raty.css',
+		'assets/css/bootstrap-datetimepicker.min.css',
+		'assets/css/bootstrap-select.min.css',
+		);
+
+		$data['css'] = $this->_css;
+		$data['js'] = $this->_js;
 
 		$this->load->view('home_view',$data);
 	}

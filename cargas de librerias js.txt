@@ -1,0 +1,43 @@
+<!--------HOME----------->
+buscador  
+type head
+--------------------------
+servicios destacados
+raty
+<!------ FIN HOME-------->
+
+<!--------RESULTADO DE BUSQUEDA----------->
+typehead
+raty
+<!--------FIN RESULTADO DE BUSQUEDA------->
+
+
+<!--------FICHA----------->
+typehead
+raty
+datepicker
+<!------FIN FICHA--------->
+
+<!--------POSTULACION SERVICIO----------->
+nada
+<!--------FIN POSTULACION SERVICIO------->
+
+
+
+
+
+<!--------SOLICITAR SERVICIO-------------->
+select picker 
+typehead
+datepicker
+<!--------FIN SOLICITAR SERVICIO----------->
+
+
+<!--------OFRECER SERVICIO y EDITAR-------------->
+select picker
+typehead
+<!--------FIN OFRECER SERVICIO-------------->
+
+<!--------USUARIO / PERFIL-------------->
+raty
+

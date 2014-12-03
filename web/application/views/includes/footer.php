@@ -219,16 +219,31 @@
 	<script src="<?php  echo site_url('assets/js/jquery.min.js');?>"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="<?php echo site_url('assets/js/bootstrap.min.js');?>"></script>
-  <script src="<?php echo site_url('assets/js/bootstrap-typeahead.js');?>"></script>
-  <script src="<?php echo site_url('assets/js/moment-with-locales.js');?>"></script>
-	<script src="<?php echo site_url('assets/js/bootstrap-datetimepicker.min.js');?>"></script>
-	<!-- BootstrapValidator -->
+
+  <!-- BootstrapValidator -->
   <script src="<?php echo site_url('assets/js/bootstrapValidator.min.js');?>" type="text/javascript"></script>
-  <script src="<?php echo site_url('assets/js/bootstrap-select.min.js');?>" type="text/javascript"></script>
-	<script src="<?php echo site_url('assets/js/ajax-bootstrap-select.min.js');?>" type="text/javascript"></script>
   <script src="<?php echo site_url('assets/js/lang/es_ES.js');?>" type="text/javascript"></script>
-	<script src="<?php echo site_url('assets/js/jquery.form.min.js');?>" type="text/javascript"></script>
-	<?php 
+  <!-- End BootstrapValidator -->
+
+  <!-- FORM AJAX -->
+  <script src="<?php echo site_url('assets/js/jquery.form.min.js');?>" type="text/javascript"></script>
+  <!-- END AJAX -->
+  <!-- 
+  <script src="<?php echo site_url('assets/js/bootstrap-typeahead.js');?>"></script>
+  
+  <script src="<?php echo site_url('assets/js/moment-with-locales.js');?>"></script>
+  <script src="<?php echo site_url('assets/js/bootstrap-datetimepicker.min.js');?>"></script>
+  
+
+  <script src="<?php echo site_url('assets/js/bootstrap-select.min.js');?>" type="text/javascript"></script>
+  <script src="<?php echo site_url('assets/js/ajax-bootstrap-select.min.js');?>" type="text/javascript"></script>
+  
+  <script src="<?php echo site_url('assets/js/jquery.raty.js');?>" type="text/javascript"></script>
+   -->
+  <script>
+    $site_url = "<?php echo site_url();?>";
+  </script>
+  <?php 
   /* Javascript agregado desde algun Controlador*/
     if(isset($js) && $js!=null)
     {
@@ -240,10 +255,9 @@
     }
   ?>
 
-	<script>
-		$site_url = "<?php echo site_url();?>";
-	</script>
-  <script src="<?php echo site_url('assets/js/jquery.raty.js');?>" type="text/javascript"></script>
+
+
+
 	<script src="<?php echo site_url('assets/js/script.js');?>" type="text/javascript"></script>
 
 	</body>
