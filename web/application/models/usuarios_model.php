@@ -270,15 +270,22 @@ Class Usuarios_model extends CI_Model{
 					servicios.id,
 					servicios.titulo,
 					servicios.descripcion,
-					servicios.foto
+					servicios.foto,
+					categorias.categoria,
+					localidades.localidad,
+					provincias.provincia
 				FROM
 					favoritos
 				INNER JOIN servicios ON favoritos.id_servicios = servicios.id
+				INNER JOIN localidades ON servicios.id_localidades = localidades.id
+				INNER JOIN categorias ON servicios.id_categorias = categorias.id
+				INNER JOIN provincias ON localidades.id_provincia = provincias.id
 				WHERE
 					favoritos.id_usuarios = $idUsuario
 				ORDER BY
 					favoritos.fecha DESC
 				LIMIT $desdeLimit, $cantidadLimit";
+
 		$rs 	= $this->db->query($query);
 
 		return $rs->result_array();
@@ -293,10 +300,16 @@ Class Usuarios_model extends CI_Model{
 						puntuacion.comentario,
 						puntuacion.puntos,
 						puntuacion.fecha_votacion,
-						puntuacion.fecha_uso_servicio
+						puntuacion.fecha_uso_servicio,
+						categorias.categoria,
+						localidades.localidad,
+						provincias.provincia
 					FROM
 						puntuacion
 					INNER JOIN servicios ON puntuacion.id_servicios = servicios.id
+					INNER JOIN localidades ON servicios.id_localidades = localidades.id
+					INNER JOIN provincias ON localidades.id_provincia = provincias.id
+					INNER JOIN categorias ON servicios.id_categorias = categorias.id
 					WHERE
 						puntuacion.id_usuarios = $idUsuario
 					LIMIT $desdeLimit, $cantidadLimit";
@@ -327,10 +340,17 @@ Class Usuarios_model extends CI_Model{
 						servicios.descripcion,
 						servicios.foto,
 						consultas_servicios.consulta,
-						consultas_servicios.fecha
+						consultas_servicios.fecha,
+						provincias.provincia,
+						categorias.categoria,
+						localidades.localidad
 					FROM
 						consultas_servicios
 					INNER JOIN servicios ON consultas_servicios.id_servicio = servicios.id
+					INNER JOIN localidades ON servicios.id_localidades = localidades.id
+					INNER JOIN provincias ON localidades.id_provincia = provincias.id
+					INNER JOIN categorias ON servicios.id_categorias = categorias.id
+
 					WHERE
 						consultas_servicios.id_usuario = $idUsuario
 					ORDER BY

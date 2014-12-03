@@ -100,22 +100,25 @@ $route['usuario/verificar/(:any)']           	= "usuario/verificar";							//Usu
 /*--- USUARIO ----------------------------------*/
 $route['menu_usuario']							= "login/menu_usuario";
 
-$route['mi-perfil']   		   					= "usuario/index";								//Usuario logueado
+$route['mi-perfil']   		   					= "usuario/index";								//Mi-Perfil Usuario logueado
+$route['mi-perfil/servicios']   		   		= "usuario/servicios_usuario";
+$route['mi-perfil/favoritos']  					= "usuario/favoritos_usuario";
+$route['mi-perfil/mis-opiniones']    			= "usuario/mis_opiniones";
+$route['mi-perfil/servicios-contactados']  		= "usuario/servicios_contactados_usuario";
+$route['mi-perfil/servicios-solicitados']  		= "usuario/servicios_solicitados_usuario";
+$route['mi-perfil/postulaciones']		  		= "usuario/postulaciones_usuario";
+
 $route['validar-voto']   		   				= "usuario/validar_voto";
 $route['mi-perfil/editar-datos']   				= "usuario/editar_datos";
 $route['mi-perfil/validar_editar_datos']   		= "login/validar_editar_datos";
 $route['editar_usuario_respuesta']				= "login/editar_usuario_respuesta";
 $route['actulaizar_foto_perfil']				= "usuario/actulaizar_foto_perfil";
 
-$route['mi-perfil/editar-servicios']  			= "usuario/editar_servicios";
-$route['mi-perfil/favoritos']  					= "usuario/favoritos";
 $route['set_favorito']  						= "usuario/set_favorito";
-$route['mi-perfil/servicios-solicitados']  		= "usuario/servicios_solicitados";
 
 $route['mi-perfil/servicios/editar/(:num)-(:any)']  = "sitio/editar_servicio/$1";
 $route['elimiar-servicio']  					= "sitio/unset_servicio";
 
-$route['mis-comentarios']           			= "usuario/mis_comentarios";
 
 $route['usuario/perfil/(:any)'] 				= "usuario/perfil_usuario/$1";
 

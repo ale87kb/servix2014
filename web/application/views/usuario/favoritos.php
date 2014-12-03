@@ -1,42 +1,38 @@
-<div class="col-md-6 panel-info">
-
-	<div class="panel-heading">
-		<h3 class="panel-title">Mis favoritos</h3>
-	</div>
-
-	<div class="panel-body">
-		<div class="row">
-			<div class="col-md-12 ">
-				<div class="list-group">
+<h1>Mis favoritos</h1>
+<div class="col-md-12">
 
         <?php
-          if(!empty($favoritos)){
-            foreach ($favoritos as $fav) {
+          if(!empty($favoritos))
+          {
+            foreach ($favoritos as $fav)
+            {
 
             ?>
-              <a href="<?php echo $fav['link']; ?>" class="list-group-item">
-                <div class="row">
-                  
-                  <div class="col-md-4">
-                    <figure><img src="<?php echo site_url($fav['foto_path']); ?>" alt=""></figure>
-                  </div>
-                  <div class="col-dm-8">
-                    
-                    <h4 class="list-group-item-heading"><?php echo ucfirst($fav['titulo']); ?></h4>
-                    <p class="list-group-item-text"><?php echo ucfirst($fav['descripcion']); ?></p>
-                  </div>
-                </div>
-              </a>
-
+  <div class="row">
+    <div class="col-md-12 blogShort">
+      <figure>
+        <img src="<?php echo site_url($fav['foto_path']); ?>" alt="<?php echo ucfirst($fav['titulo']); ?>" class="pull-left img-responsive thumb margin10 img-thumbnail">
+      </figure>
+      <h3><a href="<?php echo $fav['link']; ?>"><?php echo ucfirst($fav['titulo']); ?></a></h3>
+        <p class="pull-right">
+          <span class="label label-default"><?php echo ucfirst($fav['categoria']); ?></span>
+          <span class="label label-default"><?php echo ucfirst($fav['localidad']); ?></span>
+          <span class="label label-default"><?php echo ucfirst($fav['provincia']); ?></span>
+        </p>
+    </div>
+    </div>
+    <hr/>
             <?php
             }
-            if(count($comentarios) > 4){
+            if(count($favoritos) > 4)
+            {
             ?>
               <a href="#">Ver mas..</a>
             <?php
             }
           }
-          else{
+          else
+          {
           ?>
 
             <h4>No tienes favoritos</h4>
@@ -45,9 +41,5 @@
           <?php
           }
         ?>
-				</div>
 
-			</div>
-		</div>
-	</div>
 </div>

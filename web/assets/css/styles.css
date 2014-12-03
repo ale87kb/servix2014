@@ -184,3 +184,26 @@ a.list-group-item {
     
 }
 #search .jumbotron p{font-size: 18px;}
+
+
+#mPerfilU{}
+#mPerfilU .nav-sidebar { 
+    width: 100%;
+    padding: 8px 0; 
+    border-right: 1px solid #ddd;
+}
+#mPerfilU .nav-sidebar a {
+    color: #333;
+    -webkit-transition: all 0.08s linear;
+    -moz-transition: all 0.08s linear;
+    -o-transition: all 0.08s linear;
+    transition: all 0.08s linear;
+}
+#mPerfilU .nav-sidebar .active a { 
+    cursor: default;
+    background-color: #38C6D8; 
+    color: #fff; 
+}
+#mPerfilU .nav-sidebar .active a:hover {
+    background-color: #3AE5E8;   
+}

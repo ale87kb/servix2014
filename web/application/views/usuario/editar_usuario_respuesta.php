@@ -2,11 +2,14 @@
   <h1>Edicion de usuario</h1>
    
    <?php 
-	if (isset($edditUser) && $edditUser){
+	if (isset($edditUser) && $edditUser)
+	{
 
-		if (isset($newEmail) && $newEmail){
+		if (isset($newEmail) && $newEmail)
+		{
 
-   			if(isset($envioNuevoMail) && $envioNuevoMail){
+   			if(isset($envioNuevoMail) && $envioNuevoMail)
+   			{
 	?>
 			<p>Tu e-mail de usuario ha sido modificado correctamente.</p>
 			<p>Te enviamos un mensaje a tu casilla de e-mail, para que confirmes tu usuario.</p>
@@ -21,8 +24,10 @@
    	<?php
    			}
    		}
-   		if(isset($newClave) && $newClave){
-   			if(isset($envioEditClave) && $envioEditClave){
+   		if(isset($newClave) && $newClave)
+   		{
+   			if(isset($envioEditClave) && $envioEditClave)
+   			{
 	?>
 			<p>Tu clave ha sido modificada correctamente.</p>
 
