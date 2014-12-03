@@ -1,5 +1,8 @@
 <h1>Servicios contactados</h1>
 <div class="col-md-12">
+  <div class="row">
+    <div class="col-md-12"><p>Cantidad de servicios Contactados: <?php echo $cantidad; ?></p></div>
+  </div>
   <?php
     if(!empty($sContactados))
     {

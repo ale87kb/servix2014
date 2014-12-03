@@ -35,28 +35,43 @@ class Usuario extends CI_controller{
 	public function servicios_usuario(){
 		if($this->UsuarioSession)
 		{
-			$data['usuarioSession'] = $this->UsuarioSession;
-			$UsServicios 			= $this->_serviciosUsuario($this->UsuarioSession['id'], 0, 5);
-			$cantidadServicios 		= $this->usuarios_model->getCantidadServicioPropios($this->UsuarioSession['id']);
-			$data['cantidad'] 		= $cantidadServicios;
-			$data['serviciosPropios']= $UsServicios;
-			$data['title'] 			= 'Mis Servicios';
-			$data['vista'] 			= 'usuario/mi_perfil';
-			$data['vistaPerfil']	= 'usuario/servicios_usuario';
-			$data['page_active']	= 2;
+			$data['usuarioSession'] 	= $this->UsuarioSession;
+			$cantidadServicios 			= $this->usuarios_model->getCantidadServicioPropios($this->UsuarioSession['id']);
+			$UsServicios 				= $this->_serviciosUsuario($this->UsuarioSession['id'], $cantidadServicios, 5);
+			$data['cantidad'] 			= $cantidadServicios;
+			$data['serviciosPropios']	= $UsServicios['servicios'];
+			$data['title'] 				= 'Mis Servicios';
+			$data['vista'] 				= 'usuario/mi_perfil';
+			$data['vistaPerfil']		= 'usuario/servicios_usuario';
+			$data['page_active']		= 2;
+			$data['paginacion'] 		= $UsServicios['vinculos'];
 			$this->load->view('usuarios_view', $data);
 		}
 		else
 		{
 			redirect('', 'refresh');
 		}
-
 	}
 
-	private function _serviciosUsuario($idUsuario, $desdeLimit ,$cantidadLimit){
-		$servicios = $this->usuarios_model->getServiciosProrpios($idUsuario, $desdeLimit ,$cantidadLimit);
-		if($servicios){
-			foreach ($servicios as $key => $value) {
+	private function _serviciosUsuario($idUsuario, $totalRows, $cantidadLimit){
+		$this->load->library('pagination');
+	    $config = array();
+        $config["base_url"] 	= site_url('mi-perfil/servicios');
+        $config["total_rows"]   = $totalRows;       
+        $config["per_page"] 	= $cantidadLimit;
+        $config["uri_segment"]  = 3;
+        $config['last_link'] 	= 'Último';
+        $config['first_link'] 	= 'Primero';
+        $this->pagination->initialize($config);
+
+        $page = (is_numeric($this->uri->segment(3))) ? $this->uri->segment(3) : 0;
+		$data = null;
+		$servicios = $this->usuarios_model->getServiciosProrpios($idUsuario, $page, $cantidadLimit);
+
+		if($servicios)
+		{
+			foreach ($servicios as $key => $value)
+			{
 				$servicios[$key]['link'] = generarLinkServicio($servicios[$key]['id'],$servicios[$key]['titulo']);
 				if($servicios[$key]['foto'] == "" || $servicios[$key]['foto'] == null)
 				{
@@ -71,8 +86,9 @@ class Usuario extends CI_controller{
 					$servicios[$key]['foto_path'] = 'assets/images/servicio_125.jpg';
 				}
 			}
-
-			return $servicios;
+			$data['servicios'] = $servicios;
+			$data['vinculos'] = $this->pagination->create_links();
+			return $data;
 		}
 		return false;
 	}
@@ -83,25 +99,42 @@ class Usuario extends CI_controller{
 		if($this->UsuarioSession)
 		{
 			$data['usuarioSession'] = $this->UsuarioSession;
-			$Usfavoritos 			= $this->_linkFavoritos($this->UsuarioSession['id'], 0, 5);
-			$data['favoritos'] 		= $Usfavoritos;
+			$cantidadFavoritos 		= $this->usuarios_model->getCantidadFavoritos($this->UsuarioSession['id']);
+			$Usfavoritos 			= $this->_linkFavoritos($this->UsuarioSession['id'], $cantidadFavoritos, 5);
+			$data['cantidad']		= $cantidadFavoritos;
+			$data['favoritos'] 		= $Usfavoritos['favoritos'];
 			$data['title'] 			= 'Mis Favoritos';
 			$data['vista'] 			= 'usuario/mi_perfil';
 			$data['vistaPerfil']	= 'usuario/favoritos';
 			$data['page_active']	= 3;
+			$data['paginacion'] 	= $Usfavoritos['vinculos'];
 			$this->load->view('usuarios_view', $data);
 		}
 		else
 		{
 			redirect('', 'refresh');
 		}
-
 	}
-	
-	private function _linkFavoritos($idUsuario, $desdeLimit ,$cantidadLimit){
-		$favoritos = $this->usuarios_model->getFavoritos($idUsuario, $desdeLimit ,$cantidadLimit);
-		if($favoritos){
-			foreach ($favoritos as $key => $vlaue) {
+
+	private function _linkFavoritos($idUsuario, $totalRows, $cantidadLimit){
+		$this->load->library('pagination');
+	    $config = array();
+        $config["base_url"] 	= site_url('mi-perfil/favoritos');
+        $config["total_rows"]   = $totalRows;       
+        $config["per_page"] 	= $cantidadLimit;
+        $config["uri_segment"]  = 3;
+        $config['last_link'] 	= 'Último';
+        $config['first_link'] 	= 'Primero';
+        $this->pagination->initialize($config);
+
+        $page = (is_numeric($this->uri->segment(3))) ? $this->uri->segment(3) : 0;
+        $data = null;
+		$favoritos = $this->usuarios_model->getFavoritos($idUsuario, $page, $cantidadLimit);
+
+		if($favoritos)
+		{
+			foreach ($favoritos as $key => $vlaue)
+			{
 				$favoritos[$key]['link'] = generarLinkServicio($favoritos[$key]['id'], $favoritos[$key]['titulo']);
 				if($favoritos[$key]['foto'] == "" || $favoritos[$key]['foto'] == null)
 				{
@@ -116,39 +149,62 @@ class Usuario extends CI_controller{
 					$favoritos[$key]['foto_path'] = 'assets/images/servicio_125.jpg';
 				}
 			}
-			return $favoritos;
+			$data['favoritos'] = $favoritos;
+			$data['vinculos'] = $this->pagination->create_links();
+			return $data;
 		}
 		return false;
-	}	
+	}
+
 	/*------------------------------------------------------------*/
+	/*		print_d($this->db->last_query());*/
+
 	public function mis_opiniones(){
 		if($this->UsuarioSession)
 		{
 			$data['usuarioSession'] = $this->UsuarioSession;
-			$UsComentarios 			= $this->_comentariosRealizados($this->UsuarioSession['id'], 0, 5);
-			$data['comentarios'] 	= $UsComentarios;
+			$cantidadOpiniones		= $this->usuarios_model->getCantidadComentariosRealizados($this->UsuarioSession['id']);
+			$UsComentarios 			= $this->_comentariosRealizados($this->UsuarioSession['id'], $cantidadOpiniones, 5);
+			$data['cantidad'] 		= $cantidadOpiniones;
+			$data['comentarios'] 	= $UsComentarios['comentarios'];
 			$data['title'] 			= 'Mis Opiniones';
 			$data['vista'] 			= 'usuario/mi_perfil';
 			$data['vistaPerfil']	= 'usuario/comentarios';
 			$data['page_active']	= 4;
+			$data['paginacion']	 	= $UsComentarios['vinculos'];
 			$this->load->view('usuarios_view', $data);
 		}
 		else
 		{
 			redirect('', 'refresh');
 		}
-
 	}
 
-	private function _comentariosRealizados($idUsuario, $desdeLimit ,$cantidadLimit){
-		$comentarios = $this->usuarios_model->getComentariosRealizados($idUsuario, $desdeLimit ,$cantidadLimit);
+	private function _comentariosRealizados($idUsuario, $totalRows, $cantidadLimit){
+		$this->load->library('pagination');
+	    $config = array();
+        $config["base_url"] 	= site_url('mi-perfil/mis-opiniones');
+        $config["total_rows"]   = $totalRows;
+        $config["per_page"] 	= $cantidadLimit;
+        $config["uri_segment"]  = 3;
+        $config['last_link'] 	= 'Último';
+        $config['first_link'] 	= 'Primero';
+        $this->pagination->initialize($config);
 
-		if($comentarios){
-			foreach ($comentarios as $key => $value) {
+        $page = (is_numeric($this->uri->segment(3))) ? $this->uri->segment(3) : 0;
+        $data = null;
+		$comentarios = $this->usuarios_model->getComentariosRealizados($idUsuario, $page, $cantidadLimit);
+
+		if($comentarios)
+		{
+			foreach ($comentarios as $key => $value)
+			{
 				$comentarios[$key]['link'] 	= generarLinkServicio($comentarios[$key]['id'], $comentarios[$key]['titulo']);
 				$comentarios[$key]['fecha'] = fechaBarras(strtotime($comentarios[$key]['fecha_votacion']));
 			}
-			return $comentarios;
+			$data['comentarios'] = $comentarios;
+			$data['vinculos'] = $this->pagination->create_links();
+			return $data;
 		}
 		return false;
 	}
@@ -158,7 +214,9 @@ class Usuario extends CI_controller{
 		if($this->UsuarioSession)
 		{
 			$data['usuarioSession'] = $this->UsuarioSession;
-			$UsServiciosContactados	= $this->_serviciosContactados($this->UsuarioSession['id'], 0, 5);
+			$cantidadContactados 	= $this->usuarios_model->getCantidadServiciosContactados($this->UsuarioSession['id']); 
+			$UsServiciosContactados	= $this->_serviciosContactados($this->UsuarioSession['id'], $cantidadContactados, 5);
+			$data['cantidad'] 		= $cantidadContactados;
 			$data['sContactados'] 	= $UsServiciosContactados['sContactados'];
 			$data['title'] 			= 'Servicios Contactados';
 			$data['vista'] 			= 'usuario/mi_perfil';
@@ -171,28 +229,13 @@ class Usuario extends CI_controller{
 		{
 			redirect('', 'refresh');
 		}
-
 	}
 
-	/*private function _serviciosContactados($idUsuario, $desdeLimit ,$cantidadLimit){
-		$sContactados = $this->usuarios_model->getServiciosContactados($idUsuario, $desdeLimit ,$cantidadLimit);
-
-		if($sContactados){
-			foreach ($sContactados as $key => $value) {
-				$sContactados[$key]['link'] = generarLinkServicio($sContactados[$key]['id'], $sContactados[$key]['titulo']);
-				$sContactados[$key]['fecha'] = fechaBarras(strtotime($sContactados[$key]['fecha']));
-			}
-			return $sContactados;
-		}
-		return false;
-	}*/
-
-	private function _serviciosContactados($idUsuario, $desdeLimit, $cantidadLimit){
-
+	private function _serviciosContactados($idUsuario, $totalRows, $cantidadLimit){
 		$this->load->library('pagination');
 	    $config = array();
         $config["base_url"] 	= site_url('mi-perfil/servicios-contactados');
-        $config["total_rows"]   = $this->usuarios_model->getCantidadServiciosContactados($idUsuario);       
+        $config["total_rows"]   = $totalRows;       
         $config["per_page"] 	= $cantidadLimit;
         $config["uri_segment"]  = 3;
         $config['last_link'] 	= 'Último';
@@ -200,25 +243,20 @@ class Usuario extends CI_controller{
         $this->pagination->initialize($config);
 
         $page 					= (is_numeric($this->uri->segment(3))) ? $this->uri->segment(3) : 0;
-		$sContactados 			= $this->usuarios_model->getServiciosContactados($idUsuario, $page, $cantidadLimit);
-
 		$data = null;
+		$sContactados 			= $this->usuarios_model->getServiciosContactados($idUsuario, $page, $cantidadLimit);
 
 		if($sContactados){
 			foreach ($sContactados as $key => $value) {
 				$sContactados[$key]['link'] = generarLinkServicio($sContactados[$key]['id'], $sContactados[$key]['titulo']);
 				$sContactados[$key]['fecha'] = fechaBarras(strtotime($sContactados[$key]['fecha']));
 			}
-
 			$data['sContactados'] = $sContactados;
 			$data['vinculos'] = $this->pagination->create_links();
-
 			return $data;
 		}
-
 		return false;
 	}
-
 
 	/*------------------------------------------------------------*/
 	public function servicios_solicitados_usuario(){
@@ -237,8 +275,19 @@ class Usuario extends CI_controller{
 		{
 			redirect('', 'refresh');
 		}
-
 	}
+
+	/*private function _serviciosSolicitados($idUsuario, $desdeLimit ,$cantidadLimit){
+		$sSolicitados = $this->usuarios_model->getUServiciosSolicitados($idUsuario, $desdeLimit ,$cantidadLimit);
+		if($sSolicitados){
+			foreach ($sSolicitados as $key => $value) {
+				$sSolicitados[$key]['link'] = generarLinkServicio($sSolicitados[$key]['id'],$sSolicitados[$key]['categoria']."-en-".$sSolicitados[$key]['localidad']."-".$sSolicitados[$key]['provincia'],'servicio-solicitado');
+				$sSolicitados[$key]['fecha'] = fechaBarras(strtotime($sSolicitados[$key]['fecha_ini']));
+			}
+			return $sSolicitados;
+		}
+		return false;
+	}	*/
 
 	private function _serviciosSolicitados($idUsuario, $desdeLimit ,$cantidadLimit){
 		$sSolicitados = $this->usuarios_model->getUServiciosSolicitados($idUsuario, $desdeLimit ,$cantidadLimit);

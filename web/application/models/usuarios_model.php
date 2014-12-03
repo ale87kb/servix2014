@@ -239,7 +239,7 @@ Class Usuarios_model extends CI_Model{
 	/*-------------------------------*/
 
 	//Servicios propios del Usuario
-	public function getServiciosProrpios($idUsuario, $desdeLimit ,$cantidadLimit){
+	public function getServiciosProrpios($idUsuario, $desdeLimit, $cantidadLimit){
 		$query = "SELECT
 					servicios.id,
 					servicios.titulo,
@@ -281,7 +281,7 @@ Class Usuarios_model extends CI_Model{
 	/*-------------------------------*/
 
 	//Favoritos del usuario
-	public function getFavoritos($idUsuario, $desdeLimit ,$cantidadLimit){
+	public function getFavoritos($idUsuario, $desdeLimit, $cantidadLimit){
 		$query 	= "SELECT
 					favoritos.fecha,
 					servicios.id,
@@ -306,6 +306,19 @@ Class Usuarios_model extends CI_Model{
 		$rs 	= $this->db->query($query);
 
 		return $rs->result_array();
+	}
+
+	//Cantidad de favoritos
+	public function getCantidadFavoritos($idUsuario){
+		$query = "SELECT
+					COUNT(servicios.id) AS cantidad
+				FROM
+					favoritos
+				INNER JOIN servicios ON favoritos.id_servicios = servicios.id
+				WHERE
+					favoritos.id_usuarios = $idUsuario";
+		$rs = $this->db->query($query);
+		return $rs->row()->cantidad;
 	}
 
 	/*-------------------------------*/

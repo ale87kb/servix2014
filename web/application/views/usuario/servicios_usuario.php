@@ -32,12 +32,7 @@
     <hr/>
       <?php
       }
-      if(count($serviciosPropios) > 4)
-      {
-      ?>
-        <a href="#">Ver mas..</a>
-  <?php
-      }
+        echo "<div>" . $paginacion . "</div>";
     }
     else
     {

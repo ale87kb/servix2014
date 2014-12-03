@@ -102,11 +102,15 @@ $route['menu_usuario']								= "login/menu_usuario";
 
 $route['mi-perfil']   		   						= "usuario/index";								//Mi-Perfil Usuario logueado
 $route['mi-perfil/servicios']   		   			= "usuario/servicios_usuario";
+$route['mi-perfil/servicios/(:num)']	   			= "usuario/servicios_usuario";
 $route['mi-perfil/favoritos']  						= "usuario/favoritos_usuario";
+$route['mi-perfil/favoritos/(:num)']  				= "usuario/favoritos_usuario";
 $route['mi-perfil/mis-opiniones']    				= "usuario/mis_opiniones";
+$route['mi-perfil/mis-opiniones/(:num)']    		= "usuario/mis_opiniones";
 $route['mi-perfil/servicios-contactados']  			= "usuario/servicios_contactados_usuario";
 $route['mi-perfil/servicios-contactados/(:num)']  	= "usuario/servicios_contactados_usuario";
 $route['mi-perfil/servicios-solicitados']  			= "usuario/servicios_solicitados_usuario";
+$route['mi-perfil/servicios-solicitados/(:num)']	= "usuario/servicios_solicitados_usuario";
 $route['mi-perfil/postulaciones']		  			= "usuario/postulaciones_usuario";
 
 $route['validar-voto']   		   					= "usuario/validar_voto";

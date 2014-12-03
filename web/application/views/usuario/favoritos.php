@@ -1,5 +1,8 @@
 <h1>Mis favoritos</h1>
 <div class="col-md-12">
+  <div class="row">
+    <div class="col-md-12"><p>Cantidad de Favoritos: <?php echo $cantidad; ?></p></div>
+  </div>
 
         <?php
           if(!empty($favoritos))
@@ -24,12 +27,7 @@
     <hr/>
             <?php
             }
-            if(count($favoritos) > 4)
-            {
-            ?>
-              <a href="#">Ver mas..</a>
-            <?php
-            }
+              echo "<div class='paginacion'>" . $paginacion . "</div>";
           }
           else
           {
