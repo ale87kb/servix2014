@@ -10,7 +10,7 @@ class sitio extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->UsuarioSession = $this->usuarios_model->isLogin();
-		$this->load->library('facebook'); 
+		//$this->load->library('facebook'); 
 
 	}
 	public function test_fb(){

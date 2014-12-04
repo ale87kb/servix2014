@@ -27,7 +27,7 @@
 			      </thead>
 			      <tbody>
 			        <tr>
-			          <td><?php echo count($servicios); ?></td>
+			          <td><?php echo $cantidadServicios; ?></td>
 			        </tr>
 			      </tbody>
 			    </table>
@@ -39,8 +39,10 @@
 			<h4>Servicios ofrecidos</h4>
 
                 <?php 
-                if(!empty($servicios)){
-                    foreach ($servicios as $servicio) {
+                if(!empty($servicios))
+                {
+                    foreach ($servicios as $servicio)
+                    {
                 ?>
             <div class="row">
                 <div class="col-md-12">
@@ -56,16 +58,18 @@
                     </div>
                     <div class="col-md-3 text-center">
                 <?php 
-                  if($servicio['cantVotado'] != 1){
+                    if($servicio['cantVotado'] != 1)
+                    {
                     ?>
                         <h2> <?php echo $servicio['cantVotado']; ?> <small> votos </small></h2>
                 <?php
-                  }
-                  else{
+                    }
+                    else
+                    {
                     ?>
                         <h2> <?php echo $servicio['cantVotado']; ?><small> voto </small></h2>
                     <?php
-                  }
+                    }
                  ?>
                         <span class="ratyAVG" data-avg="<?php echo number_format($servicio['promedio'],2); ?>"></span>
                         <p> Promedio <?php echo number_format($servicio['promedio'],2); ?> <small> / </small> 5 </p>
@@ -85,6 +89,8 @@
 
                 <?php
                     }
+                echo "<div class='paginacion'>" . $paginacion . "</div>";
+
                 }
                 else
                 {

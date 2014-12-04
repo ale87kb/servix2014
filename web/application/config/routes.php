@@ -131,6 +131,7 @@ $route['eliminar-servicio-solicitado']  			= "sitio/unset_servicio_solicitado";
 $route['reactivar-servicio-solicitado']  			= "sitio/update_servicio_solicitado";
 
 $route['usuario/perfil/(:any)'] 					= "usuario/perfil_usuario/$1";
+$route['usuario/perfil/(:any)/(:num)'] 					= "usuario/perfil_usuario/$1/$2";
 $route['404_override'] 	= '';
 
 

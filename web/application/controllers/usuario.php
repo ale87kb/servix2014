@@ -786,7 +786,6 @@ class Usuario extends CI_controller{
 				$perfil = $this->usuarios_model->getUsuario($id);
 				if($perfil)
 				{
-
 					if($perfil[0]['foto'] == "" || $perfil[0]['foto'] == null)
 					{
 						$perfil[0]['foto_path'] = 'assets/images/perfil_200.png';
@@ -801,30 +800,13 @@ class Usuario extends CI_controller{
 					}
 
 					$data['perfil'] = $perfil[0];
-				
-					$servicios = $this->servicios_model->getServicioEnPerfil($id);
-					if($servicios)
-					{
-						foreach ($servicios as $servicio => $value) {
-							
-							$servicios[$servicio]['link_servicio'] = site_url(generarLinkServicio($servicios[$servicio]['id'], $servicios[$servicio]['titulo'] ));
-							
-							if($servicios[$servicio]['foto'] == "" || $servicios[$servicio]['foto'] == null)
-							{
-								$servicios[$servicio]['foto_path'] = 'assets/images/servicio_200.jpg';
-							}
-							else if(file_exists('./assets/images/usuarios/' . $servicios[$servicio]['foto']))
-							{
-								$servicios[$servicio]['foto_path'] = path_archivos('assets/images/servicios/', $servicios[$servicio]['foto']);
-							}
-							else
-							{
-								$servicios[$servicio]['foto_path'] = 'assets/images/servicio_200.jpg';
-							}
-						}
-						$data['servicios'] = $servicios;
+					$cantidadServicios 			= $this->usuarios_model->getCantidadServicioPropios($this->UsuarioSession['id']);
+					$data['cantidadServicios'] = $cantidadServicios;
 
-					}
+					$servicioEnPerfil = $this->_paginatioServiciosPerfil($id, $cantidadServicios, 5);
+					
+					$data['servicios'] 	= $servicioEnPerfil['servicios'];
+					$data['paginacion']	 	= $servicioEnPerfil['vinculos'];
 					$data['title']     = 'Perfil de Usuario';
 					$data['vista']     = 'perfil_usuario';
 				}
@@ -862,6 +844,46 @@ class Usuario extends CI_controller{
 		
 		$this->load->view('home_view',$data);
 		
+	}
+
+	private function _paginatioServiciosPerfil($idUsuario, $totalRows, $cantidadLimit){
+		$this->load->library('pagination');
+	    $config = array();
+        $config["base_url"] 	= site_url('usuario/perfil/1-Pedro-DonCorlione');
+        $config["total_rows"]   = $totalRows;       
+        $config["per_page"] 	= $cantidadLimit;
+        $config["uri_segment"]  = 4;
+        $config['last_link'] 	= 'Último';
+        $config['first_link'] 	= 'Primero';
+        $this->pagination->initialize($config);
+
+        $page 		= (is_numeric($this->uri->segment(4))) ? $this->uri->segment(4) : 0;
+		$data 		= null;
+		$servicios = $this->servicios_model->getServiciosEnPerfil($idUsuario, $page, $cantidadLimit);
+		if($servicios)
+		{
+			foreach ($servicios as $servicio => $value)
+			{
+				$servicios[$servicio]['link_servicio'] = site_url(generarLinkServicio($servicios[$servicio]['id'], $servicios[$servicio]['titulo'] ));
+				
+				if($servicios[$servicio]['foto'] == "" || $servicios[$servicio]['foto'] == null)
+				{
+					$servicios[$servicio]['foto_path'] = 'assets/images/servicio_200.jpg';
+				}
+				else if(file_exists('./assets/images/usuarios/' . $servicios[$servicio]['foto']))
+				{
+					$servicios[$servicio]['foto_path'] = path_archivos('assets/images/servicios/', $servicios[$servicio]['foto']);
+				}
+				else
+				{
+					$servicios[$servicio]['foto_path'] = 'assets/images/servicio_200.jpg';
+				}
+			}
+			$data['servicios'] = $servicios;
+			$data['vinculos'] = $this->pagination->create_links();
+			return $data;
+		}
+		return false;
 	}
 
 	private function _parseIdUsuario($usuario){

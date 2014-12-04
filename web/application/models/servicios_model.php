@@ -335,7 +335,7 @@ Class Servicios_model extends CI_Model{
 	}
 	
 
-	public function getServicioEnPerfil($id_usuario){
+	public function getServiciosEnPerfil($id_usuario, $desdeLimit, $cantidadLimit){
 		$query =    "SELECT
 						servicios.id,
 						servicios.titulo,
@@ -356,11 +356,11 @@ Class Servicios_model extends CI_Model{
 					LEFT JOIN puntuacion ON puntuacion.id_servicios = servicios.id
 					WHERE relacion_u_s.id_usurios = $id_usuario
 					GROUP BY servicios.id
-					ORDER BY promedio DESC";
+					ORDER BY promedio DESC
+					LIMIT $desdeLimit, $cantidadLimit";
 
 		$rs    = $this->db->query($query);
 		return $rs->result_array();
 
 	}
-
 }

@@ -256,6 +256,7 @@
                   </div>
                 </div>
             </div>
+            <a role="button" class="btn btn-default" href="<?php echo site_url('mi-perfil/servicios'); ?>">Volver a Mis servicios</a>
     
     </div>
 </div>
