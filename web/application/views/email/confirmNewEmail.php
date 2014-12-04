@@ -86,7 +86,7 @@
 					<td align="center">
 						<p>
 							
-							<a href="#">www.servixs.com.ar</a> 
+							<a  href="<?php echo site_url('') ?>" >www.servix.tk</a> 
 						
 						</p>
 					</td>

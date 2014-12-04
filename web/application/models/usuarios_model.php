@@ -27,6 +27,26 @@ Class Usuarios_model extends CI_Model{
 	   	 	return false;
 	   	}
 	}
+
+
+	public function getUser($usuario){
+		//Verifica que el usuario y el email sean 
+		//correspondientes entre si, para corroborar el login
+	   $query 	= "SELECT * FROM usuarios
+	   			WHERE usuarios.email = '$usuario'
+	   			LIMIT 1";
+
+		$rs    = $this->db->query($query);
+
+ 		if($rs -> num_rows() == 1)
+	   	{
+	    	return $rs->result_array();
+	   	}
+	   	else
+	   	{
+	   	 	return false;
+	   	}
+	}
 	
 	public function checkVoto($idU,$idS,$fecha){
 		$query ="SELECT * FROM puntuacion 
