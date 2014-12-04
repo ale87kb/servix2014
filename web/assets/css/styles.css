@@ -1,3 +1,11 @@
+h1{
+    color: #46c2e3;
+    text-transform: uppercase;
+    font-size: 28px;
+}
+h4{
+    color:#a1a1a1;
+}
 #logostyle a{
     line-height:20px;
     display:block;
@@ -57,6 +65,18 @@ a.list-group-item {
 
 .footer-servix{
     margin-top: 0px;
+    background: #5dc9e5; /* Old browsers */
+    background: -moz-linear-gradient(top,  #5dc9e5 0%, #0db4d0 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#5dc9e5), color-stop(100%,#0db4d0)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #5dc9e5 0%,#0db4d0 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #5dc9e5 0%,#0db4d0 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #5dc9e5 0%,#0db4d0 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #5dc9e5 0%,#0db4d0 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5dc9e5', endColorstr='#0db4d0',GradientType=0 ); /* IE6-9 */
+    border-bottom: 0px;
+}
+.footer-servix .navbar-text{
+    color: #fff;
 }
 
 .ficha h1{
@@ -206,4 +226,8 @@ a.list-group-item {
 }
 #mPerfilU .nav-sidebar .active a:hover {
     background-color: #3AE5E8;   
+}
+
+.navbar-servix {
+    background: #fff;
 }

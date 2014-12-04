@@ -83,7 +83,8 @@ Class Servix_model extends CI_Model{
 	}
 
 	public function updateSolicitudVencida($id){
-		$query = "UPDATE `busquedas_temp` SET `vencido`=0 WHERE  `id`=$id LIMIT 1;";
+		$fecha_hoy = date('Y-m-d H:i:s');
+		$query = "UPDATE `busquedas_temp` SET `fecha_ini`=$fecha_hoy, `vencido`=0 WHERE  `id`=$id LIMIT 1;";
 		$rs = $this->db->query($query);
 		return $rs;
 	}
