@@ -695,42 +695,32 @@ class Login extends CI_Controller {
        $user  = $data['user_profile']['email'];
 
 
+       if(!empty($user)){
+	       $resultemail = $this->usuarios_model->getEmail($user);
+	       if($resultemail === FALSE){
+	       		$registro = $this->_login_registro_fb($data['user_profile']);
+	       		if($registro){
+	       			echo "Bienvenido a Servix, espere unos segundos y sera redireccionado";
+	       			$this->output->set_header('refresh:3; url='.site_url()); 
+	       		}else{
+	       			echo "ups.. tenemos un problema";
+	       			$this->output->set_header('refresh:3; url='.site_url()); 
+	       		}
 
-       $resultemail = $this->usuarios_model->getEmail($user);
-
-       if($resultemail === FALSE){
-       		// echo "no esta registrado";
-
-       		$registro = $this->_login_registro_fb($data['user_profile']);
-
-       		// print_d($registro);
-
-       		if($registro){
-       			// print_d($this->session->userdata('logged_in'));
-       			echo "Bienvenido a Servix, espere unos segundos y sera redireccionado";
-       			$this->output->set_header('refresh:3; url='.site_url()); 
-       		}else{
-
-       			echo "ups.. tenemos un problema";
-       			$this->output->set_header('refresh:3; url='.site_url()); 
-       		}
-
-       }else{
-      		 	// echo "Iniciando session con facebook, un segundo por favor..";
-       			
-       			$result = $this->usuarios_model->getUser($user);
-       			if($result){
-       				$this->_setDataSession($result);
-   					redirect('','refresh');
-       				// $this->output->set_header('refresh:1; url='.site_url());   
-       			}else{
-					echo "ups.. tenemos un problema";
-       				$this->output->set_header('refresh:3; url='.site_url());        				
-       			}
-       }
-
-	
-       // print_d();
+	       }else{
+	       			$result = $this->usuarios_model->getUser($user);
+	       			if($result){
+	       				$this->_setDataSession($result);
+	   					redirect('','refresh');
+	       			}else{
+						echo "ups.. tenemos un problema";
+	       				$this->output->set_header('refresh:3; url='.site_url());        				
+	       			}
+	       }
+	   }else{
+		   	echo "ups.. tenemos un problema, no hemos podido iniciar session";
+			$this->output->set_header('refresh:5; url='.site_url()); 
+	   }
 	}
 
 	
@@ -780,11 +770,6 @@ class Login extends CI_Controller {
 		}else{
 			return false;
 		}
-		// print_d($nuevoUsuario);
-
-
-
-		
 	}
 	
 	private function _generarClave(){

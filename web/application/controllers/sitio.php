@@ -10,7 +10,7 @@ class sitio extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->UsuarioSession = $this->usuarios_model->isLogin();
-	
+		$this->loginFb = $this->_loginFB();
 	}
 
 
@@ -40,7 +40,7 @@ class sitio extends CI_Controller {
 
 	public function index(){
 
-		$loginFb = $this->_loginFB();
+	
 		
 		
 		if($this->UsuarioSession){
@@ -69,7 +69,7 @@ class sitio extends CI_Controller {
 		$data['current_page'] = $solicitados['current_page'];
 		$data['categorias'] = $this->servix_model->getCategorias();
 		$data['foot_cat'] ='footCat';
-		$data['loginFb'] = $loginFb;
+		$data['loginFb'] = $this->loginFb;
 
 		// print_d($data['loginFb']);
 	
@@ -202,16 +202,21 @@ class sitio extends CI_Controller {
 	public function busqueda_servicio(){
 		 $data = $this->servix_model->getBusquedaServicio();
 		 $arrayDatos = array();
-		 foreach ($data as $d) {
-		 	$arrayDatos[] = ucfirst($d['titulo']);
+		 if(!empty($data)){
+
+			 foreach ($data as $d) {
+			 	$arrayDatos[] = ucfirst($d['titulo']);
+			 }
 		 }
 		 echo  json_encode($arrayDatos);
 	}
 	public function busqueda_categoria(){
 		 $data = $this->servix_model->getBusquedaCategoria();
+		 if(!empty($data)){
 		 $arrayDatos = array();
 		 foreach ($data as $d) {
 		 	$arrayDatos[] = ucfirst($d['categoria']);
+		 }
 		 }
 		 echo  json_encode($arrayDatos);
 	}
@@ -219,6 +224,7 @@ class sitio extends CI_Controller {
 	public function busqueda_localidades_buscador(){
 		$data = $this->servix_model->geBusquedaLocalProvBuscador();
 		 $arrayDatos = array();
+		 if(!empty($data)){
 		 foreach ($data as $d) {
 		 	if($d['localidad']==$d['provincia']){
 		 		$d['provincia'] = '';
@@ -226,17 +232,20 @@ class sitio extends CI_Controller {
 		 	$loc = $d['localidad'].", ".$d['provincia'];
 		 	$arrayDatos[] = trim($loc,", ") ;
 		 }
+		 }
 		 echo  json_encode($arrayDatos);
 	}
 
 	public function busqueda_localidades(){
 	
 		$data = $this->servix_model->geBusquedaLocalProv($this->input->post('q'));
+		if(!empty($data)){
 		 foreach ($data as $d) {
 		 	$provLoc 	  = $d['localidad'].", ".$d['provincia'];
 		  	$arrayDatos []= array('localidad'=>$provLoc , 'idLoc'=> $d['id']);
 		}
-			echo  json_encode($arrayDatos);
+		}
+		echo  json_encode($arrayDatos);
 	}
 
 	
@@ -812,6 +821,7 @@ class sitio extends CI_Controller {
 		}
 		$data['title'] 	   = 'Resultado de búsqueda';
 		$data['vista'] 	   = 'resultado_busqueda_view';
+		$data['loginFb']   = $this->loginFb;
 
 		
 
@@ -1021,6 +1031,8 @@ class sitio extends CI_Controller {
 			$data['userPostu']    = $userPostulados;
 			$data['solicitado']   = $solicitado[0];
 			$data['id_usuario']   = $this->UsuarioSession['id'];
+			$data['loginFb']   	  = $this->loginFb;
+
 			
 			
 			if($this->UsuarioSession)
@@ -1340,7 +1352,8 @@ class sitio extends CI_Controller {
 		$data['opiniones'] = $opiniones['result'];
 		$data['title']     = 'Ficha del servicio';
 		$data['servUrl']   =  site_url('ficha/'.$servicio);
-		$data['vista'] = "ficha_servicio_view";
+		$data['vista'] 	   = "ficha_servicio_view";
+		$data['loginFb']   = $this->loginFb;
 
 		}else{
 				$data['title']     = 'Ficha del servicio no encontrada';
