@@ -241,11 +241,17 @@ class sitio extends CI_Controller {
 		echo  json_encode($arrayDatos);
 	}
 
-	
-
-
 	public function condiciones_de_uso(){
-		echo "condiciones_de_uso";  		
+		if($this->UsuarioSession)
+		{
+			$data['usuarioSession'] = $this->UsuarioSession;
+		}
+		
+		$data['buscador_off'] = TRUE;
+		$data['vista'] = 'condiciones_de_uso';
+		$data['loginFb'] = $this->loginFb;
+
+		$this->load->view('home_view',$data);
 	}
 
 	public function preguntas_frecuentes(){
@@ -1491,7 +1497,6 @@ class sitio extends CI_Controller {
 		      	return $mail;
 			 }
 		}
-
 }
 
 

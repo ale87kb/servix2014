@@ -785,9 +785,9 @@ class Usuario extends CI_controller{
 					{
 						$perfil[0]['foto_path'] = 'assets/images/perfil_200.png';
 					}
-
+					
 					$data['perfil'] = $perfil[0];
-					$cantidadServicios 			= $this->usuarios_model->getCantidadServicioPropios($this->UsuarioSession['id']);
+					$cantidadServicios 			= $this->usuarios_model->getCantidadServicioPropios($id);
 					$data['cantidadServicios'] = $cantidadServicios;
 
 					$servicioEnPerfil = $this->_paginatioServiciosPerfil($id, $cantidadServicios, 5);

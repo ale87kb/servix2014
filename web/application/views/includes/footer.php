@@ -1,6 +1,17 @@
 
 	<div class="navbar navbar-default navbar-static-bottom footer-servix">
 	  <div class="container">
+      <div class="col-md-12 navbar-text">
+        <div class="col-md-6">
+          <ul class="list-inline">
+            <li><a href="<?php echo site_url('condiciones-de-uso');?>">Condiciones de Uso</a></li>
+            <li><a href=""></a></li>
+          </ul>
+        </div>
+        <div class="col-md-6">
+          
+        </div>
+      </div>
 	    <span class="navbar-text">
 	    &copy; <?php echo APP_NAME; ?> 2014. Todos los derechos reservados.
 	    </span>
