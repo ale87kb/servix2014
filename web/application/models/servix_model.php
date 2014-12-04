@@ -82,6 +82,12 @@ Class Servix_model extends CI_Model{
 		return $rs;
 	}
 
+	public function updateSolicitudVencida($id){
+		$query = "UPDATE `busquedas_temp` SET `vencido`=0 WHERE  `id`=$id LIMIT 1;";
+		$rs = $this->db->query($query);
+		return $rs;
+	}
+
 	public function unsetSolicitudServicio($id){
 		$query = "DELETE FROM `busquedas_temp` WHERE  `id`=$id LIMIT 1;";
 		$rs    = $this->db->query($query);

@@ -126,6 +126,7 @@ $route['mi-perfil/servicios/editar/(:num)-(:any)']  = "sitio/editar_servicio/$1"
 
 $route['elimiar-servicio']  						= "sitio/unset_servicio";
 $route['eliminar-servicio-solicitado']  			= "sitio/unset_servicio_solicitado";
+$route['reactivar-servicio-solicitado']  			= "sitio/update_servicio_solicitado";
 $route['usuario/perfil/(:any)'] 					= "usuario/perfil_usuario/$1";
 $route['404_override'] 	= '';
 

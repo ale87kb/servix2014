@@ -153,6 +153,8 @@ Class Servicios_model extends CI_Model{
 		$rs    = $this->db->query($query);
 		return $rs;
 	}
+
+
 	public function unsetPostulacion($id_busquedas_temp,$id_usurio){
 		$query = "DELETE FROM postulaciones_temp 
 				WHERE id_busquedas_temp = $id_busquedas_temp 
@@ -160,6 +162,8 @@ Class Servicios_model extends CI_Model{
 		$rs    = $this->db->query($query);
 		return $rs;
 	}
+
+
 
 	public function unsetServicio($id_servicio){
 		$query = "DELETE FROM `servicios` WHERE  `id`=$id_servicio LIMIT 1;";

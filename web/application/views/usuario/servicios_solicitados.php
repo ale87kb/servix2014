@@ -6,8 +6,12 @@
   <?php
     if(!empty($sSolicitados))
     {
+      $i=0;
       foreach ($sSolicitados as $ssol)
       {
+      
+
+       
   ?>
         <div class="panel panel-default">
           <div class="panel-heading">
@@ -23,15 +27,33 @@
               <p>
                 <?php echo $ssol['busqueda']; ?>
               </p>
-           
+           <p >
+              <span class="label label-<?php echo $vencido[$i]['vencido_css'] ?> pull-left" ><?php echo $vencido[$i]['vencido']; ?></span> 
+      
             <a href="<?php echo site_url('mi-perfil/servicios-solicitados#'); ?>" class="btn btn-sm btn-default pull-right">Editar</a>
+            <?php 
+              if($ssol['vencido']){
+                ?>
+
+                  <form action="<?php echo site_url('reactivar-servicio-solicitado') ?>" method="post" >
+                       <button type="submit" class="btn btn-default  btn-sm pull-right " name="id_busqueda_temp" value="<?php echo $ssol['id']; ?>">Volver a solicitar</button>
+                  </form>
+                <?php
+              }
+             ?>
+             </p>
         </div>
         <div class="panel-footer">
-            Fecha de publicación: <?php echo $ssol['fecha']; ?>
+           <p>
+              <span class="text-left">Fecha de publicación: <?php echo $ssol['fecha']; ?></span>
+              <span class="pull-right">Fecha de vencimiento: <?php echo $vencido[$i]['vence_el']; ?></span>
+
+           </p>
         </div>
         </div>
 
       <?php
+        $i++;
       }
       echo "<div class='paginacion'>" . $paginacion . "</div>";
     }

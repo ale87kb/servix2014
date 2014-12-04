@@ -435,6 +435,9 @@ Class Usuarios_model extends CI_Model{
 
 	}
 
+	
+
+
 	//Cantidad de servicios solicitados por el usuario
 	public function getCantidadSolicitados($id, $vencido){
 		$query = "SELECT

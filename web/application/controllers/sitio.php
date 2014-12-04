@@ -1112,6 +1112,26 @@ class sitio extends CI_Controller {
 		}
 
 	}
+	public function update_servicio_solicitado(){
+
+			if( $this->UsuarioSession){
+				$post = $this->input->post();
+				if(isset($post)){
+				
+					$id_busqueda_temp  = $this->input->post('id_busqueda_temp');
+					
+					$rs = $this->servix_model->updateSolicitudVencida($id_busqueda_temp);
+					if($rs){
+						redirect($_SERVER['HTTP_REFERER']);
+					}
+				}else{
+					return false;
+				}
+			}else{
+				return false;
+			}
+
+	}
 
 	public function unset_postulacion(){
 		

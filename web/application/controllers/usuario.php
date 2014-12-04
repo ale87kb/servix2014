@@ -267,7 +267,31 @@ class Usuario extends CI_controller{
 			$cantidadTotal					= $cantidadSolicitadosActivos + $cantidadSolicitadosVencidos;
 			$UsServiciosSolicitados			= $this->_serviciosSolicitados($this->UsuarioSession['id'], $cantidadTotal, 5);
 			$data['cantidad'] 				= $cantidadTotal;
+			$fecha_hoy = date('Y-m-d H:i:s');
+			$vencido = array();
+			$i = 0;
+			foreach ($UsServiciosSolicitados['sSolicitados'] as  $value) {
+					$fecha_ini  =  $value['fecha_ini'];
+
+						$vence_el = strtotime ( '+7 day' , strtotime ( $fecha_ini ) ) ;
+						$vence_el = date ( 'd-m-Y' , $vence_el );
+						if($value['vencido'] == 1){
+							$vencido[$i]['vencido'] = 'Solicitud vencida';
+							$vencido[$i]['vencido_css'] = 'warning';
+						}else{
+							$vencido[$i]['vencido']= 'Solicitud activa';
+							$vencido[$i]['vencido_css'] = 'success';
+
+						}
+						$vencido[$i]['vence_el'] = $vence_el;
+
+				$i++;			
+			}
+
+			
+			$data['vencido']				= $vencido;
 			$data['sSolicitados'] 			= $UsServiciosSolicitados['sSolicitados'];
+			
 			$data['title'] 					= 'Mis Servicios Solicitados';
 			$data['vista'] 					= 'usuario/mi_perfil';
 			$data['vistaPerfil']			= 'usuario/servicios_solicitados';
