@@ -9,6 +9,7 @@ class sitio extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->UsuarioSession = $this->usuarios_model->isLogin();
+		$this->loginFb = $this->_loginFB();
 	}
 	
 	
@@ -29,9 +30,6 @@ class sitio extends CI_Controller {
 	}
 
 	public function index(){
-
-		$loginFb = $this->_loginFB();
-		
 		
 		if($this->UsuarioSession)
 		{
@@ -65,7 +63,7 @@ class sitio extends CI_Controller {
 		$data['current_page'] = $solicitados['current_page'];
 		$data['categorias'] = $this->servix_model->getCategorias();
 		$data['foot_cat'] ='footCat';
-		$data['loginFb'] = $loginFb;
+		$data['loginFb'] = $this->loginFb;
 
 		// print_d($data['loginFb']);
 
@@ -196,16 +194,21 @@ class sitio extends CI_Controller {
 	public function busqueda_servicio(){
 		 $data = $this->servix_model->getBusquedaServicio();
 		 $arrayDatos = array();
-		 foreach ($data as $d) {
-		 	$arrayDatos[] = ucfirst($d['titulo']);
+		 if(!empty($data)){
+			 foreach ($data as $d)
+			 {
+			 	$arrayDatos[] = ucfirst($d['titulo']);
+			 }
 		 }
 		 echo  json_encode($arrayDatos);
 	}
 	public function busqueda_categoria(){
 		 $data = $this->servix_model->getBusquedaCategoria();
+		 if(!empty($data)){
 		 $arrayDatos = array();
 		 foreach ($data as $d) {
 		 	$arrayDatos[] = ucfirst($d['categoria']);
+		 }
 		 }
 		 echo  json_encode($arrayDatos);
 	}
@@ -213,6 +216,7 @@ class sitio extends CI_Controller {
 	public function busqueda_localidades_buscador(){
 		$data = $this->servix_model->geBusquedaLocalProvBuscador();
 		 $arrayDatos = array();
+		 if(!empty($data)){
 		 foreach ($data as $d) {
 		 	if($d['localidad']==$d['provincia']){
 		 		$d['provincia'] = '';
@@ -220,17 +224,20 @@ class sitio extends CI_Controller {
 		 	$loc = $d['localidad'].", ".$d['provincia'];
 		 	$arrayDatos[] = trim($loc,", ") ;
 		 }
+		 }
 		 echo  json_encode($arrayDatos);
 	}
 
 	public function busqueda_localidades(){
 	
 		$data = $this->servix_model->geBusquedaLocalProv($this->input->post('q'));
+		if(!empty($data)){
 		 foreach ($data as $d) {
 		 	$provLoc 	  = $d['localidad'].", ".$d['provincia'];
 		  	$arrayDatos []= array('localidad'=>$provLoc , 'idLoc'=> $d['id']);
 		}
-			echo  json_encode($arrayDatos);
+		}
+		echo  json_encode($arrayDatos);
 	}
 
 	
@@ -592,10 +599,6 @@ class sitio extends CI_Controller {
 					}
 
 				}
-				
-
-				
-
 			}
 		}
 		
@@ -736,7 +739,6 @@ class sitio extends CI_Controller {
 
 		 $this->session->set_userdata("busqueda",$busqueda);
 		 return redirect("resultado-de-busqueda/".$busqueda['url']['servicio']."-en-".$busqueda['url']['localidad']);
-
 	}
 
 
@@ -801,6 +803,7 @@ class sitio extends CI_Controller {
 		}
 		$data['title'] 	   = 'Resultado de búsqueda';
 		$data['vista'] 	   = 'resultado_busqueda_view';
+		$data['loginFb']   = $this->loginFb;
 
 		$this->_js = array(
 			'assets/js/bootstrap-typeahead.js',
@@ -818,14 +821,9 @@ class sitio extends CI_Controller {
 
 		$this->load->view('home_view',$data);
 	}
-
-
 	
 
 	private function _setPaginacion($servicio, $localidad,$q){
-
-
-
  	    $this->load->library('pagination');
 	    $config = array();
         $config["base_url"] 	= site_url('resultado-de-busqueda/'.$q);
@@ -837,11 +835,7 @@ class sitio extends CI_Controller {
         $data["result"] 		= $this->servix_model->getResultadoBusqueda($servicio, $localidad, $page, $config["per_page"]); 
         $data["links"] 			= $this->pagination->create_links();
 		return $data;
-       
 	}
-
-	
-
 
 	private function _gmap($rs, $loc=null, $zoom='auto'){
 		$this->load->library('googlemaps');	
@@ -878,7 +872,6 @@ class sitio extends CI_Controller {
 
 	private function _setPaginacionOpinion($servicio,$id)
 	{
-
 	    $this->load->library('pagination');
 	    $config = array();
         $config["base_url"] 		= site_url('ficha/'.$servicio.'/opniones/page');
@@ -1010,7 +1003,7 @@ class sitio extends CI_Controller {
 			$data['userPostu']    = $userPostulados;
 			$data['solicitado']   = $solicitado[0];
 			$data['id_usuario']   = $this->UsuarioSession['id'];
-			
+			$data['loginFb']   	  = $this->loginFb;
 			
 			if($this->UsuarioSession)
 			{
@@ -1331,11 +1324,13 @@ class sitio extends CI_Controller {
 					}
 				}
 
+
 				$data['servicio']  = $data['titulo'];
 				$data['opiniones'] = $opiniones['result'];
 				$data['title']     = 'Ficha del servicio';
 				$data['servUrl']   =  site_url('ficha/'.$servicio);
-				$data['vista'] = "ficha_servicio_view";
+				$data['vista'] 	   = "ficha_servicio_view";
+				$data['loginFb']   = $this->loginFb;
 
 			}
 			else
