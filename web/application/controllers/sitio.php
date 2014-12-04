@@ -13,6 +13,7 @@ class sitio extends CI_Controller {
 	}
 	
 	
+	
 	private function _loginFB(){
 		$user = $this->facebook->getUser();
         if ($user)
@@ -769,6 +770,14 @@ class sitio extends CI_Controller {
 		}
 		
 		$data['result']    = $result['result'];
+		$data['total_rows'] = null;
+		if( $result['total_rows'] == 1){
+			$data['total_rows'] = "Hemos encontrado ". $result['total_rows']." resultado";
+		}else if($result['total_rows'] > 1){
+
+			$data['total_rows'] = "Hemos encontrado ". $result['total_rows']." resultados";
+		}
+		
 		$ltn = null;
 		$config 			= array();
 
@@ -834,6 +843,7 @@ class sitio extends CI_Controller {
         $page 					= (is_numeric($this->uri->segment(3))) ? $this->uri->segment(3) : 0;
         $data["result"] 		= $this->servix_model->getResultadoBusqueda($servicio, $localidad, $page, $config["per_page"]); 
         $data["links"] 			= $this->pagination->create_links();
+        $data['total_rows']		=  $config["total_rows"];
 		return $data;
 	}
 

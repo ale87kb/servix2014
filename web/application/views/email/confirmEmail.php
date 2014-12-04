@@ -88,7 +88,7 @@
 					<td align="center">
 						<p>
 							
-							<a  href="<?php echo site_url('') ?>" >www.servix.tk</a> 
+							<a  href="<?php echo site_url('') ?>" ><?php echo APP_WEB;?></a> 
 						
 						</p>
 					</td>

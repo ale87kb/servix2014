@@ -733,7 +733,7 @@ class Login extends CI_Controller {
 	private function _login_registro_fb($perfil){
 
 		$fecha = date('Y-m-d H:m:i');
-		$clave_original = $this->_generarClave();
+		$clave_original = $this->_generaPass();
 		
 		$clave_codimd5	= md5($clave_original);
 
@@ -772,14 +772,14 @@ class Login extends CI_Controller {
 		}
 	}
 	
-	private function _generarClave(){
-		$str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
-		$cad = "";
-		for($i=0;$i<6;$i++) {
-		$cad .= substr($str,rand(0,62),1);
-		}
-		return $cad;
-	}
+	// private function _generarClave(){
+	// 	$str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+	// 	$cad = "";
+	// 	for($i=0;$i<6;$i++) {
+	// 	$cad .= substr($str,rand(0,62),1);
+	// 	}
+	// 	return $cad;
+	// }
 
 
 	public function validacion_login_ajax(){

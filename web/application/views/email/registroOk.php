@@ -45,11 +45,15 @@
 				<tr>
 					<td>
 						<h3>Hola, <?php  echo ucfirst($nombre); ?> </h3>
-						<p class="lead">Haz iniciado session en Servix con facebook, y nos hemos tomado la libertad de registrarte en nustro sitio. <br> Te generamos una clave aleatoria que es: <strong><?php echo $pass; ?></strong>
+						<p class="lead">Haz iniciado sesion en Servix con facebook, y nos hemos tomado la libertad de registrarte en nustro sitio. <br> Te generamos una  cuenta con los siguientes datos de ingreso
 						</p>
-						<p>Puedes cambiarla a travez de cambiar contraseña en el perfil de usuario</p>
+						<p class="callout">
+							Usuario: <?php echo $email; ?><br>
+							Clave: <strong><?php echo $pass; ?></strong>
+						</p><!-- /Callout Panel -->	
+						<p>Puedes cambiar la clave a travez del perfil de usuario en editar perfil</p>
 
-						<p>Muchas gracias.</p>
+						<p>Muchas gracias. <?php echo APP_NAME ?></p>
 						<!-- Callout Panel -->
 						<p class="callout">
 							<a href="<?php ///echo $urlServ; ?>"><?php //echo $urlServ; ?></a>
@@ -80,7 +84,7 @@
 					<td align="center">
 						<p>
 							
-								<a  href="<?php echo site_url('') ?>" >www.servix.tk</a> 
+								<a  href="<?php echo site_url('') ?>" ><?php echo APP_WEB;?></a> 
 						
 						</p>
 					</td>

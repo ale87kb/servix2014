@@ -53,6 +53,7 @@ define('DEFAULT_LAYOUT', 'default');
 
 /*NOMBRE DE LA APLICACION*/
 define('APP_NAME', 'Servix');
+define('APP_WEB', 'www.servix.tk');
 
 /*SLOGAN DE LA APLICACION*/
 define('APP_SLOGAN', 'A un click de distancia');

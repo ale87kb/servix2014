@@ -7,7 +7,9 @@
         if(!empty($result)){
           ?>
           <div class="col-sm-8">
+            <p><?php echo $total_rows; ?></p>
           <?php
+
         foreach ($result as $r) {
       ?>
 
