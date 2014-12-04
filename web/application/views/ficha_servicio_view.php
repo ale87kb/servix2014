@@ -8,15 +8,13 @@
 			<div class="col-md-3">
 				<div class="row  text-center">
 					<figure>
-						<img src="<?php echo site_url($foto_path);?>" class="img-rounded img-responsive" alt="" style="
-    margin: 0px auto 10px;
-">
+						<img src="<?php echo site_url($foto_path);?>" class="img-rounded img-responsive" alt="" style="margin: 0px auto 10px;">
 					</figure>
 					<div class="col-md-10 col-md-offset-1">
 						<p>
   							<a href="#modalRecomendar" class="btn btn-sm btn-info btn-block" data-toggle="modal" data-target="#modalRecomendar" >Recomendar a un amigo</a>
   						<?php 
-							if(isset($usuario))
+							if(isset($usuarioSession))
 							{ 
 					 	?>
 					 		<form action="<?php echo site_url('set_favorito'); ?>" method="POST" id="favoritosForm">
@@ -45,7 +43,7 @@
 		      <?php
 				if(empty($comentario) and empty($puntos))
 				{
-					if(isset($usuario))
+					if(isset($usuarioSession))
 					{
 			?>
 						<a href="#modalOpinion" class="btn btn-primary"  data-toggle="modal" data-target="#modalOpinion">Quiero opinar</a>
@@ -78,7 +76,7 @@
 				<p>
 					<strong>Teléfono: </strong><?php echo $telefono; ?><br>
 				<?php 
-					if(isset($usuario))
+					if(isset($usuarioSession))
 					{
 				?>
 					<strong>Dirección: </strong><?php echo $direccion; ?><br>
@@ -103,7 +101,7 @@
 					</div>
 					
 				<?php 
-		 			if(isset($usuario))
+		 			if(isset($usuarioSession))
 		 			{
 				?>
 						<input type="hidden" value="<?php echo $id; ?>" name="id_servicio" />
@@ -154,7 +152,7 @@
 				<div class="ratyAVG" data-avg="<?php echo number_format($promedio,2); ?>"></div>
 				<p class="">Promedio <?php echo number_format($promedio,1); ?> </p>
 			<?php
-				if(isset($usuario))
+				if(isset($usuarioSession))
 				{
 			?>
 				<a href="#modalOpinion" class="btn btn-primary"  data-toggle="modal" data-target="#modalOpinion">Quiero opinar</a>

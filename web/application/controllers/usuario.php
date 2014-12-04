@@ -60,8 +60,6 @@ class Usuario extends CI_controller{
         $config["total_rows"]   = $totalRows;       
         $config["per_page"] 	= $cantidadLimit;
         $config["uri_segment"]  = 3;
-        $config['last_link'] 	= 'Último';
-        $config['first_link'] 	= 'Primero';
         $this->pagination->initialize($config);
 
         $page 		= (is_numeric($this->uri->segment(3))) ? $this->uri->segment(3) : 0;
@@ -123,8 +121,6 @@ class Usuario extends CI_controller{
         $config["total_rows"]   = $totalRows;       
         $config["per_page"] 	= $cantidadLimit;
         $config["uri_segment"]  = 3;
-        $config['last_link'] 	= 'Último';
-        $config['first_link'] 	= 'Primero';
         $this->pagination->initialize($config);
 
         $page 		= (is_numeric($this->uri->segment(3))) ? $this->uri->segment(3) : 0;
@@ -186,8 +182,6 @@ class Usuario extends CI_controller{
         $config["total_rows"]   = $totalRows;
         $config["per_page"] 	= $cantidadLimit;
         $config["uri_segment"]  = 3;
-        $config['last_link'] 	= 'Último';
-        $config['first_link'] 	= 'Primero';
         $this->pagination->initialize($config);
 
         $page 			= (is_numeric($this->uri->segment(3))) ? $this->uri->segment(3) : 0;
@@ -237,8 +231,6 @@ class Usuario extends CI_controller{
         $config["total_rows"]   = $totalRows;       
         $config["per_page"] 	= $cantidadLimit;
         $config["uri_segment"]  = 3;
-        $config['last_link'] 	= 'Último';
-        $config['first_link'] 	= 'Primero';
         $this->pagination->initialize($config);
 
         $page 			= (is_numeric($this->uri->segment(3))) ? $this->uri->segment(3) : 0;
@@ -289,8 +281,6 @@ class Usuario extends CI_controller{
         $config["total_rows"]   = $totalRows;
         $config["per_page"] 	= $cantidadLimit;
         $config["uri_segment"]  = 3;
-        $config['last_link'] 	= 'Último';
-        $config['first_link'] 	= 'Primero';
         $this->pagination->initialize($config);
 
 		$page 			= (is_numeric($this->uri->segment(3))) ? $this->uri->segment(3) : 0;
@@ -354,8 +344,6 @@ class Usuario extends CI_controller{
         $config["total_rows"]   = $totalRows;       
         $config["per_page"] 	= $cantidadLimit;
         $config["uri_segment"]  = 3;
-        $config['last_link'] 	= 'Último';
-        $config['first_link'] 	= 'Primero';
         $this->pagination->initialize($config);
 
 		$page 			= (is_numeric($this->uri->segment(3))) ? $this->uri->segment(3) : 0;
@@ -772,7 +760,6 @@ class Usuario extends CI_controller{
 	public function perfil_usuario($usuario = null){
 		if($this->UsuarioSession)
 		{
-			$data['usuario'] = $this->UsuarioSession['nombre'];
 			$data['usuarioSession'] = $this->UsuarioSession;
 
 			$id = $this->_parseIdUsuario($usuario);
@@ -853,8 +840,6 @@ class Usuario extends CI_controller{
         $config["total_rows"]   = $totalRows;       
         $config["per_page"] 	= $cantidadLimit;
         $config["uri_segment"]  = 4;
-        $config['last_link'] 	= 'Último';
-        $config['first_link'] 	= 'Primero';
         $this->pagination->initialize($config);
 
         $page 		= (is_numeric($this->uri->segment(4))) ? $this->uri->segment(4) : 0;

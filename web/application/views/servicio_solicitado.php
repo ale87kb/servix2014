@@ -36,7 +36,7 @@
 	    </div>
 	    <p class="text-right">
 			<!-- <a href="#" class="btn btn-success btn-sm"> Quiero postularme!</a> -->
-		<?php if(isset($usuario)){
+		<?php if(isset($usuarioSession)){
 				if($solicitado['userID'] != $id_usuario){
 					if(isset($user_postulado) &&( $user_postulado == 1)){
 		?>
@@ -84,7 +84,7 @@
 	    <hr>
 
 		<?php 
-		if(isset($usuario))
+		if(isset($usuarioSession))
 		{
 			if (!empty($userPostu)) 
 			{

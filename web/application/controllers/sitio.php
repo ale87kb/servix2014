@@ -6,30 +6,20 @@ class sitio extends CI_Controller {
 	private $_js 			= null; 
 	private $_css 			= null; 
 
-
 	public function __construct(){
 		parent::__construct();
 		$this->UsuarioSession = $this->usuarios_model->isLogin();
-	
 	}
-
-
-
 	
 	
 	private function _loginFB(){
-
-		
-
 		$user = $this->facebook->getUser();
-        
-       
-
-        if ($user) {
-
+        if ($user)
+        {
             $data['logout_url'] = site_url('logout'); 
-
-        } else {
+        }
+        else
+        {
             $data['login_url'] = $this->facebook->getLoginUrl(array(
                 'redirect_uri' => site_url('login/verificacion-login-fb'), 
                 'scope' => array("email") // permissions here
@@ -43,8 +33,8 @@ class sitio extends CI_Controller {
 		$loginFb = $this->_loginFB();
 		
 		
-		if($this->UsuarioSession){
-			$data['usuario'] = $this->UsuarioSession['nombre'];
+		if($this->UsuarioSession)
+		{
 			$data['usuarioSession'] = $this->UsuarioSession;
 		}
 		$seccion = "servicios-solicitados";
@@ -52,15 +42,21 @@ class sitio extends CI_Controller {
 		$destacados  	 = $this->servicios_model->getServiciosDestacados();
 		$solicitados 	 = $this->_setPagSolicitados($seccion);
 		// print_d($this->db->last_query());
-		if(!empty($destacados)){
+		if(!empty($destacados))
+		{
 			$data['destacados'] = $destacados;
-		}else{
+		}
+		else
+		{
 			$data['destacados'] = null;
 		}
 
-		if(!empty($solicitados)){
+		if(!empty($solicitados))
+		{
 			$data['solicitados'] = $solicitados['result'];
-		}else{
+		}
+		else
+		{
 			$data['solicitados'] = null;
 		}
 
@@ -72,32 +68,30 @@ class sitio extends CI_Controller {
 		$data['loginFb'] = $loginFb;
 
 		// print_d($data['loginFb']);
-	
-		
-		
 
 		$this->_js = array(
-		'assets/js/bootstrap-typeahead.js',
-		'assets/js/jquery.raty.js',
-		'assets/js/script-typehead.js',
-		'assets/js/script-raty.js',
+			'assets/js/bootstrap-typeahead.js',
+			'assets/js/jquery.raty.js',
+			'assets/js/script-typehead.js',
+			'assets/js/script-raty.js',
 		);
 
 		$this->_css = array(
-		'assets/css/raty/jquery.raty.css',
-		'assets/css/bootstrap-select.min.css',
+			'assets/css/raty/jquery.raty.css',
+			'assets/css/bootstrap-select.min.css',
 		);
 
 
 		$data['css'] = $this->_css;
 		$data['js'] = $this->_js;
 
-		if ($this->input->is_ajax_request()) {
+		if ($this->input->is_ajax_request())
+		{
 			$this->load->view('servicios_solicitados',$data);
-		
-		}else{
+		}
+		else
+		{
 			$this->load->view('home_view',$data);
-       
 		}
 	}
 
@@ -254,33 +248,34 @@ class sitio extends CI_Controller {
 		// $this->load->view('home_view');
 		if($this->UsuarioSession){
 
-		$data['buscador_off'] = true;
+			$data['buscador_off'] = true;
+			
+			$data['usuarioSession'] = $this->UsuarioSession;
 		
-		$data['usuario'] = $this->UsuarioSession['nombre'];
-		$data['usuarioSession'] = $this->UsuarioSession;
-	
-		$data['vista'] = 'solicitar_servicio';
+			$data['vista'] = 'solicitar_servicio';
 
-		$this->_js = array(
-		'assets/js/bootstrap-typeahead.js',
-		'assets/js/moment-with-locales.js',
-		'assets/js/bootstrap-datetimepicker.min.js',
-		'assets/js/bootstrap-select.min.js',
-		'assets/js/ajax-bootstrap-select.min.js',
-		'assets/js/script-typehead.js',
-		'assets/js/script-datepicker.js',
-		'assets/js/script-selectpicker.js',
-		);
+			$this->_js = array(
+				'assets/js/bootstrap-typeahead.js',
+				'assets/js/moment-with-locales.js',
+				'assets/js/bootstrap-datetimepicker.min.js',
+				'assets/js/bootstrap-select.min.js',
+				'assets/js/ajax-bootstrap-select.min.js',
+				'assets/js/script-typehead.js',
+				'assets/js/script-datepicker.js',
+				'assets/js/script-selectpicker.js',
+			);
 
-		$this->_css = array(
-		'assets/css/bootstrap-datetimepicker.min.css',
-		'assets/css/bootstrap-select.min.css',
-		);
+			$this->_css = array(
+				'assets/css/bootstrap-datetimepicker.min.css',
+				'assets/css/bootstrap-select.min.css',
+			);
 
-		$data['css'] = $this->_css;
-		$data['js'] = $this->_js;
-		$this->load->view('home_view',$data);
-		}else{
+			$data['css'] = $this->_css;
+			$data['js'] = $this->_js;
+			$this->load->view('home_view',$data);
+		}
+		else
+		{
 			return redirect('');
 		}
 	}
@@ -290,20 +285,20 @@ class sitio extends CI_Controller {
 	public function off_serv_mensaje($param){
 		// echo $param;
 
-		if($this->UsuarioSession){
+		if($this->UsuarioSession)
+		{
+			$data['buscador_off'] = true;
+			if($this->UsuarioSession)
+			{
+				$data['usuarioSession'] = $this->UsuarioSession;
+			}
+			$data['vista'] = 'mensaje_registro_servicio';
+			$data['error'] = ($param === 'registro_ok') ? 0 :1; 
 
-		$data['buscador_off'] = true;
-		if($this->UsuarioSession){
-			$data['usuario'] = $this->UsuarioSession['nombre'];
-			$data['usuarioSession'] = $this->UsuarioSession;
+			$this->load->view('home_view',$data);
 		}
-		$data['vista'] = 'mensaje_registro_servicio';
-		$data['error'] = ($param === 'registro_ok') ? 0 :1; 
-
-
-
-		$this->load->view('home_view',$data);
-		}else{
+		else
+		{
 			return redirect('');
 		}
 	}
@@ -612,11 +607,7 @@ class sitio extends CI_Controller {
 		{
 			$data['seccion'] = 'editar-servicio';
 			$data['buscador_off'] = true;
-			if($this->UsuarioSession)
-			{
-				$data['usuario'] = $this->UsuarioSession['nombre'];
-				$data['usuarioSession'] = $this->UsuarioSession;
-			}
+			$data['usuarioSession'] = $this->UsuarioSession;
 			$this->load->library('googlemaps');
 			
 			$rs = $this->servicios_model->getServicioFicha($q);
@@ -686,50 +677,46 @@ class sitio extends CI_Controller {
 	}
 	
 	public function ofrecer_servicio(){
-		if($this->UsuarioSession){
-		$data['seccion'] = 'publicar-servicio';	
-		$data['buscador_off'] = true;
-		if($this->UsuarioSession){
-			$data['usuario'] = $this->UsuarioSession['nombre'];
+		if($this->UsuarioSession)
+		{
+			$data['seccion'] = 'publicar-servicio';	
+			$data['buscador_off'] = true;
 			$data['usuarioSession'] = $this->UsuarioSession;
+
+			$this->load->library('googlemaps');
+			$config = array();
+			$config['center'] = 'auto';
+			$config['zoom'] = 'auto';
+			$config['places'] = TRUE;
+			$config['scrollwheel'] = FALSE;
+			$config['placesAutocompleteInputID'] 	= 'myPlaceTextBox';
+			$config['placesAutocompleteBoundsMap'] 	= TRUE;
+			// $opciones = array('cities'); 
+			$config['placesAutocompleteRestrict'] 	= 'AR'; 
+			$config['placesAutocompleteOnChange'] 	= gmapScript();//viene del helper de mis_funciones
+			$this->googlemaps->initialize($config);
+		
+			$data['map'] = $this->googlemaps->create_map();
+			$data['post'] = null;
+			$data['form_errors'] =null;
+			$data['vista'] = 'ofrecer_servicio';
+			$this->_js = array(
+				'assets/js/bootstrap-typeahead.js',
+				'assets/js/bootstrap-select.min.js',
+				'assets/js/ajax-bootstrap-select.min.js',
+				'assets/js/script-typehead.js',
+				'assets/js/script-selectpicker.js',
+			);
+
+			$this->_css = array(
+				'assets/css/bootstrap-select.min.css',
+			);
+			$data['css'] = $this->_css;
+			$data['js'] = $this->_js;
+			$this->load->view('home_view',$data);
 		}
-		$this->load->library('googlemaps');
-		$config = array();
-		$config['center'] = 'auto';
-		$config['zoom'] = 'auto';
-		$config['places'] = TRUE;
-		$config['scrollwheel'] = FALSE;
-		$config['placesAutocompleteInputID'] 	= 'myPlaceTextBox';
-		$config['placesAutocompleteBoundsMap'] 	= TRUE;
-		// $opciones = array('cities'); 
-		$config['placesAutocompleteRestrict'] 	= 'AR'; 
-		$config['placesAutocompleteOnChange'] 	= gmapScript();//viene del helper de mis_funciones
-		$this->googlemaps->initialize($config);
-	
-		$data['map'] = $this->googlemaps->create_map();
-		$data['post'] = null;
-		$data['form_errors'] =null;
-		$data['vista'] = 'ofrecer_servicio';
-		$this->_js = array(
-		'assets/js/bootstrap-typeahead.js',
-		'assets/js/bootstrap-select.min.js',
-		'assets/js/ajax-bootstrap-select.min.js',
-		'assets/js/script-typehead.js',
-		'assets/js/script-selectpicker.js',
-		);
-
-		$this->_css = array(
-		'assets/css/bootstrap-select.min.css',
-		);
-
-
-		$data['css'] = $this->_css;
-		$data['js'] = $this->_js;
-		$this->load->view('home_view',$data);
-
-
-
-		}else{
+		else
+		{
 			return redirect('');
 		}
 	}
@@ -755,16 +742,14 @@ class sitio extends CI_Controller {
 
 
 	public function resultado_busqueda($q,$l){
-
-
 		$q = urldecode($q);
 		$l = urldecode($l);
 
 		$busca = $this->session->userdata("busqueda");
 		$this->load->library('googlemaps');	
 
-		if($this->UsuarioSession){
-			$data['usuario'] = $this->UsuarioSession['nombre'];
+		if($this->UsuarioSession)
+		{
 			$data['usuarioSession'] = $this->UsuarioSession;
 		}
 		
@@ -772,12 +757,14 @@ class sitio extends CI_Controller {
 		$data['localidad'] = str_replace('-', ' ', $l);
 		$data['servicio']  = str_replace('-', ' ', $q);
 
-		if($l == 'argentina'){
+		if($l == 'argentina')
+		{
 			$result	   		   = $this->_setPaginacion($data['servicio'],'',$urlq );
-		}else{
+		}
+		else
+		{
 			$result	   		   = $this->_setPaginacion($data['servicio'],$data['localidad'],$urlq );
 		}
-		
 		
 		$data['result']    = $result['result'];
 		$ltn = null;
@@ -793,7 +780,8 @@ class sitio extends CI_Controller {
 
 		$marker = array();
 
-		foreach ($data['result'] as  $value) {
+		foreach ($data['result'] as  $value)
+		{
 			$ltn =  $value['latitud'].','. $value['longitud'];
 			$marker['icon'] = site_url('assets/images/servix_marker.png');
 			$marker['icon_size']   = '25, 66';
@@ -807,31 +795,28 @@ class sitio extends CI_Controller {
 			$marker['animation']		  = 'DROP';
 			$this->googlemaps->add_marker($marker);
 		}
-		if(count($ltn) >= 1){
+		if(count($ltn) >= 1)
+		{
 			$data['map'] = $this->googlemaps->create_map();
 		}
 		$data['title'] 	   = 'Resultado de búsqueda';
 		$data['vista'] 	   = 'resultado_busqueda_view';
 
-		
-
 		$this->_js = array(
-		'assets/js/bootstrap-typeahead.js',
-		'assets/js/jquery.raty.js',
-		'assets/js/script-typehead.js',
-		'assets/js/script-raty.js',
+			'assets/js/bootstrap-typeahead.js',
+			'assets/js/jquery.raty.js',
+			'assets/js/script-typehead.js',
+			'assets/js/script-raty.js',
 		);
 
 		$this->_css = array(
-		'assets/css/raty/jquery.raty.css',
-		'assets/css/bootstrap-select.min.css',
+			'assets/css/raty/jquery.raty.css',
+			'assets/css/bootstrap-select.min.css',
 		);
 		$data['css'] = $this->_css;
 		$data['js'] = $this->_js;
 
 		$this->load->view('home_view',$data);
-
-
 	}
 
 
@@ -847,8 +832,6 @@ class sitio extends CI_Controller {
         $config["total_rows"]   = $this->servix_model->getTotalFilasResultBusqueda($servicio, $localidad);
         $config["per_page"] 	= 4;
         $config["uri_segment"]  = 3;
-        $config['last_link'] 	= 'Último';
-        $config['first_link'] 	= 'Primero';
         $this->pagination->initialize($config);
         $page 					= (is_numeric($this->uri->segment(3))) ? $this->uri->segment(3) : 0;
         $data["result"] 		= $this->servix_model->getResultadoBusqueda($servicio, $localidad, $page, $config["per_page"]); 
@@ -945,8 +928,6 @@ class sitio extends CI_Controller {
         $config["total_rows"]   = $this->servicios_model->getTotalFilasSolicitados($semanaSolicitado);
         $config["per_page"] 	= 4;
         $config["uri_segment"]  = $segment;
-        $config['last_link'] 	= 'Último';
-        $config['first_link'] 	= 'Primero';
         $this->pagination->initialize($config);
       
         $page 					= (is_numeric($this->uri->segment($segment))) ? $this->uri->segment($segment) : 0;
@@ -963,6 +944,10 @@ class sitio extends CI_Controller {
 		$id 	 = $this->_parsearIdServicio($servicio);
 		$seccion = "servicio-solicitado/".$servicio."/";
 		$segment = 3;
+		if($this->UsuarioSession)
+		{
+			$data['usuarioSession'] = $this->UsuarioSession;
+		}
 
 		if(is_numeric($id)){
 
@@ -972,9 +957,12 @@ class sitio extends CI_Controller {
 
 			$userPostulados	 = $this->servicios_model->userPostulados($id);
 
-			if(!empty($solicitados)){
+			if(!empty($solicitados))
+			{
 				$data['solicitados'] = $solicitados['result'];
-			}else{
+			}
+			else
+			{
 				$data['solicitados'] = null;
 			}
 
@@ -998,20 +986,21 @@ class sitio extends CI_Controller {
 
 			if($userPostulados)
 			{
-				foreach ($userPostulados as $postulado => $value) {
-				$userPostulados[$postulado]['link_user'] = site_url('usuario/perfil/'.$userPostulados[$postulado]['id'].'-'.$userPostulados[$postulado]['nombre'].'-'.$userPostulados[$postulado]['apellido']);
-				if($userPostulados[$postulado]['foto'] == "" || $userPostulados[$postulado]['foto'] == null)
+				foreach ($userPostulados as $postulado => $value)
 				{
-					$userPostulados[$postulado]['foto_path'] = 'assets/images/perfil_200.png';
-				}
-				else if(file_exists('./assets/images/usuarios/' . $userPostulados[$postulado]['foto']))
-				{
-					$userPostulados[$postulado]['foto_path'] = path_archivos('assets/images/usuarios/', agregar_nombre_archivo($userPostulados[$postulado]['foto'], '_thumb'));
-				}
-				else 
-				{
-					$userPostulados[$postulado]['foto_path'] = 'assets/images/perfil_200.png';
-				}
+					$userPostulados[$postulado]['link_user'] = site_url('usuario/perfil/'.$userPostulados[$postulado]['id'].'-'.$userPostulados[$postulado]['nombre'].'-'.$userPostulados[$postulado]['apellido']);
+					if($userPostulados[$postulado]['foto'] == "" || $userPostulados[$postulado]['foto'] == null)
+					{
+						$userPostulados[$postulado]['foto_path'] = 'assets/images/perfil_200.png';
+					}
+					else if(file_exists('./assets/images/usuarios/' . $userPostulados[$postulado]['foto']))
+					{
+						$userPostulados[$postulado]['foto_path'] = path_archivos('assets/images/usuarios/', agregar_nombre_archivo($userPostulados[$postulado]['foto'], '_thumb'));
+					}
+					else 
+					{
+						$userPostulados[$postulado]['foto_path'] = 'assets/images/perfil_200.png';
+					}
 				}
 			}
 
@@ -1025,7 +1014,6 @@ class sitio extends CI_Controller {
 			
 			if($this->UsuarioSession)
 			{
-				$data['usuario'] 		= $this->UsuarioSession['nombre'];
 				$data['usuarioSession'] = $this->UsuarioSession;
 				$user_postulado 		= $this->servicios_model->userPostulado($data['id_usuario'],$id);
 				if(!empty($user_postulado))
@@ -1266,115 +1254,116 @@ class sitio extends CI_Controller {
 	public function ficha_servicio($id,$servicio,$page=null){
 
 		$this->load->library('googlemaps');
-
-		if(is_numeric($id)){
-
-		$data['seccion']  = 'ficha';
-		$data['favorito'] =  null;
-		$data['servicio'] = null;
-
-		
-		$opiniones 	 = $this->_setPaginacionOpinion('208-herreria-los-hermanos',$id);
-		$servicioRS  = $this->servicios_model->getServicioFicha($id);
-		$promedio 	 = $this->servicios_model->getPromedioPuntos($id);
-
-		if($servicioRS){
-
-		
-		foreach ($servicioRS[0] as $key => $value) {
-			$data[$key] = $value;
-			$data['link_user'] = site_url('usuario/perfil/'. $servicioRS[0]['userID'].'-'.$servicioRS[0]['nombre'].'-'.$servicioRS[0]['apellido']);
-		    if($servicioRS[0]['foto'] == "" || $servicioRS[0]['foto'] == null)
-		    {
-		    	$data['foto_path'] = 'assets/images/servicio_200.jpg';
-		    }
-		    else if(file_exists('./assets/images/servicios/' . $servicioRS[0]['foto']))
-		    {
-		    	$data['foto_path'] = path_archivos('assets/images/servicios/', agregar_nombre_archivo($servicioRS[0]['foto'], ''));
-		    }
-		    else 
-		    {
-		    	$data['foto_path'] = 'assets/images/servicio_200.jpg';
-		    }
-		    $ltn =   $servicioRS[0]['latitud'].','.$servicioRS[0]['longitud'];
-	
-		}
-			$config = array();
-			$config['center'] = $ltn;
-			$config['zoom'] = '17';
-			$this->googlemaps->initialize($config);
-
-			$marker = array();
-
-			$marker['icon'] = site_url('assets/images/servix_marker.png');
-			$marker['icon_size']   = '25, 66';
-			$marker['icon_origin'] = '0, 0';
-			$marker['icon_anchor'] = '17, 34';
-			$marker['icon_scaledSize'] = '20, 35';
-			$marker['position'] = $ltn;
-
-			$marker['infowindow_content'] = ('<div style="width: 250px;color: #000;font-size:14px;font-family:Arial, Helvetica, sans-serif;">'.ucwords($data['titulo']).'<br>'.ucfirst($data['direccion']).'			</div>');
-			$marker['infowindowMaxWidth'] = "500";
-			$marker['animation']		  = 'DROP';
-
-			$this->googlemaps->add_marker($marker);
-			$data['map'] = $this->googlemaps->create_map();
-
-
-		if(!empty($promedio)){
-			foreach ($promedio[0] as $key => $value) {
-				$data[$key] = $value;
-			}
-		}
-
-		if($this->UsuarioSession){
-			$data['usuario'] 		= $this->UsuarioSession['nombre'];
+		if($this->UsuarioSession)
+		{
 			$data['usuarioSession'] = $this->UsuarioSession;
-			$fav = $this->usuarios_model->getFavorito($this->UsuarioSession['id'],$id);
-			if(!empty($fav)){
-				$data['favorito'] = true;
-			}
 		}
 
-		$data['servicio']  = $data['titulo'];
-		$data['opiniones'] = $opiniones['result'];
-		$data['title']     = 'Ficha del servicio';
-		$data['servUrl']   =  site_url('ficha/'.$servicio);
-		$data['vista'] = "ficha_servicio_view";
+		if(is_numeric($id))
+		{
 
-		}else{
+			$data['seccion']  = 'ficha';
+			$data['favorito'] =  null;
+			$data['servicio'] = null;
+
+			
+			$opiniones 	 = $this->_setPaginacionOpinion('208-herreria-los-hermanos',$id);
+			$servicioRS  = $this->servicios_model->getServicioFicha($id);
+			$promedio 	 = $this->servicios_model->getPromedioPuntos($id);
+
+			if($servicioRS)
+			{
+				foreach ($servicioRS[0] as $key => $value)
+				{
+					$data[$key] = $value;
+					$data['link_user'] = site_url('usuario/perfil/'. $servicioRS[0]['userID'].'-'.$servicioRS[0]['nombre'].'-'.$servicioRS[0]['apellido']);
+				    if($servicioRS[0]['foto'] == "" || $servicioRS[0]['foto'] == null)
+				    {
+				    	$data['foto_path'] = 'assets/images/servicio_200.jpg';
+				    }
+				    else if(file_exists('./assets/images/servicios/' . $servicioRS[0]['foto']))
+				    {
+				    	$data['foto_path'] = path_archivos('assets/images/servicios/', agregar_nombre_archivo($servicioRS[0]['foto'], ''));
+				    }
+				    else 
+				    {
+				    	$data['foto_path'] = 'assets/images/servicio_200.jpg';
+				    }
+				    $ltn =   $servicioRS[0]['latitud'].','.$servicioRS[0]['longitud'];
+				}
+				$config = array();
+				$config['center'] = $ltn;
+				$config['zoom'] = '17';
+				$this->googlemaps->initialize($config);
+
+				$marker = array();
+
+				$marker['icon'] = site_url('assets/images/servix_marker.png');
+				$marker['icon_size']   = '25, 66';
+				$marker['icon_origin'] = '0, 0';
+				$marker['icon_anchor'] = '17, 34';
+				$marker['icon_scaledSize'] = '20, 35';
+				$marker['position'] = $ltn;
+
+				$marker['infowindow_content'] = ('<div style="width: 250px;color: #000;font-size:14px;font-family:Arial, Helvetica, sans-serif;">'.ucwords($data['titulo']).'<br>'.ucfirst($data['direccion']).'			</div>');
+				$marker['infowindowMaxWidth'] = "500";
+				$marker['animation']		  = 'DROP';
+
+				$this->googlemaps->add_marker($marker);
+				$data['map'] = $this->googlemaps->create_map();
+
+
+				if(!empty($promedio))
+				{
+					foreach ($promedio[0] as $key => $value)
+					{
+						$data[$key] = $value;
+					}
+				}
+
+				if($this->UsuarioSession)
+				{
+					$data['usuarioSession'] = $this->UsuarioSession;
+					$fav = $this->usuarios_model->getFavorito($this->UsuarioSession['id'],$id);
+					if(!empty($fav))
+					{
+						$data['favorito'] = true;
+					}
+				}
+
+				$data['servicio']  = $data['titulo'];
+				$data['opiniones'] = $opiniones['result'];
+				$data['title']     = 'Ficha del servicio';
+				$data['servUrl']   =  site_url('ficha/'.$servicio);
+				$data['vista'] = "ficha_servicio_view";
+
+			}
+			else
+			{
 				$data['title']     = 'Ficha del servicio no encontrada';
 				$data['vista']     = 'ficha_servicio_no_encontrado_view';
+			}
 		}
-		
-
-		
-
-		 }else{
+		else
+		{
 		 	$data['title']     = 'Ficha del servicio no encontrada';
 			$data['vista']     = 'ficha_servicio_no_encontrado_view';
 		}
 
-		
-
-
 		$this->_js = array(
-		'assets/js/bootstrap-typeahead.js',
-		'assets/js/moment-with-locales.js',
-		'assets/js/bootstrap-datetimepicker.min.js',
-		'assets/js/jquery.raty.js',
-		'assets/js/script-typehead.js',
-		'assets/js/script-datepicker.js',
-		'assets/js/script-raty.js',
-
+			'assets/js/bootstrap-typeahead.js',
+			'assets/js/moment-with-locales.js',
+			'assets/js/bootstrap-datetimepicker.min.js',
+			'assets/js/jquery.raty.js',
+			'assets/js/script-typehead.js',
+			'assets/js/script-datepicker.js',
+			'assets/js/script-raty.js',
 		);
 
-
-
 		$this->_css = array(
-		'assets/css/raty/jquery.raty.css',
-		'assets/css/bootstrap-datetimepicker.min.css',
-		'assets/css/bootstrap-select.min.css',
+			'assets/css/raty/jquery.raty.css',
+			'assets/css/bootstrap-datetimepicker.min.css',
+			'assets/css/bootstrap-select.min.css',
 		);
 
 		$data['css'] = $this->_css;

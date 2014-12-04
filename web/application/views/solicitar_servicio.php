@@ -2,7 +2,6 @@
 <div class="row">
 	<div class="jumbotron col-md-12">
 		<div class="row">
-			
 			<div class="col-md-12">
 		
 				<h1>Solicitá un servicio</h1>
@@ -12,21 +11,22 @@
 
 			<div class="col-md-6 from-box">
 				<h3>Formulario de solicitud</h3>
-				<?php 
+				<?php
 				$msj = $this->session->flashdata('mensaje_e');
-				if(!empty($msj)){
-						if($msj['error'] == 0){
-							?>
-							 <div class="alert alert-success" id="mensaje_e" role="alert"><?php echo $msj['mensaje_e']; ?></div>
-							<?php
-						}else{
-
-							?>
-							<div class="alert alert-warning" id="mensaje_e" role="alert"><?php echo $msj['mensaje_e']; ?></div>
-							<?php
-
-						}
-						
+				if(!empty($msj))
+				{
+					if($msj['error'] == 0)
+					{
+					?>
+						<div class="alert alert-success" id="mensaje_e" role="alert"><?php echo $msj['mensaje_e']; ?></div>
+					<?php
+					}
+					else
+					{
+					?>
+						<div class="alert alert-warning" id="mensaje_e" role="alert"><?php echo $msj['mensaje_e']; ?></div>
+					<?php
+					}
 				}
 				 ?>
 				
@@ -39,14 +39,14 @@
 		               <div class="form-group">
 		                <label for="busqueda-localidad">¿En que localidad lo estas solicitando?</label>
 		              
-		                 <select id="ajax-select" class="form-control selectpicker with-ajax" name="localidad" placeholder="Buscar" data-live-search="true" ></select>
+		                 <select id="ajax-select" class="form-control selectpicker with-ajax" name="localidad" placeholder="Buscar" data-live-search="true"></select>
 		               
 		              </div>
 					  <div class="form-group">
 		                <label for="fecha_fin">¿Para cuando lo necesitas?</label>
 		                
 		                <div class='input-group date' id='datetimepicker2'>
-		                    <input type='text' class="form-control" name="fecha_fin" id="fecha_fin" placeholder="Fecha y hora"   data-date-format="DD/MM/YYYY HH:mm" />
+		                    <input type='text' class="form-control" name="fecha_fin" id="fecha_fin" placeholder="Fecha y hora" data-date-format="DD/MM/YYYY HH:mm" />
 		                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
 		                    </span>
 		                </div>
@@ -54,7 +54,7 @@
 		              </div>
 		               <div class="form-group">
 		                <label for="comentario">Comentanos un poco que andas solicitando</label>
-		                <textarea name="comentario"  class="form-control"  id="comentario" cols="3" rows="6" placeholder="Tu comentario"></textarea>
+		                <textarea name="comentario" class="form-control"  id="comentario" cols="3" rows="6" placeholder="Tu comentario"></textarea>
 		               
 		              </div>
 		               <div class="form-group">
