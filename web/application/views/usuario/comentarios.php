@@ -10,7 +10,7 @@
     {
     ?>
 
-    <a href="<?php echo $comen['link']; ?>" class="list-group-item">
+    <a href="<?php echo site_url($comen['link']); ?>" class="list-group-item">
       <strong><span><?php echo ucfirst($comen['titulo']); ?></span></strong>
     <div class="ratyAVG" data-avg="<?php echo $comen['puntos'] ;?>"></div>
     <p class="list-group-item-text"><?php echo ucfirst($comen['comentario']); ?></p>

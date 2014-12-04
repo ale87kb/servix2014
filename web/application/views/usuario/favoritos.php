@@ -16,7 +16,7 @@
       <figure>
         <img src="<?php echo site_url($fav['foto_path']); ?>" alt="<?php echo ucfirst($fav['titulo']); ?>" class="pull-left img-responsive thumb margin10 img-thumbnail">
       </figure>
-      <h3><a href="<?php echo $fav['link']; ?>"><?php echo ucfirst($fav['titulo']); ?></a></h3>
+      <h3><a href="<?php echo site_url($fav['link']); ?>"><?php echo ucfirst($fav['titulo']); ?></a></h3>
         <p class="pull-right">
           <span class="label label-default"><?php echo ucfirst($fav['categoria']); ?></span>
           <span class="label label-default"><?php echo ucfirst($fav['localidad']); ?></span>
