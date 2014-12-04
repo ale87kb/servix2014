@@ -362,8 +362,8 @@ var app = function(){
                              if($("#curretSection").val() == 'ficha'){
                                 if($("#nextAction").val() == '#modalOpinion'){
                                     history.pushState({}, '','#QuieroOpinar');
-                                    window.location.reload();
                                 }
+                                    window.location.reload();
                              }else if(($("#nextAction").val() == 'solicitar-servicio') &&  $("#curretSection").val() == ''){
 
                                   window.location.href='solicitar-servicio';
