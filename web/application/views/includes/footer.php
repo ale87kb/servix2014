@@ -9,6 +9,8 @@
 
 	 <?php
      if(!isset($usuarioSession)){
+
+
       ?>
 
   <!-- Login Modal -->
@@ -18,6 +20,7 @@
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             <h4 class="modal-title">Iniciar Sesión con tu e-mail</h4>
+           
           </div>
           <div class="modal-body login_modal_body">
 
@@ -43,6 +46,8 @@
                 <div class="text-right">
                   <input type="hidden" name="curretSection" id="curretSection" value="<?php echo $this->uri->segment(1); ?>">
                   <input type="hidden" name="nextAction" id="nextAction" value="">
+                  
+                  <!-- <a href=" <?php   echo ($loginFb['login_url']); ?>" class="btn btn-primary" >Iniciar con <i class="fa  fa-facebook-square"></i></a> -->
                   <button class="btn btn-success" type="submit" value="Ingresar">Iniciar Sesión</button>
                 </div>
           </form>
