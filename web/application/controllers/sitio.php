@@ -283,8 +283,6 @@ class sitio extends CI_Controller {
 	
 		$data['vista'] = 'solicitar_servicio';
 
-
-
 		$this->_js = array(
 		'assets/js/bootstrap-typeahead.js',
 		'assets/js/moment-with-locales.js',
@@ -294,10 +292,7 @@ class sitio extends CI_Controller {
 		'assets/js/script-typehead.js',
 		'assets/js/script-datepicker.js',
 		'assets/js/script-selectpicker.js',
-
 		);
-
-
 
 		$this->_css = array(
 		'assets/css/bootstrap-datetimepicker.min.css',
