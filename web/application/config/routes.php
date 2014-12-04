@@ -114,19 +114,19 @@ $route['mi-perfil/servicios-solicitados/(:num)']	= "usuario/servicios_solicitado
 $route['mi-perfil/postulaciones']		  			= "usuario/postulaciones_usuario";
 $route['mi-perfil/postulaciones/(:num)']  			= "usuario/postulaciones_usuario";
 
+$route['mi-perfil/servicios/editar/(:num)-(:any)']  = "sitio/editar_servicio/$1";
+/*$route['mi-perfil/servicios-solicitados/editar/(:num)']	= "sitio/update_servicio_solicitado";mi-perfil/servicios-solicitados*/
+
 $route['validar-voto']   		   					= "usuario/validar_voto";
 $route['mi-perfil/editar-datos']   					= "usuario/editar_datos";
 $route['mi-perfil/validar_editar_datos']   			= "login/validar_editar_datos";
 $route['editar_usuario_respuesta']					= "login/editar_usuario_respuesta";
 $route['actulaizar_foto_perfil']					= "usuario/actulaizar_foto_perfil";
-
 $route['set_favorito']  							= "usuario/set_favorito";
-
-$route['mi-perfil/servicios/editar/(:num)-(:any)']  = "sitio/editar_servicio/$1";
-
 $route['elimiar-servicio']  						= "sitio/unset_servicio";
 $route['eliminar-servicio-solicitado']  			= "sitio/unset_servicio_solicitado";
 $route['reactivar-servicio-solicitado']  			= "sitio/update_servicio_solicitado";
+
 $route['usuario/perfil/(:any)'] 					= "usuario/perfil_usuario/$1";
 $route['404_override'] 	= '';
 
