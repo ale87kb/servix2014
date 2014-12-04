@@ -46,8 +46,13 @@
                 <div class="text-right">
                   <input type="hidden" name="curretSection" id="curretSection" value="<?php echo $this->uri->segment(1); ?>">
                   <input type="hidden" name="nextAction" id="nextAction" value="">
-                  
-                  <!-- <a href=" <?php   echo ($loginFb['login_url']); ?>" class="btn btn-primary" >Iniciar con <i class="fa  fa-facebook-square"></i></a> -->
+                  <?php 
+                    if(isset($loginFb['login_url'])){
+                      ?>
+                  <a href=" <?php   echo ($loginFb['login_url']); ?>" class="btn btn-primary" >Iniciar con <i class="fa  fa-facebook-square"></i></a>
+                      <?php
+                    }
+                   ?>
                   <button class="btn btn-success" type="submit" value="Ingresar">Iniciar Sesión</button>
                 </div>
           </form>

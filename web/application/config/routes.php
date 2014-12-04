@@ -41,7 +41,7 @@
 $route['default_controller'] 								= "sitio";
 //url                        // Controlador/metodo 
 
-$route['test/loginfb']   									= "sitio/test_fb";					//Entra cualquiera
+$route['login/verificacion-login-fb'] 						= "login/verificar_login_fb";					//Entra cualquiera
 $route['condiciones-de-uso']   								= "sitio/condiciones_de_uso";					//Entra cualquiera
 $route['preguntas_frecuentes'] 								= "sitio/preguntas_frecuentes";					//Entra cualquiera
 $route['solicitud-de-servicio']								= "sitio/solicitar_servicio";					

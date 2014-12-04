@@ -505,6 +505,37 @@ class Login extends CI_Controller {
 
 	}
 
+
+	public function sendEmailRegistroOk($perfil){
+		
+		//$this->load->view('email/confirmEmail', $post);
+
+		if(isset($perfil)){
+
+		 	// print_d($post);
+		 	$this->load->library('email');
+		 	$config['charset'] 	= 'utf-8';
+	        $config['wordwrap'] = TRUE;
+	        $config['mailtype'] = 'html';
+	        $fromemail          = MAIL_NO_RESPONDER; // desde
+	        $toemail            = $perfil['usuario']; //para
+	        $mail               = null;
+	        $subject            = "Gracias por iniciar session en Servix";
+
+	        
+	        $this->email->initialize($config);
+	        $this->email->from($fromemail, APP_NAME);
+        	$this->email->to($toemail);
+	        
+	        $this->email->subject($subject);
+	        $mesg  = $this->load->view('email/registroOk', $perfil, true);
+	        $this->email->message($mesg);
+	        $mail = $this->email->send();
+	        // echo $this->email->print_debugger();
+	      	return $mail;
+		}
+	}
+
 	public function sendEmailConfirm($post){
 		
 		//$this->load->view('email/confirmEmail', $post);
@@ -647,9 +678,129 @@ class Login extends CI_Controller {
 	}
 
 
+	public function verificar_login_fb(){
+		$user = $this->facebook->getUser();
+        
+        if ($user) {
+            try {
+                $data['user_profile'] = $this->facebook->api('/me');
+            } catch (FacebookApiException $e) {
+                $user = null;
+            }
+        }else {
+            $this->facebook->destroySession();
+        }
+      
+       
+       $user  = $data['user_profile']['email'];
+
+
+
+       $resultemail = $this->usuarios_model->getEmail($user);
+
+       if($resultemail === FALSE){
+       		// echo "no esta registrado";
+
+       		$registro = $this->_login_registro_fb($data['user_profile']);
+
+       		// print_d($registro);
+
+       		if($registro){
+       			// print_d($this->session->userdata('logged_in'));
+       			echo "Bienvenido a Servix, espere unos segundos y sera redireccionado";
+       			$this->output->set_header('refresh:3; url='.site_url()); 
+       		}else{
+
+       			echo "ups.. tenemos un problema";
+       			$this->output->set_header('refresh:3; url='.site_url()); 
+       		}
+
+       }else{
+      		 	// echo "Iniciando session con facebook, un segundo por favor..";
+       			
+       			$result = $this->usuarios_model->getUser($user);
+       			if($result){
+       				$this->_setDataSession($result);
+   					redirect('','refresh');
+       				// $this->output->set_header('refresh:1; url='.site_url());   
+       			}else{
+					echo "ups.. tenemos un problema";
+       				$this->output->set_header('refresh:3; url='.site_url());        				
+       			}
+       }
+
+	
+       // print_d();
+	}
+
+	
+	
+
+	public function showEmail($perfil){
+ 		$this->load->view('email/registroOk', $perfil);
+	}
+
+	private function _login_registro_fb($perfil){
+
+		$fecha = date('Y-m-d H:m:i');
+		$clave_original = $this->_generarClave();
+		
+		$clave_codimd5	= md5($clave_original);
+
+		$nuevoUsuario['fecha_creacion'] 	= $fecha;
+		$nuevoUsuario['fecha_mod_estado'] 	= $fecha;
+		$nuevoUsuario['ultima_edicion'] 	= $fecha;
+		$nuevoUsuario['usuario'] 			= $perfil['email'];
+		
+		$nuevoUsuario['clave'] 				= $clave_codimd5;
+		$nuevoUsuario['nombre'] 			= $perfil['first_name'];
+		$nuevoUsuario['apellido'] 			= $perfil['last_name'];
+		$nuevoUsuario['telefono'] 			= '';
+		$nuevoUsuario['direccion'] 			= '';
+		$nuevoUsuario['codigo'] 			= $this->_generarCodigo();
+		$nuevoUsuario['foto'] 				= '';
+		$nuevoUsuario['estado'] 			= 1;
+
+
+		//El estado del usuario puede ser 
+		// 0 : Registrado, email NO verificado 
+		// 1 : Registrado, email verificado
+		// 2 : Usuario dado de baja
+	
+
+		$resultAdd = $this->usuarios_model->add_usuario($nuevoUsuario);
+		$resultAdd =  true;
+
+		if($resultAdd){
+			$nuevoUsuario['pass'] = $clave_original;
+			$this->sendEmailRegistroOk($nuevoUsuario);
+			$result = $this->usuarios_model->login($nuevoUsuario['usuario'] , $clave_original);
+			$this->_setDataSession($result);
+			return true;
+		}else{
+			return false;
+		}
+		// print_d($nuevoUsuario);
+
+
+
+		
+	}
+	
+	private function _generarClave(){
+		$str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+		$cad = "";
+		for($i=0;$i<6;$i++) {
+		$cad .= substr($str,rand(0,62),1);
+		}
+		return $cad;
+	}
+
+
 	public function validacion_login_ajax(){
 
 		//Valida el formulario de login por ajax
+
 
 		$this->load->library('form_validation');
 
@@ -777,6 +928,7 @@ class Login extends CI_Controller {
 	public function logout(){
 		//Destruye la sesion del usuario y vuelve a login.
    		$this->session->unset_userdata('logged_in');
+   	    $this->facebook->destroySession();
 	   	$this->session->sess_destroy();
 	   	redirect('', 'refresh');
 	}

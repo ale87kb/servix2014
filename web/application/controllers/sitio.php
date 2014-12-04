@@ -10,26 +10,12 @@ class sitio extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->UsuarioSession = $this->usuarios_model->isLogin();
-		//$this->load->library('facebook'); 
-
+	
 	}
-	public function test_fb(){
 
-		$user = $this->facebook->getUser();
-        
-        if ($user) {
-            try {
-                $data['user_profile'] = $this->facebook->api('/me');
-            } catch (FacebookApiException $e) {
-                $user = null;
-            }
-        }else {
-            $this->facebook->destroySession();
-        }
 
-       print_d($data);
 
-	}	
+	
 	
 	private function _loginFB(){
 
@@ -37,23 +23,15 @@ class sitio extends CI_Controller {
 
 		$user = $this->facebook->getUser();
         
-        if ($user) {
-            try {
-                $data['user_profile'] = $this->facebook->api('/me');
-            } catch (FacebookApiException $e) {
-                $user = null;
-            }
-        }else {
-            $this->facebook->destroySession();
-        }
+       
 
         if ($user) {
 
-            $data['logout_url'] = site_url('welcome/logout'); 
+            $data['logout_url'] = site_url('logout'); 
 
         } else {
             $data['login_url'] = $this->facebook->getLoginUrl(array(
-                'redirect_uri' => site_url('test/loginfb'), 
+                'redirect_uri' => site_url('login/verificacion-login-fb'), 
                 'scope' => array("email") // permissions here
             ));
         }
@@ -62,7 +40,7 @@ class sitio extends CI_Controller {
 
 	public function index(){
 
-		// $loginFb = $this->_loginFB();
+		$loginFb = $this->_loginFB();
 		
 		
 		if($this->UsuarioSession){
@@ -91,9 +69,9 @@ class sitio extends CI_Controller {
 		$data['current_page'] = $solicitados['current_page'];
 		$data['categorias'] = $this->servix_model->getCategorias();
 		$data['foot_cat'] ='footCat';
-		// $data['loginFb'] = $loginFb;
+		$data['loginFb'] = $loginFb;
 
-
+		// print_d($data['loginFb']);
 	
 		
 		
