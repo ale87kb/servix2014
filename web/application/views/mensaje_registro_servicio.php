@@ -1,4 +1,5 @@
-<div class="row">
+<div class="container" id="main">
+	<div class="row">
 	<div class="jumbotron col-md-12">
 		<div class="row">
 			
@@ -36,5 +37,6 @@
 			</div>
 		</div>
 	</div>
+</div>
 </div>
 

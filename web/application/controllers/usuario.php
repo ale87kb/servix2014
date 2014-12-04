@@ -267,11 +267,12 @@ class Usuario extends CI_controller{
 			$cantidadTotal					= $cantidadSolicitadosActivos + $cantidadSolicitadosVencidos;
 			$UsServiciosSolicitados			= $this->_serviciosSolicitados($this->UsuarioSession['id'], $cantidadTotal, 5);
 			$data['cantidad'] 				= $cantidadTotal;
+
 			$fecha_hoy = date('Y-m-d H:i:s');
 			$vencido = array();
 			$i = 0;
 			foreach ($UsServiciosSolicitados['sSolicitados'] as  $value) {
-					$fecha_ini  =  $value['fecha_ini'];
+						$fecha_ini  =  $value['fecha_ini'];
 
 						$vence_el = strtotime ( '+7 day' , strtotime ( $fecha_ini ) ) ;
 						$vence_el = date ( 'd-m-Y' , $vence_el );
