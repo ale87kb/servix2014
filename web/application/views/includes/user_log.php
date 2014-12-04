@@ -9,7 +9,7 @@
       <li><a href="<?php echo site_url('mi-perfil/favoritos'); ?>">Mis favoritos</a></li>
       <li><a href="<?php echo site_url('mi-perfil/servicios'); ?>">Mis servicios</a></li>
       <li><a href="<?php echo site_url('mi-perfil/servicios-solicitados'); ?>">Servicios solicitados</a></li>
-      <li><a href="<?php echo site_url('mi-perfil/postulaciones'); ?>">Postulaciones</a></li>
+      <li><a href="<?php echo site_url('mi-perfil/postulaciones'); ?>">Mis postulaciones</a></li>
       <li class="divider"></li>
       <li><a href="<?php echo site_url('logout');?>">Cerrar Sesión</a></li>
     </ul>

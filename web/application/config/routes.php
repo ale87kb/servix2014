@@ -115,7 +115,9 @@ $route['mi-perfil/postulaciones']		  			= "usuario/postulaciones_usuario";
 $route['mi-perfil/postulaciones/(:num)']  			= "usuario/postulaciones_usuario";
 
 $route['mi-perfil/servicios/editar/(:num)-(:any)']  = "sitio/editar_servicio/$1";
-/*$route['mi-perfil/servicios-solicitados/editar/(:num)']	= "sitio/update_servicio_solicitado";mi-perfil/servicios-solicitados*/
+
+$route['mi-perfil/servicios-solicitados/editar/(:num)']	= "sitio/editar_servicio_solicitado/$1";
+$route['validar-editar-solicitud-servicio']  			= "sitio/validar_editar_servicio_solicitado";
 
 $route['validar-voto']   		   					= "usuario/validar_voto";
 $route['mi-perfil/editar-datos']   					= "usuario/editar_datos";

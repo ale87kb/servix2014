@@ -188,6 +188,7 @@ Class Servicios_model extends CI_Model{
 					busquedas_temp.id,
 					provincias.provincia,
 					localidades.localidad,
+					localidades.id as id_localidad,
 					categorias.categoria,
 					busquedas_temp.busqueda,
 					busquedas_temp.vencido,

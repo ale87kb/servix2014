@@ -84,13 +84,13 @@ Class Servix_model extends CI_Model{
 
 	public function updateSolicitudVencida($id){
 		$fecha_hoy = date('Y-m-d H:i:s');
-		$query = "UPDATE `busquedas_temp` SET `fecha_ini`=$fecha_hoy, `vencido`=0 WHERE  `id`=$id LIMIT 1;";
+		$query = "UPDATE busquedas_temp SET fecha_ini = $fecha_hoy, vencido = 0 WHERE id = $id LIMIT 1;";
 		$rs = $this->db->query($query);
 		return $rs;
 	}
 
 	public function unsetSolicitudServicio($id){
-		$query = "DELETE FROM `busquedas_temp` WHERE  `id`=$id LIMIT 1;";
+		$query = "DELETE FROM busquedas_temp WHERE id = $id LIMIT 1;";
 		$rs    = $this->db->query($query);
 		return $rs;
 	}
@@ -165,5 +165,21 @@ Class Servix_model extends CI_Model{
 		$rs    = $this->db->query($query);
 		return $rs->result_array();
 
+	}
+
+	public function updateServicioSolicitado($solicitud){
+		$query ="UPDATE
+					busquedas_temp
+				SET
+					fecha_ini = '".$solicitud['fecha_ini']."',
+					fecha_fin = '".$solicitud['fecha_fin']."',
+					busqueda = '".$solicitud['comentario']."',
+					vencido = '".$solicitud['vencido']."',
+					id_localidad = ".$solicitud['localidad'].",
+					id_categorias = ".$solicitud['id_categoria'].",
+					id_cat_nodb =  ".$solicitud['cat_en_db']."
+				WHERE id =  ".$solicitud['id']."";
+		$rs = $this->db->query($query);
+		return $rs;
 	}
 }

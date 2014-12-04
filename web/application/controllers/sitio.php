@@ -416,7 +416,8 @@ class sitio extends CI_Controller {
 
 	public function validar_solicitud_servicio(){
 		$POST = $this->input->post();
-		if( isset($POST) ){
+		if( isset($POST) )
+		{
 			$catPOST = strtolower($this->input->post('categoria'));
 
 			$post['categoria'] = $catPOST;
@@ -428,35 +429,35 @@ class sitio extends CI_Controller {
 			$POST['fecha_fin']  = $fecha_fin;
 			$POST['id_usuario']   = $this->UsuarioSession['id'];
 
-			if(!empty($categoria)){
+			if(!empty($categoria))
+			{
 				$POST['id_categoria'] = $categoria[0]['id'];
 				$POST['cat_en_db'] = 'null';
 				$rs = $this->_set_servicio_solicitado($POST);
-			}else{
-
+			}
+			else
+			{
 				$POST['id_categoria'] = 40;
-
 				$POST['cat_en_db'] = $this->_set_cat_nodb($POST);
 				$rs = $this->_set_servicio_solicitado($POST);
 			}
-			
 	
 			$displayErros = array();
 
-			if($rs){
+			if($rs)
+			{
 				$displayErros = array('mensaje_e'=> 'Gracias por publicar tu solicitud en ' .  APP_NAME , 'error' => 0);
-
 				$this->session->set_flashdata('mensaje_e', $displayErros);
-
-			}else{
-
+			}
+			else
+			{
 				$displayErros = array('mensaje_e'=> 'Ups.. tenemos un problema por favor intenta más tarde' , 'error' => 1);
-
 				$this->session->set_flashdata('mensaje_e', $displayErros);
 			}
 			return redirect($_SERVER['HTTP_REFERER']);
-
-		}else{
+		}
+		else
+		{
 			return redirect('');
 		}
 	}
@@ -582,23 +583,24 @@ class sitio extends CI_Controller {
 		{
 			$data['seccion'] = 'editar-servicio';
 			$data['buscador_off'] = true;
-			if($this->UsuarioSession){
+			if($this->UsuarioSession)
+			{
 				$data['usuario'] = $this->UsuarioSession['nombre'];
 				$data['usuarioSession'] = $this->UsuarioSession;
 			}
 			$this->load->library('googlemaps');
 			
-			$rs = $this->servicios_model->getServicioFicha($q);	
-			foreach ($rs as $v) {
-
-
-			$config = array();
-			$latLong = $v['latitud'].','.$v['longitud'];
-			if(empty($latLon)){
-				$latLon = $v['localidad'];
-			}
-			$data['titulo'] = $v['titulo'];
-			$data['direccion'] = $v['direccion'];
+			$rs = $this->servicios_model->getServicioFicha($q);
+			foreach ($rs as $v)
+			{
+				$config = array();
+				$latLong = $v['latitud'].','.$v['longitud'];
+				if(empty($latLon))
+				{
+					$latLon = $v['localidad'];
+				}
+				$data['titulo'] = $v['titulo'];
+				$data['direccion'] = $v['direccion'];
 			}
 
 			$config['center'] = $latLong;
@@ -636,24 +638,21 @@ class sitio extends CI_Controller {
 			$data['vista'] = 'editar_servicio';
 
 			$this->_js = array(
-			'assets/js/bootstrap-typeahead.js',
-			'assets/js/bootstrap-select.min.js',
-			'assets/js/ajax-bootstrap-select.min.js',
-			'assets/js/script-typehead.js',
-			'assets/js/script-selectpicker.js',
+				'assets/js/bootstrap-typeahead.js',
+				'assets/js/bootstrap-select.min.js',
+				'assets/js/ajax-bootstrap-select.min.js',
+				'assets/js/script-typehead.js',
+				'assets/js/script-selectpicker.js',
 			);
 
 			$this->_css = array(
-			'assets/css/bootstrap-select.min.css',
+				'assets/css/bootstrap-select.min.css',
 			);
-
 
 			$data['css'] = $this->_css;
 			$data['js'] = $this->_js;
 
 			$this->load->view('home_view',$data);
-
-	
 		}
 	}
 	
@@ -1025,6 +1024,103 @@ class sitio extends CI_Controller {
 			return redirect('');	
 		}
 		
+	}
+
+
+	public function editar_servicio_solicitado($idSolicitado){
+		if($this->UsuarioSession)
+		{
+			if(is_numeric($idSolicitado))
+			{
+				$id_solicitado = $this->servicios_model->getServicioSolicitado($idSolicitado);
+				if($id_solicitado)
+				{
+					$data['post'] = $id_solicitado[0];
+					$data['post']['categoria'] = ucfirst($id_solicitado[0]['categoria']);
+					$data['post']['fecha_fin'] = date('d/m/Y H:m', strtotime($id_solicitado[0]['fecha_fin']));
+				}
+
+				$data['usuarioSession'] = $this->UsuarioSession;
+
+				$data['vista'] = 'usuario/editar_servicio_solicitado';
+
+				$this->_js = array(
+					'assets/js/bootstrap-typeahead.js',
+					'assets/js/moment-with-locales.js',
+					'assets/js/bootstrap-datetimepicker.min.js',
+					'assets/js/bootstrap-select.min.js',
+					'assets/js/ajax-bootstrap-select.min.js',
+					'assets/js/script-typehead.js',
+					'assets/js/script-datepicker.js',
+					'assets/js/script-selectpicker.js',
+				);
+
+				$this->_css = array(
+					'assets/css/bootstrap-datetimepicker.min.css',
+					'assets/css/bootstrap-select.min.css',
+				);
+
+				$data['css'] = $this->_css;
+				$data['js'] = $this->_js;
+				$this->load->view('usuarios_view',$data);
+			}
+		}
+		else
+		{
+			return redirect('');
+		}
+	}
+	public function validar_editar_servicio_solicitado(){
+		
+		$POST = $this->input->post();
+		if( isset($POST) )
+		{
+			$catPOST = strtolower($this->input->post('categoria'));
+
+			$post['categoria'] = $catPOST;
+			$categoria = $this->servix_model->getCategoria($catPOST);
+			$fecha_ini = date('Y-m-d H:i:s');
+			$fecha_fin = strtotime(str_replace('/', '-', $this->input->post('fecha_fin') ));
+			$fecha_fin = date('Y-m-d H:i:s' , $fecha_fin);
+			$POST['fecha_ini']  = $fecha_ini;
+			$POST['fecha_fin']  = $fecha_fin;
+			$POST['id']  		= $this->input->post('serSoliid');
+			$POST['id_usuario']   = $this->UsuarioSession['id'];
+
+
+			if(!empty($categoria))
+			{
+				$POST['id_categoria'] = $categoria[0]['id'];
+				$POST['cat_en_db'] = 'null';
+				$POST['vencido'] = 0;
+				$rs = $this->servix_model->updateServicioSolicitado($POST);
+			}
+			else
+			{
+				$POST['id_categoria'] = 40;
+				$POST['cat_en_db'] = $this->_set_cat_nodb($POST);
+				$POST['vencido'] = 0;
+				$rs = $this->servix_model->updateServicioSolicitado($POST);
+			}
+	
+			$displayErros = array();
+
+			if($rs)
+			{
+				$displayErros = array('mensaje_e'=> 'Se republicó tu solicitud de servicio correctamente', 'error' => 0);
+				$this->session->set_flashdata('mensaje_e', $displayErros);
+			}
+			else
+			{
+				$displayErros = array('mensaje_e'=> 'Ups.. tenemos un problema por favor intenta más tarde' , 'error' => 1);
+				$this->session->set_flashdata('mensaje_e', $displayErros);
+			}
+			return redirect($_SERVER['HTTP_REFERER']);
+		}
+		else
+		{
+			return redirect('');
+		}
 	}
 
 	public function set_postulacion(){

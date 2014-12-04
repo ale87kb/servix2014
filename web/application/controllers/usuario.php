@@ -268,11 +268,11 @@ class Usuario extends CI_controller{
 			$UsServiciosSolicitados			= $this->_serviciosSolicitados($this->UsuarioSession['id'], $cantidadTotal, 5);
 			$data['cantidad'] 				= $cantidadTotal;
 			$fecha_hoy = date('Y-m-d H:i:s');
+
 			$vencido = array();
 			$i = 0;
 			foreach ($UsServiciosSolicitados['sSolicitados'] as  $value) {
 					$fecha_ini  =  $value['fecha_ini'];
-
 						$vence_el = strtotime ( '+7 day' , strtotime ( $fecha_ini ) ) ;
 						$vence_el = date ( 'd-m-Y' , $vence_el );
 						if($value['vencido'] == 1){
@@ -281,13 +281,10 @@ class Usuario extends CI_controller{
 						}else{
 							$vencido[$i]['vencido']= 'Solicitud activa';
 							$vencido[$i]['vencido_css'] = 'success';
-
 						}
 						$vencido[$i]['vence_el'] = $vence_el;
-
 				$i++;			
 			}
-
 			
 			$data['vencido']				= $vencido;
 			$data['sSolicitados'] 			= $UsServiciosSolicitados['sSolicitados'];
@@ -309,7 +306,7 @@ class Usuario extends CI_controller{
 		$this->load->library('pagination');
 	    $config = array();
         $config["base_url"] 	= site_url('mi-perfil/servicios-solicitados');
-        $config["total_rows"]   = $totalRows;       
+        $config["total_rows"]   = $totalRows;
         $config["per_page"] 	= $cantidadLimit;
         $config["uri_segment"]  = 3;
         $config['last_link'] 	= 'Último';
@@ -323,6 +320,19 @@ class Usuario extends CI_controller{
 			foreach ($sSolicitados as $key => $value) {
 				$sSolicitados[$key]['link'] = generarLinkServicio($sSolicitados[$key]['id'],$sSolicitados[$key]['categoria']."-en-".$sSolicitados[$key]['localidad']."-".$sSolicitados[$key]['provincia'],'servicio-solicitado');
 				$sSolicitados[$key]['fecha'] = fechaBarras(strtotime($sSolicitados[$key]['fecha_ini']));
+				$sSolicitados[$key]['link_servicio'] = site_url('mi-perfil/servicios-solicitados/editar/' . $sSolicitados[$key]['id']);
+						
+				$fecha_ini  = $sSolicitados[$key]['fecha_ini'];
+				$vence_el = strtotime ( '+7 day' , strtotime ( $fecha_ini ) ) ;
+				$vence_el = date ( 'd-m-Y' , $vence_el );
+				if($sSolicitados[$key]['vencido'] == 1){
+					$sSolicitados[$key]['vencido_text'] = 'Solicitud vencida';
+					$sSolicitados[$key]['vencido_css'] = 'warning';
+				}else{
+					$sSolicitados[$key]['vencido_text']= 'Solicitud activa';
+					$sSolicitados[$key]['vencido_css'] = 'success';
+				}
+				$sSolicitados[$key]['vence_el'] = $vence_el;
 			}
 			$data['sSolicitados'] = $sSolicitados;
 			$data['vinculos'] = $this->pagination->create_links();
@@ -330,6 +340,8 @@ class Usuario extends CI_controller{
 		}
 		return false;
 	}
+
+		
 
 	/*------------------------------------------------------------*/
 	public function postulaciones_usuario(){
@@ -876,6 +888,8 @@ class Usuario extends CI_controller{
 		$user = explode('-', $usuario);
 		return $user[0];
 	}
+
+
 
 }
 ?>

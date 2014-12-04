@@ -17,7 +17,6 @@
 				<h2>Datos personales</h2>
 				<p><strong>Nombre: </strong><?php echo $perfil['nombre']; ?></p>
 				<p><strong>Apellido: </strong><?php echo $perfil['apellido']; ?></p>
-				<p><strong>E-mail: </strong><?php echo $perfil['email']; ?></p>
 			</div>
 			<div class="col-md-3">
 				<table class="table table-bordered text-center">

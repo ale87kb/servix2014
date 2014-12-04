@@ -6,12 +6,8 @@
   <?php
     if(!empty($sSolicitados))
     {
-      $i=0;
       foreach ($sSolicitados as $ssol)
       {
-      
-
-       
   ?>
         <div class="panel panel-default">
           <div class="panel-heading">
@@ -23,37 +19,36 @@
                  <button type="submit" class="btn btn-default  btn-sm " id="borrar_s_solicitado" name="id_busqueda_temp" value="<?php echo $ssol['id']; ?>">x</button>
               </form>
           </div>
-        <div class="panel-body">
-              <p>
-                <?php echo $ssol['busqueda']; ?>
-              </p>
-           <p >
-              <span class="label label-<?php echo $vencido[$i]['vencido_css'] ?> pull-left" ><?php echo $vencido[$i]['vencido']; ?></span> 
-      
-            <a href="<?php echo site_url('mi-perfil/servicios-solicitados#'); ?>" class="btn btn-sm btn-default pull-right">Editar</a>
-            <?php 
-              if($ssol['vencido']){
-                ?>
-
-                  <form action="<?php echo site_url('reactivar-servicio-solicitado') ?>" method="post" >
-                       <button type="submit" class="btn btn-default  btn-sm pull-right " name="id_busqueda_temp" value="<?php echo $ssol['id']; ?>">Volver a solicitar</button>
-                  </form>
-                <?php
-              }
-             ?>
-             </p>
-        </div>
-        <div class="panel-footer">
-           <p>
+          <div class="panel-body">
+            <p>
+            <?php echo $ssol['busqueda']; ?>
+            </p>
+            <p>
+              <span class="label label-<?php echo $ssol['vencido_css'] ?> pull-left" ><?php echo $ssol['vencido_text']; ?></span> 
+              <?php 
+                if($ssol['vencido'])
+                {
+              ?>
+                  <a href="<?php echo $ssol['link_servicio']; ?>" class="btn btn-sm btn-default pull-right">Editar y volver a solicitar</a>
+              <?php
+                }
+                else
+                {
+              ?>
+                  <a href="<?php echo $ssol['link_servicio']; ?>" class="btn btn-sm btn-default pull-right">Editar</a>
+              <?php
+                }
+               ?>
+            </p>
+          </div>
+          <div class="panel-footer">
+            <p>
               <span class="text-left">Fecha de publicación: <?php echo $ssol['fecha']; ?></span>
-              <span class="pull-right">Fecha de vencimiento: <?php echo $vencido[$i]['vence_el']; ?></span>
-
-           </p>
+              <span class="pull-right">Fecha de vencimiento: <?php echo $ssol['vence_el']; ?></span>
+            </p>
+          </div>
         </div>
-        </div>
-
       <?php
-        $i++;
       }
       echo "<div class='paginacion'>" . $paginacion . "</div>";
     }

@@ -432,11 +432,7 @@ Class Usuarios_model extends CI_Model{
 					LIMIT $desdeLimit, $cantidadLimit";
 		$rs = $this->db->query($query);
 		return $rs->result_array();
-
 	}
-
-	
-
 
 	//Cantidad de servicios solicitados por el usuario
 	public function getCantidadSolicitados($id, $vencido){
