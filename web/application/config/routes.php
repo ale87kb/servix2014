@@ -43,7 +43,9 @@ $route['default_controller'] 								= "sitio";
 
 $route['login/verificacion-login-fb'] 						= "login/verificar_login_fb";					//Entra cualquiera
 $route['condiciones-de-uso']   								= "sitio/condiciones_de_uso";					//Entra cualquiera
-$route['preguntas_frecuentes'] 								= "sitio/preguntas_frecuentes";					//Entra cualquiera
+$route['politica-de-uso-de-datos']   						= "sitio/politica_de_datos";					//Entra cualquiera
+$route['politica-de-cookies']		   						= "sitio/politica_de_cookies";					//Entra cualquiera
+$route['preguntas-frecuentes'] 								= "sitio/preguntas_frecuentes";					//Entra cualquiera
 $route['solicitud-de-servicio']								= "sitio/solicitar_servicio";					
 $route['consultar-servicio']   								= "sitio/consultar_servicio";			
 $route['ofrecer-servicio']     								= "sitio/ofrecer_servicio";
@@ -132,7 +134,8 @@ $route['reactivar-servicio-solicitado']  			= "sitio/update_servicio_solicitado"
 
 $route['usuario/perfil/(:any)'] 					= "usuario/perfil_usuario/$1";
 $route['usuario/perfil/(:any)/(:num)'] 					= "usuario/perfil_usuario/$1/$2";
-$route['404_override'] 	= '';
+
+$route['404_override'] 	= 'sitio/error_404';
 
 
 /* End of file routes.php */

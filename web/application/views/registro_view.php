@@ -82,7 +82,7 @@
     
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
-        <p>Al hacer clic en Registrarse, aceptas las <a href="<?php echo site_url('condiciones-de-uso'); ?>">Condiciones</a> y que has leído la <a href="#">Política de uso de datos</a>, incluido el <a href="#">Uso de cookies</a>.</p>
+        <p>Al hacer clic en Registrarse, aceptas las <a href="<?php echo site_url('condiciones-de-uso'); ?>">Condiciones</a> y que has leído la <a href="<?php echo site_url('politica-de-uso-de-datos');?>">Política de uso de datos</a>, incluido el <a href="<?php echo site_url('politica-de-cookies');?>">Uso de cookies</a>.</p>
       </div>
     </div> 
 

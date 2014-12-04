@@ -248,14 +248,50 @@ class sitio extends CI_Controller {
 		}
 		
 		$data['buscador_off'] = TRUE;
-		$data['vista'] = 'condiciones_de_uso';
 		$data['loginFb'] = $this->loginFb;
+		$data['vista'] = 'condiciones_de_uso';
+
+		$this->load->view('home_view',$data);
+	}
+	public function politica_de_datos(){
+		if($this->UsuarioSession)
+		{
+			$data['usuarioSession'] = $this->UsuarioSession;
+		}
+		
+		$data['buscador_off'] = TRUE;
+		$data['loginFb'] = $this->loginFb;
+		$data['vista'] = 'politica_uso_datos';
 
 		$this->load->view('home_view',$data);
 	}
 
+	public function politica_de_cookies(){
+		if($this->UsuarioSession)
+		{
+			$data['usuarioSession'] = $this->UsuarioSession;
+		}
+		
+		$data['buscador_off'] = TRUE;
+		$data['loginFb'] = $this->loginFb;
+		$data['vista'] = 'politica_de_cookies';
+
+		$this->load->view('home_view',$data);
+
+	}
+
+
 	public function preguntas_frecuentes(){
-		echo "preguntas_frecuentes";  	
+		if($this->UsuarioSession)
+		{
+			$data['usuarioSession'] = $this->UsuarioSession;
+		}
+		
+		$data['buscador_off'] = TRUE;
+		$data['loginFb'] = $this->loginFb;
+		$data['vista'] = 'preguntas_frecuentes';
+
+		$this->load->view('home_view',$data);
 	}
 
 	public function solicitar_servicio(){
@@ -1474,29 +1510,43 @@ class sitio extends CI_Controller {
 
 	public function sendRecomendacion($post){
 
-			 if(isset($post)){
+		if(isset($post)){
+			$this->load->library('email');
+			$config['charset']  = 'utf-8';
+			$config['wordwrap'] = TRUE;
+			$config['mailtype'] = 'html';
+			$toemail            = $post['emailAmigo']; //para 
+			$fromemail          = MAIL_NO_RESPONDER; // desde
+			$mail               = null;
+			$subject            = "Hola ".$post['nombreAmigo']." este servicio puede ser de tu int&eacuteres";
 
-			 	$this->load->library('email');
-			 	$config['charset']  = 'utf-8';
-		        $config['wordwrap'] = TRUE;
-		        $config['mailtype'] = 'html';
-		        $toemail            = $post['emailAmigo']; //para 
-		        $fromemail          = MAIL_NO_RESPONDER; // desde
-		        $mail               = null;
-		        $subject            = "Hola ".$post['nombreAmigo']." este servicio puede ser de tu int&eacuteres";
+			$this->email->initialize($config);
+			$this->email->from($fromemail, APP_NAME);
+			$this->email->to($toemail);
 
-		        $this->email->initialize($config);
-		        $this->email->from($fromemail, APP_NAME);
-	        	$this->email->to($toemail);
-		        
-		        $this->email->subject($subject);
-		        $mesg = $this->load->view('email/recomendacion',$post,true);
-		        $this->email->message($mesg);
-		        $mail = $this->email->send();
-		      
-		      	return $mail;
-			 }
+			$this->email->subject($subject);
+			$mesg = $this->load->view('email/recomendacion',$post,true);
+			$this->email->message($mesg);
+			$mail = $this->email->send();
+
+			return $mail;
 		}
+	}
+
+	public function error_404(){
+		if($this->UsuarioSession)
+		{
+			$data['usuarioSession'] = $this->UsuarioSession;
+		}
+		
+		$data['buscador_off'] = TRUE;
+		$data['loginFb'] = $this->loginFb;
+		$data['vista'] = 'errors/404_error';
+
+		$this->load->view('home_view',$data);
+
+	}
+
 }
 
 
