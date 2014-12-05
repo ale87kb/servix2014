@@ -1,13 +1,19 @@
 
+    
+
   <!--right-->
-  <div class="col-sm-5" id="solicitados">
+  <div class="col-sm-12" id="solicitados">
         <h1>Servicios Solicitados</h1>
         <h4>Servicios solicitados de los ultimos 7 dias</h4>
+        <div class="paneles">
+          
+        
         <?php 
         if(!empty($solicitados)){
           foreach ($solicitados as $servicio) {
           ?>
-          <div class="panel panel-default">
+          <div class="col-md-4">
+            <div class="panel panel-default">
             <div class="panel-heading"><?php
 
             if( $servicio['categoria'] == 'Otros'){
@@ -40,17 +46,18 @@
              
             </div>
             <div class="panel-footer">
-              fecha de publicación: <?php echo date('d-m-Y' ,strtotime($servicio['fecha_ini'])); ?>
+              Fecha de publicación: <?php echo date('d-m-Y' ,strtotime($servicio['fecha_ini'])); ?>
             </div>
           </div>
-          <hr>
-          <?php
+          </div>
+                <?php
           }
           echo "<div id='pagSolicitados'>";
           echo $paginacion;
-          echo "</div>";
+          echo "</div></div>";
         }else{
         ?>
+
         <div class="row">
           <div class="col-xs-12">
             <p>Aún no tenemos ningun servicio solicitado</p>
@@ -59,3 +66,4 @@
         <?php
         } ?>
 </div>
+  </div>
