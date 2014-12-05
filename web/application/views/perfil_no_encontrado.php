@@ -31,5 +31,6 @@
             <p><a href="<?php echo site_url(''); ?>">Volver a la página de inicio</a></p>
              
 		</div>
-	</div>
+    </div>
 </section>
+</div>
