@@ -270,13 +270,13 @@ border-bottom: solid 2px #fff;}
 }
 
 #solicitados  .paneles .panel-heading {
-    background: #5dc9e5;
-    color: #fff;
+    /* background: #5dc9e5; */
+    /* color: #fff; */
 }
 
 #solicitados  .paneles .panel-footer {
-    background: #5dc9e5;
-    color: #fff;
+    /* background: #5dc9e5; */
+    /* color: #fff; */
 }
 .link-orange{
     color: #1b1b1b;
