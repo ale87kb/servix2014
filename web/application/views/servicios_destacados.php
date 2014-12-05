@@ -11,6 +11,7 @@
 
               <div class="col-xs-4">
                 <p><img src="http://placehold.it/350x100" alt="" class="img-responsive"></p>
+                <!--<p><img src="<?php echo $servicio['foto_path']; ?>" alt="" class="img-responsive" width="350" height="100"></p>-->
                 <h3><?php echo $servicio['titulo']; ?></h3>
                 <p><?php echo recortar_texto($servicio['descripcion'],250); ?></p>
                 <p class="lead text-right"><a href=" <?php echo site_url(generarLinkServicio($servicio['id'], $servicio['titulo'])); ?> " class="btn btn-warning bg-orange btn-sm">Más info</a></p>

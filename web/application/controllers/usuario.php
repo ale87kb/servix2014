@@ -74,15 +74,15 @@ class Usuario extends CI_controller{
 				$servicios[$key]['link'] = generarLinkServicio($servicios[$key]['id'],$servicios[$key]['titulo']);
 				if($servicios[$key]['foto'] == "" || $servicios[$key]['foto'] == null)
 				{
-					$servicios[$key]['foto_path'] = 'assets/images/servicio_125.jpg';
+					$servicios[$key]['foto_125_path'] = site_url('assets/images/servicio_125.jpg');
 				}
-				else if(file_exists('./assets/images/servicios/' . $servicios[$key]['foto']))
+				else if(file_exists('./assets/images/servicios/' . agregar_nombre_archivo($servicios[$key]['foto'], '_125')))
 				{
-					$servicios[$key]['foto_path'] = path_archivos('assets/images/servicios/', agregar_nombre_archivo($servicios[$key]['foto'], '_thumb'));
+					$servicios[$key]['foto_125_path'] = site_url(path_archivos('assets/images/servicios/', agregar_nombre_archivo($servicios[$key]['foto'], '_125')));
 				}
 				else 
 				{
-					$servicios[$key]['foto_path'] = 'assets/images/servicio_125.jpg';
+					$servicios[$key]['foto_125_path'] = site_url('assets/images/servicio_125.jpg');
 				}
 			}
 			$data['servicios'] = $servicios;
@@ -135,15 +135,15 @@ class Usuario extends CI_controller{
 				$favoritos[$key]['link'] = generarLinkServicio($favoritos[$key]['id'], $favoritos[$key]['titulo']);
 				if($favoritos[$key]['foto'] == "" || $favoritos[$key]['foto'] == null)
 				{
-					$favoritos[$key]['foto_path'] = 'assets/images/servicio_125.jpg';
+					$favoritos[$key]['foto_path'] = site_url('assets/images/servicio_125.jpg');
 				}
-				else if(file_exists('./assets/images/servicios/' . $favoritos[$key]['foto']))
+				else if(file_exists('./assets/images/servicios/' . agregar_nombre_archivo($favoritos[$key]['foto'], '_125')))
 				{
-					$favoritos[$key]['foto_path'] = path_archivos('assets/images/servicios/', agregar_nombre_archivo($favoritos[$key]['foto'], '_thumb'));
+					$favoritos[$key]['foto_path'] = site_url(path_archivos('assets/images/servicios/', agregar_nombre_archivo($favoritos[$key]['foto'], '_125')));
 				}
 				else 
 				{
-					$favoritos[$key]['foto_path'] = 'assets/images/servicio_125.jpg';
+					$favoritos[$key]['foto_path'] = site_url('assets/images/servicio_125.jpg');
 				}
 			}
 			$data['favoritos'] = $favoritos;
@@ -619,7 +619,6 @@ class Usuario extends CI_controller{
 	            $file_id = $this->usuarios_model->actulaizar_foto_usuario($user);
 
 	            $this->UsuarioSession['foto'] 			= $data['file_name'];
-	            $this->UsuarioSession['foto_thumb'] 	= agregar_nombre_archivo($data['file_name'], '_125');
 	            $this->UsuarioSession['foto_path'] 		= path_archivos('assets/images/usuarios/', $data['file_name']);
 	            $this->UsuarioSession['foto_125_path']	= $img_125_path;
 	            $this->UsuarioSession['foto_60_path']	= $img_60_path;
@@ -765,22 +764,22 @@ class Usuario extends CI_controller{
 				{
 					if($perfil[0]['foto'] == "" || $perfil[0]['foto'] == null)
 					{
-						$perfil[0]['foto_path'] = 'assets/images/perfil_200.png';
+						$perfil[0]['foto_path'] = site_url('assets/images/perfil_125.jpg');
 					}
-					else if(file_exists('./assets/images/usuarios/' . $perfil[0]['foto']))
+					else if(file_exists('./assets/images/usuarios/' . agregar_nombre_archivo($perfil[0]['foto'], '_125')))
 					{
-						$perfil[0]['foto_path'] = path_archivos('assets/images/usuarios/', agregar_nombre_archivo($perfil[0]['foto'], '_thumb'));
+						$perfil[0]['foto_path'] = site_url(path_archivos('assets/images/usuarios/', agregar_nombre_archivo($perfil[0]['foto'], '_125')));
 					}
 					else 
 					{
-						$perfil[0]['foto_path'] = 'assets/images/perfil_200.png';
+						$perfil[0]['foto_path'] = site_url('assets/images/perfil_125.jpg');
 					}
 					
 					$data['perfil'] = $perfil[0];
 					$cantidadServicios 			= $this->usuarios_model->getCantidadServicioPropios($id);
 					$data['cantidadServicios'] = $cantidadServicios;
 
-					$servicioEnPerfil = $this->_paginatioServiciosPerfil($id, $cantidadServicios, 5);
+					$servicioEnPerfil = $this->_paginatioServiciosPerfil($id, $perfil[0]['nombre'], $perfil[0]['apellido'], $cantidadServicios, 5);
 					
 					$data['servicios'] 	= $servicioEnPerfil['servicios'];
 					$data['paginacion']	 	= $servicioEnPerfil['vinculos'];
@@ -823,10 +822,10 @@ class Usuario extends CI_controller{
 		
 	}
 
-	private function _paginatioServiciosPerfil($idUsuario, $totalRows, $cantidadLimit){
+	private function _paginatioServiciosPerfil($idUsuario, $nombre, $apellido, $totalRows, $cantidadLimit){
 		$this->load->library('pagination');
 	    $config = array();
-        $config["base_url"] 	= site_url('usuario/perfil/1-Pedro-DonCorlione');
+        $config["base_url"] 	= site_url('usuario/perfil/' . $idUsuario . '-' . $nombre . '-' . $apellido);
         $config["total_rows"]   = $totalRows;       
         $config["per_page"] 	= $cantidadLimit;
         $config["uri_segment"]  = 4;
@@ -843,15 +842,15 @@ class Usuario extends CI_controller{
 				
 				if($servicios[$servicio]['foto'] == "" || $servicios[$servicio]['foto'] == null)
 				{
-					$servicios[$servicio]['foto_path'] = 'assets/images/servicio_200.jpg';
+					$servicios[$servicio]['foto_path'] = site_url('assets/images/servicio_125.jpg');
 				}
-				else if(file_exists('./assets/images/usuarios/' . $servicios[$servicio]['foto']))
+				else if(file_exists('./assets/images/servicios/' . agregar_nombre_archivo($servicios[$servicio]['foto'], '_125')))
 				{
-					$servicios[$servicio]['foto_path'] = path_archivos('assets/images/servicios/', $servicios[$servicio]['foto']);
+					$servicios[$servicio]['foto_path'] = site_url(path_archivos('assets/images/servicios/', agregar_nombre_archivo($servicios[$servicio]['foto'], '_125')));
 				}
 				else
 				{
-					$servicios[$servicio]['foto_path'] = 'assets/images/servicio_200.jpg';
+					$servicios[$servicio]['foto_path'] = site_url('assets/images/servicio_125.jpg');
 				}
 			}
 			$data['servicios'] = $servicios;

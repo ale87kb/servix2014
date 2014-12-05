@@ -166,7 +166,7 @@ Class Servicios_model extends CI_Model{
 
 
 	public function unsetServicio($id_servicio){
-		$query = "DELETE FROM `servicios` WHERE  `id`=$id_servicio LIMIT 1;";
+		$query = "DELETE FROM servicios WHERE  id = $id_servicio LIMIT 1;";
 		$rs    = $this->db->query($query);
 		return $rs;
 	}
@@ -280,6 +280,18 @@ Class Servicios_model extends CI_Model{
 
 	}
 
+	public function getServicioFoto($idServicio){
+		$query = "SELECT
+				servicios.foto
+				FROM
+				servicios
+				WHERE
+					servicios.id = $idServicio
+				LIMIT 1";
+		$rs = $this->db->query($query);
+		return $rs->row()->foto;
+	}
+
 	public function updateServicio($post){
 		/*
 		Array
@@ -299,18 +311,18 @@ Class Servicios_model extends CI_Model{
 		    $post['imagen'] => 76ced2891a8050ca5c7bdcbc12c9fb5ca_srx.jpeg
 		)
 		*/
-		$query = "	UPDATE `servicios` SET
-		    `id_categorias`=".$post['categoria'].",
-			`id_localidades`=".$post['localidad'].",
-			`titulo`='".$post['titulo']."',
-			`foto`='".$post['imagen']."',
-			`url_web`='".$post['sitioweb']."',
-			`direccion`='".$post['direccion']."',
-			`telefono`='".$post['telefono']."',
-			`latitud`='".$post['lati']."',
-			`longitud`='".$post['long']."' 
+		$query = "UPDATE servicios SET
+		    id_categorias = ".$post['categoria'].",
+			id_localidades = ".$post['localidad'].",
+			titulo = '".$post['titulo']."',
+			foto = '".$post['imagen']."',
+			url_web = '".$post['sitioweb']."',
+			direccion = '".$post['direccion']."',
+			telefono = '".$post['telefono']."',
+			latitud = '".$post['lati']."',
+			longitud = '".$post['long']."' 
 			WHERE  
-			`id`=".$post['id_servicio']." 
+			id = ".$post['id_servicio']." 
 			LIMIT 1;";
 
 			$rs    = $this->db->query($query);

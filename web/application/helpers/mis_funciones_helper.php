@@ -81,11 +81,14 @@ function path_archivos($path, $archivo)
 
 function agregar_nombre_archivo($archivo, $agregado)
 {
-	$nuevo_nombre = "";
+	$nuevo_nombre = "imposibleencontrararchivo.jpg";
 	if(!$archivo == ''){
 		$ext = explode('.',$archivo);
-		$extension = $ext[1];
-		@$nuevo_nombre = $ext[0] . $agregado . '.' . $extension;
+        if(count($ext)>1)
+        {
+		  $extension = $ext[1];
+		  @$nuevo_nombre = $ext[0] . $agregado . '.' . $extension;
+        }
 	}
 	return $nuevo_nombre;
 }

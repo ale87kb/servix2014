@@ -14,7 +14,7 @@
   <div class="row">
     <div class="col-md-12 blogShort">
       <figure>
-        <img src="<?php echo site_url($fav['foto_path']); ?>" alt="<?php echo ucfirst($fav['titulo']); ?>" class="pull-left img-responsive thumb margin10 img-thumbnail">
+        <img src="<?php echo $fav['foto_path']; ?>" alt="<?php echo ucfirst($fav['titulo']); ?>" class="pull-left img-responsive">
       </figure>
       <h3><a href="<?php echo site_url($fav['link']); ?>"><?php echo ucfirst($fav['titulo']); ?></a></h3>
         <p class="pull-right">

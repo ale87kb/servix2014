@@ -8,7 +8,7 @@
 		 	<div class="col-md-3">
 		 		<div class="row text-center">
 		 			<figure>
-						<img src="<?php echo site_url($perfil['foto_path']); ?>" class="img-rounded" alt="Foto de Perfil">
+						<img src="<?php echo $perfil['foto_path']; ?>" alt="Foto de Perfil" width="125" />
                     </figure>
                 </div>
 		 	</div>
@@ -48,7 +48,9 @@
                 <div class="col-md-12">
                     <div class="col-md-2">
                         <figure>
-                            <a href="<?php echo $servicio['link_servicio']; ?>"><img class="media-object img-rounded img-responsive" src="<?php echo site_url($servicio['foto_path']); ?>" alt="Foto <?php echo $servicio['titulo']; ?>" ></a>
+                            <a href="<?php echo $servicio['link_servicio']; ?>">
+                                <img class="media-object img-responsive" src="<?php echo $servicio['foto_path']; ?>" alt="Foto <?php echo $servicio['titulo']; ?>" width="125" />
+                            </a>
                         </figure>
                     </div>
                     <div class="col-md-7">

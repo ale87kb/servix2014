@@ -5,7 +5,7 @@
 
 		<div class="media">
 			<a class="media-left" href="#">
-		        <img data-src="holder.js/64x64" alt="Foto de perfil" src="<?php echo site_url($solicitado['foto_path']); ?>" data-holder-rendered="true" style="width: 100px; height: 100px;">
+		        <img alt="Foto de perfil" src="<?php echo $solicitado['foto_path']; ?>" data-holder-rendered="true" width="125" />
 			</a>
 			<div class="media-body">
 				<div class="col-md-12">
@@ -94,7 +94,7 @@
 				<div class="col-md-3 box-postulaciones">
 			   	   	<div class="media">
 						<span class="media-left" href="">
-					        <img data-src="holder.js/64x64" alt="Foto de perfil" src="<?php echo site_url($value['foto_path']); ?>" data-holder-rendered="true" style="width: 60px; height: 60px;">
+					        <img alt="Foto de perfil" src="<?php echo $value['foto_path']; ?>" data-holder-rendered="true" width="60">
 						</span>
 						<div class="media-body">
 							<h4 class="media-heading">

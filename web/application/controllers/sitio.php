@@ -29,6 +29,22 @@ class sitio extends CI_Controller {
 		// print_d($this->db->last_query());
 		if(!empty($destacados))
 		{
+			foreach ($destacados as $key => $value)
+			{
+				$destacados[$key]['link'] = generarLinkServicio($destacados[$key]['id'],$destacados[$key]['titulo']);
+				if($destacados[$key]['foto'] == "" || $destacados[$key]['foto'] == null)
+				{
+					$destacados[$key]['foto_path'] = site_url('assets/images/servicio_125.jpg');
+				}
+				else if(file_exists('./assets/images/servicios/' . agregar_nombre_archivo($destacados[$key]['foto'], '')))
+				{
+					$destacados[$key]['foto_path'] = site_url(path_archivos('assets/images/servicios/', agregar_nombre_archivo($destacados[$key]['foto'], '')));
+				}
+				else 
+				{
+					$destacados[$key]['foto_path'] = site_url('assets/images/servicio_125.jpg');
+				}
+			}
 			$data['destacados'] = $destacados;
 		}
 		else
@@ -341,39 +357,66 @@ class sitio extends CI_Controller {
 	
 
 	private function _fileUpload($files){
-		if($files['fotoServicio']['name']!=""){
-		$this->load->library('upload');
-		$sizeFoto  = $files['fotoServicio']['size'];
-		$this->load->helper('inflector');
+		if($files['fotoServicio']['name']!="")
+		{
+			$this->load->library('upload');
+			$sizeFoto  = $files['fotoServicio']['size'];
+			$this->load->helper('inflector');
 
-		$config['upload_path'] 	 = './assets/images/servicios/'; 
-		$config['allowed_types'] = 'jpg|jpeg|png'; 
-		$config['max_size'] 	 = '2097152';   
-		$config['encrypt_name']  = '768';
-		$config['overwrite'] 	 = FALSE; 
-		$this->upload->initialize($config);
+			$config['upload_path'] 	 = './assets/images/servicios/'; 
+			$config['allowed_types'] = 'jpg|jpeg|png'; 
+			$config['max_size'] 	 = '2097152';   
+			$config['encrypt_name']  = '768';
+			$config['overwrite'] 	 = FALSE; 
+			$this->upload->initialize($config);
 
-		if( ! $this->upload->do_upload("fotoServicio")){
-			$mjs = array('error' => 1 , 'mensaje_e' => $this->upload->display_errors() );
-		    return $mjs;
-		}else{
+			if( ! $this->upload->do_upload("fotoServicio"))
+			{
+				$mjs = array('error' => 1 , 'mensaje_e' => $this->upload->display_errors() );
+			    return $mjs;
+			}
+			else
+			{
+				$data 			= $this->upload->data();
 
-			$data 			= $this->upload->data();
-		    $size_thumb		= 300;
-		    $thumbNombre	= '';
-		    $img_thumb_path = path_archivos('assets/images/servicios/', agregar_nombre_archivo($data['file_name'], $thumbNombre));
-	
-		    $this->_generarThumbnail($data, $size_thumb, $img_thumb_path,'_srx');
-		     @unlink($img_thumb_path);
-		     $mjs = array('error' => 0 , 'file_name' => agregar_nombre_archivo($data['file_name'], '_srx') );
-		     return $mjs;
+				//GENERAR DE 200 Y DE 125
+			    $size_thumb		= 200;
+			    $thumbNombre	= '_srx_200';
+			    $img_200_path = path_archivos('assets/images/servicios/', agregar_nombre_archivo($data['file_name'], $thumbNombre));
+			    $this->load->library('image_lib');
+    			$this->image_lib->initialize(generarThumbnail($data, $size_thumb, $img_200_path, $thumbNombre));
+    			$this->image_lib->resize();
+	            $this->image_lib->initialize(generarThumbnailCuadrado($data, $size_thumb, $img_200_path, $thumbNombre));
+				$this->image_lib->crop();
 
-		}
+				$size_thumb		= 125;
+			    $thumbNombre	= '_srx_125';
+			    $img_125_path = path_archivos('assets/images/servicios/', agregar_nombre_archivo($data['file_name'], $thumbNombre));
+			    $this->load->library('image_lib');
+    			$this->image_lib->initialize(generarThumbnail($data, $size_thumb, $img_125_path, $thumbNombre));
+    			$this->image_lib->resize();
+	            $this->image_lib->initialize(generarThumbnailCuadrado($data, $size_thumb, $img_125_path, $thumbNombre));
+				$this->image_lib->crop();
 
+/*				$data 			= $this->upload->data();*/
+			    $size_thumb		= 300;
+			    $thumbNombre	= '_srx';
+			    $img_thumb_path = path_archivos('assets/images/servicios/', agregar_nombre_archivo($data['file_name'], $thumbNombre));
+				/*$this->_generarThumbnail($data, $size_thumb, $img_thumb_path,'_srx');*/
+			 	$this->load->library('image_lib');
+    			$this->image_lib->initialize(generarThumbnail($data, $size_thumb, $img_thumb_path, $thumbNombre));
+    			$this->image_lib->resize();
+
+
+
+				@unlink($data['full_path']);
+				$mjs = array('error' => 0 , 'file_name' => agregar_nombre_archivo($data['file_name'], '_srx') );
+				return $mjs;
+			}
 		}
 	}
 
-
+/*
 	private function _generarThumbnail($file, $size, $img_path, $thumbNombre)
 	{
 	 	$img_thumb = $img_path;
@@ -455,7 +498,7 @@ class sitio extends CI_Controller {
 
 	    $this->image_lib->crop();
 	}
-
+*/
 	private function _checkCategoria($cat){
 		if(isset($cat)){
 
@@ -535,28 +578,29 @@ class sitio extends CI_Controller {
 
 	public function validar_ofrecer_servicio(){
 		$seccion = $this->input->post('seccion');
-		if($this->UsuarioSession){
+		if($this->UsuarioSession)
+		{
 	
-		//******Validacion form*********//
-		$this->form_validation->set_rules('titulo', 'titulo', 'trim|required|min_length[3]|max_length[40]|xss_clean');
+			//******Validacion form*********//
+			$this->form_validation->set_rules('titulo', 'titulo', 'trim|required|min_length[3]|max_length[40]|xss_clean');
 
-		$this->form_validation->set_rules('categoria', 'categoria', 'trim|required|min_length[5]|max_length[40]|xss_clean');
+			$this->form_validation->set_rules('categoria', 'categoria', 'trim|required|min_length[5]|max_length[40]|xss_clean');
 
-		$this->form_validation->set_rules('telefono', 'telefono', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('telefono', 'telefono', 'trim|required|xss_clean');
 
-		$this->form_validation->set_rules('sitioweb', 'sitioweb', 'trim|xss_clean');
+			$this->form_validation->set_rules('sitioweb', 'sitioweb', 'trim|xss_clean');
 
-		$this->form_validation->set_rules('descripcion', 'descripcion', 'trim|required|min_length[10]|max_length[800]|xss_clean');
+			$this->form_validation->set_rules('descripcion', 'descripcion', 'trim|required|min_length[10]|max_length[800]|xss_clean');
 
-		$this->form_validation->set_rules('localidad', 'localidad', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('localidad', 'localidad', 'trim|required|xss_clean');
 
-		$this->form_validation->set_rules('direccion', 'direccion', 'trim|xss_clean');
+			$this->form_validation->set_rules('direccion', 'direccion', 'trim|xss_clean');
 
-			//si carga un archivo lo valido y si esta todo bien lo subo, con un resize y borro la original
-		$files = $this->_fileUpload($_FILES);
-		//******fin form*********//
+				//si carga un archivo lo valido y si esta todo bien lo subo, con un resize y borro la original
+			$files = $this->_fileUpload($_FILES);
+			//******fin form*********//
 
-		// print_d($files);
+			// print_d($files);
 
 			// si algo de los inputs falla mando errores a la vista
 			// y configuro una variable flashdata para mantener las post Vars
@@ -577,7 +621,8 @@ class sitio extends CI_Controller {
 
 				redirect($_SERVER['HTTP_REFERER']);
 			}
-			else if($files['error']){
+			else if($files['error'])
+			{
 			//si el archivo que esta subiendo no cumple con los requisitos minimos devuelvo el error en la vista en la pagina 2 del formulario y seteo las vars post en una var flash
 
 			
@@ -586,42 +631,64 @@ class sitio extends CI_Controller {
 
 				redirect($_SERVER['HTTP_REFERER']."#paso_2");
 
-			}else
+			}
+			else
 			{	
 				$post = $this->input->post();
 				$post['imagen'] = $files['file_name'];
+
+				/*
+				FALTA GENERAR LOS THUMBNAILS DEL SERVICIO
+
+				*/
 
 				//si esta todo bien chequeo la categoria, si existe en la db , o si se asigna a la categoria de otros y se graba en la tabla de cats_no_db
 				$categoria = $this->_checkCategoria( $this->input->post('categoria') );
 				$post['categoria'] = $categoria;
 
 				//ahora guardo los datos del servicio en la db
-				if($seccion == 'publicar-servicio'){
+				if($seccion == 'publicar-servicio')
+				{
 					$rs = $this->servicios_model->setServicio($post);
 					$this->servix_model->setRelacionUS($this->UsuarioSession['id'],$rs);
 
-					if($rs){
+					if($rs)
+					{
 						//todo bien
 						redirect('ofrecer-servicio/msj/registro_ok');
-					}else{
+					}
+					else
+					{
 						//error en db
 						redirect('ofrecer-servicio/msj/registro_e');
 					}
-				}else if($seccion == 'editar-servicio'){
-
-					if(empty($post['imagen'])){
+				}
+				else if($seccion == 'editar-servicio')
+				{
+					if(empty($post['imagen']))
+					{
 						$post['imagen'] = $post['foto'];
-					}else{
+					}
+					else
+					{
 						$img_thumb_path = path_archivos('assets/images/servicios/', agregar_nombre_archivo($post['foto'],''));
 						@unlink($img_thumb_path);
+						$img_thumb_path = path_archivos('assets/images/servicios/', agregar_nombre_archivo($post['foto'],'_200'));
+						@unlink($img_thumb_path);
+						$img_thumb_path = path_archivos('assets/images/servicios/', agregar_nombre_archivo($post['foto'],'_125'));
+						@unlink($img_thumb_path);
 					}
+
 					$rs = $this->servicios_model->updateServicio($post);
 
-					if($rs){
+					if($rs)
+					{
 						//todo bien
 						//redirect('ofrecer-servicio/msj/registro_ok');
 						echo "todo bien";
-					}else{
+					}
+					else
+					{
 						//error en db
 						//redirect('ofrecer-servicio/msj/registro_e');
 						echo "ups error";
@@ -630,7 +697,6 @@ class sitio extends CI_Controller {
 				}
 			}
 		}
-		
 	}
 
 
@@ -1003,15 +1069,15 @@ class sitio extends CI_Controller {
 
 				if($solicitado[0]['foto'] == "" || $solicitado[0]['foto'] == null)
 				{
-					$solicitado[0]['foto_path'] = 'assets/images/perfil_200.png';
+					$solicitado[0]['foto_path'] = site_url('assets/images/perfil_125.jpg');
 				}
-				else if(file_exists('./assets/images/usuarios/' . $solicitado[0]['foto']))
+				else if(file_exists('./assets/images/usuarios/' . agregar_nombre_archivo($solicitado[0]['foto'], '_125')))
 				{
-					$solicitado[0]['foto_path'] = path_archivos('assets/images/usuarios/', agregar_nombre_archivo($solicitado[0]['foto'], '_thumb'));
+					$solicitado[0]['foto_path'] = site_url(path_archivos('assets/images/usuarios/', agregar_nombre_archivo($solicitado[0]['foto'], '_125')));
 				}
 				else 
 				{
-					$solicitado[0]['foto_path'] = 'assets/images/perfil_200.png';
+					$solicitado[0]['foto_path'] = 'assets/images/perfil_125.jpg';
 				}
 			}
 
@@ -1022,15 +1088,15 @@ class sitio extends CI_Controller {
 					$userPostulados[$postulado]['link_user'] = site_url('usuario/perfil/'.$userPostulados[$postulado]['id'].'-'.$userPostulados[$postulado]['nombre'].'-'.$userPostulados[$postulado]['apellido']);
 					if($userPostulados[$postulado]['foto'] == "" || $userPostulados[$postulado]['foto'] == null)
 					{
-						$userPostulados[$postulado]['foto_path'] = 'assets/images/perfil_200.png';
+						$userPostulados[$postulado]['foto_path'] = site_url('assets/images/perfil_60.jpg');
 					}
-					else if(file_exists('./assets/images/usuarios/' . $userPostulados[$postulado]['foto']))
+					else if(file_exists('./assets/images/usuarios/' . agregar_nombre_archivo($userPostulados[$postulado]['foto'], '_60')))
 					{
-						$userPostulados[$postulado]['foto_path'] = path_archivos('assets/images/usuarios/', agregar_nombre_archivo($userPostulados[$postulado]['foto'], '_thumb'));
+						$userPostulados[$postulado]['foto_path'] = site_url(path_archivos('assets/images/usuarios/', agregar_nombre_archivo($userPostulados[$postulado]['foto'], '_60')));
 					}
 					else 
 					{
-						$userPostulados[$postulado]['foto_path'] = 'assets/images/perfil_200.png';
+						$userPostulados[$postulado]['foto_path'] = site_url('assets/images/perfil_60.jpg');
 					}
 				}
 			}
@@ -1214,19 +1280,42 @@ class sitio extends CI_Controller {
 
 	public function unset_servicio(){
 
-		if( $this->UsuarioSession){
+		if($this->UsuarioSession)
+		{
 			$post = $this->input->post();
-			if(isset($post)){
-			
-				$id_servicio	  = $this->input->post('id_servicio');
+			if(isset($post))
+			{
+				$id_servicio = $this->input->post('id_servicio');
+				$fotoServicio = $this->servicios_model->getServicioFoto($id_servicio);
+
+				if(file_exists('./assets/images/servicios/' . agregar_nombre_archivo($fotoServicio, '')))
+				{
+					$imgPaht = path_archivos('assets/images/servicios/', agregar_nombre_archivo($fotoServicio,''));
+					@unlink($imgPaht);
+				}
+				if(file_exists('./assets/images/servicios/' . agregar_nombre_archivo($fotoServicio, '_125')))
+				{
+					$imgPaht = path_archivos('assets/images/servicios/', agregar_nombre_archivo($fotoServicio,'_125'));
+					@unlink($imgPaht);
+				}
+				if(file_exists('./assets/images/servicios/' . agregar_nombre_archivo($fotoServicio, '_200')))
+				{
+					$imgPaht = path_archivos('assets/images/servicios/', agregar_nombre_archivo($fotoServicio,'_200'));
+					@unlink($imgPaht);
+				}
 				$rs = $this->servicios_model->unsetServicio($id_servicio);
-				if($rs){
+				if($rs)
+				{
 					redirect($_SERVER['HTTP_REFERER']);
 				}
-			}else{
+			}
+			else
+			{
 				return false;
 			}
-		}else{
+		}
+		else
+		{
 			return false;
 		}
 
@@ -1312,9 +1401,9 @@ class sitio extends CI_Controller {
 				    {
 				    	$data['foto_path'] = 'assets/images/servicio_200.jpg';
 				    }
-				    else if(file_exists('./assets/images/servicios/' . $servicioRS[0]['foto']))
+				    else if(file_exists('./assets/images/servicios/' . agregar_nombre_archivo($servicioRS[0]['foto'], '_200')))
 				    {
-				    	$data['foto_path'] = path_archivos('assets/images/servicios/', agregar_nombre_archivo($servicioRS[0]['foto'], ''));
+				    	$data['foto_path'] = path_archivos('assets/images/servicios/', agregar_nombre_archivo($servicioRS[0]['foto'], '_200'));
 				    }
 				    else 
 				    {
