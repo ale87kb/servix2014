@@ -29,6 +29,23 @@ Class Usuarios_model extends CI_Model{
 	}
 
 
+	public function _loginFB(){
+		$user = $this->facebook->getUser();
+        if ($user)
+        {
+            $data['logout_url'] = site_url('logout'); 
+        }
+        else
+        {
+            $data['login_url'] = $this->facebook->getLoginUrl(array(
+                'redirect_uri' => site_url('login/verificacion-login-fb'), 
+                'scope' => array("email") // permissions here
+            ));
+        }
+        return $data;
+	}
+
+
 	public function getUser($usuario){
 		//Verifica que el usuario y el email sean 
 		//correspondientes entre si, para corroborar el login

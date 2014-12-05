@@ -9,26 +9,12 @@ class sitio extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->UsuarioSession = $this->usuarios_model->isLogin();
-		$this->loginFb = $this->_loginFB();
+		$this->loginFb = $this->usuarios_model->_loginFB();
 	}
 	
 	
 	
-	private function _loginFB(){
-		$user = $this->facebook->getUser();
-        if ($user)
-        {
-            $data['logout_url'] = site_url('logout'); 
-        }
-        else
-        {
-            $data['login_url'] = $this->facebook->getLoginUrl(array(
-                'redirect_uri' => site_url('login/verificacion-login-fb'), 
-                'scope' => array("email") // permissions here
-            ));
-        }
-        return $data;
-	}
+	
 
 	public function index(){
 		

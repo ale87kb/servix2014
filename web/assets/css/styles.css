@@ -78,7 +78,28 @@ a.list-group-item {
 .footer-servix .navbar-text{
     color: #fff;
 }
+.footer-servix .nav.navbar-nav.navbar-right  li {
+    border-right: solid 1px #fff;
 
+}
+.footer-servix .nav.navbar-nav.navbar-right li:last-child{
+    border-right: none;
+}
+.footer-servix .nav.navbar-nav.navbar-right  li a{
+color:#fff;
+font-size: 12px;
+}
+.footer-servix .nav.navbar-nav.navbar-right  li a:hover{
+background: #0db4d0; /* Old browsers */
+background: -moz-linear-gradient(top,  #0db4d0 0%, #5dc9e5 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#0db4d0), color-stop(100%,#5dc9e5)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #0db4d0 0%,#5dc9e5 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #0db4d0 0%,#5dc9e5 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #0db4d0 0%,#5dc9e5 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #0db4d0 0%,#5dc9e5 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0db4d0', endColorstr='#5dc9e5',GradientType=0 ); /* IE6-9 */
+
+}
 .ficha h1{
     margin-bottom: 40px;
 }

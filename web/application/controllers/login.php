@@ -520,7 +520,7 @@ class Login extends CI_Controller {
 	        $fromemail          = MAIL_NO_RESPONDER; // desde
 	        $toemail            = $perfil['usuario']; //para
 	        $mail               = null;
-	        $subject            = "Gracias por iniciar session en Servix";
+	        $subject            = "Gracias por iniciar sesi&oacute;n en Servix";
 
 	        
 	        $this->email->initialize($config);
@@ -723,7 +723,7 @@ class Login extends CI_Controller {
 	   }else{
 			// $this->output->set_header('refresh:5; url='.site_url('')); 
 	   		echo "<meta http-equiv='refresh' content='5; url=".site_url()."'>";
-		   	echo "ups.. tenemos un problema, no hemos podido iniciar session";
+		   	echo "ups.. tenemos un problema, no hemos podido iniciar sesi&oacute;n";
 	   }
 	}
 

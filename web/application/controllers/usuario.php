@@ -8,6 +8,7 @@ class Usuario extends CI_controller{
 		parent::__construct();
 		$data['title'] = 'Servix';
 		$this->UsuarioSession = $this->usuarios_model->isLogin();
+		$this->loginFb = $this->usuarios_model->_loginFB();
 	}
 
 
@@ -758,6 +759,7 @@ class Usuario extends CI_controller{
 
 
 	public function perfil_usuario($usuario = null){
+		$data['loginFb'] = $this->loginFb;
 		if($this->UsuarioSession)
 		{
 			$data['usuarioSession'] = $this->UsuarioSession;

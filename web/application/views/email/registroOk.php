@@ -48,7 +48,7 @@
 						<p class="lead">Haz iniciado sesion en Servix con facebook, y nos hemos tomado la libertad de registrarte en nustro sitio. <br> Te generamos una  cuenta con los siguientes datos de ingreso
 						</p>
 						<p class="callout">
-							Usuario: <?php echo $email; ?><br>
+							Usuario: <?php echo $usuario; ?><br>
 							Clave: <strong><?php echo $pass; ?></strong>
 						</p><!-- /Callout Panel -->	
 						<p>Puedes cambiar la clave a travez del perfil de usuario en editar perfil</p>

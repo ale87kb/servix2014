@@ -1,21 +1,21 @@
 
 	<div class="navbar navbar-default navbar-static-bottom footer-servix">
 	  <div class="container">
-      <div class="col-md-12 navbar-text">
-          <ul class="list-inline">
+       <div class="navbar-header">
+          
+           <span class="navbar-text">      &copy; <?php echo APP_NAME; ?> 2014. Todos los derechos reservados.      </span> 
+        </div>
+          <ul class="nav navbar-nav navbar-right ">
             <li><a href="<?php echo site_url('preguntas-frecuentes');?>">Preguntas frecuentes</a></li>
-            <li>|</li>
+           
             <li><a href="<?php echo site_url('condiciones-de-uso');?>">Condiciones de Uso</a></li>
-            <li>|</li>
+        
             <li><a href="<?php echo site_url('politica-de-uso-de-datos');?>">Politica de uso de datos</a></li>
-            <li>|</li>
+            
             <li><a href="<?php echo site_url('politica-de-cookies');?>">Politica de Cookies</a></li>
 
           </ul>
-      </div>
-	    <span class="navbar-text">
-	    &copy; <?php echo APP_NAME; ?> 2014. Todos los derechos reservados.
-	    </span>
+	  
 	  </div>
 	</div>
 
