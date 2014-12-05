@@ -1,7 +1,7 @@
 <ul class="nav navbar-nav navbar-right">
   <li class="dropdown">
     <a href="#" rel="nofollow" class="dropdown-toggle" data-toggle="dropdown">
-      <?php echo $usuarioSession['nombre'];?>
+      <?php echo ucfirst( $usuarioSession['nombre']);?>
       <b class="caret"></b>
     </a>
     <ul class="dropdown-menu" role="menu">

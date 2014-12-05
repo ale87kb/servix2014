@@ -1,8 +1,8 @@
-<section class="bg-gray" id="secCat">
+<section class="bg-lightblue" id="secCat">
 <div class="container ">
 	<div class="row">
 		<div class="col-md-12">
-			<h3>Categorias</h3>
+			<h3>CATEGORIAS</h3>
 			<?php 
 			$groups = ceil(count($categorias)/4);
 			$categorias = (array_chunk($categorias,$groups ,true));

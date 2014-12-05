@@ -38,7 +38,7 @@ Class Servicios_model extends CI_Model{
 				INNER JOIN provincias ON localidades.id_provincia = provincias.id
 				GROUP BY servicios.id
 				ORDER BY cantPuntos DESC
-				LIMIT 5";
+				LIMIT 6";
 
 
 		$rs = $this->db->query($query)->result_array();

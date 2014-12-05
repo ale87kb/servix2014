@@ -18,7 +18,7 @@
                 </div>
               </div>
               <div class="col-md-2 col-xs-12">
-                <button type="submit" class="btn btn-success btn-lg btn-block">Buscar</button>
+                <button type="submit" class="btn btn-danger bg-red-degrade btn-lg btn-block">Buscar</button>
               </div>
             </div>
           </form>
@@ -30,13 +30,13 @@
         if(isset($usuarioSession))
         {
         ?>
-          <a href="<?php echo site_url('solicitar-servicio'); ?>" class="btn btn-warning">Click Aquí</a>
+          <a href="<?php echo site_url('solicitar-servicio'); ?>" class="btn btn-warning bg-orange">Click Aquí</a>
         <?php
         }
         else
         {
         ?>
-          <a data-toggle="modal" href="#loginModal" data-target="#loginModal" rel="" class="btn btn-warning gobusquedaTemp">Click Aquí</a>
+          <a data-toggle="modal" href="#loginModal" data-target="#loginModal" rel="" class="btn btn-warning  bg-orange gobusquedaTemp">Click Aquí</a>
         <?php
         }
         ?>
@@ -48,13 +48,13 @@
         if(isset($usuarioSession))
         {
         ?>
-          <a href="<?php echo site_url('ofrecer-servicio'); ?>" class="btn btn-warning">Click Aquí</a>
+          <a href="<?php echo site_url('ofrecer-servicio'); ?>" class="btn btn-warning bg-orange">Click Aquí</a>
         <?php
         }
         else
         {
         ?>
-          <a data-toggle="modal" href="#loginModal" data-target="#loginModal" rel="" class="btn btn-warning goOfrecerServicio">Click Aquí</a>
+          <a data-toggle="modal" href="#loginModal" data-target="#loginModal" rel="" class="btn btn-warning  bg-orange goOfrecerServicio">Click Aquí</a>
         <?php
         }
         ?>
