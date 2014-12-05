@@ -680,7 +680,7 @@ class Login extends CI_Controller {
 
 	public function verificar_login_fb(){
 		$user = $this->facebook->getUser();
-        
+        $data = null;
         if ($user) {
             try {
                 $data['user_profile'] = $this->facebook->api('/me');
@@ -700,11 +700,13 @@ class Login extends CI_Controller {
 	       if($resultemail === FALSE){
 	       		$registro = $this->_login_registro_fb($data['user_profile']);
 	       		if($registro){
+	       			echo "<meta http-equiv='refresh' content='5; url=".site_url()."'>";
 	       			echo "Bienvenido a Servix, espere unos segundos y sera redireccionado";
-	       			$this->output->set_header('refresh:3; url='.site_url()); 
+	       			// $this->output->set_header('refresh:3; url='.site_url()); 
 	       		}else{
+	       			echo "<meta http-equiv='refresh' content='5; url=".site_url()."'>";
 	       			echo "ups.. tenemos un problema";
-	       			$this->output->set_header('refresh:3; url='.site_url()); 
+	       			// $this->output->set_header('refresh:3; url='.site_url()); 
 	       		}
 
 	       }else{
@@ -713,13 +715,15 @@ class Login extends CI_Controller {
 	       				$this->_setDataSession($result);
 	   					redirect('','refresh');
 	       			}else{
+	       				echo "<meta http-equiv='refresh' content='5; url=".site_url()."'>";
 						echo "ups.. tenemos un problema";
-	       				$this->output->set_header('refresh:3; url='.site_url());        				
+	       				// $this->output->set_header('refresh:3; url='.site_url());        				
 	       			}
 	       }
 	   }else{
+			// $this->output->set_header('refresh:5; url='.site_url('')); 
+	   		echo "<meta http-equiv='refresh' content='5; url=".site_url()."'>";
 		   	echo "ups.. tenemos un problema, no hemos podido iniciar session";
-			$this->output->set_header('refresh:5; url='.site_url()); 
 	   }
 	}
 
