@@ -149,8 +149,8 @@ class Login extends CI_Controller {
 				$nuevoUsuario['ultima_edicion'] 	= $fecha;
 				$nuevoUsuario['usuario'] 			= $this->input->post('usuario', TRUE);
 				$nuevoUsuario['clave'] 				= $this->input->post('clave', TRUE);
-				$nuevoUsuario['nombre'] 			= $this->input->post('nombre', TRUE);
-				$nuevoUsuario['apellido'] 			= $this->input->post('apellido');
+				$nuevoUsuario['nombre'] 			= addslashes($this->input->post('nombre', TRUE));
+				$nuevoUsuario['apellido'] 			= addslashes($this->input->post('apellido'));
 				$nuevoUsuario['telefono'] 			= $this->input->post('telefono', TRUE);
 				$nuevoUsuario['direccion'] 			= $this->input->post('direccion', TRUE);
 				$nuevoUsuario['codigo'] 			= $this->_generarCodigo();
@@ -240,8 +240,8 @@ class Login extends CI_Controller {
 				$nuevoUsuario['ultima_edicion'] 	= $fecha;
 				$nuevoUsuario['usuario'] 			= $this->input->post('usuario', TRUE);
 				$nuevoUsuario['clave'] 				= $this->input->post('clave', TRUE);
-				$nuevoUsuario['nombre'] 			= $this->input->post('nombre', TRUE);
-				$nuevoUsuario['apellido'] 			= $this->input->post('apellido');
+				$nuevoUsuario['nombre'] 			= addslashes($this->input->post('nombre', TRUE));
+				$nuevoUsuario['apellido'] 			= addslashes($this->input->post('apellido'));
 				$nuevoUsuario['telefono'] 			= $this->input->post('telefono', TRUE);
 				$nuevoUsuario['direccion'] 			= $this->input->post('direccion', TRUE);
 				$nuevoUsuario['codigo'] 			= $this->_generarCodigo();
@@ -743,8 +743,8 @@ class Login extends CI_Controller {
 		$nuevoUsuario['usuario'] 			= $perfil['email'];
 		
 		$nuevoUsuario['clave'] 				= $clave_codimd5;
-		$nuevoUsuario['nombre'] 			= $perfil['first_name'];
-		$nuevoUsuario['apellido'] 			= $perfil['last_name'];
+		$nuevoUsuario['nombre'] 			= addslashes($perfil['first_name']);
+		$nuevoUsuario['apellido'] 			= addslashes($perfil['last_name']);
 		$nuevoUsuario['telefono'] 			= '';
 		$nuevoUsuario['direccion'] 			= '';
 		$nuevoUsuario['codigo'] 			= $this->_generarCodigo();
