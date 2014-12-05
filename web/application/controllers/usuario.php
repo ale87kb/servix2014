@@ -621,9 +621,8 @@ class Usuario extends CI_controller{
 	            $this->UsuarioSession['foto'] 			= $data['file_name'];
 	            $this->UsuarioSession['foto_thumb'] 	= agregar_nombre_archivo($data['file_name'], '_125');
 	            $this->UsuarioSession['foto_path'] 		= path_archivos('assets/images/usuarios/', $data['file_name']);
-	            /**************/
-	            $this->UsuarioSession['foto_thumb_path']= $img_125_path;
-	            /**************/
+	            $this->UsuarioSession['foto_125_path']	= $img_125_path;
+	            $this->UsuarioSession['foto_60_path']	= $img_60_path;
 
 	            $this->session->set_userdata('logged_in', $this->UsuarioSession);
 	            
@@ -632,7 +631,7 @@ class Usuario extends CI_controller{
 	                $status = "success";
 	                $msg 	= "Foto actulaizada correctamente";
 	                //$file 	= site_url('assets/images/usuarios/'.$data['file_name']);
-	                $file 	= site_url($this->UsuarioSession['foto_thumb_path']);
+	                $file 	= site_url($this->UsuarioSession['foto_125_path']);
 	            }
 	            else
 	            {

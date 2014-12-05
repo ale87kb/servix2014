@@ -888,16 +888,16 @@ class Login extends CI_Controller {
 			 'apellido' 		=> $row['apellido'],
 			 'direccion'		=> $row['direccion'],
 			 'telefono' 		=> $row['telefono'],
-			 'foto'				=> $row['foto'],		//default -> assets/images/perfil_640.png
+			 'foto'				=> $row['foto'],
 			 'estado'			=> $row['estado'],
 			 'ultima_edicion'	=> $row['ultima_edicion'], 
 
-			 'foto_thumb'		=> agregar_nombre_archivo($row['foto'], '_thumb'),
 			 'foto_path'		=> path_archivos('assets/images/usuarios/', $row['foto']),
-			 'foto_thumb_path'	=> path_archivos('assets/images/usuarios/', agregar_nombre_archivo($row['foto'], '_thumb'))
+			 'foto_125_path'	=> path_archivos('assets/images/usuarios/', agregar_nombre_archivo($row['foto'], '_125')),
+			 'foto_60_path'		=> path_archivos('assets/images/usuarios/', agregar_nombre_archivo($row['foto'], '_60'))
 			);
 			
-			$sess_array = $this->_chekFotoDB($sess_array, 'assets/images/perfil_200.png', 'assets/images/perfil_125.png');
+			$sess_array = $this->_chekFotoDB($sess_array, 'assets/images/perfil_125.jpg', 'assets/images/perfil_60.jpg');
 
 			$this->session->set_userdata('logged_in', $sess_array);
 		}
@@ -905,10 +905,11 @@ class Login extends CI_Controller {
 	
 
 	//Chequea que la foto no este vacia, y si lo esta devuelve la foto por default: assets/images/perfil_640.png
-	private function _chekFotoDB($sess_array, $path ,$path_thumb){
+	private function _chekFotoDB($sess_array, $path_125, $path_60){
 		if($sess_array['foto'] == ""){
-		 	$sess_array['foto_path']		= $path;
-		 	$sess_array['foto_thumb_path']	= $path_thumb;
+		 	$sess_array['foto_path']		= $path_125;
+		 	$sess_array['foto_125_path']	= $path_125;
+		 	$sess_array['foto_60_path']		= $path_60;
 		}
 		return $sess_array;
 	}

@@ -2,7 +2,7 @@
 <div class="col-md-12">
   <div class="col-md-4 text-center">
     <figure>
-      <img alt="Foto de perfil" src="<?php echo site_url($usuarioSession['foto_thumb_path']);?>" class="img-circle" width="105">
+      <img alt="Foto de perfil" src="<?php echo site_url($usuarioSession['foto_125_path']);?>" width="125"/>
     </figure>
   </div>
   <div class="col-md-8">
