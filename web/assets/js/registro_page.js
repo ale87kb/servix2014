@@ -65,7 +65,7 @@ $('document').ready(function(){
                                 message: 'Ingrese su nombre.'
                             },
                             regexp: {
-                                regexp: /^[A-Zñáéíóú\s]+$/i,
+                                regexp: /^[A-Zñáéíóú\'\s]+$/i,
                                 message: 'El nombre puede contener solamente letras y espacios'
                             }                            
                         }
@@ -76,7 +76,7 @@ $('document').ready(function(){
                                 message: 'Ingrese su apellido.'
                             },
                             regexp: {
-                                regexp: /^[A-Zñáéíóú\s]+$/i,
+                                regexp: /^[A-Zñáéíóú\'\s]+$/i,
                                 message: 'El apellido puede contener solamente letras y espacios'
                             }                            
                         }
