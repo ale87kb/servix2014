@@ -957,7 +957,7 @@ class sitio extends CI_Controller {
 	    $config = array();
         $config["base_url"] 	= site_url($seccion);
         $config["total_rows"]   = $this->servicios_model->getTotalFilasSolicitados($semanaSolicitado);
-        $config["per_page"] 	= 4;
+        $config["per_page"] 	= 6;
         $config["uri_segment"]  = $segment;
         $this->pagination->initialize($config);
       

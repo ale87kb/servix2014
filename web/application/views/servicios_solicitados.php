@@ -10,51 +10,83 @@
         
         <?php 
         if(!empty($solicitados)){
+          $i = 0;
           foreach ($solicitados as $servicio) {
-          ?>
-          <div class="col-md-4">
-            <div class="panel panel-default">
-            <div class="panel-heading"><?php
 
-            if( $servicio['categoria'] == 'Otros'){
-                echo ucfirst( $servicio['categoria'])." (".ucfirst($servicio['otra_cat']).")";
-            }else{
-             echo ucfirst( $servicio['categoria']);
-            }
-
-              ?> en <?php echo $servicio['localidad']." ". $servicio['provincia']; ?></div>
-            <div class="panel-body">
-              <strong><small><?php echo ucfirst($servicio['nombre']) ." ".ucfirst($servicio['apellido']); ?>: </small></strong>
-              <p>
-                <?php echo recortar_texto($servicio['busqueda'],100); ?>
-
-              </p>
-              <?php
-               if(isset($current_page)){
-                 
-                ?>
-                  <a href="<?php echo site_url(generarLinkServicio($servicio['id'],$servicio['categoria']."-en-".$servicio['localidad']."-".$servicio['provincia']."/".$current_page,'servicio-solicitado')); ?> " class="btn btn-sm btn-default pull-right">Ver solicitud</a>
-                <?php
-               } else{
-                ?>
-                  <a href="<?php echo site_url(generarLinkServicio($servicio['id'],$servicio['categoria']."-en-".$servicio['localidad']."-".$servicio['provincia'],'servicio-solicitado')); ?> " class="btn btn-sm btn-default pull-right">Ver solicitud</a>
-
-                <?php
-
-               }
+            if($i == 3){
               ?>
-             
-            </div>
-            <div class="panel-footer">
-              Fecha de publicación: <?php echo date('d-m-Y' ,strtotime($servicio['fecha_ini'])); ?>
-            </div>
-          </div>
-          </div>
-                <?php
+               
+              </div>
+              <?php
+              $i = 0;
+            }
+            if($i == 0){
+              ?>
+              <div class="row">
+
+            
+
+              <?php
+            }
+            ?>
+
+            <?php
+              $i++;
+
+          ?>
+           <div class="col-md-4">
+                <div class="panel panel-default">
+                <div class="panel-heading"><strong><small><?php echo ucfirst($servicio['nombre']) ." ".ucfirst($servicio['apellido']); ?>: </small></strong></div>
+                <div class="panel-body">
+                    <h4>
+                      
+                  <?php
+
+                if( $servicio['categoria'] == 'Otros'){
+                    echo ucfirst( $servicio['categoria'])." (".ucfirst($servicio['otra_cat']).")";
+                }else{
+                 echo ucfirst( $servicio['categoria']);
+                }
+
+                  ?> en <?php echo $servicio['localidad']." ". $servicio['provincia']; ?>
+                  
+                    </h4>
+                  <p>
+                    <?php echo recortar_texto($servicio['busqueda'],100); ?>
+
+                  </p>
+                   
+                </div>
+                <div class="panel-footer">
+                <p>
+                   <span>  Fecha de publicación: <?php echo date('d-m-Y' ,strtotime($servicio['fecha_ini'])); ?></span>
+
+                   <?php
+                   if(isset($current_page)){
+                     
+                    ?>
+                      
+                      <a href="<?php echo site_url(generarLinkServicio($servicio['id'],$servicio['categoria']."-en-".$servicio['localidad']."-".$servicio['provincia']."/".$current_page,'servicio-solicitado')); ?> " class=" btn-link pull-right link-orange ">Ver solicitud</a>
+                    <?php
+                   } else{
+                    ?>
+                      <a href="<?php echo site_url(generarLinkServicio($servicio['id'],$servicio['categoria']."-en-".$servicio['localidad']."-".$servicio['provincia'],'servicio-solicitado')); ?> " class="btn-link pull-right link-orange">Ver solicitud</a>
+
+                    <?php
+
+                   }
+                  ?>
+                </p>
+                </div>
+              </div>
+              </div>
+          
+          <?php
           }
-          echo "<div id='pagSolicitados'>";
+             echo "<div id='pagSolicitados'>";
           echo $paginacion;
           echo "</div></div>";
+       
         }else{
         ?>
 

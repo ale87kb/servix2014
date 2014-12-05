@@ -1,6 +1,6 @@
 
-<div class="container">
-	<div class="col-md-7">
+<div class="container" id="main">
+	<div class="col-md-12" id="fichaSolicitado">
 		<h1>Solicitud de servicio</h1>
 
 		<div class="media">
@@ -91,7 +91,7 @@
 	    		foreach ($userPostu as $value) 
 	    		{
 			?>
-				<div class="col-md-6 box-postulaciones">
+				<div class="col-md-3 box-postulaciones">
 			   	   	<div class="media">
 						<span class="media-left" href="">
 					        <img data-src="holder.js/64x64" alt="Foto de perfil" src="<?php echo site_url($value['foto_path']); ?>" data-holder-rendered="true" style="width: 60px; height: 60px;">
@@ -164,6 +164,10 @@
 	 	 	}
 		}
       ?>
+
 	</div>
+	<div class="col-md-12"><hr></div>
+
+
 		<?php $this->load->view('servicios_solicitados'); ?>
 </div>

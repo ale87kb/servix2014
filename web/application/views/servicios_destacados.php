@@ -1,7 +1,7 @@
   <!--center-->
   <div class="col-sm-12" id="destacados">
     <h1>Servicios Destacados</h1>
-    <h4>Top 5 servicios destacados</h4>
+    <h4>Top 6 servicios destacados</h4>
             <div class="row">
     <?php 
       if(!empty($destacados)){
@@ -10,8 +10,8 @@
           ?>
 
               <div class="col-xs-4">
+                <p><img src="http://placehold.it/350x100" alt="" class="img-responsive"></p>
                 <h3><?php echo $servicio['titulo']; ?></h3>
-                <p><img src="http://placehold.it/350x100" alt=""></p>
                 <p><?php echo recortar_texto($servicio['descripcion'],250); ?></p>
                 <p class="lead text-right"><a href=" <?php echo site_url(generarLinkServicio($servicio['id'], $servicio['titulo'])); ?> " class="btn btn-warning bg-orange btn-sm">Más info</a></p>
                 <p class="text-left">
@@ -22,7 +22,7 @@
                   </p>
 
 
-                <ul class="list-inline"><li><span>Promedio </span><span class="ratyAVG" data-avg="<?php echo number_format($servicio['promedio'],2); ?>"></span> <?php echo number_format($servicio['promedio'],2); ?> Puntos,
+                <ul class="list-inline"><li><span>Promedio </span><span class="ratyAVG" data-avg="<?php echo number_format($servicio['promedio'],2); ?>"></span> <?php echo number_format($servicio['promedio'],2); ?> Puntos
                   <br>
                   <span> 
                 <?php 

@@ -23,7 +23,7 @@
             </div>
           </form>
       </div>
-      <div class="col-md-5 col-xs-12">
+      <div class="col-md-5 col-xs-6">
         <h3>Solicitá un servicio</h3>
         <small><p>¿No encontrás lo que estás buscando?</p></small>
         <?php 
@@ -41,7 +41,7 @@
         }
         ?>
       </div>
-      <div class="col-md-6 col-xs-12">
+      <div class="col-md-6 col-xs-6">
         <h3>Publicá un servicio</h3>
         <small><p>¿Querés ofrecer un servicio?</p></small>
         <?php 
