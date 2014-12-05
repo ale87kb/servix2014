@@ -6,18 +6,19 @@ class Login extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		$data['title'] = 'Servix';
-		$this->UsuarioSession = $this->usuarios_model->isLogin();
+		$data['title'] 			= 'Servix';
+		$this->UsuarioSession 	= $this->usuarios_model->isLogin();
 	}
 
 
 	public function index(){
 		//Cargar la vista del formulario de login
-		if(!$this->UsuarioSession){
+		if(!$this->UsuarioSession)
+		{
 	   		$this->load->helper(array('form'));
-			$data['title'] = 'Iniciar sesión';
-			$data['vista'] = 'login/login_form';
-			$data['js'] = array('assets/js/login_page.js');
+			$data['title'] 	= 'Iniciar sesión';
+			$data['vista'] 	= 'login/login_form';
+			$data['js'] 	= array('assets/js/login_page.js');
 			$this->load->view('login_view',$data);
 		}
 		else
@@ -43,7 +44,8 @@ class Login extends CI_Controller {
 	}
 
 	public function validar_recuperar_clave(){
-		if(isset($_POST['grabar']) and $_POST['grabar'] == 'si'){
+		if(isset($_POST['grabar']) and $_POST['grabar'] == 'si')
+		{
 			$this->load->library('form_validation');
 			$this->form_validation->set_rules('usuario', 'e-mail', 'trim|required|valid_email|xss_clean|callback_check_user_database');
 			
@@ -55,31 +57,32 @@ class Login extends CI_Controller {
 			}
 			else
 			{
-				
 				//Si el email es valido, 
 				//actualizo la fehca de la ultima edicion
 				//y genero una nueva contraseña para enviarla por email
-				$fecha = date('Y-m-d H:m:i');
+				$fecha 								= date('Y-m-d H:m:i');
 				$usuariorecupero['ultima_edicion'] 	= $fecha;
 				$usuariorecupero['usuario'] 		= $this->input->post('usuario', TRUE);
 				$usuariorecupero['clave'] 			= $this->_generaPass();
 
 				$resultadoRecuClav = $this->usuarios_model->actualizar_clave($usuariorecupero);
 
-					
 				//this->sendEmailNuevaClave($usuariorecupero);
 
-				if($resultadoRecuClav){
+				if($resultadoRecuClav)
+				{
 
 					$mailenviado = $this->sendEmailNuevaClave($usuariorecupero);
 
-					if($mailenviado){
+					if($mailenviado)
+					{
 
 						$data['mailenviado'] = 'Mensaje enviado';
 					}
 					else
 					{
-						$data['mailnoenviado'] = $this->email->print_debugger();
+						$data['mailnoenviado'] = "No se puedo enviar el e-mail";
+						log_message('error', $this->email->print_debugger());
 					}
 
 					$data['correcto'] 	= "La clave a sido actualizada";
@@ -103,7 +106,8 @@ class Login extends CI_Controller {
 
 
 	public function registrar_usuario(){
-		if(!$this->UsuarioSession){
+		if(!$this->UsuarioSession)
+		{
 			//Carga vista del formulario de registro
 			$data['title'] = 'Registrar usuario';
 			$data['vista'] = 'registro_view';
@@ -120,7 +124,8 @@ class Login extends CI_Controller {
 	public function validar_nuevo_usuario(){
 		//Valida el formulario de registro de nuevo usuario
 
-		if(isset($_POST['grabar']) and $_POST['grabar'] == 'si'){
+		if(isset($_POST['grabar']) and $_POST['grabar'] == 'si')
+		{
 
 			$this->load->library('form_validation');
 
@@ -178,7 +183,8 @@ class Login extends CI_Controller {
 					}
 					else
 					{
-						$data['mailnoenviado'] = $this->email->print_debugger();
+						$data['mailnoenviado'] = "No se pudo enviar el email";
+						log_message('error', $this->email->print_debugger());
 					}
 
 
@@ -201,8 +207,8 @@ class Login extends CI_Controller {
 	public function validar_nuevo_usuario_ajax(){
 		//Valida el formulario de registro de nuevo usuario
 
-		if(isset($_POST['grabar']) and $_POST['grabar'] == 'si'){
-
+		if(isset($_POST['grabar']) and $_POST['grabar'] == 'si')
+		{
 			$this->load->library('form_validation');
 
 			$this->form_validation->set_rules('usuario', 'e-mail', 'trim|required|valid_email|xss_clean|callback_check_user_duplicate');
@@ -268,7 +274,8 @@ class Login extends CI_Controller {
 					//Envio un mail para confirmar usuario
 					$mailenviado = $this->sendEmailConfirm($nuevoUsuario);
 					
-					if($mailenviado){
+					if($mailenviado)
+					{
 						$data['mailenviado'] 	= true;
 						$data['mailmssg'] 		= "Mensaje enviado";
 					}
@@ -317,8 +324,8 @@ class Login extends CI_Controller {
 	public function validar_editar_datos(){
 		//Valida el formulario de edicion de usuario
 
-		if(isset($_POST['grabar']) and $_POST['grabar'] == 'si'){
-
+		if(isset($_POST['grabar']) and $_POST['grabar'] == 'si')
+		{
 			$id_usuario 		= (int)$this->input->post('user');
 			$UsuarioRegistrado	= $this->usuarios_model->getUsuario($id_usuario);
 			$usuario 			= $this->input->post('usuario');
@@ -328,13 +335,14 @@ class Login extends CI_Controller {
 
 			$this->load->library('form_validation');
 
-
-			if($usuario != $UsuarioRegistrado[0]['email']){
+			if($usuario != $UsuarioRegistrado[0]['email'])
+			{
 				$this->form_validation->set_rules('usuario', 'e-mail', 'trim|required|valid_email|xss_clean|callback_check_user_duplicate');
 				$newEmail = true;
 			}
 
-			if($clave != ""){
+			if($clave != "")
+			{
 				$this->form_validation->set_rules('clave', 'contraseña', 'trim|required|xss_clean|callback_check_newPassword');
 				$this->form_validation->set_rules('nclave', 'nueva contraseña', 'trim|required|xss_clean');
 				$this->form_validation->set_rules('rclave', 'repetir nueva contraseña', 'trim|required|matches[nclave]|xss_clean');
@@ -432,11 +440,10 @@ class Login extends CI_Controller {
 						{
 							$data['envioEditClave']		= false;
 							$data['maileditclave']		= "No se pudo enviar el mensaje.";
-
+							log_message('error', $this->email->print_debugger());
 						}
 					}
 				}
-
 
 				$resultadoU = $this->usuarios_model->editar_usuario($usuarioEditado);
 
@@ -477,7 +484,6 @@ class Login extends CI_Controller {
 
 	public function registro_respuesta(){
 		$data = $this->input->post(json_decode('datos',true));
-		//print_d($data);
 		$vista = $this->load->view('login/registro_respuesta',$data['datos'],true);
 		echo $vista;
 	}
@@ -510,8 +516,8 @@ class Login extends CI_Controller {
 		
 		//$this->load->view('email/confirmEmail', $post);
 
-		if(isset($perfil)){
-
+		if(isset($perfil))
+		{
 		 	// print_d($post);
 		 	$this->load->library('email');
 		 	$config['charset'] 	= 'utf-8';
@@ -521,7 +527,6 @@ class Login extends CI_Controller {
 	        $toemail            = $perfil['usuario']; //para
 	        $mail               = null;
 	        $subject            = "Gracias por iniciar sesi&oacute;n en Servix";
-
 	        
 	        $this->email->initialize($config);
 	        $this->email->from($fromemail, APP_NAME);
@@ -537,11 +542,9 @@ class Login extends CI_Controller {
 	}
 
 	public function sendEmailConfirm($post){
-		
 		//$this->load->view('email/confirmEmail', $post);
-
-		if(isset($post)){
-
+		if(isset($post))
+		{
 		 	// print_d($post);
 		 	$this->load->library('email');
 		 	$config['charset'] 	= 'utf-8';
@@ -551,7 +554,6 @@ class Login extends CI_Controller {
 	        $toemail            = $post['usuario']; //para
 	        $mail               = null;
 	        $subject            = "Confirmación de e-mail de registro en Servix";
-
 	        
 	        $this->email->initialize($config);
 	        $this->email->from($fromemail, APP_NAME);
@@ -567,11 +569,9 @@ class Login extends CI_Controller {
 	}
 
 	public function sendEmailNuevaClave($post){
-		
 		//$this->load->view('email/recuperarClave', $post);
-
-		if(isset($post)){
-
+		if(isset($post))
+		{
 		 	// print_d($post);
 		 	$this->load->library('email');
 		 	$config['charset'] 	= 'utf-8';
@@ -581,7 +581,6 @@ class Login extends CI_Controller {
 	        $toemail            = $post['usuario']; //para
 	        $mail               = null;
 	        $subject            = "Nueva Clave en Servix";
-
 	        
 	        $this->email->initialize($config);
 	        $this->email->from($fromemail, APP_NAME);
@@ -597,11 +596,9 @@ class Login extends CI_Controller {
 	}
 
 	public function sendEmailNewConfirm($post){
-		
 		//$this->load->view('email/confirmNewEmail', $post);
-
-		if(isset($post)){
-
+		if(isset($post))
+		{
 		 	// print_d($post);
 		 	$this->load->library('email');
 		 	$config['charset'] 	= 'utf-8';
@@ -611,7 +608,6 @@ class Login extends CI_Controller {
 	        $toemail            = $post['usuario']; //para
 	        $mail               = null;
 	        $subject            = "Confirmación de nuevo e-mail de usuario en Servix";
-
 	        
 	        $this->email->initialize($config);
 	        $this->email->from($fromemail, APP_NAME);
@@ -627,11 +623,9 @@ class Login extends CI_Controller {
 	}
 
 	public function sendEmailCambioClave($post){
-		
 		//$this->load->view('email/confirmNewEmail', $post);
-
-		if(isset($post)){
-
+		if(isset($post))
+		{
 		 	// print_d($post);
 		 	$this->load->library('email');
 		 	$config['charset'] 	= 'utf-8';
@@ -642,7 +636,6 @@ class Login extends CI_Controller {
 	        $mail               = null;
 	        $subject            = "Modificación de Clave en Servix";
 
-	        
 	        $this->email->initialize($config);
 	        $this->email->from($fromemail, APP_NAME);
         	$this->email->to($toemail);
@@ -681,13 +674,16 @@ class Login extends CI_Controller {
 	public function verificar_login_fb(){
 		$user = $this->facebook->getUser();
         $data = null;
-        if ($user) {
+        if ($user)
+        {
             try {
                 $data['user_profile'] = $this->facebook->api('/me');
             } catch (FacebookApiException $e) {
                 $user = null;
             }
-        }else {
+        }
+        else
+        {
             $this->facebook->destroySession();
         }
       
@@ -695,32 +691,43 @@ class Login extends CI_Controller {
        $user  = $data['user_profile']['email'];
 
 
-       if(!empty($user)){
+       if(!empty($user))
+       {
 	       $resultemail = $this->usuarios_model->getEmail($user);
-	       if($resultemail === FALSE){
+	       if($resultemail === FALSE)
+	       {
 	       		$registro = $this->_login_registro_fb($data['user_profile']);
-	       		if($registro){
+	       		if($registro)
+	       		{
 	       			echo "<meta http-equiv='refresh' content='5; url=".site_url()."'>";
 	       			echo "Bienvenido a Servix, espere unos segundos y sera redireccionado";
 	       			// $this->output->set_header('refresh:3; url='.site_url()); 
-	       		}else{
+	       		}
+	       		else
+	       		{
 	       			echo "<meta http-equiv='refresh' content='5; url=".site_url()."'>";
 	       			echo "ups.. tenemos un problema";
 	       			// $this->output->set_header('refresh:3; url='.site_url()); 
 	       		}
-
-	       }else{
-	       			$result = $this->usuarios_model->getUser($user);
-	       			if($result){
-	       				$this->_setDataSession($result);
-	   					redirect('','refresh');
-	       			}else{
-	       				echo "<meta http-equiv='refresh' content='5; url=".site_url()."'>";
-						echo "ups.. tenemos un problema";
-	       				// $this->output->set_header('refresh:3; url='.site_url());        				
-	       			}
 	       }
-	   }else{
+	       else
+	       {
+	       		$result = $this->usuarios_model->getUser($user);
+       			if($result)
+       			{
+       				$this->_setDataSession($result);
+   					redirect('','refresh');
+       			}
+       			else
+       			{
+       				echo "<meta http-equiv='refresh' content='5; url=".site_url()."'>";
+					echo "ups.. tenemos un problema";
+       				// $this->output->set_header('refresh:3; url='.site_url());        				
+       			}
+	       }
+	   }
+	   else
+	   {
 			// $this->output->set_header('refresh:5; url='.site_url('')); 
 	   		echo "<meta http-equiv='refresh' content='5; url=".site_url()."'>";
 		   	echo "ups.. tenemos un problema, no hemos podido iniciar sesi&oacute;n";
@@ -755,23 +762,35 @@ class Login extends CI_Controller {
 		$nuevoUsuario['foto'] 				= '';
 		$nuevoUsuario['estado'] 			= 1;
 
-
 		//El estado del usuario puede ser 
 		// 0 : Registrado, email NO verificado 
 		// 1 : Registrado, email verificado
 		// 2 : Usuario dado de baja
 	
-
 		$resultAdd = $this->usuarios_model->add_usuario($nuevoUsuario);
 		$resultAdd =  true;
 
-		if($resultAdd){
+		if($resultAdd)
+		{
 			$nuevoUsuario['pass'] = $clave_original;
-			$this->sendEmailRegistroOk($nuevoUsuario);
+			$emailsend = $this->sendEmailRegistroOk($nuevoUsuario);
+			if(!$emailsend)
+			{
+				log_message('error', $this->email->print_debugger());
+			}
 			$result = $this->usuarios_model->login($nuevoUsuario['usuario'] , $clave_original);
-			$this->_setDataSession($result);
+			if($result)
+			{
+				$this->_setDataSession($result);
+			}
+			else
+			{
+				return false;
+			}
 			return true;
-		}else{
+		}
+		else
+		{
 			return false;
 		}
 	}
@@ -787,12 +806,8 @@ class Login extends CI_Controller {
 
 
 	public function validacion_login_ajax(){
-
 		//Valida el formulario de login por ajax
-
-
 		$this->load->library('form_validation');
-
 
 		$this->form_validation->set_rules('usuario', 'usuario', 'trim|required|xss_clean|valid_email|callback_check_user_database');
 		$this->form_validation->set_rules('clave', 'clave', 'trim|required|xss_clean|callback_check_password_database');
@@ -906,7 +921,8 @@ class Login extends CI_Controller {
 
 	//Chequea que la foto no este vacia, y si lo esta devuelve la foto por default: assets/images/perfil_640.png
 	private function _chekFotoDB($sess_array, $path_125, $path_60){
-		if($sess_array['foto'] == ""){
+		if($sess_array['foto'] == "")
+		{
 		 	$sess_array['foto_path']		= $path_125;
 		 	$sess_array['foto_125_path']	= $path_125;
 		 	$sess_array['foto_60_path']		= $path_60;

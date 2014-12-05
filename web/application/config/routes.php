@@ -73,7 +73,6 @@ $route['busqueda'] 											= "sitio/busqueda";
 $route['resultado-de-busqueda/(:any)-en-(:any)']  	 	  	= "sitio/resultado_busqueda/$1/$2";
 $route['resultado-de-busqueda/(:any)-en-(:any)/(:num)']   	= "sitio/resultado_busqueda/$1/$2/$3";
 
-
 $route['ficha/(:any)/opniones/page']						= "sitio/get_opiniones/$1/$2";
 $route['ficha/(:any)/opniones/page/(:num)']					= "sitio/get_opiniones/$1/$2";
 

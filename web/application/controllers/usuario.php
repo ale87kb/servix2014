@@ -519,6 +519,7 @@ class Usuario extends CI_controller{
 		}
 		echo json_encode($verificado_result);
 	}
+	
 	public function editar_datos(){
 		if($this->UsuarioSession)
 		{

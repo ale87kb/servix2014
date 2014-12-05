@@ -11,13 +11,8 @@ class sitio extends CI_Controller {
 		$this->UsuarioSession = $this->usuarios_model->isLogin();
 		$this->loginFb = $this->usuarios_model->_loginFB();
 	}
-	
-	
-	
-	
 
 	public function index(){
-		
 		if($this->UsuarioSession)
 		{
 			$data['usuarioSession'] = $this->UsuarioSession;
@@ -82,7 +77,6 @@ class sitio extends CI_Controller {
 			'assets/css/bootstrap-select.min.css',
 		);
 
-
 		$data['css'] = $this->_css;
 		$data['js'] = $this->_js;
 
@@ -97,7 +91,6 @@ class sitio extends CI_Controller {
 	}
 
 	public function comentar_servicio(){
-	
 		$usuario 		= $this->UsuarioSession;
 		$post 			= $this->input->post();
 		$id_servicio 	= $this->input->post('id_servicio');
@@ -105,26 +98,23 @@ class sitio extends CI_Controller {
 		$comentario 	= $this->input->post('comentario');
 		$validacion 	= $this->_validar_consulta($usuario);
 
-
-		if($validacion['error'] == false){
-			
+		if($validacion['error'] == false)
+		{
 			$post['nombreUsuario'] = $usuario['nombre'];
 			$post['telUsuario']    = $usuario['telefono'];
 			$post['emailUsuario']  = $usuario['email'];
 
 			$email = $this->sendContacto($post);
-			if($email){
+			if($email)
+			{
 				$this->servicios_model->setConsultaServicio($id_servicio, $id_usuario, $comentario);
 			}
 			else
 			{
 				$validacion['mensaje'] = 'No se ha podido enviar su consulta. Intente mas tarde.';
 			}
-		
 		}
-
 		echo json_encode($validacion);
-
 	}
 
 
@@ -134,27 +124,25 @@ class sitio extends CI_Controller {
 		$post 		   = $this->input->post();
 		$json 		   = $this->_validar_recomendacion();
 
-
 		$user = $this->UsuarioSession;
-		if($user){
+		if($user)
+		{
 			$userID = $user['id'];
-		}else{
+		}
+		else
+		{
 			$userID = "null";
 		}
 		
-		if(!$json['error']){
+		if(!$json['error'])
+		{
 			$this->servicios_model->setRecomendacion($userID ,$post);
 			$this->sendRecomendacion($post);
 		}
-
-		
 		echo json_encode($json);
-
-
 	}
 
 	private function _validar_recomendacion(){
-
 		$json = array();
 	 	$this->form_validation->set_rules('nombreAmigo', 'nombreAmigo', 'trim|required');
 	 	$this->form_validation->set_rules('emailAmigo', 'emailAmigo', 'trim|required|valid_email');
@@ -163,84 +151,96 @@ class sitio extends CI_Controller {
 		{
 			$json['error'] 	 = true;
 			$json['mensaje'] = "Error en la validacion del formulario";
-
 		}
 		else
 		{
 			$json['error'] 	 = false;
 			$json['mensaje'] = "Recomendación enviada con exito. Gracias por recomendar este servicio.";
 		}
-
 		return $json;
 	}
 
 	private function _validar_consulta($usuario){
-		if(!empty($usuario)){
-				$this->form_validation->set_rules('comentario', 'comentario', 'trim|required|xss_clean');
-				if($this->form_validation->run() == FALSE){
-					$comentario_result = array(
+		if(!empty($usuario))
+		{
+			$this->form_validation->set_rules('comentario', 'comentario', 'trim|required|xss_clean');
+			if($this->form_validation->run() == FALSE)
+			{
+				$comentario_result = array(
 					'error' => true,
 					'mensaje'=>'Por favor ingrese un comentario.',
-					 );		
-				}else{
-					$comentario_result = array(
+					);		
+			}
+			else
+			{
+				$comentario_result = array(
 					'error' => false,
 					'mensaje'=>'Su consulta ha sido enviado exitosamente.',
-					 );
-				}
-		}else{
+					);
+			}
+		}
+		else
+		{
 			$comentario_result = array('error' => true, 'mensaje'=> 'Por favor ingrese al sitio o registrese');
 		}
 		return $comentario_result;
 	}
 
 	public function busqueda_servicio(){
-		 $data = $this->servix_model->getBusquedaServicio();
-		 $arrayDatos = array();
-		 if(!empty($data)){
-			 foreach ($data as $d)
-			 {
-			 	$arrayDatos[] = ucfirst($d['titulo']);
-			 }
-		 }
-		 echo  json_encode($arrayDatos);
+		$data = $this->servix_model->getBusquedaServicio();
+		$arrayDatos = array();
+		if(!empty($data))
+		{
+			foreach ($data as $d)
+			{
+				$arrayDatos[] = ucfirst($d['titulo']);
+			}
+		}
+		echo  json_encode($arrayDatos);
 	}
+
 	public function busqueda_categoria(){
-		 $data = $this->servix_model->getBusquedaCategoria();
-		 if(!empty($data)){
-		 $arrayDatos = array();
-		 foreach ($data as $d) {
-		 	$arrayDatos[] = ucfirst($d['categoria']);
-		 }
-		 }
-		 echo  json_encode($arrayDatos);
+		$data = $this->servix_model->getBusquedaCategoria();
+		if(!empty($data))
+		{
+			$arrayDatos = array();
+			foreach ($data as $d)
+			{
+				$arrayDatos[] = ucfirst($d['categoria']);
+			}
+		}
+		echo  json_encode($arrayDatos);
 	}
 
 	public function busqueda_localidades_buscador(){
 		$data = $this->servix_model->geBusquedaLocalProvBuscador();
-		 $arrayDatos = array();
-		 if(!empty($data)){
-		 foreach ($data as $d) {
-		 	if($d['localidad']==$d['provincia']){
-		 		$d['provincia'] = '';
-		 	}
-		 	$loc = $d['localidad'].", ".$d['provincia'];
-		 	$arrayDatos[] = trim($loc,", ") ;
-		 }
-		 }
-		 echo  json_encode($arrayDatos);
+		$arrayDatos = array();
+		if(!empty($data))
+		{
+			foreach ($data as $d)
+			{
+				if($d['localidad']==$d['provincia'])
+				{
+					$d['provincia'] = '';
+				}
+				$loc = $d['localidad'].", ".$d['provincia'];
+				$arrayDatos[] = trim($loc,", ") ;
+			}
+		}
+		echo json_encode($arrayDatos);
 	}
 
 	public function busqueda_localidades(){
-	
 		$data = $this->servix_model->geBusquedaLocalProv($this->input->post('q'));
-		if(!empty($data)){
-		 foreach ($data as $d) {
-		 	$provLoc 	  = $d['localidad'].", ".$d['provincia'];
-		  	$arrayDatos []= array('localidad'=>$provLoc , 'idLoc'=> $d['id']);
+		if(!empty($data))
+		{
+			foreach ($data as $d)
+			{
+		 		$provLoc 	  = $d['localidad'].", ".$d['provincia'];
+		  		$arrayDatos []= array('localidad'=>$provLoc , 'idLoc'=> $d['id']);
+			}
 		}
-		}
-		echo  json_encode($arrayDatos);
+		echo json_encode($arrayDatos);
 	}
 
 	public function condiciones_de_uso(){
@@ -279,7 +279,6 @@ class sitio extends CI_Controller {
 		$data['vista'] = 'politica_de_cookies';
 
 		$this->load->view('home_view',$data);
-
 	}
 
 
@@ -298,8 +297,8 @@ class sitio extends CI_Controller {
 
 	public function solicitar_servicio(){
 		// $this->load->view('home_view');
-		if($this->UsuarioSession){
-
+		if($this->UsuarioSession)
+		{
 			$data['buscador_off'] = true;
 			
 			$data['usuarioSession'] = $this->UsuarioSession;
@@ -331,12 +330,10 @@ class sitio extends CI_Controller {
 			return redirect('');
 		}
 	}
-
 	
 
 	public function off_serv_mensaje($param){
 		// echo $param;
-
 		if($this->UsuarioSession)
 		{
 			$data['buscador_off'] = true;
@@ -379,7 +376,7 @@ class sitio extends CI_Controller {
 			{
 				$data 			= $this->upload->data();
 
-				//GENERAR DE 200 Y DE 125
+				//GENERA THUMBNAIL DE 200 px
 			    $size_thumb		= 200;
 			    $thumbNombre	= '_srx_200';
 			    $img_200_path = path_archivos('assets/images/servicios/', agregar_nombre_archivo($data['file_name'], $thumbNombre));
@@ -389,6 +386,7 @@ class sitio extends CI_Controller {
 	            $this->image_lib->initialize(generarThumbnailCuadrado($data, $size_thumb, $img_200_path, $thumbNombre));
 				$this->image_lib->crop();
 
+				//GENERA THUMBNAIL DE 125 px
 				$size_thumb		= 125;
 			    $thumbNombre	= '_srx_125';
 			    $img_125_path = path_archivos('assets/images/servicios/', agregar_nombre_archivo($data['file_name'], $thumbNombre));
@@ -398,16 +396,13 @@ class sitio extends CI_Controller {
 	            $this->image_lib->initialize(generarThumbnailCuadrado($data, $size_thumb, $img_125_path, $thumbNombre));
 				$this->image_lib->crop();
 
-/*				$data 			= $this->upload->data();*/
+				//GENERA THUMBNAIL DE 300 px WIDTH
 			    $size_thumb		= 300;
 			    $thumbNombre	= '_srx';
 			    $img_thumb_path = path_archivos('assets/images/servicios/', agregar_nombre_archivo($data['file_name'], $thumbNombre));
-				/*$this->_generarThumbnail($data, $size_thumb, $img_thumb_path,'_srx');*/
 			 	$this->load->library('image_lib');
     			$this->image_lib->initialize(generarThumbnail($data, $size_thumb, $img_thumb_path, $thumbNombre));
     			$this->image_lib->resize();
-
-
 
 				@unlink($data['full_path']);
 				$mjs = array('error' => 0 , 'file_name' => agregar_nombre_archivo($data['file_name'], '_srx') );
@@ -416,103 +411,25 @@ class sitio extends CI_Controller {
 		}
 	}
 
-/*
-	private function _generarThumbnail($file, $size, $img_path, $thumbNombre)
-	{
-	 	$img_thumb = $img_path;
 
-	    $config['image_library'] 	= 'gd2';
-	    $config['source_image'] 	= $file['full_path'];
-	    $config['create_thumb'] 	= TRUE;
-	    $config['maintain_ratio'] 	= FALSE;
-		$config['thumb_marker'] 	= $thumbNombre;
-	   
-	    $_width = $file['image_width'];
-	    $_height = $file['image_height'];
-
-	    $img_type = '';
-	    $thumb_size = $size;
-
-	    if ($_width > $_height)
-	    {
-	        // wide image
-	        $config['width'] = intval(($_width / $_height) * $thumb_size);
-	        if ($config['width'] % 2 != 0)
-	        {
-	            $config['width']++;
-	        }
-	        $config['height'] = $thumb_size;
-	        $img_type = 'wide';
-	    }
-	    else if ($_width < $_height)
-	    {
-	        // landscape image
-	        $config['width'] = $thumb_size;
-	        $config['height'] = intval(($_height / $_width) * $thumb_size);
-	        if ($config['height'] % 2 != 0)
-	        {
-	            $config['height']++;
-	        }
-	        $img_type = 'landscape';
-	    }
-	    else
-	    {
-	        // square image
-	        $config['width'] = $thumb_size;
-	        $config['height'] = $thumb_size;
-	        $img_type = 'square';
-	    }
-
-	    $this->load->library('image_lib');
-	    $this->image_lib->initialize($config);
-	    $this->image_lib->resize();
-
-
-	    // reconfiguramos para cortar el thumbnail
-	    $conf_new = array(
-	        'image_library' => 'gd2',
-	        'source_image' => $img_thumb,
-	        'create_thumb' => FALSE,
-	        'maintain_ratio' => FALSE,
-	        'width' => $thumb_size,
-	        'height' => $thumb_size
-	    );
-
-	    if ($img_type == 'wide')
-	    {
-	        $conf_new['x_axis'] = ($config['width'] - $thumb_size) / 2 ;
-	        $conf_new['y_axis'] = 0;
-	    }
-	    else if($img_type == 'landscape')
-	    {
-	        $conf_new['x_axis'] = 0;
-	        $conf_new['y_axis'] = ($config['height'] - $thumb_size) / 2;
-	    }
-	    else
-	    {
-	        $conf_new['x_axis'] = 0;
-	        $conf_new['y_axis'] = 0;
-	    }
-
-	    $this->image_lib->initialize($conf_new);
-
-	    $this->image_lib->crop();
-	}
-*/
 	private function _checkCategoria($cat){
-		if(isset($cat)){
+		if(isset($cat))
+		{
+			$param = strtolower($cat);
+			$categoria = $this->servix_model->getCategoria($param);
 
-		$param = strtolower($cat);
-		$categoria = $this->servix_model->getCategoria($param);
-
-		if(!empty($categoria)){
-			$categoria = $categoria[0]['id'];
-		}else{
-
-			$categoria =  40;
-		}
+			if(!empty($categoria))
+			{
+				$categoria = $categoria[0]['id'];
+			}
+			else
+			{
+				$categoria =  40;
+			}
 			return $categoria;
-		}else{
+		}
+		else
+		{
 			return false;
 		}
 	}
@@ -566,7 +483,6 @@ class sitio extends CI_Controller {
 	}
 
 	private function _set_servicio_solicitado($post){
-
 		$insert = $this->servix_model->setSolicitarServicio($post['id_categoria'],$post['id_usuario'],$post['localidad'],$post['cat_en_db'],$post['fecha_ini'],$post['fecha_fin'],$post['comentario']);
 		return $insert;
 	}
@@ -580,7 +496,6 @@ class sitio extends CI_Controller {
 		$seccion = $this->input->post('seccion');
 		if($this->UsuarioSession)
 		{
-	
 			//******Validacion form*********//
 			$this->form_validation->set_rules('titulo', 'titulo', 'trim|required|min_length[3]|max_length[40]|xss_clean');
 
@@ -596,7 +511,7 @@ class sitio extends CI_Controller {
 
 			$this->form_validation->set_rules('direccion', 'direccion', 'trim|xss_clean');
 
-				//si carga un archivo lo valido y si esta todo bien lo subo, con un resize y borro la original
+			//si carga un archivo lo valido y si esta todo bien lo subo, con un resize y borro la original
 			$files = $this->_fileUpload($_FILES);
 			//******fin form*********//
 
@@ -617,7 +532,6 @@ class sitio extends CI_Controller {
 				);
 				$this->session->set_flashdata('post', $this->input->post());
 				$this->session->set_flashdata('form_error', $form_errors);	
-				 
 
 				redirect($_SERVER['HTTP_REFERER']);
 			}
@@ -636,11 +550,6 @@ class sitio extends CI_Controller {
 			{	
 				$post = $this->input->post();
 				$post['imagen'] = $files['file_name'];
-
-				/*
-				FALTA GENERAR LOS THUMBNAILS DEL SERVICIO
-
-				*/
 
 				//si esta todo bien chequeo la categoria, si existe en la db , o si se asigna a la categoria de otros y se graba en la tabla de cats_no_db
 				$categoria = $this->_checkCategoria( $this->input->post('categoria') );
@@ -671,6 +580,7 @@ class sitio extends CI_Controller {
 					}
 					else
 					{
+						//SI ENCUENTRA LOS ARCHIVOS LOS ELIMINA
 						$img_thumb_path = path_archivos('assets/images/servicios/', agregar_nombre_archivo($post['foto'],''));
 						@unlink($img_thumb_path);
 						$img_thumb_path = path_archivos('assets/images/servicios/', agregar_nombre_archivo($post['foto'],'_200'));
@@ -747,9 +657,7 @@ class sitio extends CI_Controller {
 			$marker['animation']		  = 'DROP';
 			$this->googlemaps->add_marker($marker);
 			
-			
 			$data['map'] = $this->googlemaps->create_map();
-
 
 			$data['post'] = $rs[0];
 			$data['form_errors'] =null;
@@ -824,16 +732,17 @@ class sitio extends CI_Controller {
 	}
 
 	public function busqueda(){
-		 $post = $this->input->post();
+		$post = $this->input->post();
 
-		 $busqueda = array();
-		 foreach ($post as $k => $v) {
+		$busqueda = array();
+		foreach ($post as $k => $v)
+		{
 			$busqueda['post'][$k] = ($v);
 			$busqueda['url'][$k]  = normaliza(trim($v));
-		 }
+		}
 
-		 $this->session->set_userdata("busqueda",$busqueda);
-		 return redirect("resultado-de-busqueda/".$busqueda['url']['servicio']."-en-".$busqueda['url']['localidad']);
+		$this->session->set_userdata("busqueda",$busqueda);
+		return redirect("resultado-de-busqueda/".$busqueda['url']['servicio']."-en-".$busqueda['url']['localidad']);
 	}
 
 
@@ -856,19 +765,21 @@ class sitio extends CI_Controller {
 
 		if($l == 'argentina')
 		{
-			$result	   		   = $this->_setPaginacion($data['servicio'],'',$urlq );
+			$result		= $this->_setPaginacion($data['servicio'],'',$urlq );
 		}
 		else
 		{
-			$result	   		   = $this->_setPaginacion($data['servicio'],$data['localidad'],$urlq );
+			$result 	= $this->_setPaginacion($data['servicio'],$data['localidad'],$urlq );
 		}
 		
 		$data['result']    = $result['result'];
 		$data['total_rows'] = null;
-		if( $result['total_rows'] == 1){
+		if( $result['total_rows'] == 1)
+		{
 			$data['total_rows'] = "Hemos encontrado ". $result['total_rows']." resultado";
-		}else if($result['total_rows'] > 1){
-
+		}
+		else if($result['total_rows'] > 1)
+		{
 			$data['total_rows'] = "Hemos encontrado ". $result['total_rows']." resultados";
 		}
 		
@@ -953,7 +864,8 @@ class sitio extends CI_Controller {
 
 		$this->googlemaps->initialize($config);
 
-		foreach ($rs as $v) {
+		foreach ($rs as $v)
+		{
 			$marker = array();
 			$marker['icon'] = site_url('assets/images/servix_marker.png');
 			$marker['icon_size']   = '25, 66';
@@ -990,7 +902,8 @@ class sitio extends CI_Controller {
         $resultDB		= $this->servicios_model->getOpinionServicio($id, $page, $config["per_page"]);
         if($resultDB)
 		{
-			foreach ($resultDB as $opinion => $value) {
+			foreach ($resultDB as $opinion => $value)
+			{
 				$resultDB[$opinion]['link_user'] = site_url('usuario/perfil/'.$resultDB[$opinion]['id'].'-'.$resultDB[$opinion]['nombre'].'-'.$resultDB[$opinion]['apellido']);
 			}
 		}
@@ -1004,13 +917,17 @@ class sitio extends CI_Controller {
 		$this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0");
 		$this->output->set_header("Pragma: no-cache"); 
 		$id = $this->_parsearIdServicio($servicio);
-		if(is_numeric($id)){
+		if(is_numeric($id))
+		{
 			$opiniones = $this->_setPaginacionOpinion($servicio,$id);
 		}
 		$data['opiniones'] = $opiniones['result'];
-		if($this->input->is_ajax_request()){
+		if($this->input->is_ajax_request())
+		{
 			$this->load->view('listar_opiniones',$data);
-		}else{
+		}
+		else
+		{
 			$this->ficha_servicio($id,$servicio);
 		}
 	}
@@ -1046,8 +963,8 @@ class sitio extends CI_Controller {
 			$data['usuarioSession'] = $this->UsuarioSession;
 		}
 
-		if(is_numeric($id)){
-
+		if(is_numeric($id))
+		{
 			$data['title']   = 'Ficha del servicio';
 			$solicitado 	 = $this->servicios_model->getServicioSolicitado($id);
 			$solicitados 	 = $this->_setPagSolicitados($seccion,$segment);
@@ -1131,7 +1048,6 @@ class sitio extends CI_Controller {
 			{
 				$this->load->view('home_view',$data);
 			}
-
 		}
 		else
 		{
@@ -1184,8 +1100,8 @@ class sitio extends CI_Controller {
 			return redirect('');
 		}
 	}
+
 	public function validar_editar_servicio_solicitado(){
-		
 		$POST = $this->input->post();
 		if( isset($POST) )
 		{
@@ -1200,7 +1116,6 @@ class sitio extends CI_Controller {
 			$POST['fecha_fin']  = $fecha_fin;
 			$POST['id']  		= $this->input->post('serSoliid');
 			$POST['id_usuario']   = $this->UsuarioSession['id'];
-
 
 			if(!empty($categoria))
 			{
@@ -1238,42 +1153,49 @@ class sitio extends CI_Controller {
 	}
 
 	public function set_postulacion(){
-		
-		if($this->UsuarioSession){
-
+		if($this->UsuarioSession)
+		{
 			$id_busqueda_temp = $this->input->post('id_busqueda_temp');
 			$id_usuario 	  = $this->UsuarioSession['id'];
 			$user_postulado   = $this->servicios_model->userPostulado($id_usuario ,$id_busqueda_temp);
 
-			if(!empty($user_postulado)){
-				
-					foreach ($user_postulado as $value) {
-
-						if(($value['postulado'] == 0) &&  ( $value['envio_mail'] == 1 ) ){
-							$this->servicios_model->updatePostulacion($id_busqueda_temp ,$id_usuario,1);
-
-						}
-					
+			if(!empty($user_postulado))
+			{
+				foreach ($user_postulado as $value)
+				{
+					if(($value['postulado'] == 0) &&  ( $value['envio_mail'] == 1 ) )
+					{
+						$this->servicios_model->updatePostulacion($id_busqueda_temp ,$id_usuario,1);
 					}
+				}
 
-			}else{
-				 $id_user_publicacion  = $this->input->post('id_user_publicacion');
-				 $userSolicitudData    = $this->usuarios_model->getUsuario($id_user_publicacion);
-				 $usuario 			   = $this->UsuarioSession;
-				 $servicioSolicitado   = $this->servicios_model->getServicioSolicitado($id_busqueda_temp);
-				 $mail = $this->_crearEmailTemplacePostulacion($userSolicitudData,$servicioSolicitado,$usuario);
-				 $this->servicios_model->setPostulacion($id_busqueda_temp,$id_usuario,1,1);
-
-				 if($mail){
-
-				 	$displayErros = array('mensaje_e'=> 'Gracias por publicar tu solicitud en ' .  APP_NAME , 'error' => 0);
-					$this->session->set_flashdata('mensaje_e', $displayErros);
-
-				 }else{
-
-				 }
 			}
-
+			else
+			{
+				$id_user_publicacion  = $this->input->post('id_user_publicacion');
+				$userSolicitudData    = $this->usuarios_model->getUsuario($id_user_publicacion);
+				$usuario 			   = $this->UsuarioSession;
+				$servicioSolicitado   = $this->servicios_model->getServicioSolicitado($id_busqueda_temp);
+				$mail = $this->_crearEmailTemplacePostulacion($userSolicitudData,$servicioSolicitado,$usuario);
+				$postulacion = $this->servicios_model->setPostulacion($id_busqueda_temp,$id_usuario,1,1);
+				if($postulacion)
+				{
+					if($mail)
+					{
+						$displayErros = array('mensaje_e'=> 'Gracias por publicar tu solicitud en ' .  APP_NAME , 'error' => 0);
+						$this->session->set_flashdata('mensaje_e', $displayErros);
+					}
+					else
+					{
+						log_message('error', $this->email->print_debugger());
+		 			}
+				}
+				else
+				{
+					$displayErros = array('mensaje_e'=> 'Ups.. tenemos un problema por favor intenta más tarde' , 'error' => 1);
+					$this->session->set_flashdata('mensaje_e', $displayErros);
+				}
+			}
 	        return redirect($_SERVER['HTTP_REFERER']);
 		}
 	}
@@ -1320,59 +1242,68 @@ class sitio extends CI_Controller {
 		}
 
 	}
-	public function unset_servicio_solicitado(){
 
-		if( $this->UsuarioSession){
+	public function unset_servicio_solicitado(){
+		if( $this->UsuarioSession)
+		{
 			$post = $this->input->post();
-			if(isset($post)){
-			
+			if(isset($post))
+			{
 				$id_busqueda_temp  = $this->input->post('id_busqueda_temp');
 				
 				$rs = $this->servix_model->unsetSolicitudServicio($id_busqueda_temp);
-				if($rs){
+				if($rs)
+				{
 					redirect($_SERVER['HTTP_REFERER']);
 				}
-			}else{
+			}
+			else
+			{
 				return false;
 			}
-		}else{
+		}
+		else
+		{
 			return false;
 		}
 
 	}
-	public function update_servicio_solicitado(){
 
-			if( $this->UsuarioSession){
-				$post = $this->input->post();
-				if(isset($post)){
+	public function update_servicio_solicitado(){
+		if( $this->UsuarioSession)
+		{
+			$post = $this->input->post();
+			if(isset($post))
+			{
+				$id_busqueda_temp  = $this->input->post('id_busqueda_temp');
 				
-					$id_busqueda_temp  = $this->input->post('id_busqueda_temp');
-					
-					$rs = $this->servix_model->updateSolicitudVencida($id_busqueda_temp);
-					if($rs){
-						redirect($_SERVER['HTTP_REFERER']);
-					}
-				}else{
-					return false;
+				$rs = $this->servix_model->updateSolicitudVencida($id_busqueda_temp);
+				if($rs)
+				{
+					redirect($_SERVER['HTTP_REFERER']);
 				}
-			}else{
+			}
+			else
+			{
 				return false;
 			}
+		}
+		else
+		{
+			return false;
+		}
 
 	}
 
 	public function unset_postulacion(){
-		
 		$id_busqueda_temp = $this->input->post('id_busqueda_temp');
 		$id_usuario 	  = $this->UsuarioSession['id'];
 		$this->servicios_model->updatePostulacion($id_busqueda_temp ,$id_usuario,0);
 
 		return redirect($_SERVER['HTTP_REFERER']);
-
 	}
 
 	public function ficha_servicio($id,$servicio,$page=null){
-
 		$this->load->library('googlemaps');
 		if($this->UsuarioSession)
 		{
@@ -1381,12 +1312,10 @@ class sitio extends CI_Controller {
 
 		if(is_numeric($id))
 		{
-
 			$data['seccion']  = 'ficha';
 			$data['favorito'] =  null;
 			$data['servicio'] = null;
 
-			
 			$opiniones 	 = $this->_setPaginacionOpinion('208-herreria-los-hermanos',$id);
 			$servicioRS  = $this->servicios_model->getServicioFicha($id);
 			$promedio 	 = $this->servicios_model->getPromedioPuntos($id);
@@ -1432,7 +1361,6 @@ class sitio extends CI_Controller {
 				$this->googlemaps->add_marker($marker);
 				$data['map'] = $this->googlemaps->create_map();
 
-
 				if(!empty($promedio))
 				{
 					foreach ($promedio[0] as $key => $value)
@@ -1451,14 +1379,12 @@ class sitio extends CI_Controller {
 					}
 				}
 
-
 				$data['servicio']  = $data['titulo'];
 				$data['opiniones'] = $opiniones['result'];
 				$data['title']     = 'Ficha del servicio';
 				$data['servUrl']   =  site_url('ficha/'.$servicio);
 				$data['vista'] 	   = "ficha_servicio_view";
 				$data['loginFb']   = $this->loginFb;
-
 			}
 			else
 			{
@@ -1494,7 +1420,6 @@ class sitio extends CI_Controller {
 		$this->load->view('home_view',$data);
 	}
 
-	
 
 	private function _parsearIdServicio($servicio){
 		$serv = explode('-', $servicio);
@@ -1502,18 +1427,17 @@ class sitio extends CI_Controller {
 	}
 
 	private function _crearEmailTemplacePostulacion($dataUserSolicitud,$dataServicioSoliciutd,$dataUserPostulante){
-		
-		foreach ($dataUserSolicitud as  $value) {
+		foreach ($dataUserSolicitud as  $value)
+		{
 			$data['nombreUs'] 	= $value['nombre'];
 			$data['emailUS'] 	= $value['email'];
-			
 		}
 		
-		foreach ($dataServicioSoliciutd as $value) {
+		foreach ($dataServicioSoliciutd as $value)
+		{
 			$data['nombreSS'] = ucfirst($value['categoria'])." en ".ucfirst($value['localidad'])." ".ucfirst($value['provincia']);
 			$data['linkSS']	  = site_url(generarLinkServicio($value['id'],$value['categoria']."-en-".$value['localidad']."-".$value['provincia'],'servicio-solicitado'));
 		}
-
 	
 		$data['nombreUP']   = $dataUserPostulante['nombre'];
 		$data['apellidoUP'] = $dataUserPostulante['apellido'];
@@ -1523,13 +1447,9 @@ class sitio extends CI_Controller {
 		$vista = $this->load->view('email/servicioPostulacion',$data,true);
 		
 		return $this->sendPostulacion($data['emailUS'],$vista);
-
-		
-
 	}
 
 	public function sendPostulacion($para,$vista){
-		
 		 	$this->load->library('email');
 		 	$config['charset']  = 'utf-8';
 	        $config['wordwrap'] = TRUE;
@@ -1539,7 +1459,6 @@ class sitio extends CI_Controller {
 	        $mail               = null;
 	        $subject            = "Tienes una nueva postulaci&oacute;n en tu solicitud de servicio";
 
-	        
 	        $this->email->initialize($config);
         	$this->email->to($toemail);
 	        $this->email->from($fromemail, APP_NAME);
@@ -1550,42 +1469,40 @@ class sitio extends CI_Controller {
 	        $mail = $this->email->send();
 	        // echo $this->email->print_debugger();
 	      	return $mail;
-		 
 	}
 
 
 
 	public function sendContacto($post){
+		if(isset($post))
+		{
+			$this->load->library('email');
+			$config['charset']  = 'utf-8';
+			$config['wordwrap'] = TRUE;
+			$config['mailtype'] = 'html';
+			$fromemail          = MAIL_NO_RESPONDER; // desde
+			$toemail            = $post['email']; //para 
+			$mail               = null;
+			$subject            = "Servix datos de contacto";
 
-		 if(isset($post)){
 
-		 	$this->load->library('email');
-		 	$config['charset']  = 'utf-8';
-	        $config['wordwrap'] = TRUE;
-	        $config['mailtype'] = 'html';
-	        $fromemail          = MAIL_NO_RESPONDER; // desde
-	        $toemail            = $post['email']; //para 
-	        $mail               = null;
-	        $subject            = "Servix datos de contacto";
+			$this->email->initialize($config);
+			$this->email->to($toemail);
+			$this->email->from($fromemail, APP_NAME);
 
-	        
-	        $this->email->initialize($config);
-        	$this->email->to($toemail);
-	        $this->email->from($fromemail, APP_NAME);
-	        
-	        $this->email->subject($subject);
-	        $mesg = $this->load->view('email/contacto',$post,true);
-	        $this->email->message($mesg);
-	        $mail = $this->email->send();
-	      
-	      	return $mail;
-		 }
+			$this->email->subject($subject);
+			$mesg = $this->load->view('email/contacto',$post,true);
+			$this->email->message($mesg);
+			$mail = $this->email->send();
+
+			return $mail;
+		}
 	}
 
 
 	public function sendRecomendacion($post){
-
-		if(isset($post)){
+		if(isset($post))
+		{
 			$this->load->library('email');
 			$config['charset']  = 'utf-8';
 			$config['wordwrap'] = TRUE;
@@ -1619,7 +1536,6 @@ class sitio extends CI_Controller {
 		$data['vista'] = 'errors/404_error';
 
 		$this->load->view('home_view',$data);
-
 	}
 
 }
