@@ -17,6 +17,7 @@
               ?>
                
               </div>
+
               <?php
               $i = 0;
             }
@@ -27,10 +28,14 @@
             
 
               <?php
+            }else{
+              ?>
+              <?php
             }
             ?>
-
+            
             <?php
+           // echo $i;
               $i++;
 
           ?>
@@ -39,7 +44,7 @@
                 <div class="panel-heading"><strong><small><?php echo ucfirst($servicio['nombre']) ." ".ucfirst($servicio['apellido']); ?>: </small></strong></div>
                 <div class="panel-body">
                     <h4>
-                      
+                       <a href="<?php echo site_url(generarLinkServicio($servicio['id'],$servicio['categoria']."-en-".$servicio['localidad']."-".$servicio['provincia'],'servicio-solicitado')); ?> " class="btn-link ">
                   <?php
 
                 if( $servicio['categoria'] == 'Otros'){
@@ -49,10 +54,10 @@
                 }
 
                   ?> en <?php echo $servicio['localidad']." ". $servicio['provincia']; ?>
-                  
+                  </a>
                     </h4>
                   <p>
-                    <?php echo recortar_texto($servicio['busqueda'],100); ?>
+                    <?php echo recortar_texto($servicio['busqueda'],130); ?>
 
                   </p>
                    
@@ -83,7 +88,7 @@
           
           <?php
           }
-             echo "<div id='pagSolicitados'>";
+             echo "</div><div id='pagSolicitados col-md-12'>";
           echo $paginacion;
           echo "</div></div>";
        

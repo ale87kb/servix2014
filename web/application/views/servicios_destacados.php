@@ -2,7 +2,7 @@
   <div class="col-sm-12" id="destacados">
     <h1>Servicios Destacados</h1>
     <h4>Top 6 servicios destacados</h4>
-            <div class="row">
+            <div class="row paneles">
     <?php 
       if(!empty($destacados)){
 
