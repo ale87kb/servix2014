@@ -1,4 +1,5 @@
-  <div class="jumbotron col-md-12">
+
+  	<div class="jumbotron col-md-12">
   <h1>Registro de usuario en Servix</h1>
    
    <?php 
@@ -37,4 +38,3 @@
 
 
   </div>
-</div>

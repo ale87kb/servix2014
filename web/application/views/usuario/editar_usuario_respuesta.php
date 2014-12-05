@@ -59,4 +59,3 @@
 	<a href="<?php echo site_url('mi-perfil');?>">Volver a mi perfil</a>
 
   </div>
-</div>
