@@ -575,41 +575,55 @@ class Usuario extends CI_controller{
 	        }
 	        else
 	        {
+	            //GENERAMOS THUMBNAILS DE 125 Y DE 60
+
 	            $data 			= $this->upload->data();
 	            $size_thumb		= 125;
-	            $thumbNombre	= '_thumb';
-	            $img_thumb_path = path_archivos('assets/images/usuarios/', agregar_nombre_archivo($data['file_name'], $thumbNombre));
+	            $thumbNombre	= '_125';
+	            $img_125_path = path_archivos('assets/images/usuarios/', agregar_nombre_archivo($data['file_name'], $thumbNombre));
     
-	            //$this->_generarThumbnail($data, $width, $height);
 	            //GENERO EL THUMBNAIL DE 125
-	            $this->_generarThumbnail($data, $size_thumb, $img_thumb_path, $thumbNombre);
+	            $this->load->library('image_lib');
+    			$this->image_lib->initialize(generarThumbnail($data, $size_thumb, $img_125_path, $thumbNombre));
+    			$this->image_lib->resize();
+	            $this->image_lib->initialize(generarThumbnailCuadrado($data, $size_thumb, $img_125_path, $thumbNombre));
+				$this->image_lib->crop();
 
-	            //GENERO EL THUMBNAIL DE 200
-	           /* $size_thumb		= 200;
-	            $thumbNombre	= '_thumbx200';
-	            $img_thumb_path = path_archivos('assets/images/usuarios/', agregar_nombre_archivo($data['file_name'], $thumbNombre));
-	            $this->_generarThumbnail($data, $size_thumb, $img_thumb_path, $thumbNombre);*/
+
+	            //GENERO EL THUMBNAIL DE 60
+	            $size_thumb		= 60;
+	            $thumbNombre	= '_60';
+	            $img_60_path = path_archivos('assets/images/usuarios/', agregar_nombre_archivo($data['file_name'], $thumbNombre));
+	            $this->load->library('image_lib');
+    			$this->image_lib->initialize(generarThumbnail($data, $size_thumb, $img_60_path, $thumbNombre));
+    			$this->image_lib->resize();
+	            $this->image_lib->initialize(generarThumbnailCuadrado($data, $size_thumb, $img_60_path, $thumbNombre));
+				$this->image_lib->crop();
 
 
 	            $user 						= $this->UsuarioSession;
             	$foto_anterior 				= $user['foto'];
 	            $path_foto_anterior			= $config['upload_path'].$foto_anterior;
-	            $path_foto_thumb_anterior	= $config['upload_path'].$user['foto_thumb'];
+	            $path_foto_125_anterior		= $config['upload_path'].agregar_nombre_archivo($foto_anterior, '_125');
+	            $path_foto_60_anterior		= $config['upload_path'].agregar_nombre_archivo($foto_anterior, '_60');
 	            $user['ultima_edicion'] 	= date('Y-m-d H:m:i');
 	            $user['foto']				= $data['file_name'];
 
 	            if($foto_anterior != "")
 	            {
 	            	$this->_borarArchivoFotoAnterior($path_foto_anterior);
-	            	$this->_borarArchivoFotoAnterior($path_foto_thumb_anterior);
+	            	$this->_borarArchivoFotoAnterior($path_foto_125_anterior);
+	            	$this->_borarArchivoFotoAnterior($path_foto_60_anterior);
 	            }
 
 	            $file_id = $this->usuarios_model->actulaizar_foto_usuario($user);
 
 	            $this->UsuarioSession['foto'] 			= $data['file_name'];
-	            $this->UsuarioSession['foto_thumb'] 	= agregar_nombre_archivo($data['file_name'], '_thumb');
+	            $this->UsuarioSession['foto_thumb'] 	= agregar_nombre_archivo($data['file_name'], '_125');
 	            $this->UsuarioSession['foto_path'] 		= path_archivos('assets/images/usuarios/', $data['file_name']);
-	            $this->UsuarioSession['foto_thumb_path']= $img_thumb_path;
+	            /**************/
+	            $this->UsuarioSession['foto_thumb_path']= $img_125_path;
+	            /**************/
 
 	            $this->session->set_userdata('logged_in', $this->UsuarioSession);
 	            
@@ -619,8 +633,6 @@ class Usuario extends CI_controller{
 	                $msg 	= "Foto actulaizada correctamente";
 	                //$file 	= site_url('assets/images/usuarios/'.$data['file_name']);
 	                $file 	= site_url($this->UsuarioSession['foto_thumb_path']);
-	                
-
 	            }
 	            else
 	            {
@@ -641,29 +653,6 @@ class Usuario extends CI_controller{
 	    echo json_encode(array('status' => $status, 'msg' => $msg, 'file' => $file));
 
 	}
-
-	/*private function _generarThumbnail($file, $width, $height){
-
-		//Tipos de 'image_library': 'GD', 'GD2', 'ImageMagick', 'NetPBM'
-
-		$config['image_library'] 	= 'GD2'; //o usar libreria 'ImageMagic'
-		$config['source_image'] 	= $file['full_path'];
-		$config['create_thumb'] 	= TRUE;
-		$config['thumb_marker'] 	= '_thumb';
-		$config['maintain_ratio'] 	= TRUE;
-		$config['width'] 			= $width;
-		$config['height'] 			= $height;
-		$config['quality'] 			= '100';
-
-		$this->load->library('image_lib', $config);
-
-		$result = $this->image_lib->resize();
-		if(!$result){
-			log_message('error', $this->image_lib->display_errors());
-		}
-	}*/
-
-
 
 	private function _generarThumbnail($file, $size, $img_path, $thumbNombre)
 	{

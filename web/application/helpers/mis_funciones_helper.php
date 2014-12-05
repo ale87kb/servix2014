@@ -175,13 +175,13 @@ function existe_archivo($fileUrl)
 
 function generarThumbnail($file, $size, $img_path, $thumbNombre)
 {
- 	$img_thumb = $img_path;
+    $img_thumb = $img_path;
 
-    $config['image_library'] 	= 'gd2';
-    $config['source_image'] 	= $file['full_path'];
-    $config['create_thumb'] 	= TRUE;
-    $config['maintain_ratio'] 	= FALSE;
-	$config['thumb_marker'] 	= $thumbNombre;
+    $config['image_library']    = 'gd2';
+    $config['source_image']     = $file['full_path'];
+    $config['create_thumb']     = TRUE;
+    $config['maintain_ratio']   = FALSE;
+    $config['thumb_marker']     = $thumbNombre;
    
     $_width = $file['image_width'];
     $_height = $file['image_height'];
@@ -218,11 +218,48 @@ function generarThumbnail($file, $size, $img_path, $thumbNombre)
         $config['height'] = $thumb_size;
         $img_type = 'square';
     }
+    return $config;
+}
 
-    $this->load->library('image_lib');
-    $this->image_lib->initialize($config);
-    $this->image_lib->resize();
+function generarThumbnailCuadrado($file, $size, $img_path, $thumbNombre)
+{
+    $img_thumb = $img_path;
 
+    $_width = $file['image_width'];
+    $_height = $file['image_height'];
+
+    $img_type = '';
+    $thumb_size = $size;
+
+    if ($_width > $_height)
+    {
+        // wide image
+        $config['width'] = intval(($_width / $_height) * $thumb_size);
+        if ($config['width'] % 2 != 0)
+        {
+            $config['width']++;
+        }
+        $config['height'] = $thumb_size;
+        $img_type = 'wide';
+    }
+    else if ($_width < $_height)
+    {
+        // landscape image
+        $config['width'] = $thumb_size;
+        $config['height'] = intval(($_height / $_width) * $thumb_size);
+        if ($config['height'] % 2 != 0)
+        {
+            $config['height']++;
+        }
+        $img_type = 'landscape';
+    }
+    else
+    {
+        // square image
+        $config['width'] = $thumb_size;
+        $config['height'] = $thumb_size;
+        $img_type = 'square';
+    }
 
     // reconfiguramos para cortar el thumbnail
     $conf_new = array(
@@ -250,8 +287,7 @@ function generarThumbnail($file, $size, $img_path, $thumbNombre)
         $conf_new['y_axis'] = 0;
     }
 
-    $this->image_lib->initialize($conf_new);
-
-    $this->image_lib->crop();
+    return $conf_new;
 }
+
 ?>
