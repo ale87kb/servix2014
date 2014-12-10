@@ -10,6 +10,8 @@ class sitio extends CI_Controller {
 		parent::__construct();
 		$this->UsuarioSession = $this->usuarios_model->isLogin();
 		$this->loginFb = $this->usuarios_model->_loginFB();
+		$this->load->library('usuarioClass');
+		$this->load->library('servicioClass');
 	}
 
 	public function index(){
@@ -24,23 +26,12 @@ class sitio extends CI_Controller {
 		// print_d($this->db->last_query());
 		if(!empty($destacados))
 		{
-			foreach ($destacados as $key => $value)
-			{
-				$destacados[$key]['link'] = generarLinkServicio($destacados[$key]['id'],$destacados[$key]['titulo']);
-				if($destacados[$key]['foto'] == "" || $destacados[$key]['foto'] == null)
-				{
-					$destacados[$key]['foto_path'] = site_url('assets/images/servicio_125.jpg');
-				}
-				else if(file_exists('./assets/images/servicios/' . agregar_nombre_archivo($destacados[$key]['foto'], '')))
-				{
-					$destacados[$key]['foto_path'] = site_url(path_archivos('assets/images/servicios/', agregar_nombre_archivo($destacados[$key]['foto'], '')));
-				}
-				else 
-				{
-					$destacados[$key]['foto_path'] = site_url('assets/images/servicio_125.jpg');
-				}
-			}
-			$data['destacados'] = $destacados;
+			$serviciosObj = $this->servicioclass->setServicios($destacados);
+			$serviciosObj = $this->servicioclass->setFotos($serviciosObj, '_350');
+
+			$data['destacados'] = $serviciosObj;
+			//print_d($serviciosObj);
+			//print_d($destacados);
 		}
 		else
 		{
@@ -93,6 +84,10 @@ class sitio extends CI_Controller {
 	public function comentar_servicio(){
 		$usuario 		= $this->UsuarioSession;
 		$post 			= $this->input->post();
+		$id_usuario_servicio = $this->input->post('userid');
+		if(is_numeric($id_usuario_servicio)){
+			$usuario_servicio = $this->usuarios_model->getUsuario($id_usuario_servicio);
+		}
 		$id_servicio 	= $this->input->post('id_servicio');
 		$id_usuario  	= $usuario['id'];
 		$comentario 	= $this->input->post('comentario');
@@ -100,9 +95,11 @@ class sitio extends CI_Controller {
 
 		if($validacion['error'] == false)
 		{
-			$post['nombreUsuario'] = $usuario['nombre'];
-			$post['telUsuario']    = $usuario['telefono'];
-			$post['emailUsuario']  = $usuario['email'];
+			$post['nombreUsuario'] 	= $usuario['nombre'];
+			$post['telUsuario']    	= $usuario['telefono'];
+			$post['emailUsuario']  	= $usuario['email'];
+			$post['email']			= $usuario_servicio[0]['email'];
+			$post['nombre']			= $usuario_servicio[0]['nombre'];
 
 			$email = $this->sendContacto($post);
 			if($email)
@@ -251,10 +248,11 @@ class sitio extends CI_Controller {
 		
 		$data['buscador_off'] = TRUE;
 		$data['loginFb'] = $this->loginFb;
-		$data['vista'] = 'condiciones_de_uso';
+		$data['vista'] = 'fijas/condiciones_de_uso';
 
 		$this->load->view('home_view',$data);
 	}
+
 	public function politica_de_datos(){
 		if($this->UsuarioSession)
 		{
@@ -263,7 +261,7 @@ class sitio extends CI_Controller {
 		
 		$data['buscador_off'] = TRUE;
 		$data['loginFb'] = $this->loginFb;
-		$data['vista'] = 'politica_uso_datos';
+		$data['vista'] = 'fijas/politica_uso_datos';
 
 		$this->load->view('home_view',$data);
 	}
@@ -276,7 +274,7 @@ class sitio extends CI_Controller {
 		
 		$data['buscador_off'] = TRUE;
 		$data['loginFb'] = $this->loginFb;
-		$data['vista'] = 'politica_de_cookies';
+		$data['vista'] = 'fijas/politica_de_cookies';
 
 		$this->load->view('home_view',$data);
 	}
@@ -290,7 +288,7 @@ class sitio extends CI_Controller {
 		
 		$data['buscador_off'] = TRUE;
 		$data['loginFb'] = $this->loginFb;
-		$data['vista'] = 'preguntas_frecuentes';
+		$data['vista'] = 'fijas/preguntas_frecuentes';
 
 		$this->load->view('home_view',$data);
 	}
@@ -375,40 +373,77 @@ class sitio extends CI_Controller {
 			else
 			{
 				$data 			= $this->upload->data();
+			    $this->load->library('image_lib');
+
+				$thumbNombre				= '_srx';
+			    $img_path 					= path_archivos('assets/images/servicios/', agregar_nombre_archivo($data['file_name'], $thumbNombre));
+				$configsrx['image_library'] = 'GD2';
+				$configsrx['source_image'] 	= $data['full_path'];
+				$configsrx['new_image'] 	=  $img_path;
+				$configsrx['maintain_ratio'] = TRUE;
+				$this->image_lib->initialize($configsrx);
+				$this->image_lib->resize();
+				$this->image_lib->clear();
+
 
 				//GENERA THUMBNAIL DE 200 px
 			    $size_thumb		= 200;
 			    $thumbNombre	= '_srx_200';
-			    $img_200_path = path_archivos('assets/images/servicios/', agregar_nombre_archivo($data['file_name'], $thumbNombre));
-			    $this->load->library('image_lib');
-    			$this->image_lib->initialize(generarThumbnail($data, $size_thumb, $img_200_path, $thumbNombre));
+			    $img_200_path 	= path_archivos('assets/images/servicios/', agregar_nombre_archivo($data['file_name'], $thumbNombre));
+			    print_d($img_200_path);
+    			$this->image_lib->initialize(generarThumbnail($data, $size_thumb, $thumbNombre));
     			$this->image_lib->resize();
 	            $this->image_lib->initialize(generarThumbnailCuadrado($data, $size_thumb, $img_200_path, $thumbNombre));
 				$this->image_lib->crop();
+				$this->image_lib->clear();
+
 
 				//GENERA THUMBNAIL DE 125 px
 				$size_thumb		= 125;
 			    $thumbNombre	= '_srx_125';
-			    $img_125_path = path_archivos('assets/images/servicios/', agregar_nombre_archivo($data['file_name'], $thumbNombre));
-			    $this->load->library('image_lib');
-    			$this->image_lib->initialize(generarThumbnail($data, $size_thumb, $img_125_path, $thumbNombre));
+			    $img_125_path 	= path_archivos('assets/images/servicios/', agregar_nombre_archivo($data['file_name'], $thumbNombre));
+    			$this->image_lib->initialize(generarThumbnail($data, $size_thumb, $thumbNombre));
     			$this->image_lib->resize();
 	            $this->image_lib->initialize(generarThumbnailCuadrado($data, $size_thumb, $img_125_path, $thumbNombre));
 				$this->image_lib->crop();
+				$this->image_lib->clear();
+				
+				//GENERA THUMBNAIL DE 350 px WIDTH X 125 px HEIGHT
+				$thumbNombre350 = '_srx_350';
+				$img_350_path = path_archivos('assets/images/servicios/', agregar_nombre_archivo($data['file_name'], $thumbNombre350));
+				$this->_generarimgDestacado($data, $img_350_path, $thumbNombre350);
+				$this->image_lib->clear();
 
-				//GENERA THUMBNAIL DE 300 px WIDTH
-			    $size_thumb		= 300;
-			    $thumbNombre	= '_srx';
-			    $img_thumb_path = path_archivos('assets/images/servicios/', agregar_nombre_archivo($data['file_name'], $thumbNombre));
+				//GENERA THUMBNAIL DE 300 px WIDTH X 125 px HEIGHT
+			  //  $size_thumb		= 300;
+			  //  $thumbNombre	= '_srx_300';
+			  //  $img_thumb_path = path_archivos('assets/images/servicios/', agregar_nombre_archivo($data['file_name'], $thumbNombre));
+/*
 			 	$this->load->library('image_lib');
     			$this->image_lib->initialize(generarThumbnail($data, $size_thumb, $img_thumb_path, $thumbNombre));
     			$this->image_lib->resize();
+				$this->image_lib->crop();*/
 
+				@unlink($_FILES['fotoServicio']);
 				@unlink($data['full_path']);
 				$mjs = array('error' => 0 , 'file_name' => agregar_nombre_archivo($data['file_name'], '_srx') );
 				return $mjs;
 			}
 		}
+	}
+
+	private function _generarimgDestacado($file, $img_path, $thumbNombre){
+		$config['image_library'] 	='gd2';
+		$config['source_image']     = $file['full_path'];
+	    $config['create_thumb']     = TRUE;
+    	$config['maintain_ratio']   = FALSE;
+    	$config['thumb_marker']     = $thumbNombre;
+		$config['width'] 			= 350;
+		$config['height'] 			= 125;
+
+		$this->image_lib->initialize($config);
+
+		$this->image_lib->resize();
 	}
 
 
@@ -583,6 +618,8 @@ class sitio extends CI_Controller {
 						//SI ENCUENTRA LOS ARCHIVOS LOS ELIMINA
 						$img_thumb_path = path_archivos('assets/images/servicios/', agregar_nombre_archivo($post['foto'],''));
 						@unlink($img_thumb_path);
+						$img_thumb_path = path_archivos('assets/images/servicios/', agregar_nombre_archivo($post['foto'],'_350'));
+						@unlink($img_thumb_path);
 						$img_thumb_path = path_archivos('assets/images/servicios/', agregar_nombre_archivo($post['foto'],'_200'));
 						@unlink($img_thumb_path);
 						$img_thumb_path = path_archivos('assets/images/servicios/', agregar_nombre_archivo($post['foto'],'_125'));
@@ -591,7 +628,7 @@ class sitio extends CI_Controller {
 
 					$rs = $this->servicios_model->updateServicio($post);
 
-					if($rs)
+					/*if($rs)
 					{
 						//todo bien
 						//redirect('ofrecer-servicio/msj/registro_ok');
@@ -602,8 +639,19 @@ class sitio extends CI_Controller {
 						//error en db
 						//redirect('ofrecer-servicio/msj/registro_e');
 						echo "ups error";
-					}
+					}*/
 
+					if($rs)
+					{
+						$displayErros = array('mensj_e'=> 'Se editó tu servicio correctamente', 'error' => 0);
+						$this->session->set_flashdata('mensj_e', $displayErros);
+					}
+					else
+					{
+						$displayErros = array('mensj_e'=> 'Ups.. tenemos un problema por favor intenta más tarde' , 'error' => 1);
+						$this->session->set_flashdata('mensj_e', $displayErros);
+					}
+					return redirect($_SERVER['HTTP_REFERER']);
 				}
 			}
 		}
@@ -971,6 +1019,7 @@ class sitio extends CI_Controller {
 
 			$userPostulados	 = $this->servicios_model->userPostulados($id);
 
+
 			if(!empty($solicitados))
 			{
 				$data['solicitados'] = $solicitados['result'];
@@ -982,40 +1031,14 @@ class sitio extends CI_Controller {
 
 			if($solicitado)
 			{
-				$solicitado[0]['link_user'] = site_url('usuario/perfil/'.$solicitado[0]['userID'].'-'.$solicitado[0]['nombre'].'-'.$solicitado[0]['apellido']);
-
-				if($solicitado[0]['foto'] == "" || $solicitado[0]['foto'] == null)
-				{
-					$solicitado[0]['foto_path'] = site_url('assets/images/perfil_125.jpg');
-				}
-				else if(file_exists('./assets/images/usuarios/' . agregar_nombre_archivo($solicitado[0]['foto'], '_125')))
-				{
-					$solicitado[0]['foto_path'] = site_url(path_archivos('assets/images/usuarios/', agregar_nombre_archivo($solicitado[0]['foto'], '_125')));
-				}
-				else 
-				{
-					$solicitado[0]['foto_path'] = 'assets/images/perfil_125.jpg';
-				}
+				$solicitado = $this->usuarioclass->setUsuarios($solicitado);
+				$solicitado = $this->usuarioclass->setFotos($solicitado, '_125');
 			}
 
 			if($userPostulados)
 			{
-				foreach ($userPostulados as $postulado => $value)
-				{
-					$userPostulados[$postulado]['link_user'] = site_url('usuario/perfil/'.$userPostulados[$postulado]['id'].'-'.$userPostulados[$postulado]['nombre'].'-'.$userPostulados[$postulado]['apellido']);
-					if($userPostulados[$postulado]['foto'] == "" || $userPostulados[$postulado]['foto'] == null)
-					{
-						$userPostulados[$postulado]['foto_path'] = site_url('assets/images/perfil_60.jpg');
-					}
-					else if(file_exists('./assets/images/usuarios/' . agregar_nombre_archivo($userPostulados[$postulado]['foto'], '_60')))
-					{
-						$userPostulados[$postulado]['foto_path'] = site_url(path_archivos('assets/images/usuarios/', agregar_nombre_archivo($userPostulados[$postulado]['foto'], '_60')));
-					}
-					else 
-					{
-						$userPostulados[$postulado]['foto_path'] = site_url('assets/images/perfil_60.jpg');
-					}
-				}
+				$userPostulados = $this->usuarioclass->setUsuarios($userPostulados);
+				$userPostulados = $this->usuarioclass->setFotos($userPostulados, '_60');
 			}
 
 			$data['paginacion']   = $solicitados['links'];
@@ -1163,30 +1186,53 @@ class sitio extends CI_Controller {
 			{
 				foreach ($user_postulado as $value)
 				{
-					if(($value['postulado'] == 0) &&  ( $value['envio_mail'] == 1 ) )
+					if(($value['postulado'] == 0) && ($value['envio_mail'] == 1 ))
 					{
 						$this->servicios_model->updatePostulacion($id_busqueda_temp ,$id_usuario,1);
 					}
+					if(($value['postulado'] == 0) && ($value['envio_mail'] == 0 ))
+					{
+						$this->servicios_model->updatePostulacion($id_busqueda_temp ,$id_usuario,1);
+						$id_user_publicacion	= $this->input->post('id_user_publicacion');
+						$userSolicitudData    	= $this->usuarios_model->getUsuario($id_user_publicacion);
+						$usuario 			   	= $this->UsuarioSession;
+						$servicioSolicitado   	= $this->servicios_model->getServicioSolicitado($id_busqueda_temp);
+						$mail 					= $this->_crearEmailTemplacePostulacion($userSolicitudData,$servicioSolicitado,$usuario);
+
+						if($mail)
+						{
+							$this->servicios_model->updatePostulacionEmail($id_busqueda_temp ,$id_usuario,1);
+							$displayErros = array('mensaje_e'=> 'Se envió un e-mail' , 'error' => 0);
+							$this->session->set_flashdata('mensaje_e', $displayErros);
+						}
+						else
+						{
+							log_message('error', $this->email->print_debugger());
+			 			}
+					}
+
 				}
 
 			}
 			else
 			{
-				$id_user_publicacion  = $this->input->post('id_user_publicacion');
-				$userSolicitudData    = $this->usuarios_model->getUsuario($id_user_publicacion);
-				$usuario 			   = $this->UsuarioSession;
-				$servicioSolicitado   = $this->servicios_model->getServicioSolicitado($id_busqueda_temp);
-				$mail = $this->_crearEmailTemplacePostulacion($userSolicitudData,$servicioSolicitado,$usuario);
-				$postulacion = $this->servicios_model->setPostulacion($id_busqueda_temp,$id_usuario,1,1);
+				$id_user_publicacion	= $this->input->post('id_user_publicacion');
+				$userSolicitudData    	= $this->usuarios_model->getUsuario($id_user_publicacion);
+				$usuario 			   	= $this->UsuarioSession;
+				$servicioSolicitado   	= $this->servicios_model->getServicioSolicitado($id_busqueda_temp);
+
+				$mail 					= $this->_crearEmailTemplacePostulacion($userSolicitudData,$servicioSolicitado,$usuario);
+				$postulacion 			= $this->servicios_model->setPostulacion($id_busqueda_temp,$id_usuario,1,1);
 				if($postulacion)
 				{
 					if($mail)
 					{
-						$displayErros = array('mensaje_e'=> 'Gracias por publicar tu solicitud en ' .  APP_NAME , 'error' => 0);
+						$displayErros = array('mensaje_e'=> 'Se envió un e-mail' , 'error' => 0);
 						$this->session->set_flashdata('mensaje_e', $displayErros);
 					}
 					else
 					{
+						$this->servicios_model->updatePostulacionEmail($id_busqueda_temp ,$id_usuario,0);
 						log_message('error', $this->email->print_debugger());
 		 			}
 				}
@@ -1223,6 +1269,11 @@ class sitio extends CI_Controller {
 				if(file_exists('./assets/images/servicios/' . agregar_nombre_archivo($fotoServicio, '_200')))
 				{
 					$imgPaht = path_archivos('assets/images/servicios/', agregar_nombre_archivo($fotoServicio,'_200'));
+					@unlink($imgPaht);
+				}
+				if(file_exists('./assets/images/servicios/' . agregar_nombre_archivo($fotoServicio, '_350')))
+				{
+					$imgPaht = path_archivos('assets/images/servicios/', agregar_nombre_archivo($fotoServicio,'_350'));
 					@unlink($imgPaht);
 				}
 				$rs = $this->servicios_model->unsetServicio($id_servicio);
@@ -1322,9 +1373,20 @@ class sitio extends CI_Controller {
 
 			if($servicioRS)
 			{
+
+
+				$serviciosObj = $this->servicioclass->setServicios($servicioRS);
+				$serviciosObj = $this->servicioclass->setFotos($serviciosObj, '_200');
+				$serviciosObj = $this->servicioclass->setLinkUser($serviciosObj);
+				$data['servicioRS'] = $serviciosObj[0];
+
+
+
+/*
 				foreach ($servicioRS[0] as $key => $value)
 				{
 					$data[$key] = $value;
+					print_d($key);
 					$data['link_user'] = site_url('usuario/perfil/'. $servicioRS[0]['userID'].'-'.$servicioRS[0]['nombre'].'-'.$servicioRS[0]['apellido']);
 				    if($servicioRS[0]['foto'] == "" || $servicioRS[0]['foto'] == null)
 				    {
@@ -1340,8 +1402,11 @@ class sitio extends CI_Controller {
 				    }
 				    $ltn =   $servicioRS[0]['latitud'].','.$servicioRS[0]['longitud'];
 				}
+
+*/
+				$latlong = $serviciosObj[0]->latitud.','.$serviciosObj[0]->longitud;
 				$config = array();
-				$config['center'] = $ltn;
+				$config['center'] = $latlong;
 				$config['zoom'] = '17';
 				$this->googlemaps->initialize($config);
 
@@ -1352,9 +1417,9 @@ class sitio extends CI_Controller {
 				$marker['icon_origin'] = '0, 0';
 				$marker['icon_anchor'] = '17, 34';
 				$marker['icon_scaledSize'] = '20, 35';
-				$marker['position'] = $ltn;
+				$marker['position'] = $latlong;
 
-				$marker['infowindow_content'] = ('<div style="width: 250px;color: #000;font-size:14px;font-family:Arial, Helvetica, sans-serif;">'.ucwords($data['titulo']).'<br>'.ucfirst($data['direccion']).'			</div>');
+				$marker['infowindow_content'] = ('<div style="width: 250px;color: #000;font-size:14px;font-family:Arial, Helvetica, sans-serif;">'.ucwords($serviciosObj[0]->titulo).'<br>'.ucfirst($serviciosObj[0]->direccion).'</div>');
 				$marker['infowindowMaxWidth'] = "500";
 				$marker['animation']		  = 'DROP';
 
@@ -1372,17 +1437,18 @@ class sitio extends CI_Controller {
 				if($this->UsuarioSession)
 				{
 					$data['usuarioSession'] = $this->UsuarioSession;
-					$fav = $this->usuarios_model->getFavorito($this->UsuarioSession['id'],$id);
+					$fav = $this->usuarios_model->getFavorito($this->UsuarioSession['id'], $id);
 					if(!empty($fav))
 					{
 						$data['favorito'] = true;
 					}
 				}
-
-				$data['servicio']  = $data['titulo'];
+				//Para el buscador
+				$data['servicio']  = $serviciosObj[0]->titulo;
+				$data['localidad']  = $serviciosObj[0]->localidad;
+				
 				$data['opiniones'] = $opiniones['result'];
 				$data['title']     = 'Ficha del servicio';
-				$data['servUrl']   =  site_url('ficha/'.$servicio);
 				$data['vista'] 	   = "ficha_servicio_view";
 				$data['loginFb']   = $this->loginFb;
 			}
@@ -1474,6 +1540,7 @@ class sitio extends CI_Controller {
 
 
 	public function sendContacto($post){
+		
 		if(isset($post))
 		{
 			$this->load->library('email');

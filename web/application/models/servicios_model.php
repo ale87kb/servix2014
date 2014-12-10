@@ -146,6 +146,19 @@ Class Servicios_model extends CI_Model{
 		return $rs;
 	}
 
+	public function updatePostulacionEmail($id_busquedas_temp ,$id_usuario,$emailEnvio){
+		$query = "UPDATE 
+					postulaciones_temp 
+				SET 
+					envio_mail = $emailEnvio 
+				WHERE 
+					id_busquedas_temp = $id_busquedas_temp 
+				AND id_usuarios = $id_usuario 
+				LIMIT 1;";
+		$rs    = $this->db->query($query);
+		return $rs;
+	}
+
 	public function setPostulacion($id_busquedas_temp,$id_usurio,$postu,$emailEnvio){
 		$query = "INSERT INTO 
 					postulaciones_temp (id_busquedas_temp, id_usuarios, postulado, envio_mail) 
@@ -185,16 +198,16 @@ Class Servicios_model extends CI_Model{
 
 	public function getServicioSolicitado($id){ 
 		$query ="SELECT
-					busquedas_temp.id,
+					busquedas_temp.id AS busqID,
 					provincias.provincia,
 					localidades.localidad,
-					localidades.id as id_localidad,
+					localidades.id AS id_localidad,
 					categorias.categoria,
 					busquedas_temp.busqueda,
 					busquedas_temp.vencido,
 					busquedas_temp.fecha_fin,
 					busquedas_temp.fecha_ini,
-					usuarios.id as userID,
+					usuarios.id,
 					usuarios.nombre,
 					usuarios.apellido,
 					usuarios.foto,

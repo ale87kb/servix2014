@@ -68,12 +68,12 @@
 										<tr>
 											<td>				
 																			
-												<h5 class="">Contact Info:</h5>												
+												<h5 class="">Información del contacto:</h5>												
 											
 												<p>
 													Nombre: <strong><?php echo $nombreUsuario; ?></strong></br>
 													Teléfono: <strong><?php echo $telUsuario; ?></strong><br/>
-            										E-mail: <strong><a href="emailto:hseldon@trantor.com"><?php echo $emailUsuario; ?></a></strong></p>
+            										E-mail: <strong><a href="mailto:<?php echo $emailUsuario ?>"><?php echo $emailUsuario; ?></a></strong></p>
                 
 											</td>
 										</tr>

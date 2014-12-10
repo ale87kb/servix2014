@@ -176,10 +176,8 @@ function existe_archivo($fileUrl)
 }
 
 
-function generarThumbnail($file, $size, $img_path, $thumbNombre)
+function generarThumbnail($file, $size, $thumbNombre)
 {
-    $img_thumb = $img_path;
-
     $config['image_library']    = 'gd2';
     $config['source_image']     = $file['full_path'];
     $config['create_thumb']     = TRUE;

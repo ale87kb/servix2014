@@ -15,6 +15,24 @@
      
         ?>
             <div class="row bg-white tab-box">
+              <?php 
+                $msje = $this->session->flashdata('mensj_e');
+                if(!empty($msje))
+                {
+                  if($msje['error'] == 0)
+                  {
+                  ?>
+                    <div class="alert alert-success" id="mensaje_e" role="alert"><?php echo $msje['mensj_e']; ?></div>
+                <?php
+                  }
+                  else
+                  {
+                ?>
+                    <div class="alert alert-warning" id="mensaje_e" role="alert"><?php echo $msje['mensj_e']; ?></div>
+                <?php
+                  }
+                }
+               ?>
                <div class="col-md-12 ">
                   <div role="tabpanel">
 
@@ -103,7 +121,7 @@
                                         if($msj['error'] == 0){
                                           ?>
                                            <div class="alert alert-success"  role="alert">
-                                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                                             <?php echo $msj['mensaje_e']; ?>
                                            </div>
                                           <?php
@@ -111,7 +129,7 @@
 
                                           ?>
                                           <div class="alert alert-warning"  role="alert">
-                                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                                             <?php echo $msj['mensaje_e']; ?>
                                           </div>
                                           <?php

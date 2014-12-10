@@ -14,13 +14,13 @@
   <div class="row">
     <div class="col-md-12 blogShort">
       <figure>
-        <img src="<?php echo $fav['foto_path']; ?>" alt="<?php echo ucfirst($fav['titulo']); ?>" class="pull-left img-responsive">
+        <img src="<?php echo $fav->foto_path; ?>" alt="<?php echo ucfirst($fav->titulo); ?>" class="pull-left img-responsive">
       </figure>
-      <h3><a href="<?php echo site_url($fav['link']); ?>"><?php echo ucfirst($fav['titulo']); ?></a></h3>
+      <h3><a href="<?php echo $fav->link_servicio; ?>"><?php echo ucfirst($fav->titulo); ?></a></h3>
         <p class="pull-right">
-          <span class="label label-default"><?php echo ucfirst($fav['categoria']); ?></span>
-          <span class="label label-default"><?php echo ucfirst($fav['localidad']); ?></span>
-          <span class="label label-default"><?php echo ucfirst($fav['provincia']); ?></span>
+          <span class="label label-default"><?php echo ucfirst($fav->categoria); ?></span>
+          <span class="label label-default"><?php echo ucfirst($fav->localidad); ?></span>
+          <span class="label label-default"><?php echo ucfirst($fav->provincia); ?></span>
         </p>
     </div>
     </div>

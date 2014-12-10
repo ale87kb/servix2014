@@ -158,7 +158,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
             <h4 class="modal-title" id="modalOpinion-1">Recomienda este servicio a un amigo</h4>
           </div>
           <form class="form-horizontal" role="form" id="form_recomendacion" method="post" action="<?php echo site_url('validar-recomendacion'); ?>" enctype="application/x-www-form-urlencoded">
@@ -186,8 +186,8 @@
           </div>
           <div class="modal-footer">
 
-           <input type="hidden" name="nombreServ" id="nombreServ" value="<?php echo $titulo; ?>"/>
-           <input type="hidden" name="urlServ" id="urlServ" value="<?php echo $servUrl; ?>"/>
+           <input type="hidden" name="nombreServ" id="nombreServ" value="<?php echo $servicioRS->titulo; ?>"/>
+           <input type="hidden" name="urlServ" id="urlServ" value="<?php echo $servicioRS->link_servicio; ?>"/>
             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
             <button type="submit" class="btn btn-primary">Enviar recomendación</button>
           </div>
@@ -212,7 +212,7 @@
               <p>Sube un archivo para actualizar tu foto de perfil.</p>
 
 
-                <form action="<?php echo site_url('actulaizar_foto_perfil'); ?>" method="post" enctype="multipart/form-data" id="form_edit_foto">
+                <form action="<?php echo site_url('actualizar_foto_perfil'); ?>" method="post" enctype="multipart/form-data" id="form_edit_foto">
                   <input type="file" title="Elegir archivo" name="mifoto" class="btn-primary">
                   <input type="submit" value="Subir foto">
                 </form>

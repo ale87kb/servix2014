@@ -9,6 +9,8 @@ class Usuario extends CI_controller{
 		$data['title'] = 'Servix';
 		$this->UsuarioSession = $this->usuarios_model->isLogin();
 		$this->loginFb = $this->usuarios_model->_loginFB();
+		$this->load->library('usuarioClass');
+		$this->load->library('servicioClass');
 	}
 
 
@@ -23,7 +25,6 @@ class Usuario extends CI_controller{
 			$data['page_active']	= 1;
 
 			//LA VISTA DEL DATOS LA CARGA CON $this->UsuarioSession
-			
 			$this->load->view('usuarios_view', $data);
 		}
 		else
@@ -69,23 +70,10 @@ class Usuario extends CI_controller{
 
 		if($servicios)
 		{
-			foreach ($servicios as $key => $value)
-			{
-				$servicios[$key]['link'] = generarLinkServicio($servicios[$key]['id'],$servicios[$key]['titulo']);
-				if($servicios[$key]['foto'] == "" || $servicios[$key]['foto'] == null)
-				{
-					$servicios[$key]['foto_125_path'] = site_url('assets/images/servicio_125.jpg');
-				}
-				else if(file_exists('./assets/images/servicios/' . agregar_nombre_archivo($servicios[$key]['foto'], '_125')))
-				{
-					$servicios[$key]['foto_125_path'] = site_url(path_archivos('assets/images/servicios/', agregar_nombre_archivo($servicios[$key]['foto'], '_125')));
-				}
-				else 
-				{
-					$servicios[$key]['foto_125_path'] = site_url('assets/images/servicio_125.jpg');
-				}
-			}
-			$data['servicios'] = $servicios;
+			$serviciosObj = $this->servicioclass->setServicios($servicios);
+			$serviciosObj = $this->servicioclass->setFotos($serviciosObj, '_125');
+
+			$data['servicios'] = $serviciosObj;
 			$data['vinculos'] = $this->pagination->create_links();
 			return $data;
 		}
@@ -130,23 +118,10 @@ class Usuario extends CI_controller{
 
 		if($favoritos)
 		{
-			foreach ($favoritos as $key => $vlaue)
-			{
-				$favoritos[$key]['link'] = generarLinkServicio($favoritos[$key]['id'], $favoritos[$key]['titulo']);
-				if($favoritos[$key]['foto'] == "" || $favoritos[$key]['foto'] == null)
-				{
-					$favoritos[$key]['foto_path'] = site_url('assets/images/servicio_125.jpg');
-				}
-				else if(file_exists('./assets/images/servicios/' . agregar_nombre_archivo($favoritos[$key]['foto'], '_125')))
-				{
-					$favoritos[$key]['foto_path'] = site_url(path_archivos('assets/images/servicios/', agregar_nombre_archivo($favoritos[$key]['foto'], '_125')));
-				}
-				else 
-				{
-					$favoritos[$key]['foto_path'] = site_url('assets/images/servicio_125.jpg');
-				}
-			}
-			$data['favoritos'] = $favoritos;
+			$serviciosObj = $this->servicioclass->setServicios($favoritos);
+			$serviciosObj = $this->servicioclass->setFotos($serviciosObj, '_125');
+
+			$data['favoritos'] = $serviciosObj;
 			$data['vinculos'] = $this->pagination->create_links();
 			return $data;
 		}
@@ -444,7 +419,6 @@ class Usuario extends CI_controller{
 							'mensaje'	=>	'El usuario ha sido verificado correctamente.',
 							'estado'	=>	0
 					 	);
-
 						break;
 
 					case 1:
@@ -453,7 +427,6 @@ class Usuario extends CI_controller{
 							'mensaje'	=>	'El usuario ya ha sido verificado.',
 							'estado'	=>	1
 					 	);		
-
 						break;
 
 					case 2:
@@ -462,7 +435,6 @@ class Usuario extends CI_controller{
 							'mensaje'	=>	'El usuario no puede ser verificado.',
 							'estado'	=>	2
 					 	);
-
 						break;
 					
 					default:
@@ -471,7 +443,6 @@ class Usuario extends CI_controller{
 							'mensaje'	=>	'El usuario no puede ser verificado.',
 							'estado'	=>	3
 					 	);
-
 						break;
 				}
 			}
@@ -552,7 +523,7 @@ class Usuario extends CI_controller{
 		return true;
 	}
 
-	public function actulaizar_foto_perfil(){
+	public function actualizar_foto_perfil(){
 
 	    $status 			= "";
 	    $msg 				= "";
@@ -579,27 +550,29 @@ class Usuario extends CI_controller{
 	            //GENERAMOS THUMBNAILS DE 125 Y DE 60
 
 	            $data 			= $this->upload->data();
+	            $this->load->library('image_lib');
+	            
+	            //GENERO EL THUMBNAIL DE 125
 	            $size_thumb		= 125;
 	            $thumbNombre	= '_125';
 	            $img_125_path = path_archivos('assets/images/usuarios/', agregar_nombre_archivo($data['file_name'], $thumbNombre));
-    
-	            //GENERO EL THUMBNAIL DE 125
-	            $this->load->library('image_lib');
-    			$this->image_lib->initialize(generarThumbnail($data, $size_thumb, $img_125_path, $thumbNombre));
+    			$this->image_lib->initialize(generarThumbnail($data, $size_thumb, $thumbNombre));
     			$this->image_lib->resize();
 	            $this->image_lib->initialize(generarThumbnailCuadrado($data, $size_thumb, $img_125_path, $thumbNombre));
 				$this->image_lib->crop();
+				$this->image_lib->clear();
+
 
 
 	            //GENERO EL THUMBNAIL DE 60
 	            $size_thumb		= 60;
 	            $thumbNombre	= '_60';
 	            $img_60_path = path_archivos('assets/images/usuarios/', agregar_nombre_archivo($data['file_name'], $thumbNombre));
-	            $this->load->library('image_lib');
-    			$this->image_lib->initialize(generarThumbnail($data, $size_thumb, $img_60_path, $thumbNombre));
+    			$this->image_lib->initialize(generarThumbnail($data, $size_thumb, $thumbNombre));
     			$this->image_lib->resize();
 	            $this->image_lib->initialize(generarThumbnailCuadrado($data, $size_thumb, $img_60_path, $thumbNombre));
 				$this->image_lib->crop();
+				$this->image_lib->clear();
 
 
 	            $user 						= $this->UsuarioSession;
@@ -612,9 +585,9 @@ class Usuario extends CI_controller{
 
 	            if($foto_anterior != "")
 	            {
-	            	$this->_borarArchivoFotoAnterior($path_foto_anterior);
-	            	$this->_borarArchivoFotoAnterior($path_foto_125_anterior);
-	            	$this->_borarArchivoFotoAnterior($path_foto_60_anterior);
+	            	$this->_borrarArchivoFotoAnterior($path_foto_anterior);
+	            	$this->_borrarArchivoFotoAnterior($path_foto_125_anterior);
+	            	$this->_borrarArchivoFotoAnterior($path_foto_60_anterior);
 	            }
 
 	            $file_id = $this->usuarios_model->actulaizar_foto_usuario($user);
@@ -653,90 +626,8 @@ class Usuario extends CI_controller{
 
 	}
 
-	private function _generarThumbnail($file, $size, $img_path, $thumbNombre)
-	{
-	 	$img_thumb = $img_path;
 
-	    $config['image_library'] 	= 'gd2';
-	    $config['source_image'] 	= $file['full_path'];
-	    $config['create_thumb'] 	= TRUE;
-	    $config['maintain_ratio'] 	= FALSE;
-		$config['thumb_marker'] 	= $thumbNombre;
-	   
-	    $_width = $file['image_width'];
-	    $_height = $file['image_height'];
-
-	    $img_type = '';
-	    $thumb_size = $size;
-
-	    if ($_width > $_height)
-	    {
-	        // wide image
-	        $config['width'] = intval(($_width / $_height) * $thumb_size);
-	        if ($config['width'] % 2 != 0)
-	        {
-	            $config['width']++;
-	        }
-	        $config['height'] = $thumb_size;
-	        $img_type = 'wide';
-	    }
-	    else if ($_width < $_height)
-	    {
-	        // landscape image
-	        $config['width'] = $thumb_size;
-	        $config['height'] = intval(($_height / $_width) * $thumb_size);
-	        if ($config['height'] % 2 != 0)
-	        {
-	            $config['height']++;
-	        }
-	        $img_type = 'landscape';
-	    }
-	    else
-	    {
-	        // square image
-	        $config['width'] = $thumb_size;
-	        $config['height'] = $thumb_size;
-	        $img_type = 'square';
-	    }
-
-	    $this->load->library('image_lib');
-	    $this->image_lib->initialize($config);
-	    $this->image_lib->resize();
-
-
-	    // reconfiguramos para cortar el thumbnail
-	    $conf_new = array(
-	        'image_library' => 'gd2',
-	        'source_image' => $img_thumb,
-	        'create_thumb' => FALSE,
-	        'maintain_ratio' => FALSE,
-	        'width' => $thumb_size,
-	        'height' => $thumb_size
-	    );
-
-	    if ($img_type == 'wide')
-	    {
-	        $conf_new['x_axis'] = ($config['width'] - $thumb_size) / 2 ;
-	        $conf_new['y_axis'] = 0;
-	    }
-	    else if($img_type == 'landscape')
-	    {
-	        $conf_new['x_axis'] = 0;
-	        $conf_new['y_axis'] = ($config['height'] - $thumb_size) / 2;
-	    }
-	    else
-	    {
-	        $conf_new['x_axis'] = 0;
-	        $conf_new['y_axis'] = 0;
-	    }
-
-	    $this->image_lib->initialize($conf_new);
-
-	    $this->image_lib->crop();
-	}
-
-
-	private function _borarArchivoFotoAnterior($archivoPath){
+	private function _borrarArchivoFotoAnterior($archivoPath){
 		if(file_exists($archivoPath)){
 			$dalete = unlink($archivoPath);
 			if(!$dalete){
@@ -756,36 +647,29 @@ class Usuario extends CI_controller{
 
 			if(is_numeric($id))
 			{
-				$data['perfil'] = null;
-				$data['servicios'] = null;
-				$data['canServicios'] = null;
+				$data['perfil'] 		= null;
+				$data['servicios']		= null;
+				$data['canServicios'] 	= null;
 				$data['canSolicitados'] = null;
+				
 				$perfil = $this->usuarios_model->getUsuario($id);
+
 				if($perfil)
 				{
-					if($perfil[0]['foto'] == "" || $perfil[0]['foto'] == null)
-					{
-						$perfil[0]['foto_path'] = site_url('assets/images/perfil_125.jpg');
-					}
-					else if(file_exists('./assets/images/usuarios/' . agregar_nombre_archivo($perfil[0]['foto'], '_125')))
-					{
-						$perfil[0]['foto_path'] = site_url(path_archivos('assets/images/usuarios/', agregar_nombre_archivo($perfil[0]['foto'], '_125')));
-					}
-					else 
-					{
-						$perfil[0]['foto_path'] = site_url('assets/images/perfil_125.jpg');
-					}
-					
-					$data['perfil'] = $perfil[0];
-					$cantidadServicios 			= $this->usuarios_model->getCantidadServicioPropios($id);
-					$data['cantidadServicios'] = $cantidadServicios;
+					$perfilObj 			= $this->usuarioclass->setUsuarios($perfil);
+					$perfilObj 			= $this->usuarioclass->setFotos($perfilObj, '_125');
 
-					$servicioEnPerfil = $this->_paginatioServiciosPerfil($id, $perfil[0]['nombre'], $perfil[0]['apellido'], $cantidadServicios, 5);
-					
-					$data['servicios'] 	= $servicioEnPerfil['servicios'];
-					$data['paginacion']	 	= $servicioEnPerfil['vinculos'];
-					$data['title']     = 'Perfil de Usuario';
-					$data['vista']     = 'perfil_usuario';
+					$data['perfil'] 			= $perfilObj[0];
+
+					$cantidadServicios 			= $this->usuarios_model->getCantidadServicioPropios($id);
+					$data['cantidadServicios'] 	= $cantidadServicios;
+
+					$servicioEnPerfil 			= $this->_paginatioServiciosPerfil($id, $perfil[0]['nombre'], $perfil[0]['apellido'], $cantidadServicios, 5);
+
+					$data['servicios'] 			= $servicioEnPerfil['servicios'];
+					$data['paginacion']	 		= $servicioEnPerfil['vinculos'];
+					$data['title']     			= 'Perfil de Usuario';
+					$data['vista']     			= 'perfil_usuario';
 				}
 				else
 				{
@@ -795,8 +679,8 @@ class Usuario extends CI_controller{
 			}
 			else
 			{
-					$data['title']     = 'Perfil no encontrado';
-					$data['vista']     = 'perfil_no_encontrado';
+				$data['title']     = 'Perfil no encontrado';
+				$data['vista']     = 'perfil_no_encontrado';
 			}
 		}
 		else
@@ -807,20 +691,18 @@ class Usuario extends CI_controller{
 		}
 
 		$this->_js = array(
-		'assets/js/jquery.raty.js',
-		'assets/js/script-raty.js',
+			'assets/js/jquery.raty.js',
+			'assets/js/script-raty.js',
 		);
 
 		$this->_css = array(
-		'assets/css/raty/jquery.raty.css',
+			'assets/css/raty/jquery.raty.css',
 		);
-
 
 		$data['css'] = $this->_css;
 		$data['js'] = $this->_js;
 		
 		$this->load->view('home_view',$data);
-		
 	}
 
 	private function _paginatioServiciosPerfil($idUsuario, $nombre, $apellido, $totalRows, $cantidadLimit){
@@ -837,24 +719,10 @@ class Usuario extends CI_controller{
 		$servicios = $this->servicios_model->getServiciosEnPerfil($idUsuario, $page, $cantidadLimit);
 		if($servicios)
 		{
-			foreach ($servicios as $servicio => $value)
-			{
-				$servicios[$servicio]['link_servicio'] = site_url(generarLinkServicio($servicios[$servicio]['id'], $servicios[$servicio]['titulo'] ));
-				
-				if($servicios[$servicio]['foto'] == "" || $servicios[$servicio]['foto'] == null)
-				{
-					$servicios[$servicio]['foto_path'] = site_url('assets/images/servicio_125.jpg');
-				}
-				else if(file_exists('./assets/images/servicios/' . agregar_nombre_archivo($servicios[$servicio]['foto'], '_125')))
-				{
-					$servicios[$servicio]['foto_path'] = site_url(path_archivos('assets/images/servicios/', agregar_nombre_archivo($servicios[$servicio]['foto'], '_125')));
-				}
-				else
-				{
-					$servicios[$servicio]['foto_path'] = site_url('assets/images/servicio_125.jpg');
-				}
-			}
-			$data['servicios'] = $servicios;
+			$serviciosObj = $this->servicioclass->setServicios($servicios);
+			$serviciosObj = $this->servicioclass->setFotos($serviciosObj, '_125');
+
+			$data['servicios'] = $serviciosObj;
 			$data['vinculos'] = $this->pagination->create_links();
 			return $data;
 		}

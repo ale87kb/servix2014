@@ -320,7 +320,7 @@ Class Usuarios_model extends CI_Model{
 	//Favoritos del usuario
 	public function getFavoritos($idUsuario, $desdeLimit, $cantidadLimit){
 		$query 	= "SELECT
-					favoritos.fecha,
+					favoritos.fecha AS fav_fecha,
 					servicios.id,
 					servicios.titulo,
 					servicios.descripcion,

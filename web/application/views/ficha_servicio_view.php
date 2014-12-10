@@ -8,7 +8,7 @@
 			<div class="col-md-3">
 				<div class="row  text-center">
 					<figure>
-						<img src="<?php echo site_url($foto_path);?>" class="img-rounded img-responsive" alt="" style="margin: 0px auto 10px;">
+						<img src="<?php echo $servicioRS->foto_path;?>" class="img-rounded img-responsive" alt="" style="margin: 0px auto 10px;">
 					</figure>
 					<div class="col-md-10 col-md-offset-1">
 						<p>
@@ -20,7 +20,7 @@
 					 		<form action="<?php echo site_url('set_favorito'); ?>" method="POST" id="favoritosForm">
 					 			<div class="checkbox">
 							        <label>
-										<input type="hidden" name="id_servicio" value="<?php echo $id; ?>">	
+										<input type="hidden" name="id_servicio" value="<?php echo $servicioRS->id; ?>">	
 										<input type="checkbox" name="favorito" <?php if($favorito){echo "checked";} ?> id="favorito">
 									<?php 
 							          	if($favorito)
@@ -46,13 +46,13 @@
 					if(isset($usuarioSession))
 					{
 			?>
-						<a href="#modalOpinion" class="btn btn-primary"  data-toggle="modal" data-target="#modalOpinion">Quiero opinar</a>
+						<a href="#modalOpinion" class="btn btn-primary" data-toggle="modal" data-target="#modalOpinion">Quiero opinar</a>
 			<?php
 					}
 					else
 					{
 			?>
-						<a data-toggle="modal" href="#loginModal" data-seccion="ficha"  data-target="#loginModal" rel=""  class="btn btn-primary affterOpenLogin">Quiero opinar</a>
+						<a data-toggle="modal" href="#loginModal" data-seccion="ficha" data-target="#loginModal" rel="" class="btn btn-primary affterOpenLogin">Quiero opinar</a>
 			<?php
 					}
 
@@ -63,28 +63,28 @@
 			<div class="col-md-6">
                 <div class="row">
                 	<p class="pull-right">
-	                	<span class="label label-default"><?php echo ucfirst($categoria); ?></span>
-	                	<span class="label label-default"><?php echo ucfirst($localidad); ?></span>
-	                	<span class="label label-default"><?php echo ucfirst($provincia); ?></span>
+	                	<span class="label label-default"><?php echo ucfirst($servicioRS->categoria); ?></span>
+	                	<span class="label label-default"><?php echo ucfirst($servicioRS->localidad); ?></span>
+	                	<span class="label label-default"><?php echo ucfirst($servicioRS->provincia); ?></span>
                 	</p>
             	</div>
 
-				<h2><?php echo $titulo; ?></h2>
-				<p><?php echo  $descripcion; ?></p>
+				<h2><?php echo $servicioRS->titulo; ?></h2>
+				<p><?php echo  $servicioRS->descripcion; ?></p>
 				<br>
 				<h4>Datos de contacto</h4>
 				<p>
-					<strong>Teléfono: </strong><?php echo $telefono; ?><br>
+					<strong>Teléfono: </strong><?php echo $servicioRS->telefono; ?><br>
 				<?php 
 					if(isset($usuarioSession))
 					{
 				?>
-					<strong>Dirección: </strong><?php echo $direccion; ?><br>
+					<strong>Dirección: </strong><?php echo $servicioRS->direccion; ?><br>
 				<?php
 					}
 				?>
-					<strong>Sitio web: </strong><a href="<?php echo $url_web; ?>" title="<?php echo $titulo; ?>"><?php echo $url_web; ?></a><br>
-					<strong>Titular: </strong><a href="<?php echo $link_user; ?>" title="Ver perfil"><?php echo $nombre . ' ' .  $apellido; ?></a><br />
+					<strong>Sitio web: </strong><a href="<?php echo $servicioRS->url_web; ?>" title="<?php echo $servicioRS->titulo; ?>"><?php echo $servicioRS->url_web; ?></a><br>
+					<strong>Titular: </strong><a href="<?php echo $servicioRS->link_user; ?>" title="Ver perfil"><?php echo $servicioRS->nombre . ' ' .  $servicioRS->apellido; ?></a><br />
 			
 				</p>
 				<div class="clearfix"><br></div>
@@ -104,10 +104,11 @@
 		 			if(isset($usuarioSession))
 		 			{
 				?>
-						<input type="hidden" value="<?php echo $id; ?>" name="id_servicio" />
-						<input type="hidden" value="<?php echo $titulo; ?>" name="nombre_servicio" />
-						<input type="hidden" value="<?php echo $nombre; ?>" name="nombre" />
-						<input type="hidden" value="<?php echo $email; ?>" name="email" />
+						<input type="hidden" value="<?php echo $servicioRS->id; ?>" name="id_servicio" />
+						<input type="hidden" value="<?php echo $servicioRS->titulo; ?>" name="nombre_servicio" />
+						<!--<input type="hidden" value="<?php echo $servicioRS->nombre; ?>" name="nombre" />-->
+						<input type="hidden" value="<?php echo $servicioRS->userID; ?>" name="userid" />
+						<!--<input type="hidden" value="<?php echo $servicioRS->email; ?>" name="email" />-->
 						<button type="submit" class="btn btn-info pull-right">Contactar</button>
 				<?php
 					}
