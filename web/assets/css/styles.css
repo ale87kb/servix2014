@@ -210,10 +210,8 @@ text-decoration: underline;
     padding:40px 0px 8px;
 
   
-    background: #5dc9e5;
 
-    /*background: url('../images/bgtest.jpg') no-repeat;*/
-    /*background-size: cover;*/
+    background: url('../images/bgtest.jpg') no-repeat;
 
   /*  background: #d0f6ff;  Old browsers 
     background: -moz-linear-gradient(top,  #d0f6ff 0%, #ffffff 100%); 
@@ -223,6 +221,7 @@ text-decoration: underline;
     background: -ms-linear-gradient(top,  #d0f6ff 0%,#ffffff 100%); 
     background: linear-gradient(to bottom, #d0f6ff 0%, #ffffff 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d0f6ff', endColorstr='#ffffff',GradientType=0 );*/
+    background-size: cover;      /* Firefox 3.6 */    background-position: center;  /* Internet Explorer 7/8 */;
 }
 
 #search .jumbotron {

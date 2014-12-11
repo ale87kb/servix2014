@@ -8,6 +8,7 @@ class Login extends CI_Controller {
 		parent::__construct();
 		$data['title'] 			= 'Servix';
 		$this->UsuarioSession 	= $this->usuarios_model->isLogin();
+		$this->loginFb = $this->usuarios_model->_loginFB();
 	}
 
 
@@ -109,6 +110,7 @@ class Login extends CI_Controller {
 		if(!$this->UsuarioSession)
 		{
 			//Carga vista del formulario de registro
+			$data['loginFb'] = $this->loginFb;
 			$data['title'] = 'Registrar usuario';
 			$data['vista'] = 'registro_view';
 			$data['js'] = array('assets/js/registro_page.js');
