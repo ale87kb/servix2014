@@ -1360,7 +1360,10 @@ class sitio extends CI_Controller {
 
 	public function ficha_servicio($id,$servicio,$page=null){
 		$this->load->library('googlemaps');
-		
+		if($this->UsuarioSession)
+		{
+			$data['usuarioSession'] = $this->UsuarioSession;
+		}
 
 		if(is_numeric($id))
 		{
@@ -1413,7 +1416,6 @@ class sitio extends CI_Controller {
 
 				if($this->UsuarioSession)
 				{
-					$data['usuarioSession'] = $this->UsuarioSession;
 					$fav = $this->usuarios_model->getFavorito($this->UsuarioSession['id'], $id);
 					if(!empty($fav))
 					{
@@ -1437,10 +1439,7 @@ class sitio extends CI_Controller {
 		}
 		else
 		{
-			if($this->UsuarioSession)
-			{
-			$data['usuarioSession'] = $this->UsuarioSession;
-			}
+			
 		 	$data['title']     = 'Ficha del servicio no encontrada';
 			$data['vista']     = 'ficha_servicio_no_encontrado_view';
 		}

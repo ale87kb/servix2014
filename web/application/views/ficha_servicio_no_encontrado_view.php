@@ -1,4 +1,5 @@
-<section class="ficha">
+<div class="container" id="main">
+	<section class="ficha">
 	<div class="row">
 		<div class="col-md-12">
 			<h1>Ficha del servicio</h1>
@@ -12,3 +13,4 @@
 		</div>
 	</div>
 </section>
+</div>
