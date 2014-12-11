@@ -32,10 +32,19 @@
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             <h4 class="modal-title">Iniciar Sesión con tu e-mail</h4>
-           
+          </div>
+          <div class="text-center" id="facelog">
+            <?php 
+              if(isset($loginFb['login_url']))
+              {
+            ?>
+                <!--<a style="display:block;" href=" <?php echo ($loginFb['login_url']); ?>" class="btn btn-primary">Iniciar con <i class="fa fa-facebook-square"></i></a>-->
+                <a href="<?php echo ($loginFb['login_url']); ?>" class="facebtnlog btn btn-primary">Iniciar con Facebook</a>
+          <?php
+              }
+             ?>
           </div>
           <div class="modal-body login_modal_body">
-
             <form role="form" id="form_login_ajax" name="login_ajax" action="<?php echo site_url('validar_login_ajax');?>" method="POST" enctype="application/x-www-form-urlencoded">
               <div class="form-group">
                 <ul id="errors"></ul>
@@ -58,13 +67,6 @@
                 <div class="text-right">
                   <input type="hidden" name="curretSection" id="curretSection" value="<?php echo $this->uri->segment(1); ?>">
                   <input type="hidden" name="nextAction" id="nextAction" value="">
-                  <?php 
-                    if(isset($loginFb['login_url'])){
-                      ?>
-                  <a href=" <?php   echo ($loginFb['login_url']); ?>" class="btn btn-primary" >Iniciar con <i class="fa  fa-facebook-square"></i></a>
-                      <?php
-                    }
-                   ?>
                   <button class="btn btn-success" type="submit" value="Ingresar">Iniciar Sesión</button>
                 </div>
           </form>
@@ -73,7 +75,6 @@
           <div class="modal-footer">
             <a class="pull-left" href="<?php echo site_url('registrarse'); ?>"rel="nofollow">Registrarse</a>
             <a href="<?php echo site_url('recuperar-clave');?>" rel="nofollow">No recuerdo mi contraseña</a>
-            <!--<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>-->
           </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->

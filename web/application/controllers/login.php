@@ -799,6 +799,7 @@ class Login extends CI_Controller {
         }
         else
         {
+        	$this->_setRecordarUsuario($this->input->post('recordar'), $this->input->post('usuario'));
             $data = array(
                 'res'      	=> "success"
             );
@@ -806,6 +807,31 @@ class Login extends CI_Controller {
         }
 	}
 
+	private function _setRecordarUsuario($checkbox, $user){
+	    if(isset($checkbox) && !empty($checkbox)){
+	    /*	if (isset($_COOKIE['idusuario'])) {
+	            unset($_COOKIE['idusuario']);
+    	        setcookie('idusuario', null, -1, '/');
+    	        return true;
+        	} else {
+            	return false;
+        	}*/
+			$resultemail = $this->usuarios_model->getEmail($user);
+	    	//setcookie("idusuario", $resultemail[0]['id'] , time()+3600, "/", COOKIE_DOMAIN);
+	    	$cookie = array(
+			    'name'   => 'idusuario',
+			    'value'  => $resultemail[0]['id'],
+			    'expire' => time()+3600,
+			    'domain' => COOKIE_DOMAIN,
+			    'path'   => '/',
+			    'secure' => TRUE
+			);
+
+			set_cookie($cookie);
+		}
+	    // time()+3600 es igual a la hora actual mas 3600 segundos osea una hora que es lo que durara la cookie
+	    // el / es la ruta donde se almacena la cookie te recomiendo que lo dejes asi porque el navegador sabra donde almacenarla
+	}
 
 	public function menu_usuario(){
 		$data['usuarioSession'] = $this->UsuarioSession;

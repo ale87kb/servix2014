@@ -64,6 +64,10 @@ define('APP_COMPANY', 'Servix');
 /*E-MAIL DE LA COMPAÑIA AL CUAL NO RESPONDER*/
 define('MAIL_NO_RESPONDER', 'no-responder@servix.com');
 
+define('COOKIE_DOMAIN', '');
+//LOCALHOST = ""
+//EN SERVIDO = ".tu_dominio.com"
+
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */
