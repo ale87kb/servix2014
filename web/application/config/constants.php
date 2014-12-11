@@ -68,6 +68,5 @@ define('COOKIE_DOMAIN', '');
 //LOCALHOST = ""
 //EN SERVIDO = ".tu_dominio.com"
 
-
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

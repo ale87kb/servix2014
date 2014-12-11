@@ -819,7 +819,7 @@ class Login extends CI_Controller {
 			$resultemail = $this->usuarios_model->getEmail($user);
 	    	//setcookie("idusuario", $resultemail[0]['id'] , time()+3600, "/", COOKIE_DOMAIN);
 	    	$cookie = array(
-			    'name'   => 'idusuario',
+			    'name'   => 'srxidusr',
 			    'value'  => $resultemail[0]['id'],
 			    'expire' => time()+3600,
 			    'domain' => COOKIE_DOMAIN,
@@ -913,7 +913,14 @@ class Login extends CI_Controller {
 
 	//Chequea que la foto no este vacia, y si lo esta devuelve la foto por default: assets/images/perfil_640.png
 	private function _chekFotoDB($sess_array, $path_125, $path_60){
-		if($sess_array['foto'] == "")
+
+		if(!file_exists('./' . $sess_array['foto_path']))
+		{
+			$sess_array['foto_path']		= $path_125;
+		 	$sess_array['foto_125_path']	= $path_125;
+		 	$sess_array['foto_60_path']		= $path_60;
+		}
+		else if($sess_array['foto'] == "")
 		{
 		 	$sess_array['foto_path']		= $path_125;
 		 	$sess_array['foto_125_path']	= $path_125;
@@ -925,9 +932,11 @@ class Login extends CI_Controller {
 
 	public function logout(){
 		//Destruye la sesion del usuario y vuelve a login.
+   		
    		$this->session->unset_userdata('logged_in');
    	    $this->facebook->destroySession();
 	   	$this->session->sess_destroy();
+		delete_cookie('srxidusr');
 	   	redirect('', 'refresh');
 	}
 
