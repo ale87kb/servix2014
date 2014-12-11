@@ -1,8 +1,10 @@
 <div class="container" id="main">
 <div class="col-md-12">
-	<h1>Politica de uso de datos</h1>
-	<p>uso de datos
-	</p>
+	<h1>POLÍTICA DE CONTENIDO</h1>
+	<p>
+
+		 Usted entiende que Servix no controla, y no es responsable de todos los artículos, mensajes, comentarios, archivos, las imágenes, las fotografías, los videos, sonidos y todo otro material ("Contenido") anunciado o bien transmitido a través del Servicio u obtenido a partir de este, y que al utilizar el sitio usted puede estar expuesto a Contenido ofensivo, indecente, impreciso, tramposo o bien objetable por algún otro motivo. Sumado a ello, el sitio Servix y el Contenido que se encuentra disponible a través del sitio pueden contener enlaces a otros sitios, sitios que no guardan relación alguna con Servix ni están bajo su control. Servix no realiza manifestaciones ni otorga garantías respecto de la precisión o la autenticidad de la información contenida en dichos sitios. La conexión que el Usuario realice con otros sitios Web queda totalmente bajo la responsabilidad de dicho Usuario. El Usuario se obliga a evaluar y asumir los riesgos que se relacionan con el uso del Contenido. El Usuario conviene en que puede no confiar en dicho Contenido y en que bajo ninguna circunstancia Servix será responsable por el Contenido o bien las pérdidas o los daños y perjuicios que el Usuario pueda sufrir como resultado del uso de un Contenido publicado, enviado por email o que de otra forma el Usuario hubiera podido acceder mediante el Servicio. El Usuario reconoce que Servix no hace un análisis previo ni aprueba Contenido alguno, no obstante lo cual, que Servix conservará el derecho (pero no la obligación) a su entera discreción para rechazar, eliminar o quitar aquel Contenido que se haya puesto a disposición de los demás a través del Servicio y que implique una violación a la concepción del sitio o las Condiciones o por cualquier otro motivo.</p>
+
 </div>
 
 </div>
