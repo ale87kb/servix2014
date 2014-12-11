@@ -72,12 +72,10 @@ class Login extends CI_Controller {
 
 				if($resultadoRecuClav)
 				{
-
 					$mailenviado = $this->sendEmailNuevaClave($usuariorecupero);
 
 					if($mailenviado)
 					{
-
 						$data['mailenviado'] = 'Mensaje enviado';
 					}
 					else
@@ -85,12 +83,10 @@ class Login extends CI_Controller {
 						$data['mailnoenviado'] = "No se puedo enviar el e-mail";
 						log_message('error', $this->email->print_debugger());
 					}
-
 					$data['correcto'] 	= "La clave a sido actualizada";
 					$data['title'] 		= "Recuperar Clave";
 					$data['vista'] 		= "login/recuperar_clave_respuesta";
 					$this->load->view("login_view", $data);
-
 				}
 				else
 				{
@@ -98,11 +94,9 @@ class Login extends CI_Controller {
 					$data['title'] 		= "Recuperar Clave - Error";
 					$data['vista'] 		= "login/recuperar_clave_respuesta";
 					$this->load->view("login_view", $data);
-
 				}
 			}
 		}
-
 	}
 
 
@@ -125,10 +119,8 @@ class Login extends CI_Controller {
 
 	public function validar_nuevo_usuario(){
 		//Valida el formulario de registro de nuevo usuario
-
 		if(isset($_POST['grabar']) and $_POST['grabar'] == 'si')
 		{
-
 			$this->load->library('form_validation');
 
 			$this->form_validation->set_rules('usuario', 'e-mail', 'trim|required|valid_email|xss_clean|callback_check_user_duplicate');
@@ -150,7 +142,6 @@ class Login extends CI_Controller {
 			else
 			{
 				$fecha = date('Y-m-d H:m:i');
-
 				$nuevoUsuario['fecha_creacion'] 	= $fecha;
 				$nuevoUsuario['fecha_mod_estado'] 	= $fecha;
 				$nuevoUsuario['ultima_edicion'] 	= $fecha;
@@ -162,7 +153,6 @@ class Login extends CI_Controller {
 				$nuevoUsuario['direccion'] 			= $this->input->post('direccion', TRUE);
 				$nuevoUsuario['codigo'] 			= $this->_generarCodigo();
 				$nuevoUsuario['foto'] 				= '';
-
 				
 				$nuevoUsuario['estado'] 			= 0;
 				//El estado del usuario puede ser 
@@ -174,13 +164,12 @@ class Login extends CI_Controller {
 
 				$resultAdd = $this->usuarios_model->add_usuario($nuevoUsuario);
 
-
 				if($resultAdd)
 				{
 					//Envio un mail para confirmar usuario
-
 					$mailenviado = $this->sendEmailConfirm($nuevoUsuario);
-					if($mailenviado){
+					if($mailenviado)
+					{
 						$data['mailenviado'] = "Mensaje enviado";
 					}
 					else
@@ -189,9 +178,7 @@ class Login extends CI_Controller {
 						log_message('error', $this->email->print_debugger());
 					}
 
-
 					$data['correcto'] 	= "Registro correcto";
-
 					$data['title'] 		= "Registro de Usuario en Servix";
 					$data['vista'] 		= "login/registro_respuesta";
 					$this->load->view("login_view", $data);
@@ -206,6 +193,7 @@ class Login extends CI_Controller {
 			}
 		}
 	}
+
 	public function validar_nuevo_usuario_ajax(){
 		//Valida el formulario de registro de nuevo usuario
 
@@ -229,13 +217,10 @@ class Login extends CI_Controller {
 
 			if($this->form_validation->run() == FALSE)
 			{
-				//$this->registrar_usuario();
-/*				if(form_error('usuario') != "")*/
 				if(form_error('usuario'))
 	            {
 		            $data['username'] = form_error('usuario');
 	            }
-	           	
 	           	$data['res'] = "error";
 	            echo json_encode($data);
 			}
@@ -267,7 +252,6 @@ class Login extends CI_Controller {
 
 				if($resultAdd)
 				{
-
 					$data['adduser'] 	= true;
 					$data['mensaje'] 	= "Registro correcto";
 					$data['title'] 		= "Registro de Usuario en Servix";
@@ -288,7 +272,6 @@ class Login extends CI_Controller {
 						$data['mailmssg'] 		= "No se pudo enviar el mensaje.";
 						
 						log_message('error', $this->email->print_debugger());
-
 					}
 				}
 				else
@@ -298,7 +281,6 @@ class Login extends CI_Controller {
 					$data['title'] 		= "Registro de Usuario en Servix - Error";
 					$data['vista'] 		= "login/registro_respuesta";
 				}
-
 				$data['res'] = "success";
 				echo json_encode($data);
 			}
@@ -371,7 +353,6 @@ class Login extends CI_Controller {
 	            {
 	            	$data['clave'] 		= form_error('clave');
 	            }
-	           	
 	           	$data['res'] = "error";
 	            echo json_encode($data);
 			}
@@ -483,7 +464,6 @@ class Login extends CI_Controller {
 	}
 
 
-
 	public function registro_respuesta(){
 		$data = $this->input->post(json_decode('datos',true));
 		$vista = $this->load->view('login/registro_respuesta',$data['datos'],true);
@@ -515,9 +495,7 @@ class Login extends CI_Controller {
 
 
 	public function sendEmailRegistroOk($perfil){
-		
 		//$this->load->view('email/confirmEmail', $post);
-
 		if(isset($perfil))
 		{
 		 	// print_d($post);
@@ -566,7 +544,7 @@ class Login extends CI_Controller {
 	        $this->email->message($mesg);
 	        $mail = $this->email->send();
 	      
-	      return $mail;
+	      	return $mail;
 		}
 	}
 
@@ -593,7 +571,7 @@ class Login extends CI_Controller {
 	        $this->email->message($mesg);
 	        $mail = $this->email->send();
 	      
-	      return $mail;
+	      	return $mail;
 		}
 	}
 
@@ -620,7 +598,7 @@ class Login extends CI_Controller {
 	        $this->email->message($mesg);
 	        $mail = $this->email->send();
 	      
-	      return $mail;
+	    	return $mail;
 		}
 	}
 
@@ -647,7 +625,7 @@ class Login extends CI_Controller {
 	        $this->email->message($mesg);
 	        $mail = $this->email->send();
 	      
-	      return $mail;
+	    	return $mail;
 		}
 	}
 
@@ -688,16 +666,15 @@ class Login extends CI_Controller {
         {
             $this->facebook->destroySession();
         }
-      
        
-       $user  = $data['user_profile']['email'];
+       	$user  = $data['user_profile']['email'];
 
 
-       if(!empty($user))
-       {
-	       $resultemail = $this->usuarios_model->getEmail($user);
-	       if($resultemail === FALSE)
-	       {
+		if(!empty($user))
+		{
+			$resultemail = $this->usuarios_model->getEmail($user);
+			if($resultemail === FALSE)
+			{
 	       		$registro = $this->_login_registro_fb($data['user_profile']);
 	       		if($registro)
 	       		{
@@ -711,9 +688,9 @@ class Login extends CI_Controller {
 	       			echo "ups.. tenemos un problema";
 	       			// $this->output->set_header('refresh:3; url='.site_url()); 
 	       		}
-	       }
-	       else
-	       {
+			}
+			else
+			{
 	       		$result = $this->usuarios_model->getUser($user);
        			if($result)
        			{
@@ -726,17 +703,15 @@ class Login extends CI_Controller {
 					echo "ups.. tenemos un problema";
        				// $this->output->set_header('refresh:3; url='.site_url());        				
        			}
-	       }
-	   }
-	   else
-	   {
+			}
+		}
+		else
+		{
 			// $this->output->set_header('refresh:5; url='.site_url('')); 
 	   		echo "<meta http-equiv='refresh' content='5; url=".site_url()."'>";
 		   	echo "ups.. tenemos un problema, no hemos podido iniciar sesi&oacute;n";
-	   }
+		}
 	}
-
-	
 	
 
 	public function showEmail($perfil){
@@ -744,10 +719,8 @@ class Login extends CI_Controller {
 	}
 
 	private function _login_registro_fb($perfil){
-
 		$fecha = date('Y-m-d H:m:i');
 		$clave_original = $this->_generaPass();
-		
 		$clave_codimd5	= md5($clave_original);
 
 		$nuevoUsuario['fecha_creacion'] 	= $fecha;
@@ -797,15 +770,6 @@ class Login extends CI_Controller {
 		}
 	}
 	
-	// private function _generarClave(){
-	// 	$str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
-	// 	$cad = "";
-	// 	for($i=0;$i<6;$i++) {
-	// 	$cad .= substr($str,rand(0,62),1);
-	// 	}
-	// 	return $cad;
-	// }
-
 
 	public function validacion_login_ajax(){
 		//Valida el formulario de login por ajax

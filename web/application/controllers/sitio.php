@@ -27,7 +27,7 @@ class sitio extends CI_Controller {
 		if(!empty($destacados))
 		{
 			$serviciosObj = $this->servicioclass->setServicios($destacados);
-			$serviciosObj = $this->servicioclass->setFotos($serviciosObj, '_350');
+			$serviciosObj = $this->servicioclass->setFotos($serviciosObj, '_dest');
 
 			$data['destacados'] = $serviciosObj;
 			//print_d($serviciosObj);
@@ -408,21 +408,12 @@ class sitio extends CI_Controller {
 				$this->image_lib->crop();
 				$this->image_lib->clear();
 				
-				//GENERA THUMBNAIL DE 350 px WIDTH X 125 px HEIGHT
-				$thumbNombre350 = '_srx_350';
-				$img_350_path = path_archivos('assets/images/servicios/', agregar_nombre_archivo($data['file_name'], $thumbNombre350));
-				$this->_generarimgDestacado($data, $img_350_path, $thumbNombre350);
+				//GENERA THUMBNAIL DE DESTACADO
+				$thumbNombreDest = '_srx_dest';
+				$medidas = array('width'=>300, 'height'=>190);
+				$img_dest_path = path_archivos('assets/images/servicios/', agregar_nombre_archivo($data['file_name'], $thumbNombreDest));
+				$this->_generarimgDestacado($data, $img_dest_path, $thumbNombreDest, $medidas);
 				$this->image_lib->clear();
-
-				//GENERA THUMBNAIL DE 300 px WIDTH X 125 px HEIGHT
-			  //  $size_thumb		= 300;
-			  //  $thumbNombre	= '_srx_300';
-			  //  $img_thumb_path = path_archivos('assets/images/servicios/', agregar_nombre_archivo($data['file_name'], $thumbNombre));
-/*
-			 	$this->load->library('image_lib');
-    			$this->image_lib->initialize(generarThumbnail($data, $size_thumb, $img_thumb_path, $thumbNombre));
-    			$this->image_lib->resize();
-				$this->image_lib->crop();*/
 
 				@unlink($_FILES['fotoServicio']);
 				@unlink($data['full_path']);
@@ -432,18 +423,48 @@ class sitio extends CI_Controller {
 		}
 	}
 
-	private function _generarimgDestacado($file, $img_path, $thumbNombre){
-		$config['image_library'] 	='gd2';
-		$config['source_image']     = $file['full_path'];
-	    $config['create_thumb']     = TRUE;
-    	$config['maintain_ratio']   = FALSE;
-    	$config['thumb_marker']     = $thumbNombre;
-		$config['width'] 			= 350;
-		$config['height'] 			= 125;
 
-		$this->image_lib->initialize($config);
+	//GENERA THUMBNAIL DE DESTACADO
+	private function _generarimgDestacado($file, $img_path, $thumbNombre, $medidas){
+		$image_config["image_library"] = "gd2";
+		$image_config["source_image"] = $file['full_path'];
+		$image_config['create_thumb'] = TRUE;
+		$image_config['maintain_ratio'] = TRUE;
+		$image_config['thumb_marker'] = $thumbNombre;
+		$image_config['width'] = $medidas['width'];
+		$image_config['height'] = $medidas['height'];
+		
+		$dim = (intval($file['image_width']) / intval($file['image_height'])) - ($image_config['width'] / $image_config['height']);
+		$image_config['master_dim'] = ($dim > 0)? 'height' : 'width';
 
+		$this->image_lib->initialize($image_config);
 		$this->image_lib->resize();
+
+		if( !$this->image_lib->resize() )
+		{
+    		return false;
+		}
+		else
+		{
+			$this->image_lib->clear();
+			$vals = @getimagesize($img_path);
+			$width = $vals[0];
+			$height = $vals[1]; 
+			$image_config['image_library'] = 'gd2';
+			$image_config['source_image'] = $img_path;
+			$image_config['new_image'] = $img_path;
+			$image_config['create_thumb'] = FALSE;
+			$image_config['maintain_ratio'] = FALSE;
+			$image_config['width'] = $medidas['width'];
+			$image_config['height'] = $medidas['height'];
+			$image_config['x_axis'] = ( $width - $image_config['width'] ) / 2;
+			$image_config['y_axis'] = ( $height - $image_config['height'] ) / 2;
+			
+			$this->image_lib->initialize($image_config);
+			$this->image_lib->crop();
+			$this->image_lib->clear();
+		}
+
 	}
 
 
@@ -618,7 +639,7 @@ class sitio extends CI_Controller {
 						//SI ENCUENTRA LOS ARCHIVOS LOS ELIMINA
 						$img_thumb_path = path_archivos('assets/images/servicios/', agregar_nombre_archivo($post['foto'],''));
 						@unlink($img_thumb_path);
-						$img_thumb_path = path_archivos('assets/images/servicios/', agregar_nombre_archivo($post['foto'],'_350'));
+						$img_thumb_path = path_archivos('assets/images/servicios/', agregar_nombre_archivo($post['foto'],'_dest'));
 						@unlink($img_thumb_path);
 						$img_thumb_path = path_archivos('assets/images/servicios/', agregar_nombre_archivo($post['foto'],'_200'));
 						@unlink($img_thumb_path);
@@ -627,19 +648,6 @@ class sitio extends CI_Controller {
 					}
 
 					$rs = $this->servicios_model->updateServicio($post);
-
-					/*if($rs)
-					{
-						//todo bien
-						//redirect('ofrecer-servicio/msj/registro_ok');
-						echo "todo bien";
-					}
-					else
-					{
-						//error en db
-						//redirect('ofrecer-servicio/msj/registro_e');
-						echo "ups error";
-					}*/
 
 					if($rs)
 					{
@@ -1210,9 +1218,7 @@ class sitio extends CI_Controller {
 							log_message('error', $this->email->print_debugger());
 			 			}
 					}
-
 				}
-
 			}
 			else
 			{
@@ -1271,9 +1277,9 @@ class sitio extends CI_Controller {
 					$imgPaht = path_archivos('assets/images/servicios/', agregar_nombre_archivo($fotoServicio,'_200'));
 					@unlink($imgPaht);
 				}
-				if(file_exists('./assets/images/servicios/' . agregar_nombre_archivo($fotoServicio, '_350')))
+				if(file_exists('./assets/images/servicios/' . agregar_nombre_archivo($fotoServicio, '_dest')))
 				{
-					$imgPaht = path_archivos('assets/images/servicios/', agregar_nombre_archivo($fotoServicio,'_350'));
+					$imgPaht = path_archivos('assets/images/servicios/', agregar_nombre_archivo($fotoServicio,'_dest'));
 					@unlink($imgPaht);
 				}
 				$rs = $this->servicios_model->unsetServicio($id_servicio);
@@ -1317,7 +1323,6 @@ class sitio extends CI_Controller {
 		{
 			return false;
 		}
-
 	}
 
 	public function update_servicio_solicitado(){
@@ -1343,7 +1348,6 @@ class sitio extends CI_Controller {
 		{
 			return false;
 		}
-
 	}
 
 	public function unset_postulacion(){
@@ -1377,30 +1381,6 @@ class sitio extends CI_Controller {
 				$serviciosObj = $this->servicioclass->setLinkUser($serviciosObj);
 				$data['servicioRS'] = $serviciosObj[0];
 
-
-
-/*
-				foreach ($servicioRS[0] as $key => $value)
-				{
-					$data[$key] = $value;
-					print_d($key);
-					$data['link_user'] = site_url('usuario/perfil/'. $servicioRS[0]['userID'].'-'.$servicioRS[0]['nombre'].'-'.$servicioRS[0]['apellido']);
-				    if($servicioRS[0]['foto'] == "" || $servicioRS[0]['foto'] == null)
-				    {
-				    	$data['foto_path'] = 'assets/images/servicio_200.jpg';
-				    }
-				    else if(file_exists('./assets/images/servicios/' . agregar_nombre_archivo($servicioRS[0]['foto'], '_200')))
-				    {
-				    	$data['foto_path'] = path_archivos('assets/images/servicios/', agregar_nombre_archivo($servicioRS[0]['foto'], '_200'));
-				    }
-				    else 
-				    {
-				    	$data['foto_path'] = 'assets/images/servicio_200.jpg';
-				    }
-				    $ltn =   $servicioRS[0]['latitud'].','.$servicioRS[0]['longitud'];
-				}
-
-*/
 				$latlong = $serviciosObj[0]->latitud.','.$serviciosObj[0]->longitud;
 				$config = array();
 				$config['center'] = $latlong;

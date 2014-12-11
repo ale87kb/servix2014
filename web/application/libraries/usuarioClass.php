@@ -23,9 +23,6 @@ class usuarioClass {
 	private $_fotoPath		= './assets/images/usuarios/';
 	private $_carpetafotos 	= 'assets/images/usuarios/';
 	private $_fotoPerfil 	= 'assets/images/perfil'; //EJEMPLO: assets/images/perfil_125.jpg
-	private $_ext125 		= '_125';
-	private $_ext60 		= '_60';
-
 
     public function __construct() {
     }
