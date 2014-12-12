@@ -61,7 +61,7 @@
               </div>
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" value="recordar" name="recordar" id="recordar">Seguir conectado
+                    <input type="checkbox" value="recordar" name="recordar" id="recordar" <?php echo set_checkbox('recordar', 'recordar'); ?>>Recordar Usuario
                   </label>
                 </div>
                 <div class="text-right">

@@ -5,14 +5,18 @@
       if(!empty($destacados))
       {
         $val = 0;
-        ?>
+    ?>
         <h4>Top 6 servicios destacados</h4>
         <div class="row paneles">
             
-  <?php
+      <?php
         foreach ($destacados as $servicio)
         {
-          ?>
+          if ($val % 3 == 0 && $val != 0) {
+            echo '</div><div class="row paneles">';
+          }
+          $val++;
+      ?>
               <div class="col-sm-4 col-xs-12">
                 <div class="destc">
                   <p><a href="<?php echo $servicio->link_servicio; ?>"><img src="<?php echo $servicio->foto_path; ?>" alt="<?php echo $servicio->titulo; ?>" class="img-responsive"></a></p>

@@ -296,9 +296,16 @@ var app = function(){
             urlweb = this.url;
            
             //Reseteo el cuadro login cuando aparece
-            $('#loginModal').on('shown.bs.modal', function() {
+           /*$('#loginModal').on('shown.bs.modal', function() {
                 $('#form_login_ajax').bootstrapValidator('resetForm', true);
+            });*/
+            $('#loginModal').on('hidden.bs.modal', function() {
+                $('#form_login_ajax').bootstrapValidator('resetForm', true);
+                $('#loginModal').on('shown.bs.modal', function() {
+                $('#form_login_ajax').bootstrapValidator('resetForm', true);
+                });
             });
+            
 
             $('#form_login_ajax').bootstrapValidator({
                 autoFocus:  true,

@@ -12,6 +12,8 @@ class sitio extends CI_Controller {
 		$this->loginFb = $this->usuarios_model->_loginFB();
 		$this->load->library('usuarioClass');
 		$this->load->library('servicioClass');
+
+		//var_dump($this->encrypt->decode($this->input->cookie('srxidusr',TRUE)));
 	}
 
 	public function index(){
@@ -19,6 +21,7 @@ class sitio extends CI_Controller {
 		{
 			$data['usuarioSession'] = $this->UsuarioSession;
 		}
+
 		$seccion = "servicios-solicitados";
 
 		$destacados  	 = $this->servicios_model->getServiciosDestacados();
@@ -669,72 +672,83 @@ class sitio extends CI_Controller {
 	public function editar_servicio($q){
 		if($this->UsuarioSession)
 		{
-			$data['seccion'] = 'editar-servicio';
-			$data['buscador_off'] = true;
-			$data['usuarioSession'] = $this->UsuarioSession;
-			$this->load->library('googlemaps');
-			
 			$rs = $this->servicios_model->getServicioFicha($q);
-			foreach ($rs as $v)
+			if($rs && $rs[0]['userID']==$this->UsuarioSession['id'])
 			{
-				$config = array();
-				$latLong = $v['latitud'].','.$v['longitud'];
-				if(empty($latLon))
+				$data['seccion'] = 'editar-servicio';
+				$data['buscador_off'] = true;
+				$data['usuarioSession'] = $this->UsuarioSession;
+				$this->load->library('googlemaps');
+				
+				foreach ($rs as $v)
 				{
-					$latLon = $v['localidad'];
+					$config = array();
+					$latLong = $v['latitud'].','.$v['longitud'];
+					if(empty($latLon))
+					{
+						$latLon = $v['localidad'];
+					}
+					$data['titulo'] = $v['titulo'];
+					$data['direccion'] = $v['direccion'];
 				}
-				$data['titulo'] = $v['titulo'];
-				$data['direccion'] = $v['direccion'];
+
+				$config['center'] = $latLong;
+				
+				$config['zoom'] = '17';
+				$config['places'] = TRUE;
+				$config['scrollwheel'] = FALSE;
+				$config['placesAutocompleteInputID'] 	= 'myPlaceTextBox';
+				$config['placesAutocompleteBoundsMap'] 	= TRUE;
+				$config['placesAutocompleteRestrict'] 	= 'AR'; 
+				$config['placesAutocompleteOnChange'] 	= gmapScript();//viene del helper de mis_funciones
+				$this->googlemaps->initialize($config);
+			
+
+				$marker = array();
+				$marker['icon'] = site_url('assets/images/servix_marker.png');
+				$marker['icon_size']   = '25, 66';
+				$marker['icon_origin'] = '0, 0';
+				$marker['icon_anchor'] = '17, 34';
+				$marker['icon_scaledSize'] = '20, 35';
+
+				$marker['position']			  = $latLong;
+
+				$marker['infowindow_content'] = ('<div style="width: 250px;color: #000;font-size:14px;font-family:Arial, Helvetica, sans-serif;">'.ucwords($v['titulo']).'<br>'.ucfirst($v['direccion']).'			</div>');
+				$marker['infowindowMaxWidth'] = "500";
+				$marker['animation']		  = 'DROP';
+				$this->googlemaps->add_marker($marker);
+				
+				$data['map'] = $this->googlemaps->create_map();
+
+				$data['post'] = $rs[0];
+				$data['form_errors'] =null;
+				$data['vista'] = 'editar_servicio';
+
+				$this->_js = array(
+					'assets/js/bootstrap-typeahead.js',
+					'assets/js/bootstrap-select.min.js',
+					'assets/js/ajax-bootstrap-select.min.js',
+					'assets/js/script-typehead.js',
+					'assets/js/script-selectpicker.js',
+				);
+
+				$this->_css = array(
+					'assets/css/bootstrap-select.min.css',
+				);
+
+				$data['css'] = $this->_css;
+				$data['js'] = $this->_js;
+
+				$this->load->view('home_view',$data);
 			}
-
-			$config['center'] = $latLong;
-			
-			$config['zoom'] = '17';
-			$config['places'] = TRUE;
-			$config['scrollwheel'] = FALSE;
-			$config['placesAutocompleteInputID'] 	= 'myPlaceTextBox';
-			$config['placesAutocompleteBoundsMap'] 	= TRUE;
-			$config['placesAutocompleteRestrict'] 	= 'AR'; 
-			$config['placesAutocompleteOnChange'] 	= gmapScript();//viene del helper de mis_funciones
-			$this->googlemaps->initialize($config);
-		
-
-			$marker = array();
-			$marker['icon'] = site_url('assets/images/servix_marker.png');
-			$marker['icon_size']   = '25, 66';
-			$marker['icon_origin'] = '0, 0';
-			$marker['icon_anchor'] = '17, 34';
-			$marker['icon_scaledSize'] = '20, 35';
-
-			$marker['position']			  = $latLong;
-
-			$marker['infowindow_content'] = ('<div style="width: 250px;color: #000;font-size:14px;font-family:Arial, Helvetica, sans-serif;">'.ucwords($v['titulo']).'<br>'.ucfirst($v['direccion']).'			</div>');
-			$marker['infowindowMaxWidth'] = "500";
-			$marker['animation']		  = 'DROP';
-			$this->googlemaps->add_marker($marker);
-			
-			$data['map'] = $this->googlemaps->create_map();
-
-			$data['post'] = $rs[0];
-			$data['form_errors'] =null;
-			$data['vista'] = 'editar_servicio';
-
-			$this->_js = array(
-				'assets/js/bootstrap-typeahead.js',
-				'assets/js/bootstrap-select.min.js',
-				'assets/js/ajax-bootstrap-select.min.js',
-				'assets/js/script-typehead.js',
-				'assets/js/script-selectpicker.js',
-			);
-
-			$this->_css = array(
-				'assets/css/bootstrap-select.min.css',
-			);
-
-			$data['css'] = $this->_css;
-			$data['js'] = $this->_js;
-
-			$this->load->view('home_view',$data);
+			else
+			{
+				$this->error_404();
+			}
+		}
+		else
+		{
+			$this->error_404();
 		}
 	}
 	
@@ -1094,36 +1108,41 @@ class sitio extends CI_Controller {
 			if(is_numeric($idSolicitado))
 			{
 				$id_solicitado = $this->servicios_model->getServicioSolicitado($idSolicitado);
-				if($id_solicitado)
+				
+				if($id_solicitado && $id_solicitado[0]['id'] == $this->UsuarioSession['id'])
 				{
 					$data['post'] = $id_solicitado[0];
 					$data['post']['categoria'] = ucfirst($id_solicitado[0]['categoria']);
 					$data['post']['fecha_fin'] = date('d/m/Y H:m', strtotime($id_solicitado[0]['fecha_fin']));
+
+					$data['usuarioSession'] = $this->UsuarioSession;
+
+					$data['vista'] = 'usuario/editar_servicio_solicitado';
+
+					$this->_js = array(
+						'assets/js/bootstrap-typeahead.js',
+						'assets/js/moment-with-locales.js',
+						'assets/js/bootstrap-datetimepicker.min.js',
+						'assets/js/bootstrap-select.min.js',
+						'assets/js/ajax-bootstrap-select.min.js',
+						'assets/js/script-typehead.js',
+						'assets/js/script-datepicker.js',
+						'assets/js/script-selectpicker.js',
+					);
+
+					$this->_css = array(
+						'assets/css/bootstrap-datetimepicker.min.css',
+						'assets/css/bootstrap-select.min.css',
+					);
+
+					$data['css'] = $this->_css;
+					$data['js'] = $this->_js;
+					$this->load->view('usuarios_view',$data);
 				}
-
-				$data['usuarioSession'] = $this->UsuarioSession;
-
-				$data['vista'] = 'usuario/editar_servicio_solicitado';
-
-				$this->_js = array(
-					'assets/js/bootstrap-typeahead.js',
-					'assets/js/moment-with-locales.js',
-					'assets/js/bootstrap-datetimepicker.min.js',
-					'assets/js/bootstrap-select.min.js',
-					'assets/js/ajax-bootstrap-select.min.js',
-					'assets/js/script-typehead.js',
-					'assets/js/script-datepicker.js',
-					'assets/js/script-selectpicker.js',
-				);
-
-				$this->_css = array(
-					'assets/css/bootstrap-datetimepicker.min.css',
-					'assets/css/bootstrap-select.min.css',
-				);
-
-				$data['css'] = $this->_css;
-				$data['js'] = $this->_js;
-				$this->load->view('usuarios_view',$data);
+				else
+				{
+					$this->error_404();
+				}
 			}
 		}
 		else

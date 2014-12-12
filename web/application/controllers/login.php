@@ -817,17 +817,18 @@ class Login extends CI_Controller {
             	return false;
         	}*/
 			$resultemail = $this->usuarios_model->getEmail($user);
+			$this->load->library('encrypt');
+			$encrpt = $this->encrypt->encode($resultemail[0]['id']);
 	    	//setcookie("idusuario", $resultemail[0]['id'] , time()+3600, "/", COOKIE_DOMAIN);
 	    	$cookie = array(
 			    'name'   => 'srxidusr',
-			    'value'  => $resultemail[0]['id'],
+			    'value'  => $encrpt,
 			    'expire' => time()+3600,
 			    'domain' => COOKIE_DOMAIN,
-			    'path'   => '/',
-			    'secure' => TRUE
+			    'path'   => '/'
 			);
 
-			set_cookie($cookie);
+			$this->input->set_cookie($cookie);
 		}
 	    // time()+3600 es igual a la hora actual mas 3600 segundos osea una hora que es lo que durara la cookie
 	    // el / es la ruta donde se almacena la cookie te recomiendo que lo dejes asi porque el navegador sabra donde almacenarla
@@ -932,11 +933,9 @@ class Login extends CI_Controller {
 
 	public function logout(){
 		//Destruye la sesion del usuario y vuelve a login.
-   		
    		$this->session->unset_userdata('logged_in');
    	    $this->facebook->destroySession();
 	   	$this->session->sess_destroy();
-		delete_cookie('srxidusr');
 	   	redirect('', 'refresh');
 	}
 
