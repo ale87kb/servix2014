@@ -2,8 +2,7 @@
 	<div class="navbar navbar-default navbar-static-bottom footer-servix">
 	  <div class="container">
        <div class="navbar-header">
-          
-           <span class="navbar-text">      &copy; <?php echo APP_NAME; ?> 2014. Todos los derechos reservados.      </span> 
+          <span class="navbar-text">&copy; <?php echo APP_NAME; ?> 2014. Todos los derechos reservados.</span> 
         </div>
           <ul class="nav navbar-nav navbar-right ">
             <li><a href="<?php echo site_url('preguntas-frecuentes');?>">Preguntas frecuentes</a></li>
@@ -13,16 +12,12 @@
             <li><a href="<?php echo site_url('politica-de-uso-de-datos');?>">Politica de uso de datos</a></li>
             
             <li><a href="<?php echo site_url('politica-de-cookies');?>">Politica de Cookies</a></li>
-
           </ul>
-	  
 	  </div>
 	</div>
 
 	 <?php
      if(!isset($usuarioSession)){
-
-
       ?>
 
   <!-- Login Modal -->
@@ -84,12 +79,12 @@
         if(isset($seccion) && ($seccion == 'ficha')){
 
         ?>
-                <!-- Opinion Modal -->
+      <!-- Opinion Modal -->
       <div class="modal fade" id="modalOpinion" tabindex="-1" role="dialog" aria-labelledby="modalOpinion-1" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
               <h4 class="modal-title" id="modalOpinion-1">Dejanos tu opinion sobre el servicio</h4>
             </div>
             <form class="form-horizontal" role="form" id="form_votacion" method="post" action="<?php echo site_url('validar-voto'); ?>" enctype="application/x-www-form-urlencoded">
@@ -142,10 +137,6 @@
           </div>
         </div>
       </div>
-
-
-
-
 
         <?php
         }
@@ -206,26 +197,20 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
               <h4 class="modal-title" id="title_edit_foto">Editar foto de perfil</h4>
             </div>
             <div class="modal-body">
               <p>Sube un archivo para actualizar tu foto de perfil.</p>
-
-
                 <form action="<?php echo site_url('actualizar_foto_perfil'); ?>" method="post" enctype="multipart/form-data" id="form_edit_foto">
                   <input type="file" title="Elegir archivo" name="mifoto" class="btn-primary">
                   <input type="submit" value="Subir foto">
                 </form>
-                    
-                <div class="progress">
-                    <div class="bar"></div>
+                <div class="progress progress-striped active">
+                    <div class="bar progress-bar progress-bar-success"></div>
                     <div class="percent">0%</div>
                 </div>
-                    
                 <div id="status_pic"></div>
-
-
             </div>
             <div class="modal-footer">
             </div>

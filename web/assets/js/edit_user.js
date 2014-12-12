@@ -189,8 +189,6 @@ $('document').ready(function(){
         },
 
         this.modal_foto = function(){
-            
-
             var bar = $('.bar');
             var percent = $('.percent');
             var status = $('#status_pic');
