@@ -157,7 +157,7 @@ a.list-group-item {
 
 /***********EDITAR FOTO PERFIL MODALBOX ******************/
 #edit_photo .progress{ position:relative;}
-#edit_photo .percent { position:absolute; display:inline-block; top:3px; left:45%; }
+#edit_photo .percent { position:absolute; display:inline-block; top:3px; left:45%; color:#ccc; }
 
 /***********EDITAR FOTO PERFIL MODALBOX ******************/
 

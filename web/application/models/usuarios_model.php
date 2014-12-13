@@ -38,10 +38,14 @@ Class Usuarios_model extends CI_Model{
         else
         {
             $data['login_url'] = $this->facebook->getLoginUrl(array(
+                'scope' => array("email"), // permissions here
+                'display' => 'popup',
                 'redirect_uri' => site_url('login/verificacion-login-fb'), 
-                'scope' => array("email") // permissions here
             ));
+            // $this->facebook->destroySession();
         }
+
+       
         return $data;
 	}
 

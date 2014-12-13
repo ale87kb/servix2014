@@ -33,8 +33,8 @@
               if(isset($loginFb['login_url']))
               {
             ?>
-                <!--<a style="display:block;" href=" <?php echo ($loginFb['login_url']); ?>" class="btn btn-primary">Iniciar con <i class="fa fa-facebook-square"></i></a>-->
-                <a href="<?php echo ($loginFb['login_url']); ?>" class="facebtnlog btn btn-primary">Iniciar con Facebook</a>
+              
+                <a href="<?php echo ($loginFb['login_url']); ?>"  id="loginFB"  title="Conectar con Facebook"  class="facebtnlog btn btn-primary">Iniciar con Facebook</a>
           <?php
               }
              ?>
@@ -203,8 +203,10 @@
             <div class="modal-body">
               <p>Sube un archivo para actualizar tu foto de perfil.</p>
                 <form action="<?php echo site_url('actualizar_foto_perfil'); ?>" method="post" enctype="multipart/form-data" id="form_edit_foto">
-                  <input type="file" title="Elegir archivo" name="mifoto" class="btn-primary">
-                  <input type="submit" value="Subir foto">
+                 <div class="form-group">
+                    <input type="file" title="Elegir archivo" name="mifoto" class="btn btn-primary btn-sm">
+                     <input type="submit" value="Subir foto">
+                 </div>
                 </form>
                 <div class="progress progress-striped active">
                     <div class="bar progress-bar progress-bar-success"></div>
@@ -236,18 +238,7 @@
   <!-- FORM AJAX -->
   <script src="<?php echo site_url('assets/js/jquery.form.min.js');?>" type="text/javascript"></script>
   <!-- END AJAX -->
-  <!-- 
-  <script src="<?php echo site_url('assets/js/bootstrap-typeahead.js');?>"></script>
-  
-  <script src="<?php echo site_url('assets/js/moment-with-locales.js');?>"></script>
-  <script src="<?php echo site_url('assets/js/bootstrap-datetimepicker.min.js');?>"></script>
-  
-
-  <script src="<?php echo site_url('assets/js/bootstrap-select.min.js');?>" type="text/javascript"></script>
-  <script src="<?php echo site_url('assets/js/ajax-bootstrap-select.min.js');?>" type="text/javascript"></script>
-  
-  <script src="<?php echo site_url('assets/js/jquery.raty.js');?>" type="text/javascript"></script>
-   -->
+ 
   <script>
     $site_url = "<?php echo site_url();?>";
   </script>

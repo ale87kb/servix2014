@@ -1,7 +1,22 @@
 var app = function(){
      this.url      = $site_url,
 
-       
+        this.popupWindow = function(){
+            function popupwindow(url, title, w, h) {
+                wLeft = window.screenLeft ? window.screenLeft : window.screenX;
+                wTop = window.screenTop ? window.screenTop : window.screenY;
+
+                var left = wLeft + (window.innerWidth / 2) - (w / 2);
+                var top = wTop + (window.innerHeight / 2) - (h / 2);
+                return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+            }
+
+            $("#loginFB").on('click',function(e){
+                e.preventDefault();
+                var url = $(this).attr("href");
+                popupwindow(''+url+'', '', 500, 200);
+            });
+        }
         this.validar_busqueda = function(){
             $("#formulario-busqueda").bootstrapValidator({
                                      
@@ -772,6 +787,7 @@ var app = function(){
             this.compWizzard();
             this.validar_ofrecer();
             this.previewImgUpload();
+            this.popupWindow ();
         }
 };
     
