@@ -795,8 +795,7 @@ var app = function(){
 
 $('document').ready(function(){
 
-    var servix = new app();
-    servix.init();
+   
 
     if (typeof typeheadApp == 'function') { 
         typeheadApp(); 
@@ -813,7 +812,10 @@ $('document').ready(function(){
     if (typeof ratyApp == 'function') { 
         ratyApp(); 
     }
+
+    var servix = new app();
+    servix.init();
     
-	
+    
 
 });

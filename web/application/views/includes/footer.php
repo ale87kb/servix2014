@@ -116,7 +116,7 @@
                 </div>
                 <label for="comentario" class="col-sm-5 control-label">Cuentanos tu experiencia</label>
                 <div class="col-sm-6">
-                  <input type="hidden" name="id_servicio" value="<?php echo $id; ?>">
+                  <input type="hidden" name="id_servicio" value="<?php echo $servicioRS->id; ?>">
                         <textarea class="form-control"  name="comentario" rows="3" required></textarea>
                 </div>
               </div>

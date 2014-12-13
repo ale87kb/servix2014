@@ -24,6 +24,7 @@ class Usuario extends CI_controller{
 			$data['vistaPerfil']	= 'usuario/datos';
 			$data['page_active']	= 1;
 
+
 			//LA VISTA DEL DATOS LA CARGA CON $this->UsuarioSession
 			$this->load->view('usuarios_view', $data);
 		}
@@ -143,6 +144,19 @@ class Usuario extends CI_controller{
 			$data['vistaPerfil']	= 'usuario/comentarios';
 			$data['page_active']	= 4;
 			$data['paginacion']	 	= $UsComentarios['vinculos'];
+			$this->_js = array(
+				'assets/js/jquery.raty.js',
+				'assets/js/script-raty.js',
+			);
+
+			$this->_css = array(
+				'assets/css/raty/jquery.raty.css',
+			);
+
+
+			$data['css'] = $this->_css;
+			$data['js'] = $this->_js;
+
 			$this->load->view('usuarios_view', $data);
 		}
 		else
@@ -698,6 +712,7 @@ class Usuario extends CI_controller{
 		$this->_css = array(
 			'assets/css/raty/jquery.raty.css',
 		);
+
 
 		$data['css'] = $this->_css;
 		$data['js'] = $this->_js;
