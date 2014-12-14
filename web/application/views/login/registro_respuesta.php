@@ -1,5 +1,5 @@
-
-  	<div class="jumbotron col-md-12">
+<div class="container">
+  <div class="col-md-12">
   <h1>Registro de usuario en Servix</h1>
    
    <?php 
@@ -17,7 +17,7 @@
    		{
 	?>
 			<p>Tu usuario ha sido creado.</p>
-			<p>No se pudimos enviarte un mensaje a tu casilla de e-mail para que confirmes tu usuario, la proxima vez que inicies sesión se te pedirá verifiar tu usuario.</p>
+			<p>No pudimos enviarte un mensaje a tu casilla de e-mail para que confirmes tu usuario, la proxima vez que inicies sesión se te pedirá verifiar tu usuario.</p>
 			<p>Gracias por sumarte a Servix</p>
 
    	<?php
@@ -37,4 +37,5 @@
 	<a href="<?php echo site_url('');?>">Volver al inicio</a>
 
 
+  </div>
   </div>

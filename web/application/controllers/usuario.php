@@ -542,8 +542,9 @@ class Usuario extends CI_controller{
 	 
 	        if (!$this->upload->do_upload($file_element_name))
 	        {
+	            log_message('error', $this->upload->display_errors('', '') );
 	            $status = "error";
-	            $msg = $this->upload->display_errors('', '');
+                $msg 	= "Archvivo inválido";
 	        }
 	        else
 	        {

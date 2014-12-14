@@ -190,7 +190,6 @@
     <?php
       }
       if(isset($editar_perfil)){
-
       ?>
       <!-- Editar foto Modal -->
       <div class="modal fade" id="edit_photo" tabindex="-1" role="dialog" aria-labelledby="title_edit_foto" aria-hidden="true">
@@ -203,14 +202,25 @@
             <div class="modal-body">
               <p>Sube un archivo para actualizar tu foto de perfil.</p>
                 <form action="<?php echo site_url('actualizar_foto_perfil'); ?>" method="post" enctype="multipart/form-data" id="form_edit_foto">
-                  <input type="file" title="Elegir archivo" name="mifoto" class="btn-primary">
-                  <input type="submit" value="Subir foto">
+                  <input type="file" title="Elegir archivo" id="mifoto" name="mifoto" class="btn-primary">
+                  <input class="btn btn-success pull-right" type="submit" value="Subir foto">
+                  
+                  <div id="boxPreview">
+                    <p><img id="previewImg" class="img-responsive hidden" alt="" src=""></p>
+
+                    <div id="status_pic" class="containerprogress">
+                      <div class="alert alert-info" role="alert"></div>
+                    </div>
+                    
+                    <div id="containerprogress" class="containerprogress hidden">
+                      <div class="progress progress-striped active">
+                        <div class="bar progress-bar progress-bar-success"></div>
+                        <div class="percent">0%</div>
+                      </div>
+                    </div>
+  
+                  </div>
                 </form>
-                <div class="progress progress-striped active">
-                    <div class="bar progress-bar progress-bar-success"></div>
-                    <div class="percent">0%</div>
-                </div>
-                <div id="status_pic"></div>
             </div>
             <div class="modal-footer">
             </div>

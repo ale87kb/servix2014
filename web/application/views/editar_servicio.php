@@ -11,7 +11,6 @@
         <?php 
         		// print_d($post);
           $form_error = $this->session->flashdata('form_error');
-
      
         ?>
             <div class="row bg-white tab-box">
@@ -56,14 +55,14 @@
                             <div class="col-md-6">
                               <div class="form-group">
                               <label for="titulo">Titulo</label>
-                              <input type="text" class="form-control" id="titulo" value="<?php echo $post['titulo']?>" name="titulo"  required="" placeholder="Titulo">
+                              <input type="text" class="form-control" id="titulo" value="<?php echo $post->titulo?>" name="titulo"  required="" placeholder="Titulo">
                               <div class='titulo' style="color:red;">
                                 <?php echo $form_error['titulo']; ?>
                               </div>
                               </div>
                               <div class="form-group">
                               <label for="busqueda-servicio">Categoria</label>
-                              <input type="text" class="form-control typeaheadOnlyCat" id="busqueda-servicio" value="<?php echo ucfirst($post['categoria']);?>" name="categoria" autocomplete="off" required="" placeholder="Categoría">
+                              <input type="text" class="form-control typeaheadOnlyCat" id="busqueda-servicio" value="<?php echo ucfirst($post->categoria);?>" name="categoria" autocomplete="off" required="" placeholder="Categoría">
                                <div class='categoria' style="color:red;">
                                  <?php echo $form_error['categoria']; ?>
                               </div> 
@@ -71,14 +70,14 @@
 
                               <div class="form-group">
                               <label for="telefono">Teléfono</label>
-                              <input type="text" class="form-control" id="telefono" value="<?php echo $post['telefono'];?>" name="telefono"  required="" placeholder="Teléfono">
+                              <input type="text" class="form-control" id="telefono" value="<?php echo $post->telefono;?>" name="telefono"  required="" placeholder="Teléfono">
                                <div class='telefono' style="color:red;">
                                  <?php echo $form_error['telefono']; ?>
                               </div> 
                               </div>
                               <div class="form-group">
                               <label for="sitioweb">Web</label>
-                              <input type="url" class="form-control" id="sitioweb" value="<?php echo $post['url_web'];?>" name="sitioweb"   placeholder="Web">
+                              <input type="url" class="form-control" id="sitioweb" value="<?php echo $post->url_web;?>" name="sitioweb"   placeholder="Web">
                                <div class='sitioweb' style="color:red;">
                                <?php echo $form_error['sitioweb']; ?>
                               </div> 
@@ -153,7 +152,7 @@
                               </div>
                               <div class="form-group">
                                 <label for="descripcion">Describe el servicio que ofreces</label>
-                               <textarea class="form-control" id="descripcion" name="descripcion" rows="13"><?php echo $post['descripcion'];?></textarea>
+                               <textarea class="form-control" id="descripcion" name="descripcion" rows="13"><?php echo $post->descripcion;?></textarea>
                                 <div class='descripcion' style="color:red;">
                                 <?php echo $form_error['descripcion']; ?>
                                 </div> 
@@ -163,26 +162,25 @@
                             <div class="col-md-6">
                             	<?php 
 
-                        	 if(!empty($post['foto'])){
+                        	 if(!empty($post->foto_path)){
                                  
                              ?>
                               <h3>Imagen del servicio</h3>
                                <p>
-                               	<img src="<?php echo site_url('assets/images/servicios/'.$post['foto']); ?>"  alt="" style="margin:0 auto 10px;" class="img-responsive" id="previewImg">
+                               	<img src="<?php echo $post->foto_path; ?>"  alt="Vista Previa" style="margin:0 auto 10px;" class="img-responsive" id="previewImg">
                               </p>
                               <?php
-                               }else{
+                               }
+                               else
+                               {
                                	?>
                                	<h3>No tienes una foto del servicio..</h3>
-                               	<p>Las imagenes sirven para que la gente se interese más en lo que ofreces,
-									tambien hacen más atractiva la descripción  del servicio.
-                               	</p>
-                               	<?php
+                               	<p>Las imagenes sirven para que la gente se interese más en lo que ofreces, tambien hacen más atractiva la descripción  del servicio.</p>
+                             	<?php
                                }
                               ?>
                             </div>
                             <div class="col-md-12">
-                              
                                 <div class="row">
                                   <div class="col-md-6">
                                         <p class="text-left">
@@ -206,11 +204,11 @@
                                       <label for="busqueda-localidad">Tu Localidad </label>
                                     
                                        <select id="ajax-select" class="form-control selectpicker with-ajax" name="localidad" placeholder="Buscar" data-live-search="true" >
-                                       	<?php if(isset($post['id_localidad'])){
+                                       	<?php if(isset($post->id_localidad)){
                                        		?>
-                                       		  <option value="<?php echo $post['id_localidad']; ?>">
+                                       		  <option value="<?php echo $post->id_localidad; ?>">
                                        	
-		                                       <?php echo $post['localidad'] .", ".$post['provincia']; ?>
+		                                       <?php echo $post->localidad .", ".$post->provincia; ?>
 		                                       </option>
                                        		<?php
                                        	} ?>
@@ -225,14 +223,14 @@
                                       <label for="direccion">Tu dirección en donde ofreces el servicio</label>
                                       <!-- <img src="http://placehold.it/480x400&text=google map" alt=""> -->
                                         <p>
-                                           <input type="text" id="myPlaceTextBox" name="direccion" class="form-control" placeholder="Ej: Av Rivadavia 5555" value="<?php echo $post['direccion'];?>" />
+                                           <input type="text" id="myPlaceTextBox" name="direccion" class="form-control" placeholder="Ej: Av Rivadavia 5555" value="<?php echo $post->direccion;?>" />
                                         </p>
                                         <br>
                                       <div class="map">
                                          <?php echo $map['html']; ?>
                                       </div>
-                                      <input type="hidden" name="lati" value="<?php echo $post['latitud'];?>" id="lati" >
-                                      <input type="hidden" name="long" value="<?php echo $post['longitud'];?>" id="long" >
+                                      <input type="hidden" name="lati" value="<?php echo $post->latitud;?>" id="lati" >
+                                      <input type="hidden" name="long" value="<?php echo $post->longitud;?>" id="long" >
 
                                       <div class='direccion' style="color:red;">
                                       <?php echo $form_error['direccion']; ?>
@@ -260,8 +258,8 @@
                                         <div class="col-md-6">
                                             <p class="text-right">
                                             	<input type="hidden" name="seccion" value="<?php echo $seccion; ?>">
-                                            		<input type="hidden" name="foto" value="<?php echo $post['foto']; ?>">
-                                            		<input type="hidden" name="id_servicio" value="<?php echo $post['id']; ?>">
+                                            		<input type="hidden" name="foto" value="<?php echo $post->foto; ?>">
+                                            		<input type="hidden" name="id_servicio" value="<?php echo $post->id; ?>">
                                                 <button type="submit" class="btn btn-success">Finalizar edición</button>
                                             </p>
                                         </div>

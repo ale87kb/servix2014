@@ -158,9 +158,7 @@ $('document').ready(function(){
                                 success:function(page){
                                     $("#box_edicionUser").html(page);
                                 }
-
                             });
-
                         }
                         if(data['res']=='error')
                         {
@@ -192,10 +190,28 @@ $('document').ready(function(){
             var bar = $('.bar');
             var percent = $('.percent');
             var status = $('#status_pic');
-               
+            var containerprogress = $('#containerprogress');
+            var reset_form_foto = this.reset_form_foto;
+
+            function readURL(input) {
+                if (input.files && input.files[0]){
+                    var reader = new FileReader();
+                    reader.onload = function (e){
+                        $('#previewImg').attr('src', e.target.result);
+                        $('#previewImg').removeClass("hidden");
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            $("#mifoto").change(function(){
+                readURL(this);
+            });
+    
             $('#form_edit_foto').ajaxForm({
                 beforeSend: function() {
                     status.empty();
+                    containerprogress.removeClass("hidden");
                     var percentVal = '0%';
                     bar.width(percentVal)
                     percent.html(percentVal);
@@ -212,9 +228,16 @@ $('document').ready(function(){
                 },
                 complete: function(xhr) {
                     var out = JSON.parse(xhr.responseText);
-                    status.html('<p>'+out['msg']+'</p>')
-                    if(out['file']!=""){$('#user_foto').attr('src', out['file']);}
-                    setTimeout(function() { $("#edit_photo").modal('hide') }, 3000);
+                    if(out['status'] == "success"){
+                        containerprogress.addClass("hidden");
+                        status.html('<div class="alert alert-success" role="alert"><p>'+out['msg']+'</p></div>')
+                        if(out['file']!=""){$('#user_foto').attr('src', out['file']);}
+                        setTimeout(function(){ $("#edit_photo").modal('hide') }, 2000);
+                    }else{
+                        containerprogress.addClass("hidden");
+                        status.html('<div class="alert alert-danger" role="alert"><p>'+out['msg']+'</p></div>');
+                        setTimeout(function(){ status.empty();}, 5000);
+                    }
                 }
             });
         }
@@ -230,7 +253,7 @@ $('document').ready(function(){
             });
         }
         this.reset_form_foto = function(){
-            //$('input[type=file]').replaceWith($('input[type=file]').val('').clone(true));
+            $('#previewImg').addClass("hidden").attr('src', '');
             $('.file-input-name , #status_pic').html('');
             $('.bar').width('0%')
             $('.percent').html('0%');

@@ -1,4 +1,5 @@
-  <div class="jumbotron col-md-12">
+  <div class="container">
+  <div class="col-md-12">
   <h1>Edicion de usuario</h1>
    
    <?php 
@@ -58,4 +59,5 @@
 	<a href="<?php echo site_url('');?>">Volver al inicio</a>
 	<a href="<?php echo site_url('mi-perfil');?>">Volver a mi perfil</a>
 
+  </div>
   </div>

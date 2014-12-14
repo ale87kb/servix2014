@@ -5,6 +5,7 @@ class sitio extends CI_Controller {
 	private $UsuarioSession	= null;
 	private $_js 			= null; 
 	private $_css 			= null; 
+	public $data;
 
 	public function __construct(){
 		parent::__construct();
@@ -13,7 +14,8 @@ class sitio extends CI_Controller {
 		$this->load->library('usuarioClass');
 		$this->load->library('servicioClass');
 
-		//var_dump($this->encrypt->decode($this->input->cookie('srxidusr',TRUE)));
+		$data['cookie'] = $this->usuarios_model->isRecordarCookie()['usuarioCookie'];
+		///NO PUEDO PASAR LA VARIABLE A TODOS LOS METODOS
 	}
 
 	public function index(){
@@ -21,7 +23,6 @@ class sitio extends CI_Controller {
 		{
 			$data['usuarioSession'] = $this->UsuarioSession;
 		}
-
 		$seccion = "servicios-solicitados";
 
 		$destacados  	 = $this->servicios_model->getServiciosDestacados();
@@ -692,6 +693,10 @@ class sitio extends CI_Controller {
 					$data['direccion'] = $v['direccion'];
 				}
 
+				$serviciosObj = $this->servicioclass->setServicios($rs);
+				$serviciosObj = $this->servicioclass->setFotos($serviciosObj, '_200');
+				$serviciosObj = $this->servicioclass->setLinkUser($serviciosObj);
+
 				$config['center'] = $latLong;
 				
 				$config['zoom'] = '17';
@@ -719,8 +724,8 @@ class sitio extends CI_Controller {
 				$this->googlemaps->add_marker($marker);
 				
 				$data['map'] = $this->googlemaps->create_map();
-
-				$data['post'] = $rs[0];
+				
+				$data['post'] = $serviciosObj[0];
 				$data['form_errors'] =null;
 				$data['vista'] = 'editar_servicio';
 
@@ -1396,8 +1401,6 @@ class sitio extends CI_Controller {
 
 			if($servicioRS)
 			{
-
-
 				$serviciosObj = $this->servicioclass->setServicios($servicioRS);
 				$serviciosObj = $this->servicioclass->setFotos($serviciosObj, '_200');
 				$serviciosObj = $this->servicioclass->setLinkUser($serviciosObj);

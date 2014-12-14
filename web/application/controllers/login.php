@@ -548,6 +548,33 @@ class Login extends CI_Controller {
 		}
 	}
 
+	public function sendEmailCodigoNew($post){
+		//$this->load->view('email/codigoNew', $post);
+		if(isset($post))
+		{
+		 	// print_d($post);
+		 	$this->load->library('email');
+		 	$config['charset'] 	= 'utf-8';
+	        $config['wordwrap'] = TRUE;
+	        $config['mailtype'] = 'html';
+	        $fromemail          = MAIL_NO_RESPONDER; // desde
+	        $toemail            = $post['usuario']; //para
+	        $mail               = null;
+	        $subject            = "Código de verificación - Servix";
+	        
+	        $this->email->initialize($config);
+	        $this->email->from($fromemail, APP_NAME);
+        	$this->email->to($toemail);
+	        
+	        $this->email->subject($subject);
+	        $mesg  = $this->load->view('email/codigoNew', $post, true);
+	        $this->email->message($mesg);
+	        $mail = $this->email->send();
+	      
+	      	return $mail;
+		}
+	}
+
 	public function sendEmailNuevaClave($post){
 		//$this->load->view('email/recuperarClave', $post);
 		if(isset($post))
@@ -795,16 +822,35 @@ class Login extends CI_Controller {
 	                'res'      => "error"
 				);
            	}
-            echo json_encode($data);
         }
         else
         {
-        	$this->_setRecordarUsuario($this->input->post('recordar'), $this->input->post('usuario'));
-            $data = array(
-                'res'      	=> "success"
-            );
-            echo json_encode($data);
+			$user = $this->input->post('usuario');
+			$clave = $this->input->post('clave');
+			$result = $this->usuarios_model->login($user, $clave);
+			if($result)
+			{
+	        	$verifEstado = $this->check_estado($result);
+	        	if($verifEstado)
+	        	{
+					$this->_setDataSession($result);
+	        		$this->_setRecordarUsuario($this->input->post('recordar'), $this->input->post('usuario'));
+	            	$data = array(
+	                	'res'      	=> "success"
+	            	);
+	        	}
+	        	else
+	        	{
+	        		$this->session->unset_userdata('logged_in');
+	   				$this->session->sess_destroy();
+	   				$data = array(
+		                'session' => 'Tu usuario no ha sido verificado. Ingresa en tu e-mail para verificarlo.',
+		                'res'      => "error"
+					);
+	        	}
+			}
         }
+    	echo json_encode($data);
 	}
 
 	private function _setRecordarUsuario($checkbox, $user){
@@ -875,13 +921,24 @@ class Login extends CI_Controller {
 
 		if($result)
 		{
-			$this->_setDataSession($result);
 			return true;
 		}
 		else
 		{
 			$this->form_validation->set_message('check_password_database', 'Clave incorrecta');
 			return false;
+		}
+	}
+
+	public function check_estado($user){
+		switch ($user[0]['estado']) {
+			case 1:
+				return true; //usuario verificado mediante el mail
+				break;
+			
+			default:
+				return false; //usuario NO verificado mediante el mail
+				break;
 		}
 	}
 
@@ -965,7 +1022,61 @@ class Login extends CI_Controller {
 	    return $pass;
 	}
 
+	public function verificar_usuario_email(){
+		$data['buscador_off'] = TRUE;
+		$data['title'] 		= "Código de Verificación de usuario";
+		$data['vista'] = 'fijas/verificar_usuario';
 
+		$this->load->view('home_view',$data);
+	}
+
+	public function validar_usuario_newCodigo(){
+		if(isset($_POST['grabar']) and $_POST['grabar'] == 'si')
+		{
+			$this->load->library('form_validation');
+			$this->form_validation->set_rules('usuario', 'e-mail', 'trim|required|valid_email|xss_clean|callback_check_user_database');
+			
+			$this->form_validation->set_message('required', 'El campo %s es obligatorio');
+			$this->form_validation->set_message('valid_email', 'Ingrese un %s válido');
+			if($this->form_validation->run() == FALSE)
+			{
+				$this->verificar_usuario_email();
+			}
+			else
+			{
+				//Si el email es valido, 
+				//actualizo la fehca de la ultima edicion
+				//y genero una nueva contraseña para enviarla por email
+				$rs = $this->usuarios_model->getUser($this->input->post('usuario', TRUE));
+				if($rs){
+					$usuario['nombre'] = $rs[0]['nombre'];
+					$usuario['usuario'] = $rs[0]['email'];
+					$usuario['codigo'] = $rs[0]['codigo'];
+					//$this->sendEmailCodigoNew($usuario);
+					$mailenviado = $this->sendEmailCodigoNew($usuario);
+
+					if($mailenviado)
+					{
+						$data['correcto'] 	= "El código de verificación fue enviado";
+						$data['mailenviado'] = 'Mensaje enviado';
+					}
+					else
+					{
+						$data['mailnoenviado'] = "No se puedo enviar el e-mail";
+						log_message('error', $this->email->print_debugger());
+					}
+					$data['buscador_off'] = TRUE;
+					$data['title'] 		= "Código de Verificación de usuario";
+					$data['vista'] = 'fijas/verificar_usuario_respuesta';
+					$this->load->view('home_view',$data);
+				}
+				else
+				{
+					$this->verificar_usuario_email();
+				}
+			}
+		}
+	}
 
 
 

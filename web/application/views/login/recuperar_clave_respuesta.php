@@ -1,11 +1,10 @@
 <div class="container">
-  <div class="jumbotron col-md-12">
+  <div class="col-md-12">
   <h1>Recuperar clave de usuario</h1>
    
    <?php 
 	if (isset($correcto)){
 
-   		//if(isset($data['mailenviado'])){
    		if(isset($mailenviado)){
 	?>
 

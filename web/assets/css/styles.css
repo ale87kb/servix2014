@@ -157,7 +157,10 @@ a.list-group-item {
 
 /***********EDITAR FOTO PERFIL MODALBOX ******************/
 #edit_photo .progress{ position:relative;}
-#edit_photo .percent { position:absolute; display:inline-block; top:3px; left:45%; }
+#edit_photo .percent { position:absolute; display:inline-block; top:1px; left:45%; }
+#edit_photo #previewImg { margin:0 auto 10px; max-width:250px; }
+#edit_photo .containerprogress{ padding: 0 15%; position: absolute; top:25%; width: 100%;}
+#edit_photo #boxPreview{position:relative; margin-top:25px; min-height: 75px;}
 
 /***********EDITAR FOTO PERFIL MODALBOX ******************/
 
@@ -216,6 +219,7 @@ a.list-group-item {
 
 #main{
     margin: 30px auto 30px;
+    min-height: 400px;
 }
 #search{
     padding:40px 0px 8px;

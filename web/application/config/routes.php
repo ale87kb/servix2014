@@ -89,6 +89,9 @@ $route['login']     	       								= "login/index";								//Usuario desloguead
 $route['validar_login']        								= "login/validacion_login";
 $route['validar_login_ajax']        						= "login/validacion_login_ajax";
 
+$route['verificar-usuario']	        						= "login/verificar_usuario_email";
+$route['validar_usuario_newCodigo']	        				= "login/validar_usuario_newCodigo";
+
 $route['recuperar-clave']      								= "login/recuperar_clave";						//Usuario deslogueado
 $route['validar_recuperar_clave']      						= "login/validar_recuperar_clave";				//Usuario deslogueado
 

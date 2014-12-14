@@ -378,16 +378,9 @@ var app = function(){
                              }else if(($("#nextAction").val() == 'ofrecer-servicio') &&  $("#curretSection").val() == '' ){
 
                                   window.location.href='ofrecer-servicio';
-
-                             
                              }else{
-
                                 window.location.reload();
                              }
-
-
-                              
-                             
                         }
                         if(data['username']){
                             bv.updateStatus('usuario', 'INVALID', 'notEmpty');
@@ -397,6 +390,9 @@ var app = function(){
                         if(data['password']){
                             bv.updateStatus('clave', 'INVALID');
                             bv.updateMessage('clave', 'notEmpty', 'Clave incorrecta');
+                        }
+                        if(data['session']){
+                            window.location.href='verificar-usuario';
                         }
                     }, 'json'
                 )}

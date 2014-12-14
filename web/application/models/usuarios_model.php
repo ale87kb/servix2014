@@ -138,6 +138,29 @@ Class Usuarios_model extends CI_Model{
 	   }
 	}
 
+	public function isRecordarCookie(){
+		$id = $this->encrypt->decode($this->input->cookie('srxidusr',TRUE));
+		$id = (int)$id;
+		if(is_numeric($id)){
+			$userCookie = null;
+			$rs = $this->getUsuario($id);
+			if($rs)
+			{
+				$data['usuarioCookie'] = $rs[0]['email'];
+				return $data;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
+			return false;
+		}
+
+	}
+
 
 	public function get_datos(){
 		$query = "SELECT * FROM servicios";
