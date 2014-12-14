@@ -46,7 +46,7 @@
               </div>
               <div class="form-group">
                 <label for="usuario">Usuario</label>
-                <input type="email" name="usuario" class="form-control" placeholder="E-mail de usuario">
+                <input type="email" name="usuario" class="form-control" placeholder="E-mail de usuario" value="">
                 <span class='errorusername'></span>
               </div>
               <div class="form-group">

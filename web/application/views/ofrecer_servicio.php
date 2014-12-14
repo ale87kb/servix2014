@@ -168,7 +168,7 @@
                           </div>
                           <div role="tabpanel" class="tab-pane fade " id="paso_3">
                                  <div class="col-md-12">
-                                  <h2>Ulimo paso, en que localidad, barrio ofreces el servicio </h2>
+                                  <h2>Último paso, en que localidad, barrio ofreces el servicio </h2>
                                 </div>
                                 <div class="col-md-6">
                                    <div class="form-group">

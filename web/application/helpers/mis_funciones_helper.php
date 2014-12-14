@@ -127,7 +127,6 @@ function gmapScript()
           anchor: new google.maps.Point(17, 34),
           scaledSize: new google.maps.Size(20, 35)
         }));
-       
 
         marker.setPosition(place.geometry.location);
         marker.setVisible(true);
@@ -141,18 +140,13 @@ function gmapScript()
         }
         console.log(place.address_components);
         
-
-        
-
-        document.getElementById("id")
-        var $latitud =  place.geometry.location.k; 
+        document.getElementById("id");
+        var $latitud =  place.geometry.location.lat();
+        $latitud = $latitud.toString().slice(0,12);
         document.getElementById("lati").value = $latitud;
 
-       
-        //$longitud = $logitud.slice(0,10);
-
-        var $longitud = place.geometry.location.B;
-		$longitud = $longitud.toString().slice(0, 12);
+        var $longitud = place.geometry.location.lng();
+        $longitud = $longitud.toString().slice(0, 12);
         document.getElementById("long").value = $longitud;
 
         iw_map.setContent("<div><strong>" + place.name + "</strong><br>" + address);
