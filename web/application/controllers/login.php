@@ -679,6 +679,8 @@ class Login extends CI_Controller {
 
 
 	public function verificar_login_fb(){
+
+	
 		$user = $this->facebook->getUser();
         $data = null;
         if ($user)
@@ -695,7 +697,7 @@ class Login extends CI_Controller {
         }
        
        	$user  = $data['user_profile']['email'];
-
+       	$mensaje = null;
 
 		if(!empty($user))
 		{
@@ -705,14 +707,15 @@ class Login extends CI_Controller {
 	       		$registro = $this->_login_registro_fb($data['user_profile']);
 	       		if($registro)
 	       		{
-	       			echo "<meta http-equiv='refresh' content='5; url=".site_url()."'>";
-	       			echo "Bienvenido a Servix, espere unos segundos y sera redireccionado";
+	       			$mensaje = 'Bienvenido a Servix, espere unos segundos y sera redireccionado';
+	       			
+	       		
 	       			// $this->output->set_header('refresh:3; url='.site_url()); 
 	       		}
 	       		else
 	       		{
-	       			echo "<meta http-equiv='refresh' content='5; url=".site_url()."'>";
-	       			echo "ups.. tenemos un problema";
+	       			//echo "<meta http-equiv='refresh' content='5; url=".site_url()."'>";
+	       			$mensaje =  "ups.. tenemos un problema";
 	       			// $this->output->set_header('refresh:3; url='.site_url()); 
 	       		}
 			}
@@ -722,22 +725,32 @@ class Login extends CI_Controller {
        			if($result)
        			{
        				$this->_setDataSession($result);
-   					redirect('','refresh');
+       				$mensaje =  'Bienvenido a Servix';
+       				
+   					
        			}
        			else
        			{
-       				echo "<meta http-equiv='refresh' content='5; url=".site_url()."'>";
-					echo "ups.. tenemos un problema";
-       				// $this->output->set_header('refresh:3; url='.site_url());        				
+					$mensaje = "ups.. tenemos un problema";
        			}
 			}
 		}
 		else
 		{
-			// $this->output->set_header('refresh:5; url='.site_url('')); 
-	   		echo "<meta http-equiv='refresh' content='5; url=".site_url()."'>";
-		   	echo "ups.. tenemos un problema, no hemos podido iniciar sesi&oacute;n";
+			
+		   	$mensaje =  "ups.. tenemos un problema, no hemos podido iniciar sesi&oacute;n";
 		}
+
+
+		echo "<script > 
+				document.write('".$mensaje."');
+
+					setTimeout(function(){ 
+							window.close()
+						window.opener.location.reload();
+					 }, 500);
+					
+			</script>";
 	}
 	
 
