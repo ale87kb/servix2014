@@ -1394,8 +1394,10 @@ class sitio extends CI_Controller {
 			$data['seccion']  = 'ficha';
 			$data['favorito'] =  null;
 			$data['servicio'] = null;
+			
+			$servicioPaginacion = $id. "-". $servicio;
 
-			$opiniones 	 = $this->_setPaginacionOpinion('208-herreria-los-hermanos',$id);
+			$opiniones 	 = $this->_setPaginacionOpinion($servicioPaginacion,$id);
 			$servicioRS  = $this->servicios_model->getServicioFicha($id);
 			$promedio 	 = $this->servicios_model->getPromedioPuntos($id);
 
