@@ -1038,7 +1038,7 @@ class Login extends CI_Controller {
 	public function verificar_usuario_email(){
 		$data['buscador_off'] = TRUE;
 		$data['title'] 		= "Código de Verificación de usuario";
-		$data['vista'] = 'fijas/verificar_usuario';
+		$data['vista'] = 'fijas/verificar_estado_usuario';
 
 		$this->load->view('home_view',$data);
 	}
