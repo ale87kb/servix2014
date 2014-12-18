@@ -36,7 +36,7 @@
         else
         {
         ?>
-          <a data-toggle="modal" href="#loginModal" data-target="#loginModal" rel="" class="btn btn-warning  bg-orange gobusquedaTemp">Click Aquí</a>
+          <a data-toggle="modal" href="#loginModal" data-target="#loginModal" rel="" class="btn btn-warning bg-orange gobusquedaTemp">Click Aquí</a>
         <?php
         }
         ?>
@@ -54,7 +54,7 @@
         else
         {
         ?>
-          <a data-toggle="modal" href="#loginModal" data-target="#loginModal" rel="" class="btn btn-warning  bg-orange goOfrecerServicio">Click Aquí</a>
+          <a data-toggle="modal" href="#loginModal" data-target="#loginModal" rel="" class="btn btn-warning bg-orange goOfrecerServicio">Click Aquí</a>
         <?php
         }
         ?>

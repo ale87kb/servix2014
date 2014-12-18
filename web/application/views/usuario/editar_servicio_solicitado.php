@@ -13,18 +13,10 @@
 				$msj = $this->session->flashdata('mensaje_e');
 				if(!empty($msj))
 				{
-					if($msj['error'] == 0)
-					{
-					?>
-						<div class="alert alert-success" id="mensaje_e" role="alert"><?php echo $msj['mensaje_e']; ?></div>
-				<?php
-					}
-					else
-					{
+					$clase = ($msj['error'] == 0) ? 'alert-success' : 'alert-warning';
 				?>
-						<div class="alert alert-warning" id="mensaje_e" role="alert"><?php echo $msj['mensaje_e']; ?></div>
+					<div class="alert <php echo $clase; ?>" id="mensaje_e" role="alert"><?php echo $msj['mensaje_e']; ?></div>
 				<?php
-					}
 				}
 			 ?>
 				
@@ -45,9 +37,7 @@
                			<?php
                        	}
                        	?>
-                     
                        </select>
-
 
 		              </div>
 					  <div class="form-group">

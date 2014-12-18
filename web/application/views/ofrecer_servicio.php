@@ -59,7 +59,7 @@
                               </div>
                               <div class="form-group">
                               <label for="sitioweb">¿Sitio web?</label>
-                              <input type="url" class="form-control" id="sitioweb" value="<?php echo $post['sitioweb'];?>" name="sitioweb"   placeholder="www.misitio.com">
+                              <input type="url" class="form-control" id="sitioweb" value="<?php echo $post['sitioweb'];?>" name="sitioweb" placeholder="http://www.misitio.com">
                                <div class='sitioweb' style="color:red;">
                                 <?php echo $form_error['url_web']; ?>
                               </div> 

@@ -77,7 +77,7 @@
                               </div>
                               <div class="form-group">
                               <label for="sitioweb">Web</label>
-                              <input type="url" class="form-control" id="sitioweb" value="<?php echo $post->url_web;?>" name="sitioweb"   placeholder="Web">
+                              <input type="url" class="form-control" id="sitioweb" value="<?php echo $post->url_web;?>" name="sitioweb" placeholder="http://www.misitio.com">
                                <div class='sitioweb' style="color:red;">
                                <?php echo $form_error['sitioweb']; ?>
                               </div> 

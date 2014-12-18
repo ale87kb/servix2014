@@ -33,7 +33,6 @@
               if(isset($loginFb['login_url']))
               {
             ?>
-              
                 <a href="<?php echo ($loginFb['login_url']); ?>"  id="loginFB"  title="Conectar con Facebook"  class="facebtnlog btn btn-primary">Iniciar con Facebook</a>
           <?php
               }
