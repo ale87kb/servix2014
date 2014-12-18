@@ -56,7 +56,6 @@
                     <div class="col-md-7">
                         <h4 class="list-group-item-heading"><a href="<?php echo $servicio->link_servicio; ?>"><?php echo $servicio->titulo ; ?></a></h4>
                         <p class="list-group-item-text"><?php echo $servicio->descripcion; ?></p>
-                       
                     </div>
                     <div class="col-md-3 text-center">
                 <?php 
@@ -76,15 +75,14 @@
                         <span class="ratyAVG" data-avg="<?php echo number_format($servicio->promedio,2); ?>"></span>
                         <p> Promedio <?php echo number_format($servicio->promedio,2); ?> <small> / </small> 5 </p>
                     </div>
-
-                    <div class="col-md-7">
-                            <p class="pull-right">
-                        
-                            <span class="label label-default"><?php echo ucfirst($servicio->categoria); ?></span>
-                            <span class="label label-default"><?php echo $servicio->provincia; ?></span>
-                            <span class="label label-default"><?php echo $servicio->localidad; ?></span>
-                        </p>
-                    </div>
+                </div>
+                <div class="col-md-9">
+                        <p class="pull-right">
+                    
+                        <span class="label label-default"><?php echo ucfirst($servicio->categoria); ?></span>
+                        <span class="label label-default"><?php echo $servicio->provincia; ?></span>
+                        <span class="label label-default"><?php echo $servicio->localidad; ?></span>
+                    </p>
                 </div>
             </div>
             <hr />
@@ -104,12 +102,7 @@
                 <?php 
                 }
                 ?>
-
-
         </div>
-
-
-
-		 </div> 
+    </div> 
 </section>
 </div>

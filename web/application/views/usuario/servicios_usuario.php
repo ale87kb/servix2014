@@ -16,7 +16,7 @@
        
            <img src="<?php echo $ser->foto_path; ?>" alt="<?php echo ucfirst($ser->titulo); ?>" class=""  > 
       </a>
-      <div class="media-body">
+      <div class="media-body mservicios">
           <h3 class="list-group-item-text media-heading" ><a href="<?php echo $ser->link_servicio; ?>"><?php echo ucfirst($ser->titulo); ?></a></h3>
            <p class="list-group-item-text"><?php echo ucfirst($ser->descripcion); ?></p>
           <p class="pull-right">
@@ -33,13 +33,9 @@
           <div class="form-group">
               <button class="btn btn-danger btn-block  btn-sm" value="<?php echo $ser->id; ?>" id="borrar_servicio" name="id_servicio"><i class="fa fa-times"></i> Eliminar Servicio </button>
           </div>
-       
         </form>
-      
-
       </div>
     </div>
-      
     </div>
     <hr/>
       <?php
