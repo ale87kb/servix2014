@@ -35,7 +35,6 @@
 			</div>
 	    </div>
 	    <p class="text-right">
-			<!-- <a href="#" class="btn btn-success btn-sm"> Quiero postularme!</a> -->
 		<?php if(isset($usuarioSession)){
 				if($solicitado->id != $id_usuario){
 					if(isset($user_postulado) &&( $user_postulado == 1)){
@@ -164,10 +163,7 @@
 	 	 	}
 		}
       ?>
-
 	</div>
 	<div class="col-md-12"><hr></div>
-
-
 		<?php $this->load->view('servicios_solicitados'); ?>
 </div>

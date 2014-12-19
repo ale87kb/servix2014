@@ -1,5 +1,3 @@
-
-
 <!--Prueba para ver si el usuario iniciaba secion-->
 
 <html xmlns="http://www.w3.org/1999/xhtml">

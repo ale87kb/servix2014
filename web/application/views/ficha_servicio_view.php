@@ -106,9 +106,7 @@
 				?>
 						<input type="hidden" value="<?php echo $servicioRS->id; ?>" name="id_servicio" />
 						<input type="hidden" value="<?php echo $servicioRS->titulo; ?>" name="nombre_servicio" />
-						<!--<input type="hidden" value="<?php echo $servicioRS->nombre; ?>" name="nombre" />-->
 						<input type="hidden" value="<?php echo $servicioRS->userID; ?>" name="userid" />
-						<!--<input type="hidden" value="<?php echo $servicioRS->email; ?>" name="email" />-->
 						<button type="submit" class="btn btn-info pull-right">Contactar</button>
 				<?php
 					}

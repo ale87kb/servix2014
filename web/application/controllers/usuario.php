@@ -9,10 +9,7 @@ class Usuario extends CI_controller{
 		$data['title'] = 'Servix';
 		$this->UsuarioSession = $this->usuarios_model->isLogin();
 		$this->loginFb = $this->usuarios_model->_loginFB();
-	/*	$this->load->library('usuarioClass');
-		$this->load->library('servicioClass');*/
 	}
-
 
 	public function index(){
 		if($this->UsuarioSession)
@@ -24,7 +21,6 @@ class Usuario extends CI_controller{
 			$data['vistaPerfil']	= 'usuario/datos';
 			$data['page_active']	= 1;
 
-
 			//LA VISTA DEL DATOS LA CARGA CON $this->UsuarioSession
 			$this->load->view('usuarios_view', $data);
 		}
@@ -33,6 +29,7 @@ class Usuario extends CI_controller{
 			redirect('', 'refresh');
 		}
 	}
+
 	/*------------------------------------------------------------*/
 
 	public function servicios_usuario(){
@@ -240,6 +237,7 @@ class Usuario extends CI_controller{
 	}
 
 	/*------------------------------------------------------------*/
+
 	public function servicios_solicitados_usuario(){
 		if($this->UsuarioSession)
 		{
@@ -301,9 +299,8 @@ class Usuario extends CI_controller{
 		return false;
 	}
 
-		
-
 	/*------------------------------------------------------------*/
+	
 	public function postulaciones_usuario(){
 		if($this->UsuarioSession)
 		{
@@ -356,7 +353,6 @@ class Usuario extends CI_controller{
 
 	/*------------------------------------------------------------*/
 
-
 	public function verificar(){
 		//Verifica el codigo del usuario mandado por mail cuando se registra
 		if(isset($_GET['codigo']))
@@ -379,8 +375,6 @@ class Usuario extends CI_controller{
 				$data['mensaje'] 	=  $verificacionCodigo['mensaje'];
 				$data['estado']		=  $verificacionCodigo['estado'];
 			}
-
-			//print_d($this->db->last_query());
 			$data['vista'] = 'login/verificar_usuario';
 			$this->load->view('login_view', $data);
 		}
@@ -415,10 +409,6 @@ class Usuario extends CI_controller{
 		{
 			//Compruebo que en la db exista este código
 			$respCodigo = $this->usuarios_model->verificarCodigo($codigo);
-
-
-			//$data['respuesta'] = $respCodigo;
-			//print_d($respCodigo);
 			if($respCodigo)
 			{
 				//Si existe el código, actualizo el estado si es 0.
@@ -480,7 +470,6 @@ class Usuario extends CI_controller{
 
 		return $verificado_result;
 	}
-
 
 	public function validar_voto(){
 		$fechaHoy    =  date('Y-m-d');
@@ -564,7 +553,6 @@ class Usuario extends CI_controller{
 	        else
 	        {
 	            //GENERAMOS THUMBNAILS DE 125 Y DE 60
-
 	            $data 			= $this->upload->data();
 	            $this->load->library('image_lib');
 	            
@@ -578,8 +566,6 @@ class Usuario extends CI_controller{
 				$this->image_lib->crop();
 				$this->image_lib->clear();
 
-
-
 	            //GENERO EL THUMBNAIL DE 60
 	            $size_thumb		= 60;
 	            $thumbNombre	= '_60';
@@ -589,7 +575,6 @@ class Usuario extends CI_controller{
 	            $this->image_lib->initialize(generarThumbnailCuadrado($data, $size_thumb, $img_60_path, $thumbNombre));
 				$this->image_lib->crop();
 				$this->image_lib->clear();
-
 
 	            $user 						= $this->UsuarioSession;
             	$foto_anterior 				= $user['foto'];
@@ -639,9 +624,7 @@ class Usuario extends CI_controller{
 	        @unlink($_FILES[$file_element_name]);
 	    }
 	    echo json_encode(array('status' => $status, 'msg' => $msg, 'file' => $file));
-
 	}
-
 
 	private function _borrarArchivoFotoAnterior($archivoPath){
 		if(file_exists($archivoPath)){
@@ -651,7 +634,6 @@ class Usuario extends CI_controller{
 			}
 		}
 	}
-
 
 	public function perfil_usuario($usuario = null){
 		$data['loginFb'] = $this->loginFb;
@@ -750,8 +732,5 @@ class Usuario extends CI_controller{
 		$user = explode('-', $usuario);
 		return $user[0];
 	}
-
-
-
 }
 ?>

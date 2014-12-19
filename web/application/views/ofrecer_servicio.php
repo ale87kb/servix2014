@@ -11,7 +11,6 @@
         <?php 
           $form_error = $this->session->flashdata('form_error');
           $post = $this->session->flashdata('post');
-        
         ?>
             <div class="row bg-white tab-box">
                <div class="col-md-12 ">
@@ -114,18 +113,14 @@
                                             <?php echo $msj['mensaje_e']; ?>
                                           </div>
                                           <?php
-
                                         }
                                         ?>
                                         </div>
                                         <?php
-                                        
                                     }
                                      ?>
-                  
                               </div>
-                         
-                        
+
                             <div class="col-md-6">
                               <div class="form-group">
                                 <label for="fotoServicio">Sube una foto del servicio que ofreces</label>
@@ -193,7 +188,6 @@
                                   
                                     <div class="form-group">
                                       <label for="direccion">Escribe, y selecciona la dirección en donde ofreces el servicio</label>
-                                      <!-- <img src="http://placehold.it/480x400&text=google map" alt=""> -->
                                         <p>
                                            <input type="text" id="myPlaceTextBox" name="direccion" class="form-control" placeholder="Ej: Av Rivadavia 5555" value="<?php echo $post['direccion'];?>" />
                                         </p>
@@ -208,7 +202,6 @@
                                      <?php echo $form_error['direccion']; ?>
                                       </div> 
                                     </div>
-
                                 </div>
                                 <div class="col-md-6">
                                   <h3>Guia para ofrecer un servicio paso 3</h3>
@@ -220,7 +213,6 @@
                                   </p>
                                 </div>
                                 <div class="col-md-12">
-                                  
                                     <div class="row">
                                       <div class="col-md-6">
                                             <p class="text-left">

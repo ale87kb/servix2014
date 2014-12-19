@@ -11,7 +11,6 @@ class Login extends CI_Controller {
 		$this->loginFb = $this->usuarios_model->_loginFB();
 	}
 
-
 	public function index(){
 		//Cargar la vista del formulario de login
 		if(!$this->UsuarioSession)
@@ -27,7 +26,6 @@ class Login extends CI_Controller {
 			redirect('', 'refresh');
 		}
 	}
-
 
 	public function recuperar_clave(){
 		if(!$this->UsuarioSession)
@@ -67,9 +65,6 @@ class Login extends CI_Controller {
 				$usuariorecupero['clave'] 			= $this->_generaPass();
 
 				$resultadoRecuClav = $this->usuarios_model->actualizar_clave($usuariorecupero);
-
-				//this->sendEmailNuevaClave($usuariorecupero);
-
 				if($resultadoRecuClav)
 				{
 					$mailenviado = $this->sendEmailNuevaClave($usuariorecupero);
@@ -99,7 +94,6 @@ class Login extends CI_Controller {
 		}
 	}
 
-
 	public function registrar_usuario(){
 		if(!$this->UsuarioSession)
 		{
@@ -115,7 +109,6 @@ class Login extends CI_Controller {
 			redirect('', 'refresh');
 		}
 	}
-
 
 	public function validar_nuevo_usuario(){
 		//Valida el formulario de registro de nuevo usuario
@@ -246,10 +239,7 @@ class Login extends CI_Controller {
 				// 1 : Registrado, email verificado
 				// 2 : Usuario dado de baja
 				
-				//$this->sendEmailConfirm($nuevoUsuario);
-
 				$resultAdd = $this->usuarios_model->add_usuario($nuevoUsuario);
-
 				if($resultAdd)
 				{
 					$data['adduser'] 	= true;
@@ -292,8 +282,6 @@ class Login extends CI_Controller {
 		$UsuarioRegistrado	= $this->usuarios_model->getUsuario($user);
 
 		$result = $this->usuarios_model->login($UsuarioRegistrado[0]['email'], $clave);
-		//print_d($result);
-		//print_d($this->db->last_query());
 		if($result)
 		{
 			return true;
@@ -307,7 +295,6 @@ class Login extends CI_Controller {
 
 	public function validar_editar_datos(){
 		//Valida el formulario de edicion de usuario
-
 		if(isset($_POST['grabar']) and $_POST['grabar'] == 'si')
 		{
 			$id_usuario 		= (int)$this->input->post('user');
@@ -463,13 +450,11 @@ class Login extends CI_Controller {
 		echo $vista;
 	}
 
-
 	public function registro_respuesta(){
 		$data = $this->input->post(json_decode('datos',true));
 		$vista = $this->load->view('login/registro_respuesta',$data['datos'],true);
 		echo $vista;
 	}
-
 
 	public function check_user_duplicate(){
 		//Consulta si el usuario/email ya existe en la base de datos
@@ -490,15 +475,11 @@ class Login extends CI_Controller {
 		{
 			return true;
 		}
-
 	}
 
-
 	public function sendEmailRegistroOk($perfil){
-		//$this->load->view('email/confirmEmail', $post);
 		if(isset($perfil))
 		{
-		 	// print_d($post);
 		 	$this->load->library('email');
 		 	$config['charset'] 	= 'utf-8';
 	        $config['wordwrap'] = TRUE;
@@ -516,16 +497,13 @@ class Login extends CI_Controller {
 	        $mesg  = $this->load->view('email/registroOk', $perfil, true);
 	        $this->email->message($mesg);
 	        $mail = $this->email->send();
-	        // echo $this->email->print_debugger();
 	      	return $mail;
 		}
 	}
 
 	public function sendEmailConfirm($post){
-		//$this->load->view('email/confirmEmail', $post);
 		if(isset($post))
 		{
-		 	// print_d($post);
 		 	$this->load->library('email');
 		 	$config['charset'] 	= 'utf-8';
 	        $config['wordwrap'] = TRUE;
@@ -549,10 +527,8 @@ class Login extends CI_Controller {
 	}
 
 	public function sendEmailCodigoNew($post){
-		//$this->load->view('email/codigoNew', $post);
 		if(isset($post))
 		{
-		 	// print_d($post);
 		 	$this->load->library('email');
 		 	$config['charset'] 	= 'utf-8';
 	        $config['wordwrap'] = TRUE;
@@ -576,10 +552,8 @@ class Login extends CI_Controller {
 	}
 
 	public function sendEmailNuevaClave($post){
-		//$this->load->view('email/recuperarClave', $post);
 		if(isset($post))
 		{
-		 	// print_d($post);
 		 	$this->load->library('email');
 		 	$config['charset'] 	= 'utf-8';
 	        $config['wordwrap'] = TRUE;
@@ -603,10 +577,8 @@ class Login extends CI_Controller {
 	}
 
 	public function sendEmailNewConfirm($post){
-		//$this->load->view('email/confirmNewEmail', $post);
 		if(isset($post))
 		{
-		 	// print_d($post);
 		 	$this->load->library('email');
 		 	$config['charset'] 	= 'utf-8';
 	        $config['wordwrap'] = TRUE;
@@ -630,10 +602,8 @@ class Login extends CI_Controller {
 	}
 
 	public function sendEmailCambioClave($post){
-		//$this->load->view('email/confirmNewEmail', $post);
 		if(isset($post))
 		{
-		 	// print_d($post);
 		 	$this->load->library('email');
 		 	$config['charset'] 	= 'utf-8';
 	        $config['wordwrap'] = TRUE;
@@ -656,8 +626,6 @@ class Login extends CI_Controller {
 		}
 	}
 
-
-
 	public function validacion_login(){
 		//Valida el formulario de login
 		$this->load->library('form_validation');
@@ -677,10 +645,7 @@ class Login extends CI_Controller {
 		}
 	}
 
-
 	public function verificar_login_fb(){
-
-	
 		$user = $this->facebook->getUser();
         $data = null;
         if ($user)
@@ -708,15 +673,10 @@ class Login extends CI_Controller {
 	       		if($registro)
 	       		{
 	       			$mensaje = 'Bienvenido a Servix, espere unos segundos y sera redireccionado';
-	       			
-	       		
-	       			// $this->output->set_header('refresh:3; url='.site_url()); 
 	       		}
 	       		else
 	       		{
-	       			//echo "<meta http-equiv='refresh' content='5; url=".site_url()."'>";
 	       			$mensaje =  "ups.. tenemos un problema";
-	       			// $this->output->set_header('refresh:3; url='.site_url()); 
 	       		}
 			}
 			else
@@ -726,8 +686,6 @@ class Login extends CI_Controller {
        			{
        				$this->_setDataSession($result);
        				$mensaje =  'Bienvenido a Servix';
-       				
-   					
        			}
        			else
        			{
@@ -737,22 +695,17 @@ class Login extends CI_Controller {
 		}
 		else
 		{
-			
 		   	$mensaje =  "ups.. tenemos un problema, no hemos podido iniciar sesi&oacute;n";
 		}
 
-
 		echo "<script > 
 				document.write('".$mensaje."');
-
 					setTimeout(function(){ 
-							window.close()
+						window.close()
 						window.opener.location.reload();
 					 }, 500);
-					
 			</script>";
 	}
-	
 
 	public function showEmail($perfil){
  		$this->load->view('email/registroOk', $perfil);
@@ -776,7 +729,6 @@ class Login extends CI_Controller {
 		$nuevoUsuario['codigo'] 			= $this->_generarCodigo();
 		$nuevoUsuario['foto'] 				= '';
 		$nuevoUsuario['estado'] 			= 1;
-
 		//El estado del usuario puede ser 
 		// 0 : Registrado, email NO verificado 
 		// 1 : Registrado, email verificado
@@ -809,7 +761,6 @@ class Login extends CI_Controller {
 			return false;
 		}
 	}
-	
 
 	public function validacion_login_ajax(){
 		//Valida el formulario de login por ajax
@@ -868,17 +819,9 @@ class Login extends CI_Controller {
 
 	private function _setRecordarUsuario($checkbox, $user){
 	    if(isset($checkbox) && !empty($checkbox)){
-	    /*	if (isset($_COOKIE['idusuario'])) {
-	            unset($_COOKIE['idusuario']);
-    	        setcookie('idusuario', null, -1, '/');
-    	        return true;
-        	} else {
-            	return false;
-        	}*/
 			$resultemail = $this->usuarios_model->getEmail($user);
 			$this->load->library('encrypt');
 			$encrpt = $this->encrypt->encode($resultemail[0]['id']);
-	    	//setcookie("idusuario", $resultemail[0]['id'] , time()+3600, "/", COOKIE_DOMAIN);
 	    	$cookie = array(
 			    'name'   => 'srxidusr',
 			    'value'  => $encrpt,
@@ -886,11 +829,8 @@ class Login extends CI_Controller {
 			    'domain' => COOKIE_DOMAIN,
 			    'path'   => '/'
 			);
-
 			$this->input->set_cookie($cookie);
 		}
-	    // time()+3600 es igual a la hora actual mas 3600 segundos osea una hora que es lo que durara la cookie
-	    // el / es la ruta donde se almacena la cookie te recomiendo que lo dejes asi porque el navegador sabra donde almacenarla
 	}
 
 	public function menu_usuario(){
@@ -920,7 +860,6 @@ class Login extends CI_Controller {
 			return false;
 		}
 	}
-
 
 	public function check_password_database($clave){
 		//Consulta la clave en base de datos
@@ -981,10 +920,8 @@ class Login extends CI_Controller {
 		}
 	}
 	
-
 	//Chequea que la foto no este vacia, y si lo esta devuelve la foto por default: assets/images/perfil_640.png
 	private function _chekFotoDB($sess_array, $path_125, $path_60){
-
 		if(!file_exists('./' . $sess_array['foto_path']))
 		{
 			$sess_array['foto_path']		= $path_125;
@@ -1000,7 +937,6 @@ class Login extends CI_Controller {
 		return $sess_array;
 	}
 
-
 	public function logout(){
 		//Destruye la sesion del usuario y vuelve a login.
    		$this->session->unset_userdata('logged_in');
@@ -1008,7 +944,6 @@ class Login extends CI_Controller {
 	   	$this->session->sess_destroy();
 	   	redirect('', 'refresh');
 	}
-
 
 	private function _generarCodigo() {
 		$key = md5(microtime().rand());
@@ -1090,20 +1025,5 @@ class Login extends CI_Controller {
 			}
 		}
 	}
-
-
-
-	/*
-	.....................................................................................
-	COMENTADA PARA FUTURO USO.. EN ESTOS MOMENTOS ESTA EN DESUSO
-	.....................................................................................
-	public function generarCodigo($longitud) {
-		$key = '';
-		$pattern = '1234567890abcdefghijklmnopqrstuvwxyz';
-		$max = strlen($pattern)-1;
-		for($i=0;$i < $longitud;$i++) $key .= $pattern{mt_rand(0,$max)};
-	}
-
-	*/
 }
 ?>

@@ -2,10 +2,8 @@
 
 Class Usuarios_model extends CI_Model{
 
-
 	public function __construct(){
 		parent::__construct();
-
 	}
 
 	public function login($usuario, $clave){
@@ -28,7 +26,6 @@ Class Usuarios_model extends CI_Model{
 	   	}
 	}
 
-
 	public function _loginFB(){
 		$user = $this->facebook->getUser();
         if ($user)
@@ -44,11 +41,8 @@ Class Usuarios_model extends CI_Model{
             ));
             // $this->facebook->destroySession();
         }
-
-       
         return $data;
 	}
-
 
 	public function getUser($usuario){
 		//Verifica que el usuario y el email sean 
@@ -84,7 +78,6 @@ Class Usuarios_model extends CI_Model{
 			return false;
 		}
 	}
-
 
 	public function set_voto($idU,$idS,$puntos,$comentario,$fechaUso){
 		$fechaVotacion = date('Y-m-d h:i:s');
@@ -162,21 +155,17 @@ Class Usuarios_model extends CI_Model{
 		{
 			return false;
 		}
-
 	}
-
 
 	public function get_datos(){
 		$query = "SELECT * FROM servicios";
 		$rs    = $this->db->query($query);
 		return $rs->result_array();
-
 	}
 
 	public function add_usuario($nuevoUsuario){
 		//Agrega un nuevo usuario a la base de datos
 		//La calve esta encriptada en md5 desde el controlador login.php
-
 		$query	= 	"INSERT INTO usuarios (email, clave, nombre, apellido, telefono, direccion, foto, codigo, estado, fecha_creacion, fecha_mod_estado, ultima_edicion)
 					 VALUES (
 						'".$nuevoUsuario['usuario']."',
@@ -194,9 +183,7 @@ Class Usuarios_model extends CI_Model{
 					);";
 		$rs    = $this->db->query($query);
 		return $rs;
-
 	}
-
 
 	//Edita el usuario
 	public function editar_email($usuario){
@@ -210,7 +197,6 @@ Class Usuarios_model extends CI_Model{
 		return $rs;
 	}
 	
-
 	//Edita una nueva clave dependiendo el id de usuario
 	public function editar_clave($usuario){
 		$query="UPDATE usuarios
@@ -234,7 +220,6 @@ Class Usuarios_model extends CI_Model{
 		return $rs;
 	}
 
-
 	//Actualiza la clave dependiendo el email del usuarios: Recibe un array
 	public function actualizar_clave($usuario){
 		$query 	= 	"UPDATE usuarios 
@@ -247,7 +232,6 @@ Class Usuarios_model extends CI_Model{
 		return $rs;
 	}
 
-
 	public function actulaizar_foto_usuario($foto){
 		$query = 	"UPDATE usuarios
 					SET foto = '".$foto['foto']."',
@@ -257,7 +241,6 @@ Class Usuarios_model extends CI_Model{
 		return $rs;
 	}
 
-
 	public function verificarCodigo($codigo){
 		$query 	= "SELECT * FROM usuarios WHERE codigo = '$codigo';";
 
@@ -265,8 +248,6 @@ Class Usuarios_model extends CI_Model{
 
 		return $rs->result_array();
 	}
-
-
 
 	//Actualiza el estado del usuario
 	public function actualizarEstadoVerficado($estado, $codigo, $fecha){
@@ -277,7 +258,6 @@ Class Usuarios_model extends CI_Model{
 					WHERE codigo = '$codigo';";
 
 		$rs 	= $this->db->query($query);
-
 		return $rs;
 	}
 
@@ -287,6 +267,7 @@ Class Usuarios_model extends CI_Model{
 		$rs = $this->db->query($query);
 		return $rs;
 	}
+
 	public function getFavorito($id_usuario,$id_servicio){
 		$fechaUso = date('Y-m-d h:i:s');
 		$query = "SELECT * FROM favoritos WHERE id_usuarios = $id_usuario  AND id_servicios = $id_servicio";
@@ -368,7 +349,6 @@ Class Usuarios_model extends CI_Model{
 				LIMIT $desdeLimit, $cantidadLimit";
 
 		$rs 	= $this->db->query($query);
-
 		return $rs->result_array();
 	}
 
@@ -412,9 +392,7 @@ Class Usuarios_model extends CI_Model{
 					LIMIT $desdeLimit, $cantidadLimit";
 
 		$rs = $this->db->query($query);
-
 		return $rs->result_array();
-
 	}
 
 	//Cantidad de servicios comentados
@@ -472,7 +450,6 @@ Class Usuarios_model extends CI_Model{
 		return $rs->row()->cantidad;
 	}
 
-
 	/*-------------------------------*/
 
 	//Servicios solicitados temporales por el usuario
@@ -509,9 +486,9 @@ Class Usuarios_model extends CI_Model{
 				AND
 					busquedas_temp.vencido = $vencido";
 		$rs = $this->db->query($query);
-
 		return $rs->row()->cantidad;
 	}
+
 	/*-------------------------------*/
 
 	//Postulaciones a servicios solicitados
@@ -558,10 +535,7 @@ Class Usuarios_model extends CI_Model{
 				AND 
 					postulaciones_temp.postulado = $postulado";
 		$rs = $this->db->query($query);
-
 		return $rs->row()->cantidad;
 	}
-
-
-
 }
+?>

@@ -33,7 +33,6 @@ class servicio_class{
 			{
 				$servicio->$key 	= $param[$key];
        		}
-			
 			$lista[] = $servicio;
 			$this->setLinK($lista);
 		}

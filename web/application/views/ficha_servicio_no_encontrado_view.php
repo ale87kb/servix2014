@@ -8,7 +8,6 @@
 			<div class="row text-center">
  	    		<p>El servicio que estás buscando no está disponible o no existe.</p>
             </div>
-    		
     		<p><a href="<?php echo site_url(''); ?>">Volver a la página de inicio</a></p>
 		</div>
 	</div>

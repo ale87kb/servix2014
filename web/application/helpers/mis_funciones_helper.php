@@ -55,14 +55,12 @@ function recortar_texto($texto, $limite=100)
 
 function generarLinkServicio($id, $titulo, $sec='ficha')
 {
-
 	if (is_numeric($id))
 	{
 		$tituloServicio = normaliza($titulo);
 		$ulrServicio = $sec."/". $id . "-" . $tituloServicio;
 		return $ulrServicio;
 	}
-
 }
 
 function date_siH_mYd()
@@ -154,8 +152,6 @@ function gmapScript()
         return $scripts;
 }
 
-
-
 function existe_archivo($fileUrl)
 {
 	$AgetHeaders = @get_headers($fileUrl);
@@ -168,7 +164,6 @@ function existe_archivo($fileUrl)
 	return FALSE;
 	}
 }
-
 
 function generarThumbnail($file, $size, $thumbNombre)
 {
@@ -284,5 +279,4 @@ function generarThumbnailCuadrado($file, $size, $img_path, $thumbNombre)
 
     return $conf_new;
 }
-
 ?>

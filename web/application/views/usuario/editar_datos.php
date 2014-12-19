@@ -138,19 +138,11 @@
       <input type="hidden" name="user" value="<?php echo $usuarioSession['id']; ?>" />
     </div>
   </div>
-
 </form>
 
-  </div><!--/box_edicionUser-->
-</div>
-
-
-
+</div><!--/box_edicionUser-->
 			</div><!--/row-->
-
-	
 		</div>
 	</div>
 </div>
-
 </div><!--/container-fluid-->

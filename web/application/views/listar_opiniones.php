@@ -2,7 +2,6 @@
 foreach ($opiniones as $opinion)
 {
 	$fechaUsoServicio =  strtotime($opinion['fecha_uso_servicio']);
-	// date( 'Y-m-d',  );
 ?>
 	<div class="col-md-12">
         <h4 class=""><a href="<?php echo $opinion['link_user'];?>"><?php echo $opinion['nombre'] . " " . $opinion['apellido']; ?></a></h4>
@@ -14,7 +13,6 @@ foreach ($opiniones as $opinion)
 <?php
 }
 ?>
-					
 <div id="pagination">
 <?php
 	echo $this->pagination->create_links();  

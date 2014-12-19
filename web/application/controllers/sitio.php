@@ -11,81 +11,8 @@ class sitio extends CI_Controller {
 		parent::__construct();
 		$this->UsuarioSession = $this->usuarios_model->isLogin();
 		$this->loginFb = $this->usuarios_model->_loginFB();
-
-	/*	$this->load->library('usuarioClass');
-		$this->load->library('servicioClass');*/
-
-//		$data['cookie'] = $this->usuarios_model->isRecordarCookie()['usuarioCookie'];
-		///NO PUEDO PASAR LA VARIABLE A TODOS LOS METODOS
+		//$data['cookie'] = $this->usuarios_model->isRecordarCookie()['usuarioCookie'];
 	}
-
-	/*public function test_page(){
-		if($this->UsuarioSession)
-		{
-			$data['usuarioSession'] = $this->UsuarioSession;
-		}
-		$seccion = "servicios-solicitados";
-
-		$destacados  	 = $this->servicios_model->getServiciosDestacados();
-		$solicitados 	 = $this->_setPagSolicitados($seccion);
-
-		if(!empty($destacados))
-		{
-			$serviciosObj = $this->servicio_class->setServicios($destacados);
-			$serviciosObj = $this->servicio_class->setFotos($serviciosObj, '_dest');
-
-			$data['destacados'] = $serviciosObj;
-			//print_d($serviciosObj);
-			//print_d($destacados);
-		}
-		else
-		{
-			$data['destacados'] = null;
-		}
-
-		if(!empty($solicitados))
-		{
-			$data['solicitados'] = $solicitados['result'];
-		}
-		else
-		{
-			$data['solicitados'] = null;
-		}
-
-		$data['paginacion'] = $solicitados['links'];
-		$data['vista'] = 'index_view';
-		$data['current_page'] = $solicitados['current_page'];
-		$data['categorias'] = $this->servix_model->getCategorias();
-		$data['foot_cat'] ='footCat';
-		$data['loginFb'] = $this->loginFb;
-
-		// print_d($data['loginFb']);
-
-		$this->_js = array(
-			'assets/js/bootstrap-typeahead.js',
-			'assets/js/jquery.raty.js',
-			'assets/js/script-typehead.js',
-			'assets/js/script-raty.js',
-		);
-
-		$this->_css = array(
-			'assets/css/raty/jquery.raty.css',
-			'assets/css/bootstrap-select.min.css',
-		);
-
-		$data['css'] = $this->_css;
-		$data['js'] = $this->_js;
-
-		if ($this->input->is_ajax_request())
-		{
-			$this->load->view('servicios_solicitados',$data);
-		}
-		else
-		{
-			$this->load->view('home_view',$data);
-		}
-		// echo "todo bien";
-	}*/
 
 	public function index(){
 		if($this->UsuarioSession)
@@ -96,15 +23,12 @@ class sitio extends CI_Controller {
 
 		$destacados  	 = $this->servicios_model->getServiciosDestacados();
 		$solicitados 	 = $this->_setPagSolicitados($seccion);
-		// print_d($this->db->last_query());
 		if(!empty($destacados))
 		{
 			$serviciosObj = $this->servicio_class->setServicios($destacados);
 			$serviciosObj = $this->servicio_class->setFotos($serviciosObj, '_dest');
 
 			$data['destacados'] = $serviciosObj;
-			//print_d($serviciosObj);
-			//print_d($destacados);
 		}
 		else
 		{
@@ -126,8 +50,6 @@ class sitio extends CI_Controller {
 		$data['categorias'] = $this->servix_model->getCategorias();
 		$data['foot_cat'] ='footCat';
 		$data['loginFb'] = $this->loginFb;
-
-		// print_d($data['loginFb']);
 
 		$this->_js = array(
 			'assets/js/bootstrap-typeahead.js',
@@ -186,7 +108,6 @@ class sitio extends CI_Controller {
 		}
 		echo json_encode($validacion);
 	}
-
 
 	public function recomendar_servicio(){
 		$fechaHoy      =  date('Y-m-d');
@@ -352,7 +273,6 @@ class sitio extends CI_Controller {
 		$this->load->view('home_view',$data);
 	}
 
-
 	public function preguntas_frecuentes(){
 		if($this->UsuarioSession)
 		{
@@ -367,7 +287,6 @@ class sitio extends CI_Controller {
 	}
 
 	public function solicitar_servicio(){
-		// $this->load->view('home_view');
 		if($this->UsuarioSession)
 		{
 			$data['buscador_off'] = true;
@@ -402,9 +321,7 @@ class sitio extends CI_Controller {
 		}
 	}
 	
-
 	public function off_serv_mensaje($param){
-		// echo $param;
 		if($this->UsuarioSession)
 		{
 			$data['buscador_off'] = true;
@@ -423,7 +340,6 @@ class sitio extends CI_Controller {
 		}
 	}
 	
-
 	private function _fileUpload($files){
 		if($files['fotoServicio']['name']!="")
 		{
@@ -458,7 +374,6 @@ class sitio extends CI_Controller {
 				$this->image_lib->resize();
 				$this->image_lib->clear();
 
-
 				//GENERA THUMBNAIL DE 200 px
 			    $size_thumb		= 200;
 			    $thumbNombre	= '_srx_200';
@@ -469,7 +384,6 @@ class sitio extends CI_Controller {
 	            $this->image_lib->initialize(generarThumbnailCuadrado($data, $size_thumb, $img_200_path, $thumbNombre));
 				$this->image_lib->crop();
 				$this->image_lib->clear();
-
 
 				//GENERA THUMBNAIL DE 125 px
 				$size_thumb		= 125;
@@ -495,7 +409,6 @@ class sitio extends CI_Controller {
 			}
 		}
 	}
-
 
 	//GENERA THUMBNAIL DE DESTACADO
 	private function _generarimgDestacado($file, $img_path, $thumbNombre, $medidas){
@@ -539,7 +452,6 @@ class sitio extends CI_Controller {
 		}
 
 	}
-
 
 	private function _checkCategoria($cat){
 		if(isset($cat))
@@ -644,8 +556,6 @@ class sitio extends CI_Controller {
 			$files = $this->_fileUpload($_FILES);
 			//******fin form*********//
 
-			// print_d($files);
-
 			// si algo de los inputs falla mando errores a la vista
 			// y configuro una variable flashdata para mantener las post Vars
 			if ($this->form_validation->run() == FALSE)
@@ -667,8 +577,6 @@ class sitio extends CI_Controller {
 			else if($files['error'])
 			{
 			//si el archivo que esta subiendo no cumple con los requisitos minimos devuelvo el error en la vista en la pagina 2 del formulario y seteo las vars post en una var flash
-
-			
 				$this->session->set_flashdata('mensaje_e', $files);
 				$this->session->set_flashdata('post', $this->input->post());
 
@@ -737,7 +645,6 @@ class sitio extends CI_Controller {
 			}
 		}
 	}
-
 
 	public function editar_servicio($q){
 		if($this->UsuarioSession)
@@ -841,7 +748,6 @@ class sitio extends CI_Controller {
 			$config['scrollwheel'] = FALSE;
 			$config['placesAutocompleteInputID'] 	= 'myPlaceTextBox';
 			$config['placesAutocompleteBoundsMap'] 	= TRUE;
-			// $opciones = array('cities'); 
 			$config['placesAutocompleteRestrict'] 	= 'AR'; 
 			$config['placesAutocompleteOnChange'] 	= gmapScript();//viene del helper de mis_funciones
 			$this->googlemaps->initialize($config);
@@ -889,8 +795,6 @@ class sitio extends CI_Controller {
 		return redirect("resultado-de-busqueda/".$busqueda['url']['servicio']."-en-".$busqueda['url']['localidad']);
 	}
 
-
-
 	public function resultado_busqueda($q,$l){
 		$q = urldecode($q);
 		$l = urldecode($l);
@@ -935,7 +839,6 @@ class sitio extends CI_Controller {
    		$config['zoom']		= "auto";
 		$config['cluster'] 	= TRUE;
 		$config['places'] 	= TRUE; 
-		// $config['minifyJS'] = TRUE;
 		$this->googlemaps->initialize($config);
 
 		$marker = array();
@@ -979,7 +882,6 @@ class sitio extends CI_Controller {
 
 		$this->load->view('home_view',$data);
 	}
-	
 
 	private function _setPaginacion($servicio, $localidad,$q){
  	    $this->load->library('pagination');
@@ -1027,8 +929,6 @@ class sitio extends CI_Controller {
 		$data['map'] = $this->googlemaps->create_map();
 		return $data['map'];
 	}
-
-
 
 	private function _setPaginacionOpinion($servicio,$id)
 	{
@@ -1174,7 +1074,6 @@ class sitio extends CI_Controller {
 		}
 		
 	}
-
 
 	public function editar_servicio_solicitado($idSolicitado){
 		if($this->UsuarioSession)
@@ -1559,7 +1458,6 @@ class sitio extends CI_Controller {
 		$this->load->view('home_view',$data);
 	}
 
-
 	private function _parsearIdServicio($servicio){
 		$serv = explode('-', $servicio);
 		return $serv[0];
@@ -1606,14 +1504,10 @@ class sitio extends CI_Controller {
 	        $mesg = $vista;
 	        $this->email->message($mesg);
 	        $mail = $this->email->send();
-	        // echo $this->email->print_debugger();
 	      	return $mail;
 	}
 
-
-
 	public function sendContacto($post){
-		
 		if(isset($post))
 		{
 			$this->load->library('email');
@@ -1677,10 +1571,5 @@ class sitio extends CI_Controller {
 
 		$this->load->view('home_view',$data);
 	}
-
 }
-
-
-
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */
+?>

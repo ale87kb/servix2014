@@ -2,10 +2,8 @@
 
 Class Servix_model extends CI_Model{
 
-
 	public function __construct(){
 		parent::__construct();
-
 	}
 
 	public function getBusquedaServicio(){
@@ -14,37 +12,31 @@ Class Servix_model extends CI_Model{
 				(SELECT categorias.categoria FROM categorias)";
 		$rs    = $this->db->query($query);
 		return $rs->result_array();
-
 	}
 
 	public function getBusquedaCategoria(){
 		$query ="SELECT categorias.categoria FROM categorias";
 		$rs    = $this->db->query($query);
 		return $rs->result_array();
-
 	}
+
 	public function getCategoria($string){
 		$query ="SELECT categorias.id,categorias.categoria FROM categorias WHERE categoria = '$string'";
 		$rs    = $this->db->query($query);
 		return $rs->result_array();
-
 	}
 
 	public function getCategorias(){
 		$query = "SELECT * FROM categorias ORDER BY categoria ASC LIMIT 100";
 		$rs    = $this->db->query($query);
 		return $rs->result_array();
-
 	}
 
 	public function setRelacionUS($idUser,$idServ){
-
 		$query = "INSERT INTO relacion_u_s (id_usurios, id_servicios) VALUES ($idUser,$idServ);";
 		$rs    = $this->db->query($query);
-		
 		return $rs;
 	}
-
 
 	public function setCatNobd($id_usuario,$cat_nodb,$comentario,$fecha_ini){
 		$query = "INSERT INTO cat_nodb (id_usuario, categoria, comentario, fecha) VALUES ($id_usuario, '$cat_nodb', '$comentario', '$fecha_ini');";
@@ -63,8 +55,8 @@ Class Servix_model extends CI_Model{
 				";
 		$rs    = $this->db->query($query);
 		return $rs->result_array();
-
 	}
+
 	public function geBusquedaLocalProv($loc){
 		$query = "SELECT localidades.id,localidades.localidad,provincias.provincia
 					FROM
@@ -73,7 +65,6 @@ Class Servix_model extends CI_Model{
 					WHERE localidades.localidad LIKE '%$loc%' OR provincias.provincia LIKE '%$loc%' LIMIT 10";
 		$rs    = $this->db->query($query);
 		return $rs->result_array();
-
 	}
 
 	public function setSolicitarServicio($idCat,$idUser,$idLoc,$idCatNodb=null,$fecha_ini,$fecha_fin,$comentario){
@@ -96,7 +87,6 @@ Class Servix_model extends CI_Model{
 	}
 
 	private function _parsearLocalidad($localidad){
-
 		$loc = explode(',', $localidad );
 		$data = array();
 		if(!empty($loc[1])){
@@ -132,7 +122,6 @@ Class Servix_model extends CI_Model{
 	}
 	
 	public function getResultadoBusqueda($servicio,$localidad,$ini=10,$fin=0){
-
 		$loc = $this->_parsearLocalidad($localidad);
 
 		$query = "SELECT
@@ -164,7 +153,6 @@ Class Servix_model extends CI_Model{
 				
 		$rs    = $this->db->query($query);
 		return $rs->result_array();
-
 	}
 
 	public function updateServicioSolicitado($solicitud){
@@ -183,3 +171,4 @@ Class Servix_model extends CI_Model{
 		return $rs;
 	}
 }
+?>

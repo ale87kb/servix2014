@@ -2,12 +2,10 @@
 
 Class Servicios_model extends CI_Model{
 
-
 	public function __construct(){
 		parent::__construct();
 
 	}
-
 
 	public function setConsultaServicio($id_servicio,$id_usuario,$comentario){
 		$fecha = date('Y-m-d H:m:i');
@@ -40,11 +38,9 @@ Class Servicios_model extends CI_Model{
 				ORDER BY cantPuntos DESC
 				LIMIT 6";
 
-
 		$rs = $this->db->query($query)->result_array();
 		return $rs;
 	}
-
 
 	public function getPromedioPuntos($id){
 		$query ="SELECT
@@ -70,6 +66,7 @@ Class Servicios_model extends CI_Model{
 		$rs    = $this->db->query($query);
 		return $rs->first_row()->total;
 	}
+
 	public function getOpinionServicio($id,$ini=0,$fin=4){
 		$query ="SELECT
 				puntuacion.id_usuarios,
@@ -102,7 +99,6 @@ Class Servicios_model extends CI_Model{
 		$rs     = $this->db->query($query);
 		return $rs;
 	}
-
 
 	public function getTotalFilasSolicitados($fecha){
 		$query="SELECT
@@ -167,7 +163,6 @@ Class Servicios_model extends CI_Model{
 		return $rs;
 	}
 
-
 	public function unsetPostulacion($id_busquedas_temp,$id_usurio){
 		$query = "DELETE FROM postulaciones_temp 
 				WHERE id_busquedas_temp = $id_busquedas_temp 
@@ -175,8 +170,6 @@ Class Servicios_model extends CI_Model{
 		$rs    = $this->db->query($query);
 		return $rs;
 	}
-
-
 
 	public function unsetServicio($id_servicio){
 		$query = "DELETE FROM servicios WHERE  id = $id_servicio LIMIT 1;";
@@ -225,7 +218,6 @@ Class Servicios_model extends CI_Model{
 		return $rs->result_array();
 	 }
 
-
 	public function getServiciosSolicitados($fecha,$ini,$fin){
 		$query = "SELECT
 					busquedas_temp.id,
@@ -255,7 +247,6 @@ Class Servicios_model extends CI_Model{
 				
 		$rs    = $this->db->query($query);
 		return $rs->result_array();
-
 	}
 
 	public function getServicioFicha($id){
@@ -290,7 +281,6 @@ Class Servicios_model extends CI_Model{
 
 		$rs    = $this->db->query($query);
 		return $rs->result_array();
-
 	}
 
 	public function getServicioFoto($idServicio){
@@ -306,24 +296,6 @@ Class Servicios_model extends CI_Model{
 	}
 
 	public function updateServicio($post){
-		/*
-		Array
-		(
-		    $post['titulo'] => Reparador de pc2
-		    $post['categoria'] => 41
-		    $post['telefono'] => 11340907331
-		    $post['sitioweb'] => www.google1.com
-		    $post['descripcion'] => Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus ipsum nisi autem at iusto illum excepturi perspiciatis. Praesentium, quod eligendi consectetur officia nemo dolorum quo. Tempora nostrum debitis laudantium porro.1
-		    $post['localidad'] => 167
-		    $post['direccion'] => El Cisne, Ciudad Evita, Buenos Aires, Argentina1
-		    $post['lati'] => -34.73237611
-		    $post['long'] => -58.523746501
-		    $post['seccion'] => editar-servicio
-		    $post['foto'] => 76ced2891a8050ca5c7bdcbc12c9fb5ca_srx.jpeg
-		    $post['id_servicio'] => 529
-		    $post['imagen'] => 76ced2891a8050ca5c7bdcbc12c9fb5ca_srx.jpeg
-		)
-		*/
 		$query = "UPDATE servicios SET
 		    id_categorias = ".$post['categoria'].",
 			id_localidades = ".$post['localidad'].",
@@ -343,22 +315,15 @@ Class Servicios_model extends CI_Model{
 	}
 
 	public function setServicio($post=null){
-
 		if(isset($post)){
-
 			$query = "INSERT INTO servicios (id_categorias, id_localidades, titulo, descripcion, foto, url_web, direccion, telefono, latitud, longitud) 
 						VALUES (".$post['categoria'].", ".$post['localidad'].", '".$post['titulo']."', '".$post['descripcion']."', '".$post['imagen']."','".$post['sitioweb']."','".$post['direccion']."', '".$post['telefono']."', '".$post['lati']."', '".$post['long']."');";
 			$rs    = $this->db->query($query);
-
 			return $this->db->insert_id();
-
 		}else{
-
 			return false;		
 		}
-
 	}
-	
 
 	public function getServiciosEnPerfil($id_usuario, $desdeLimit, $cantidadLimit){
 		$query =    "SELECT
@@ -386,6 +351,6 @@ Class Servicios_model extends CI_Model{
 
 		$rs    = $this->db->query($query);
 		return $rs->result_array();
-
 	}
 }
+?>

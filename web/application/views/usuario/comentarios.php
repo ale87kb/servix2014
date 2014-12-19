@@ -9,7 +9,6 @@
     foreach ($comentarios as $comen)
     {
     ?>
-
     <a href="<?php echo site_url($comen['link']); ?>" class="list-group-item">
       <strong><span><?php echo ucfirst($comen['titulo']); ?></span></strong>
     <div class="ratyAVG" data-avg="<?php echo $comen['puntos'] ;?>"></div>
@@ -19,10 +18,8 @@
           <span class="label label-default"><?php echo ucfirst($comen['localidad']); ?></span>
           <span class="label label-default"><?php echo ucfirst($comen['provincia']); ?></span>
         </p>
-
     <p>Realizado el <?php echo fechaEs(strtotime($comen['fecha_votacion']));?> </p>
     </a>
-
     <?php
     }
       echo "<div class='paginacion'>" . $paginacion . "</div>";
@@ -30,10 +27,8 @@
   else
   {
   ?>
-
     <h4>No tienes opiniones</h4>
     <p>Todabía no has realizado ninguna opinión en los servicios ofrecidos.</p>
-
   <?php
   }
 ?>

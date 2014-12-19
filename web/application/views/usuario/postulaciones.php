@@ -38,7 +38,6 @@
 					<?php
 						echo $postulacion['busqueda'];
 					?>
-
 					</p>
 					
 				<?php
@@ -52,14 +51,11 @@
 					{
 				?>
 						<small><span class="label label-default">Cancelaste esta postulación</span></small>
-
 				<?php
 					}
 				?>
 					<a href="<?php echo site_url($postulacion['link']); ?> " class="btn btn-sm btn-default pull-right">Ver solicitud</a>
-
 				</div>
-
 				<div class="panel-footer">
 					<p>Fecha de publicación: <?php echo $postulacion['fecha']; ?></p>
 					<p>Se necesita para: <?php echo $postulacion['fecha_fin']; ?></p>
@@ -68,7 +64,6 @@
     <?php
     		}
       	echo "<div class='paginacion'>" . $paginacion . "</div>";
-
       	}
     ?>
 </div>

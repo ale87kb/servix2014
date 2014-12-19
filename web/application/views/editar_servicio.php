@@ -9,9 +9,7 @@
         </div>
         </div>
         <?php 
-        		// print_d($post);
           $form_error = $this->session->flashdata('form_error');
-     
         ?>
             <div class="row bg-white tab-box">
               <?php 
@@ -112,10 +110,7 @@
                                    
                                     if(!empty($msj)){
                                       ?>
-
                                       <div class="col-md-12 ">
-                                        
-                                      
                                       <?php
                                         if($msj['error'] == 0){
                                           ?>
@@ -132,23 +127,17 @@
                                             <?php echo $msj['mensaje_e']; ?>
                                           </div>
                                           <?php
-
                                         }
                                         ?>
                                         </div>
                                         <?php
-                                        
                                     }
                                      ?>
-                  
                               </div>
-                         
-                        
                             <div class="col-md-6">
                               <div class="form-group">
                                 <label for="fotoServicio">Puedes cambiar la foto de tu servicio o subir una si no tienes</label>
                                 <input type="file" id="fotoServicio" name="fotoServicio">
-                              
                               </div>
                               <div class="form-group">
                                 <label for="descripcion">Describe el servicio que ofreces</label>
@@ -157,13 +146,10 @@
                                 <?php echo $form_error['descripcion']; ?>
                                 </div> 
                               </div>
-
                             </div>
                             <div class="col-md-6">
                             	<?php 
-
                         	 if(!empty($post->foto_path)){
-                                 
                              ?>
                               <h3>Imagen del servicio</h3>
                                <p>
@@ -207,7 +193,6 @@
                                        	<?php if(isset($post->id_localidad)){
                                        		?>
                                        		  <option value="<?php echo $post->id_localidad; ?>">
-                                       	
 		                                       <?php echo $post->localidad .", ".$post->provincia; ?>
 		                                       </option>
                                        		<?php
@@ -221,7 +206,6 @@
                                   
                                     <div class="form-group">
                                       <label for="direccion">Tu dirección en donde ofreces el servicio</label>
-                                      <!-- <img src="http://placehold.it/480x400&text=google map" alt=""> -->
                                         <p>
                                            <input type="text" id="myPlaceTextBox" name="direccion" class="form-control" placeholder="Ej: Av Rivadavia 5555" value="<?php echo $post->direccion;?>" />
                                         </p>
@@ -231,12 +215,10 @@
                                       </div>
                                       <input type="hidden" name="lati" value="<?php echo $post->latitud;?>" id="lati" >
                                       <input type="hidden" name="long" value="<?php echo $post->longitud;?>" id="long" >
-
                                       <div class='direccion' style="color:red;">
                                       <?php echo $form_error['direccion']; ?>
                                       </div> 
                                     </div>
-
                                 </div>
                                 <div class="col-md-6">
                                   <h3>Modificar localidades y direcciones</h3>
@@ -248,7 +230,6 @@
                                   </p>
                                 </div>
                                 <div class="col-md-12">
-                                  
                                     <div class="row">
                                       <div class="col-md-6">
                                             <p class="text-left">
@@ -273,8 +254,6 @@
                 </div>
             </div>
             <a role="button" class="btn btn-default" href="<?php echo site_url('mi-perfil/servicios'); ?>">Volver a Mis servicios</a>
-    
     </div>
 </div>
-
 </div>

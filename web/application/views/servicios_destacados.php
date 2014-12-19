@@ -21,7 +21,6 @@
                 <div class="destc">
                   <p><a href="<?php echo $servicio->link_servicio; ?>"><img src="<?php echo $servicio->foto_path; ?>" alt="<?php echo $servicio->titulo; ?>" class="img-responsive"></a></p>
                   <h3><a class="nodeco" href="<?php echo $servicio->link_servicio; ?>"><?php echo $servicio->titulo;?></a></h3>
-                  <!--<p><?php echo recortar_texto($servicio->descripcion,120); ?></p>-->
                   <p class="text-left">
                     <span class="label label-default"><?php echo ucfirst($servicio->categoria); ?></span>
                     <span class="label label-default"><?php echo ucfirst($servicio->localidad); ?></span>
