@@ -27,7 +27,8 @@ Class Servix_model extends CI_Model{
 	}
 
 	public function getCategorias(){
-		$query = "SELECT * FROM categorias ORDER BY categoria ASC LIMIT 100";
+		/*$query = "SELECT * FROM categorias ORDER BY categoria ASC LIMIT 100";*/
+		$query = "SELECT * FROM categorias ORDER BY  RAND(), categoria ASC LIMIT 20";
 		$rs    = $this->db->query($query);
 		return $rs->result_array();
 	}
