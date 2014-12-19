@@ -45,6 +45,27 @@ if (defined('ENVIRONMENT'))
 			exit('The application environment is not set correctly.');
 	}
 }
+/*
+if (defined('ENVIRONMENT'))
+{
+	switch (ENVIRONMENT)
+	{
+		case 'development':
+			error_reporting(E_ALL);
+			ini_set('display_errors','On'); // <----- added
+		break;
+
+		case 'testing':
+		case 'production':
+			error_reporting(0);
+			ini_set('display_errors','Off'); // <----- added
+		break;
+
+		default:
+		exit('The application environment is not set correctly.');
+	}
+}*/
+
 
 /*
  *---------------------------------------------------------------
