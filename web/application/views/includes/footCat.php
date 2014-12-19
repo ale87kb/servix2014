@@ -2,7 +2,7 @@
 <div class="container ">
 	<div class="row">
 		<div class="col-md-12">
-			<h3>CATEGORIAS MAS BUSCADAS</h3>
+			<h3>CATEGORIAS MÁS BUSCADAS</h3>
 			<?php 
 			$groups = ceil(count($categorias)/4);
 			$categorias = (array_chunk($categorias,$groups ,true));

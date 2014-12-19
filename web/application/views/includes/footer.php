@@ -52,11 +52,11 @@
                 <input type="password" name="clave" class="form-control" placeholder="Clave">
                 <span class='errorpassword'></span>
               </div>
-                <div class="checkbox">
+                <!--<div class="checkbox">
                   <label>
                     <input type="checkbox" value="recordar" name="recordar" id="recordar" <?php echo set_checkbox('recordar', 'recordar'); ?>>Recordar Usuario
                   </label>
-                </div>
+                </div>-->
                 <div class="text-right">
                   <input type="hidden" name="curretSection" id="curretSection" value="<?php echo $this->uri->segment(1); ?>">
                   <input type="hidden" name="nextAction" id="nextAction" value="">

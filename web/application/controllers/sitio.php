@@ -188,7 +188,7 @@ class sitio extends CI_Controller {
 				$arrayDatos[] = ucfirst($d['titulo']);
 			}
 		}
-		echo  json_encode($arrayDatos);
+		echo json_encode($arrayDatos);
 	}
 
 	public function busqueda_categoria(){

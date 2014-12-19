@@ -12,6 +12,7 @@
           $form_error = $this->session->flashdata('form_error');
         ?>
             <div class="row bg-white tab-box">
+               <div class="col-md-12 ">
               <?php 
                 $msje = $this->session->flashdata('mensj_e');
                 if(!empty($msje))
@@ -30,7 +31,6 @@
                   }
                 }
                ?>
-               <div class="col-md-12 ">
                   <div role="tabpanel">
 
                   <div class="col-md-12">
@@ -253,7 +253,9 @@
                   </div>
                 </div>
             </div>
-            <a role="button" class="btn btn-default" href="<?php echo site_url('mi-perfil/servicios'); ?>">Volver a Mis servicios</a>
+            <div class="media row">
+              <a role="button" class="btn btn-default" href="<?php echo site_url('mi-perfil/servicios'); ?>">Volver a Mis servicios</a>
+            </div>
     </div>
 </div>
 </div>
