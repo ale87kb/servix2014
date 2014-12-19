@@ -847,7 +847,7 @@ class Login extends CI_Controller {
 	        	if($verifEstado)
 	        	{
 					$this->_setDataSession($result);
-	        		$this->_setRecordarUsuario($this->input->post('recordar'), $this->input->post('usuario'));
+	        		/*$this->_setRecordarUsuario($this->input->post('recordar'), $this->input->post('usuario'));*/
 	            	$data = array(
 	                	'res'      	=> "success"
 	            	);

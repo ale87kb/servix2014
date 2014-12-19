@@ -11,10 +11,10 @@ class sitio extends CI_Controller {
 		parent::__construct();
 		$this->UsuarioSession = $this->usuarios_model->isLogin();
 		$this->loginFb = $this->usuarios_model->_loginFB();
-		$this->load->library('usuarioClass');
-		$this->load->library('servicioClass');
+	/*	$this->load->library('usuarioClass');
+		$this->load->library('servicioClass');*/
 
-		$data['cookie'] = $this->usuarios_model->isRecordarCookie()['usuarioCookie'];
+//		$data['cookie'] = $this->usuarios_model->isRecordarCookie()['usuarioCookie'];
 		///NO PUEDO PASAR LA VARIABLE A TODOS LOS METODOS
 	}
 

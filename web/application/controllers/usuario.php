@@ -9,8 +9,8 @@ class Usuario extends CI_controller{
 		$data['title'] = 'Servix';
 		$this->UsuarioSession = $this->usuarios_model->isLogin();
 		$this->loginFb = $this->usuarios_model->_loginFB();
-		$this->load->library('usuarioClass');
-		$this->load->library('servicioClass');
+	/*	$this->load->library('usuarioClass');
+		$this->load->library('servicioClass');*/
 	}
 
 

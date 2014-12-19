@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class usuarioClass {
+class usuario_class{
 	/* DECLARADAS COMO EN DB */
 	public $id 					= null;
 	public $email 				= null;
@@ -30,23 +30,15 @@ class usuarioClass {
     public function setUsuarios($params){
         foreach ($params as $param)
 		{
-			$usuario = new usuarioclass();
+			$usuario = new usuario_class();
 			foreach ($param as $key => $value)
 			{
-                if (property_exists('usuarioclass', $key))
-                {
-                	$usuario->$key 	= $param[$key];
-				}
-				else
-				{
-					$usuario->$key 	= $param[$key];
-				}
+				$usuario->$key 	= $param[$key];
        		}
 			
 			$lista[] = $usuario;
 			$this->setLinK($lista);
 		}
-
 		return $lista;
     }
 
@@ -76,7 +68,5 @@ class usuarioClass {
     		$param->link_user = site_url('usuario/perfil/'.$param->id.'-'.$param->nombre.'-'.$param->apellido);
     	}
     }
-
 }
-
-?> 
+?>

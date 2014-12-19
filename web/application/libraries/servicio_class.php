@@ -1,9 +1,8 @@
 
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class servicioClass {
+class servicio_class  {
 	/* DECLARADAS COMO EN DB */
-
 	public $id 					= null;
 	public $id_categorias 		= null;
 	public $id_loclaidades 		= null;
@@ -24,30 +23,21 @@ class servicioClass {
 	private $_carpetafotos 	= 'assets/images/servicios/';
 	private $_fotoPerfil 	= 'assets/images/servicio'; //EJEMPLO: assets/images/servicio_125.jpg
 
-
     public function __construct() {
     }
 
 	public function setServicios($params){
         foreach ($params as $param)
 		{
-			$servicio = new servicioClass();
+			$servicio = new servicio_class ();
 			foreach ($param as $key => $value)
 			{
-                if (property_exists('servicioclass', $key))
-                {
-                	$servicio->$key 	= $param[$key];
-				}
-				else
-				{
-					$servicio->$key 	= $param[$key];
-				}
+				$servicio->$key 	= $param[$key];
        		}
 			
 			$lista[] = $servicio;
 			$this->setLinK($lista);
 		}
-
 		return $lista;
     }
 
@@ -91,9 +81,6 @@ class servicioClass {
 			$lista[] = $param;
     	}
     	return $lista;
-    	
     }
-
 }
-
-?> 
+?>
