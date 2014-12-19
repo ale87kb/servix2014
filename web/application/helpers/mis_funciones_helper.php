@@ -1,5 +1,4 @@
-<?php 
-date_default_timezone_set('America/Argentina/Buenos_Aires');
+<?php date_default_timezone_set('America/Argentina/Buenos_Aires');
 setlocale(LC_ALL,"es_ES");
 
 function print_d($dato)
@@ -7,7 +6,7 @@ function print_d($dato)
 	echo "<pre>";
 	print_r($dato);
 	echo "</pre>";
-};
+}
 
 function fechaEs($date)
 {

@@ -11,8 +11,9 @@ class sitio extends CI_Controller {
 		parent::__construct();
 		$this->UsuarioSession = $this->usuarios_model->isLogin();
 		$this->loginFb = $this->usuarios_model->_loginFB();
-		//$data['cookie'] = $this->usuarios_model->isRecordarCookie()['usuarioCookie'];
 	}
+
+
 
 	public function index(){
 		if($this->UsuarioSession)
@@ -378,7 +379,7 @@ class sitio extends CI_Controller {
 			    $size_thumb		= 200;
 			    $thumbNombre	= '_srx_200';
 			    $img_200_path 	= path_archivos('assets/images/servicios/', agregar_nombre_archivo($data['file_name'], $thumbNombre));
-			    print_d($img_200_path);
+			    // print_d($img_200_path);
     			$this->image_lib->initialize(generarThumbnail($data, $size_thumb, $thumbNombre));
     			$this->image_lib->resize();
 	            $this->image_lib->initialize(generarThumbnailCuadrado($data, $size_thumb, $img_200_path, $thumbNombre));
@@ -456,7 +457,9 @@ class sitio extends CI_Controller {
 	private function _checkCategoria($cat){
 		if(isset($cat))
 		{
-			$param = strtolower($cat);
+			$cat =  urldecode($cat);
+			$param = mb_strtolower($cat);
+
 			$categoria = $this->servix_model->getCategoria($param);
 
 			if(!empty($categoria))
@@ -468,6 +471,7 @@ class sitio extends CI_Controller {
 				$categoria =  40;
 			}
 			return $categoria;
+			
 		}
 		else
 		{
@@ -479,7 +483,7 @@ class sitio extends CI_Controller {
 		$POST = $this->input->post();
 		if( isset($POST) )
 		{
-			$catPOST = strtolower($this->input->post('categoria'));
+			$catPOST = mb_strtolower($this->input->post('categoria'));
 
 			$post['categoria'] = $catPOST;
 			$categoria = $this->servix_model->getCategoria($catPOST);
@@ -1128,7 +1132,7 @@ class sitio extends CI_Controller {
 		$POST = $this->input->post();
 		if( isset($POST) )
 		{
-			$catPOST = strtolower($this->input->post('categoria'));
+			$catPOST = mb_strtolower($this->input->post('categoria'));
 
 			$post['categoria'] = $catPOST;
 			$categoria = $this->servix_model->getCategoria($catPOST);
