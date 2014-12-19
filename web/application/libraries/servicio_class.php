@@ -1,7 +1,8 @@
 
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php 
+if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class servicioClass {
+class servicio_class {
 	/* DECLARADAS COMO EN DB */
 
 	public $id 					= null;
@@ -26,22 +27,17 @@ class servicioClass {
 
 
     public function __construct() {
+    //	parent::__construct();
     }
 
 	public function setServicios($params){
         foreach ($params as $param)
 		{
-			$servicio = new servicioClass();
+			$servicio = new servicio_class();
 			foreach ($param as $key => $value)
 			{
-                if (property_exists('servicioclass', $key))
-                {
-                	$servicio->$key 	= $param[$key];
-				}
-				else
-				{
+              
 					$servicio->$key 	= $param[$key];
-				}
        		}
 			
 			$lista[] = $servicio;
@@ -95,5 +91,4 @@ class servicioClass {
     }
 
 }
-
 ?> 
