@@ -379,7 +379,6 @@ class sitio extends CI_Controller {
 			    $size_thumb		= 200;
 			    $thumbNombre	= '_srx_200';
 			    $img_200_path 	= path_archivos('assets/images/servicios/', agregar_nombre_archivo($data['file_name'], $thumbNombre));
-			    // print_d($img_200_path);
     			$this->image_lib->initialize(generarThumbnail($data, $size_thumb, $thumbNombre));
     			$this->image_lib->resize();
 	            $this->image_lib->initialize(generarThumbnailCuadrado($data, $size_thumb, $img_200_path, $thumbNombre));
@@ -471,7 +470,6 @@ class sitio extends CI_Controller {
 				$categoria =  40;
 			}
 			return $categoria;
-			
 		}
 		else
 		{
@@ -1111,7 +1109,6 @@ class sitio extends CI_Controller {
 						'assets/css/bootstrap-datetimepicker.min.css',
 						'assets/css/bootstrap-select.min.css',
 					);
-
 					$data['css'] = $this->_css;
 					$data['js'] = $this->_js;
 					$this->load->view('usuarios_view',$data);
@@ -1132,7 +1129,8 @@ class sitio extends CI_Controller {
 		$POST = $this->input->post();
 		if( isset($POST) )
 		{
-			$catPOST = mb_strtolower($this->input->post('categoria'));
+			$catPOST = urldecode($this->input->post('categoria'));
+			$catPOST = mb_strtolower($catPOST);
 
 			$post['categoria'] = $catPOST;
 			$categoria = $this->servix_model->getCategoria($catPOST);
@@ -1171,7 +1169,7 @@ class sitio extends CI_Controller {
 				$displayErros = array('mensaje_e'=> 'Ups.. tenemos un problema por favor intenta más tarde' , 'error' => 1);
 				$this->session->set_flashdata('mensaje_e', $displayErros);
 			}
-			return redirect($_SERVER['HTTP_REFERER']);
+				redirect($_SERVER['HTTP_REFERER']);
 		}
 		else
 		{
@@ -1293,7 +1291,6 @@ class sitio extends CI_Controller {
 		{
 			return false;
 		}
-
 	}
 
 	public function unset_servicio_solicitado(){

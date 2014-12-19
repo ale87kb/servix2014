@@ -13,9 +13,9 @@
 				$msj = $this->session->flashdata('mensaje_e');
 				if(!empty($msj))
 				{
-					$clase = ($msj['error'] == 0) ? 'alert-success' : 'alert-warning';
+					$clasemsj = ($msj['error'] == 0) ? 'alert-success' : 'alert-warning';
 				?>
-					<div class="alert <php echo $clase; ?>" id="mensaje_e" role="alert"><?php echo $msj['mensaje_e']; ?></div>
+					<div class="alert <?php echo $clasemsj;?>" id="mensaje_e" role="alert"><?php echo $msj['mensaje_e']; ?></div>
 				<?php
 				}
 			 ?>
@@ -54,7 +54,7 @@
 		               <div class="form-group">
 		                <p class="text-right">
 		                	<a role="button" class="btn btn-default pull-left" href="<?php echo site_url('mi-perfil/servicios-solicitados'); ?>">Volver a Mis servicios solicitados</a>
-		                	 <input type="hidden" name="serSoliid" value="<?php echo $post['id'];?>">
+		                	 <input type="hidden" name="serSoliid" value="<?php echo $post['busqID'];?>">
 		                	<button type="submit" class="btn btn-success">Enviar solicitud</button>
 		                </p>
 		              </div>
