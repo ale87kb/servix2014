@@ -11,12 +11,81 @@ class sitio extends CI_Controller {
 		parent::__construct();
 		$this->UsuarioSession = $this->usuarios_model->isLogin();
 		$this->loginFb = $this->usuarios_model->_loginFB();
+
 	/*	$this->load->library('usuarioClass');
 		$this->load->library('servicioClass');*/
 
 //		$data['cookie'] = $this->usuarios_model->isRecordarCookie()['usuarioCookie'];
 		///NO PUEDO PASAR LA VARIABLE A TODOS LOS METODOS
 	}
+
+	/*public function test_page(){
+		if($this->UsuarioSession)
+		{
+			$data['usuarioSession'] = $this->UsuarioSession;
+		}
+		$seccion = "servicios-solicitados";
+
+		$destacados  	 = $this->servicios_model->getServiciosDestacados();
+		$solicitados 	 = $this->_setPagSolicitados($seccion);
+
+		if(!empty($destacados))
+		{
+			$serviciosObj = $this->servicio_class->setServicios($destacados);
+			$serviciosObj = $this->servicio_class->setFotos($serviciosObj, '_dest');
+
+			$data['destacados'] = $serviciosObj;
+			//print_d($serviciosObj);
+			//print_d($destacados);
+		}
+		else
+		{
+			$data['destacados'] = null;
+		}
+
+		if(!empty($solicitados))
+		{
+			$data['solicitados'] = $solicitados['result'];
+		}
+		else
+		{
+			$data['solicitados'] = null;
+		}
+
+		$data['paginacion'] = $solicitados['links'];
+		$data['vista'] = 'index_view';
+		$data['current_page'] = $solicitados['current_page'];
+		$data['categorias'] = $this->servix_model->getCategorias();
+		$data['foot_cat'] ='footCat';
+		$data['loginFb'] = $this->loginFb;
+
+		// print_d($data['loginFb']);
+
+		$this->_js = array(
+			'assets/js/bootstrap-typeahead.js',
+			'assets/js/jquery.raty.js',
+			'assets/js/script-typehead.js',
+			'assets/js/script-raty.js',
+		);
+
+		$this->_css = array(
+			'assets/css/raty/jquery.raty.css',
+			'assets/css/bootstrap-select.min.css',
+		);
+
+		$data['css'] = $this->_css;
+		$data['js'] = $this->_js;
+
+		if ($this->input->is_ajax_request())
+		{
+			$this->load->view('servicios_solicitados',$data);
+		}
+		else
+		{
+			$this->load->view('home_view',$data);
+		}
+		// echo "todo bien";
+	}*/
 
 	public function index(){
 		if($this->UsuarioSession)
@@ -30,8 +99,8 @@ class sitio extends CI_Controller {
 		// print_d($this->db->last_query());
 		if(!empty($destacados))
 		{
-			$serviciosObj = $this->servicioclass->setServicios($destacados);
-			$serviciosObj = $this->servicioclass->setFotos($serviciosObj, '_dest');
+			$serviciosObj = $this->servicio_class->setServicios($destacados);
+			$serviciosObj = $this->servicio_class->setFotos($serviciosObj, '_dest');
 
 			$data['destacados'] = $serviciosObj;
 			//print_d($serviciosObj);
@@ -693,9 +762,9 @@ class sitio extends CI_Controller {
 					$data['direccion'] = $v['direccion'];
 				}
 
-				$serviciosObj = $this->servicioclass->setServicios($rs);
-				$serviciosObj = $this->servicioclass->setFotos($serviciosObj, '_200');
-				$serviciosObj = $this->servicioclass->setLinkUser($serviciosObj);
+				$serviciosObj = $this->servicio_class->setServicios($rs);
+				$serviciosObj = $this->servicio_class->setFotos($serviciosObj, '_200');
+				$serviciosObj = $this->servicio_class->setLinkUser($serviciosObj);
 
 				$config['center'] = $latLong;
 				
@@ -1058,14 +1127,14 @@ class sitio extends CI_Controller {
 
 			if($solicitado)
 			{
-				$solicitado = $this->usuarioclass->setUsuarios($solicitado);
-				$solicitado = $this->usuarioclass->setFotos($solicitado, '_125');
+				$solicitado = $this->usuario_class->setUsuarios($solicitado);
+				$solicitado = $this->usuario_class->setFotos($solicitado, '_125');
 			}
 
 			if($userPostulados)
 			{
-				$userPostulados = $this->usuarioclass->setUsuarios($userPostulados);
-				$userPostulados = $this->usuarioclass->setFotos($userPostulados, '_60');
+				$userPostulados = $this->usuario_class->setUsuarios($userPostulados);
+				$userPostulados = $this->usuario_class->setFotos($userPostulados, '_60');
 			}
 
 			$data['paginacion']   = $solicitados['links'];
@@ -1403,9 +1472,9 @@ class sitio extends CI_Controller {
 
 			if($servicioRS)
 			{
-				$serviciosObj = $this->servicioclass->setServicios($servicioRS);
-				$serviciosObj = $this->servicioclass->setFotos($serviciosObj, '_200');
-				$serviciosObj = $this->servicioclass->setLinkUser($serviciosObj);
+				$serviciosObj = $this->servicio_class->setServicios($servicioRS);
+				$serviciosObj = $this->servicio_class->setFotos($serviciosObj, '_200');
+				$serviciosObj = $this->servicio_class->setLinkUser($serviciosObj);
 				$data['servicioRS'] = $serviciosObj[0];
 
 				$latlong = $serviciosObj[0]->latitud.','.$serviciosObj[0]->longitud;
@@ -1527,7 +1596,7 @@ class sitio extends CI_Controller {
 	        $fromemail          = MAIL_NO_RESPONDER; // desde
 	        $toemail            = $para; //para 
 	        $mail               = null;
-	        $subject            = "Tienes una nueva postulaci&oacute;n en tu solicitud de servicio";
+	        $subject            = "Tienes una nueva postulación en tu solicitud de servicio";
 
 	        $this->email->initialize($config);
         	$this->email->to($toemail);
@@ -1581,7 +1650,7 @@ class sitio extends CI_Controller {
 			$toemail            = $post['emailAmigo']; //para 
 			$fromemail          = MAIL_NO_RESPONDER; // desde
 			$mail               = null;
-			$subject            = "Hola ".$post['nombreAmigo']." este servicio puede ser de tu int&eacuteres";
+			$subject            = "Hola ".$post['nombreAmigo']." este servicio puede ser de tu intéres";
 
 			$this->email->initialize($config);
 			$this->email->from($fromemail, APP_NAME);

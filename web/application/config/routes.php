@@ -39,6 +39,7 @@
 */
 
 $route['default_controller'] 								= "sitio";
+/*$route['default_controller'] 								= "sitio/test_page";*/
 //url                        // Controlador/metodo 
 
 $route['login/verificacion-login-fb'] 						= "login/verificar_login_fb";					//Entra cualquiera

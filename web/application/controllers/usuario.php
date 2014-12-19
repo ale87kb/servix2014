@@ -71,8 +71,8 @@ class Usuario extends CI_controller{
 
 		if($servicios)
 		{
-			$serviciosObj = $this->servicioclass->setServicios($servicios);
-			$serviciosObj = $this->servicioclass->setFotos($serviciosObj, '_125');
+			$serviciosObj = $this->servicio_class->setServicios($servicios);
+			$serviciosObj = $this->servicio_class->setFotos($serviciosObj, '_125');
 
 			$data['servicios'] = $serviciosObj;
 			$data['vinculos'] = $this->pagination->create_links();
@@ -119,8 +119,8 @@ class Usuario extends CI_controller{
 
 		if($favoritos)
 		{
-			$serviciosObj = $this->servicioclass->setServicios($favoritos);
-			$serviciosObj = $this->servicioclass->setFotos($serviciosObj, '_125');
+			$serviciosObj = $this->servicio_class->setServicios($favoritos);
+			$serviciosObj = $this->servicio_class->setFotos($serviciosObj, '_125');
 
 			$data['favoritos'] = $serviciosObj;
 			$data['vinculos'] = $this->pagination->create_links();
@@ -672,8 +672,8 @@ class Usuario extends CI_controller{
 
 				if($perfil)
 				{
-					$perfilObj 			= $this->usuarioclass->setUsuarios($perfil);
-					$perfilObj 			= $this->usuarioclass->setFotos($perfilObj, '_125');
+					$perfilObj 			= $this->usuario_class->setUsuarios($perfil);
+					$perfilObj 			= $this->usuario_class->setFotos($perfilObj, '_125');
 
 					$data['perfil'] 			= $perfilObj[0];
 
@@ -736,8 +736,8 @@ class Usuario extends CI_controller{
 		$servicios = $this->servicios_model->getServiciosEnPerfil($idUsuario, $page, $cantidadLimit);
 		if($servicios)
 		{
-			$serviciosObj = $this->servicioclass->setServicios($servicios);
-			$serviciosObj = $this->servicioclass->setFotos($serviciosObj, '_125');
+			$serviciosObj = $this->servicio_class->setServicios($servicios);
+			$serviciosObj = $this->servicio_class->setFotos($serviciosObj, '_125');
 
 			$data['servicios'] = $serviciosObj;
 			$data['vinculos'] = $this->pagination->create_links();

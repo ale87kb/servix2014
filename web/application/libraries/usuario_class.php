@@ -35,7 +35,6 @@ class usuario_class{
 			{
 				$usuario->$key 	= $param[$key];
        		}
-			
 			$lista[] = $usuario;
 			$this->setLinK($lista);
 		}

@@ -1,7 +1,6 @@
-
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class servicio_class  {
+class servicio_class{
 	/* DECLARADAS COMO EN DB */
 	public $id 					= null;
 	public $id_categorias 		= null;
@@ -74,6 +73,7 @@ class servicio_class  {
     		$param->link_servicio = site_url(generarLinkServicio($param->id, $param->titulo));
     	}
     }
+
     public function setLinkUser($params){
     	foreach ($params as $param)
     	{
