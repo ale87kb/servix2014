@@ -57,7 +57,7 @@
     ?>
       <div class="list-group">
         <h4>No has solicitado ningún servicio</h4>
-        <p>Todabía no has solicitado ningún servicio.</p>
+        <p>Todavía no has solicitado ningún servicio.</p>
       </div>
     <?php
     }

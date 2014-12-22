@@ -46,7 +46,7 @@
     {
     ?>
       <h4>No tiene servicios ofrecidos.</h4>
-      <p>Todabía no has completado ningún servicio para ofrecer.</p>
+      <p>Todavía no has completado ningún servicio para ofrecer.</p>
     <?php
     }
   ?>

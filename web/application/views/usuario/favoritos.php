@@ -34,7 +34,7 @@
           {
           ?>
             <h4>No tienes favoritos</h4>
-            <p>Todabía no has agregado ningún servicio a tu lista de favoritos.</p>
+            <p>Todavía no has agregado ningún servicio a tu lista de favoritos.</p>
           <?php
           }
         ?>

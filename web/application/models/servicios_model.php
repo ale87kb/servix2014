@@ -300,6 +300,7 @@ Class Servicios_model extends CI_Model{
 		    id_categorias = ".$post['categoria'].",
 			id_localidades = ".$post['localidad'].",
 			titulo = '".$post['titulo']."',
+			descripcion = '".$post['descripcion']."',
 			foto = '".$post['imagen']."',
 			url_web = '".$post['sitioweb']."',
 			direccion = '".$post['direccion']."',

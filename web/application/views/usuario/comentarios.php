@@ -28,7 +28,7 @@
   {
   ?>
     <h4>No tienes opiniones</h4>
-    <p>Todabía no has realizado ninguna opinión en los servicios ofrecidos.</p>
+    <p>Todavía no has realizado ninguna opinión en los servicios ofrecidos.</p>
   <?php
   }
 ?>

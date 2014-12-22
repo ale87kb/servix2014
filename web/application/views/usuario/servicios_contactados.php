@@ -27,7 +27,7 @@
     {
     ?>
       <h4>No has contactado ningún servicio</h4>
-      <p>Todabía no has contactado ningún servicio.</p>
+      <p>Todavía no has contactado ningún servicio.</p>
     <?php
     }
   ?>
